@@ -1,0 +1,33 @@
+--- 
+title: "<font color='DarkGreen'>mrgsolve User Guide</font>"
+author: "<font color='DarkGreen'>Metrum Research Group, LLC</font>"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "A guide to using mrgsolve."
+---
+
+# mrgsolve User Guide
+
+<img src='img/mrgsolve.png'>
+
+For more information: https://mrgsolve.github.io
+
+__The following environment was used to generate this documentation__:
+```{r,echo=FALSE, message=FALSE}
+library(mrgsolve)
+library(magrittr)
+library(dplyr)
+library(ggplot2)
+devtools::session_info()
+```
+
+```{r,echo=FALSE}
+date()
+```
+

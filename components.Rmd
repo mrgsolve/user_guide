@@ -1,0 +1,111 @@
+# Model components
+
+This chapter details the different components of a model in `mrgsolve`.  Each component listed here is maintained within a "model object".  This is an updatable S4 object in `R` that contains all of the basic information required to properly configure and simulate from the model. 
+
+## Parameter list {#component-param}
+
+The parameter list is an updatable set of name-value pairs. Referencing the name of an item in the parameter list will substitute the current value associated with that name.  While the name "paramter" may have a certain connotation in the modeling world, in `mrgsolve` a "parameter" could be any category of numeric data: covariates (e.g. `WT`, `AGE`, `SEX`), flags, other numeric data that we commonly call "parameter" (e.g. `CL` or `VC`).  
+
+The parameter list is declared in the code block `$PARAM`.  While there may be multiple `$PARAM` blocks in a model, these are condensed to a single parameter list stored in the model object.  The names and numbers of all parameters in the model must be declared at the time that 
+the model is compiled.  Also, a default value for each parameter must 
+be declared at model compile time, but the value of each parameter may be updated in one of several ways. 
+
+The parameters in a model object can be queried or updated with the `param()` function.
+
+See also: \@ref(block-param), `?param` in the `R` help system after loading `mrgsolve`.
+
+### Central role of parameters in planning simulations
+The data items in the parameter list are more than just values associated with a name.  When an name is added to the parameter list, that name becomes a key word that `mrgsolve` will start to recognize in input data sets or when manipulting the model object.  
+
+For example, when you want to include a covariate in the model, say weight (`WT`), you'll include a column in the data set called `WT` that will indicate the weight of this or that patient.  It is crutial that you also list `WT` in `$PARAM` with some default value.  It helps if that value is sensible too.  When `mrgsolve`
+receives the data set prior to simulating, the `WT` column is matched up with the `WT` parameter name.  As `mrgsolve` works its way through the input data set (from person to person or from time to time), the value of `WT` is updated so that the symbol `WT` in `$MAIN` or `$ODE` or `$TABLE` always points to the value of `WT`.  If the `WT` name is not in the parameter list, it won't matter if it is in the data set or not.  Only listing a name in `$PARAM` gets it "into the game".  
+
+Understanding the parameter update mechanism is very important for planning complicated simulations with `mrgsolve`.  Please see the information in \@ref(datasets) and in \@ref(topic-parameter-update).
+
+
+## Compartment list {#component-init}
+Like the parameter list, the compartment list is a series of name-value pairs.  The compartment list defines the number, names, and initial values of each compartment in the model.     The names, numbers, and order of the compartment in a model is established at the time of model compile and changes to the compartment list require re-compilation of the model.  
+
+Compartments are declared in one of two code blocks: `$INIT` and `$CMT`. Nominal initial values must be supplied for each compartment.  The main difference between `$INIT` and `$CMT` is that `$CMT` assumes a default initial value of 0 for each compartment; thus only compartment names are entered.  When using `$INIT`, both names and values must be explicitly stated for each compartment.  
+
+The initial values for each compartment can be queried with the `init()` function.  There are several different ways to set the initial conditions in a model; section \@ref(topic-init) illustrates several of these.. 
+
+See also: section \@ref(topic-init) and `?init` in the `R` help system after loading `mrgsolve`.
+
+## Simulation time grid {#component-stime}
+
+The `mrgsolve` model object stores the parameters for the series of 
+time points to be output for a a simulation.  This is the default output time grid that will be used if not over-ridden by another mechanism.  
+
+The elements of the simulation time grid are: `start`, `end`, `delta` and `add`.  `start`, `end`, `delta` are passed to `seq()` as `from`, `to`, and `by`, respectively. `add` is any arbitrary vector of additional times to simulate.  
+
+The simulation time grid in a model object may be queried with the `stime()` function or by printing the model object to the `R` console. 
+
+See also section \@ref(data-set) for discussion of the simulation time grid and input data sets and \@ref(component-tgrid) and \@ref(topic-tgrid) for using time grid objects . 
+
+
+### `tgrid` objects {#component-tgrid}
+
+A `tgrid` object has `start`, `end`, `delta` and `add` attributes.  This object is independent of the model object.  `tgrid` objects may be created and combined to create complex sampling designs.
+
+See section \@ref(topic-tgrid) for examples and usage.
+
+## Solver settings
+`mrgsolve` uses the `DLSODA` solver from `ODEPACK`. Several of the settings for that solver are stored in the model object and passed to the solver when the problem is started.  Settings include: `atol`, `rtol`, `maxsteps`, `hmax`, `hmin`, `ixpr`, `mxhnil`.  
+
+## Functions
+
+There are three `C++` functions that `mrgsolve` creates and manages: `MAIN`, `ODE`, `TABLE`. Each 
+function is created from an entire code block in the model specification 
+file.  The user is responsible for writing correct `C++` code in each of these blocks.  `mrgsolve` will parse these blocks and augment this code with the necessary elements to create the `C++` function. 
+
+These functions may be specified in any order in the model specification file, but there is a __specific calling order__ for these functions.  Recognizing and understanding this calling order will help understand how the different pieces of the model specification fit together.  During advance from time `T1` to `T2`, first `$MAIN` is called, then `$ODE` is called repeatedly as the solver finds the values of state variables at `T2`, and, once the solution is found, `$TABLE` is called to calculate derived quantities at `T2` and to specify variables that should be included in the model output.  So, it is helpful to write model specification files in the order:
+
+1. `$MAIN`  - __before__ advancing the system
+2. `$ODE`   - the system __advances__ to `T2`
+3. `$TABLE` - __after__ advancing the system
+
+But the order in which they are coded will not affect model compilation or the simulation result. 
+
+### The `$MAIN` function
+
+The `MAIN` function gets called at least once before the the solver advances from the current time (`T1`) to the next time (`T2`).  In the `MAIN` function, the user may:
+
+* Set initial conditions for any compartment
+* Derive new variables to be used in the model
+* Write covariate models
+* Add between-subject variability to quantities to structural model paramters (e.g. `CL` or `VC`).  
+
+In addition to getting called once per record, the `MAIN` function may be called several times prior to starting the simulation run.  The `MAIN` function is also called whenever the user queries the compartment list. 
+
+See \@ref(block-main) for details.
+
+
+### The `$ODE` function
+
+The `ODE` function is where the user writes the model differential equations.  Any derived quantity that depends on a state variable and is used to to calculate the differentation must be calculated inside `$ODE`.  But, this function is called repeatedly during the simulation run, so any calculation that __can__ be moved out of `$ODE` (for example: to `$MAIN`) should be.  
+
+See \@ref(block-ode) for details.
+
+
+### The `$TABLE` function
+The `TABLE` function is called __after__ the solver advances in time.  The purpose of `TABLE` is to allow the user to interact with the values of the state variables after advancing, potentially derive new variables, and to insert different outputs into the table of simulated results. 
+
+See \@ref(block-table) for details.
+
+
+## Random effect variances
+The `mrgsolve` model object keeps track of a arbitrary number of block matrices that are used to simulate variates from multivariate normal distributions.  Users can specify `OMEGA` matrices for simulating between-subject random effects (one draw per individual) or `SIGMA` matrices for simulating within-subject random effects (one draw per observation).  
+
+The user may use the `revar()` function to query both `OMEGA` and `SIGMA`.
+
+### `OMEGA`
+The matrices are specified in `$OMEGA` blocks in the model specification file. 
+
+`OMEGA` may be queried or updated with the `omat()` function. 
+
+### `SIGMA`
+The matrices are specified in `$SIGMA` blocks in the model specification file.  
+
+`SIGMA` may be queried or updated by the `smat()` function. 
+

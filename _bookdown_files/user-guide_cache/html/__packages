@@ -1,0 +1,7 @@
+base
+bookdown
+mrgsolve
+magrittr
+dplyr
+ggplot2
+bindrcpp
