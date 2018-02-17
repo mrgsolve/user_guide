@@ -5,15 +5,17 @@ DEST := ../../mrgsolve/mrgsolve.github.io/user_guide
 
 publish:
 	make render
-	cp -r img public
-	cp -r public/ ${DEST}
-	cd ${DEST} && git add * && git commit -am "publish"
-	git add * && git commit -am "publish"
+	make pdfbook
+	rm -rf docs/*
+	cp -r _book/* docs/
 
 .PHONY: www
 www:
 	Rscript build.R
 
+
+pdfbook:
+	Rscript -e "bookdown::render_book('index.Rmd', output_format = 'bookdown::pdf_book')"
 
 edits:
 	git add user_guide/*
@@ -23,11 +25,9 @@ edits:
 render:
 	Rscript -e "bookdown::render_book('index.Rmd')"
 
-
 all:
 	make render
-	rm -rf docs/*
-	cp -r _book/* docs/
+
 
 .PHONY: doxygen
 doxygen:
