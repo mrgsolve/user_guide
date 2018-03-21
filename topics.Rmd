@@ -102,18 +102,23 @@ knitr::opts_chunk$set(comment='.')
 
 ### Summary
 
-
--   `mrgsolve` keeps a base list of compartments and initial conditions that you can update **either** from `R` or from inside the model specification
--   When you use `$CMT`, the value in that base list is assumed to be 0 for every compartment
--   `mrgsolve` will by default use the values in that base list when starting the problem
--   When only the base list is available, every individual will get the same initial condition
--   You can **override** this base list by including code in `$MAIN` to set the initial condition
--   Most often, you do this so that the initial is calculated as a function of a parameter
--   For example, `$MAIN RESP_0 = KIN/KOUT;` when `KIN` and `KOUT` have some value in `$PARAM`
--   This code in `$MAIN` overwrites the value in the base list for the current `ID`
--   For typical PK/PD type models, we most frequently initialize in `$MAIN`
--   This is equivalent to what you might do in your NONMEM model
--   For larger systems models, we often just set the initial value via the base list
+-  `mrgsolve` keeps a base list of compartments and initial conditions that 
+you can update **either** from `R` or from inside the model specification
+-  When you use `$CMT`, the value in that base list is assumed to be 0 for 
+every compartment
+-  `mrgsolve` will by default use the values in that base list when starting 
+the problem
+-  When only the base list is available, every individual will get the same 
+initial condition
+-  You can **override** this base list by including code in `$MAIN` to set 
+the initial condition
+-  Most often, you do this so that the initial is calculated as a function 
+of a parameter
+-  For example, `$MAIN RESP_0 = KIN/KOUT;` when `KIN` and `KOUT` have some value in `$PARAM`
+-  This code in `$MAIN` overwrites the value in the base list for the current `ID`
+-  For typical PK/PD type models, we most frequently initialize in `$MAIN`
+-  This is equivalent to what you might do in your NONMEM model
+-  For larger systems models, we often just set the initial value via the base list
 
 ### Make a model only to examine `init` behavior
 
@@ -152,9 +157,11 @@ init(mod)
 
 Note:
 
--   We used `$CMT` in the model spec; that implies that the base initial condition for `A` is set to 0
+-   We used `$CMT` in the model spec; that implies that the base initial 
+condition for `A` is set to 0
 -   In this chunk, the code in `$MAIN` doesn't get run because `IFLAG` is 0
--   So, if we don't update something in `$MAIN` the initial condition is as we set it in the base list
+-   So, if we don't update something in `$MAIN` the initial condition is as we 
+set it in the base list
 
 ``` {r topic-init-2, cache=TRUE}
 mod %>% mrgsim %>% plot
@@ -191,7 +198,8 @@ mod %>% param(IFLAG=1, BASE=300) %>% mrgsim %>% plot
 ### Example PK/PD model with initial condition
 
 
-Just to be clear, there is no need to set any sort of flag to set the initial condition.
+Just to be clear, there is no need to set any sort of flag to set the initial 
+condition.
 
 ``` {r}
 code <- '
@@ -228,9 +236,9 @@ mod %>% init(RESP=1E9) %>% mrgsim
 
 ### Remember: calling `init` will let you check to see what is going on
 
-
--   It's a good idea to get in the habit of doing this when things aren't clear
--   `init` first takes the base initial condition list, then calls `$MAIN` and does any calculation you have in there; so the result is the calculated initials
+-  It's a good idea to get in the habit of doing this when things aren't clear
+-  `init` first takes the base initial condition list, then calls `$MAIN` and 
+does any calculation you have in there; so the result is the calculated initials
 
 ``` {r, topic-init-9}
 init(mod)
@@ -256,9 +264,11 @@ init(mod)
 
 Notes
 
--   In `idata` (only), include a column with `CMT_0` (like you'd do in `$MAIN`).
--   When each ID is simulated, the `idata` value will override the base initial list for that subject.
--   But note that if `CMT_0` is set in `$MAIN`, that will override the `idata` update.
+-  In `idata` (only), include a column with `CMT_0` (like you'd do in `$MAIN`).
+-  When each ID is simulated, the `idata` value will override the base initial 
+list for that subject.
+-  But note that if `CMT_0` is set in `$MAIN`, that will override the `idata` 
+update.
 
 ``` {r,init-by-idata-expand.idata}
 idata <- expand.idata(CENT_0 = seq(0,25,1))
@@ -283,16 +293,40 @@ plot(out, CENT~.)
 
 ## Updating parameters {#topic-parameter-update}
 
-The parameter list was introduced in section \@ref(component-param) and the `$PARAM` code block was shown in \@ref(block-param).
-
-As an overview:  parameters may be updated either by the user (in `R`) or by `mrgsolve` (in the `C++` simulation engine, as the simulation proceeds). 
+The parameter list was introduced in section \@ref(component-param) and the 
+`$PARAM` code block was shown in \@ref(block-param). Once a model is compiled, 
+the names and number of parameters in a model is fixed. However, the values of parameters can be changed: parameters may be updated either by the user 
+(in `R`) or by `mrgsolve` (in the `C++` simulation engine, as the simulation proceeds). 
 
 * To update in `R`, use the `param()` function (see examples below)
-* To have `mrgsolve` update the parameters, attach columns to your data set (either `data_set` or `idata_set`) with the same name as items in the parameter list
+* To have `mrgsolve` update the parameters, attach columns to your data set 
+(either `data_set` or `idata_set`) with the same name as items in the parameter 
+list
 
 Both of these methods are discussed and illustrated in the following sections.
 
 ### Parameter update hierarchy
+
+As we noted above, new parameter values can come from three potential sources:
+
+1. Modification of the (base) parameter list
+1. A column in an `idata_set` that has the same name as a model parameter
+1. A column in a `data_set` that has the same name as a model parameter
+
+These sources for new parameter values are discussed below.  We note here that
+the sources listed above are listed in the order of the parameter update
+*hierarchy*.  So, the base parameter list provides the value by default.  A 
+parameter value coming from an `idata_set` will override the value in the 
+base list.  And a parameter value coming from a `data_set` will override
+the value coming from the base list or an `idata_set` (in case a parameter 
+is listed in both the `idata_set` and the `data_set`).  In other words,
+the hierarchy is:
+
+1. base parameter list is the default
+1. the `idata_set` overrides the base list
+1. the `data_set` overrides the `idata_set` and the base list
+
+The parameter update hierarchy is discussed in the following sections.
 
 __Base parameter set__
 
@@ -317,7 +351,8 @@ param(mod)
 
 __The base parameter set is the default__
 
-The base parameter set allows you to run the model without entering any other data; there are some default values in place.  
+The base parameter set allows you to run the model without entering any other 
+data; there are some default values in place.  
 
 __The parameters in the base list can be changed or updated in `R`__
 
@@ -330,11 +365,16 @@ mod %<>% param(CL=2.1)
 ```{r}
 param(mod)
 ```
-But whatever you've done in `R`, there is a base set (with values) to use. See section \@ref(topic-parameter-update-base) for a more detailed discussion of using `param()` to updated the base list.
+But whatever you've done in `R`, there is a base set (with values) to use. 
+See section \@ref(topic-parameter-update-base) for a more detailed discussion 
+of using `param()` to updated the base list.
 
 __Parameters can also be updated during the simulation run__
 
-Parameters can be updated by putting columns in `idata` set or `data_set` that have the same name as one of the parameters in the parameter list.  But there is no changing values in the base parameter set once the simulation starts.  That is, the following model specification will not compile:
+Parameters can be updated by putting columns in `idata` set or `data_set` that 
+have the same name as one of the parameters in the parameter list.  But there 
+is no changing values in the base parameter set once the simulation starts.  
+That is, the following model specification will not compile:
 
 ```{c,eval=FALSE}
 $PARAM CL = 2
@@ -342,27 +382,32 @@ $PARAM CL = 2
 $MAIN CL = 3; // ERROR
 ```
 
-You cannot over-write the value of a parameter in the model specification.  Let `mrgsolve` do the updating.
+You cannot over-write the value of a parameter in the model specification.  
+Let `mrgsolve` do the updating.
 
-`mrgsolve` always reverts to the base parameter set when starting work on a new individual.
+`mrgsolve` always reverts to the base parameter set when starting work on a 
+new individual.
 
 __Parameters updated from `idata_set`__
 
-When `mrgsolve` finds parameters in `idata`, it will update the base parameter list with those parameters prior to starting that individual.
+When `mrgsolve` finds parameters in `idata`, it will update the base parameter 
+list with those parameters prior to starting that individual.
 
 ```{r}
 data(exidata)
 head(exidata)
 ```
 
-Notice that there are several columns in `exidata` that match up with the names in the parameter list
+Notice that there are several columns in `exidata` that match up with the 
+names in the parameter list
 ```{r}
 names(exidata)
 
 names(param(mod))
 ```
 
-The matching names tell `mrgsolve` to update, assigning each individual their individual parameter.
+The matching names tell `mrgsolve` to update, assigning each individual 
+their individual parameter.
 
 
 ```{r topic-pars-4,cache=TRUE}

@@ -10,9 +10,16 @@ This chapter details the `mrgsolve` model specification format.
 There are two ways to write your model:
 
 ### Separate file {#spec-separate-file}
-Open a text editor and type the model into a file with name that has the format `<model-name>.cpp`.  This filename format identifies a "name" for your model (`<model-name>`, the "stem" of the file name).  The extension __MUST__ be `.cpp` (`mrgsolve` curently assumes the extension).  Note: this whole file will be read and parsed, so everything in it must be valid `mrgsolve` model specification elements.  
+Open a text editor and type the model into a file with name that has the 
+format `<model-name>.cpp`.  This filename format identifies a "name" for your 
+model (`<model-name>`, the "stem" of the file name).  The extension __MUST__ 
+be `.cpp` (`mrgsolve` curently assumes the extension).  Note: this whole file 
+will be read and parsed, so everything in it must be valid `mrgsolve` model
+specification elements.  
 
-Use the `mread()` function to read and parse this file.  For the model called `mymodel` saved in `mymodel.cpp` (in the current working directory), issue the command:
+Use the `mread()` function to read and parse this file.  For the model 
+called `mymodel` saved in `mymodel.cpp` (in the current working directory), 
+issue the command:
 ```{r,eval=FALSE}
 mod <- mread("mymodel")
 ```
@@ -22,7 +29,8 @@ mod <- mread("mymodel")
 
 
 ### Inline / `code` \ {#spec-inline}
-Often it is more convenient to write a model right in your `R` script.  The model might look something like this:
+Often it is more convenient to write a model right in your `R` script.  The 
+model might look something like this:
 
 ```{r}
 code <- '
@@ -31,7 +39,12 @@ $PKMODEL ncmt=1
 '
 ```
 
-Here, we created a character vector of length 1 and saved it to the `R` object called `code`.  The name of this object is irrelevant.  But `code` will be passed into `mrgsolve` as the model definition.  When `mrgsolve` gets a model like this along with a "name" for the model, mrgsolve will write the code to a file called `<model-name>.cpp` and read it right back in as if you had typed the code into this file (section \@ref(spec-separate-file)). 
+Here, we created a character vector of length 1 and saved it to the `R` object
+called `code`.  The name of this object is irrelevant.  But `code` will be 
+passed into `mrgsolve` as the model definition.  When `mrgsolve` gets a model 
+like this along with a "name" for the model, mrgsolve will write the code to a 
+file called `<model-name>.cpp` and read it right back in as if you had typed 
+the code into this file (section \@ref(spec-separate-file)). 
 
 To parse and load this model, use the `mcode()` command:
 
@@ -39,14 +52,16 @@ To parse and load this model, use the `mcode()` command:
 mod <- mcode("mymodel", code)
 ```
 
-`mcode()` is a convenience wrapper for `mread()`.  `mcode` writes the code to `mymodel.cpp` in `tempdir()`, reads it back in, compiles and loads.
+`mcode()` is a convenience wrapper for `mread()`.  `mcode` writes the code to
+`mymodel.cpp` in `tempdir()`, reads it back in, compiles and loads.
 
 The `mcode` call is equivalent to:
 ```{r, eval=FALSE}
 mod <- mread("mymodel", tempdir(), code)
 ```
 
-For help, see `?mread` , `?mcode` in the `R` help system after loading `mrgsolve`.
+For help, see `?mread` , `?mcode` in the `R` help system after loading 
+`mrgsolve`.
 
 
 
@@ -63,9 +78,11 @@ in `$ODE` etc.  Users are free to include block code on the
 same line as the block identifier, but must include a space after the identifier. 
 For example, the parser will recognize `$PARAM CL = 1` but not `$PARAMCL=1` as parameters.
 
-Different blocks may require different syntax.  For example, code written in `$PARAM` will be parsed by the `R` parser and will generally need to adhere to `R` syntax requirements.  On the other hand, code in `$MAIN`, `$ODE`, and `$TABLE` will be used to make functions
-in `C++` and therefore will need to be valid `C++` code, including terminal `;` on each
-line.  
+Different blocks may require different syntax.  For example, code written in
+`$PARAM` will be parsed by the `R` parser and will generally need to adhere 
+to `R` syntax requirements.  On the other hand, code in `$MAIN`, `$ODE`, 
+and `$TABLE` will be used to make functions in `C++` and therefore will 
+need to be valid `C++` code, including terminal `;` on each line.  
 
 
 __Block options__
@@ -102,11 +119,17 @@ See also: section \@ref(block-theta) and \@ref(block-fixed).
 See `?param` in the `R` help system after loading `mrgsolve`.
 
 ### `$FIXED`  \ {#block-fixed}
-Like `$PARAM`, `$FIXED` is used to specify `name=value` pairs.  Unlike `$PARAM`, however, the values associated with names in `$FIXED` are not able to be updated.  
+Like `$PARAM`, `$FIXED` is used to specify `name=value` pairs.  Unlike 
+`$PARAM`, however, the values associated with names in `$FIXED` are not able 
+to be updated.  
 
-By default, names in `$FIXED` are associated with their value through a `C++` preprocessor `#define` statement. 
+By default, names in `$FIXED` are associated with their value through a 
+`C++` preprocessor `#define` statement. 
 
-Usually, `$FIXED` is only used when there are a very large number of parameters ($>$ 100 or 200).  When some of these parameters never need to be updated, you can move them to a `$FIXED` block to get a modest gain in efficiency of the simulation.
+Usually, `$FIXED` is only used when there are a very large number of 
+parameters ($>$ 100 or 200).  When some of these parameters never need 
+to be updated, you can move them to a `$FIXED` block to get a modest gain 
+in efficiency of the simulation.
 
 Items in `$FIXED` will not be shown when parameters are queried. 
 
@@ -175,10 +198,15 @@ This code block has two main purposes:
 
 For users who are familiar with NONMEM, `$MAIN` is similar to `$PK`.
 
-`$MAIN` is wrapped into a `C++` function and compiled / loaded by `mrgsolve`.  The `MAIN` function gets called just prior to advancing the system from the current time to the next time for each record in the data set.  `$MAIN` also gets called several times before starting the problem (`NEWIND == 0`) and just prior to simulating each individual (`NEWIND == 1`).  Finally, `$MAIN` gets called every time the model
-initial conditions are queried with `init()`.  
+`$MAIN` is wrapped into a `C++` function and compiled / loaded by `mrgsolve`.  
+The `MAIN` function gets called just prior to advancing the system from the 
+current time to the next time for each record in the data set.  `$MAIN` also 
+gets called several times before starting the problem (`NEWIND == 0`) and 
+just prior to simulating each individual (`NEWIND == 1`).  Finally, `$MAIN` 
+gets called every time the model initial conditions are queried with `init()`.  
 
-New variables may be declared in `$MAIN`.  See section \@ref(new-variables) for details.
+New variables may be declared in `$MAIN`.  See section \@ref(new-variables) 
+for details.
 
 Examples:
 
@@ -198,8 +226,11 @@ double ke = CL/VC;
 
 ### `$ODE` \ {#block-ode}
 
-Use `$ODE` to define model differential equations.  For all compartments assign the value of the differential equation to `dxdt_CMT` where `CMT` is the name of the compartment.  The `dxdt_` equation may 
-be a function of model parameters (via `$PARAM`), the current value of any compartment (`CMT`) or any user-derived variable. 
+Use `$ODE` to define model differential equations.  For all compartments assign 
+the value of the differential equation to `dxdt_CMT` where `CMT` is the name 
+of the compartment.  The `dxdt_` equation may be a function of model 
+parameters (via `$PARAM`), the current value of any compartment (`CMT`) 
+or any user-derived variable. 
 
 For example:
 ```{c,eval=FALSE}
@@ -211,12 +242,18 @@ dxdt_CENT = KA*GUT - KE*CENT;
 
 ```
 
-It is important to make sure that there is a `dxdt_` expression defined for every compartment listed in `$CMT` or `$INIT`, even if it is `dxdt_CMT = 0;`
+It is important to make sure that there is a `dxdt_` expression defined for 
+every compartment listed in `$CMT` or `$INIT`, even if it is `dxdt_CMT = 0;`
 
-The `$ODE` function is called repeatedly during a simulation run.  So it is wise to do as many calculations as possible outside of `$ODE`, usually in `$MAIN`.  But remember that any calculation that depends on an amount in a compartment and helps determine the `dxdt_` expression in a model must be written in `$ODE`.
+The `$ODE` function is called repeatedly during a simulation run.  So it is 
+wise to do as many calculations as possible outside of `$ODE`, usually in 
+`$MAIN`.  But remember that any calculation that depends on an amount in a
+compartment and helps determine the `dxdt_` expression in a model must be 
+written in `$ODE`.
 
 
-New variables may be declared in `$ODE`.  See section \@ref(new-variables) for details.
+New variables may be declared in `$ODE`.  See section \@ref(new-variables) 
+for details.
 
 For example:
 ```{c,eval=FALSE}
@@ -319,7 +356,8 @@ bool yes = true;
 $CAPTURE A B C yes
 ```
 
-This construct will result in 4 additional columns in the simulated output with names `A`, `B`, `C`, and `yes`.  
+This construct will result in 4 additional columns in the simulated output 
+with names `A`, `B`, `C`, and `yes`.  
 
 Users can also rename captured variables by providing a 
 `newname = oldname` specification. 
@@ -338,8 +376,8 @@ $CAPTURE WEIGHT = WT TVCL = THETA2 CL  ETA(1)
 In this example, the names of the captured data items
 will be `WEIGHT,TVCL,CL,ETA_1`. 
 
-
-Users can use the `capture` type to declare variables in `$MAIN` and `$TABLE`.  `capture` types are really `double`s, but using that type will signal `mrgsolve`
+Users can use the `capture` type to declare variables in `$MAIN` and `$TABLE`. 
+`capture` types are really `double`s, but using that type will signal `mrgsolve`
 to automatically capture that value.  For example:
 
 ```{c,eval=FALSE}
@@ -351,10 +389,8 @@ $TABLE
 capture DV = (CENT/VC);
 ```
 
-Since we used type `capture` for `DV`, `DV` will show up as a column in the simulated data.
-
-
-
+Since we used type `capture` for `DV`, `DV` will show up as a column in the
+simulated data.
 
 Annotated example:
 
@@ -661,6 +697,17 @@ $THETA @annotated
 0.3 : Typical value of ka (1/hr)
 ```
 
+To change the prefix, use `@name` directive
+
+```{c,eval = FALSE}
+$THETA @name theta
+0.1 0.2 0.3
+```
+
+would be equivalent to
+```{c,eval = FALSE}
+$PARAM theta1 = 0.1, theta2 = 0.2, theta3 = 0.3
+```
 
 
 See also: \@ref(block-param) .
@@ -668,18 +715,23 @@ See also: \@ref(block-param) .
 
 ### `$NMXML`  \ {#block-nmxml}
 The `$NMXML` block lets you read and incorporate results from a NONMEM run into 
-your `mrgsolve` model.  From the NONMEM run, `THETA` will be imported into your parameter
-list (see \@ref(block-param) and \@ref(component-param)), `OMEGA` will be captured as an `$OMEGA` block (\@ref(block-omega)) and `SIGMA` will be captured as a `$SIGMA` block (\@ref(block-sigma)).  Users may optionally omit any one of these from being imported.
+your `mrgsolve` model.  From the NONMEM run, `THETA` will be imported into your
+parameter list (see \@ref(block-param) and \@ref(component-param)), `OMEGA` will 
+be captured as an `$OMEGA` block (\@ref(block-omega)) and `SIGMA` will be 
+captured as a `$SIGMA` block (\@ref(block-sigma)).  Users may optionally omit 
+any one of these from being imported.
 
-`$NMXML` contains a `project` argument and a `run` argument.  By default, the estimates are read from 
-from the file `project/run/run.xml`.  That is, it is assumed that there is a directory named `run` that is 
-inside the `project` directory where `$NMXML` will find `run.xml`.  Your NONMEM run directories may
-not be organized in a way that is compatible with this default.  In that case, you will need to 
-provide the `file` argument, which should be the path to the `run.xml` file, either as a full path
-or as a path relative to the current working directory.
+`$NMXML` contains a `project` argument and a `run` argument.  By default, the 
+estimates are read from from the file `project/run/run.xml`.  That is, it is 
+assumed that there is a directory named `run` that is inside the `project` 
+directory where `$NMXML` will find `run.xml`.  Your NONMEM run directories may
+not be organized in a way that is compatible with this default.  In that case, 
+you will need to provide the `file` argument, which should be the path to the 
+`run.xml` file, either as a full path or as a path relative to the current 
+working directory.
 
-For help on the arguments / options for `$NMXML`, please see the `?nmxml` help topic in your `R` session after 
-loading the `mrgsolve` package.
+For help on the arguments / options for `$NMXML`, please see the `?nmxml` 
+help topic in your `R` session after loading the `mrgsolve` package.
 
 __An example__
 
@@ -699,7 +751,6 @@ code <- '
 $NMXML
 run = 1005
 project = path
-theta = TRUE, omega = TRUE, sigma = TRUE
 olabels = s(ECL, EVC, EKA)
 slabels = s(PROP, ADD)
 
@@ -813,6 +864,14 @@ cama <- function(mod) {
 ```
 
 ## Variables and Macros
+
+This section describes some macros and internal variables that can 
+be used in model specification files.  It should be clear from the usage 
+examples which variables can be set by the user and which are to be 
+read or checked.  All internal variables are pre-defined and pre-initialized.
+The user should never try to declare an internal variable; this will 
+always result in an compile-time error. 
+
 In the following section, we adopt the convention that `CMT` stands for a compartment in the model.
 
 ### `ID`
@@ -858,7 +917,8 @@ if(NEWIND <=1) {
 `NEWIND` is an alias for `self.newind`.
 
 ### `self.cmt`
-The current compartment number regardless of whether it was given as `cmt` or `CMT` in the data set.  There is no alias for `self.cmt`.
+The current compartment number regardless of whether it was given as `cmt` or 
+`CMT` in the data set.  There is no alias for `self.cmt`.
 
 For example:
 
@@ -872,7 +932,8 @@ if(self.cmt==3) DV = RESPOSE + EPS(2);
 
 
 ### `self.amt`
-The current `amt` value regardless of whether it was given as `amt` or `AMT` in the data set.  There is no alias for `self.amt`.
+The current `amt` value regardless of whether it was given as `amt` or `AMT` 
+in the data set.  There is no alias for `self.amt`.
 
 ### `self.nid`
 The number of IDs in the data set.
@@ -888,7 +949,10 @@ The current row number.  Numbers start at 0 and increase by one to `self.rown-1`
 
 
 ### `ETA(n)`
-`ETA(n)` is the value of the subject-level variate drawn from the model `OMEGA` matrix.  `ETA(1)` through `ETA(25)` have default values of zero so they may be used in a model even if appropriate `OMEGA` matrices have not been provided. 
+`ETA(n)` is the value of the subject-level variate drawn from the model 
+`OMEGA` matrix.  `ETA(1)` through `ETA(25)` have default values of zero so 
+they may be used in a model even if appropriate `OMEGA` matrices have not been
+provided. 
 
 For example:
 ```{c, eval=FALSE}
@@ -900,10 +964,13 @@ double CL = TVCL*exp(ETA(1));
 double VC = TVVC*exp(ETA(2));
 double KA = TVKA*exp(ETA(3));
 ```
-Here, we have a 3x3 `OMEGA` matrix. `ETA(1)`, `ETA(2)`, and `ETA(3)` will be populated with variates drawn from this matrix.  `ETA(4)` through `ETA(25)` will be populated with zero. 
+Here, we have a 3x3 `OMEGA` matrix. `ETA(1)`, `ETA(2)`, and `ETA(3)` will be
+populated with variates drawn from this matrix.  `ETA(4)` through `ETA(25)` 
+will be populated with zero. 
 
 ### `EPS(n)`
-`EPS(n)` holds the current value of the observation-level random variates drawn from `SIGMA`.  The basic setup is the same as detailed in `ETA(n)`.
+`EPS(n)` holds the current value of the observation-level random variates drawn
+from `SIGMA`.  The basic setup is the same as detailed in `ETA(n)`.
 
 Example:
 ```{c,eval=FALSE}
@@ -938,8 +1005,6 @@ double CP = CENT/VC;
 $CAPTURE CP
 ```
 
-
-
 See: section \@ref(block-table) and also \@ref(block-capture)
 
 
@@ -964,7 +1029,9 @@ ALAG_CENT = 0.25;
 
 
 ### `R_CMT` \ {#spec-r}
-For the `CMT` compartment, sets the infusion rate for that compartment.  The infusion rate is only set via `R_CMT` when `rate` in the data set or event object is set to `-1`. 
+For the `CMT` compartment, sets the infusion rate for that compartment.  The
+infusion rate is only set via `R_CMT` when `rate` in the data set or event 
+object is set to `-1`. 
 
 Example:
 ```{c,eval=FALSE}
@@ -974,7 +1041,9 @@ R_CENT = 100;
 
 
 ### `D_CMT` \ {#spec-d}
-For the `CMT` compartment, sets the infusion duration for that compartment.  The infusion duration is only set via `D_CMT` when `rate` in the data set or event object is set to `-2`. 
+For the `CMT` compartment, sets the infusion duration for that compartment.  
+The infusion duration is only set via `D_CMT` when `rate` in the data set or 
+event object is set to `-2`. 
 
 Example:
 ```{c,eval=FALSE}
@@ -983,10 +1052,11 @@ D_CENT = 2;
 ```
 
 
-
-
 ## Derive new variables {#new-variables}
-New `C++` variables may be derived in `$GLOBAL`, `$MAIN`, `$ODE` and `$TABLE`.  Because these are `C++` variables, the type of variable being used must be declared.  For the vast majority of applications, the `double` type is used (double-precision numeric value. 
+New `C++` variables may be derived in `$GLOBAL`, `$MAIN`, `$ODE` and `$TABLE`.
+Because these are `C++` variables, the type of variable being used must be
+declared.  For the vast majority of applications, the `double` type is used
+(double-precision numeric value). 
 
 ```{c,eval=FALSE}
 $MAIN
@@ -999,7 +1069,12 @@ $MAIN
 bool cure = false;
 ```
 
-When variables of the type `double`, `int`, and `bool` are declared and initialized in `$MAIN`, `$ODE`, `$TABLE`, `mrgsolve` will detect those declarations, and modify the code so that the variables are actually declared in `$GLOBAL` not in `$MAIN`, `$ODE`, or `$TABLE`.  This is done so that variables declared in one code block can be read and modified in another code block.  
+When variables of the type `double`, `int`, and `bool` are declared and 
+initialized in `$MAIN`, `$ODE`, `$TABLE`, `mrgsolve` will detect those
+declarations, and modify the code so that the variables are actually declared 
+in `$GLOBAL` not in `$MAIN`, `$ODE`, or `$TABLE`.  This is done so that 
+variables declared in one code block can be read and modified in another 
+code block.  
 
 For example, the following code:
 ```{c,eval=FALSE}
@@ -1038,18 +1113,26 @@ localdouble CLi = TVCL*exp(ETA(1));
 
 
 ## Examples
-The following sections show example model specification.  The intention is to show how the different blocks, macros and variables can work together to make a functional model.  Some models are given purely for illustrative purpose and may not be particularly useful in application.
+The following sections show example model specification.  The intention is to 
+show how the different blocks, macros and variables can work together to make 
+a functional model.  Some models are given purely for illustrative purpose and 
+may not be particularly useful in application.
 
 ### Simple PK model
 
 Notes:
 
-* Basic PK parameters are declared in `$PARAM`; every parameter needs to be assigned a value
-* Two compartments `GUT` and `CENT` are declared in `$CMT`; using `$CMT` assumes that both compartments start with 0 mass
-* Because we declared `GUT` and `CENT` as compartments, we write `dxdt_` equations for both in `$ODE`
-* In `$ODE`, we refer to parameters (`CL/VC/KA`) and the amounts in each compartment at any particular time (`GUT` and `CENT`)
+* Basic PK parameters are declared in `$PARAM`; every parameter needs to be
+assigned a value
+* Two compartments `GUT` and `CENT` are declared in `$CMT`; using `$CMT` 
+assumes that both compartments start with 0 mass
+* Because we declared `GUT` and `CENT` as compartments, we write `dxdt_` 
+equations for both in `$ODE`
+* In `$ODE`, we refer to parameters (`CL/VC/KA`) and the amounts in each
+compartment at any particular time (`GUT` and `CENT`)
 * `$ODE` should be `C++` code; each line ends in `;`
-* We derive a variable called `CP` in `$TABLE` and `$CAPTURE` that value so that it appears in the simulated output
+* We derive a variable called `CP` in `$TABLE` and `$CAPTURE` that value 
+so that it appears in the simulated output
 
 ```{c, eval=FALSE}
 $PARAM CL = 1, VC = 30, KA = 1.3
@@ -1072,11 +1155,16 @@ $CAPTURE CP
 
 Notes:
 
-* We use a preprocessor `#define` directive in `$GLOBAL`; everywhere in the model where a `CP` token is found, the expression `(CENT/VC)` ... with parentheses ... is inserted
-* We write the initial value for the `RESP` compartment in `$MAIN` as a funciton of two parameters `KIN/KOUT`
+* We use a preprocessor `#define` directive in `$GLOBAL`; everywhere in the 
+model where a `CP` token is found, the expression `(CENT/VC)` ... with 
+parentheses ... is inserted
+* We write the initial value for the `RESP` compartment in `$MAIN` as a 
+function of two parameters `KIN/KOUT`
 * A new variable - `INH`- is declared and used in `$ODE`
-* Since `CP` is defined as `CENT/VC`, we can "capture" that name/value in `$CAPTURE`
-* Both `$MAIN` and `$ODE` are `C++` code blocks; don't forget to add the `;` at the end of each statement
+* Since `CP` is defined as `CENT/VC`, we can "capture" that name/value in
+`$CAPTURE`
+* Both `$MAIN` and `$ODE` are `C++` code blocks; don't forget to add the `;` 
+at the end of each statement
 
 ```{c, eval=FALSE}
 $PARAM CL = 1, VC = 30, KA = 1.3
@@ -1110,9 +1198,13 @@ Notes:
 
 * Use `$SET` to set the simulation time grid from 0 to 240 by 0.1
 * There are two `$OMEGA` matrices; we name them `IIV` and `IOV`
-* The IIV "etas" are labeled as `ECL/EVC/EKA`; these are aliases to `ETA(1)/ETA(2)/ETA(3)`.  The `IOV` matrix is unlabeled; we must refer to `ETA(4)/ETA(5)` for this
-* Because `ETA(1)` and `ETA(2)` are labeled, we can "capture" them as `ECL` and `EVC`
-* We added zeros for both `$OMEGA` matrices; all the etas will be zero until we populate those matrices (section \@ref(topic-matrix-update))
+* The IIV "etas" are labeled as `ECL/EVC/EKA`; these are aliases to
+`ETA(1)/ETA(2)/ETA(3)`.  The `IOV` matrix is unlabeled; we must refer to
+`ETA(4)/ETA(5)` for this
+* Because `ETA(1)` and `ETA(2)` are labeled, we can "capture" them as `ECL` and
+`EVC`
+* We added zeros for both `$OMEGA` matrices; all the etas will be zero until we
+populate those matrices (section \@ref(topic-matrix-update))
 
 
 ```{c,eval=FALSE}

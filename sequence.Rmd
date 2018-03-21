@@ -25,15 +25,18 @@ their code block identifiers, the functions are
 
 ## Problem initiation
 Just prior to starting the problem (when `NEWIND` is 
-equal to `0`), `mrgsolve` calls `$PREAMBLE`.  This function is only called once during the simulation 
-sequence.  The goal of `$PREAMBLE` is to allow
-the user to work with different `C++` data structures to get them ready for the simulation run. 
+equal to `0`), `mrgsolve` calls `$PREAMBLE`.  This function is only called 
+once during the simulation sequence.  The goal of `$PREAMBLE` is to allow
+the user to work with different `C++` data structures to get them ready for 
+the simulation run. 
 
 ## Subject initiation
 After the `$PREAMBLE` call, `mrgsolve` simulates
-each `ID` in the data set, one after another.  `mrgsolve` runs this sequence just prior to simulating a given `ID`
+each `ID` in the data set, one after another.  `mrgsolve` runs this sequence 
+just prior to simulating a given `ID`
 
-1. Copy any parameters that are found in the `idata_set` to the working parameter list
+1. Copy any parameters that are found in the `idata_set` to the working 
+parameter list
 1. Copy any parameters that are found in 
 the `data_set` to the working parameter list, 
 with the copy being taken from the first actual
@@ -54,8 +57,19 @@ are found there.
 `mrgsolve` executes this sequence while working 
 from record to record for a given `ID`
 
-1. If `nocb` (next observation carried backward) is `TRUE`, then parameters are  copied from the current record if that is an actual data set record. Note that if `nocb` is `FALSE` then `locf` (first observation carried forward) is assumed to be `TRUE`
-(see below).
+1. If `nocb` (next observation carried backward) is `TRUE`, then parameters 
+are  copied from the current record if that is an actual data set record. 
+Note that if `nocb` is `FALSE` then `locf` (first observation carried forward) 
+is assumed to be `TRUE` (see below).  This is the last parameters will be 
+copied from any input data set prior to advancing the system (when `locf`
+is being used).  Therefore, when parameter columns are found in both 
+an `idata_set` and a `data_set`, it will be the value found in the `data_set`
+that will overwrite both the base list and any parameter value that was 
+copied from an `idata_set`.  It is not an error to have different parameter 
+values in an `idata_set` and a `data-set`, but the value found in the `data_set`
+will be used when this happens.  More on parameters and the parameter update
+sequence can be found in sections \@ref(topic-parameter-update) and 
+\@ref(component-param).
 1. `$MAIN` is called
 1. The system is advanced via `$ODE` or `$PKMODEL`, 
 whichever one is invoked in the model specification
