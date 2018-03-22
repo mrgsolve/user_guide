@@ -1,0 +1,1019 @@
+```{r,echo=FALSE,message=FALSE}
+source("setup.R")
+```
+
+
+# Topics {#topics}
+
+## Annotated model specification {#topic-annotated}
+Here is a complete annotated `mrgsolve` model.  The 
+goal was to get in several of the most common
+blocks that you might want to annotate.  The different 
+code blocks are rendered here separately for clarity in
+presentation; but users should include all relevant
+blocks in a single file (or R string).
+
+
+```{r,eval=FALSE}
+$PROB
+
+# Final PK model
+
+- Author: Pmetrics Scientist
+- Client: Pharmaco, Inc.
+- Date: `r Sys.Date()`
+- NONMEM Run: 12345
+- Structure: one compartment, first order absorption
+- Implementation: closed form solutions
+- Error model: Additive + proportional
+- Covariates:
+  - WT on clearance
+- SEX on volume
+- Random effects on: `CL`, `V`, `KA`
+```
+
+```{r,eval=FALSE}
+[PARAM] @annotated
+TVCL : 1.1   : Clearance (L/hr)
+TVV  : 35.6  : Volume of distribution (L)
+TVKA : 1.35  : Absorption rate constant (1/hr)
+WT   : 70    : Weight (kg)
+SEX  : 1     : Male = 0, Female 1
+WTCL : 0.75  : Exponent weight on CL
+SEXV : 0.878 : Volume female/Volume male
+```
+
+```{r,eval=FALSE}
+[MAIN]
+double CL = TVCL*pow(WT/70,WTCL)*exp(ECL);
+double V  = TVV *pow(SEXVC,SEX)*exp(EV);
+double KA = TVKA*exp(EKA);
+```
+
+```{r,eval=FALSE}
+[OMEGA] @name OMGA @correlation @block
+ECL : 1.23 : Random effect on CL
+EV  : 0.67 0.4 : Random effect on V
+EKA : 0.25 0.87 0.2 : Random effect on KA
+```
+
+```{r,eval=FALSE}
+[SIGMA] @name SGMA 
+PROP: 0.25 : Proportional residual error
+ADD : 25   : Additive residual error
+```
+
+```{r,eval=FALSE}
+[CMT]
+GUT  : Dosing compartment  (mg)
+CENT : Central compartment (mg)
+```
+
+
+```{r,eval=FALSE}
+[PKMODEL] ncmt = 1, depot=TRUE
+```
+
+```{r,eval=FALSE}
+[TABLE]
+capture IPRED = CENT/V;
+double DV = IPRED*(1+PROP) + ADD;
+
+```{r,eval=FALSE}
+[CAPTURE]
+DV  : Concentration (mg/L)
+ECL : Random effect on CL
+CL  : Individual clearance (L/hr)
+```
+
+
+## Set initial conditions {#topic-init}
+
+``` {r}
+library(mrgsolve)
+library(dplyr)
+```
+```{r,echo=FALSE}
+options(mrgsolve_mread_quiet = TRUE)
+knitr::opts_chunk$set(comment='.')
+```
+
+
+
+### Summary
+
+-  `mrgsolve` keeps a base list of compartments and initial conditions that 
+you can update **either** from `R` or from inside the model specification
+-  When you use `$CMT`, the value in that base list is assumed to be 0 for 
+every compartment
+-  `mrgsolve` will by default use the values in that base list when starting 
+the problem
+-  When only the base list is available, every individual will get the same 
+initial condition
+-  You can **override** this base list by including code in `$MAIN` to set 
+the initial condition
+-  Most often, you do this so that the initial is calculated as a function 
+of a parameter
+-  For example, `$MAIN RESP_0 = KIN/KOUT;` when `KIN` and `KOUT` have some value in `$PARAM`
+-  This code in `$MAIN` overwrites the value in the base list for the current `ID`
+-  For typical PK/PD type models, we most frequently initialize in `$MAIN`
+-  This is equivalent to what you might do in your NONMEM model
+-  For larger systems models, we often just set the initial value via the base list
+
+### Make a model only to examine `init` behavior
+
+
+Note: `IFLAG` is my invention only for this demo. The demo is always responsible for setting and interpreting the value (it is not reserved in any way and `mrgsolve` does not control the value).
+
+For this demo
+
+-   Compartment `A` initial condition defaults to 0
+-   Compartment `A` initial condition will get set to `BASE` **only** if `IFLAG  > 0`
+-   Compartment `A` always stays at the initial condition
+
+``` {r}
+code <- '
+$PARAM BASE=100, IFLAG = 0
+
+$CMT A
+
+$MAIN
+
+if(IFLAG > 0) A_0 = BASE;
+
+$ODE dxdt_A = 0;
+'
+```
+
+``` {r inits-mread,cache=TRUE}
+mod <- mcode("init",code)
+```
+
+**Check the initial condition**
+
+``` {r}
+init(mod)
+```
+
+Note:
+
+-   We used `$CMT` in the model spec; that implies that the base initial 
+condition for `A` is set to 0
+-   In this chunk, the code in `$MAIN` doesn't get run because `IFLAG` is 0
+-   So, if we don't update something in `$MAIN` the initial condition is as we 
+set it in the base list
+
+``` {r topic-init-2, cache=TRUE}
+mod %>% mrgsim %>% plot
+```
+
+
+**Next, we update the base initial condition for `A` to 50**
+
+Note:
+
+-   The code in `$MAIN` still doesn't get run because `IFLAG` is 0
+
+``` {r topic-init-3,cache=TRUE}
+mod %>% init(A = 50) %>% mrgsim %>% plot
+```
+
+**Now, turn on `IFLAG`**
+
+Note:
+
+-   Now, that code in `$MAIN` gets run
+-   `A_0` is set to the value of `BASE`
+
+``` {r topic-init-4,cache=TRUE}
+mod %>% param(IFLAG=1) %>% mrgsim %>% plot
+```
+
+
+``` {r topic-init-5,cache=TRUE}
+mod %>% param(IFLAG=1, BASE=300) %>% mrgsim %>% plot
+```
+
+
+### Example PK/PD model with initial condition
+
+
+Just to be clear, there is no need to set any sort of flag to set the initial 
+condition.
+
+``` {r}
+code <- '
+$PARAM AUC=0, AUC50 = 75, KIN=200, KOUT=5
+
+$CMT RESP
+
+$MAIN 
+RESP_0 = KIN/KOUT;
+
+$ODE
+
+dxdt_RESP = KIN*(1-AUC/(AUC50+AUC)) - KOUT*RESP;
+
+'
+```
+
+``` {r topic-init-6,cache=TRUE}
+mod <- mcode("init2", code)
+```
+
+The initial condition is set to 40 per the values of `KIN` and `KOUT`
+
+``` {r topic-init-7, cache=TRUE}
+mod %>% mrgsim %>% plot
+```
+
+Even when we change `RESP_0` in `R`, the calculation in `$MAIN` gets the final say
+
+``` {r topic-init-8, cache=TRUE}
+mod %>% init(RESP=1E9) %>% mrgsim
+```
+
+
+### Remember: calling `init` will let you check to see what is going on
+
+-  It's a good idea to get in the habit of doing this when things aren't clear
+-  `init` first takes the base initial condition list, then calls `$MAIN` and 
+does any calculation you have in there; so the result is the calculated initials
+
+``` {r, topic-init-9}
+init(mod)
+```
+
+``` {r, topic init 10}
+mod %>% param(KIN=100) %>% init
+```
+
+
+
+### Set initial conditions via `idata`
+
+Go back to house model
+
+``` {r, init-by-idata-house}
+mod <- mrgsolve:::house()
+```
+
+``` {r,init-by-idata-init}
+init(mod)
+```
+
+Notes
+
+-  In `idata` (only), include a column with `CMT_0` (like you'd do in `$MAIN`).
+-  When each ID is simulated, the `idata` value will override the base initial 
+list for that subject.
+-  But note that if `CMT_0` is set in `$MAIN`, that will override the `idata` 
+update.
+
+``` {r,init-by-idata-expand.idata}
+idata <- expand.idata(CENT_0 = seq(0,25,1))
+```
+
+``` {r,init-by-idata-expand.idata-2}
+idata %>% head
+```
+
+
+``` {r topic-init-10,cache=TRUE}
+out <- 
+  mod %>% 
+  idata_set(idata) %>% 
+  mrgsim(end=40)
+```
+
+``` {r topic-init-11,cache=TRUE}
+plot(out, CENT~.)
+```
+
+
+## Updating parameters {#topic-parameter-update}
+
+The parameter list was introduced in section \@ref(component-param) and the 
+`$PARAM` code block was shown in \@ref(block-param). Once a model is compiled, 
+the names and number of parameters in a model is fixed. However, the values of parameters can be changed: parameters may be updated either by the user 
+(in `R`) or by `mrgsolve` (in the `C++` simulation engine, as the simulation proceeds). 
+
+* To update in `R`, use the `param()` function (see examples below)
+* To have `mrgsolve` update the parameters, attach columns to your data set 
+(either `data_set` or `idata_set`) with the same name as items in the parameter 
+list
+
+Both of these methods are discussed and illustrated in the following sections.
+
+### Parameter update hierarchy
+
+As we noted above, new parameter values can come from three potential sources:
+
+1. Modification of the (base) parameter list
+1. A column in an `idata_set` that has the same name as a model parameter
+1. A column in a `data_set` that has the same name as a model parameter
+
+These sources for new parameter values are discussed below.  We note here that
+the sources listed above are listed in the order of the parameter update
+*hierarchy*.  So, the base parameter list provides the value by default.  A 
+parameter value coming from an `idata_set` will override the value in the 
+base list.  And a parameter value coming from a `data_set` will override
+the value coming from the base list or an `idata_set` (in case a parameter 
+is listed in both the `idata_set` and the `data_set`).  In other words,
+the hierarchy is:
+
+1. base parameter list is the default
+1. the `idata_set` overrides the base list
+1. the `data_set` overrides the `idata_set` and the base list
+
+The parameter update hierarchy is discussed in the following sections.
+
+__Base parameter set__
+
+* Every model has a base set of "parameters"
+* These are named and set in `$PARAM`
+* Parameters can only get into the parameter list in `$PARAM` (or `$THETA`)
+* No changing the names or numbers of parameters once the model is compiled
+* But, several ways to change the values
+
+```{r,message=FALSE}
+code <- '
+$VCMT KYLE
+$PARAM CL = 1.1, VC=23.1, KA=1.7, KM=10
+$CAPTURE CL VC KA KM
+'
+mod <- mcode("tmp", code, warn=FALSE)
+```
+
+```{r}
+param(mod)
+```
+
+__The base parameter set is the default__
+
+The base parameter set allows you to run the model without entering any other 
+data; there are some default values in place.  
+
+__The parameters in the base list can be changed or updated in `R`__
+
+Use the `param()` function to both set and get:
+
+```{r}
+mod %<>% param(CL=2.1)
+```
+
+```{r}
+param(mod)
+```
+But whatever you've done in `R`, there is a base set (with values) to use. 
+See section \@ref(topic-parameter-update-base) for a more detailed discussion 
+of using `param()` to updated the base list.
+
+__Parameters can also be updated during the simulation run__
+
+Parameters can be updated by putting columns in `idata` set or `data_set` that 
+have the same name as one of the parameters in the parameter list.  But there 
+is no changing values in the base parameter set once the simulation starts.  
+That is, the following model specification will not compile:
+
+```{c,eval=FALSE}
+$PARAM CL = 2
+
+$MAIN CL = 3; // ERROR
+```
+
+You cannot over-write the value of a parameter in the model specification.  
+Let `mrgsolve` do the updating.
+
+`mrgsolve` always reverts to the base parameter set when starting work on a 
+new individual.
+
+__Parameters updated from `idata_set`__
+
+When `mrgsolve` finds parameters in `idata`, it will update the base parameter 
+list with those parameters prior to starting that individual.
+
+```{r}
+data(exidata)
+head(exidata)
+```
+
+Notice that there are several columns in `exidata` that match up with the 
+names in the parameter list
+```{r}
+names(exidata)
+
+names(param(mod))
+```
+
+The matching names tell `mrgsolve` to update, assigning each individual 
+their individual parameter.
+
+
+```{r topic-pars-4,cache=TRUE}
+out <- 
+  mod %>%
+  idata_set(exidata) %>%
+  mrgsim(end=-1 , add=c(0,2))
+```
+
+```{r}
+out
+```
+
+__Parameters updated from `data_set`__
+
+Like an `idata` set, we can put parameters on a `data` set
+
+```{r}
+data <- expand.ev(amt=0, CL=c(1,2,3), VC=30)
+```
+
+```{r topic-pars-5, cache=TRUE}
+out <- 
+  mod %>%
+  data_set(data) %>% 
+  obsonly %>%
+  mrgsim(end=-1, add=c(0,2))
+```
+```{r}
+out
+```
+
+This is how we do time-varying parameters:
+```{r}
+data <- 
+  data_frame(CL=seq(1,5)) %>%
+  mutate(evid=0,ID=1,cmt=1,time=CL-1,amt=0)
+```
+
+```{r}
+mod %>%
+  data_set(data) %>%
+  mrgsim(end=-1)
+```
+
+For more information on time-varying covariates 
+(parameters), see sections \@ref(topics-time-varying) and \@ref(section-sequence).
+
+
+__Parameters are carried back when first record isn't at `time == 0`__
+
+What about this?
+
+```{r}
+data <- expand.ev(amt=100,time=24,CL=5,VC=32)
+data
+```
+
+The first `data` record happens at `time==24`
+
+```{r}
+mod %>% 
+  data_set(data) %>%
+  mrgsim(end=-1, add=c(0,2))
+```
+
+Since the data set doesn't start until `time==5`, we might think that `CL` doesn't change from the base parameter set until then.  
+
+But by default, `mrgsolve` carries those parameter values back to the start of the simulation.  This is by design ... by far the more useful configuration.
+
+If you wanted the base parameter set in play until that first data set record, do this:
+
+```{r}
+mod %>%
+  data_set(data) %>%
+  mrgsim(end=-1,add=c(0,2), filbak=FALSE)
+```
+
+Will this work? 
+
+```{r}
+
+idata <- do.call("expand.idata", as.list(param(mod)))
+
+idata
+
+```
+Here, we'll pass in __both__ `data_set` and `idata_set` and they have conflicting values for the parameters.
+
+```{r}
+
+mod %>%
+  data_set(data) %>%
+  idata_set(idata) %>%
+  mrgsim(end=-1,add=c(0,2))
+```
+
+The data set always gets the last word.
+
+
+### Updating the base parameter list {#topic-parameter-update-base}
+
+From the previous section
+```{r}
+param(mod)
+```
+
+__Update with `name-value` pairs__
+
+We can call `param()` to update the model object, directly naming the parameter to update and the new value to take
+
+```{r}
+mod %>% param(CL = 777, KM = 999) %>% param
+```
+
+The parameter list can also be updated by scanning the names in a list
+
+```{r}
+what <- list(CL = 555, VC = 888, KYLE = 123, MN = 100)
+
+mod %>% param(what) %>% param
+```
+
+`mrgsolve` looks at the names to drive the update.  `KYLE` (a compartment name) and `MN` (not in the model anywhere) are ignored.
+
+Alternatively, we can pick a row from a data frame to provide the input for the update
+```{r}
+d <- data_frame(CL=c(9,10), VC=c(11,12), KTB=c(13,14))
+
+mod %>% param(d[2,]) %>% param
+
+```
+
+Here the second row in the data frame drives the update.  Other names are ignored.  
+
+A warning will be issued if an update is attempted, but no matching names are found
+```{r,eval=FALSE}
+mod %>% param(ZIP = 1, CODE = 2) %>% param
+```
+
+```
+Warning message:
+Found nothing to update: param 
+```
+
+
+
+## Time grid objects {#topic-tgrid}
+
+__Simulation times in `mrgsolve`__
+
+```{r}
+mod <- mrgsolve:::house() %>% Req(CP) %>% ev(amt=1000,ii=24, addl=1000) 
+```
+
+
+`mrgsolve` keeps track of a simulation `start` and `end` time and a 
+fixed size step between `start` and `end` (called `delta`).  `mrgsolve`
+also keeps an arbitrary vector of simulation times called `add`. 
+
+```{r}
+mod %>%
+  mrgsim(end=4,delta=2,add=c(7,9,50)) %>%
+  as.data.frame
+```
+
+
+__`tgrid` objects__
+
+The `tgrid` object abstracts this setup and allows us to make 
+complicated sampling designs from elementary building blocks.
+
+__Make a day 1 sampling with intensive sampling around the peak and sparser otherwise__
+```{r}
+peak1 <- tgrid(1,4,0.1)
+sparse1 <- tgrid(0,24,4)
+```
+
+__Use the `c` operator to combine simpler designs into more complicated designs__
+```{r}
+day1 <- c(peak1,sparse1)
+```
+
+Check this by calling `stime`
+```{r}
+stime(day1)
+```
+
+Pass this object in to `mrgsim` as `tgrid`.  It will override the default `start/end/delta/add` sequence.
+```{r topic-tgrid-1, cache=TRUE}
+mod %>% 
+  mrgsim(tgrid=day1) %>%
+  plot(type='b')
+```
+
+
+__Now, look at both day 1 and day 10__:
+
+Adding a number to a `tgrid` object will offset those times by that amount.  
+
+```{r topic-tgrid-2, cache=TRUE}
+des <- c(day1, day1+10*24)
+
+mod %>% 
+  mrgsim(tgrid=des) %>%
+  plot(type='b')
+
+
+```
+
+Pick up day 5 as well
+
+```{r topic-tgrid-3, cache=TRUE}
+des <- c(des, day1+5*24)
+
+mod %>% 
+  mrgsim(tgrid=des) %>%
+  plot(type='b')
+```
+
+
+
+## Individualized sampling designs {#topic-designs}
+
+Here is a PopPK model and a full `data_set`.
+
+```{r}
+mod <- mrgsolve:::house()
+
+data(exTheoph)
+
+df <- exTheoph
+
+head(df)
+```
+
+```{r topic-tgrid-5,cache=TRUE}
+mod %>% 
+  Req(CP) %>%
+  carry.out(a.u.g) %>%
+  data_set(df) %>%
+  obsaug %>%
+  mrgsim 
+```
+
+Now, define two time grid objects: `des1` runs from 0 to 24 and `des2` runs from 0 to 96, both every hour.
+```{r}
+
+des1 <- tgrid(0,24,1)
+des2 <- tgrid(0,96,1)
+
+range(stime(des1))
+range(stime(des2))
+```
+
+Now, derive an `idata_set` after adding a grouping column (`GRP`) that splits the data set into two groups
+```{r}
+df %<>% mutate(GRP = as.integer(ID > 5))
+
+id <- df %>% distinct(ID,GRP) 
+
+id
+```
+
+Now, we have two groups in `GRP` in `idata_set` and we have two `tgrid` objects.  
+
+* Pass in both the `idata_set` and the `data_set`
+* Call `design`
+* Identify `GRP` as `descol`; the column __must__ be in `idata_set`
+* Pass in a list of designs; it __must__ be at least two because there are two levels in `GRP`
+
+
+When we simulate, the individuals in `GRP 1` will get `des1` and those in `GRP 2` will get `des2`
+
+```{r topic-design-1,cache=TRUE}
+out <- 
+  mod %>% 
+  Req(CP) %>%
+  carry.out(a.u.g,GRP) %>%
+  idata_set(id) %>%
+  data_set(df) %>%
+  design(descol="GRP", deslist=list(des1,des2)) %>%
+  obsaug %>%
+  mrgsim 
+
+plot(out, CP~time|GRP)
+```
+
+
+## Some helpful `C++`
+
+```{c,eval=FALSE}
+
+// If
+if(a == 2) b = 2;
+
+// If else
+if(b <= 2) {
+c=3;
+} else {
+c=4;
+}
+
+// x <- ifelse(c == 4, 8, 10)
+double x = c == 4 ? 8 : 10;
+
+double d = pow(base,exponent);
+double e = exp(3);
+double f = fabs(-4);
+double g = sqrt(5);
+double h = log(6);
+double i = log10(7);
+double j = floor(4.2);
+double k = ceil(4.2);
+```
+
+## Resimulate `ETA` and `EPS`
+
+
+__Call `simeps()` to resimulate `ETA`__
+
+- No `$PLUGIN` is required
+- `simeta()` takes no arguments
+
+For example, we can simulate individual-level covariates
+within a certain range:
+
+```{r topic-simeta-1, cache=TRUE}
+code <- '
+$PARAM TVCL = 1, TVWT = 70
+
+$MAIN 
+capture WT = TVWT*exp(EWT);
+
+int i = 0;
+
+while((WT < 60) || (WT > 80)) {
+  if(++i > 100) break;
+  simeta();
+  WT = TVWT*exp(EWT);
+}
+
+$OMEGA @labels EWT
+4
+
+$CAPTURE EWT WT
+'
+
+mod <- mcode("simeta", code)
+
+out <- mod %>% mrgsim(nid=100, end=-1)
+
+sum <- summary(out)
+
+sum
+```
+
+
+__Call `simeps()` to resimulate `EPS`__
+
+- No `$PLUGIN` is required
+- `simeps()` takes no arguments
+
+For example, we can resimulate untill all 
+concentrations are greater than zero:
+
+```{r topic-simeps-1,cache=TRUE}
+code <- '
+$PARAM CL = 1, V = 20,
+
+$CMT CENT
+
+$SIGMA 50
+
+$PKMODEL ncmt=1
+
+$TABLE
+capture CP = CENT/V + EPS(1);
+
+int i = 0;
+
+while(CP < 0 && i < 100) {
+  simeps();
+  CP = CENT/V + EPS(1);
+  ++i;
+}
+
+'
+
+mod <- mcode("simeps", code)
+
+out <- mod %>% ev(amt=100) %>% mrgsim(end=48)
+sum <- summary(out)
+
+sum
+```
+
+
+__A safety check is recommended__
+Note that in both examples, we implement a safety check: an integer 
+counter is incremented every time we resimulated.  The resimulation 
+process stops if we don't reach the desired condition within 
+100 replicates.  You might also consider issuing a message
+or a flag in the simulated data if you are not able to reach the desired condition.
+
+## Updating `$OMEGA` and `$SIGMA` \  {#topic-matrix-update}
+
+Like the values of parameters in the parameter list, we may want to update the 
+values in `$OMEGA` and `$SIGMA` matrices.  We can do so without re-compiling the 
+model.
+
+### Matrix helper functions
+
+`mrgsolve` keeps `$OMEGA` and `$SIGMA` in block matrices (regardless of whether the off-diagonal elements are zeros or not).  Recall that in the model specification file
+we can enter data for `$OMEGA` and `$SIGMA` as the lower triangle of the matrix (see section \@ref(block-omega)).  In `R`, we need to provide a matrix (as an `R` object).  `mrgsolve` provides some convenience functions to help ... allowing the user to enter lower diagonals instead of the full matrix. 
+
+
+`dmat()` for diagonal matrix
+```{r}
+dmat(1,2,3)
+```
+
+`bmat()` for block matrix
+```{r}
+dmat(1,2,3)
+```
+
+`cmat()` for a block matrix where the diagonal elements are variances and the off-diagonals are taken to be correlations, not covariances
+```{r}
+cmat(0.1, 0.87,0.3)
+```
+`mrgsolve` will convert the correlations to covariances. 
+
+
+`mrgsolve` also provides `as_bmat()` and `as_dmat()` for converting other `R` objects to matrices or lists of matrices.  
+
+Consider this list with named elements holding the data for a matrix:
+```{r}
+m <- list(OMEGA1.1 = 0.9, OMEGA2.1 = 0.3, OMEGA2.2 = 0.4)
+```
+
+These data could form either a 3x3 diagonal matrix or a 2x2 block matrix.  But the names suggest a 2x2 form.  `as_bmat()` can make the matrix like this
+
+```{r}
+as_bmat(m, "OMEGA")
+```
+
+The second argument is a regular expression that `mrgsolve` uses to find elements in the list to use for building the matrix.
+
+Frequently, we have estimates in a data frame like this
+```{r}
+data(exBoot)
+head(exBoot)
+```
+
+We can use `as_bmat()` with this data frame to extract the `$OMEGA` matrices
+```{r}
+omegas <- as_bmat(exBoot, "OMEGA")
+length(omegas)
+dim(exBoot)
+
+omegas[[6]]
+
+omegas[[16]]
+```
+
+The result of calling `as_bmat` or `as_dmat` is a list of matrices, one for each row in the data frame.
+
+Note in this example, we could have called
+```{r,eval=FALSE}
+sigmas <- as_bmat(exBoot,"SIGMA") 
+```
+to grab the `$SIGMA` matrices.
+
+
+For help on these helper functions, see `?dmat`, `?bmat`, `?cmat`, `?as_bmat`, `?as_dmat` in the `R` help system after loading `mrgsolve`.
+
+
+### Example: unnamed matrix
+Here is a model with only a 3x3 `$OMEGA` matrix
+```{r}
+code <- '
+$OMEGA
+1 2 3
+'
+
+mod <- mcode("matrix", code, compile=FALSE)
+```
+
+Let's check the values in the matrix using `omat()`
+```{r}
+mod %>% omat
+```
+
+We also use `omat()` to update the values in the matrix 
+
+```{r}
+mod %>% omat(dmat(4,5,6)) %>% omat
+```
+
+To update `$OMEGA`, we must provide a matrix of the same dimension, in this case 3x3. An error is generated if we provide a matrix with the wrong dimension.
+
+```{r}
+ans <- try(mod %>% omat(dmat(11,23)))
+
+ans
+```
+
+### Example: named matrices
+When there are multiple `$OMEGA` matrices, it can be helpful to assign them names.  Here, there are two matrices: one for interindividual variability (`IIV`) and one for interoccasion variability (`IOV`). 
+
+```{r}
+code <- '
+$OMEGA @name IIV
+1 2 3
+$OMEGA @name IOV
+4 5
+'
+mod <- mcode("iov", code, compile=FALSE)
+
+revar(mod)
+```
+
+Now, we can update either `IIV` or `IOV` (or both) by name
+
+```{r}
+mod %>% 
+  omat(IOV = dmat(11,12), IIV = dmat(13,14,15)) %>% 
+  omat
+```
+
+Again, an error is generated if we try to assign a 3x3 matrix to the `IOV` position
+```{r}
+ans <- try(mod %>% omat(IIV=dmat(1,2)))
+ans
+```
+
+
+
+### Example: unnamed matrices
+If we do write the model with unnamed matrices, we can still update them
+```{r}
+code <- '
+$OMEGA
+1 2 3
+
+$OMEGA 
+4 5
+'
+mod <- mcode("multi", code, compile=FALSE)
+```
+
+In this case, the only way to update is to pass in a __list__ of matrices, where (in this example) the first matrix is 3x3 and the second is 2x2
+
+```{r}
+mod %>% omat(list(dmat(5,6,7),dmat(8,9))) %>% omat
+```
+
+
+## Time varying covariates {#topics-time-varying}
+
+A note in a previous section showed how to 
+implement time-varying covariates or other
+time-varying parameters by including those
+parameters as column in the data set. 
+
+By default, `mrgsolve` performs next observation
+carried backward (`nocb`) when processing 
+time-varying covariates.  That is, when the 
+system advances from `TIME1` to `TIME2`, 
+and the advance is a function of a covariate
+found in the data set, the system advances 
+using the covariate value `COV2` rather than
+the covariate `COV1`.  
+
+The user can change the behavior to last observation
+carried forward (`locf`), so that the system 
+uses the value of `COV1` to advance from `TIME1` to 
+`TIME2`.  To use `locf` advance, set `nocb` to `FALSE` when calling `mrgsim`.  For example, 
+
+```{r,eval = FALSE}
+mod %>% mrgsim(nocb = FALSE)
+```
+
+
+Note that time-varying covariates are not 
+possible when using `qsim` simulation. 
+
+There is additional information about the sequence
+of events that takes place during system advance 
+in section \@ref(section-sequence).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

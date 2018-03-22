@@ -1,0 +1,6 @@
+# Installation {#install}
+
+The most up to date installation instructions can be found on our `github` site:
+
+https://github.com/metrumresearchgroup/mrgsolve/
+https://github.com/metrumresearchgroup/mrgsolve/wiki/mrgsolve-Installation

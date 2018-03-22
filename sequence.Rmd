@@ -1,0 +1,98 @@
+```{r,echo=FALSE,message=FALSE}
+source("setup.R")
+```
+
+# Simulation sequence {#section-sequence}
+
+This section is intended to help the user understand
+the steps `mrgsolve` takes when working through 
+a simulation problem.  The focus is on the order
+in which `mrgsolve` calls different user-defined
+functions as well as when parameter updates
+and output writing happens during the simulation
+sequence. 
+
+## Functions to call
+The model specification results in the definition
+of four functions that `mrgsolve` calls during the 
+simulation sequence.  Naming them by 
+their code block identifiers, the functions are
+
+1. `$PREAMBLE`
+1. `$MAIN`
+1. `$ODE`
+1. `$TABLE`
+
+## Problem initiation
+Just prior to starting the problem (when `NEWIND` is 
+equal to `0`), `mrgsolve` calls `$PREAMBLE`.  This function is only called 
+once during the simulation sequence.  The goal of `$PREAMBLE` is to allow
+the user to work with different `C++` data structures to get them ready for 
+the simulation run. 
+
+## Subject initiation
+After the `$PREAMBLE` call, `mrgsolve` simulates
+each `ID` in the data set, one after another.  `mrgsolve` runs this sequence 
+just prior to simulating a given `ID`
+
+1. Copy any parameters that are found in the `idata_set` to the working 
+parameter list
+1. Copy any parameters that are found in 
+the `data_set` to the working parameter list, 
+with the copy being taken from the first actual
+data set row for that individual.  If the 
+first actual data set record in the data set
+is not the first record for the individual, 
+`mrgsolve` still copies from the first data 
+set record as long as the `fillbak` argument
+to `mrgsim` is `TRUE`. 
+1. Set initial estimates from the base 
+initial estimate list
+1. Copy initial estimates from `idata_set` if they
+are found there.
+1. Call `$MAIN`
+1. Start simulating the records for that individual
+
+## Sequence for a single record
+`mrgsolve` executes this sequence while working 
+from record to record for a given `ID`
+
+1. If `nocb` (next observation carried backward) is `TRUE`, then parameters 
+are  copied from the current record if that is an actual data set record. 
+Note that if `nocb` is `FALSE` then `locf` (first observation carried forward) 
+is assumed to be `TRUE` (see below).  This is the last parameters will be 
+copied from any input data set prior to advancing the system (when `locf`
+is being used).  Therefore, when parameter columns are found in both 
+an `idata_set` and a `data_set`, it will be the value found in the `data_set`
+that will overwrite both the base list and any parameter value that was 
+copied from an `idata_set`.  It is not an error to have different parameter 
+values in an `idata_set` and a `data-set`, but the value found in the `data_set`
+will be used when this happens.  More on parameters and the parameter update
+sequence can be found in sections \@ref(topic-parameter-update) and 
+\@ref(component-param).
+1. `$MAIN` is called
+1. The system is advanced via `$ODE` or `$PKMODEL`, 
+whichever one is invoked in the model specification
+file. 
+1. If the current record is a dosing record, 
+the dose is implemented (e.g. bolus made or 
+infusion started). 
+1. If the system is advancing according to 
+`locf`, then parameters are copied from
+the current record if that is an actual data set
+record. This is in contrast to `nocb` advance (see
+above).
+1. The `$TABLE` function is called
+1. If the current record is marked for inclusion 
+in the simulated output, results are 
+written to the output matrix.
+1. Continue to the next record in the individual.
+1. Once the last record is processed in an 
+individual, a new individual is started.
+
+
+
+
+
+
+

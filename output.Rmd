@@ -1,0 +1,52 @@
+# Simulated output
+
+When `mrgsim` is used to simulate from a model, it returns an object with class `mrgsims`.  It is an S4 object containing a matrix of simulated output and a handful of other pieces of data related to the simulation run.  
+
+`mrgsolve` provides several methods for working with `mrgsims` objects or coercing the simulation matrix into other `R` objects.
+
+## Coersion methods
+
+* `as.data.frame` convert to `data.frame`
+* `as.matrix` convert to `matrix`
+* `as.tbl` convert to `tbl`
+* `as_data_frame` convert to `tbl` via `tibble` package
+
+
+## Query methods
+* `head`
+* `tail`
+* `names`
+* `dim`
+* `summary`
+* `show`
+* `$`
+
+
+## Methods for `dplyr` verbs
+`mrgsolve` provides several S3 methods to make it possible to include `dplyr` verbs in your simulation pipeline. 
+
+For example
+```{r}
+library(dplyr)
+
+mod <- mrgsolve:::house()
+
+mod %>% 
+  ev(amt=100) %>%
+  mrgsim %>% 
+  filter(time >=10)
+```
+
+Here, `mrgsim` returns an `mrgsims` object.  When `dplyr` is also loaded, this object can be piped directly to `dplyr::summarise`.
+
+Other `dplyr` functions that can be used with `mrgsims` objects
+
+* `group_by`
+* `mutate`
+* `filter`
+* `summarise`
+* `select`
+* `slice`
+* `summarise.each` (use a `<dot>` not an `<underscore>`)
+
+
