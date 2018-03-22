@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve.">
-  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="mrgsolve User Guide" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2018-02-16">
+<meta name="date" content="2018-03-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -353,7 +353,8 @@ RESPONSE :  <span class="dv">25</span> : Response</code></pre></div>
 <li>Set the initial conditions for model compartments</li>
 </ul>
 <p>For users who are familiar with NONMEM, <code>$MAIN</code> is similar to <code>$PK</code>.</p>
-<p><code>$MAIN</code> is wrapped into a <code>C++</code> function and compiled / loaded by <code>mrgsolve</code>. The <code>MAIN</code> function gets called just prior to advancing the system from the current time to the next time for each record in the data set. <code>$MAIN</code> also gets called several times before starting the problem (<code>NEWIND == 0</code>) and just prior to simulating each individual (<code>NEWIND == 1</code>). Finally, <code>$MAIN</code> gets called every time the model initial conditions are queried with <code>init()</code>.</p>
+<p><code>$MAIN</code> is wrapped into a <code>C++</code> function and compiled / loaded by <code>mrgsolve</code>.<br />
+The <code>MAIN</code> function gets called just prior to advancing the system from the current time to the next time for each record in the data set. <code>$MAIN</code> also gets called several times before starting the problem (<code>NEWIND == 0</code>) and just prior to simulating each individual (<code>NEWIND == 1</code>). Finally, <code>$MAIN</code> gets called every time the model initial conditions are queried with <code>init()</code>.</p>
 <p>New variables may be declared in <code>$MAIN</code>. See section <a href="model-specification.html#new-variables">3.4</a> for details.</p>
 <p>Examples:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$CMT CENT RESP
@@ -668,6 +669,11 @@ $MAIN
 <span class="fl">0.1</span> : Typical value of clearance (L/hr)
 <span class="fl">0.2</span> : Typical value of volume (L)
 <span class="fl">0.3</span> : Typical value of ka (<span class="dv">1</span>/hr)</code></pre></div>
+<p>To change the prefix, use <code>@name</code> directive</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$THETA @name theta
+<span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span></code></pre></div>
+<p>would be equivalent to</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$PARAM theta1 = <span class="fl">0.1</span>, theta2 = <span class="fl">0.2</span>, theta3 = <span class="fl">0.3</span></code></pre></div>
 <p>See also: <a href="model-specification.html#block-param">3.2.2</a> .</p>
 </div>
 <div id="block-nmxml" class="section level3">
@@ -690,7 +696,6 @@ $MAIN
 <span class="st">$NMXML</span>
 <span class="st">run = 1005</span>
 <span class="st">project = path</span>
-<span class="st">theta = TRUE, omega = TRUE, sigma = TRUE</span>
 <span class="st">olabels = s(ECL, EVC, EKA)</span>
 <span class="st">slabels = s(PROP, ADD)</span>
 
@@ -719,9 +724,9 @@ $MAIN
 <pre><code>. 
 . 
 . -------- mrgsolve model object (unix) --------
-.   Project: /private/var/fol.../T/RtmptLbHIX
+.   Project: /private/var/fol.../T/RtmpQ3Zubq
 .   source:        nmxml.cpp
-.   shared object: nmxml-so-14fc9358c784b 
+.   shared object: nmxml-so-a2ab15abf02a 
 . 
 .   Time:          start: 0 end: 96 delta: 4
 .   &gt;              add: &lt;none&gt;
@@ -764,7 +769,7 @@ mod <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ev</span>(<span class="dt">amt=</span><span class="dv">1000</span>, <span class="dt">rate=</span><span class="dv">1000</span><span class="op">/</span><span class="dv">36</span>, <span class="dt">cmt=</span><span class="st">&quot;GUT&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">nid=</span><span class="dv">10</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>plot</code></pre></div>
-<p><img src="user-guide_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="user-guide_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 </div>
 <div id="block-include" class="section level3">
 <h3><span class="header-section-number">3.2.18</span> <code>$INCLUDE</code>  </h3>
@@ -812,6 +817,7 @@ cama &lt;- function(mod) {
 </div>
 <div id="variables-and-macros" class="section level2">
 <h2><span class="header-section-number">3.3</span> Variables and Macros</h2>
+<p>This section describes some macros and internal variables that can be used in model specification files. It should be clear from the usage examples which variables can be set by the user and which are to be read or checked. All internal variables are pre-defined and pre-initialized. The user should never try to declare an internal variable; this will always result in an compile-time error.</p>
 <p>In the following section, we adopt the convention that <code>CMT</code> stands for a compartment in the model.</p>
 <div id="id" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> <code>ID</code></h3>
@@ -948,7 +954,8 @@ R_CENT = <span class="dv">100</span>;</code></pre></div>
 </div>
 <div id="spec-d" class="section level3">
 <h3><span class="header-section-number">3.3.18</span> <code>D_CMT</code>  </h3>
-<p>For the <code>CMT</code> compartment, sets the infusion duration for that compartment. The infusion duration is only set via <code>D_CMT</code> when <code>rate</code> in the data set or event object is set to <code>-2</code>.</p>
+<p>For the <code>CMT</code> compartment, sets the infusion duration for that compartment.<br />
+The infusion duration is only set via <code>D_CMT</code> when <code>rate</code> in the data set or event object is set to <code>-2</code>.</p>
 <p>Example:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$MAIN
 D_CENT = <span class="dv">2</span>;</code></pre></div>
@@ -956,7 +963,7 @@ D_CENT = <span class="dv">2</span>;</code></pre></div>
 </div>
 <div id="new-variables" class="section level2">
 <h2><span class="header-section-number">3.4</span> Derive new variables</h2>
-<p>New <code>C++</code> variables may be derived in <code>$GLOBAL</code>, <code>$MAIN</code>, <code>$ODE</code> and <code>$TABLE</code>. Because these are <code>C++</code> variables, the type of variable being used must be declared. For the vast majority of applications, the <code>double</code> type is used (double-precision numeric value.</p>
+<p>New <code>C++</code> variables may be derived in <code>$GLOBAL</code>, <code>$MAIN</code>, <code>$ODE</code> and <code>$TABLE</code>. Because these are <code>C++</code> variables, the type of variable being used must be declared. For the vast majority of applications, the <code>double</code> type is used (double-precision numeric value).</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$MAIN
 <span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</code></pre></div>
 <p>We want <code>CLi</code> to be a numeric value, so we use <code>double</code>. To derived a <code>boolean</code> variable, write</p>
@@ -1018,7 +1025,7 @@ $CAPTURE CP</code></pre></div>
 <p>Notes:</p>
 <ul>
 <li>We use a preprocessor <code>#define</code> directive in <code>$GLOBAL</code>; everywhere in the model where a <code>CP</code> token is found, the expression <code>(CENT/VC)</code> … with parentheses … is inserted</li>
-<li>We write the initial value for the <code>RESP</code> compartment in <code>$MAIN</code> as a funciton of two parameters <code>KIN/KOUT</code></li>
+<li>We write the initial value for the <code>RESP</code> compartment in <code>$MAIN</code> as a function of two parameters <code>KIN/KOUT</code></li>
 <li>A new variable - <code>INH</code>- is declared and used in <code>$ODE</code></li>
 <li>Since <code>CP</code> is defined as <code>CENT/VC</code>, we can “capture” that name/value in <code>$CAPTURE</code></li>
 <li>Both <code>$MAIN</code> and <code>$ODE</code> are <code>C++</code> code blocks; don’t forget to add the <code>;</code> at the end of each statement</li>
@@ -1114,10 +1121,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",

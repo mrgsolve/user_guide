@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve.">
-  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="mrgsolve User Guide" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2018-02-16">
+<meta name="date" content="2018-03-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -458,8 +458,7 @@ CL  <span class="op">:</span><span class="st"> </span>Individual <span class="kw
 </div>
 <div id="topic-parameter-update" class="section level2">
 <h2><span class="header-section-number">6.3</span> Updating parameters</h2>
-<p>The parameter list was introduced in section <a href="model-components.html#component-param">2.1</a> and the <code>$PARAM</code> code block was shown in <a href="model-specification.html#block-param">3.2.2</a>.</p>
-<p>As an overview: parameters may be updated either by the user (in <code>R</code>) or by <code>mrgsolve</code> (in the <code>C++</code> simulation engine, as the simulation proceeds).</p>
+<p>The parameter list was introduced in section <a href="model-components.html#component-param">2.1</a> and the <code>$PARAM</code> code block was shown in <a href="model-specification.html#block-param">3.2.2</a>. Once a model is compiled, the names and number of parameters in a model is fixed. However, the values of parameters can be changed: parameters may be updated either by the user (in <code>R</code>) or by <code>mrgsolve</code> (in the <code>C++</code> simulation engine, as the simulation proceeds).</p>
 <ul>
 <li>To update in <code>R</code>, use the <code>param()</code> function (see examples below)</li>
 <li>To have <code>mrgsolve</code> update the parameters, attach columns to your data set (either <code>data_set</code> or <code>idata_set</code>) with the same name as items in the parameter list</li>
@@ -467,6 +466,19 @@ CL  <span class="op">:</span><span class="st"> </span>Individual <span class="kw
 <p>Both of these methods are discussed and illustrated in the following sections.</p>
 <div id="parameter-update-hierarchy" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> Parameter update hierarchy</h3>
+<p>As we noted above, new parameter values can come from three potential sources:</p>
+<ol style="list-style-type: decimal">
+<li>Modification of the (base) parameter list</li>
+<li>A column in an <code>idata_set</code> that has the same name as a model parameter</li>
+<li>A column in a <code>data_set</code> that has the same name as a model parameter</li>
+</ol>
+<p>These sources for new parameter values are discussed below. We note here that the sources listed above are listed in the order of the parameter update <em>hierarchy</em>. So, the base parameter list provides the value by default. A parameter value coming from an <code>idata_set</code> will override the value in the base list. And a parameter value coming from a <code>data_set</code> will override the value coming from the base list or an <code>idata_set</code> (in case a parameter is listed in both the <code>idata_set</code> and the <code>data_set</code>). In other words, the hierarchy is:</p>
+<ol style="list-style-type: decimal">
+<li>base parameter list is the default</li>
+<li>the <code>idata_set</code> overrides the base list</li>
+<li>the <code>data_set</code> overrides the <code>idata_set</code> and the base list</li>
+</ol>
+<p>The parameter update hierarchy is discussed in the following sections.</p>
 <p><strong>Base parameter set</strong></p>
 <ul>
 <li>Every model has a base set of “parameters”</li>
@@ -500,11 +512,13 @@ mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st"
 .  KA   1.7   | VC   23.1</code></pre>
 <p>But whatever you’ve done in <code>R</code>, there is a base set (with values) to use. See section <a href="topics.html#topic-parameter-update-base">6.3.2</a> for a more detailed discussion of using <code>param()</code> to updated the base list.</p>
 <p><strong>Parameters can also be updated during the simulation run</strong></p>
-<p>Parameters can be updated by putting columns in <code>idata</code> set or <code>data_set</code> that have the same name as one of the parameters in the parameter list. But there is no changing values in the base parameter set once the simulation starts. That is, the following model specification will not compile:</p>
+<p>Parameters can be updated by putting columns in <code>idata</code> set or <code>data_set</code> that have the same name as one of the parameters in the parameter list. But there is no changing values in the base parameter set once the simulation starts.<br />
+That is, the following model specification will not compile:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$PARAM CL = <span class="dv">2</span>
 
 $MAIN CL = <span class="dv">3</span>; <span class="co">// ERROR</span></code></pre></div>
-<p>You cannot over-write the value of a parameter in the model specification. Let <code>mrgsolve</code> do the updating.</p>
+<p>You cannot over-write the value of a parameter in the model specification.<br />
+Let <code>mrgsolve</code> do the updating.</p>
 <p><code>mrgsolve</code> always reverts to the base parameter set when starting work on a new individual.</p>
 <p><strong>Parameters updated from <code>idata_set</code></strong></p>
 <p>When <code>mrgsolve</code> finds parameters in <code>idata</code>, it will update the base parameter list with those parameters prior to starting that individual.</p>
@@ -1133,10 +1147,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",

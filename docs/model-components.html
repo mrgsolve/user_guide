@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve.">
-  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="mrgsolve User Guide" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2018-02-16">
+<meta name="date" content="2018-03-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="model-components" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Model components</h1>
-<p>This chapter details the different components of a model in <code>mrgsolve</code>. Each component listed here is maintained within a “model object”. This is an updatable S4 object in <code>R</code> that contains all of the basic information required to properly configure and simulate from the model.</p>
+<p>This chapter details the different components of a model in <code>mrgsolve</code>.<br />
+Each component listed here is maintained within a “model object”. This is an updatable S4 object in <code>R</code> that contains all of the basic information required to properly configure and simulate from the model.</p>
 <div id="component-param" class="section level2">
 <h2><span class="header-section-number">2.1</span> Parameter list</h2>
 <p>The parameter list is an updatable set of name-value pairs. Referencing the name of an item in the parameter list will substitute the current value associated with that name. While the name “paramter” may have a certain connotation in the modeling world, in <code>mrgsolve</code> a “parameter” could be any category of numeric data: covariates (e.g. <code>WT</code>, <code>AGE</code>, <code>SEX</code>), flags, other numeric data that we commonly call “parameter” (e.g. <code>CL</code> or <code>VC</code>).</p>
@@ -258,15 +259,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="central-role-of-parameters-in-planning-simulations" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Central role of parameters in planning simulations</h3>
 <p>The data items in the parameter list are more than just values associated with a name. When an name is added to the parameter list, that name becomes a key word that <code>mrgsolve</code> will start to recognize in input data sets or when manipulting the model object.</p>
-<p>For example, when you want to include a covariate in the model, say weight (<code>WT</code>), you’ll include a column in the data set called <code>WT</code> that will indicate the weight of this or that patient. It is crutial that you also list <code>WT</code> in <code>$PARAM</code> with some default value. It helps if that value is sensible too. When <code>mrgsolve</code> receives the data set prior to simulating, the <code>WT</code> column is matched up with the <code>WT</code> parameter name. As <code>mrgsolve</code> works its way through the input data set (from person to person or from time to time), the value of <code>WT</code> is updated so that the symbol <code>WT</code> in <code>$MAIN</code> or <code>$ODE</code> or <code>$TABLE</code> always points to the value of <code>WT</code>. If the <code>WT</code> name is not in the parameter list, it won’t matter if it is in the data set or not. Only listing a name in <code>$PARAM</code> gets it “into the game”.</p>
+<p>For example, when you want to include a covariate in the model, say weight (<code>WT</code>), you’ll include a column in the data set called <code>WT</code> that will indicate the weight of this or that patient. It is crutial that you also list <code>WT</code> in <code>$PARAM</code> with some default value. It helps if that value is sensible too.<br />
+When <code>mrgsolve</code> receives the data set prior to simulating, the <code>WT</code> column is matched up with the <code>WT</code> parameter name. As <code>mrgsolve</code> works its way through the input data set (from person to person or from time to time), the value of <code>WT</code> is updated so that the symbol <code>WT</code> in <code>$MAIN</code> or <code>$ODE</code> or <code>$TABLE</code> always points to the value of <code>WT</code>. If the <code>WT</code> name is not in the parameter list, it won’t matter if it is in the data set or not.<br />
+Only listing a name in <code>$PARAM</code> gets it “into the game”.</p>
 <p>Understanding the parameter update mechanism is very important for planning complicated simulations with <code>mrgsolve</code>. Please see the information in <a href="input-data-sets.html#datasets">4.1</a> and in <a href="topics.html#topic-parameter-update">6.3</a>.</p>
 </div>
 </div>
 <div id="component-init" class="section level2">
 <h2><span class="header-section-number">2.2</span> Compartment list</h2>
-<p>Like the parameter list, the compartment list is a series of name-value pairs. The compartment list defines the number, names, and initial values of each compartment in the model. The names, numbers, and order of the compartment in a model is established at the time of model compile and changes to the compartment list require re-compilation of the model.</p>
+<p>Like the parameter list, the compartment list is a series of name-value pairs.<br />
+The compartment list defines the number, names, and initial values of each compartment in the model. The names, numbers, and order of the compartment in a model is established at the time of model compile and changes to the compartment list require re-compilation of the model.</p>
 <p>Compartments are declared in one of two code blocks: <code>$INIT</code> and <code>$CMT</code>. Nominal initial values must be supplied for each compartment. The main difference between <code>$INIT</code> and <code>$CMT</code> is that <code>$CMT</code> assumes a default initial value of 0 for each compartment; thus only compartment names are entered. When using <code>$INIT</code>, both names and values must be explicitly stated for each compartment.</p>
-<p>The initial values for each compartment can be queried with the <code>init()</code> function. There are several different ways to set the initial conditions in a model; section <a href="topics.html#topic-init">6.2</a> illustrates several of these..</p>
+<p>The initial values for each compartment can be queried with the <code>init()</code> function. There are several different ways to set the initial conditions in a model; section <a href="topics.html#topic-init">6.2</a> illustrates several of these.</p>
 <p>See also: section <a href="topics.html#topic-init">6.2</a> and <code>?init</code> in the <code>R</code> help system after loading <code>mrgsolve</code>.</p>
 </div>
 <div id="component-stime" class="section level2">
@@ -277,7 +281,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>See also section <a href="input-data-sets.html#data-set">4.2</a> for discussion of the simulation time grid and input data sets and <a href="model-components.html#component-tgrid">2.3.1</a> and <a href="topics.html#topic-tgrid">6.4</a> for using time grid objects .</p>
 <div id="component-tgrid" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> <code>tgrid</code> objects</h3>
-<p>A <code>tgrid</code> object has <code>start</code>, <code>end</code>, <code>delta</code> and <code>add</code> attributes. This object is independent of the model object. <code>tgrid</code> objects may be created and combined to create complex sampling designs.</p>
+<p>A <code>tgrid</code> object has <code>start</code>, <code>end</code>, <code>delta</code> and <code>add</code> attributes.<br />
+This object is independent of the model object. <code>tgrid</code> objects may be created and combined to create complex sampling designs.</p>
 <p>See section <a href="topics.html#topic-tgrid">6.4</a> for examples and usage.</p>
 </div>
 </div>
@@ -309,7 +314,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="the-ode-function" class="section level3">
 <h3><span class="header-section-number">2.5.2</span> The <code>$ODE</code> function</h3>
-<p>The <code>ODE</code> function is where the user writes the model differential equations. Any derived quantity that depends on a state variable and is used to to calculate the differentation must be calculated inside <code>$ODE</code>. But, this function is called repeatedly during the simulation run, so any calculation that <strong>can</strong> be moved out of <code>$ODE</code> (for example: to <code>$MAIN</code>) should be.</p>
+<p>The <code>ODE</code> function is where the user writes the model differential equations.<br />
+Any derived quantity that depends on a state variable and is used to to calculate the differentation must be calculated inside <code>$ODE</code>. But, this function is called repeatedly during the simulation run, so any calculation that <strong>can</strong> be moved out of <code>$ODE</code> (for example: to <code>$MAIN</code>) should be.</p>
 <p>See <a href="model-specification.html#block-ode">3.2.6</a> for details.</p>
 </div>
 <div id="the-table-function" class="section level3">
@@ -359,10 +365,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
