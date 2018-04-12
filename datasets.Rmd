@@ -33,7 +33,7 @@ Event data sets have several special column names that `mrgsolve` is always awar
 
 * `amt` the dose amount (if `evid==1`)
 * `cmt` the dosing compartment number.  This may also be a character value naming the compartment name
-* `rate` if non-zero and `evid=1`, implements a zero-order infusion of duration `F*amt/rate`, where `F` is the bioavailability fraction for the dosing compartment.  Use `rate = -1` to model the infusion rate and `rate = -2` to model the infusion duration, both in `$MAIN` (see sections \@ref(block-main), \@ref(spec-f),\@ref(spec-r), \@ref(spec-d)).
+* `rate` if non-zero and `evid=1` or `evid=4`, implements a zero-order infusion of duration `F*amt/rate`, where `F` is the bioavailability fraction for the dosing compartment.  Use `rate = -1` to model the infusion rate and `rate = -2` to model the infusion duration, both in `$MAIN` (see sections \@ref(block-main), \@ref(spec-f),\@ref(spec-r), \@ref(spec-d)).
 * `ii` inter-dose interval; `ii=24` means daily dosing
 * `addl` additional doses; a non-zero value in `addl` requires non-zero `ii` on the same record
 * `ss` steady state indicator; use 1 to implement steady-state dosing; 0 otherwise.  `mrgsolve` also recoginzes dosing records where `ss=2`.  This allows combination of different steady state dosing regimens under linear kinetics (e.g. 10 mg QAM and 20 mg QPM daily to steady state).

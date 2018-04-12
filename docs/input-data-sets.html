@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2018-03-21">
+<meta name="date" content="2018-04-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -272,7 +272,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><code>amt</code> the dose amount (if <code>evid==1</code>)</li>
 <li><code>cmt</code> the dosing compartment number. This may also be a character value naming the compartment name</li>
-<li><code>rate</code> if non-zero and <code>evid=1</code>, implements a zero-order infusion of duration <code>F*amt/rate</code>, where <code>F</code> is the bioavailability fraction for the dosing compartment. Use <code>rate = -1</code> to model the infusion rate and <code>rate = -2</code> to model the infusion duration, both in <code>$MAIN</code> (see sections <a href="model-specification.html#block-main">3.2.5</a>, <a href="model-specification.html#spec-f">3.3.15</a>,<a href="model-specification.html#spec-r">3.3.17</a>, <a href="model-specification.html#spec-d">3.3.18</a>).</li>
+<li><code>rate</code> if non-zero and <code>evid=1</code> or <code>evid=4</code>, implements a zero-order infusion of duration <code>F*amt/rate</code>, where <code>F</code> is the bioavailability fraction for the dosing compartment. Use <code>rate = -1</code> to model the infusion rate and <code>rate = -2</code> to model the infusion duration, both in <code>$MAIN</code> (see sections <a href="model-specification.html#block-main">3.2.5</a>, <a href="model-specification.html#spec-f">3.3.15</a>,<a href="model-specification.html#spec-r">3.3.17</a>, <a href="model-specification.html#spec-d">3.3.18</a>).</li>
 <li><code>ii</code> inter-dose interval; <code>ii=24</code> means daily dosing</li>
 <li><code>addl</code> additional doses; a non-zero value in <code>addl</code> requires non-zero <code>ii</code> on the same record</li>
 <li><p><code>ss</code> steady state indicator; use 1 to implement steady-state dosing; 0 otherwise. <code>mrgsolve</code> also recoginzes dosing records where <code>ss=2</code>. This allows combination of different steady state dosing regimens under linear kinetics (e.g. 10 mg QAM and 20 mg QPM daily to steady state).</p></li>
