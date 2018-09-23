@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2018-04-12">
+<meta name="date" content="2018-09-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -112,7 +112,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3" data-path="model-components.html"><a href="model-components.html#component-stime"><i class="fa fa-check"></i><b>2.3</b> Simulation time grid</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="model-components.html"><a href="model-components.html#component-tgrid"><i class="fa fa-check"></i><b>2.3.1</b> <code>tgrid</code> objects</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="model-components.html"><a href="model-components.html#solver-settings"><i class="fa fa-check"></i><b>2.4</b> Solver settings</a></li>
+<li class="chapter" data-level="2.4" data-path="model-components.html"><a href="model-components.html#solver-settings"><i class="fa fa-check"></i><b>2.4</b> Solver settings</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="model-components.html"><a href="model-components.html#atol"><i class="fa fa-check"></i><b>2.4.1</b> <code>atol</code></a></li>
+<li class="chapter" data-level="2.4.2" data-path="model-components.html"><a href="model-components.html#rtol"><i class="fa fa-check"></i><b>2.4.2</b> <code>rtol</code></a></li>
+<li class="chapter" data-level="2.4.3" data-path="model-components.html"><a href="model-components.html#maxsteps"><i class="fa fa-check"></i><b>2.4.3</b> <code>maxsteps</code></a></li>
+<li class="chapter" data-level="2.4.4" data-path="model-components.html"><a href="model-components.html#hmax"><i class="fa fa-check"></i><b>2.4.4</b> <code>hmax</code></a></li>
+<li class="chapter" data-level="2.4.5" data-path="model-components.html"><a href="model-components.html#hmin"><i class="fa fa-check"></i><b>2.4.5</b> <code>hmin</code></a></li>
+<li class="chapter" data-level="2.4.6" data-path="model-components.html"><a href="model-components.html#ixpr"><i class="fa fa-check"></i><b>2.4.6</b> <code>ixpr</code></a></li>
+<li class="chapter" data-level="2.4.7" data-path="model-components.html"><a href="model-components.html#mxhnil"><i class="fa fa-check"></i><b>2.4.7</b> <code>mxhnil</code></a></li>
+</ul></li>
 <li class="chapter" data-level="2.5" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>2.5</b> Functions</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="model-components.html"><a href="model-components.html#the-main-function"><i class="fa fa-check"></i><b>2.5.1</b> The <code>$MAIN</code> function</a></li>
 <li class="chapter" data-level="2.5.2" data-path="model-components.html"><a href="model-components.html#the-ode-function"><i class="fa fa-check"></i><b>2.5.2</b> The <code>$ODE</code> function</a></li>
@@ -249,72 +257,74 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title"><font color='DarkGreen'>mrgsolve User Guide</font></h1>
 <h4 class="author"><em><font color='DarkGreen'>Metrum Research Group, LLC</font></em></h4>
-<h4 class="date"><em>2018-04-12</em></h4>
+<h4 class="date"><em>2018-09-23</em></h4>
 </div>
 <div id="mrgsolve-user-guide" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> mrgsolve User Guide</h1>
-<p><img src="images/mrgsolve.png" width="185" /></p>
+<p><img src="images/mrgsolve.png" /><!-- --></p>
 <p>For more information: <a href="https://mrgsolve.github.io" class="uri">https://mrgsolve.github.io</a></p>
 <p><strong>The following environment was used to generate this documentation</strong>:</p>
 <pre><code>##  setting  value                       
-##  version  R version 3.4.2 (2017-09-28)
+##  version  R version 3.5.0 (2018-04-23)
 ##  system   x86_64, darwin15.6.0        
 ##  ui       X11                         
 ##  language (EN)                        
 ##  collate  en_US.UTF-8                 
 ##  tz       America/Chicago             
-##  date     2018-04-12                  
+##  date     2018-09-23                  
 ## 
-##  package       * version     date       source                          
-##  assertthat      0.2.0       2017-04-11 CRAN (R 3.4.0)                  
-##  backports       1.1.2       2017-12-13 CRAN (R 3.4.2)                  
-##  base          * 3.4.2       2017-10-04 local                           
-##  bindr           0.1.1       2018-03-13 CRAN (R 3.4.4)                  
-##  bindrcpp        0.2         2017-06-17 cran (@0.2)                     
-##  bookdown        0.7         2018-02-18 CRAN (R 3.4.2)                  
-##  colorspace      1.3-2       2016-12-14 CRAN (R 3.4.0)                  
-##  compiler        3.4.2       2017-10-04 local                           
-##  datasets      * 3.4.2       2017-10-04 local                           
-##  devtools        1.13.5      2018-02-18 CRAN (R 3.4.2)                  
-##  digest          0.6.15      2018-01-28 CRAN (R 3.4.2)                  
-##  dplyr         * 0.7.4       2017-09-28 CRAN (R 3.4.2)                  
-##  evaluate        0.10.1      2017-06-24 CRAN (R 3.4.0)                  
-##  ggplot2       * 2.2.1       2016-12-30 CRAN (R 3.4.0)                  
-##  glue            1.2.0.9000  2018-01-12 Github (tidyverse/glue@1592ee1) 
-##  graphics      * 3.4.2       2017-10-04 local                           
-##  grDevices     * 3.4.2       2017-10-04 local                           
-##  grid            3.4.2       2017-10-04 local                           
-##  gtable          0.2.0       2016-02-26 CRAN (R 3.4.0)                  
-##  htmltools       0.3.6       2017-04-28 CRAN (R 3.4.0)                  
-##  knitr           1.20        2018-02-20 CRAN (R 3.4.2)                  
-##  lazyeval        0.2.1       2017-10-29 cran (@0.2.1)                   
-##  magrittr      * 1.5         2014-11-22 CRAN (R 3.4.0)                  
-##  memoise         1.1.0       2017-04-21 CRAN (R 3.4.0)                  
-##  methods       * 3.4.2       2017-10-04 local                           
-##  mrgsolve      * 0.8.10.9014 2018-04-12 local                           
-##  munsell         0.4.3       2016-02-13 CRAN (R 3.4.0)                  
-##  pillar          1.2.1       2018-02-27 CRAN (R 3.4.3)                  
-##  pkgconfig       2.0.1       2017-03-21 CRAN (R 3.4.0)                  
-##  plyr            1.8.4       2016-06-08 CRAN (R 3.4.0)                  
-##  png             0.1-7       2013-12-03 CRAN (R 3.4.0)                  
-##  R6              2.2.2       2017-06-17 CRAN (R 3.4.0)                  
-##  Rcpp            0.12.15     2018-01-20 CRAN (R 3.4.2)                  
-##  RcppArmadillo   0.8.400.0.0 2018-03-01 CRAN (R 3.4.3)                  
-##  rlang           0.2.0       2018-02-20 CRAN (R 3.4.2)                  
-##  rmarkdown       1.8         2017-11-17 cran (@1.8)                     
-##  rprojroot       1.3-2       2018-01-03 CRAN (R 3.4.2)                  
-##  rstudioapi      0.7         2017-09-07 CRAN (R 3.4.1)                  
-##  scales          0.5.0.9000  2018-02-23 Github (hadley/scales@d767915)  
-##  stats         * 3.4.2       2017-10-04 local                           
-##  stringi         1.1.6       2017-11-17 CRAN (R 3.4.2)                  
-##  stringr         1.3.0       2018-02-19 CRAN (R 3.4.2)                  
-##  tibble          1.4.2       2018-01-22 cran (@1.4.2)                   
-##  tools           3.4.2       2017-10-04 local                           
-##  utils         * 3.4.2       2017-10-04 local                           
-##  withr           2.1.1.9000  2018-02-23 Github (jimhester/withr@5d05571)
-##  xfun            0.1         2018-01-22 CRAN (R 3.4.2)                  
-##  yaml            2.1.16      2017-12-12 CRAN (R 3.4.2)</code></pre>
-<pre><code>## [1] &quot;Thu Apr 12 16:40:43 2018&quot;</code></pre>
+##  package       * version     date       source        
+##  assertthat      0.2.0       2017-04-11 CRAN (R 3.4.0)
+##  backports       1.1.2       2017-12-13 CRAN (R 3.5.0)
+##  base          * 3.5.0       2018-04-24 local         
+##  bindr           0.1.1       2018-03-13 CRAN (R 3.4.4)
+##  bindrcpp        0.2.2       2018-03-29 CRAN (R 3.5.0)
+##  bookdown        0.7         2018-02-18 CRAN (R 3.4.2)
+##  colorspace      1.3-2       2016-12-14 CRAN (R 3.5.0)
+##  compiler        3.5.0       2018-04-24 local         
+##  crayon          1.3.4       2017-09-16 CRAN (R 3.4.1)
+##  datasets      * 3.5.0       2018-04-24 local         
+##  devtools        1.13.6      2018-06-27 CRAN (R 3.5.0)
+##  digest          0.6.15      2018-01-28 CRAN (R 3.5.0)
+##  dplyr         * 0.7.5       2018-05-19 CRAN (R 3.5.0)
+##  evaluate        0.11        2018-07-17 CRAN (R 3.5.0)
+##  ggplot2       * 3.0.0       2018-07-03 CRAN (R 3.5.0)
+##  glue            1.3.0       2018-07-17 CRAN (R 3.5.0)
+##  graphics      * 3.5.0       2018-04-24 local         
+##  grDevices     * 3.5.0       2018-04-24 local         
+##  grid            3.5.0       2018-04-24 local         
+##  gtable          0.2.0       2016-02-26 CRAN (R 3.4.0)
+##  htmltools       0.3.6       2017-04-28 CRAN (R 3.5.0)
+##  knitr           1.20        2018-02-20 CRAN (R 3.5.0)
+##  lazyeval        0.2.1       2017-10-29 CRAN (R 3.5.0)
+##  magrittr      * 1.5         2014-11-22 CRAN (R 3.4.0)
+##  memoise         1.1.0       2017-04-21 CRAN (R 3.4.0)
+##  methods       * 3.5.0       2018-04-24 local         
+##  mrgsolve      * 0.8.12.9000 2018-09-23 local         
+##  munsell         0.5.0       2018-06-12 cran (@0.5.0) 
+##  pillar          1.3.0       2018-07-14 CRAN (R 3.5.0)
+##  pkgconfig       2.0.1       2017-03-21 CRAN (R 3.4.0)
+##  plyr            1.8.4       2016-06-08 CRAN (R 3.5.0)
+##  purrr           0.2.5       2018-05-29 cran (@0.2.5) 
+##  R6              2.2.2       2017-06-17 CRAN (R 3.4.0)
+##  Rcpp            0.12.18     2018-07-23 CRAN (R 3.5.0)
+##  RcppArmadillo   0.8.500.0   2018-04-30 CRAN (R 3.5.0)
+##  rlang           0.2.2       2018-08-16 CRAN (R 3.5.0)
+##  rmarkdown       1.10        2018-06-11 CRAN (R 3.5.0)
+##  rprojroot       1.3-2       2018-01-03 CRAN (R 3.4.2)
+##  rstudioapi      0.7         2017-09-07 CRAN (R 3.5.0)
+##  scales          1.0.0       2018-08-09 CRAN (R 3.5.0)
+##  stats         * 3.5.0       2018-04-24 local         
+##  stringi         1.2.4       2018-07-20 CRAN (R 3.5.0)
+##  stringr         1.3.1       2018-05-10 CRAN (R 3.5.0)
+##  tibble          1.4.2       2018-01-22 CRAN (R 3.5.0)
+##  tidyselect      0.2.4       2018-02-26 CRAN (R 3.5.0)
+##  tools           3.5.0       2018-04-24 local         
+##  utils         * 3.5.0       2018-04-24 local         
+##  withr           2.1.2       2018-03-15 CRAN (R 3.5.0)
+##  xfun            0.3         2018-07-06 CRAN (R 3.5.0)
+##  yaml            2.2.0       2018-07-25 CRAN (R 3.5.0)</code></pre>
+<pre><code>## [1] &quot;Sun Sep 23 07:05:38 2018&quot;</code></pre>
 
 </div>
             </section>

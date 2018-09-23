@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2018-04-12">
+<meta name="date" content="2018-09-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -112,7 +112,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3" data-path="model-components.html"><a href="model-components.html#component-stime"><i class="fa fa-check"></i><b>2.3</b> Simulation time grid</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="model-components.html"><a href="model-components.html#component-tgrid"><i class="fa fa-check"></i><b>2.3.1</b> <code>tgrid</code> objects</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="model-components.html"><a href="model-components.html#solver-settings"><i class="fa fa-check"></i><b>2.4</b> Solver settings</a></li>
+<li class="chapter" data-level="2.4" data-path="model-components.html"><a href="model-components.html#solver-settings"><i class="fa fa-check"></i><b>2.4</b> Solver settings</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="model-components.html"><a href="model-components.html#atol"><i class="fa fa-check"></i><b>2.4.1</b> <code>atol</code></a></li>
+<li class="chapter" data-level="2.4.2" data-path="model-components.html"><a href="model-components.html#rtol"><i class="fa fa-check"></i><b>2.4.2</b> <code>rtol</code></a></li>
+<li class="chapter" data-level="2.4.3" data-path="model-components.html"><a href="model-components.html#maxsteps"><i class="fa fa-check"></i><b>2.4.3</b> <code>maxsteps</code></a></li>
+<li class="chapter" data-level="2.4.4" data-path="model-components.html"><a href="model-components.html#hmax"><i class="fa fa-check"></i><b>2.4.4</b> <code>hmax</code></a></li>
+<li class="chapter" data-level="2.4.5" data-path="model-components.html"><a href="model-components.html#hmin"><i class="fa fa-check"></i><b>2.4.5</b> <code>hmin</code></a></li>
+<li class="chapter" data-level="2.4.6" data-path="model-components.html"><a href="model-components.html#ixpr"><i class="fa fa-check"></i><b>2.4.6</b> <code>ixpr</code></a></li>
+<li class="chapter" data-level="2.4.7" data-path="model-components.html"><a href="model-components.html#mxhnil"><i class="fa fa-check"></i><b>2.4.7</b> <code>mxhnil</code></a></li>
+</ul></li>
 <li class="chapter" data-level="2.5" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>2.5</b> Functions</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="model-components.html"><a href="model-components.html#the-main-function"><i class="fa fa-check"></i><b>2.5.1</b> The <code>$MAIN</code> function</a></li>
 <li class="chapter" data-level="2.5.2" data-path="model-components.html"><a href="model-components.html#the-ode-function"><i class="fa fa-check"></i><b>2.5.2</b> The <code>$ODE</code> function</a></li>
@@ -289,6 +297,49 @@ This object is independent of the model object. <code>tgrid</code> objects may b
 <div id="solver-settings" class="section level2">
 <h2><span class="header-section-number">2.4</span> Solver settings</h2>
 <p><code>mrgsolve</code> uses the <code>DLSODA</code> solver from <code>ODEPACK</code>. Several of the settings for that solver are stored in the model object and passed to the solver when the problem is started. Settings include: <code>atol</code>, <code>rtol</code>, <code>maxsteps</code>, <code>hmax</code>, <code>hmin</code>, <code>ixpr</code>, <code>mxhnil</code>.</p>
+<div id="atol" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> <code>atol</code></h3>
+<p>Absolute tolerance parameter. Adjust this value lower when you see state variables (compartments) that are becoming very small and possibly turning negative. Adjusting <code>atol</code> to <code>1E-20</code> or <code>1E-30</code> will prevent this.</p>
+</div>
+<div id="rtol" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> <code>rtol</code></h3>
+<p>Relative tolerance parameter. Adjust this value lower when you want more precision around the calculation of state variables as the system advances.</p>
+</div>
+<div id="maxsteps" class="section level3">
+<h3><span class="header-section-number">2.4.3</span> <code>maxsteps</code></h3>
+<p>This is the maximum number of steps the solver will take when advancing from one time to the next. If the solver can’t make it in <code>maxsteps</code> it will stop and give an error message like this:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">DLSODA-  At current T (=R1), MXSTEP (=I1) steps   
+      taken on this call before reaching TOUT     
+In above message, I = 
+[<span class="dv">1</span>] <span class="dv">2000</span>
+In above message, R = 
+[<span class="dv">1</span>] <span class="fl">0.0004049985</span>
+DLSODA-  ISTATE (=I1) illegal.
+In above message, I = 
+[<span class="dv">1</span>] -<span class="dv">1</span>
+DLSODA-  Run aborted.. apparent infinite loop.    
+Error in (function (x, data, idata = null_idata, carry.out = character(<span class="dv">0</span>),  : 
+  error from XERRWD</code></pre></div>
+<p>You might see this when you have to integrate along time between records in a data set. There isn’t necessarily a problem, but the solver might have to advance over many doses to get to the next record and it only has a limited number of steps it can take between those records before it stops with this error.</p>
+<p>When you see this, increase <code>maxsteps</code> to 50000 or larger.</p>
+<p>But keep in mind that sometimes the solver can’t make it to the next record because there are issues with the model. It might take thousands of steps to make it 24 hours down the road. In that case, go back to the model code and look for problems in how it is coded.</p>
+</div>
+<div id="hmax" class="section level3">
+<h3><span class="header-section-number">2.4.4</span> <code>hmax</code></h3>
+<p>The <strong>maximum</strong> step size. By default, the solver will take steps of different sizes based on what is happening in the simulation. Setting <code>hmax</code> tells the solver not to take a step larger than that value. So in a model where <code>time</code> is in hours, reducing <code>hmax</code> to <code>0.1</code> will prevent the solver from taking a step larger than <code>0.1</code> hours as it tries to advance to the next time. The will slow down the simulation a bit. But somtimes helpful when the solver starts taking large steps. We don’t recommend using this routinely; for most applications, it should be reserved for troubleshooting situations. If your model doesn’t give the results that you want without setting <code>hmax</code>, we’d recommend a new setup where this isn’t needed.</p>
+</div>
+<div id="hmin" class="section level3">
+<h3><span class="header-section-number">2.4.5</span> <code>hmin</code></h3>
+<p>The <strong>minimum</strong> step size. Only set this if you know what you’re doing.</p>
+</div>
+<div id="ixpr" class="section level3">
+<h3><span class="header-section-number">2.4.6</span> <code>ixpr</code></h3>
+<p>A flag to enable printing messages to the R console when the solver switches between non-stiff and stiff solving modes. Rarely used.</p>
+</div>
+<div id="mxhnil" class="section level3">
+<h3><span class="header-section-number">2.4.7</span> <code>mxhnil</code></h3>
+<p>The maximum number of messages printed when the model is solving. If you have a lot of messages, keep working on your model code.</p>
+</div>
 </div>
 <div id="functions" class="section level2">
 <h2><span class="header-section-number">2.5</span> Functions</h2>

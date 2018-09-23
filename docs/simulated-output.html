@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2018-04-12">
+<meta name="date" content="2018-09-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -112,7 +112,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3" data-path="model-components.html"><a href="model-components.html#component-stime"><i class="fa fa-check"></i><b>2.3</b> Simulation time grid</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="model-components.html"><a href="model-components.html#component-tgrid"><i class="fa fa-check"></i><b>2.3.1</b> <code>tgrid</code> objects</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="model-components.html"><a href="model-components.html#solver-settings"><i class="fa fa-check"></i><b>2.4</b> Solver settings</a></li>
+<li class="chapter" data-level="2.4" data-path="model-components.html"><a href="model-components.html#solver-settings"><i class="fa fa-check"></i><b>2.4</b> Solver settings</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="model-components.html"><a href="model-components.html#atol"><i class="fa fa-check"></i><b>2.4.1</b> <code>atol</code></a></li>
+<li class="chapter" data-level="2.4.2" data-path="model-components.html"><a href="model-components.html#rtol"><i class="fa fa-check"></i><b>2.4.2</b> <code>rtol</code></a></li>
+<li class="chapter" data-level="2.4.3" data-path="model-components.html"><a href="model-components.html#maxsteps"><i class="fa fa-check"></i><b>2.4.3</b> <code>maxsteps</code></a></li>
+<li class="chapter" data-level="2.4.4" data-path="model-components.html"><a href="model-components.html#hmax"><i class="fa fa-check"></i><b>2.4.4</b> <code>hmax</code></a></li>
+<li class="chapter" data-level="2.4.5" data-path="model-components.html"><a href="model-components.html#hmin"><i class="fa fa-check"></i><b>2.4.5</b> <code>hmin</code></a></li>
+<li class="chapter" data-level="2.4.6" data-path="model-components.html"><a href="model-components.html#ixpr"><i class="fa fa-check"></i><b>2.4.6</b> <code>ixpr</code></a></li>
+<li class="chapter" data-level="2.4.7" data-path="model-components.html"><a href="model-components.html#mxhnil"><i class="fa fa-check"></i><b>2.4.7</b> <code>mxhnil</code></a></li>
+</ul></li>
 <li class="chapter" data-level="2.5" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>2.5</b> Functions</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="model-components.html"><a href="model-components.html#the-main-function"><i class="fa fa-check"></i><b>2.5.1</b> The <code>$MAIN</code> function</a></li>
 <li class="chapter" data-level="2.5.2" data-path="model-components.html"><a href="model-components.html#the-ode-function"><i class="fa fa-check"></i><b>2.5.2</b> The <code>$ODE</code> function</a></li>
@@ -286,16 +294,16 @@ mod <span class="op">%&gt;%</span><span class="st"> </span>
 <pre><code>. # A tibble: 441 x 7
 .       ID  time       GUT  CENT  RESP    DV    CP
 .    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-.  1    1.  10.0 0.000614   63.3  37.7  3.16  3.16
-.  2    1.  10.2 0.000455   62.5  37.9  3.13  3.13
-.  3    1.  10.5 0.000337   61.7  38.0  3.09  3.09
-.  4    1.  10.8 0.000250   61.0  38.1  3.05  3.05
-.  5    1.  11.0 0.000185   60.2  38.2  3.01  3.01
-.  6    1.  11.2 0.000137   59.5  38.3  2.97  2.97
-.  7    1.  11.5 0.000102   58.7  38.4  2.94  2.94
-.  8    1.  11.8 0.0000752  58.0  38.5  2.90  2.90
-.  9    1.  12.0 0.0000557  57.3  38.7  2.86  2.86
-. 10    1.  12.2 0.0000413  56.6  38.8  2.83  2.83
+.  1     1  10   0.000614   63.3  37.7  3.16  3.16
+.  2     1  10.2 0.000455   62.5  37.9  3.13  3.13
+.  3     1  10.5 0.000337   61.7  38.0  3.09  3.09
+.  4     1  10.8 0.000250   61.0  38.1  3.05  3.05
+.  5     1  11   0.000185   60.2  38.2  3.01  3.01
+.  6     1  11.2 0.000137   59.5  38.3  2.97  2.97
+.  7     1  11.5 0.000102   58.7  38.4  2.94  2.94
+.  8     1  11.8 0.0000752  58.0  38.5  2.90  2.90
+.  9     1  12   0.0000557  57.3  38.7  2.86  2.86
+. 10     1  12.2 0.0000413  56.6  38.8  2.83  2.83
 . # ... with 431 more rows</code></pre>
 <p>Here, <code>mrgsim</code> returns an <code>mrgsims</code> object. When <code>dplyr</code> is also loaded, this object can be piped directly to <code>dplyr::summarise</code>.</p>
 <p>Other <code>dplyr</code> functions that can be used with <code>mrgsims</code> objects</p>
