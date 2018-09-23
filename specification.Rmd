@@ -751,8 +751,8 @@ code <- '
 $NMXML
 run = 1005
 project = path
-olabels = s(ECL, EVC, EKA)
-slabels = s(PROP, ADD)
+olabels = s_(ECL, EVC, EKA)
+slabels = s_(PROP, ADD)
 
 $MAIN
 double CL = THETA1*exp(ECL);

@@ -103,6 +103,79 @@ for that solver are stored in the model object and passed to the solver when
 the problem is started.  Settings include: `atol`, `rtol`, `maxsteps`, `hmax`,
 `hmin`, `ixpr`, `mxhnil`.  
 
+### `atol`
+
+Absolute tolerance parameter. Adjust this value lower when you see state variables
+(compartments) that are becoming very small and possibly turning negative. 
+Adjusting `atol` to `1E-20` or `1E-30` will prevent this. 
+
+### `rtol` 
+
+Relative tolerance parameter.  Adjust this value lower when you want more 
+precision around the calculation of state variables as the system advances.  
+
+### `maxsteps`
+
+This is the maximum number of steps the solver will take when advancing 
+from one time to the next.  If the solver can't make it in `maxsteps`
+it will stop and give an error message like this:
+
+```{c,eval=FALSE}
+DLSODA-  At current T (=R1), MXSTEP (=I1) steps   
+      taken on this call before reaching TOUT     
+In above message, I = 
+[1] 2000
+In above message, R = 
+[1] 0.0004049985
+DLSODA-  ISTATE (=I1) illegal.
+In above message, I = 
+[1] -1
+DLSODA-  Run aborted.. apparent infinite loop.    
+Error in (function (x, data, idata = null_idata, carry.out = character(0),  : 
+  error from XERRWD
+```
+
+You might see this when you have to integrate along time between records 
+in a data set.  There isn't necessarily a problem, but the solver might 
+have to advance over many doses to get to the next record and it only 
+has a limited number of steps it can take between those records before
+it stops with this error. 
+
+When you see this, increase `maxsteps` to 50000 or larger.  
+
+But keep in mind that sometimes the solver can't make it to the next record
+because there are issues with the model.  It might take thousands of 
+steps to make it 24 hours down the road.  In that case, go back to the 
+model code and look for problems in how it is coded. 
+
+### `hmax`
+
+The __maximum__ step size.  By default, the solver will take steps of different
+sizes based on what is happening in the simulation.  Setting `hmax` tells
+the solver not to take a step larger than that value.  So in a model 
+where `time` is in hours, reducing `hmax` to `0.1` will prevent the 
+solver from taking a step larger than `0.1` hours as it tries to advance
+to the next time.  The will slow down the simulation a bit.  But somtimes
+helpful when the solver starts taking large steps.  We don't recommend
+using this routinely; for most applications, it should be reserved for troubleshooting
+situations.  If your model doesn't give the results that you 
+want without setting `hmax`, we'd recommend a new setup where this isn't 
+needed. 
+
+### `hmin`
+
+The __minimum__ step size.  Only set this if you know what you're doing.
+
+### `ixpr`
+
+A flag to enable printing messages to the R console when the solver
+switches between non-stiff and stiff solving modes.  Rarely used.
+
+### `mxhnil`
+
+The maximum number of messages printed when the model is solving.  If you 
+have a lot of messages, keep working on your model code. 
+
 ## Functions
 
 There are three `C++` functions that `mrgsolve` creates and manages: `MAIN`, 
