@@ -886,7 +886,7 @@ to grab the `$SIGMA` matrices.
 For help on these helper functions, see `?dmat`, `?bmat`, `?cmat`, `?as_bmat`, 
 `?as_dmat` in the `R` help system after loading `mrgsolve`.
 
-## Fill a matrix with zeros
+### Fill a matrix with zeros
 Sometimes we write a population model that includes random effects, but we would
 like to simulate from that same model without the random effects implemented.  
 For example, we want to simulate some typical PK profiles from a population
