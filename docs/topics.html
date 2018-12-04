@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2018-09-23">
+<meta name="date" content="2018-12-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -221,11 +221,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.7" data-path="topics.html"><a href="topics.html#resimulate-eta-and-eps"><i class="fa fa-check"></i><b>6.7</b> Resimulate <code>ETA</code> and <code>EPS</code></a></li>
 <li class="chapter" data-level="6.8" data-path="topics.html"><a href="topics.html#topic-matrix-update"><i class="fa fa-check"></i><b>6.8</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a><ul>
 <li class="chapter" data-level="6.8.1" data-path="topics.html"><a href="topics.html#matrix-helper-functions"><i class="fa fa-check"></i><b>6.8.1</b> Matrix helper functions</a></li>
-<li class="chapter" data-level="6.8.2" data-path="topics.html"><a href="topics.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>6.8.2</b> Example: unnamed matrix</a></li>
-<li class="chapter" data-level="6.8.3" data-path="topics.html"><a href="topics.html#example-named-matrices"><i class="fa fa-check"></i><b>6.8.3</b> Example: named matrices</a></li>
-<li class="chapter" data-level="6.8.4" data-path="topics.html"><a href="topics.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>6.8.4</b> Example: unnamed matrices</a></li>
 </ul></li>
-<li class="chapter" data-level="6.9" data-path="topics.html"><a href="topics.html#topics-time-varying"><i class="fa fa-check"></i><b>6.9</b> Time varying covariates</a></li>
+<li class="chapter" data-level="6.9" data-path="topics.html"><a href="topics.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>6.9</b> Fill a matrix with zeros</a><ul>
+<li class="chapter" data-level="6.9.1" data-path="topics.html"><a href="topics.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>6.9.1</b> Example: unnamed matrix</a></li>
+<li class="chapter" data-level="6.9.2" data-path="topics.html"><a href="topics.html#example-named-matrices"><i class="fa fa-check"></i><b>6.9.2</b> Example: named matrices</a></li>
+<li class="chapter" data-level="6.9.3" data-path="topics.html"><a href="topics.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>6.9.3</b> Example: unnamed matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="topics.html"><a href="topics.html#topics-time-varying"><i class="fa fa-check"></i><b>6.10</b> Time varying covariates</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="section-sequence.html"><a href="section-sequence.html"><i class="fa fa-check"></i><b>7</b> Simulation sequence</a><ul>
 <li class="chapter" data-level="7.1" data-path="section-sequence.html"><a href="section-sequence.html#functions-to-call"><i class="fa fa-check"></i><b>7.1</b> Functions to call</a></li>
@@ -600,7 +602,7 @@ Let <code>mrgsolve</code> do the updating.</p>
 . [3,]  1    2    0  3 23.1 1.7 10
 . [4,]  1    3    0  4 23.1 1.7 10
 . [5,]  1    4    0  5 23.1 1.7 10</code></pre>
-<p>For more information on time-varying covariates (parameters), see sections <a href="topics.html#topics-time-varying">6.9</a> and <a href="section-sequence.html#section-sequence">7</a>.</p>
+<p>For more information on time-varying covariates (parameters), see sections <a href="topics.html#topics-time-varying">6.10</a> and <a href="section-sequence.html#section-sequence">7</a>.</p>
 <p><strong>Parameters are carried back when first record isn’t at <code>time == 0</code></strong></p>
 <p>What about this?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">expand.ev</span>(<span class="dt">amt=</span><span class="dv">100</span>,<span class="dt">time=</span><span class="dv">24</span>,<span class="dt">CL=</span><span class="dv">5</span>,<span class="dt">VC=</span><span class="dv">32</span>)
@@ -1012,8 +1014,36 @@ sum</code></pre></div>
 <p>to grab the <code>$SIGMA</code> matrices.</p>
 <p>For help on these helper functions, see <code>?dmat</code>, <code>?bmat</code>, <code>?cmat</code>, <code>?as_bmat</code>, <code>?as_dmat</code> in the <code>R</code> help system after loading <code>mrgsolve</code>.</p>
 </div>
+</div>
+<div id="fill-a-matrix-with-zeros" class="section level2">
+<h2><span class="header-section-number">6.9</span> Fill a matrix with zeros</h2>
+<p>Sometimes we write a population model that includes random effects, but we would like to simulate from that same model without the random effects implemented.<br />
+For example, we want to simulate some typical PK profiles from a population PK model that includes IIV on some parameters and / or RUV on the simulated outputs.</p>
+<p>To do this, pass the model through the <code>zero_re()</code> function. By default, this will convert all <code>$OMEGA</code> and <code>$SIGMA</code> matrix elements to zeros. See the R help file (<code>?zero_re</code>) to see some options for selectively zeroing out only one or the other.</p>
+<p>For example we have this population PK model</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">mread</span>(<span class="st">&quot;popex&quot;</span>, <span class="kw">modlib</span>(), <span class="dt">compile =</span> <span class="ot">FALSE</span>)
+
+<span class="kw">omat</span>(mod)</code></pre></div>
+<pre><code>. $...
+.       [,1] [,2] [,3]
+. ECL:   0.3  0.0  0.0
+. EV:    0.0  0.1  0.0
+. EKA:   0.0  0.0  0.5</code></pre>
+<p>We can turn that matrix to all zeros with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">zero_re</span>() <span class="op">%&gt;%</span><span class="st"> </span>omat</code></pre></div>
+<pre><code>. $...
+.       [,1] [,2] [,3]
+. ECL:     0    0    0
+. EV:      0    0    0
+. EKA:     0    0    0</code></pre>
+<p>And when we simulate right after that, all <code>ETA(n)</code> will be zero as well and you’ll get your fixed-effects simulation (the following is for example only and is not evaluated)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">zero_re</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ev</span>(<span class="dt">amt =</span> <span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mrgsim</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">plot</span>()</code></pre></div>
 <div id="example-unnamed-matrix" class="section level3">
-<h3><span class="header-section-number">6.8.2</span> Example: unnamed matrix</h3>
+<h3><span class="header-section-number">6.9.1</span> Example: unnamed matrix</h3>
 <p>Here is a model with only a 3x3 <code>$OMEGA</code> matrix</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">code &lt;-<span class="st"> &#39;</span>
 <span class="st">$OMEGA</span>
@@ -1046,7 +1076,7 @@ ans</code></pre></div>
 . &lt;simpleError: improper signature: omat&gt;</code></pre>
 </div>
 <div id="example-named-matrices" class="section level3">
-<h3><span class="header-section-number">6.8.3</span> Example: named matrices</h3>
+<h3><span class="header-section-number">6.9.2</span> Example: named matrices</h3>
 <p>When there are multiple <code>$OMEGA</code> matrices, it can be helpful to assign them names. Here, there are two matrices: one for interindividual variability (<code>IIV</code>) and one for interoccasion variability (<code>IOV</code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">code &lt;-<span class="st"> &#39;</span>
 <span class="st">$OMEGA @name IIV</span>
@@ -1096,7 +1126,7 @@ ans</code></pre></div>
 . &lt;simpleError: improper dimension: omat&gt;</code></pre>
 </div>
 <div id="example-unnamed-matrices" class="section level3">
-<h3><span class="header-section-number">6.8.4</span> Example: unnamed matrices</h3>
+<h3><span class="header-section-number">6.9.3</span> Example: unnamed matrices</h3>
 <p>If we do write the model with unnamed matrices, we can still update them</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">code &lt;-<span class="st"> &#39;</span>
 <span class="st">$OMEGA</span>
@@ -1121,7 +1151,7 @@ mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st"
 </div>
 </div>
 <div id="topics-time-varying" class="section level2">
-<h2><span class="header-section-number">6.9</span> Time varying covariates</h2>
+<h2><span class="header-section-number">6.10</span> Time varying covariates</h2>
 <p>A note in a previous section showed how to implement time-varying covariates or other time-varying parameters by including those parameters as column in the data set.</p>
 <p>By default, <code>mrgsolve</code> performs next observation carried backward (<code>nocb</code>) when processing time-varying covariates. That is, when the system advances from <code>TIME1</code> to <code>TIME2</code>, and the advance is a function of a covariate found in the data set, the system advances using the covariate value <code>COV2</code> rather than the covariate <code>COV1</code>.</p>
 <p>The user can change the behavior to last observation carried forward (<code>locf</code>), so that the system uses the value of <code>COV1</code> to advance from <code>TIME1</code> to <code>TIME2</code>. To use <code>locf</code> advance, set <code>nocb</code> to <code>FALSE</code> when calling <code>mrgsim</code>. For example,</p>

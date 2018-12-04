@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2018-09-23">
+<meta name="date" content="2018-12-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -221,11 +221,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.7" data-path="topics.html"><a href="topics.html#resimulate-eta-and-eps"><i class="fa fa-check"></i><b>6.7</b> Resimulate <code>ETA</code> and <code>EPS</code></a></li>
 <li class="chapter" data-level="6.8" data-path="topics.html"><a href="topics.html#topic-matrix-update"><i class="fa fa-check"></i><b>6.8</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a><ul>
 <li class="chapter" data-level="6.8.1" data-path="topics.html"><a href="topics.html#matrix-helper-functions"><i class="fa fa-check"></i><b>6.8.1</b> Matrix helper functions</a></li>
-<li class="chapter" data-level="6.8.2" data-path="topics.html"><a href="topics.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>6.8.2</b> Example: unnamed matrix</a></li>
-<li class="chapter" data-level="6.8.3" data-path="topics.html"><a href="topics.html#example-named-matrices"><i class="fa fa-check"></i><b>6.8.3</b> Example: named matrices</a></li>
-<li class="chapter" data-level="6.8.4" data-path="topics.html"><a href="topics.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>6.8.4</b> Example: unnamed matrices</a></li>
 </ul></li>
-<li class="chapter" data-level="6.9" data-path="topics.html"><a href="topics.html#topics-time-varying"><i class="fa fa-check"></i><b>6.9</b> Time varying covariates</a></li>
+<li class="chapter" data-level="6.9" data-path="topics.html"><a href="topics.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>6.9</b> Fill a matrix with zeros</a><ul>
+<li class="chapter" data-level="6.9.1" data-path="topics.html"><a href="topics.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>6.9.1</b> Example: unnamed matrix</a></li>
+<li class="chapter" data-level="6.9.2" data-path="topics.html"><a href="topics.html#example-named-matrices"><i class="fa fa-check"></i><b>6.9.2</b> Example: named matrices</a></li>
+<li class="chapter" data-level="6.9.3" data-path="topics.html"><a href="topics.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>6.9.3</b> Example: unnamed matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="topics.html"><a href="topics.html#topics-time-varying"><i class="fa fa-check"></i><b>6.10</b> Time varying covariates</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="section-sequence.html"><a href="section-sequence.html"><i class="fa fa-check"></i><b>7</b> Simulation sequence</a><ul>
 <li class="chapter" data-level="7.1" data-path="section-sequence.html"><a href="section-sequence.html#functions-to-call"><i class="fa fa-check"></i><b>7.1</b> Functions to call</a></li>
@@ -257,7 +259,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title"><font color='DarkGreen'>mrgsolve User Guide</font></h1>
 <h4 class="author"><em><font color='DarkGreen'>Metrum Research Group, LLC</font></em></h4>
-<h4 class="date"><em>2018-09-23</em></h4>
+<h4 class="date"><em>2018-12-03</em></h4>
 </div>
 <div id="mrgsolve-user-guide" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> mrgsolve User Guide</h1>
@@ -271,7 +273,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  language (EN)                        
 ##  collate  en_US.UTF-8                 
 ##  tz       America/Chicago             
-##  date     2018-09-23                  
+##  date     2018-12-03                  
 ## 
 ##  package       * version     date       source        
 ##  assertthat      0.2.0       2017-04-11 CRAN (R 3.4.0)
@@ -285,10 +287,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  crayon          1.3.4       2017-09-16 CRAN (R 3.4.1)
 ##  datasets      * 3.5.0       2018-04-24 local         
 ##  devtools        1.13.6      2018-06-27 CRAN (R 3.5.0)
-##  digest          0.6.15      2018-01-28 CRAN (R 3.5.0)
-##  dplyr         * 0.7.5       2018-05-19 CRAN (R 3.5.0)
+##  digest          0.6.18      2018-10-10 CRAN (R 3.5.0)
+##  dplyr         * 0.7.7       2018-10-16 CRAN (R 3.5.0)
 ##  evaluate        0.11        2018-07-17 CRAN (R 3.5.0)
-##  ggplot2       * 3.0.0       2018-07-03 CRAN (R 3.5.0)
+##  ggplot2       * 3.1.0       2018-10-25 CRAN (R 3.5.0)
 ##  glue            1.3.0       2018-07-17 CRAN (R 3.5.0)
 ##  graphics      * 3.5.0       2018-04-24 local         
 ##  grDevices     * 3.5.0       2018-04-24 local         
@@ -300,16 +302,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  magrittr      * 1.5         2014-11-22 CRAN (R 3.4.0)
 ##  memoise         1.1.0       2017-04-21 CRAN (R 3.4.0)
 ##  methods       * 3.5.0       2018-04-24 local         
-##  mrgsolve      * 0.8.12.9000 2018-09-23 local         
+##  mrgsolve      * 0.8.12.9000 2018-12-04 local         
 ##  munsell         0.5.0       2018-06-12 cran (@0.5.0) 
 ##  pillar          1.3.0       2018-07-14 CRAN (R 3.5.0)
-##  pkgconfig       2.0.1       2017-03-21 CRAN (R 3.4.0)
+##  pkgconfig       2.0.2       2018-08-16 CRAN (R 3.5.0)
 ##  plyr            1.8.4       2016-06-08 CRAN (R 3.5.0)
 ##  purrr           0.2.5       2018-05-29 cran (@0.2.5) 
-##  R6              2.2.2       2017-06-17 CRAN (R 3.4.0)
-##  Rcpp            0.12.18     2018-07-23 CRAN (R 3.5.0)
+##  R6              2.3.0       2018-10-04 CRAN (R 3.5.0)
+##  Rcpp            0.12.19     2018-10-01 CRAN (R 3.5.0)
 ##  RcppArmadillo   0.8.500.0   2018-04-30 CRAN (R 3.5.0)
-##  rlang           0.2.2       2018-08-16 CRAN (R 3.5.0)
+##  rlang           0.3.0.1     2018-10-25 CRAN (R 3.5.0)
 ##  rmarkdown       1.10        2018-06-11 CRAN (R 3.5.0)
 ##  rprojroot       1.3-2       2018-01-03 CRAN (R 3.4.2)
 ##  rstudioapi      0.7         2017-09-07 CRAN (R 3.5.0)
@@ -318,13 +320,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  stringi         1.2.4       2018-07-20 CRAN (R 3.5.0)
 ##  stringr         1.3.1       2018-05-10 CRAN (R 3.5.0)
 ##  tibble          1.4.2       2018-01-22 CRAN (R 3.5.0)
-##  tidyselect      0.2.4       2018-02-26 CRAN (R 3.5.0)
+##  tidyselect      0.2.5       2018-10-11 CRAN (R 3.5.0)
 ##  tools           3.5.0       2018-04-24 local         
 ##  utils         * 3.5.0       2018-04-24 local         
 ##  withr           2.1.2       2018-03-15 CRAN (R 3.5.0)
 ##  xfun            0.3         2018-07-06 CRAN (R 3.5.0)
 ##  yaml            2.2.0       2018-07-25 CRAN (R 3.5.0)</code></pre>
-<pre><code>## [1] &quot;Sun Sep 23 07:05:38 2018&quot;</code></pre>
+<pre><code>## [1] &quot;Mon Dec  3 23:33:48 2018&quot;</code></pre>
 
 </div>
             </section>

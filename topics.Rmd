@@ -883,7 +883,46 @@ sigmas <- as_bmat(exBoot,"SIGMA")
 to grab the `$SIGMA` matrices.
 
 
-For help on these helper functions, see `?dmat`, `?bmat`, `?cmat`, `?as_bmat`, `?as_dmat` in the `R` help system after loading `mrgsolve`.
+For help on these helper functions, see `?dmat`, `?bmat`, `?cmat`, `?as_bmat`, 
+`?as_dmat` in the `R` help system after loading `mrgsolve`.
+
+## Fill a matrix with zeros
+Sometimes we write a population model that includes random effects, but we would
+like to simulate from that same model without the random effects implemented.  
+For example, we want to simulate some typical PK profiles from a population
+PK model that includes IIV on some parameters and / or RUV 
+on the simulated outputs. 
+
+To do this, pass the model through the `zero_re()` function.  By default, 
+this will convert all `$OMEGA` and `$SIGMA` matrix elements to zeros. 
+See the R help file (`?zero_re`) to see some options for selectively 
+zeroing out only one or the other. 
+
+For example we have this population PK model
+
+```{r}
+mod <- mread("popex", modlib(), compile = FALSE)
+
+omat(mod)
+```
+
+We can turn that matrix to all zeros with
+
+```{r}
+mod %>% zero_re() %>% omat
+```
+
+And when we simulate right after that, all `ETA(n)` will be zero as well 
+and you'll get your fixed-effects simulation (the following is for example
+only and is not evaluated)
+
+```{r,eval = FALSE}
+mod %>% 
+  zero_re() %>% 
+  ev(amt = 100) %>% 
+  mrgsim() %>%
+  plot()
+```
 
 
 ### Example: unnamed matrix
