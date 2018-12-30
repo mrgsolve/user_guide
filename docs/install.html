@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>mrgsolve User Guide</title>
+  <title>Chapter 8 Installation | mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="mrgsolve User Guide" />
+  <meta property="og:title" content="Chapter 8 Installation | mrgsolve User Guide" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="metrumresearchgroup/mrgsolve" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="mrgsolve User Guide" />
+  <meta name="twitter:title" content="Chapter 8 Installation | mrgsolve User Guide" />
   
   <meta name="twitter:description" content="A guide to using mrgsolve." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2018-12-03">
+<meta name="date" content="2018-12-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -145,17 +146,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.2.6" data-path="model-specification.html"><a href="model-specification.html#block-ode"><i class="fa fa-check"></i><b>3.2.6</b> <code>$ODE</code>  </a></li>
 <li class="chapter" data-level="3.2.7" data-path="model-specification.html"><a href="model-specification.html#block-table"><i class="fa fa-check"></i><b>3.2.7</b> <code>$TABLE</code>  </a></li>
 <li class="chapter" data-level="3.2.8" data-path="model-specification.html"><a href="model-specification.html#block-preamble"><i class="fa fa-check"></i><b>3.2.8</b> <code>$PREAMBLE</code>  </a></li>
-<li class="chapter" data-level="3.2.9" data-path="model-specification.html"><a href="model-specification.html#block-capture"><i class="fa fa-check"></i><b>3.2.9</b> <code>$CAPTURE</code>  </a></li>
-<li class="chapter" data-level="3.2.10" data-path="model-specification.html"><a href="model-specification.html#block-omega"><i class="fa fa-check"></i><b>3.2.10</b> <code>$OMEGA</code>  </a></li>
-<li class="chapter" data-level="3.2.11" data-path="model-specification.html"><a href="model-specification.html#block-sigma"><i class="fa fa-check"></i><b>3.2.11</b> <code>$SIGMA</code>  </a></li>
-<li class="chapter" data-level="3.2.12" data-path="model-specification.html"><a href="model-specification.html#set"><i class="fa fa-check"></i><b>3.2.12</b> <code>$SET</code></a></li>
-<li class="chapter" data-level="3.2.13" data-path="model-specification.html"><a href="model-specification.html#global"><i class="fa fa-check"></i><b>3.2.13</b> <code>$GLOBAL</code></a></li>
-<li class="chapter" data-level="3.2.14" data-path="model-specification.html"><a href="model-specification.html#pkmodel"><i class="fa fa-check"></i><b>3.2.14</b> <code>$PKMODEL</code></a></li>
-<li class="chapter" data-level="3.2.15" data-path="model-specification.html"><a href="model-specification.html#block-plugin"><i class="fa fa-check"></i><b>3.2.15</b> <code>$PLUGIN</code>  </a></li>
-<li class="chapter" data-level="3.2.16" data-path="model-specification.html"><a href="model-specification.html#block-theta"><i class="fa fa-check"></i><b>3.2.16</b> <code>$THETA</code>  </a></li>
-<li class="chapter" data-level="3.2.17" data-path="model-specification.html"><a href="model-specification.html#block-nmxml"><i class="fa fa-check"></i><b>3.2.17</b> <code>$NMXML</code>  </a></li>
-<li class="chapter" data-level="3.2.18" data-path="model-specification.html"><a href="model-specification.html#block-include"><i class="fa fa-check"></i><b>3.2.18</b> <code>$INCLUDE</code>  </a></li>
-<li class="chapter" data-level="3.2.19" data-path="model-specification.html"><a href="model-specification.html#block-env"><i class="fa fa-check"></i><b>3.2.19</b> <code>$ENV</code>  </a></li>
+<li class="chapter" data-level="3.2.9" data-path="model-specification.html"><a href="model-specification.html#block-pred"><i class="fa fa-check"></i><b>3.2.9</b> <code>$PRED</code>  </a></li>
+<li class="chapter" data-level="3.2.10" data-path="model-specification.html"><a href="model-specification.html#block-capture"><i class="fa fa-check"></i><b>3.2.10</b> <code>$CAPTURE</code>  </a></li>
+<li class="chapter" data-level="3.2.11" data-path="model-specification.html"><a href="model-specification.html#block-omega"><i class="fa fa-check"></i><b>3.2.11</b> <code>$OMEGA</code>  </a></li>
+<li class="chapter" data-level="3.2.12" data-path="model-specification.html"><a href="model-specification.html#block-sigma"><i class="fa fa-check"></i><b>3.2.12</b> <code>$SIGMA</code>  </a></li>
+<li class="chapter" data-level="3.2.13" data-path="model-specification.html"><a href="model-specification.html#set"><i class="fa fa-check"></i><b>3.2.13</b> <code>$SET</code></a></li>
+<li class="chapter" data-level="3.2.14" data-path="model-specification.html"><a href="model-specification.html#global"><i class="fa fa-check"></i><b>3.2.14</b> <code>$GLOBAL</code></a></li>
+<li class="chapter" data-level="3.2.15" data-path="model-specification.html"><a href="model-specification.html#pkmodel"><i class="fa fa-check"></i><b>3.2.15</b> <code>$PKMODEL</code></a></li>
+<li class="chapter" data-level="3.2.16" data-path="model-specification.html"><a href="model-specification.html#block-plugin"><i class="fa fa-check"></i><b>3.2.16</b> <code>$PLUGIN</code>  </a></li>
+<li class="chapter" data-level="3.2.17" data-path="model-specification.html"><a href="model-specification.html#block-theta"><i class="fa fa-check"></i><b>3.2.17</b> <code>$THETA</code>  </a></li>
+<li class="chapter" data-level="3.2.18" data-path="model-specification.html"><a href="model-specification.html#block-nmxml"><i class="fa fa-check"></i><b>3.2.18</b> <code>$NMXML</code>  </a></li>
+<li class="chapter" data-level="3.2.19" data-path="model-specification.html"><a href="model-specification.html#block-include"><i class="fa fa-check"></i><b>3.2.19</b> <code>$INCLUDE</code>  </a></li>
+<li class="chapter" data-level="3.2.20" data-path="model-specification.html"><a href="model-specification.html#block-env"><i class="fa fa-check"></i><b>3.2.20</b> <code>$ENV</code>  </a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="model-specification.html"><a href="model-specification.html#variables-and-macros"><i class="fa fa-check"></i><b>3.3</b> Variables and Macros</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="model-specification.html"><a href="model-specification.html#id"><i class="fa fa-check"></i><b>3.3.1</b> <code>ID</code></a></li>
@@ -196,6 +198,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.3.1" data-path="input-data-sets.html"><a href="input-data-sets.html#use-case"><i class="fa fa-check"></i><b>4.3.1</b> Use case</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="input-data-sets.html"><a href="input-data-sets.html#numeric-only"><i class="fa fa-check"></i><b>4.4</b> Numeric data only</a></li>
+<li class="chapter" data-level="4.5" data-path="input-data-sets.html"><a href="input-data-sets.html#pred-data"><i class="fa fa-check"></i><b>4.5</b> Data sets for use with <code>$PRED</code></a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>5</b> Simulated output</a><ul>
 <li class="chapter" data-level="5.1" data-path="simulated-output.html"><a href="simulated-output.html#coersion-methods"><i class="fa fa-check"></i><b>5.1</b> Coersion methods</a></li>
@@ -287,7 +290,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -297,6 +300,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -314,7 +321,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

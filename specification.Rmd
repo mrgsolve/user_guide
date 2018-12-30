@@ -277,7 +277,8 @@ Notes:
 
 
 ### `$TABLE` \ {#block-table}
-Use `$TABLE` to interact with parameters, compartment values, and other user-defined variables __after__ the system advances to the next time.  
+Use `$TABLE` to interact with parameters, compartment values, and other
+user-defined variables __after__ the system advances to the next time.
 
 For example:
 ```{c,eval=FALSE}
@@ -286,16 +287,15 @@ double CP = CENT/VC;
 ```
 
 __NOTE__
-`mrgsolve` formerly had a `table()` macro for inserting derived values into simulated output. This macro
-has been deprecated.  The only way to insert derived values into the simulated output is via `$CAPTURE`.
+`mrgsolve` formerly had a `table()` macro for inserting derived values into
+simulated output. This macro has been deprecated.  The only way to insert
+derived values into the simulated output is via `$CAPTURE`.
 
 __NOTE__
-When variables are marked for capture 
-(see \@ref(block-capture)), the values 
-of those variables are saved at the __end__
-of the `$TABLE` function.  This process is carried
-out automatically by `mrgsolve` and therefore
-requires no user intervention. 
+When variables are marked for capture (see \@ref(block-capture)), the values of
+those variables are saved at the __end__ of the `$TABLE` function.  This process
+is carried out automatically by `mrgsolve` and therefore requires no user
+intervention.
 
 
 ### `$PREAMBLE` \ {#block-preamble}
@@ -305,9 +305,10 @@ This is the fourth C++ code block.  It is called once in two different settings:
 1. Immediately prior to calling `$MAIN` when calculating initial conditions
 
 
-`$PREAMBLE` is a function that allows you to set up your C++ environment.  It is only called 
-one time during the simulation run (right at the start).  The code in this block is typically 
-used to configure or initialize C++ variables or data structures that were declared in `$GLOBAL`. 
+`$PREAMBLE` is a function that allows you to set up your C++ environment.  It is
+only called one time during the simulation run (right at the start).  The code
+in this block is typically used to configure or initialize C++ variables or data
+structures that were declared in `$GLOBAL`.
 
 For example:
 
@@ -328,10 +329,12 @@ $MAIN
 <some code that uses x vector>
 ```
 
-In this example, we want to use a numeric vector `x` and declare it in `$GLOBAL` so that we
-can use it anywhere else in the code (the declaration is also made in an unnamed namespace to 
-ensure that the variable is local to the model file).  Then, in `$PREAMBLE`, we put 3 numbers
-into the vector and we use `x` in `$MAIN`.  Since `$MAIN`, `$TABLE` and (especially) `$ODE` are called repeatedly as the simulation run procees, we put the initialization of `x` in `$PREAMBLE`
+In this example, we want to use a numeric vector `x` and declare it in `$GLOBAL`
+so that we can use it anywhere else in the code (the declaration is also made in
+an unnamed namespace to ensure that the variable is local to the model file).
+Then, in `$PREAMBLE`, we put 3 numbers into the vector and we use `x` in
+`$MAIN`.  Since `$MAIN`, `$TABLE` and (especially) `$ODE` are called repeatedly
+as the simulation run procees, we put the initialization of `x` in `$PREAMBLE`
 to make sure the initialization of `x` only happens once.
 
 Notes:
@@ -342,8 +345,33 @@ Notes:
 
 See also: \@ref(block-plugin).
 
+
+### `$PRED` \ {#block-pred}
+Use `$PRED` to write a model without differential equations.  In this block, 
+write all algebraic expressions for derived parameters, the response, and 
+any other derived output quantities.  
+
+For example:
+
+```{c, eval=FALSE}
+$PARAM TVE0 = 100, AUC50 = 100, IMAX = 40, AUC = 0
+
+$PRED
+double E0 = EVE0*exp(ETA(1));
+
+double RESP = E0 - IMAX*AUC/(AUC50+AUC);
+```
+
+In this example, the entire model is written in the `$PRED` block.  It is an 
+error to include `$MAIN` or `$ODE` when `$PRED` is being used.  
+
+See the section \@ref(pred-data) for additional information regardin data sets in use 
+with `$PRED` block.  
+
+
 ### `$CAPTURE` \ {#block-capture}
-This is a block to identify variables that should be captured in the simulated output. 
+This is a block to identify variables that should be captured in the simulated
+output.
 
 For example:
 ```{c,eval=FALSE}
@@ -373,8 +401,8 @@ $OMEGA 1
 $CAPTURE WEIGHT = WT TVCL = THETA2 CL  ETA(1)
 ```
 
-In this example, the names of the captured data items
-will be `WEIGHT,TVCL,CL,ETA_1`. 
+In this example, the names of the captured data items will be
+`WEIGHT,TVCL,CL,ETA_1`.
 
 Users can use the `capture` type to declare variables in `$MAIN` and `$TABLE`. 
 `capture` types are really `double`s, but using that type will signal `mrgsolve`
@@ -415,9 +443,10 @@ New variables may be declared in `$TABLE`.  See section \@ref(new-variables) for
 ### `$OMEGA` \ {#block-omega}
 See `?modMATRIX` for more details about options for this block.
 
-Use this block to enter variance/covariance matrices for subject-level random effects drawn from multivariate normal distribution. All 
-random effects are assumed to have mean of 0.  Off diagonal elements for block matrices are assumed to be correlation coefficients if the 
-`@correlation` option is used (see below).
+Use this block to enter variance/covariance matrices for subject-level random
+effects drawn from multivariate normal distribution. All random effects are
+assumed to have mean of 0.  Off diagonal elements for block matrices are assumed
+to be correlation coefficients if the `@correlation` option is used (see below).
 
 By default, a __diagonal__ matrix is assumed.  So:
 
@@ -516,7 +545,12 @@ For example:
 $GLOBAL
 #define CP (CENT/VC)
 ```
-When this preprocessor directive is included, everywhere the preprocessor finds a `CP` token it will substitute `(CENT/VC)`.  Both `CENT` and `VC` must be defined and the ratio of `CENT` to `VC` will be calculated depending on whatever the current values are.  Notice that we included parentheses around `(CENT/VC)`.  This makes sure the ratio between the two is taken first, before any other operations involving `CP`.  
+When this preprocessor directive is included, everywhere the preprocessor finds 
+a `CP` token it will substitute `(CENT/VC)`.  Both `CENT` and `VC` must be 
+defined and the ratio of `CENT` to `VC` will be calculated depending on whatever 
+the current values are.  Notice that we included parentheses around `(CENT/VC)`.  
+This makes sure the ratio between the two is taken first, before any other 
+operations involving `CP`.  
 
 __Declaring global variables__
 Sometimes, you may wish to use global variables and have more control over how they get declared.  
@@ -811,40 +845,46 @@ or
 
 ```{c,eval=FALSE}
 $INCLUDE
-mystuff.h otherstuff.h
-```
-
-or
-
-```{c,eval=FALSE}
-$INCLUDE
 mystuff.h,  otherstuff.h
 ```
 
-
-`mrgsolve` will insert proper `#include` preprocessor directives into the `C++` code that gets compiled.
+`mrgsolve` will insert proper `#include` preprocessor directives into the `C++` 
+code that gets compiled.
 
 __Requirements__
 
-  - All header files listed in `$INCLUDE` are assumed (expected) to be under the `project` directory; don't use `$INCLUDE` for header files that are in any other location
+  - All header files listed in `$INCLUDE` are assumed (expected) to be under 
+    the `project` directory; don't use `$INCLUDE` for header files that are in 
+    any other location
   - An error is generated if the header file does not exist
-  - An error is generated if any quotation marks are found in the file name (don't use quotes around the file name; `mrgsolve` will take care of that)
+  - An error is generated if any quotation marks are found in the file name 
+    (don't use quotes around the file name; `mrgsolve` will take care of that)
   - A warning is issued if the header file does not end in `.h`
-  - When the header file is changed (MD5 checksum changes), the model will be forced to be rebuilt (recompiled) when `mread` or `mcode` is called; this feature is only available for header files listed in `$INCLUDE` (see below)
-  - Do not use `$INCLUDE` to include `Rcpp`, `boost`, `RcppArmadillo` or `RcppEigen` headers; use the appropriate `$PLUGIN` instead
+  - When the header file is changed (MD5 checksum changes), the model will be 
+    forced to be rebuilt (recompiled) when `mread` or `mcode` (but not 
+    `mread_cache` or `mcode_cache`) is called; this feature is only available 
+    for header files listed in `$INCLUDE` (see below)
+  - Do not use `$INCLUDE` to include `Rcpp`, `boost`, `RcppArmadillo` or 
+    `RcppEigen` headers; use the appropriate `$PLUGIN` instead
 
-For applications that don't fit into the requirements listed above, users can always include header files in the model in `$GLOBAL` like this:
+For applications that don't fit into the requirements listed above, users can 
+always include header files in the model in `$GLOBAL` like this:
 
 ```{c,eval=FALSE}
 $GLOBAL
 #include "/Users/me/libs/mystuff.h"
 ```
 
-But be careful when doing this: if there are changes to `mystuff.h` but not to any other part of the model specification, the model may not be fully compiled when calling `mread`.  In this case, always use `preclean=TRUE` argument to `mread` to force the model to be built when calling `mread`.
-
+But be careful when doing this: if there are changes to `mystuff.h` but not to 
+any other part of the model specification, the model may not be fully compiled 
+when calling `mread`.  In this case, always use `preclean=TRUE` argument to 
+`mread` to force the model to be built when calling `mread`.
 
 ### `$ENV` \ {#block-env}
-This block is all `R` code (just as you would code in a stand-alone `R` script. The code is parsed and evaluated into a new environment when the model is compiled.  Objects inside `$ENV` can be utilized in different C++ functions (see \@ref(block-plugin)) or other parts of the simulation process.
+This block is all `R` code (just as you would code in a stand-alone `R` script. 
+The code is parsed and evaluated into a new environment when the model is 
+compiled.  Objects inside `$ENV` can be utilized in different C++ functions 
+(see \@ref(block-plugin)) or other parts of the simulation process.
 
 For example:
 
@@ -872,16 +912,20 @@ read or checked.  All internal variables are pre-defined and pre-initialized.
 The user should never try to declare an internal variable; this will 
 always result in an compile-time error. 
 
-In the following section, we adopt the convention that `CMT` stands for a compartment in the model.
+In the following section, we adopt the convention that `CMT` stands for a 
+compartment in the model.
 
 ### `ID`
 The current subject identifier. `ID` is an alias for `self.id`.
 
 ### `TIME`
-Gives the time in the curent data set record.  This is usually only used in `$MAIN` or `$TABLE`.  `TIME` is an alias for `self.time`.  Contrast with `SOLVERTIME`.
+Gives the time in the curent data set record.  This is usually only used in 
+`$MAIN` or `$TABLE`.  `TIME` is an alias for `self.time`.  Contrast with 
+`SOLVERTIME`.
 
 ### `SOLVERTIME`
-Gives the time of the current timestep taken by the solver.  This is can only be used in `$ODE`.  Contrast with `TIME`.
+Gives the time of the current timestep taken by the solver.  This is can only 
+be used in `$ODE`.  Contrast with `TIME`.
 
 ### `EVID`
 `EVID` is an event id indicator.  `mrgsolve` recognized the following 
@@ -1063,7 +1107,8 @@ $MAIN
 double CLi = TVCL*exp(ETA(1));
 ```
 
-We want `CLi` to be a numeric value, so we use `double`.  To derived a `boolean` variable, write
+We want `CLi` to be a numeric value, so we use `double`.  To derived a `boolean` 
+variable, write
 ```{c,eval=FALSE}
 $MAIN
 bool cure = false;

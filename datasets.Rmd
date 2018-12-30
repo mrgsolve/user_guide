@@ -5,24 +5,40 @@ source("setup.R")
 ```
 
 
-Input data sets are used in `mrgsolve` to allow the user to 
-specify interventions and input data items. 
+Input data sets are used in mrgsolve to allow the user to specify
+interventions and input data items.
 
-Please see the `mrgsolve` help topic `?exdatasets` for examples of all of the data sets discussed in this chapter.  The example data sets are embedded in the `mrgsolve` package and may be used at any time.
+Please see the mrgsolve help topic `?exdatasets` for examples of all of the
+data sets discussed in this chapter.  The example data sets are embedded in the
+mrgsolve package and may be used at any time.
 
 ## Overview {#datasets}
-Data sets are the primary mechanism for establishing the scope of your simulations in `mrsolve`, including individuals, interventions, observation times, and parameter values.  For both `data_set` and `idata_set` (see below), you may include columns in the data sets that have the same names as the parameters in your model (section \@ref(component-param), \@ref(block-param)).  `mrgsolve` can recognize these columns and update the parameter list as the simulation proceeds.  This process is of key importance when planning and executing complex simulations and is further discussed in section \@ref(topic-parameter-update).
+Data sets are the primary mechanism for establishing the scope of your
+simulations in `mrsolve`, including individuals, interventions, observation
+times, and parameter values.  For both `data_set` and `idata_set` (see below),
+you may include columns in the data sets that have the same names as the
+parameters in your model (section \@ref(component-param), \@ref(block-param)).
+mrgsolve can recognize these columns and update the parameter list as the
+simulation proceeds.  This process is of key importance when planning and
+executing complex simulations and is further discussed in section
+\@ref(topic-parameter-update).
 
 
 ## Event data sets (`data`) {#data-set}
-Event data sets are entered as `data.frame`, with one event per row.  Events may be observations, doses, or other type events.  In `mrgsolve` documentation, we refer to these data sets as `data` or `data_set` (after the function that 
-is used to associate the data set with the model object prior to simulation).  
+Event data sets are entered as `data.frame`, with one event per row.  Events may
+be observations, doses, or other type events.  In mrgsolve documentation, we
+refer to these data sets as `data` or `data_set` (after the function that is
+used to associate the data set with the model object prior to simulation).
 
-Event data sets have several special column names that `mrgsolve` is always aware of:
+Event data sets have several special column names that mrgsolve is always
+aware of:
 
-* `ID` the subject id.  This id does not need to be unique in the `data_set`: `mrgsolve` detects an new individual when the current value of `ID` is different from the immediate preceeding value of `ID`.  However, we always recommend using unique `ID`.
-* `time` states the time of the data record
-* `evid` is the event id indicator.  `evid` can take the values:
+* `ID` the subject id.  This id does not need to be unique in the `data_set`:
+mrgsolve detects an new individual when the current value of `ID` is different
+from the immediate preceeding value of `ID`.  However, we always recommend using
+unique `ID`.
+* `time` or `TIME`: states the time of the data record
+* `evid` or `EVID`: the event id indicator.  `evid` can take the values:
 
     - __0__ = observation record
     - __1__ = dosing event (bolus or infusion)
@@ -31,20 +47,59 @@ Event data sets have several special column names that `mrgsolve` is always awar
     - __4__ = reset and dose
     - __8__ = replace the amount in the compartment with `amt`
 
-* `amt` the dose amount (if `evid==1`)
-* `cmt` the dosing compartment number.  This may also be a character value naming the compartment name
-* `rate` if non-zero and `evid=1` or `evid=4`, implements a zero-order infusion of duration `F*amt/rate`, where `F` is the bioavailability fraction for the dosing compartment.  Use `rate = -1` to model the infusion rate and `rate = -2` to model the infusion duration, both in `$MAIN` (see sections \@ref(block-main), \@ref(spec-f),\@ref(spec-r), \@ref(spec-d)).
-* `ii` inter-dose interval; `ii=24` means daily dosing
-* `addl` additional doses; a non-zero value in `addl` requires non-zero `ii` on the same record
-* `ss` steady state indicator; use 1 to implement steady-state dosing; 0 otherwise.  `mrgsolve` also recoginzes dosing records where `ss=2`.  This allows combination of different steady state dosing regimens under linear kinetics (e.g. 10 mg QAM and 20 mg QPM daily to steady state).
+* `amt` or `AMT`: the dose amount (if `evid==1`)
+* `cmt` or `CMT`: the dosing compartment number.  This may also be a character
+value naming the compartment name.  The compartment number must be consistent 
+with the number of compartments in the model for dosing records (`evid`==1).  
+For observation records, a `cmt` value of 0 is acceptable.  Use a negative 
+compartment number with `evid` 2 to turn a compartment off.  
+* `rate` or `RATE`: if non-zero and `evid=1` or `evid=4`, implements a
+zero-order infusion of duration `F_CMT*amt/rate`, where `F_CMT` is the
+bioavailability fraction for the dosing compartment.  Use `rate = -1` to model
+the infusion rate and `rate = -2` to model the infusion duration, both in
+`$MAIN` (see sections \@ref(block-main), \@ref(spec-f),\@ref(spec-r),
+\@ref(spec-d)).
+* `ii` or `II`: inter-dose interval; `ii=24` means daily dosing when the model
+time unit is hours
+* `addl` or `ADDL`: additional doses; a non-zero value in `addl` requires
+non-zero `ii` on the same record
+* `ss` or `SS` steady state indicator; use 1 to implement steady-state dosing; 0
+otherwise.  mrgsolve also recoginzes dosing records where `ss=2`.  This allows
+combination of different steady state dosing regimens under linear kinetics
+(e.g. 10 mg QAM and 20 mg QPM daily to steady state).
 
-In addition to these special column names, `mrgsolve` will recognize columns in `data_set` that have the same name as items in the parameter list (see \@ref(block-param) and \@ref(component-param)).  When `mrgsolve` sees that the names match up, it will update the values of those matching names based on what it finds as it moves through the data set (see section \ref@(topic-parameter-update)).  
+The column names in the preceeding list were written either as lower case form
+(e.g. `amt`) or upper case form (e.g. `AMT`).  Either may be used, however
+the data set will be checked for consistency of usage.  An error will be 
+issued in case a mixture of lower and upper case names are found.
+
+In addition to these special column names, mrgsolve will recognize columns in
+`data_set` that have the same name as items in the parameter list (see
+\@ref(block-param) and \@ref(component-param)).  When mrgsolve sees that the
+names match up, it will update the values of those matching names based on what
+it finds as it moves through the data set (see section
+\ref@(topic-parameter-update)).
 
 ### Two types of `data_set`
-`mrgsolve` distinguishes between two types of data sets: data sets that have *at least one observation record*  (`evid=0`) and data sets that have *no records with `evid=0`*.  
+mrgsolve distinguishes between two types of data sets: data sets that have *at
+least one observation record*  (`evid=0`) and data sets that have *no records
+with `evid=0`*.
 
-* __Full data sets__ have a mix of observations and dosing events (likely, but not required).  When `mrgsolve` finds one record with `evid=0`, it assumes that __ALL__ output observation times are to come from the data set. In this case the simulation output time grid discussed in \@ref(component-stime) is ignored and only observations found in the data set appear in the simulated output.  Use full data sets when you want a highly customized sampling schedule or you are working with a clinical data set.
-* __Condensed data sets__ have no records with `evid=0`.  In this case, `mrgsolve` will fill the simulated output with observations at times specified by the output time grid ( section \@ref(component-stime) and see section \@ref(topic-designs)).  These are very convenient to use because there is less data assembly burden and output data sets can easily be created with very dense sampling scheme or highly customised sampling schemes with very little work.  Use a condensed data set when you want a uniform set of sampling times for all subjects in the data set.
+* __Full data sets__ have a mix of observations and dosing events (likely, but
+not required).  When mrgsolve finds one record with `evid=0`, it assumes that
+__ALL__ output observation times are to come from the data set. In this case the
+simulation output time grid discussed in \@ref(component-stime) is ignored and
+only observations found in the data set appear in the simulated output.  Use
+full data sets when you want a highly customized sampling schedule or you are
+working with a clinical data set.
+* __Condensed data sets__ have no records with `evid=0`.  In this case,
+mrgsolve will fill the simulated output with observations at times specified
+by the output time grid ( section \@ref(component-stime) and see section
+\@ref(topic-designs)).  These are very convenient to use because there is less
+data assembly burden and output data sets can easily be created with very dense
+sampling scheme or highly customised sampling schemes with very little work.
+Use a condensed data set when you want a uniform set of sampling times for all
+subjects in the data set.
 
 __Example of condensed data set__
 data(extran1)
@@ -53,7 +108,7 @@ data(extran1)
 data(extran1)
 extran1
 ```
-See `?exdatasets` in the `R` help system after loading `mrgsolve`.
+See `?exdatasets` in the `R` help system after loading mrgsolve.
 
 __Example of full data set__
 data(extran1)
@@ -63,12 +118,16 @@ data(exTheoph)
 head(exTheoph)
 ```
 
-See `?exdatasets` in the `R` help system after loading `mrgsolve`.
+See `?exdatasets` in the `R` help system after loading mrgsolve.
 
 
 
 __Augmenting observations in a clinical data set__
-Occassionally, we want to simulate from a clinical data set (with observation records as actually observed in a population of patients) but we also want to augment those observations with a regular sequence of times (for example, to make a smooth profile on a plot).  In that case, you can set `obsaug  = TRUE` when calling `mrgsim`.  
+Occassionally, we want to simulate from a clinical data set (with observation
+records as actually observed in a population of patients) but we also want to
+augment those observations with a regular sequence of times (for example, to
+make a smooth profile on a plot).  In that case, you can set `obsaug  = TRUE`
+when calling `mrgsim`.
 
 For example:
 ```{r obsaug-1,cache=TRUE}
@@ -87,14 +146,21 @@ out %>% select(time) %>% unlist %>% unname
 
 ```
 
-`obsaug` requests that the data set be augmented with observations from the simulation time grid.  We can optionally request an indicator called `a.u.g` to appear in the output that takes value of 1 for augmented observations and 0 for observations from the data set.
+`obsaug` requests that the data set be augmented with observations from the
+simulation time grid.  We can optionally request an indicator called `a.u.g` to
+appear in the output that takes value of 1 for augmented observations and 0 for
+observations from the data set.
 
 
 ### Sorting requirements
-The `ID`s in the data set can appear in any order.  However, an error will be generated if `time` on any record is less that `time` on the previous record within any `ID`. 
+The `ID`s in the data set can appear in any order.  However, an error will be
+generated if `time` on any record is less that `time` on the previous record
+within any `ID`.
 
 ### Creating data sets
-The `expand.ev` function is provided by `mrgsolve` to help in creating data sets of a certain style.  But any `R` code that produces a valid data set is fine to use.  
+The `expand.ev` function is provided by mrgsolve to help in creating data sets
+of a certain style.  But any `R` code that produces a valid data set is fine to
+use.
 
 
 ### Example
@@ -108,7 +174,8 @@ data
 ```
 
 
-Notice that `expand.ev` assumes that `time` is 0 and `cmt` is 1.  To dose as a 2-hour infusion into the second compartment use:
+Notice that `expand.ev` assumes that `time` is 0 and `cmt` is 1.  To dose as a
+2-hour infusion into the second compartment use:
 ```{r}
 
 data <- expand.ev(ID=1:3, amt=250, rate=125, ii=8, addl=11, cmt=2)
@@ -133,14 +200,29 @@ mod %>%
 
 
 ## Individual data sets (`idata`)  {#idata-set}
-Individual data sets carry individual-level data.  This individual data is used in several different ways:
+Individual data sets carry individual-level data.  This individual data is used
+in several different ways:
 
-* __Individual-level parameters__: Just prior to simulating any individual, `mrgsolve` checks the appropriate row in `idata` (if supplied) for any
-columns with parameter names.  If parameter names are found, the parameter list is updated and that update remains in effect for the duration of that individual's data records.
-* __Individual- or group-level designs__: Each individual or group of individual may be assigned a different sampling design.  For example, individuals in arm 1 may need to be simulated for 4 weeks whereas individuals in arm 2 may need to be simulated for 8 weeks.  `idata` may be used to identify one of several sampling designs for each individual or group of individuals.
-* __Individual-level compartment initialization__: if a model has a compartment called `CMT` and `mrgsolve` finds a column in `idata` called `CMT_0`, the value of `CMT_0` will be used to initialize that compartment with, potentially a different value for each individual.  Note that there are several other ways to initialize compartments detailed in \@ref(topic-init).
+* __Individual-level parameters__: Just prior to simulating any individual,
+mrgsolve checks the appropriate row in `idata` (if supplied) for any columns
+with parameter names.  If parameter names are found, the parameter list is
+updated and that update remains in effect for the duration of that individual's
+data records.
+* __Individual- or group-level designs__: Each individual or group of individual
+may be assigned a different sampling design.  For example, individuals in arm 1
+may need to be simulated for 4 weeks whereas individuals in arm 2 may need to be
+simulated for 8 weeks.  `idata` may be used to identify one of several sampling
+designs for each individual or group of individuals.
+* __Individual-level compartment initialization__: if a model has a compartment
+called `CMT` and mrgsolve finds a column in `idata` called `CMT_0`, the value
+of `CMT_0` will be used to initialize that compartment with, potentially a
+different value for each individual.  Note that there are several other ways to
+initialize compartments detailed in \@ref(topic-init).
 
-`idata_set` are entered as `data.frame` with one unique `ID` per row.  In `mrgsolve` documentation, we refer to individual data sets  `idata` or `idata_set` to distinguish them from event data sets (see section \@ref(data-set)).
+`idata_set` are entered as `data.frame` with one unique `ID` per row.  In
+mrgsolve documentation, we refer to individual data sets  `idata` or
+`idata_set` to distinguish them from event data sets (see section
+\@ref(data-set)).
 
 An `idata_set` looks like this:
 ```{r}
@@ -148,12 +230,18 @@ data(exidata)
 
 exidata
 ```
-Here we have an `idata_set` with 10 subjects, one subject per row.  The `ID` column connects the data in each row to the data in a `data_set`, which also requires an `ID` column.    
+Here we have an `idata_set` with 10 subjects, one subject per row.  The `ID`
+column connects the data in each row to the data in a `data_set`, which also
+requires an `ID` column.
 
-The `ID` column is the only required column name in `idata_set` and `ID` should always be a unique identifier for that row.
+The `ID` column is the only required column name in `idata_set` and `ID` should
+always be a unique identifier for that row.
 
 ### Use case
-`idata_set` is usually helpful for implementing a batch of simulations when a `data_set` is not used.  The batch may be as a sensitivity analysis or for population simulation.  Usually, an events object is used with `idata`, but it is not required.
+`idata_set` is usually helpful for implementing a batch of simulations when a
+`data_set` is not used.  The batch may be as a sensitivity analysis or for
+population simulation.  Usually, an events object is used with `idata`, but it
+is not required.
 
 Use the `idata_set` function to pass the data set into the problem.
 
@@ -168,8 +256,27 @@ mod %>%
   mrgsim %>% plot
 ```
 
-Because there were 10 subjects in the `idata_set`, we get 10 profiles in the output.  Each "individual" or "unit" received the same 100 mg dose.  We would use a `data_set` to assign different doses to different individuals.
+Because there were 10 subjects in the `idata_set`, we get 10 profiles in the
+output.  Each "individual" or "unit" received the same 100 mg dose.  We would
+use a `data_set` to assign different doses to different individuals.
 
 ## Numeric data only {#numeric-only}
-The `data.frame` holding the `data_set` or `idata_set` may have any type of data in its columns.  However, only numeric data can actually get passed into the simulation engine.  `mrgsolve` will automatically look for non-numeric columns and drop them from the `data_set` or `idata_set` with a warning.
+The `data.frame` holding the `data_set` or `idata_set` may have any type of data
+in its columns.  However, only numeric data can actually get passed into the
+simulation engine.  mrgsolve will automatically look for non-numeric columns
+and drop them from the `data_set` or `idata_set` with a warning.
+
+## Data sets for use with `$PRED` {#pred-data}
+Because there are no compartments involved, there are relaxed data set
+requirements for models that utilize `$PRED`.
+
+* `time` or `TIME` is not required as input; when this is not supplied, a 
+  `time` column will be included in output with value 0
+* When `time` or `TIME` is supplied, it may be negative; but records must still
+  be sorted by `time` or `TIME`
+* If supplied, `cmt` or `CMT` must be zero
+* An error is generated if `rate` or `RATE` is supplied
+* An error is generated if `ss` or `SS` is supplied
+
+
 

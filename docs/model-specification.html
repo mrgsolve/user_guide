@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>mrgsolve User Guide</title>
+  <title>Chapter 3 Model specification | mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="mrgsolve User Guide" />
+  <meta property="og:title" content="Chapter 3 Model specification | mrgsolve User Guide" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="metrumresearchgroup/mrgsolve" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="mrgsolve User Guide" />
+  <meta name="twitter:title" content="Chapter 3 Model specification | mrgsolve User Guide" />
   
   <meta name="twitter:description" content="A guide to using mrgsolve." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2018-12-03">
+<meta name="date" content="2018-12-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="input-data-sets.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -145,17 +146,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.2.6" data-path="model-specification.html"><a href="model-specification.html#block-ode"><i class="fa fa-check"></i><b>3.2.6</b> <code>$ODE</code>  </a></li>
 <li class="chapter" data-level="3.2.7" data-path="model-specification.html"><a href="model-specification.html#block-table"><i class="fa fa-check"></i><b>3.2.7</b> <code>$TABLE</code>  </a></li>
 <li class="chapter" data-level="3.2.8" data-path="model-specification.html"><a href="model-specification.html#block-preamble"><i class="fa fa-check"></i><b>3.2.8</b> <code>$PREAMBLE</code>  </a></li>
-<li class="chapter" data-level="3.2.9" data-path="model-specification.html"><a href="model-specification.html#block-capture"><i class="fa fa-check"></i><b>3.2.9</b> <code>$CAPTURE</code>  </a></li>
-<li class="chapter" data-level="3.2.10" data-path="model-specification.html"><a href="model-specification.html#block-omega"><i class="fa fa-check"></i><b>3.2.10</b> <code>$OMEGA</code>  </a></li>
-<li class="chapter" data-level="3.2.11" data-path="model-specification.html"><a href="model-specification.html#block-sigma"><i class="fa fa-check"></i><b>3.2.11</b> <code>$SIGMA</code>  </a></li>
-<li class="chapter" data-level="3.2.12" data-path="model-specification.html"><a href="model-specification.html#set"><i class="fa fa-check"></i><b>3.2.12</b> <code>$SET</code></a></li>
-<li class="chapter" data-level="3.2.13" data-path="model-specification.html"><a href="model-specification.html#global"><i class="fa fa-check"></i><b>3.2.13</b> <code>$GLOBAL</code></a></li>
-<li class="chapter" data-level="3.2.14" data-path="model-specification.html"><a href="model-specification.html#pkmodel"><i class="fa fa-check"></i><b>3.2.14</b> <code>$PKMODEL</code></a></li>
-<li class="chapter" data-level="3.2.15" data-path="model-specification.html"><a href="model-specification.html#block-plugin"><i class="fa fa-check"></i><b>3.2.15</b> <code>$PLUGIN</code>  </a></li>
-<li class="chapter" data-level="3.2.16" data-path="model-specification.html"><a href="model-specification.html#block-theta"><i class="fa fa-check"></i><b>3.2.16</b> <code>$THETA</code>  </a></li>
-<li class="chapter" data-level="3.2.17" data-path="model-specification.html"><a href="model-specification.html#block-nmxml"><i class="fa fa-check"></i><b>3.2.17</b> <code>$NMXML</code>  </a></li>
-<li class="chapter" data-level="3.2.18" data-path="model-specification.html"><a href="model-specification.html#block-include"><i class="fa fa-check"></i><b>3.2.18</b> <code>$INCLUDE</code>  </a></li>
-<li class="chapter" data-level="3.2.19" data-path="model-specification.html"><a href="model-specification.html#block-env"><i class="fa fa-check"></i><b>3.2.19</b> <code>$ENV</code>  </a></li>
+<li class="chapter" data-level="3.2.9" data-path="model-specification.html"><a href="model-specification.html#block-pred"><i class="fa fa-check"></i><b>3.2.9</b> <code>$PRED</code>  </a></li>
+<li class="chapter" data-level="3.2.10" data-path="model-specification.html"><a href="model-specification.html#block-capture"><i class="fa fa-check"></i><b>3.2.10</b> <code>$CAPTURE</code>  </a></li>
+<li class="chapter" data-level="3.2.11" data-path="model-specification.html"><a href="model-specification.html#block-omega"><i class="fa fa-check"></i><b>3.2.11</b> <code>$OMEGA</code>  </a></li>
+<li class="chapter" data-level="3.2.12" data-path="model-specification.html"><a href="model-specification.html#block-sigma"><i class="fa fa-check"></i><b>3.2.12</b> <code>$SIGMA</code>  </a></li>
+<li class="chapter" data-level="3.2.13" data-path="model-specification.html"><a href="model-specification.html#set"><i class="fa fa-check"></i><b>3.2.13</b> <code>$SET</code></a></li>
+<li class="chapter" data-level="3.2.14" data-path="model-specification.html"><a href="model-specification.html#global"><i class="fa fa-check"></i><b>3.2.14</b> <code>$GLOBAL</code></a></li>
+<li class="chapter" data-level="3.2.15" data-path="model-specification.html"><a href="model-specification.html#pkmodel"><i class="fa fa-check"></i><b>3.2.15</b> <code>$PKMODEL</code></a></li>
+<li class="chapter" data-level="3.2.16" data-path="model-specification.html"><a href="model-specification.html#block-plugin"><i class="fa fa-check"></i><b>3.2.16</b> <code>$PLUGIN</code>  </a></li>
+<li class="chapter" data-level="3.2.17" data-path="model-specification.html"><a href="model-specification.html#block-theta"><i class="fa fa-check"></i><b>3.2.17</b> <code>$THETA</code>  </a></li>
+<li class="chapter" data-level="3.2.18" data-path="model-specification.html"><a href="model-specification.html#block-nmxml"><i class="fa fa-check"></i><b>3.2.18</b> <code>$NMXML</code>  </a></li>
+<li class="chapter" data-level="3.2.19" data-path="model-specification.html"><a href="model-specification.html#block-include"><i class="fa fa-check"></i><b>3.2.19</b> <code>$INCLUDE</code>  </a></li>
+<li class="chapter" data-level="3.2.20" data-path="model-specification.html"><a href="model-specification.html#block-env"><i class="fa fa-check"></i><b>3.2.20</b> <code>$ENV</code>  </a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="model-specification.html"><a href="model-specification.html#variables-and-macros"><i class="fa fa-check"></i><b>3.3</b> Variables and Macros</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="model-specification.html"><a href="model-specification.html#id"><i class="fa fa-check"></i><b>3.3.1</b> <code>ID</code></a></li>
@@ -196,6 +198,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.3.1" data-path="input-data-sets.html"><a href="input-data-sets.html#use-case"><i class="fa fa-check"></i><b>4.3.1</b> Use case</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="input-data-sets.html"><a href="input-data-sets.html#numeric-only"><i class="fa fa-check"></i><b>4.4</b> Numeric data only</a></li>
+<li class="chapter" data-level="4.5" data-path="input-data-sets.html"><a href="input-data-sets.html#pred-data"><i class="fa fa-check"></i><b>4.5</b> Data sets for use with <code>$PRED</code></a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>5</b> Simulated output</a><ul>
 <li class="chapter" data-level="5.1" data-path="simulated-output.html"><a href="simulated-output.html#coersion-methods"><i class="fa fa-check"></i><b>5.1</b> Coersion methods</a></li>
@@ -309,7 +312,7 @@ KA:  <span class="fl">1.2</span> : Absorption rate constant (<span class="dv">1<
 <li>Multiple blocks are allowed</li>
 <li>Values are evaluated by the <code>R</code> interperter</li>
 </ul>
-<p>See also: section <a href="model-specification.html#block-theta">3.2.16</a> and <a href="model-specification.html#block-fixed">3.2.3</a>.</p>
+<p>See also: section <a href="model-specification.html#block-theta">3.2.17</a> and <a href="model-specification.html#block-fixed">3.2.3</a>.</p>
 <p>See <code>?param</code> in the <code>R</code> help system after loading <code>mrgsolve</code>.</p>
 </div>
 <div id="block-fixed" class="section level3">
@@ -326,7 +329,7 @@ g = <span class="fl">9.8</span></code></pre></div>
 <p>Annotated example:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$FIXED @annotated
 g : <span class="fl">9.8</span> : Acceleration due to gravity (m/s^<span class="dv">2</span>)</code></pre></div>
-<p>See also: section <a href="model-specification.html#block-param">3.2.2</a> and <a href="model-specification.html#block-theta">3.2.16</a>.</p>
+<p>See also: section <a href="model-specification.html#block-param">3.2.2</a> and <a href="model-specification.html#block-theta">3.2.17</a>.</p>
 <p>Notes:</p>
 <ul>
 <li>Multiple blocks are allowed</li>
@@ -411,7 +414,7 @@ dxdt_RESP =  KIN*(<span class="dv">1</span> - INH) - RESP*KOUT;</code></pre></di
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$TABLE
 <span class="dt">double</span> CP = CENT/VC;</code></pre></div>
 <p><strong>NOTE</strong> <code>mrgsolve</code> formerly had a <code>table()</code> macro for inserting derived values into simulated output. This macro has been deprecated. The only way to insert derived values into the simulated output is via <code>$CAPTURE</code>.</p>
-<p><strong>NOTE</strong> When variables are marked for capture (see <a href="model-specification.html#block-capture">3.2.9</a>), the values of those variables are saved at the <strong>end</strong> of the <code>$TABLE</code> function. This process is carried out automatically by <code>mrgsolve</code> and therefore requires no user intervention.</p>
+<p><strong>NOTE</strong> When variables are marked for capture (see <a href="model-specification.html#block-capture">3.2.10</a>), the values of those variables are saved at the <strong>end</strong> of the <code>$TABLE</code> function. This process is carried out automatically by <code>mrgsolve</code> and therefore requires no user intervention.</p>
 </div>
 <div id="block-preamble" class="section level3">
 <h3><span class="header-section-number">3.2.8</span> <code>$PREAMBLE</code>  </h3>
@@ -443,10 +446,23 @@ $MAIN
 <li>There may be only one <code>$PREAMBLE</code> block in a model</li>
 <li>Like <code>$MAIN</code>, <code>$ODE</code> and <code>$TABLE</code>, <code>double</code>, <code>int</code> and <code>bool</code> variables initialized in <code>$PREAMBLE</code> are actually initialized for global (within the model file)</li>
 </ul>
-<p>See also: <a href="model-specification.html#block-plugin">3.2.15</a>.</p>
+<p>See also: <a href="model-specification.html#block-plugin">3.2.16</a>.</p>
+</div>
+<div id="block-pred" class="section level3">
+<h3><span class="header-section-number">3.2.9</span> <code>$PRED</code>  </h3>
+<p>Use <code>$PRED</code> to write a model without differential equations. In this block, write all algebraic expressions for derived parameters, the response, and any other derived output quantities.</p>
+<p>For example:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$PARAM TVE0 = <span class="dv">100</span>, AUC50 = <span class="dv">100</span>, IMAX = <span class="dv">40</span>, AUC = <span class="dv">0</span>
+
+$PRED
+<span class="dt">double</span> E0 = EVE0*exp(ETA(<span class="dv">1</span>));
+
+<span class="dt">double</span> RESP = E0 - IMAX*AUC/(AUC50+AUC);</code></pre></div>
+<p>In this example, the entire model is written in the <code>$PRED</code> block. It is an error to include <code>$MAIN</code> or <code>$ODE</code> when <code>$PRED</code> is being used.</p>
+<p>See the section <a href="input-data-sets.html#pred-data">4.5</a> for additional information regardin data sets in use with <code>$PRED</code> block.</p>
 </div>
 <div id="block-capture" class="section level3">
-<h3><span class="header-section-number">3.2.9</span> <code>$CAPTURE</code>  </h3>
+<h3><span class="header-section-number">3.2.10</span> <code>$CAPTURE</code>  </h3>
 <p>This is a block to identify variables that should be captured in the simulated output.</p>
 <p>For example:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$PARAM A = <span class="dv">1</span>, B = <span class="dv">2</span>
@@ -488,7 +504,7 @@ DV  : Plasma concentration (mcg/ml)</code></pre></div>
 <p>New variables may be declared in <code>$TABLE</code>. See section <a href="model-specification.html#new-variables">3.4</a> for details.</p>
 </div>
 <div id="block-omega" class="section level3">
-<h3><span class="header-section-number">3.2.10</span> <code>$OMEGA</code>  </h3>
+<h3><span class="header-section-number">3.2.11</span> <code>$OMEGA</code>  </h3>
 <p>See <code>?modMATRIX</code> for more details about options for this block.</p>
 <p>Use this block to enter variance/covariance matrices for subject-level random effects drawn from multivariate normal distribution. All random effects are assumed to have mean of 0. Off diagonal elements for block matrices are assumed to be correlation coefficients if the <code>@correlation</code> option is used (see below).</p>
 <p>By default, a <strong>diagonal</strong> matrix is assumed. So:</p>
@@ -526,13 +542,13 @@ EKA: <span class="fl">0.001</span> <span class="fl">0.001</span> <span class="fl
 </ul>
 </div>
 <div id="block-sigma" class="section level3">
-<h3><span class="header-section-number">3.2.11</span> <code>$SIGMA</code>  </h3>
+<h3><span class="header-section-number">3.2.12</span> <code>$SIGMA</code>  </h3>
 <p>See <code>?modMATRIX</code> for more details about options for this block.</p>
 <p>Use this block to enter variance/covariance matrices for within-subject random effects drawn from multivariate normal distribution. All random effects are assumed to have mean of 0. Off diagonal elements for block matrices are assumed to be correlation coefficients if the <code>@correlation</code> option is used (see below).</p>
 <p>The <code>$SIGMA</code> block functions like the <code>$OMEGA</code> block. See <code>$OMEGA</code> for details.</p>
 </div>
 <div id="set" class="section level3">
-<h3><span class="header-section-number">3.2.12</span> <code>$SET</code></h3>
+<h3><span class="header-section-number">3.2.13</span> <code>$SET</code></h3>
 <p>Use this code block to set different options for the simulation. Use a <code>name=value</code> format, where <code>value</code> is evaluated by the <code>R</code> interpreter.</p>
 <p>Most of the options that can be entered in <code>$SET</code> are passed to <code>update</code>.</p>
 <p>For example:</p>
@@ -540,7 +556,7 @@ EKA: <span class="fl">0.001</span> <span class="fl">0.001</span> <span class="fl
 <p>Here, we set the simulation <code>end</code> time to 240, set the time difference between two adjacent time points to 0.25 time units, and request only the <code>RESP</code>onse compartment in the simulated output.</p>
 </div>
 <div id="global" class="section level3">
-<h3><span class="header-section-number">3.2.13</span> <code>$GLOBAL</code></h3>
+<h3><span class="header-section-number">3.2.14</span> <code>$GLOBAL</code></h3>
 <p>The <code>$GLOBAL</code> block is for writing <code>C++</code> code that is outside of <code>$MAIN</code>, <code>$ODE</code>, and <code>$TABLE</code>.</p>
 <p>There are no artificial limit on what sort of <code>C++</code> code can go in <code>$GLOBAL</code>. However there are two more-common uses:</p>
 <ol style="list-style-type: decimal">
@@ -551,14 +567,15 @@ EKA: <span class="fl">0.001</span> <span class="fl">0.001</span> <span class="fl
 <p>For example:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$GLOBAL
 <span class="pp">#define CP (CENT/VC)</span></code></pre></div>
-<p>When this preprocessor directive is included, everywhere the preprocessor finds a <code>CP</code> token it will substitute <code>(CENT/VC)</code>. Both <code>CENT</code> and <code>VC</code> must be defined and the ratio of <code>CENT</code> to <code>VC</code> will be calculated depending on whatever the current values are. Notice that we included parentheses around <code>(CENT/VC)</code>. This makes sure the ratio between the two is taken first, before any other operations involving <code>CP</code>.</p>
+<p>When this preprocessor directive is included, everywhere the preprocessor finds a <code>CP</code> token it will substitute <code>(CENT/VC)</code>. Both <code>CENT</code> and <code>VC</code> must be defined and the ratio of <code>CENT</code> to <code>VC</code> will be calculated depending on whatever the current values are. Notice that we included parentheses around <code>(CENT/VC)</code>.<br />
+This makes sure the ratio between the two is taken first, before any other operations involving <code>CP</code>.</p>
 <p><strong>Declaring global variables</strong> Sometimes, you may wish to use global variables and have more control over how they get declared.</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$GLOBAL
 bool cure = false;</code></pre></div>
 <p>With this construct, the boolean variable <code>cure</code> is declared and defined right as the model is compiled.</p>
 </div>
 <div id="pkmodel" class="section level3">
-<h3><span class="header-section-number">3.2.14</span> <code>$PKMODEL</code></h3>
+<h3><span class="header-section-number">3.2.15</span> <code>$PKMODEL</code></h3>
 <p>This code block implements a one- or two-compartment PK model where the system is calculated by algebraic equations, not ODEs. <code>mrgsolve</code> handles the calculations and an error is generated if both <code>$PKMODEL</code> and <code>$ODE</code> blocks are included in the same model specification file.</p>
 <p>This is an options-only block. The user must specify the number of compartments (1 or 2) to use in the model as well as whether or not to include a depot dosing compartment. See <code>?PKMODEL</code> for more details about this block, including specific requirements for symbols that must be defined in the model specification file.</p>
 <p>The <code>$CMT</code> or <code>$INIT</code> block must also be included with an appropriate number of compartments. Compartment names, however, may be determined by the user.</p>
@@ -570,7 +587,7 @@ $PKMODEL ncmt=<span class="dv">2</span>, depot=TRUE</code></pre></div>
 <p>Specifying three compartments with <code>depot=TRUE</code> implies <code>ncmt=2</code>. Notice that a separate <code>$CMT</code> block is not appropriate when <code>cmt</code> is specified in <code>$PKMODEL</code>.</p>
 </div>
 <div id="block-plugin" class="section level3">
-<h3><span class="header-section-number">3.2.15</span> <code>$PLUGIN</code>  </h3>
+<h3><span class="header-section-number">3.2.16</span> <code>$PLUGIN</code>  </h3>
 <p>Plugins are a way to add extensions to your <code>mrgsolve</code> model. When a plugin is recruited into the model, <code>mrgsolve</code> may do one or more of the following:</p>
 <ul>
 <li>Link to another <code>R</code> package during compilation, including
@@ -666,7 +683,7 @@ $MAIN
 <p>See also: <a href="model-specification.html#block-preamble">3.2.8</a>.</p>
 </div>
 <div id="block-theta" class="section level3">
-<h3><span class="header-section-number">3.2.16</span> <code>$THETA</code>  </h3>
+<h3><span class="header-section-number">3.2.17</span> <code>$THETA</code>  </h3>
 <p>Use this code block as an efficient way to add to the parameter list where names are determined by a prefix and a number. By default, the prefix is <code>THETA</code> and the number sequentially numbers the input values.</p>
 <p>For example:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$THETA
@@ -686,8 +703,8 @@ $MAIN
 <p>See also: <a href="model-specification.html#block-param">3.2.2</a> .</p>
 </div>
 <div id="block-nmxml" class="section level3">
-<h3><span class="header-section-number">3.2.17</span> <code>$NMXML</code>  </h3>
-<p>The <code>$NMXML</code> block lets you read and incorporate results from a NONMEM run into your <code>mrgsolve</code> model. From the NONMEM run, <code>THETA</code> will be imported into your parameter list (see <a href="model-specification.html#block-param">3.2.2</a> and <a href="model-components.html#component-param">2.1</a>), <code>OMEGA</code> will be captured as an <code>$OMEGA</code> block (<a href="model-specification.html#block-omega">3.2.10</a>) and <code>SIGMA</code> will be captured as a <code>$SIGMA</code> block (<a href="model-specification.html#block-sigma">3.2.11</a>). Users may optionally omit any one of these from being imported.</p>
+<h3><span class="header-section-number">3.2.18</span> <code>$NMXML</code>  </h3>
+<p>The <code>$NMXML</code> block lets you read and incorporate results from a NONMEM run into your <code>mrgsolve</code> model. From the NONMEM run, <code>THETA</code> will be imported into your parameter list (see <a href="model-specification.html#block-param">3.2.2</a> and <a href="model-components.html#component-param">2.1</a>), <code>OMEGA</code> will be captured as an <code>$OMEGA</code> block (<a href="model-specification.html#block-omega">3.2.11</a>) and <code>SIGMA</code> will be captured as a <code>$SIGMA</code> block (<a href="model-specification.html#block-sigma">3.2.12</a>). Users may optionally omit any one of these from being imported.</p>
 <p><code>$NMXML</code> contains a <code>project</code> argument and a <code>run</code> argument. By default, the estimates are read from from the file <code>project/run/run.xml</code>. That is, it is assumed that there is a directory named <code>run</code> that is inside the <code>project</code> directory where <code>$NMXML</code> will find <code>run.xml</code>. Your NONMEM run directories may not be organized in a way that is compatible with this default. In that case, you will need to provide the <code>file</code> argument, which should be the path to the <code>run.xml</code> file, either as a full path or as a path relative to the current working directory.</p>
 <p>For help on the arguments / options for <code>$NMXML</code>, please see the <code>?nmxml</code> help topic in your <code>R</code> session after loading the <code>mrgsolve</code> package.</p>
 <p><strong>An example</strong></p>
@@ -733,9 +750,9 @@ $MAIN
 <pre><code>. 
 . 
 . -------- mrgsolve model object (unix) --------
-.   Project: /private/var/fol.../T/RtmplPVvf1
+.   Project: /private/var/fol.../T/Rtmp9psbD8
 .   source:        nmxml.cpp
-.   shared object: nmxml-so-455b257e98d1 
+.   shared object: nmxml-so-166c37b4e84bc 
 . 
 .   Time:          start: 0 end: 96 delta: 4
 .   &gt;              add: &lt;none&gt;
@@ -778,17 +795,14 @@ mod <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ev</span>(<span class="dt">amt=</span><span class="dv">1000</span>, <span class="dt">rate=</span><span class="dv">1000</span><span class="op">/</span><span class="dv">36</span>, <span class="dt">cmt=</span><span class="st">&quot;GUT&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">nid=</span><span class="dv">10</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>plot</code></pre></div>
-<p><img src="user-guide_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p><img src="user-guide_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 </div>
 <div id="block-include" class="section level3">
-<h3><span class="header-section-number">3.2.18</span> <code>$INCLUDE</code>  </h3>
+<h3><span class="header-section-number">3.2.19</span> <code>$INCLUDE</code>  </h3>
 <p>To include your own header file(s) in a model use <code>$INCLUDE</code></p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$INCLUDE
 mystuff.h
 otherstuff.h</code></pre></div>
-<p>or</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$INCLUDE
-mystuff.h otherstuff.h</code></pre></div>
 <p>or</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$INCLUDE
 mystuff.h,  otherstuff.h</code></pre></div>
@@ -799,7 +813,7 @@ mystuff.h,  otherstuff.h</code></pre></div>
 <li>An error is generated if the header file does not exist</li>
 <li>An error is generated if any quotation marks are found in the file name (don’t use quotes around the file name; <code>mrgsolve</code> will take care of that)</li>
 <li>A warning is issued if the header file does not end in <code>.h</code></li>
-<li>When the header file is changed (MD5 checksum changes), the model will be forced to be rebuilt (recompiled) when <code>mread</code> or <code>mcode</code> is called; this feature is only available for header files listed in <code>$INCLUDE</code> (see below)</li>
+<li>When the header file is changed (MD5 checksum changes), the model will be forced to be rebuilt (recompiled) when <code>mread</code> or <code>mcode</code> (but not <code>mread_cache</code> or <code>mcode_cache</code>) is called; this feature is only available for header files listed in <code>$INCLUDE</code> (see below)</li>
 <li>Do not use <code>$INCLUDE</code> to include <code>Rcpp</code>, <code>boost</code>, <code>RcppArmadillo</code> or <code>RcppEigen</code> headers; use the appropriate <code>$PLUGIN</code> instead</li>
 </ul>
 <p>For applications that don’t fit into the requirements listed above, users can always include header files in the model in <code>$GLOBAL</code> like this:</p>
@@ -808,8 +822,8 @@ mystuff.h,  otherstuff.h</code></pre></div>
 <p>But be careful when doing this: if there are changes to <code>mystuff.h</code> but not to any other part of the model specification, the model may not be fully compiled when calling <code>mread</code>. In this case, always use <code>preclean=TRUE</code> argument to <code>mread</code> to force the model to be built when calling <code>mread</code>.</p>
 </div>
 <div id="block-env" class="section level3">
-<h3><span class="header-section-number">3.2.19</span> <code>$ENV</code>  </h3>
-<p>This block is all <code>R</code> code (just as you would code in a stand-alone <code>R</code> script. The code is parsed and evaluated into a new environment when the model is compiled. Objects inside <code>$ENV</code> can be utilized in different C++ functions (see <a href="model-specification.html#block-plugin">3.2.15</a>) or other parts of the simulation process.</p>
+<h3><span class="header-section-number">3.2.20</span> <code>$ENV</code>  </h3>
+<p>This block is all <code>R</code> code (just as you would code in a stand-alone <code>R</code> script. The code is parsed and evaluated into a new environment when the model is compiled. Objects inside <code>$ENV</code> can be utilized in different C++ functions (see <a href="model-specification.html#block-plugin">3.2.16</a>) or other parts of the simulation process.</p>
 <p>For example:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$ENV
 
@@ -938,7 +952,7 @@ table(CP) = CENT/VC;</code></pre></div>
 <span class="dt">double</span> CP = CENT/VC;
 
 $CAPTURE CP</code></pre></div>
-<p>See: section <a href="model-specification.html#block-table">3.2.7</a> and also <a href="model-specification.html#block-capture">3.2.9</a></p>
+<p>See: section <a href="model-specification.html#block-table">3.2.7</a> and also <a href="model-specification.html#block-capture">3.2.10</a></p>
 </div>
 <div id="spec-f" class="section level3">
 <h3><span class="header-section-number">3.3.15</span> <code>F_CMT</code>  </h3>
@@ -1132,7 +1146,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -1142,6 +1156,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -1159,7 +1177,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
