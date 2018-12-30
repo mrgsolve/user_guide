@@ -363,10 +363,11 @@ double RESP = E0 - IMAX*AUC/(AUC50+AUC);
 ```
 
 In this example, the entire model is written in the `$PRED` block.  It is an 
-error to include `$MAIN` or `$ODE` when `$PRED` is being used.  
+error to include the following blocks when `$PRED` is being used: `$MAIN`, 
+`$TABLE`, `$PKMODEL`, `$ODE`, `$CMT`, `$INIT`.
 
-See the section \@ref(pred-data) for additional information regardin data sets in use 
-with `$PRED` block.  
+See the section \@ref(pred-data) for additional information regarding data sets
+in use with `$PRED` block.
 
 
 ### `$CAPTURE` \ {#block-capture}

@@ -458,8 +458,8 @@ $PRED
 <span class="dt">double</span> E0 = EVE0*exp(ETA(<span class="dv">1</span>));
 
 <span class="dt">double</span> RESP = E0 - IMAX*AUC/(AUC50+AUC);</code></pre></div>
-<p>In this example, the entire model is written in the <code>$PRED</code> block. It is an error to include <code>$MAIN</code> or <code>$ODE</code> when <code>$PRED</code> is being used.</p>
-<p>See the section <a href="input-data-sets.html#pred-data">4.5</a> for additional information regardin data sets in use with <code>$PRED</code> block.</p>
+<p>In this example, the entire model is written in the <code>$PRED</code> block. It is an error to include the following blocks when <code>$PRED</code> is being used: <code>$MAIN</code>, <code>$TABLE</code>, <code>$PKMODEL</code>, <code>$ODE</code>, <code>$CMT</code>, <code>$INIT</code>.</p>
+<p>See the section <a href="input-data-sets.html#pred-data">4.5</a> for additional information regarding data sets in use with <code>$PRED</code> block.</p>
 </div>
 <div id="block-capture" class="section level3">
 <h3><span class="header-section-number">3.2.10</span> <code>$CAPTURE</code>  </h3>
@@ -750,9 +750,9 @@ $MAIN
 <pre><code>. 
 . 
 . -------- mrgsolve model object (unix) --------
-.   Project: /private/var/fol.../T/Rtmp9psbD8
+.   Project: /private/var/fol.../T/RtmpwDUrOI
 .   source:        nmxml.cpp
-.   shared object: nmxml-so-166c37b4e84bc 
+.   shared object: nmxml-so-167fd2d16ad12 
 . 
 .   Time:          start: 0 end: 96 delta: 4
 .   &gt;              add: &lt;none&gt;
