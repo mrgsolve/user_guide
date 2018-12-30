@@ -6,12 +6,10 @@ source("setup.R")
 # Topics {#topics}
 
 ## Annotated model specification {#topic-annotated}
-Here is a complete annotated `mrgsolve` model.  The 
-goal was to get in several of the most common
-blocks that you might want to annotate.  The different 
-code blocks are rendered here separately for clarity in
-presentation; but users should include all relevant
-blocks in a single file (or R string).
+Here is a complete annotated `mrgsolve` model.  The goal was to get in several
+of the most common blocks that you might want to annotate.  The different code
+blocks are rendered here separately for clarity in presentation; but users
+should include all relevant blocks in a single file (or R string).
 
 
 ```{r,eval=FALSE}
@@ -199,7 +197,7 @@ mod %>% param(IFLAG=1, BASE=300) %>% mrgsim %>% plot
 
 
 Just to be clear, there is no need to set any sort of flag to set the initial 
-condition.
+condition as seen here:  
 
 ``` {r}
 code <- '
@@ -293,14 +291,15 @@ plot(out, CENT~.)
 
 ## Updating parameters {#topic-parameter-update}
 
-The parameter list was introduced in section \@ref(component-param) and the 
-`$PARAM` code block was shown in \@ref(block-param). Once a model is compiled, 
-the names and number of parameters in a model is fixed. However, the values of parameters can be changed: parameters may be updated either by the user 
-(in `R`) or by `mrgsolve` (in the `C++` simulation engine, as the simulation proceeds). 
+The parameter list was introduced in section \@ref(component-param) and the
+`$PARAM` code block was shown in \@ref(block-param). Once a model is compiled,
+the names and number of parameters in a model is fixed. However, the values of
+parameters can be changed: parameters may be updated either by the user (in `R`)
+or by `mrgsolve` (in the `C++` simulation engine, as the simulation proceeds).
 
 * To update in `R`, use the `param()` function (see examples below)
-* To have `mrgsolve` update the parameters, attach columns to your data set 
-(either `data_set` or `idata_set`) with the same name as items in the parameter 
+* To have `mrgsolve` update the parameters, attach columns to your data set
+(either `data_set` or `idata_set`) with the same name as items in the parameter
 list
 
 Both of these methods are discussed and illustrated in the following sections.
@@ -315,12 +314,11 @@ As we noted above, new parameter values can come from three potential sources:
 
 These sources for new parameter values are discussed below.  We note here that
 the sources listed above are listed in the order of the parameter update
-*hierarchy*.  So, the base parameter list provides the value by default.  A 
-parameter value coming from an `idata_set` will override the value in the 
-base list.  And a parameter value coming from a `data_set` will override
-the value coming from the base list or an `idata_set` (in case a parameter 
-is listed in both the `idata_set` and the `data_set`).  In other words,
-the hierarchy is:
+*hierarchy*.  So, the base parameter list provides the value by default.  A
+parameter value coming from an `idata_set` will override the value in the base
+list.  And a parameter value coming from a `data_set` will override the value
+coming from the base list or an `idata_set` (in case a parameter is listed in
+both the `idata_set` and the `data_set`).  In other words, the hierarchy is:
 
 1. base parameter list is the default
 1. the `idata_set` overrides the base list
@@ -398,8 +396,8 @@ data(exidata)
 head(exidata)
 ```
 
-Notice that there are several columns in `exidata` that match up with the 
-names in the parameter list
+Notice that there are several columns in `exidata` that match up with the names
+in the parameter list
 ```{r}
 names(exidata)
 
@@ -474,11 +472,14 @@ mod %>%
   mrgsim(end=-1, add=c(0,2))
 ```
 
-Since the data set doesn't start until `time==5`, we might think that `CL` doesn't change from the base parameter set until then.  
+Since the data set doesn't start until `time==5`, we might think that `CL`
+doesn't change from the base parameter set until then.
 
-But by default, `mrgsolve` carries those parameter values back to the start of the simulation.  This is by design ... by far the more useful configuration.
+But by default, `mrgsolve` carries those parameter values back to the start of
+the simulation.  This is by design ... by far the more useful configuration.
 
-If you wanted the base parameter set in play until that first data set record, do this:
+If you wanted the base parameter set in play until that first data set record,
+do this:
 
 ```{r}
 mod %>%
@@ -495,7 +496,8 @@ idata <- do.call("expand.idata", as.list(param(mod)))
 idata
 
 ```
-Here, we'll pass in __both__ `data_set` and `idata_set` and they have conflicting values for the parameters.
+Here, we'll pass in __both__ `data_set` and `idata_set` and they have
+conflicting values for the parameters.
 
 ```{r}
 
@@ -517,7 +519,8 @@ param(mod)
 
 __Update with `name-value` pairs__
 
-We can call `param()` to update the model object, directly naming the parameter to update and the new value to take
+We can call `param()` to update the model object, directly naming the parameter
+to update and the new value to take
 
 ```{r}
 mod %>% param(CL = 777, KM = 999) %>% param
@@ -531,9 +534,12 @@ what <- list(CL = 555, VC = 888, KYLE = 123, MN = 100)
 mod %>% param(what) %>% param
 ```
 
-`mrgsolve` looks at the names to drive the update.  `KYLE` (a compartment name) and `MN` (not in the model anywhere) are ignored.
+`mrgsolve` looks at the names to drive the update.  `KYLE` (a compartment name)
+and `MN` (not in the model anywhere) are ignored.
 
-Alternatively, we can pick a row from a data frame to provide the input for the update
+Alternatively, we can pick a row from a data frame to provide the input for the
+update
+
 ```{r}
 d <- data_frame(CL=c(9,10), VC=c(11,12), KTB=c(13,14))
 
@@ -564,9 +570,9 @@ mod <- mrgsolve:::house() %>% Req(CP) %>% ev(amt=1000,ii=24, addl=1000)
 ```
 
 
-`mrgsolve` keeps track of a simulation `start` and `end` time and a 
-fixed size step between `start` and `end` (called `delta`).  `mrgsolve`
-also keeps an arbitrary vector of simulation times called `add`. 
+`mrgsolve` keeps track of a simulation `start` and `end` time and a fixed size
+step between `start` and `end` (called `delta`).  `mrgsolve` also keeps an
+arbitrary vector of simulation times called `add`.
 
 ```{r}
 mod %>%
@@ -577,8 +583,8 @@ mod %>%
 
 __`tgrid` objects__
 
-The `tgrid` object abstracts this setup and allows us to make 
-complicated sampling designs from elementary building blocks.
+The `tgrid` object abstracts this setup and allows us to make complicated
+sampling designs from elementary building blocks.
 
 __Make a day 1 sampling with intensive sampling around the peak and sparser otherwise__
 ```{r}
@@ -807,11 +813,11 @@ sum
 
 
 __A safety check is recommended__
-Note that in both examples, we implement a safety check: an integer 
-counter is incremented every time we resimulated.  The resimulation 
-process stops if we don't reach the desired condition within 
-100 replicates.  You might also consider issuing a message
-or a flag in the simulated data if you are not able to reach the desired condition.
+Note that in both examples, we implement a safety check: an integer counter is
+incremented every time we resimulated.  The resimulation process stops if we
+don't reach the desired condition within 100 replicates.  You might also
+consider issuing a message or a flag in the simulated data if you are not able
+to reach the desired condition.
 
 ## Updating `$OMEGA` and `$SIGMA` \  {#topic-matrix-update}
 
@@ -821,8 +827,13 @@ model.
 
 ### Matrix helper functions
 
-`mrgsolve` keeps `$OMEGA` and `$SIGMA` in block matrices (regardless of whether the off-diagonal elements are zeros or not).  Recall that in the model specification file
-we can enter data for `$OMEGA` and `$SIGMA` as the lower triangle of the matrix (see section \@ref(block-omega)).  In `R`, we need to provide a matrix (as an `R` object).  `mrgsolve` provides some convenience functions to help ... allowing the user to enter lower diagonals instead of the full matrix. 
+`mrgsolve` keeps `$OMEGA` and `$SIGMA` in block matrices (regardless of whether
+the off-diagonal elements are zeros or not).  Recall that in the model
+specification file we can enter data for `$OMEGA` and `$SIGMA` as the lower
+triangle of the matrix (see section \@ref(block-omega)).  In `R`, we need to
+provide a matrix (as an `R` object).  `mrgsolve` provides some convenience
+functions to help ... allowing the user to enter lower diagonals instead of the
+full matrix.
 
 
 `dmat()` for diagonal matrix
@@ -832,17 +843,19 @@ dmat(1,2,3)
 
 `bmat()` for block matrix
 ```{r}
-dmat(1,2,3)
+bmat(1,2,3)
 ```
 
-`cmat()` for a block matrix where the diagonal elements are variances and the off-diagonals are taken to be correlations, not covariances
+`cmat()` for a block matrix where the diagonal elements are variances and the
+off-diagonals are taken to be correlations, not covariances
 ```{r}
 cmat(0.1, 0.87,0.3)
 ```
 `mrgsolve` will convert the correlations to covariances. 
 
 
-`mrgsolve` also provides `as_bmat()` and `as_dmat()` for converting other `R` objects to matrices or lists of matrices.  
+`mrgsolve` also provides `as_bmat()` and `as_dmat()` for converting other `R`
+objects to matrices or lists of matrices.
 
 Consider this list with named elements holding the data for a matrix:
 ```{r}
@@ -888,15 +901,15 @@ For help on these helper functions, see `?dmat`, `?bmat`, `?cmat`, `?as_bmat`,
 
 ### Fill a matrix with zeros
 Sometimes we write a population model that includes random effects, but we would
-like to simulate from that same model without the random effects implemented.  
-For example, we want to simulate some typical PK profiles from a population
-PK model that includes IIV on some parameters and / or RUV 
-on the simulated outputs. 
+like to simulate from that same model without the random effects implemented.
+For example, we want to simulate some typical PK profiles from a population PK
+model that includes IIV on some parameters and / or RUV on the simulated
+outputs.
 
-To do this, pass the model through the `zero_re()` function.  By default, 
-this will convert all `$OMEGA` and `$SIGMA` matrix elements to zeros. 
-See the R help file (`?zero_re`) to see some options for selectively 
-zeroing out only one or the other. 
+To do this, pass the model through the `zero_re()` function.  By default, this
+will convert all `$OMEGA` and `$SIGMA` matrix elements to zeros. See the R help
+file (`?zero_re`) to see some options for selectively zeroing out only one or
+the other.
 
 For example we have this population PK model
 
@@ -1008,36 +1021,30 @@ mod %>% omat(list(dmat(5,6,7),dmat(8,9))) %>% omat
 
 ## Time varying covariates {#topics-time-varying}
 
-A note in a previous section showed how to 
-implement time-varying covariates or other
-time-varying parameters by including those
-parameters as column in the data set. 
+A note in a previous section showed how to implement time-varying covariates or
+other time-varying parameters by including those parameters as column in the
+data set.
 
-By default, `mrgsolve` performs next observation
-carried backward (`nocb`) when processing 
-time-varying covariates.  That is, when the 
-system advances from `TIME1` to `TIME2`, 
-and the advance is a function of a covariate
-found in the data set, the system advances 
-using the covariate value `COV2` rather than
-the covariate `COV1`.  
+By default, `mrgsolve` performs next observation carried backward (`nocb`) when
+processing time-varying covariates.  That is, when the system advances from
+`TIME1` to `TIME2`, and the advance is a function of a covariate found in the
+data set, the system advances using the covariate value `COV2` rather than the
+covariate `COV1`.
 
-The user can change the behavior to last observation
-carried forward (`locf`), so that the system 
-uses the value of `COV1` to advance from `TIME1` to 
-`TIME2`.  To use `locf` advance, set `nocb` to `FALSE` when calling `mrgsim`.  For example, 
+The user can change the behavior to last observation carried forward (`locf`),
+so that the system uses the value of `COV1` to advance from `TIME1` to `TIME2`.
+To use `locf` advance, set `nocb` to `FALSE` when calling `mrgsim`.  For
+example,
 
 ```{r,eval = FALSE}
 mod %>% mrgsim(nocb = FALSE)
 ```
 
 
-Note that time-varying covariates are not 
-possible when using `qsim` simulation. 
+Note that time-varying covariates are not possible when using `qsim` simulation.
 
-There is additional information about the sequence
-of events that takes place during system advance 
-in section \@ref(section-sequence).
+There is additional information about the sequence of events that takes place
+during system advance in section \@ref(section-sequence).
 
 
 
