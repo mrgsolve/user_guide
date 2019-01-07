@@ -1,14 +1,15 @@
 --- 
-pagetitle: "mrgsolve User Guide"
+title: "mrgsolve User Guide"
 author: "<font color='DarkGreen'>Metrum Research Group, LLC</font>"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+url: 'https\://mrgsolve.github.io/user_guide/'
+github-repo: mrgsolve/user_guide
+twitter-handle: mrgsolve
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: metrumresearchgroup/mrgsolve
 description: "A guide to using mrgsolve."
 ---
 
@@ -51,5 +52,5 @@ devtools::session_info()
 
 <hr>
 
-This book was build on `r date()`.
+This book was assembled on `r date()`.
 

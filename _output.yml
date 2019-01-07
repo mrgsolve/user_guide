@@ -1,11 +1,14 @@
 bookdown::gitbook:
-  css: style.css
+  css: [bookstyle.css]
   config:
     toc:
+      collapse: section
       before: |
-        <li><a href="./">User Guide</a></li>
+        <li><strong><a href="./">User Guide</a></strong></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+        <li><a href="https://mrgsolve.github.io" target="blank">https://mrgsolve.github.io</a></li>
+        <li><a href="https:/metrumrg.com" target="blank">https://metrumrg.com</a></li>
+      sharing: no
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
