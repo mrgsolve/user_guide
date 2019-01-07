@@ -2,7 +2,7 @@
 source("setup.R")
 ```
 
-# Model specification
+# Model specification {#model-specification}
 
 This chapter details the `mrgsolve` model specification format.  
 

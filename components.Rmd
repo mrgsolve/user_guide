@@ -1,4 +1,4 @@
-# Model components
+# Model components {#model-components}
 
 This chapter details the different components of a model in `mrgsolve`.  
 Each component listed here is maintained within a "model object".  This is 

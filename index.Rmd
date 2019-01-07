@@ -1,5 +1,5 @@
 --- 
-title: "<font color='DarkGreen'>mrgsolve User Guide</font>"
+pagetitle: "mrgsolve User Guide"
 author: "<font color='DarkGreen'>Metrum Research Group, LLC</font>"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -12,16 +12,36 @@ github-repo: metrumresearchgroup/mrgsolve
 description: "A guide to using mrgsolve."
 ---
 
-# mrgsolve User Guide
+# Introduction {-}
 
-```{r, echo = FALSE }
-knitr::include_graphics("images/mrgsolve.png")
-```
+<img src="images/mrgsolve_hex.png" align="right" width="150px"></img> Welcome to
+the mrgsolve user guide. The user guide is the main documentation source for how
+mrgsolve works and how to best use mrgsolve in your modeling and simulation
+project.  As with most of the mrgsolve documentation, this is a work in
+progress.  I am currently working to transition this to more of a refrence
+resource, rather than demonstration.  So key content in the user guide includes
+chapter \@ref(model-specification) on model specification, chapter
+\@ref(model-components) on model components and chapter \@ref(section-sequence)
+on the simulation sequence. Installation is a big topic but we defer to the wiki
+page for installation help since requirements tend to change frequently with new
+R releases.  The other content is hopefully helpful as well.  I'm leaving it all
+in place for now, but will gradually transition the "how-to" and demo type
+content over to the vignettes repository or the gallery repository (see
+[below](#other-resources)).
 
-For more information: https://mrgsolve.github.io
+Please feel free to ask questions about anything mrgsolve-related on the 
+issue tracker on the main github repo: https://github.com/metrumresearchgroup/mrgsolve/issues.
 
-__The following environment was used to generate this documentation__:
-```{r,echo=FALSE, message=FALSE}
+
+## Other Resources {-}
+
+- Main resource page: [mrgsolve.github.io](https://mrgsolve.github.io)
+- Vignettes: [mrgsolve.github.io/vignettes](https://mrgsolve.github.io/vignettes)
+- R documentation: [mrgsolve.github.io/docs](https://mrgsolve.github.io/docs)
+- Gallery: [github.com/mrgsolve/gallery](https://github.com/mrgsolve/gallery)
+
+<!-- __The following environment was used to generate this documentation__: -->
+```{r,echo=FALSE, message=FALSE, include=FALSE}
 library(mrgsolve)
 library(magrittr)
 library(dplyr)
@@ -29,7 +49,7 @@ library(ggplot2)
 devtools::session_info()
 ```
 
-```{r,echo=FALSE}
-date()
-```
+<hr>
+
+This book was build on `r date()`.
 
