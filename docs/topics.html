@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2019-01-07">
+<meta name="date" content="2019-01-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -594,6 +594,8 @@ Let <code>mrgsolve</code> do the updating.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">data_frame</span>(<span class="dt">CL=</span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">5</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">evid=</span><span class="dv">0</span>,<span class="dt">ID=</span><span class="dv">1</span>,<span class="dt">cmt=</span><span class="dv">1</span>,<span class="dt">time=</span>CL<span class="op">-</span><span class="dv">1</span>,<span class="dt">amt=</span><span class="dv">0</span>)</code></pre></div>
+<pre><code>. Warning: `data_frame()` is deprecated, use `tibble()`.
+. This warning is displayed once per session.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>)</code></pre></div>
@@ -1209,7 +1211,7 @@ gitbook.start({
 },
 "download": ["user-guide.pdf"],
 "toc": {
-"collapse": "section",
+"collapse": "none",
 "sharing": false
 }
 });

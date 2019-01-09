@@ -2,7 +2,7 @@ bookdown::gitbook:
   css: [bookstyle.css]
   config:
     toc:
-      collapse: section
+      collapse: none
       before: |
         <li><strong><a href="./">User Guide</a></strong></li>
       after: |
