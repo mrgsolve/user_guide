@@ -14,7 +14,6 @@ description: "A guide to using mrgsolve."
 ---
 
 # Introduction {-}
-
 <img src="images/mrgsolve_hex.png" align="right" width="150px"></img> Welcome to
 the mrgsolve user guide. The user guide is the main documentation source for how
 mrgsolve works and how to best use mrgsolve in your modeling and simulation
