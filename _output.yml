@@ -4,7 +4,7 @@ bookdown::gitbook:
     toc:
       collapse: none
       before: |
-        <li><strong><a href="./">User Guide</a></strong></li>
+        <li><strong><a href="./">User Guide: mrgsolve</a></strong></li>
       after: |
         <li><a href="https://mrgsolve.github.io" target="blank">https://mrgsolve.github.io</a></li>
         <li><a href="https:/metrumrg.com" target="blank">https://metrumrg.com</a></li>
