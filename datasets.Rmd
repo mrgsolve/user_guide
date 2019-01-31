@@ -42,7 +42,7 @@ unique `ID`.
 
     - __0__ = observation record
     - __1__ = dosing event (bolus or infusion)
-    - __2__ = other type event
+    - __2__ = other type event, with solver stop and restart
     - __3__ = system reset
     - __4__ = reset and dose
     - __8__ = replace the amount in the compartment with `amt`
