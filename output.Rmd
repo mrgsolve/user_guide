@@ -1,10 +1,13 @@
 # Simulated output
 
-When `mrgsim` is used to simulate from a model, it returns an object with class `mrgsims`.  It is an S4 object containing a matrix of simulated output and a handful of other pieces of data related to the simulation run.  
+When `mrgsim` is used to simulate from a model, it returns an object with class 
+`mrgsims`.  It is an S4 object containing a matrix of simulated output and a 
+handful of other pieces of data related to the simulation run.  
 
-`mrgsolve` provides several methods for working with `mrgsims` objects or coercing the simulation matrix into other `R` objects.
+`mrgsolve` provides several methods for working with `mrgsims` objects or 
+coercing the simulation matrix into other `R` objects.
 
-## Coersion methods
+## Coercion methods
 
 * `as.data.frame` convert to `data.frame`
 * `as.matrix` convert to `matrix`

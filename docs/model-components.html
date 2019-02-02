@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2019-01-31">
+<meta name="date" content="2019-02-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -201,7 +201,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.5" data-path="input-data-sets.html"><a href="input-data-sets.html#pred-data"><i class="fa fa-check"></i><b>3.5</b> Data sets for use with <code>$PRED</code></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>4</b> Simulated output</a><ul>
-<li class="chapter" data-level="4.1" data-path="simulated-output.html"><a href="simulated-output.html#coersion-methods"><i class="fa fa-check"></i><b>4.1</b> Coersion methods</a></li>
+<li class="chapter" data-level="4.1" data-path="simulated-output.html"><a href="simulated-output.html#coercion-methods"><i class="fa fa-check"></i><b>4.1</b> Coercion methods</a></li>
 <li class="chapter" data-level="4.2" data-path="simulated-output.html"><a href="simulated-output.html#query-methods"><i class="fa fa-check"></i><b>4.2</b> Query methods</a></li>
 <li class="chapter" data-level="4.3" data-path="simulated-output.html"><a href="simulated-output.html#methods-for-dplyr-verbs"><i class="fa fa-check"></i><b>4.3</b> Methods for <code>dplyr</code> verbs</a></li>
 </ul></li>
@@ -265,14 +265,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 Each component listed here is maintained within a “model object”. This is an updatable S4 object in <code>R</code> that contains all of the basic information required to properly configure and simulate from the model.</p>
 <div id="component-param" class="section level2">
 <h2><span class="header-section-number">1.1</span> Parameter list</h2>
-<p>The parameter list is an updatable set of name-value pairs. Referencing the name of an item in the parameter list will substitute the current value associated with that name. While the name “paramter” may have a certain connotation in the modeling world, in <code>mrgsolve</code> a “parameter” could be any category of numeric data: covariates (e.g. <code>WT</code>, <code>AGE</code>, <code>SEX</code>), flags, other numeric data that we commonly call “parameter” (e.g. <code>CL</code> or <code>VC</code>).</p>
+<p>The parameter list is an updatable set of name-value pairs. Referencing the name of an item in the parameter list will substitute the current value associated with that name. While the name “parameter” may have a certain connotation in the modeling world, in <code>mrgsolve</code> a “parameter” could be any category of numeric data: covariates (e.g. <code>WT</code>, <code>AGE</code>, <code>SEX</code>), flags, other numeric data that we commonly call “parameter” (e.g. <code>CL</code> or <code>VC</code>).</p>
 <p>The parameter list is declared in the code block <code>$PARAM</code>. While there may be multiple <code>$PARAM</code> blocks in a model, these are condensed to a single parameter list stored in the model object. The names and numbers of all parameters in the model must be declared at the time that the model is compiled. Also, a default value for each parameter must be declared at model compile time, but the value of each parameter may be updated in one of several ways.</p>
 <p>The parameters in a model object can be queried or updated with the <code>param()</code> function.</p>
 <p>See also: <a href="model-specification.html#block-param">2.2.2</a>, <code>?param</code> in the <code>R</code> help system after loading <code>mrgsolve</code>.</p>
 <div id="central-role-of-parameters-in-planning-simulations" class="section level3">
 <h3><span class="header-section-number">1.1.1</span> Central role of parameters in planning simulations</h3>
-<p>The data items in the parameter list are more than just values associated with a name. When an name is added to the parameter list, that name becomes a key word that <code>mrgsolve</code> will start to recognize in input data sets or when manipulting the model object.</p>
-<p>For example, when you want to include a covariate in the model, say weight (<code>WT</code>), you’ll include a column in the data set called <code>WT</code> that will indicate the weight of this or that patient. It is crutial that you also list <code>WT</code> in <code>$PARAM</code> with some default value. It helps if that value is sensible too.<br />
+<p>The data items in the parameter list are more than just values associated with a name. When an name is added to the parameter list, that name becomes a key word that <code>mrgsolve</code> will start to recognize in input data sets or when manipulating the model object.</p>
+<p>For example, when you want to include a covariate in the model, say weight (<code>WT</code>), you’ll include a column in the data set called <code>WT</code> that will indicate the weight of this or that patient. It is crucial that you also list <code>WT</code> in <code>$PARAM</code> with some default value. It helps if that value is sensible too.<br />
 When <code>mrgsolve</code> receives the data set prior to simulating, the <code>WT</code> column is matched up with the <code>WT</code> parameter name. As <code>mrgsolve</code> works its way through the input data set (from person to person or from time to time), the value of <code>WT</code> is updated so that the symbol <code>WT</code> in <code>$MAIN</code> or <code>$ODE</code> or <code>$TABLE</code> always points to the value of <code>WT</code>. If the <code>WT</code> name is not in the parameter list, it won’t matter if it is in the data set or not.<br />
 Only listing a name in <code>$PARAM</code> gets it “into the game”.</p>
 <p>Understanding the parameter update mechanism is very important for planning complicated simulations with <code>mrgsolve</code>. Please see the information in <a href="input-data-sets.html#datasets">3.1</a> and in <a href="topics.html#topic-parameter-update">6.3</a>.</p>
@@ -331,7 +331,7 @@ Error in (function (x, data, idata = null_idata, carry.out = character(<span cla
 </div>
 <div id="hmax" class="section level3">
 <h3><span class="header-section-number">1.4.4</span> <code>hmax</code></h3>
-<p>The <strong>maximum</strong> step size. By default, the solver will take steps of different sizes based on what is happening in the simulation. Setting <code>hmax</code> tells the solver not to take a step larger than that value. So in a model where <code>time</code> is in hours, reducing <code>hmax</code> to <code>0.1</code> will prevent the solver from taking a step larger than <code>0.1</code> hours as it tries to advance to the next time. The will slow down the simulation a bit. But somtimes helpful when the solver starts taking large steps. We don’t recommend using this routinely; for most applications, it should be reserved for troubleshooting situations. If your model doesn’t give the results that you want without setting <code>hmax</code>, we’d recommend a new setup where this isn’t needed.</p>
+<p>The <strong>maximum</strong> step size. By default, the solver will take steps of different sizes based on what is happening in the simulation. Setting <code>hmax</code> tells the solver not to take a step larger than that value. So in a model where <code>time</code> is in hours, reducing <code>hmax</code> to <code>0.1</code> will prevent the solver from taking a step larger than <code>0.1</code> hours as it tries to advance to the next time. The will slow down the simulation a bit. But sometimes helpful when the solver starts taking large steps. We don’t recommend using this routinely; for most applications, it should be reserved for troubleshooting situations. If your model doesn’t give the results that you want without setting <code>hmax</code>, we’d recommend a new setup where this isn’t needed.</p>
 </div>
 <div id="hmin" class="section level3">
 <h3><span class="header-section-number">1.4.5</span> <code>hmin</code></h3>
@@ -363,7 +363,7 @@ Error in (function (x, data, idata = null_idata, carry.out = character(<span cla
 <li>Set initial conditions for any compartment</li>
 <li>Derive new variables to be used in the model</li>
 <li>Write covariate models</li>
-<li>Add between-subject variability to quantities to structural model paramters (e.g. <code>CL</code> or <code>VC</code>).</li>
+<li>Add between-subject variability to quantities to structural model parameters (e.g. <code>CL</code> or <code>VC</code>).</li>
 </ul>
 <p>In addition to getting called once per record, the <code>MAIN</code> function may be called several times prior to starting the simulation run. The <code>MAIN</code> function is also called whenever the user queries the compartment list.</p>
 <p>See <a href="model-specification.html#block-main">2.2.5</a> for details.</p>
@@ -371,7 +371,7 @@ Error in (function (x, data, idata = null_idata, carry.out = character(<span cla
 <div id="the-ode-function" class="section level3">
 <h3><span class="header-section-number">1.5.2</span> The <code>$ODE</code> function</h3>
 <p>The <code>ODE</code> function is where the user writes the model differential equations.<br />
-Any derived quantity that depends on a state variable and is used to to calculate the differentation must be calculated inside <code>$ODE</code>. But, this function is called repeatedly during the simulation run, so any calculation that <strong>can</strong> be moved out of <code>$ODE</code> (for example: to <code>$MAIN</code>) should be.</p>
+Any derived quantity that depends on a state variable and is used to advanced the system must be calculated inside <code>$ODE</code>. But, this function is called repeatedly during the simulation run, so any calculation that <strong>can</strong> be moved out of <code>$ODE</code> (for example: to <code>$MAIN</code>) should be.</p>
 <p>See <a href="model-specification.html#block-ode">2.2.6</a> for details.</p>
 </div>
 <div id="the-table-function" class="section level3">

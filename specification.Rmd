@@ -13,7 +13,7 @@ There are two ways to write your model:
 Open a text editor and type the model into a file with name that has the 
 format `<model-name>.cpp`.  This filename format identifies a "name" for your 
 model (`<model-name>`, the "stem" of the file name).  The extension __MUST__ 
-be `.cpp` (`mrgsolve` curently assumes the extension).  Note: this whole file 
+be `.cpp` (`mrgsolve` currently assumes the extension).  Note: this whole file 
 will be read and parsed, so everything in it must be valid `mrgsolve` model
 specification elements.  
 
@@ -63,26 +63,24 @@ mod <- mread("mymodel", tempdir(), code)
 For help, see `?mread` , `?mcode` in the `R` help system after loading 
 `mrgsolve`.
 
-
-
 ## Code blocks {#code-blocks}
 
 ### About code blocks
 
 __Block identifier__
-The `mrgsolve` model specification involves several different types of code 
-that are written in different blocks.  A block starts with an identifier
-that starts with `$BLOCKID`, where `BLOCKID` is a character designator.  For 
-example, parameters are written in `$PARAM`, differential equations are written
-in `$ODE` etc.  Users are free to include block code on the 
-same line as the block identifier, but must include a space after the identifier. 
-For example, the parser will recognize `$PARAM CL = 1` but not `$PARAMCL=1` as parameters.
+The `mrgsolve` model specification involves several different types of code that
+are written in different blocks.  A block starts with an identifier that takes
+one of two forms: `$BLOCKID` or `[ BLOCKID ]`.  For example, parameters are
+written in `$PARAM`, differential equations are written in `$ODE` etc.  Users
+are free to include block code on the same line as the block identifier, but
+must include a space after the identifier. For example, the parser will
+recognize `$PARAM CL = 1` but not `$PARAMCL=1` as parameters.
 
 Different blocks may require different syntax.  For example, code written in
-`$PARAM` will be parsed by the `R` parser and will generally need to adhere 
-to `R` syntax requirements.  On the other hand, code in `$MAIN`, `$ODE`, 
-and `$TABLE` will be used to make functions in `C++` and therefore will 
-need to be valid `C++` code, including terminal `;` on each line.  
+`$PARAM` will be parsed by the `R` parser and will generally need to adhere to
+`R` syntax requirements.  On the other hand, code in `$MAIN`, `$ODE`, and
+`$TABLE` will be used to make functions in `C++` and therefore will need to be
+valid `C++` code, including terminal `;` on each line.
 
 
 __Block options__
@@ -111,7 +109,7 @@ KA:  1.2 : Absorption rate constant (1/hr)
 Notes:
 
 * Multiple blocks are allowed
-* Values are evaluated by the `R` interperter
+* Values are evaluated by the `R` interpreter
 
 
 See also: section \@ref(block-theta) and \@ref(block-fixed).
@@ -334,7 +332,7 @@ so that we can use it anywhere else in the code (the declaration is also made in
 an unnamed namespace to ensure that the variable is local to the model file).
 Then, in `$PREAMBLE`, we put 3 numbers into the vector and we use `x` in
 `$MAIN`.  Since `$MAIN`, `$TABLE` and (especially) `$ODE` are called repeatedly
-as the simulation run procees, we put the initialization of `x` in `$PREAMBLE`
+as the simulation run progresses, we put the initialization of `x` in `$PREAMBLE`
 to make sure the initialization of `x` only happens once.
 
 Notes:
@@ -480,7 +478,7 @@ $OMEGA @name PK @block
 $OMEGA @name PD
 0.1 0.2 0.3 0.5
 ```
-to distinguish between multiple `$OMEGA` blocks and to facilitate updating later. The model in the preceeding example will have two 
+to distinguish between multiple `$OMEGA` blocks and to facilitate updating later. The model in the preceding example will have two 
 `$OMEGA` matrices: 2x2 and 4x4.
 
 
@@ -526,7 +524,8 @@ $SET end = 240, delta=0.5, req=s(RESP)
 ```
 
 Here, we set the simulation `end` time to 240, set the time difference between two
-adjacent time points to 0.25 time units, and request only the `RESP`onse compartment in the simulated output.
+adjacent time points to 0.25 time units, and request only the `RESP` compartment 
+in the simulated output.
 
 
 ### `$GLOBAL`
@@ -539,7 +538,7 @@ There are no artificial limit on what sort of `C++` code can go in `$GLOBAL`.  H
 
 
 __Preprocessor directives__
-Preprocessor  `#define` directives are direct substibutions that the `C++` preprocessor makes prior to compiling your code.  
+Preprocessor  `#define` directives are direct substitutions that the `C++` preprocessor makes prior to compiling your code.  
 
 For example:
 ```{c,eval=FALSE}
@@ -920,7 +919,7 @@ compartment in the model.
 The current subject identifier. `ID` is an alias for `self.id`.
 
 ### `TIME`
-Gives the time in the curent data set record.  This is usually only used in 
+Gives the time in the current data set record.  This is usually only used in 
 `$MAIN` or `$TABLE`.  `TIME` is an alias for `self.time`.  Contrast with 
 `SOLVERTIME`.
 
@@ -1054,7 +1053,7 @@ See: section \@ref(block-table) and also \@ref(block-capture)
 
 
 ### `F_CMT` \ {#spec-f}
-For the `CMT` compartment, sets the bioavability fraction for that compartment. 
+For the `CMT` compartment, sets the bioavailability fraction for that compartment. 
 
 Example:
 ```{c,eval=FALSE}

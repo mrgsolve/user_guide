@@ -18,7 +18,7 @@ description: "A guide to using mrgsolve."
 the mrgsolve user guide. The user guide is the main documentation source for how
 mrgsolve works and how to best use mrgsolve in your modeling and simulation
 project.  As with most of the mrgsolve documentation, this is a work in
-progress.  I am currently working to transition this to more of a refrence
+progress.  I am currently working to transition this to more of a reference
 resource, rather than demonstration.  So key content in the user guide includes
 chapter \@ref(model-specification) on model specification, chapter
 \@ref(model-components) on model components and chapter \@ref(section-sequence)

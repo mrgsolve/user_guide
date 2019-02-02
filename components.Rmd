@@ -9,7 +9,7 @@ required to properly configure and simulate from the model.
 
 The parameter list is an updatable set of name-value pairs. Referencing the name 
 of an item in the parameter list will substitute the current value associated 
-with that name.  While the name "paramter" may have a certain connotation in 
+with that name.  While the name "parameter" may have a certain connotation in 
 the modeling world, in `mrgsolve` a "parameter" could be any category of 
 numeric data: covariates (e.g. `WT`, `AGE`, `SEX`), flags, other numeric 
 data that we commonly call "parameter" (e.g. `CL` or `VC`).  
@@ -32,11 +32,11 @@ loading `mrgsolve`.
 The data items in the parameter list are more than just values associated with 
 a name.  When an name is added to the parameter list, that name becomes a key 
 word that `mrgsolve` will start to recognize in input data sets or when 
-manipulting the model object.  
+manipulating the model object.  
 
 For example, when you want to include a covariate in the model, say weight 
 (`WT`), you'll include a column in the data set called `WT` that will indicate 
-the weight of this or that patient.  It is crutial that you also list `WT` in 
+the weight of this or that patient.  It is crucial that you also list `WT` in 
 `$PARAM` with some default value.  It helps if that value is sensible too.  
 When `mrgsolve` receives the data set prior to simulating, the `WT` column 
 is matched up with the `WT` parameter name.  As `mrgsolve` works its way 
@@ -155,7 +155,7 @@ sizes based on what is happening in the simulation.  Setting `hmax` tells
 the solver not to take a step larger than that value.  So in a model 
 where `time` is in hours, reducing `hmax` to `0.1` will prevent the 
 solver from taking a step larger than `0.1` hours as it tries to advance
-to the next time.  The will slow down the simulation a bit.  But somtimes
+to the next time.  The will slow down the simulation a bit.  But sometimes
 helpful when the solver starts taking large steps.  We don't recommend
 using this routinely; for most applications, it should be reserved for troubleshooting
 situations.  If your model doesn't give the results that you 
@@ -210,7 +210,7 @@ the user may:
 * Derive new variables to be used in the model
 * Write covariate models
 * Add between-subject variability to quantities to structural model 
-paramters (e.g. `CL` or `VC`).  
+parameters (e.g. `CL` or `VC`).  
 
 In addition to getting called once per record, the `MAIN` function may be 
 called several times prior to starting the simulation run.  The `MAIN` 
@@ -222,8 +222,8 @@ See \@ref(block-main) for details.
 ### The `$ODE` function
 
 The `ODE` function is where the user writes the model differential equations.  
-Any derived quantity that depends on a state variable and is used to to 
-calculate the differentation must be calculated inside `$ODE`.  But, this 
+Any derived quantity that depends on a state variable and is used to 
+advanced the system must be calculated inside `$ODE`.  But, this 
 function is called repeatedly during the simulation run, so any calculation 
 that __can__ be moved out of `$ODE` (for example: to `$MAIN`) should be.  
 

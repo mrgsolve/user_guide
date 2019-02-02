@@ -777,7 +777,7 @@ __Call `simeps()` to resimulate `EPS`__
 - No `$PLUGIN` is required
 - `simeps()` takes no arguments
 
-For example, we can resimulate untill all 
+For example, we can resimulate until all 
 concentrations are greater than zero:
 
 ```{r topic-simeps-1,cache=TRUE}

@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2019-01-31">
+<meta name="date" content="2019-02-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -201,7 +201,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.5" data-path="input-data-sets.html"><a href="input-data-sets.html#pred-data"><i class="fa fa-check"></i><b>3.5</b> Data sets for use with <code>$PRED</code></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>4</b> Simulated output</a><ul>
-<li class="chapter" data-level="4.1" data-path="simulated-output.html"><a href="simulated-output.html#coersion-methods"><i class="fa fa-check"></i><b>4.1</b> Coersion methods</a></li>
+<li class="chapter" data-level="4.1" data-path="simulated-output.html"><a href="simulated-output.html#coercion-methods"><i class="fa fa-check"></i><b>4.1</b> Coercion methods</a></li>
 <li class="chapter" data-level="4.2" data-path="simulated-output.html"><a href="simulated-output.html#query-methods"><i class="fa fa-check"></i><b>4.2</b> Query methods</a></li>
 <li class="chapter" data-level="4.3" data-path="simulated-output.html"><a href="simulated-output.html#methods-for-dplyr-verbs"><i class="fa fa-check"></i><b>4.3</b> Methods for <code>dplyr</code> verbs</a></li>
 </ul></li>
@@ -272,7 +272,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Event data sets are entered as <code>data.frame</code>, with one event per row. Events may be observations, doses, or other type events. In mrgsolve documentation, we refer to these data sets as <code>data</code> or <code>data_set</code> (after the function that is used to associate the data set with the model object prior to simulation).</p>
 <p>Event data sets have several special column names that mrgsolve is always aware of:</p>
 <ul>
-<li><code>ID</code> the subject id. This id does not need to be unique in the <code>data_set</code>: mrgsolve detects an new individual when the current value of <code>ID</code> is different from the immediate preceeding value of <code>ID</code>. However, we always recommend using unique <code>ID</code>.</li>
+<li><code>ID</code> the subject id. This id does not need to be unique in the <code>data_set</code>: mrgsolve detects an new individual when the current value of <code>ID</code> is different from the immediate preceding value of <code>ID</code>. However, we always recommend using unique <code>ID</code>.</li>
 <li><code>time</code> or <code>TIME</code>: states the time of the data record</li>
 <li><p><code>evid</code> or <code>EVID</code>: the event id indicator. <code>evid</code> can take the values:</p>
 <ul>
@@ -290,16 +290,16 @@ For observation records, a <code>cmt</code> value of 0 is acceptable. Use a nega
 <li><code>rate</code> or <code>RATE</code>: if non-zero and <code>evid=1</code> or <code>evid=4</code>, implements a zero-order infusion of duration <code>F_CMT*amt/rate</code>, where <code>F_CMT</code> is the bioavailability fraction for the dosing compartment. Use <code>rate = -1</code> to model the infusion rate and <code>rate = -2</code> to model the infusion duration, both in <code>$MAIN</code> (see sections <a href="model-specification.html#block-main">2.2.5</a>, <a href="model-specification.html#spec-f">2.3.15</a>,<a href="model-specification.html#spec-r">2.3.17</a>, <a href="model-specification.html#spec-d">2.3.18</a>).</li>
 <li><code>ii</code> or <code>II</code>: inter-dose interval; <code>ii=24</code> means daily dosing when the model time unit is hours</li>
 <li><code>addl</code> or <code>ADDL</code>: additional doses; a non-zero value in <code>addl</code> requires non-zero <code>ii</code> on the same record</li>
-<li><p><code>ss</code> or <code>SS</code> steady state indicator; use 1 to implement steady-state dosing; 0 otherwise. mrgsolve also recoginzes dosing records where <code>ss=2</code>. This allows combination of different steady state dosing regimens under linear kinetics (e.g. 10 mg QAM and 20 mg QPM daily to steady state).</p></li>
+<li><p><code>ss</code> or <code>SS</code> steady state indicator; use 1 to implement steady-state dosing; 0 otherwise. mrgsolve also recognizes dosing records where <code>ss=2</code>. This allows combination of different steady state dosing regimens under linear kinetics (e.g. 10 mg QAM and 20 mg QPM daily to steady state).</p></li>
 </ul>
-<p>The column names in the preceeding list were written either as lower case form (e.g. <code>amt</code>) or upper case form (e.g. <code>AMT</code>). Either may be used, however the data set will be checked for consistency of usage. An error will be issued in case a mixture of lower and upper case names are found.</p>
+<p>The column names in the preceding list were written either as lower case form (e.g. <code>amt</code>) or upper case form (e.g. <code>AMT</code>). Either may be used, however the data set will be checked for consistency of usage. An error will be issued in case a mixture of lower and upper case names are found.</p>
 <p>In addition to these special column names, mrgsolve will recognize columns in <code>data_set</code> that have the same name as items in the parameter list (see <a href="model-specification.html#block-param">2.2.2</a> and <a href="model-components.html#component-param">1.1</a>). When mrgsolve sees that the names match up, it will update the values of those matching names based on what it finds as it moves through the data set (see section @(topic-parameter-update)).</p>
 <div id="two-types-of-data_set" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Two types of <code>data_set</code></h3>
 <p>mrgsolve distinguishes between two types of data sets: data sets that have <em>at least one observation record</em> (<code>evid=0</code>) and data sets that have <em>no records with <code>evid=0</code></em>.</p>
 <ul>
 <li><strong>Full data sets</strong> have a mix of observations and dosing events (likely, but not required). When mrgsolve finds one record with <code>evid=0</code>, it assumes that <strong>ALL</strong> output observation times are to come from the data set. In this case the simulation output time grid discussed in <a href="model-components.html#component-stime">1.3</a> is ignored and only observations found in the data set appear in the simulated output. Use full data sets when you want a highly customized sampling schedule or you are working with a clinical data set.</li>
-<li><strong>Condensed data sets</strong> have no records with <code>evid=0</code>. In this case, mrgsolve will fill the simulated output with observations at times specified by the output time grid ( section <a href="model-components.html#component-stime">1.3</a> and see section <a href="topics.html#topic-designs">6.5</a>). These are very convenient to use because there is less data assembly burden and output data sets can easily be created with very dense sampling scheme or highly customised sampling schemes with very little work. Use a condensed data set when you want a uniform set of sampling times for all subjects in the data set.</li>
+<li><strong>Condensed data sets</strong> have no records with <code>evid=0</code>. In this case, mrgsolve will fill the simulated output with observations at times specified by the output time grid ( section <a href="model-components.html#component-stime">1.3</a> and see section <a href="topics.html#topic-designs">6.5</a>). These are very convenient to use because there is less data assembly burden and output data sets can easily be created with very dense sampling scheme or highly customized sampling schemes with very little work. Use a condensed data set when you want a uniform set of sampling times for all subjects in the data set.</li>
 </ul>
 <p><strong>Example of condensed data set</strong> data(extran1)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(extran1)
@@ -326,7 +326,7 @@ extran1</code></pre></div>
 . 5  1 79.6 4.02 2.02  9.66   0 0.00    0
 . 6  1 79.6 4.02 3.82  8.58   0 0.00    0</code></pre>
 <p>See <code>?exdatasets</code> in the <code>R</code> help system after loading mrgsolve.</p>
-<p><strong>Augmenting observations in a clinical data set</strong> Occassionally, we want to simulate from a clinical data set (with observation records as actually observed in a population of patients) but we also want to augment those observations with a regular sequence of times (for example, to make a smooth profile on a plot). In that case, you can set <code>obsaug  = TRUE</code> when calling <code>mrgsim</code>.</p>
+<p><strong>Augmenting observations in a clinical data set</strong> Occasionally, we want to simulate from a clinical data set (with observation records as actually observed in a population of patients) but we also want to augment those observations with a regular sequence of times (for example, to make a smooth profile on a plot). In that case, you can set <code>obsaug  = TRUE</code> when calling <code>mrgsim</code>.</p>
 <p>For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()
 

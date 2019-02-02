@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2019-01-31">
+<meta name="date" content="2019-02-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -201,7 +201,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.5" data-path="input-data-sets.html"><a href="input-data-sets.html#pred-data"><i class="fa fa-check"></i><b>3.5</b> Data sets for use with <code>$PRED</code></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>4</b> Simulated output</a><ul>
-<li class="chapter" data-level="4.1" data-path="simulated-output.html"><a href="simulated-output.html#coersion-methods"><i class="fa fa-check"></i><b>4.1</b> Coersion methods</a></li>
+<li class="chapter" data-level="4.1" data-path="simulated-output.html"><a href="simulated-output.html#coercion-methods"><i class="fa fa-check"></i><b>4.1</b> Coercion methods</a></li>
 <li class="chapter" data-level="4.2" data-path="simulated-output.html"><a href="simulated-output.html#query-methods"><i class="fa fa-check"></i><b>4.2</b> Query methods</a></li>
 <li class="chapter" data-level="4.3" data-path="simulated-output.html"><a href="simulated-output.html#methods-for-dplyr-verbs"><i class="fa fa-check"></i><b>4.3</b> Methods for <code>dplyr</code> verbs</a></li>
 </ul></li>
@@ -267,7 +267,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>There are two ways to write your model:</p>
 <div id="spec-separate-file" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Separate file</h3>
-<p>Open a text editor and type the model into a file with name that has the format <code>&lt;model-name&gt;.cpp</code>. This filename format identifies a “name” for your model (<code>&lt;model-name&gt;</code>, the “stem” of the file name). The extension <strong>MUST</strong> be <code>.cpp</code> (<code>mrgsolve</code> curently assumes the extension). Note: this whole file will be read and parsed, so everything in it must be valid <code>mrgsolve</code> model specification elements.</p>
+<p>Open a text editor and type the model into a file with name that has the format <code>&lt;model-name&gt;.cpp</code>. This filename format identifies a “name” for your model (<code>&lt;model-name&gt;</code>, the “stem” of the file name). The extension <strong>MUST</strong> be <code>.cpp</code> (<code>mrgsolve</code> currently assumes the extension). Note: this whole file will be read and parsed, so everything in it must be valid <code>mrgsolve</code> model specification elements.</p>
 <p>Use the <code>mread()</code> function to read and parse this file. For the model called <code>mymodel</code> saved in <code>mymodel.cpp</code> (in the current working directory), issue the command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">mread</span>(<span class="st">&quot;mymodel&quot;</span>)</code></pre></div>
 <p><code>mread()</code> returns a model object from which you can simulate.</p>
@@ -292,7 +292,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.2</span> Code blocks</h2>
 <div id="about-code-blocks" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> About code blocks</h3>
-<p><strong>Block identifier</strong> The <code>mrgsolve</code> model specification involves several different types of code that are written in different blocks. A block starts with an identifier that starts with <code>$BLOCKID</code>, where <code>BLOCKID</code> is a character designator. For example, parameters are written in <code>$PARAM</code>, differential equations are written in <code>$ODE</code> etc. Users are free to include block code on the same line as the block identifier, but must include a space after the identifier. For example, the parser will recognize <code>$PARAM CL = 1</code> but not <code>$PARAMCL=1</code> as parameters.</p>
+<p><strong>Block identifier</strong> The <code>mrgsolve</code> model specification involves several different types of code that are written in different blocks. A block starts with an identifier that takes one of two forms: <code>$BLOCKID</code> or <code>[ BLOCKID ]</code>. For example, parameters are written in <code>$PARAM</code>, differential equations are written in <code>$ODE</code> etc. Users are free to include block code on the same line as the block identifier, but must include a space after the identifier. For example, the parser will recognize <code>$PARAM CL = 1</code> but not <code>$PARAMCL=1</code> as parameters.</p>
 <p>Different blocks may require different syntax. For example, code written in <code>$PARAM</code> will be parsed by the <code>R</code> parser and will generally need to adhere to <code>R</code> syntax requirements. On the other hand, code in <code>$MAIN</code>, <code>$ODE</code>, and <code>$TABLE</code> will be used to make functions in <code>C++</code> and therefore will need to be valid <code>C++</code> code, including terminal <code>;</code> on each line.</p>
 <p><strong>Block options</strong> Options may be specified on some code blocks that signal how the code is to be parsed or used in the simulation.</p>
 </div>
@@ -311,7 +311,7 @@ KA:  <span class="fl">1.2</span> : Absorption rate constant (<span class="dv">1<
 <p>Notes:</p>
 <ul>
 <li>Multiple blocks are allowed</li>
-<li>Values are evaluated by the <code>R</code> interperter</li>
+<li>Values are evaluated by the <code>R</code> interpreter</li>
 </ul>
 <p>See also: section <a href="model-specification.html#block-theta">2.2.17</a> and <a href="model-specification.html#block-fixed">2.2.3</a>.</p>
 <p>See <code>?param</code> in the <code>R</code> help system after loading <code>mrgsolve</code>.</p>
@@ -440,7 +440,7 @@ x.push_back(<span class="dv">3</span>);
 
 $MAIN 
 &lt;some code that uses x vector&gt;</code></pre></div>
-<p>In this example, we want to use a numeric vector <code>x</code> and declare it in <code>$GLOBAL</code> so that we can use it anywhere else in the code (the declaration is also made in an unnamed namespace to ensure that the variable is local to the model file). Then, in <code>$PREAMBLE</code>, we put 3 numbers into the vector and we use <code>x</code> in <code>$MAIN</code>. Since <code>$MAIN</code>, <code>$TABLE</code> and (especially) <code>$ODE</code> are called repeatedly as the simulation run procees, we put the initialization of <code>x</code> in <code>$PREAMBLE</code> to make sure the initialization of <code>x</code> only happens once.</p>
+<p>In this example, we want to use a numeric vector <code>x</code> and declare it in <code>$GLOBAL</code> so that we can use it anywhere else in the code (the declaration is also made in an unnamed namespace to ensure that the variable is local to the model file). Then, in <code>$PREAMBLE</code>, we put 3 numbers into the vector and we use <code>x</code> in <code>$MAIN</code>. Since <code>$MAIN</code>, <code>$TABLE</code> and (especially) <code>$ODE</code> are called repeatedly as the simulation run progresses, we put the initialization of <code>x</code> in <code>$PREAMBLE</code> to make sure the initialization of <code>x</code> only happens once.</p>
 <p>Notes:</p>
 <ul>
 <li><code>$PREAMBLE</code> is written in <code>C++</code> syntax; every line must end in <code>;</code></li>
@@ -526,7 +526,7 @@ DV  : Plasma concentration (mcg/ml)</code></pre></div>
 
 $OMEGA @name PD
 <span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span> <span class="fl">0.5</span></code></pre></div>
-<p>to distinguish between multiple <code>$OMEGA</code> blocks and to facilitate updating later. The model in the preceeding example will have two <code>$OMEGA</code> matrices: 2x2 and 4x4.</p>
+<p>to distinguish between multiple <code>$OMEGA</code> blocks and to facilitate updating later. The model in the preceding example will have two <code>$OMEGA</code> matrices: 2x2 and 4x4.</p>
 <p>Annotated example (diagonal matrix):</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$OMEGA @annotated
 ECL: <span class="fl">0.09</span> : ETA on clearance
@@ -554,7 +554,7 @@ EKA: <span class="fl">0.001</span> <span class="fl">0.001</span> <span class="fl
 <p>Most of the options that can be entered in <code>$SET</code> are passed to <code>update</code>.</p>
 <p>For example:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$SET end = <span class="dv">240</span>, delta=<span class="fl">0.5</span>, req=s(RESP)</code></pre></div>
-<p>Here, we set the simulation <code>end</code> time to 240, set the time difference between two adjacent time points to 0.25 time units, and request only the <code>RESP</code>onse compartment in the simulated output.</p>
+<p>Here, we set the simulation <code>end</code> time to 240, set the time difference between two adjacent time points to 0.25 time units, and request only the <code>RESP</code> compartment in the simulated output.</p>
 </div>
 <div id="global" class="section level3">
 <h3><span class="header-section-number">2.2.14</span> <code>$GLOBAL</code></h3>
@@ -564,7 +564,7 @@ EKA: <span class="fl">0.001</span> <span class="fl">0.001</span> <span class="fl
 <li>Write <code>#define</code> preprocessor statements</li>
 <li>Define global variables, usually variables other than <code>double</code>, <code>bool</code>, <code>int</code> (see <a href="model-specification.html#new-variables">2.4</a>)</li>
 </ol>
-<p><strong>Preprocessor directives</strong> Preprocessor <code>#define</code> directives are direct substibutions that the <code>C++</code> preprocessor makes prior to compiling your code.</p>
+<p><strong>Preprocessor directives</strong> Preprocessor <code>#define</code> directives are direct substitutions that the <code>C++</code> preprocessor makes prior to compiling your code.</p>
 <p>For example:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$GLOBAL
 <span class="pp">#define CP (CENT/VC)</span></code></pre></div>
@@ -751,9 +751,9 @@ $MAIN
 <pre><code>. 
 . 
 . ------------ mrgsolve model object (unix) ------------
-.   project: /private/var/fol.../T/RtmpIHESxI
+.   project: /private/var/fol.../T/Rtmp5AZDu3
 .   source:        nmxml.cpp
-.   shared object: nmxml-so-15747896f879 
+.   shared object: nmxml-so-11e91ec2773d 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
@@ -849,7 +849,7 @@ cama &lt;- function(mod) {
 </div>
 <div id="time" class="section level3">
 <h3><span class="header-section-number">2.3.2</span> <code>TIME</code></h3>
-<p>Gives the time in the curent data set record. This is usually only used in <code>$MAIN</code> or <code>$TABLE</code>. <code>TIME</code> is an alias for <code>self.time</code>. Contrast with <code>SOLVERTIME</code>.</p>
+<p>Gives the time in the current data set record. This is usually only used in <code>$MAIN</code> or <code>$TABLE</code>. <code>TIME</code> is an alias for <code>self.time</code>. Contrast with <code>SOLVERTIME</code>.</p>
 </div>
 <div id="solvertime" class="section level3">
 <h3><span class="header-section-number">2.3.3</span> <code>SOLVERTIME</code></h3>
@@ -957,7 +957,7 @@ $CAPTURE CP</code></pre></div>
 </div>
 <div id="spec-f" class="section level3">
 <h3><span class="header-section-number">2.3.15</span> <code>F_CMT</code>  </h3>
-<p>For the <code>CMT</code> compartment, sets the bioavability fraction for that compartment.</p>
+<p>For the <code>CMT</code> compartment, sets the bioavailability fraction for that compartment.</p>
 <p>Example:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$MAIN
 F_CENT = <span class="fl">0.7</span>;</code></pre></div>

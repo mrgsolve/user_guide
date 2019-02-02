@@ -35,7 +35,7 @@ aware of:
 
 * `ID` the subject id.  This id does not need to be unique in the `data_set`:
 mrgsolve detects an new individual when the current value of `ID` is different
-from the immediate preceeding value of `ID`.  However, we always recommend using
+from the immediate preceding value of `ID`.  However, we always recommend using
 unique `ID`.
 * `time` or `TIME`: states the time of the data record
 * `evid` or `EVID`: the event id indicator.  `evid` can take the values:
@@ -64,11 +64,11 @@ time unit is hours
 * `addl` or `ADDL`: additional doses; a non-zero value in `addl` requires
 non-zero `ii` on the same record
 * `ss` or `SS` steady state indicator; use 1 to implement steady-state dosing; 0
-otherwise.  mrgsolve also recoginzes dosing records where `ss=2`.  This allows
+otherwise.  mrgsolve also recognizes dosing records where `ss=2`.  This allows
 combination of different steady state dosing regimens under linear kinetics
 (e.g. 10 mg QAM and 20 mg QPM daily to steady state).
 
-The column names in the preceeding list were written either as lower case form
+The column names in the preceding list were written either as lower case form
 (e.g. `amt`) or upper case form (e.g. `AMT`).  Either may be used, however
 the data set will be checked for consistency of usage.  An error will be 
 issued in case a mixture of lower and upper case names are found.
@@ -97,7 +97,7 @@ mrgsolve will fill the simulated output with observations at times specified
 by the output time grid ( section \@ref(component-stime) and see section
 \@ref(topic-designs)).  These are very convenient to use because there is less
 data assembly burden and output data sets can easily be created with very dense
-sampling scheme or highly customised sampling schemes with very little work.
+sampling scheme or highly customized sampling schemes with very little work.
 Use a condensed data set when you want a uniform set of sampling times for all
 subjects in the data set.
 
@@ -123,7 +123,7 @@ See `?exdatasets` in the `R` help system after loading mrgsolve.
 
 
 __Augmenting observations in a clinical data set__
-Occassionally, we want to simulate from a clinical data set (with observation
+Occasionally, we want to simulate from a clinical data set (with observation
 records as actually observed in a population of patients) but we also want to
 augment those observations with a regular sequence of times (for example, to
 make a smooth profile on a plot).  In that case, you can set `obsaug  = TRUE`

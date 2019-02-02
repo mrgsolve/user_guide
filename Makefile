@@ -2,6 +2,8 @@ SHELL := /bin/bash
 export PATH := /Applications/RStudio.app/Contents/MacOS/pandoc:$(PATH)
 DEST := ../../mrgsolve/mrgsolve.github.io/user_guide
 
+spelling:
+	Rscript _spelling.R
 
 publish:
 	make render
