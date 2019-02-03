@@ -1,4 +1,5 @@
 bookdown::gitbook:
+  highlight: pygments
   css: [bookstyle.css]
   config:
     toc:

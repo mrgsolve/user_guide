@@ -13,6 +13,12 @@ link-citations: yes
 description: "A guide to using mrgsolve."
 ---
 
+
+```{r, include = FALSE}
+source("setup.R")
+```
+
+
 # Introduction {-}
 <img src="images/mrgsolve_hex.png" align="right" width="150px"></img> Welcome to
 the mrgsolve user guide. The user guide is the main documentation source for how

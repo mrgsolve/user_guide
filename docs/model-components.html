@@ -307,7 +307,32 @@ This object is independent of the model object. <code>tgrid</code> objects may b
 <p><code>mrgsolve</code> uses the <code>DLSODA</code> solver from <code>ODEPACK</code>. Several of the settings for that solver are stored in the model object and passed to the solver when the problem is started. Settings include: <code>atol</code>, <code>rtol</code>, <code>maxsteps</code>, <code>hmax</code>, <code>hmin</code>, <code>ixpr</code>, <code>mxhnil</code>.</p>
 <div id="atol" class="section level3">
 <h3><span class="header-section-number">1.4.1</span> <code>atol</code></h3>
-<p>Absolute tolerance parameter. Adjust this value lower when you see state variables (compartments) that are becoming very small and possibly turning negative. Adjusting <code>atol</code> to <code>1E-20</code> or <code>1E-30</code> will prevent this.</p>
+<p>Absolute tolerance parameter. Adjust this value lower when you see state variables (compartments) that are becoming very small and possibly turning negative. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">modlib</span>(<span class="st">&quot;viral1&quot;</span>, <span class="dt">end =</span> <span class="dv">144</span>) </code></pre></div>
+<pre><code>. Loading model from cache.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">out &lt;-<span class="st"> </span><span class="kw">mrgsim_e</span>(mod, <span class="kw">ev</span>(<span class="dt">amt =</span> <span class="dv">1000</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(V <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)
+
+out</code></pre></div>
+<pre><code>. # A tibble: 6 x 8
+.      ID  time expos        T         I         V  logV logChange
+.   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+. 1     1  95    1000 5187630. -2.74e-10 -1.79e-12   NaN       NaN
+. 2     1  97.5  1000 5298189. -3.18e-10 -2.09e-12   NaN       NaN
+. 3     1 120    1000 6252828. -1.55e-10 -1.01e-12   NaN       NaN
+. 4     1 122.   1000 6354547. -2.90e-10 -1.90e-12   NaN       NaN
+. 5     1 125    1000 6455422. -1.97e-10 -1.30e-12   NaN       NaN
+. 6     1 128.   1000 6555459. -7.81e-11 -5.21e-13   NaN       NaN</code></pre>
+<p>Adjusting <code>atol</code> to <code>1E-20</code> or <code>1E-30</code> will prevent this.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mrgsim_e</span>(mod, <span class="kw">ev</span>(<span class="dt">amt =</span> <span class="dv">1000</span>), <span class="dt">atol =</span> <span class="fl">1E-20</span>)  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(time <span class="op">%in%</span><span class="st"> </span>out<span class="op">$</span>time)</code></pre></div>
+<pre><code>. # A tibble: 6 x 8
+.      ID  time expos        T        I        V  logV logChange
+.   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+. 1     1  95    1000 5187630. 1.33e-11 8.72e-14 -13.1     -18.7
+. 2     1  97.5  1000 5298189. 5.13e-12 3.36e-14 -13.5     -19.2
+. 3     1 120    1000 6252828. 1.01e-15 6.62e-18 -17.2     -22.9
+. 4     1 122.   1000 6354547. 3.94e-16 2.58e-18 -17.6     -23.3
+. 5     1 125    1000 6455422. 1.54e-16 1.01e-18 -18.0     -23.7
+. 6     1 128.   1000 6555459. 5.99e-17 3.92e-19 -18.4     -24.1</code></pre>
 </div>
 <div id="rtol" class="section level3">
 <h3><span class="header-section-number">1.4.2</span> <code>rtol</code></h3>

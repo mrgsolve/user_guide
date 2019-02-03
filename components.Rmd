@@ -106,8 +106,24 @@ the problem is started.  Settings include: `atol`, `rtol`, `maxsteps`, `hmax`,
 ### `atol`
 
 Absolute tolerance parameter. Adjust this value lower when you see state variables
-(compartments) that are becoming very small and possibly turning negative. 
+(compartments) that are becoming very small and possibly turning negative. For
+example:
+
+```{r}
+mod <- modlib("viral1", end = 144) 
+
+out <- mrgsim_e(mod, ev(amt = 1000)) %>% filter(V < 0)
+
+out
+```
+
+
 Adjusting `atol` to `1E-20` or `1E-30` will prevent this. 
+
+```{r}
+mrgsim_e(mod, ev(amt = 1000), atol = 1E-20)  %>% filter(time %in% out$time)
+```
+
 
 ### `rtol` 
 
