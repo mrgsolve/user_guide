@@ -283,7 +283,7 @@ valid <- valid_data_set(exTheoph,mod)
 str(valid)
 ```
 
-This can improve efficiency when performing a very larg number of replicate
+This can improve efficiency when performing a very large number of replicate
 simulations on the same data set, but is unlikely to provide a meaningful 
 speed-up for a single simulation or a small number of simulations. 
 

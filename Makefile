@@ -15,6 +15,7 @@ publish:
 	make pdfbook
 	rm -rf docs/*
 	cp -r _book/* docs/
+	make spelling
 
 .PHONY: www
 www:
@@ -22,7 +23,7 @@ www:
 
 
 pdfbook:
-	Rscript -e "bookdown::render_book('index.Rmd', output_format = 'bookdown::pdf_book')"
+	Rscript -e "bookdown::render_book('index.Rmd', output_format = 'bookdown::pdf_book',quiet=TRUE)"
 
 edits:
 	git add user_guide/*
@@ -30,7 +31,7 @@ edits:
 	git push -u origin master
 
 render:
-	Rscript -e "bookdown::render_book('index.Rmd')"
+	Rscript -e "bookdown::render_book('index.Rmd', quiet=TRUE)"
 
 all:
 	make render
