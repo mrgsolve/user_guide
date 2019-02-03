@@ -5,6 +5,11 @@ DEST := ../../mrgsolve/mrgsolve.github.io/user_guide
 spelling:
 	Rscript _spelling.R
 
+html: 
+	make render
+	rm -rf docs/*
+	cp -r _book/* docs/
+
 publish:
 	make render
 	make pdfbook

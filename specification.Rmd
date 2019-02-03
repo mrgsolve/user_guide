@@ -67,15 +67,45 @@ For help, see `?mread` , `?mcode` in the `R` help system after loading
 
 ### About code blocks
 
+
 __Block identifier__
-The `mrgsolve` model specification involves several different types of code that
-are written in different blocks.  A block starts with an identifier that takes
-one of two forms: `$BLOCKID` or `[ BLOCKID ]`.  For example, parameters are
-written in `$PARAM`, differential equations are written in `$ODE` etc.  Users
-are free to include block code on the same line as the block identifier, but
-must include a space after the identifier. For example, the parser will
+
+Different types of code are organized in the model specification file and 
+separated by block identifiers. There are two ways to formulate block identifiers that
+can be used in mrgsolve.  In the first type, a dollar-sign is placed at the 
+start of the block name
+
+```{c,eval=FALSE}
+$BLOCKNAME
+<block-code>
+```
+
+For example, a block of parameters would be
+
+```{c, eval=FALSE}
+$PARAM
+CL = 1
+```
+
+The second way to write this is with brackets
+
+```{c, eval=FALSE}
+[ BLOCKNAME ] 
+<block-code>
+```
+
+There is no functional difference between the dollar-sign notation and the 
+brackets.  When model specification code is saved into a file with a `.cpp` 
+extension, the code editor may make certain assumptions about formatting or
+styling the code.  Using brackets will most-likely work better with the 
+editor in that case.  
+
+Users are free to include block code on the same line as the block identifier,
+but must include a space after the identifier. For example, the parser will
 recognize `$PARAM CL = 1` but not `$PARAMCL=1` as parameters.
 
+
+__Block syntax__
 Different blocks may require different syntax.  For example, code written in
 `$PARAM` will be parsed by the `R` parser and will generally need to adhere to
 `R` syntax requirements.  On the other hand, code in `$MAIN`, `$ODE`, and
@@ -87,20 +117,42 @@ __Block options__
 Options may be specified on some code blocks that signal how the code is 
 to be parsed or used in the simulation.  
 
+### `$PROB` \ {#block-prob}
+
+__Syntax__: text   
+__Multiple allowed__: yes   
+__Options__: `@annotated`, `@covariates`
+
+Use this block to make notes about the model.  There are no restrictions on the 
+text that gets entered here.  mrgsolve does not routinely process the text 
+in any way, except when rendering the model as a document.  Frequently, we 
+write the text here in markdown format so that it will render nicely in the
+model document.  But this is completely optional. 
+
+See the annotated model in section \@ref(topic-annotated) for an example. 
 
 ### `$PARAM` \ {#block-param}
-Define the parameter list in the current model. 
+
+__Syntax__: R   
+__Multiple allowed__: yes   
+__Options__: `@annotated`, `@covariates`
+
+Define the parameter list in the current model. Parameters are names associated
+with values that can be used throughout the model.  A value must be given 
+for every parameter name.  Names (and numbers) of parameters must be set at the
+time the model is compiled, but parameter values may be updated without 
+re-compiling the model. 
 
 Example:
 ```{c, eval=FALSE}
-$PARAM CL = 1, VC = 20, KA = 1.2
+[ PARAM ] CL = 1, VC = 20, KA = 1.2
 KM = 25, VMAX = 400, FLAG = 1, WT = 80
 SEX = 0, N = sqrt(25)
 ```
 
 Annotated example:
 ```{c, eval=FALSE}
-$PARAM @annotated
+[ PARAM ] @annotated
 CL :   1 : Clearance (L/hr)
 VC :  20 : Volume of distribution (L)
 KA:  1.2 : Absorption rate constant (1/hr)
@@ -111,12 +163,16 @@ Notes:
 * Multiple blocks are allowed
 * Values are evaluated by the `R` interpreter
 
-
 See also: section \@ref(block-theta) and \@ref(block-fixed).
 
 See `?param` in the `R` help system after loading `mrgsolve`.
 
 ### `$FIXED`  \ {#block-fixed}
+
+__Syntax__: R   
+__Multiple allowed__: yes   
+__Options__: `@annotated`   
+
 Like `$PARAM`, `$FIXED` is used to specify `name=value` pairs.  Unlike 
 `$PARAM`, however, the values associated with names in `$FIXED` are not able 
 to be updated.  
@@ -133,9 +189,9 @@ Items in `$FIXED` will not be shown when parameters are queried.
 
 Example:
 ```{c,eval=FALSE}
-$PARAM CL = 2, VC = 20
+[ PARAM ] CL = 2, VC = 20
 
-$FIXED
+[ FIXED ]
 g = 9.8
 ```
 
@@ -155,6 +211,11 @@ Notes:
 
 
 ### `$CMT`  and  `$INIT`
+
+__Syntax__: text   
+__Multiple allowed__: yes   
+__Options__: `@annotated`   
+
 Declare the names of all compartments in the model. 
 
 * For `$CMT` give the names of compartments; initial values are assumed to be 0
@@ -162,16 +223,16 @@ Declare the names of all compartments in the model.
 
 Examples:
 ```{c,eval=FALSE}
-$CMT GUT CENT RESPONSE
+[ CMT ] GUT CENT RESPONSE
 ```
 
 ```{c,eval=FALSE}
-$INIT GUT  = 0, CENT = 0, RESPONSE = 25
+[ INIT ] GUT  = 0, CENT = 0, RESPONSE = 25
 ```
 
 Annotated examples:
 ```{c, eval=FALSE}
-$CMT @annotated
+[ CMT ] @annotated
 GUT      : Dosing compartment (mg)
 CENT     : Central PK compartment (mg)
 RESPONSE : Response
@@ -189,9 +250,14 @@ RESPONSE :  25 : Response
 See `?init` in the `R` help system after loading `mrgsolve`.
 
 ### `$MAIN`  \ {#block-main}
+
+__Syntax__: C++   
+__Multiple allowed__: no   
+
 This code block has two main purposes:
 
-* Derive new algebraic relationships between parameters, random, effects and other derived variables
+* Derive new algebraic relationships between parameters, random, effects and 
+  other derived variables
 * Set the initial conditions for model compartments
 
 For users who are familiar with NONMEM, `$MAIN` is similar to `$PK`.
@@ -209,11 +275,11 @@ for details.
 Examples:
 
 ```{c,eval=FALSE}
-$CMT CENT RESP
+[ CMT ] CENT RESP
 
-$PARAM KIN = 100, KOUT = 2, CL = 1, VC = 20
+[ PARAM ] KIN = 100, KOUT = 2, CL = 1, VC = 20
 
-$MAIN
+[ MAIN ]
 
 RESP_0 = KIN/KOUT;
 
@@ -224,6 +290,9 @@ double ke = CL/VC;
 
 ### `$ODE` \ {#block-ode}
 
+__Syntax__: C++   
+__Multiple allowed__: no   
+
 Use `$ODE` to define model differential equations.  For all compartments assign 
 the value of the differential equation to `dxdt_CMT` where `CMT` is the name 
 of the compartment.  The `dxdt_` equation may be a function of model 
@@ -232,9 +301,9 @@ or any user-derived variable.
 
 For example:
 ```{c,eval=FALSE}
-$CMT GUT CENT
+[ CMT ] GUT CENT
 
-$ODE
+[ ODE ]
 dxdt_GUT = -KA*GUT;
 dxdt_CENT = KA*GUT - KE*CENT;
 
@@ -275,12 +344,16 @@ Notes:
 
 
 ### `$TABLE` \ {#block-table}
+
+__Syntax__: C++   
+__Multiple allowed__: no   
+
 Use `$TABLE` to interact with parameters, compartment values, and other
 user-defined variables __after__ the system advances to the next time.
 
 For example:
 ```{c,eval=FALSE}
-$TABLE
+[ TABLE ]
 double CP = CENT/VC;
 ```
 
@@ -297,6 +370,10 @@ intervention.
 
 
 ### `$PREAMBLE` \ {#block-preamble}
+
+__Syntax__: C++   
+__Multiple allowed__: no   
+
 This is the fourth C++ code block.  It is called once in two different settings:
 
 1. Immediately prior to starting the simulation run
@@ -311,19 +388,19 @@ structures that were declared in `$GLOBAL`.
 For example:
 
 ```{c,eval=FALSE}
-$PLUGIN Rcpp
+[ PLUGIN ] Rcpp
 
-$GLOBAL 
+[ GLOBAL ]
 namespace{
   Rcpp::NumericVector x;
 }
 
-$PREAMBLE
+[ PREAMBLE ]
 x.push_back(1);
 x.push_back(2);
 x.push_back(3);
 
-$MAIN 
+[ MAIN ]
 <some code that uses x vector>
 ```
 
@@ -339,12 +416,18 @@ Notes:
 
 * `$PREAMBLE` is written in `C++` syntax; every line must end in `;`
 * There may be only one `$PREAMBLE` block in a model
-* Like `$MAIN`, `$ODE` and `$TABLE`, `double`, `int` and `bool` variables initialized in `$PREAMBLE` are actually initialized for global (within the model file)
+* Like `$MAIN`, `$ODE` and `$TABLE`, `double`, `int` and `bool` variables 
+  initialized in `$PREAMBLE` are actually initialized for global (within the 
+  model file)
 
 See also: \@ref(block-plugin).
 
 
 ### `$PRED` \ {#block-pred}
+
+__Syntax__: C++   
+__Multiple allowed__: no   
+
 Use `$PRED` to write a model without differential equations.  In this block, 
 write all algebraic expressions for derived parameters, the response, and 
 any other derived output quantities.  
@@ -352,9 +435,9 @@ any other derived output quantities.
 For example:
 
 ```{c, eval=FALSE}
-$PARAM TVE0 = 100, AUC50 = 100, IMAX = 40, AUC = 0
+[ PARAM ] TVE0 = 100, AUC50 = 100, IMAX = 40, AUC = 0
 
-$PRED
+[ PRED ]
 double E0 = EVE0*exp(ETA(1));
 
 double RESP = E0 - IMAX*AUC/(AUC50+AUC);
@@ -369,18 +452,23 @@ in use with `$PRED` block.
 
 
 ### `$CAPTURE` \ {#block-capture}
+
+__Syntax__: text   
+__Multiple allowed__: yes   
+__Options__: `@annotated`   
+
 This is a block to identify variables that should be captured in the simulated
 output.
 
 For example:
 ```{c,eval=FALSE}
-$PARAM A = 1, B = 2
+[ PARAM ] A = 1, B = 2
 
-$MAIN
+[ MAIN ]
 double C = 3;
 bool yes = true;
 
-$CAPTURE A B C yes
+[ CAPTURE ] A B C yes
 ```
 
 This construct will result in 4 additional columns in the simulated output 
@@ -433,13 +521,16 @@ CLi : Individual clearance (L/hr)
 DV  : Plasma concentration (mcg/ml)
 ```
 
-
-
-
-New variables may be declared in `$TABLE`.  See section \@ref(new-variables) for details.
+New variables may be declared in `$TABLE`.  See section \@ref(new-variables) for 
+details.
 
 
 ### `$OMEGA` \ {#block-omega}
+
+__Syntax__: text   
+__Multiple allowed__: yes   
+__Options__: `@annotated`, `@block`, `@correlation`, `@labels`, `@name`   
+
 See `?modMATRIX` for more details about options for this block.
 
 Use this block to enter variance/covariance matrices for subject-level random
@@ -462,13 +553,16 @@ $OMEGA @block
 ```
 will generate a 2x2 matrix with covariance 0.02.
 
-A 2x2 matrix where the off-diagonal element is a correlation, not a covariance can be specified like this:
+A 2x2 matrix where the off-diagonal element is a correlation, not a covariance 
+can be specified like this:
 ```{c,eval=FALSE}
 $OMEGA @correlation
 0.1 0.67 0.3
 ```
 
-Here, the correlation is 0.67. `mrgsolve` will calculate the covariances and substitute these values.  The matrix will be stored and used with these covariances, not the correlation.
+Here, the correlation is 0.67. `mrgsolve` will calculate the covariances and 
+substitute these values.  The matrix will be stored and used with these 
+covariances, not the correlation.
 
 A name can be assigned to each matrix:
 ```{c, eval=FALSE}
@@ -505,44 +599,63 @@ Notes:
 
 
 ### `$SIGMA` \ {#block-sigma}
+
+__Syntax__: text   
+__Multiple allowed__: yes   
+__Options__: `@annotated`, `@block`, `@correlation`, `@labels`, `@name`   
+
 See `?modMATRIX` for more details about options for this block.
 
-Use this block to enter variance/covariance matrices for within-subject random effects drawn from multivariate normal distribution. All 
-random effects are assumed to have mean of 0.  Off diagonal elements for block matrices are assumed to be correlation coefficients if the 
-`@correlation` option is used (see below).
+Use this block to enter variance/covariance matrices for within-subject random
+effects drawn from multivariate normal distribution. All random effects are
+assumed to have mean of 0.  Off diagonal elements for block matrices are assumed
+to be correlation coefficients if the `@correlation` option is used (see below).
 
 The `$SIGMA` block functions like the `$OMEGA` block.  See `$OMEGA` for details. 
 
 ### `$SET`
-Use this code block to set different options for the simulation. Use a `name=value` format, where `value` is evaluated by the `R` interpreter.  
+
+__Syntax__: R   
+__Multiple allowed__: no   
+
+Use this code block to set different options for the simulation. Use a 
+`name=value` format, where `value` is evaluated by the `R` interpreter.  
 
 Most of the options that can be entered in `$SET` are passed to `update`. 
 
 For example:
 ```{c,eval=FALSE}
-$SET end = 240, delta=0.5, req=s(RESP)
+[ SET ] end = 240, delta=0.5, req=s(RESP)
 ```
 
-Here, we set the simulation `end` time to 240, set the time difference between two
-adjacent time points to 0.25 time units, and request only the `RESP` compartment 
-in the simulated output.
+Here, we set the simulation `end` time to 240, set the time difference between 
+two adjacent time points to 0.25 time units, and request only the `RESP` 
+compartment in the simulated output.
 
 
 ### `$GLOBAL`
-The `$GLOBAL` block is for writing `C++` code that is outside of `$MAIN`, `$ODE`, and `$TABLE`.
 
-There are no artificial limit on what sort of `C++` code can go in `$GLOBAL`.  However there are two more-common uses:
+__Syntax__: C++   
+__Multiple allowed__: no   
+
+
+The `$GLOBAL` block is for writing `C++` code that is outside of `$MAIN`, 
+`$ODE`, and `$TABLE`.
+
+There are no artificial limit on what sort of `C++` code can go in `$GLOBAL`.  
+However there are two more-common uses:
 
 1. Write `#define` preprocessor statements
-1. Define global variables, usually variables other than `double`, `bool`, `int` (see \@ref(new-variables))
-
+1. Define global variables, usually variables other than `double`, `bool`, 
+   `int` (see \@ref(new-variables))
 
 __Preprocessor directives__
-Preprocessor  `#define` directives are direct substitutions that the `C++` preprocessor makes prior to compiling your code.  
+Preprocessor  `#define` directives are direct substitutions that the `C++` 
+preprocessor makes prior to compiling your code.  
 
 For example:
 ```{c,eval=FALSE}
-$GLOBAL
+[ GLOBAL ]
 #define CP (CENT/VC)
 ```
 When this preprocessor directive is included, everywhere the preprocessor finds 
@@ -553,39 +666,57 @@ This makes sure the ratio between the two is taken first, before any other
 operations involving `CP`.  
 
 __Declaring global variables__
-Sometimes, you may wish to use global variables and have more control over how they get declared.  
+Sometimes, you may wish to use global variables and have more control over how 
+they get declared.  
 
 ```{c,eval=FALSE}
 $GLOBAL
 bool cure = false;
 ```
-With this construct, the boolean variable `cure` is declared and defined right as the model is compiled.  
-
+With this construct, the boolean variable `cure` is declared and defined right 
+as the model is compiled.  
 
 ### `$PKMODEL`
-This code block implements a one- or two-compartment PK model where the system is calculated by algebraic equations, not ODEs.  `mrgsolve` handles the calculations and an error is generated if both `$PKMODEL` and `$ODE` blocks are included in the same model specification file.
 
-This is an options-only block. The user must specify the number of compartments (1 or 2) to use in the model as well as whether or not to include a depot dosing compartment.  See `?PKMODEL` for more details about this block, including specific requirements for symbols that must be defined in the model specification file.
+__Syntax__: R   
+__Multiple allowed__: no   
 
-The `$CMT` or `$INIT` block must also be included with an appropriate number of compartments.  Compartment names, however, may be determined by the user.
+This code block implements a one- or two-compartment PK model where the system 
+is calculated by algebraic equations, not ODEs.  `mrgsolve` handles the 
+calculations and an error is generated if both `$PKMODEL` and `$ODE` blocks are 
+included in the same model specification file.
+
+This is an options-only block. The user must specify the number of compartments
+(1 or 2) to use in the model as well as whether or not to include a depot dosing
+compartment.  See `?PKMODEL` for more details about this block, including
+specific requirements for symbols that must be defined in the model
+specification file.
+
+The `$CMT` or `$INIT` block must also be included with an appropriate number of
+compartments.  Compartment names, however, may be determined by the user.
 
 Example:
 ```{c, eval=FALSE}
-$CMT GUT CENT PERIPH
-$PKMODEL ncmt=2, depot=TRUE
+[ CMT ] GUT CENT PERIPH
+
+[ PKMODEL ] ncmt=2, depot=TRUE
 ```
 
 As of version `0.8.2`, we can alternatively specify the compartments
 right in the `$PKMODEL` block:
+
 ```{c,eval=FALSE}
 $PKMODEL cmt="GUT CENT PERIPH", depot = TRUE
 ```
-Specifying three compartments with `depot=TRUE` implies
-`ncmt=2`.  Notice that a separate `$CMT` block is not 
-appropriate when `cmt` is specified in `$PKMODEL`.
+Specifying three compartments with `depot=TRUE` implies `ncmt=2`.  Notice that a
+separate `$CMT` block is not appropriate when `cmt` is specified in `$PKMODEL`.
 
 
 ### `$PLUGIN` \ {#block-plugin}
+
+__Syntax__: text   
+__Multiple allowed__: no   
+
 Plugins are a way to add extensions to your `mrgsolve` model.  When a plugin is 
 recruited into the model, `mrgsolve` may do one or more of the following:
 
@@ -595,12 +726,13 @@ recruited into the model, `mrgsolve` may do one or more of the following:
     - `RcppArmadillo` to both `Rcpp` and `Armadillo` in your specification
     - `BH` to use `boost` headers
 - Include appropriate header files during compilation
-    - For example, when the `Rcpp` plugin is called, `mrgsolve` will `#include <Rcpp.h> at the top of your model file
+    - For example, when the `Rcpp` plugin is called, `mrgsolve` will `#include <Rcpp.h>` 
+      at the top of your model file
 
 You recruit a plugin in the `$PLUGIN` block
 
 ```{c, eval=FALSE}
-$PLUGIN Rcpp
+[ PLUGIN ] Rcpp
 ```
 
 The example above will bring `Rcpp` headers into the model code.  
@@ -611,16 +743,19 @@ Plugins that you can use:
 - `RcppArmadillo` to write any `Rcpp` or `RcppArmadillo` code
 - `BH` to link to `boost` headers
 
-Note that `Rcpp`, `RcppArmadillo` and `BH` only allow you to link to those headers.  To take advantage of that, you will need to know how to use `Rcpp`, `boost` etc.  For the `BH` plugin, no headers are included for you; you must include the proper headers you want to use in `$GLOBAL`.
+Note that `Rcpp`, `RcppArmadillo` and `BH` only allow you to link to those
+headers.  To take advantage of that, you will need to know how to use `Rcpp`,
+`boost` etc.  For the `BH` plugin, no headers are included for you; you must
+include the proper headers you want to use in `$GLOBAL`.
 
 
 __Rcpp__ example
 
 ```{c,eval=FALSE}
 
-$PLUGIN Rcpp
+[ PLUGIN ] Rcpp
 
-$MAIN
+[ MAIN ]
 
 if(NEWIND <=1) {
   double wt = R::rnorm(70,20);
@@ -656,21 +791,23 @@ Functions provided by `mrgx`:
       - Example: `Rcpp::Function print = mrgx::mt_fun();`
 
 
-__IMPORTANT__ All of these functions are in the `mrgx` namespace.  So, in order to call these 
-functions you must include `mrgx::` namespace identifier to the front of the function name.  For example, don't use `rnorm(50,20,40,140)`; use `mrgx::rnorm(50,20,40,140)`.
+__IMPORTANT__ All of these functions are in the `mrgx` namespace.  So, in order
+to call these functions you must include `mrgx::` namespace identifier to the
+front of the function name.  For example, don't use `rnorm(50,20,40,140)`; use
+`mrgx::rnorm(50,20,40,140)`.
 
 
 __Get a numeric vector from `$ENV`__
 ```{c,eval=FALSE}
-$PLUGIN Rcpp mrgx
+[ PLUGIN ] Rcpp mrgx
 
-$ENV
+[ ENV ]
 x <- c(1,2,3,4,5)
 
-$GLOBAL
+[ GLOBAL ]
 Rcpp::NumericVector x;
 
-$PREAMBLE
+[ PREAMBLE ]
 x = mrgx::get<Rcpp::NumericVector>("x", self);
 
 ```
@@ -693,8 +830,8 @@ print(self.rown);
 Note that we declare the `print` in `$GLOBAL` and use the `mt_fun()` place holder.
 
 __Simulate truncated normal variables__
-This simulates a weight that has mean 80, standard deviation 20 and is greater than 
-40 and less than 140.
+This simulates a weight that has mean 80, standard deviation 20 and is greater
+than 40 and less than 140.
 
 ```{c,eval=FALSE}
 $PLUGIN Rcpp mrgx
@@ -708,13 +845,19 @@ if(NEWIND <=1) {
 See also: \@ref(block-preamble).
 
 ### `$THETA`  \ {#block-theta}
-Use this code block as an efficient way to add to the parameter list where 
-names are determined by a prefix and a number.  By default, the prefix is `THETA` and the number sequentially numbers the input values. 
+
+__Syntax__: text   
+__Multiple allowed__: yes   
+__Options__: `@annotated`, `@name`   
+
+Use this code block as an efficient way to add to the parameter list where names
+are determined by a prefix and a number.  By default, the prefix is `THETA` and
+the number sequentially numbers the input values.
 
 For example:
 
 ```{c,eval=FALSE}
-$THETA
+[ THETA ]
 0.1 0.2 0.3
 ```
 is equivalent to
@@ -731,7 +874,7 @@ $THETA @annotated
 0.3 : Typical value of ka (1/hr)
 ```
 
-To change the prefix, use `@name` directive
+To change the prefix, use `@name` option
 
 ```{c,eval = FALSE}
 $THETA @name theta
@@ -740,7 +883,7 @@ $THETA @name theta
 
 would be equivalent to
 ```{c,eval = FALSE}
-$PARAM theta1 = 0.1, theta2 = 0.2, theta3 = 0.3
+[ PARAM ] theta1 = 0.1, theta2 = 0.2, theta3 = 0.3
 ```
 
 
@@ -748,6 +891,10 @@ See also: \@ref(block-param) .
 
 
 ### `$NMXML`  \ {#block-nmxml}
+
+__Syntax__: R   
+__Multiple allowed__: yes   
+
 The `$NMXML` block lets you read and incorporate results from a NONMEM run into 
 your `mrgsolve` model.  From the NONMEM run, `THETA` will be imported into your
 parameter list (see \@ref(block-param) and \@ref(component-param)), `OMEGA` will 
@@ -809,7 +956,7 @@ $SET delta=4, end=96
 ```
 
 
-__NOTE__: in order to use this code, we need to install the `XML` package.
+__NOTE__: in order to use this code, we need to install the `xml2` package.
 
 ```{r}
 mod <- mcode("nmxml", code, quiet=TRUE)
@@ -822,18 +969,11 @@ revar(mod)
 
 ```
 
-
-An infusion into `GUT`:
-```{r}
-set.seed(2922)
-#+
-mod %>%
-  ev(amt=1000, rate=1000/36, cmt="GUT") %>%
-  mrgsim(nid=10) %>%
-  plot
-```
-
 ### `$INCLUDE`  \ {#block-include}
+
+__Syntax__: text   
+__Multiple allowed__: no   
+
 To include your own header file(s) in a model use `$INCLUDE`
 ```{c,eval=FALSE}
 $INCLUDE
@@ -881,6 +1021,10 @@ when calling `mread`.  In this case, always use `preclean=TRUE` argument to
 `mread` to force the model to be built when calling `mread`.
 
 ### `$ENV` \ {#block-env}
+
+__Syntax__: R   
+__Multiple allowed__: no   
+
 This block is all `R` code (just as you would code in a stand-alone `R` script. 
 The code is parsed and evaluated into a new environment when the model is 
 compiled.  Objects inside `$ENV` can be utilized in different C++ functions 
@@ -905,14 +1049,14 @@ cama <- function(mod) {
 
 ## Variables and Macros
 
-This section describes some macros and internal variables that can 
-be used in model specification files.  It should be clear from the usage 
-examples which variables can be set by the user and which are to be 
-read or checked.  All internal variables are pre-defined and pre-initialized.
-The user should never try to declare an internal variable; this will 
-always result in an compile-time error. 
+This section describes some macros and internal variables that can be used in
+model specification files.  It should be clear from the usage examples which
+variables can be set by the user and which are to be read or checked.  All
+internal variables are pre-defined and pre-initialized. The user should never
+try to declare an internal variable; this will always result in an compile-time
+error.
 
-In the following section, we adopt the convention that `CMT` stands for a 
+In the following section, we adopt the convention that `CMT` stands for a
 compartment in the model.
 
 ### `ID`
@@ -928,12 +1072,11 @@ Gives the time of the current timestep taken by the solver.  This is can only
 be used in `$ODE`.  Contrast with `TIME`.
 
 ### `EVID`
-`EVID` is an event id indicator.  `mrgsolve` recognized the following 
-event IDs:
+`EVID` is an event id indicator.  `mrgsolve` recognized the following event IDs:
 
 * 0 = an observation record
 * 1 = a bolus or infusion dose
-* 2 = other type event
+* 2 = other type event, with solver reset
 * 3 = system reset
 * 4 = system reset and dose
 * 8 = replace
@@ -949,10 +1092,10 @@ event IDs:
 
 For example:
 ```{c, eval=FALSE}
-$GLOBAL 
+[ GLOBAL ]
 int counter = 0;
 
-$MAIN
+[ MAIN ]
 if(NEWIND <=1) {
   counter  = 0;
 }
@@ -969,7 +1112,9 @@ For example:
 ```{c,eval=FALSE}
 
 $TABLE
+
 double DV = CENT/VC + EPS(1);
+
 if(self.cmt==3) DV = RESPOSE + EPS(2);
 
 ```
@@ -990,7 +1135,6 @@ The number of rows in the output data set.
 
 ### `self.rown`
 The current row number.  Numbers start at 0 and increase by one to `self.rown-1`. 
-
 
 ### `ETA(n)`
 `ETA(n)` is the value of the subject-level variate drawn from the model 
@@ -1018,15 +1162,14 @@ from `SIGMA`.  The basic setup is the same as detailed in `ETA(n)`.
 
 Example:
 ```{c,eval=FALSE}
-$CMT CENT
+[ CMT ] CENT
 
-$PARAM CL=1, VC=20
+[ PARAM ] CL=1, VC=20
 
-$SIGMA
-labels=s(ADD,PROP)
+[ SIGMA ] @labels ADD PROP
 25 0.0025
 
-$TABLE
+[ TABLE ]
 double DV = (CENT/VC)*(1+PROP) + ADD;
 
 ```
@@ -1037,7 +1180,7 @@ double DV = (CENT/VC)*(1+PROP) + ADD;
 This macro has been deprecated.  Users should __not__ use code like this:
 
 ```{c,eval=FALSE}
-$TABLE
+[ TABLE ]
 table(CP) = CENT/VC;
 ```
 
@@ -1168,16 +1311,16 @@ may not be particularly useful in application.
 Notes:
 
 * Basic PK parameters are declared in `$PARAM`; every parameter needs to be
-assigned a value
+  assigned a value
 * Two compartments `GUT` and `CENT` are declared in `$CMT`; using `$CMT` 
-assumes that both compartments start with 0 mass
+  assumes that both compartments start with 0 mass
 * Because we declared `GUT` and `CENT` as compartments, we write `dxdt_` 
-equations for both in `$ODE`
+  equations for both in `$ODE`
 * In `$ODE`, we refer to parameters (`CL/VC/KA`) and the amounts in each
-compartment at any particular time (`GUT` and `CENT`)
+  compartment at any particular time (`GUT` and `CENT`)
 * `$ODE` should be `C++` code; each line ends in `;`
-* We derive a variable called `CP` in `$TABLE` and `$CAPTURE` that value 
-so that it appears in the simulated output
+* We derive a variable called `CP` in `$TABLE` that has type `capture`; mrgsolve
+  will enter the `CP` name into the `$CAPTURE` block list
 
 ```{c, eval=FALSE}
 $PARAM CL = 1, VC = 30, KA = 1.3
@@ -1190,21 +1333,30 @@ dxdt_GUT = -KA*GUT;
 dxdt_CENT = KA*GUT - (CL/VC)*CENT;
 
 $TABLE
-double CP = CENT/VC;
+capture CP = CENT/VC;
 
-$CAPTURE CP
 ```
 
+This model can also be written without differential equations
 
+```{c, eval=FALSE}
+[ PARAM ] CL = 1, VC = 30, KA = 1.3
+
+[ PKMODEL ] cmt = "CMT GUT CENT", depot = TRUE
+
+$TABLE
+capture CP = CENT/VC;
+
+```
 ### PK/PD model
 
 Notes:
 
 * We use a preprocessor `#define` directive in `$GLOBAL`; everywhere in the 
-model where a `CP` token is found, the expression `(CENT/VC)` ... with 
+  model where a `CP` token is found, the expression `(CENT/VC)` ... with 
 parentheses ... is inserted
 * We write the initial value for the `RESP` compartment in `$MAIN` as a 
-function of two parameters `KIN/KOUT`
+  function of two parameters `KIN/KOUT`
 * A new variable - `INH`- is declared and used in `$ODE`
 * Since `CP` is defined as `CENT/VC`, we can "capture" that name/value in
 `$CAPTURE`
@@ -1217,7 +1369,6 @@ KIN = 100, KOUT = 2, IC50 = 2
 
 $GLOBAL
 #define CP (CENT/VC)
-
 
 $CMT GUT CENT RESP
 
@@ -1232,7 +1383,6 @@ dxdt_GUT = -KA*GUT;
 dxdt_CENT = KA*GUT - (CL/VC)*CENT;
 dxdt_RESP = KIN*(1-INH) - KOUT*CENT;
 
-
 $CAPTURE CP
 
 ```
@@ -1244,12 +1394,12 @@ Notes:
 * Use `$SET` to set the simulation time grid from 0 to 240 by 0.1
 * There are two `$OMEGA` matrices; we name them `IIV` and `IOV`
 * The IIV "etas" are labeled as `ECL/EVC/EKA`; these are aliases to
-`ETA(1)/ETA(2)/ETA(3)`.  The `IOV` matrix is unlabeled; we must refer to
-`ETA(4)/ETA(5)` for this
+  `ETA(1)/ETA(2)/ETA(3)`.  The `IOV` matrix is unlabeled; we must refer to
+  `ETA(4)/ETA(5)` for this
 * Because `ETA(1)` and `ETA(2)` are labeled, we can "capture" them as `ECL` and
-`EVC`
+  `EVC`
 * We added zeros for both `$OMEGA` matrices; all the etas will be zero until we
-populate those matrices (section \@ref(topic-matrix-update))
+  populate those matrices (section \@ref(topic-matrix-update))
 
 
 ```{c,eval=FALSE}
@@ -1280,9 +1430,9 @@ dxdt_GUT = -KAi*GUT;
 dxdt_CENT = KAi*GUT - (CLi/VCi)*CENT;
 
 $TABLE
-double CP = CENT/VCi;
+capture CP = CENT/VCi;
 
-$CAPTURE IOV ECL EVC CP
+$CAPTURE IOV ECL EVC
 ```
 
 

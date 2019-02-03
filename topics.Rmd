@@ -100,28 +100,29 @@ knitr::opts_chunk$set(comment='.')
 
 ### Summary
 
--  `mrgsolve` keeps a base list of compartments and initial conditions that 
-you can update **either** from `R` or from inside the model specification
--  When you use `$CMT`, the value in that base list is assumed to be 0 for 
-every compartment
--  `mrgsolve` will by default use the values in that base list when starting 
-the problem
--  When only the base list is available, every individual will get the same 
-initial condition
--  You can **override** this base list by including code in `$MAIN` to set 
-the initial condition
--  Most often, you do this so that the initial is calculated as a function 
-of a parameter
--  For example, `$MAIN RESP_0 = KIN/KOUT;` when `KIN` and `KOUT` have some value in `$PARAM`
--  This code in `$MAIN` overwrites the value in the base list for the current `ID`
--  For typical PK/PD type models, we most frequently initialize in `$MAIN`
--  This is equivalent to what you might do in your NONMEM model
--  For larger systems models, we often just set the initial value via the base list
+- `mrgsolve` keeps a base list of compartments and initial conditions that 
+  you can update **either** from `R` or from inside the model specification
+- When you use `$CMT`, the value in that base list is assumed to be 0 for 
+  every compartment
+- `mrgsolve` will by default use the values in that base list when starting 
+  the problem
+- When only the base list is available, every individual will get the same 
+  initial condition
+- You can **override** this base list by including code in `$MAIN` to set 
+  the initial condition
+- Most often, you do this so that the initial is calculated as a function 
+  of a parameter
+- For example, `$MAIN RESP_0 = KIN/KOUT;` when `KIN` and `KOUT` have some value in `$PARAM`
+- This code in `$MAIN` overwrites the value in the base list for the current `ID`
+- For typical PK/PD type models, we most frequently initialize in `$MAIN`
+- This is equivalent to what you might do in your NONMEM model
+- For larger systems models, we often just set the initial value via the base list
 
 ### Make a model only to examine `init` behavior
 
-
-Note: `IFLAG` is my invention only for this demo. The demo is always responsible for setting and interpreting the value (it is not reserved in any way and `mrgsolve` does not control the value).
+Note: `IFLAG` is my invention only for this demo. The demo is always responsible
+for setting and interpreting the value (it is not reserved in any way and
+`mrgsolve` does not control the value).
 
 For this demo
 
@@ -602,7 +603,8 @@ Check this by calling `stime`
 stime(day1)
 ```
 
-Pass this object in to `mrgsim` as `tgrid`.  It will override the default `start/end/delta/add` sequence.
+Pass this object in to `mrgsim` as `tgrid`.  It will override the default
+`start/end/delta/add` sequence.
 ```{r topic-tgrid-1, cache=TRUE}
 mod %>% 
   mrgsim(tgrid=day1) %>%
@@ -659,7 +661,8 @@ mod %>%
   mrgsim 
 ```
 
-Now, define two time grid objects: `des1` runs from 0 to 24 and `des2` runs from 0 to 96, both every hour.
+Now, define two time grid objects: `des1` runs from 0 to 24 and `des2` runs from
+0 to 96, both every hour.
 ```{r}
 
 des1 <- tgrid(0,24,1)
@@ -669,7 +672,8 @@ range(stime(des1))
 range(stime(des2))
 ```
 
-Now, derive an `idata_set` after adding a grouping column (`GRP`) that splits the data set into two groups
+Now, derive an `idata_set` after adding a grouping column (`GRP`) that splits
+the data set into two groups
 ```{r}
 df %<>% mutate(GRP = as.integer(ID > 5))
 
@@ -686,7 +690,8 @@ Now, we have two groups in `GRP` in `idata_set` and we have two `tgrid` objects.
 * Pass in a list of designs; it __must__ be at least two because there are two levels in `GRP`
 
 
-When we simulate, the individuals in `GRP 1` will get `des1` and those in `GRP 2` will get `des2`
+When we simulate, the individuals in `GRP 1` will get `des1` and those in `GRP
+2` will get `des2`
 
 ```{r topic-design-1,cache=TRUE}
 out <- 
@@ -862,13 +867,15 @@ Consider this list with named elements holding the data for a matrix:
 m <- list(OMEGA1.1 = 0.9, OMEGA2.1 = 0.3, OMEGA2.2 = 0.4)
 ```
 
-These data could form either a 3x3 diagonal matrix or a 2x2 block matrix.  But the names suggest a 2x2 form.  `as_bmat()` can make the matrix like this
+These data could form either a 3x3 diagonal matrix or a 2x2 block matrix.  But
+the names suggest a 2x2 form.  `as_bmat()` can make the matrix like this
 
 ```{r}
 as_bmat(m, "OMEGA")
 ```
 
-The second argument is a regular expression that `mrgsolve` uses to find elements in the list to use for building the matrix.
+The second argument is a regular expression that `mrgsolve` uses to find
+elements in the list to use for building the matrix.
 
 Frequently, we have estimates in a data frame like this
 ```{r}
@@ -1012,7 +1019,8 @@ $OMEGA
 mod <- mcode("multi", code, compile=FALSE)
 ```
 
-In this case, the only way to update is to pass in a __list__ of matrices, where (in this example) the first matrix is 3x3 and the second is 2x2
+In this case, the only way to update is to pass in a __list__ of matrices, where 
+(in this example) the first matrix is 3x3 and the second is 2x2
 
 ```{r}
 mod %>% omat(list(dmat(5,6,7),dmat(8,9))) %>% omat

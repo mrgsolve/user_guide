@@ -209,7 +209,7 @@ simulation result.
 
 The `PREAMBLE` function gets called only once, just prior to processing the 
 first record of the data set.  This function is composed of `C++` code and is
-used to initialize variables and get them set up proior to starting on 
+used to initialize variables and get them set up prior to starting on 
 the problem. 
 
 See \@ref(block-preamble) for details.
