@@ -178,27 +178,41 @@ have a lot of messages, keep working on your model code.
 
 ## Functions
 
-There are three `C++` functions that `mrgsolve` creates and manages: `MAIN`, 
-`ODE`, `TABLE`. Each function is created from an entire code block in the model
-specification file.  The user is responsible for writing correct `C++` code 
-in each of these blocks.  `mrgsolve` will parse these blocks and augment this 
-code with the necessary elements to create the `C++` function. 
+There are four `C++` functions that `mrgsolve` creates and manages: `PREAMBLE`,
+`MAIN`, `ODE`, `TABLE`. Each function is created from an entire code block in
+the model specification file.  The user is responsible for writing correct `C++`
+code in each of these blocks.  mrgsolve will parse these blocks and augment
+this code with the necessary elements to create the `C++` function.
 
 These functions may be specified in any order in the model specification file, 
 but there is a __specific calling order__ for these functions.  Recognizing 
 and understanding this calling order will help understand how the different 
-pieces of the model specification fit together.  During advance from time 
-`T1` to `T2`, first `$MAIN` is called, then `$ODE` is called repeatedly as 
-the solver finds the values of state variables at `T2`, and, once the solution 
-is found, `$TABLE` is called to calculate derived quantities at `T2` and to 
-specify variables that should be included in the model output.  So, it is 
-helpful to write model specification files in the order:
+pieces of the model specification fit together.  
 
+Just prior to starting the problem, mrgsolve calls `$PREAMBLE`.  Then, during
+advance from time `T1` to `T2`, first `$MAIN` is called, then `$ODE` is called
+repeatedly as the solver finds the values of state variables at `T2`, and, once
+the solution is found, `$TABLE` is called to calculate derived quantities at
+`T2` and to specify variables that should be included in the model output.  So,
+it is helpful to write model specification files in the order:
+
+1. `$PREAMBLE` -  called __only once__ just prior to processing the first record 
+    of the data set
 1. `$MAIN`  - __before__ advancing the system
-2. `$ODE`   - the system __advances__ to `T2`
-3. `$TABLE` - __after__ advancing the system
+1. `$ODE`   - the system __advances__ to `T2`
+1. `$TABLE` - __after__ advancing the system
 
-But the order in which they are coded will not affect model compilation or the simulation result. 
+But the order in which they are coded will not affect model compilation or the 
+simulation result. 
+
+### The `$PREAMBLE` function
+
+The `PREAMBLE` function gets called only once, just prior to processing the 
+first record of the data set.  This function is composed of `C++` code and is
+used to initialize variables and get them set up proior to starting on 
+the problem. 
+
+See \@ref(block-preamble) for details.
 
 ### The `$MAIN` function
 
@@ -240,12 +254,11 @@ See \@ref(block-table) for details.
 
 
 ## Random effect variances
-The `mrgsolve` model object keeps track of a arbitrary number of block 
-matrices that are used to simulate variates from multivariate normal 
-distributions.  Users can specify `OMEGA` matrices for simulating 
-between-subject random effects (one draw per individual) or `SIGMA` 
-matrices for simulating within-subject random effects (one draw per 
-observation).  
+The `mrgsolve` model object keeps track of a arbitrary number of block matrices
+that are used to simulate variates from multivariate normal distributions.
+Users can specify `OMEGA` matrices for simulating between-subject random effects
+(one draw per individual) or `SIGMA` matrices for simulating within-subject
+random effects (one draw per observation).
 
 The user may use the `revar()` function to query both `OMEGA` and `SIGMA`.
 

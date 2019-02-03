@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2019-02-02">
+<meta name="date" content="2019-02-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -123,9 +123,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.4.7" data-path="model-components.html"><a href="model-components.html#mxhnil"><i class="fa fa-check"></i><b>1.4.7</b> <code>mxhnil</code></a></li>
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>1.5</b> Functions</a><ul>
-<li class="chapter" data-level="1.5.1" data-path="model-components.html"><a href="model-components.html#the-main-function"><i class="fa fa-check"></i><b>1.5.1</b> The <code>$MAIN</code> function</a></li>
-<li class="chapter" data-level="1.5.2" data-path="model-components.html"><a href="model-components.html#the-ode-function"><i class="fa fa-check"></i><b>1.5.2</b> The <code>$ODE</code> function</a></li>
-<li class="chapter" data-level="1.5.3" data-path="model-components.html"><a href="model-components.html#the-table-function"><i class="fa fa-check"></i><b>1.5.3</b> The <code>$TABLE</code> function</a></li>
+<li class="chapter" data-level="1.5.1" data-path="model-components.html"><a href="model-components.html#the-preamble-function"><i class="fa fa-check"></i><b>1.5.1</b> The <code>$PREAMBLE</code> function</a></li>
+<li class="chapter" data-level="1.5.2" data-path="model-components.html"><a href="model-components.html#the-main-function"><i class="fa fa-check"></i><b>1.5.2</b> The <code>$MAIN</code> function</a></li>
+<li class="chapter" data-level="1.5.3" data-path="model-components.html"><a href="model-components.html#the-ode-function"><i class="fa fa-check"></i><b>1.5.3</b> The <code>$ODE</code> function</a></li>
+<li class="chapter" data-level="1.5.4" data-path="model-components.html"><a href="model-components.html#the-table-function"><i class="fa fa-check"></i><b>1.5.4</b> The <code>$TABLE</code> function</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="model-components.html"><a href="model-components.html#random-effect-variances"><i class="fa fa-check"></i><b>1.6</b> Random effect variances</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="model-components.html"><a href="model-components.html#omega"><i class="fa fa-check"></i><b>1.6.1</b> <code>OMEGA</code></a></li>
@@ -348,16 +349,23 @@ Error in (function (x, data, idata = null_idata, carry.out = character(<span cla
 </div>
 <div id="functions" class="section level2">
 <h2><span class="header-section-number">1.5</span> Functions</h2>
-<p>There are three <code>C++</code> functions that <code>mrgsolve</code> creates and manages: <code>MAIN</code>, <code>ODE</code>, <code>TABLE</code>. Each function is created from an entire code block in the model specification file. The user is responsible for writing correct <code>C++</code> code in each of these blocks. <code>mrgsolve</code> will parse these blocks and augment this code with the necessary elements to create the <code>C++</code> function.</p>
-<p>These functions may be specified in any order in the model specification file, but there is a <strong>specific calling order</strong> for these functions. Recognizing and understanding this calling order will help understand how the different pieces of the model specification fit together. During advance from time <code>T1</code> to <code>T2</code>, first <code>$MAIN</code> is called, then <code>$ODE</code> is called repeatedly as the solver finds the values of state variables at <code>T2</code>, and, once the solution is found, <code>$TABLE</code> is called to calculate derived quantities at <code>T2</code> and to specify variables that should be included in the model output. So, it is helpful to write model specification files in the order:</p>
+<p>There are four <code>C++</code> functions that <code>mrgsolve</code> creates and manages: <code>PREAMBLE</code>, <code>MAIN</code>, <code>ODE</code>, <code>TABLE</code>. Each function is created from an entire code block in the model specification file. The user is responsible for writing correct <code>C++</code> code in each of these blocks. mrgsolve will parse these blocks and augment this code with the necessary elements to create the <code>C++</code> function.</p>
+<p>These functions may be specified in any order in the model specification file, but there is a <strong>specific calling order</strong> for these functions. Recognizing and understanding this calling order will help understand how the different pieces of the model specification fit together.</p>
+<p>Just prior to starting the problem, mrgsolve calls <code>$PREAMBLE</code>. Then, during advance from time <code>T1</code> to <code>T2</code>, first <code>$MAIN</code> is called, then <code>$ODE</code> is called repeatedly as the solver finds the values of state variables at <code>T2</code>, and, once the solution is found, <code>$TABLE</code> is called to calculate derived quantities at <code>T2</code> and to specify variables that should be included in the model output. So, it is helpful to write model specification files in the order:</p>
 <ol style="list-style-type: decimal">
+<li><code>$PREAMBLE</code> - called <strong>only once</strong> just prior to processing the first record of the data set</li>
 <li><code>$MAIN</code> - <strong>before</strong> advancing the system</li>
 <li><code>$ODE</code> - the system <strong>advances</strong> to <code>T2</code></li>
 <li><code>$TABLE</code> - <strong>after</strong> advancing the system</li>
 </ol>
 <p>But the order in which they are coded will not affect model compilation or the simulation result.</p>
+<div id="the-preamble-function" class="section level3">
+<h3><span class="header-section-number">1.5.1</span> The <code>$PREAMBLE</code> function</h3>
+<p>The <code>PREAMBLE</code> function gets called only once, just prior to processing the first record of the data set. This function is composed of <code>C++</code> code and is used to initialize variables and get them set up proior to starting on the problem.</p>
+<p>See <a href="model-specification.html#block-preamble">2.2.8</a> for details.</p>
+</div>
 <div id="the-main-function" class="section level3">
-<h3><span class="header-section-number">1.5.1</span> The <code>$MAIN</code> function</h3>
+<h3><span class="header-section-number">1.5.2</span> The <code>$MAIN</code> function</h3>
 <p>The <code>MAIN</code> function gets called at least once before the the solver advances from the current time (<code>T1</code>) to the next time (<code>T2</code>). In the <code>MAIN</code> function, the user may:</p>
 <ul>
 <li>Set initial conditions for any compartment</li>
@@ -369,13 +377,13 @@ Error in (function (x, data, idata = null_idata, carry.out = character(<span cla
 <p>See <a href="model-specification.html#block-main">2.2.5</a> for details.</p>
 </div>
 <div id="the-ode-function" class="section level3">
-<h3><span class="header-section-number">1.5.2</span> The <code>$ODE</code> function</h3>
+<h3><span class="header-section-number">1.5.3</span> The <code>$ODE</code> function</h3>
 <p>The <code>ODE</code> function is where the user writes the model differential equations.<br />
 Any derived quantity that depends on a state variable and is used to advanced the system must be calculated inside <code>$ODE</code>. But, this function is called repeatedly during the simulation run, so any calculation that <strong>can</strong> be moved out of <code>$ODE</code> (for example: to <code>$MAIN</code>) should be.</p>
 <p>See <a href="model-specification.html#block-ode">2.2.6</a> for details.</p>
 </div>
 <div id="the-table-function" class="section level3">
-<h3><span class="header-section-number">1.5.3</span> The <code>$TABLE</code> function</h3>
+<h3><span class="header-section-number">1.5.4</span> The <code>$TABLE</code> function</h3>
 <p>The <code>TABLE</code> function is called <strong>after</strong> the solver advances in time. The purpose of <code>TABLE</code> is to allow the user to interact with the values of the state variables after advancing, potentially derive new variables, and to insert different outputs into the table of simulated results.</p>
 <p>See <a href="model-specification.html#block-table">2.2.7</a> for details.</p>
 </div>
