@@ -200,7 +200,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.3.1" data-path="input-data-sets.html"><a href="input-data-sets.html#use-case"><i class="fa fa-check"></i><b>3.3.1</b> Use case</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="input-data-sets.html"><a href="input-data-sets.html#numeric-only"><i class="fa fa-check"></i><b>3.4</b> Numeric data only</a></li>
-<li class="chapter" data-level="3.5" data-path="input-data-sets.html"><a href="input-data-sets.html#pred-data"><i class="fa fa-check"></i><b>3.5</b> Data sets for use with <code>$PRED</code></a></li>
+<li class="chapter" data-level="3.5" data-path="input-data-sets.html"><a href="input-data-sets.html#valid_data_set"><i class="fa fa-check"></i><b>3.5</b> Data set validation</a></li>
+<li class="chapter" data-level="3.6" data-path="input-data-sets.html"><a href="input-data-sets.html#pred-data"><i class="fa fa-check"></i><b>3.6</b> Data sets for use with <code>$PRED</code></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>4</b> Simulated output</a><ul>
 <li class="chapter" data-level="4.1" data-path="simulated-output.html"><a href="simulated-output.html#coercion-methods"><i class="fa fa-check"></i><b>4.1</b> Coercion methods</a></li>
@@ -500,7 +501,7 @@ x.push_back(<span class="dv">3</span>);
 
 <span class="dt">double</span> RESP = E0 - IMAX*AUC/(AUC50+AUC);</code></pre></div>
 <p>In this example, the entire model is written in the <code>$PRED</code> block. It is an error to include the following blocks when <code>$PRED</code> is being used: <code>$MAIN</code>, <code>$TABLE</code>, <code>$PKMODEL</code>, <code>$ODE</code>, <code>$CMT</code>, <code>$INIT</code>.</p>
-<p>See the section <a href="input-data-sets.html#pred-data">3.5</a> for additional information regarding data sets in use with <code>$PRED</code> block.</p>
+<p>See the section <a href="input-data-sets.html#pred-data">3.6</a> for additional information regarding data sets in use with <code>$PRED</code> block.</p>
 </div>
 <div id="block-capture" class="section level3">
 <h3><span class="header-section-number">2.2.11</span> <code>$CAPTURE</code>  </h3>
@@ -815,9 +816,9 @@ $MAIN
 <pre><code>. 
 . 
 . ------------ mrgsolve model object (unix) ------------
-.   project: /private/var/fol.../T/Rtmptxq1k7
+.   project: /private/var/fol.../T/RtmpkOAm4z
 .   source:        nmxml.cpp
-.   shared object: nmxml-so-4a5075ec2c23 
+.   shared object: nmxml-so-4d4e2c835e29 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;

@@ -102,25 +102,22 @@ Use a condensed data set when you want a uniform set of sampling times for all
 subjects in the data set.
 
 __Example of condensed data set__
-data(extran1)
 
 ```{r}
-data(extran1)
+data(extran1, package = "mrgsolve")
 extran1
 ```
 See `?exdatasets` in the `R` help system after loading mrgsolve.
 
 __Example of full data set__
-data(extran1)
 
 ```{r}
-data(exTheoph)
+data(exTheoph, package = "mrgsolve")
+
 head(exTheoph)
 ```
 
 See `?exdatasets` in the `R` help system after loading mrgsolve.
-
-
 
 __Augmenting observations in a clinical data set__
 Occasionally, we want to simulate from a clinical data set (with observation
@@ -183,7 +180,6 @@ data <- expand.ev(ID=1:3, amt=250, rate=125, ii=8, addl=11, cmt=2)
 data
 
 ```
-
 
 Use `data_set` to pass the data into the problem.
 
@@ -265,6 +261,31 @@ The `data.frame` holding the `data_set` or `idata_set` may have any type of data
 in its columns.  However, only numeric data can actually get passed into the
 simulation engine.  mrgsolve will automatically look for non-numeric columns
 and drop them from the `data_set` or `idata_set` with a warning.
+
+## Data set validation {#valid_data_set}
+
+A the time of simulation, mrgsolve will validate the input data set, removing
+character column, checking for missing values in parameter columns, checking
+compartment numbers etc.  
+
+Users can pre-validate the data set so that this does not need to happen at 
+run time. 
+
+```{r}
+data(exTheoph)
+
+head(exTheoph)
+
+mod <- modlib("pk1")
+
+valid <- valid_data_set(exTheoph,mod)
+
+str(valid)
+```
+
+This can improve efficiency when performing a very larg number of replicate
+simulations on the same data set, but is unlikely to provide a meaningful 
+speed-up for a single simulation or a small number of simulations. 
 
 ## Data sets for use with `$PRED` {#pred-data}
 Because there are no compartments involved, there are relaxed data set
