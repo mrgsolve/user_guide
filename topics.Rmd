@@ -921,7 +921,7 @@ the other.
 For example we have this population PK model
 
 ```{r}
-mod <- mread("popex", modlib(), compile = FALSE)
+mod <- modlib("popex", compile = FALSE)
 
 omat(mod)
 ```

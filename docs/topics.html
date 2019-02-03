@@ -1026,7 +1026,7 @@ sum</code></pre></div>
 <p>Sometimes we write a population model that includes random effects, but we would like to simulate from that same model without the random effects implemented. For example, we want to simulate some typical PK profiles from a population PK model that includes IIV on some parameters and / or RUV on the simulated outputs.</p>
 <p>To do this, pass the model through the <code>zero_re()</code> function. By default, this will convert all <code>$OMEGA</code> and <code>$SIGMA</code> matrix elements to zeros. See the R help file (<code>?zero_re</code>) to see some options for selectively zeroing out only one or the other.</p>
 <p>For example we have this population PK model</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">mread</span>(<span class="st">&quot;popex&quot;</span>, <span class="kw">modlib</span>(), <span class="dt">compile =</span> <span class="ot">FALSE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">modlib</span>(<span class="st">&quot;popex&quot;</span>, <span class="dt">compile =</span> <span class="ot">FALSE</span>)
 
 <span class="kw">omat</span>(mod)</code></pre></div>
 <pre><code>. $...
