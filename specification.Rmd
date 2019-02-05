@@ -1331,7 +1331,6 @@ or
 
 ```{c,eval=FALSE}
 [ GLOBAL ]
-
 namespace {
   std::vector<double> myvec;
 }
