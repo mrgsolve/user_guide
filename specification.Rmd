@@ -1240,46 +1240,55 @@ D_CENT = 2;
 
 
 ## Derive new variables {#new-variables}
-New `C++` variables may be derived in `$GLOBAL`, `$MAIN`, `$ODE` and `$TABLE`.
-Because these are `C++` variables, the type of variable being used must be
-declared.  For the vast majority of applications, the `double` type is used
-(double-precision numeric value). 
+New `C++` variables may be derived in `$GLOBAL`, `$PREAMBLE` `$MAIN`, `$ODE` and
+`$TABLE`. Because these are `C++` variables, the type of variable being used
+must be declared.  For the vast majority of applications, the `double` type is
+used (double-precision numeric value).
 
 ```{c,eval=FALSE}
 $MAIN
 double CLi = TVCL*exp(ETA(1));
 ```
 
-We want `CLi` to be a numeric value, so we use `double`.  To derived a `boolean` 
-variable, write
+We want `CLi` to be a numeric value, so we use `double`.  To initialize a `boolean` 
+variable (true / false), write
 ```{c,eval=FALSE}
 $MAIN
 bool cure = false;
 ```
 
-When variables of the type `double`, `int`, and `bool` are declared and 
-initialized in `$MAIN`, `$ODE`, `$TABLE`, `mrgsolve` will detect those
-declarations, and modify the code so that the variables are actually declared 
-in `$GLOBAL` not in `$MAIN`, `$ODE`, or `$TABLE`.  This is done so that 
-variables declared in one code block can be read and modified in another 
-code block.  
+### Special handling for `double`, `int`, `bool`
 
-For example, the following code:
+When variables of the type `double`, `int`, and `bool` are declared and
+initialized in `$PREAMBLE`, `$MAIN`, `$ODE`, `$TABLE`, mrgsolve will detect
+those declarations, and modify the code so that the variables are actually
+declared once in `$GLOBAL` not in `$MAIN`, `$ODE`, or `$TABLE`.  This is done so
+that variables declared in one code block (e.g. `$MAIN`) can be read and
+modified in another code block (e.g. `$TABLE`).
+
+For example, in the following code:
 ```{c,eval=FALSE}
 $MAIN
 double CLi = TVCL*exp(ETA(1));
 ```
 
-gets translated to:
+a double-precision numeric variable is created (`CLi`) in the `$MAIN` block. 
+When mrgsolve parses the model file, this code gets translated to
+
 ```{c,eval=FALSE}
 $GLOBAL
-double CLi;
+namespace {
+  double CLi;
+}
 
 $MAIN
 CLi = TVCL*exp(ETA(1));
 ```
 
-This way, we can still read `CLi` in `$TABLE`:
+That is, `CLi` is declared in `$GLOBAL` in an unnamed namespace so that variables
+like this are global variables within the model file only.  
+
+This way, we can still read the `CLi` variable in `$TABLE`:
 ```{c,eval=FALSE}
 $MAIN
 double CLi = TVCL*exp(ETA(1));
@@ -1295,9 +1304,50 @@ To declare a variable that is local to a particular code block:
 
 ```{c,eval=FALSE}
 $MAIN
-localdouble CLi = TVCL*exp(ETA(1));
 
+localdouble CLi = TVCL*exp(ETA(1));
 ```
+
+The `localdouble` type is still just a double-precision variable.  The difference
+is that it is protected from this re-declaration process and the variable 
+will be local to (in this case) the `$MAIN` block. 
+
+### Using other types globally
+
+As we noted in the previous section, `double`, `int`, and `bool` are processed
+in a special way so that they are by default global to the file. Many times 
+we want to work with other variable types in a global manner.  Whenever you 
+want a data structure to be accessible across functions (e.g. `$MAIN`, `$TABLE`, 
+etc.) they should be declared in `$GLOBAL`, optionally in an unnamed namespace.
+
+For example:
+
+```{c,eval=FALSE}
+[ GLOBAL ]
+std::vector<double> myvec;
+```
+
+or
+
+```{c,eval=FALSE}
+[ GLOBAL ]
+
+namespace {
+  std::vector<double> myvec;
+}
+```
+
+In case that object needs some configuration prior to starting the problem, 
+use `$PREAMBLE` to do that work
+
+```{c, eval=FALSE}
+[ GLOBAL ]
+std::vector<double> myvec;
+
+[ PREAMBLE ] 
+myvec.assign(3,1);
+```
+
 
 
 ## Examples
