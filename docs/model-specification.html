@@ -25,7 +25,7 @@
 <meta name="author" content="Metrum Research Group, LLC">
 
 
-<meta name="date" content="2019-02-05">
+<meta name="date" content="2019-03-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -818,23 +818,22 @@ $MAIN
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod</code></pre></div>
 <pre><code>. 
 . 
-. ------------ mrgsolve model object (unix) ------------
-.   project: /private/var/fol.../T/RtmpedTbAZ
-.   source:        nmxml.cpp
-.   shared object: nmxml-so-929c4dc57a51 
+. ---------------  source: nmxml.cpp  ---------------
+. 
+.   project: /private/var/fol.../T/RtmpwkxyLL
+.   shared object: nmxml-so-503df2b6ee0 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
-.                  tscale: 1
 . 
 .   compartments:  GUT CENT PERIPH [3]
 .   parameters:    THETA1 THETA2 THETA3 THETA4 THETA5
 .                  THETA6 THETA7 [7]
+.   captures:      CP [1]
 .   omega:         3x3 
 .   sigma:         2x2 
 . 
-.   solver:        atol: 1e-08 rtol: 1e-08
-.                  maxsteps: 5000 hmin: 0 hmax: 0</code></pre>
+.   solver:        atol: 1e-08 rtol: 1e-08 maxsteps: 5000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">param</span>(mod)</code></pre></div>
 <pre><code>. 
 .  Model parameters (N=7):
@@ -905,8 +904,9 @@ cama &lt;- function(mod) {
 </div>
 <div id="variables-and-macros" class="section level2">
 <h2><span class="header-section-number">2.3</span> Variables and Macros</h2>
-<p>This section describes some macros and internal variables that can be used in model specification files. It should be clear from the usage examples which variables can be set by the user and which are to be read or checked. All internal variables are pre-defined and pre-initialized. The user should never try to declare an internal variable; this will always result in an compile-time error.</p>
-<p>In the following section, we adopt the convention that <code>CMT</code> stands for a compartment in the model.</p>
+<p>This section describes some macros and internal variables that can be used in model specification files. In the following section, we adopt the convention that <code>CMT</code> stands for a compartment in the model.</p>
+<p><strong>IMPORTANT NOTE</strong>:</p>
+<p>It should be clear from the usage examples which variables can be set by the user and which are to be read or checked. <strong>All internal variables are pre-defined and pre-initialized by mrgsolve. <em>The user should never try to declare an internal variable; this will always result in an compile-time error</em></strong>.</p>
 <div id="id" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> <code>ID</code></h3>
 <p>The current subject identifier. <code>ID</code> is an alias for <code>self.id</code>.</p>
@@ -917,7 +917,7 @@ cama &lt;- function(mod) {
 </div>
 <div id="solvertime" class="section level3">
 <h3><span class="header-section-number">2.3.3</span> <code>SOLVERTIME</code></h3>
-<p>Gives the time of the current timestep taken by the solver. This is can only be used in <code>$ODE</code>. Contrast with <code>TIME</code>.</p>
+<p>Gives the time of the current timestep taken by the solver. <em>This is can only be used in <code>$ODE</code></em>. Contrast with <code>TIME</code>.</p>
 </div>
 <div id="evid" class="section level3">
 <h3><span class="header-section-number">2.3.4</span> <code>EVID</code></h3>
@@ -954,8 +954,7 @@ cama &lt;- function(mod) {
 <h3><span class="header-section-number">2.3.6</span> <code>self.cmt</code></h3>
 <p>The current compartment number regardless of whether it was given as <code>cmt</code> or <code>CMT</code> in the data set. There is no alias for <code>self.cmt</code>.</p>
 <p>For example:</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">
-$TABLE
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$TABLE
 
 <span class="dt">double</span> DV = CENT/VC + EPS(<span class="dv">1</span>);
 
@@ -964,6 +963,14 @@ $TABLE
 <div id="self.amt" class="section level3">
 <h3><span class="header-section-number">2.3.7</span> <code>self.amt</code></h3>
 <p>The current <code>amt</code> value regardless of whether it was given as <code>amt</code> or <code>AMT</code> in the data set. There is no alias for <code>self.amt</code>.</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">[ PREAMBLE ]
+<span class="dt">double</span> last_dose = <span class="dv">0</span>;
+
+[ MAIN ]
+
+<span class="cf">if</span>(EVID==<span class="dv">1</span>) {
+  last_dose = self.amt;  
+}</code></pre></div>
 </div>
 <div id="self.nid" class="section level3">
 <h3><span class="header-section-number">2.3.8</span> <code>self.nid</code></h3>
@@ -1032,7 +1039,7 @@ F_CENT = <span class="fl">0.7</span>;</code></pre></div>
 <p>For the <code>CMT</code> compartment, sets the lag time for doses into that compartment.</p>
 <p>Example:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$MAIN
-ALAG_CENT = <span class="fl">0.25</span>;</code></pre></div>
+ALAG_GUT = <span class="fl">0.25</span>;</code></pre></div>
 </div>
 <div id="spec-r" class="section level3">
 <h3><span class="header-section-number">2.3.17</span> <code>R_CMT</code>  </h3>
@@ -1054,6 +1061,7 @@ D_CENT = <span class="dv">2</span>;</code></pre></div>
 <h2><span class="header-section-number">2.4</span> Derive new variables</h2>
 <p>New <code>C++</code> variables may be derived in <code>$GLOBAL</code>, <code>$PREAMBLE</code> <code>$MAIN</code>, <code>$ODE</code> and <code>$TABLE</code>. Because these are <code>C++</code> variables, the type of variable being used must be declared. For the vast majority of applications, the <code>double</code> type is used (double-precision numeric value).</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$MAIN
+
 <span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</code></pre></div>
 <p>We want <code>CLi</code> to be a numeric value, so we use <code>double</code>. To initialize a <code>boolean</code> variable (true / false), write</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">$MAIN
@@ -1193,8 +1201,8 @@ $MAIN
 <span class="cf">if</span>(OCC==<span class="dv">2</span>) IOV = IOV2;
 
 <span class="dt">double</span> CLi = exp(log(TVCL) + <span class="fl">0.75</span>*log(WT/<span class="dv">70</span>) + ECL + IOV);
-<span class="dt">double</span> VCi = exp(log(TVVC) + EVC;
-<span class="dt">double</span> KAi = exp(log(TVKA) + EKA;
+<span class="dt">double</span> VCi = exp(log(TVVC) + EVC);
+<span class="dt">double</span> KAi = exp(log(TVKA) + EKA);
 
 $OMEGA @name IIV @labels ECL EVC EKA
 <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>

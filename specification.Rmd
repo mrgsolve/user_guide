@@ -1050,14 +1050,17 @@ cama <- function(mod) {
 ## Variables and Macros
 
 This section describes some macros and internal variables that can be used in
-model specification files.  It should be clear from the usage examples which
-variables can be set by the user and which are to be read or checked.  All
-internal variables are pre-defined and pre-initialized. The user should never
-try to declare an internal variable; this will always result in an compile-time
-error.
+model specification files.  In the following section, we adopt the convention
+that `CMT` stands for a compartment in the model.
 
-In the following section, we adopt the convention that `CMT` stands for a
-compartment in the model.
+__IMPORTANT NOTE__:
+
+It should be clear from the usage examples which variables can be set by the
+user and which are to be read or checked.  **All internal variables are
+pre-defined and pre-initialized by mrgsolve. _The user should never try to
+declare an internal variable; this will always result in an compile-time
+error_**.
+
 
 ### `ID`
 The current subject identifier. `ID` is an alias for `self.id`.
@@ -1068,8 +1071,8 @@ Gives the time in the current data set record.  This is usually only used in
 `SOLVERTIME`.
 
 ### `SOLVERTIME`
-Gives the time of the current timestep taken by the solver.  This is can only 
-be used in `$ODE`.  Contrast with `TIME`.
+Gives the time of the current timestep taken by the solver.  *This is can only 
+be used in `$ODE`*.  Contrast with `TIME`.
 
 ### `EVID`
 `EVID` is an event id indicator.  `mrgsolve` recognized the following event IDs:
@@ -1110,7 +1113,6 @@ The current compartment number regardless of whether it was given as `cmt` or
 For example:
 
 ```{c,eval=FALSE}
-
 $TABLE
 
 double DV = CENT/VC + EPS(1);
@@ -1119,10 +1121,21 @@ if(self.cmt==3) DV = RESPOSE + EPS(2);
 
 ```
 
-
 ### `self.amt`
 The current `amt` value regardless of whether it was given as `amt` or `AMT` 
-in the data set.  There is no alias for `self.amt`.
+in the data set.  There is no alias for `self.amt`. 
+
+```{c, eval=FALSE}
+[ PREAMBLE ]
+double last_dose = 0;
+
+[ MAIN ]
+
+if(EVID==1) {
+  last_dose = self.amt;  
+}
+
+```
 
 ### `self.nid`
 The number of IDs in the data set.
@@ -1174,8 +1187,6 @@ double DV = (CENT/VC)*(1+PROP) + ADD;
 
 ```
 
-
-
 ### `table(name) `
 This macro has been deprecated.  Users should __not__ use code like this:
 
@@ -1211,7 +1222,7 @@ For the `CMT` compartment, sets the lag time for doses into that compartment.
 Example:
 ```{c,eval=FALSE}
 $MAIN
-ALAG_CENT = 0.25;
+ALAG_GUT = 0.25;
 ```
 
 
@@ -1238,7 +1249,6 @@ $MAIN
 D_CENT = 2;
 ```
 
-
 ## Derive new variables {#new-variables}
 New `C++` variables may be derived in `$GLOBAL`, `$PREAMBLE` `$MAIN`, `$ODE` and
 `$TABLE`. Because these are `C++` variables, the type of variable being used
@@ -1247,6 +1257,7 @@ used (double-precision numeric value).
 
 ```{c,eval=FALSE}
 $MAIN
+
 double CLi = TVCL*exp(ETA(1));
 ```
 
@@ -1464,8 +1475,8 @@ double IOV = IOV1
 if(OCC==2) IOV = IOV2;
 
 double CLi = exp(log(TVCL) + 0.75*log(WT/70) + ECL + IOV);
-double VCi = exp(log(TVVC) + EVC;
-double KAi = exp(log(TVKA) + EKA;
+double VCi = exp(log(TVVC) + EVC);
+double KAi = exp(log(TVKA) + EKA);
 
 $OMEGA @name IIV @labels ECL EVC EKA
 0 0 0
