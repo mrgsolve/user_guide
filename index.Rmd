@@ -1,6 +1,6 @@
 --- 
 title: "mrgsolve User Guide"
-author: "<font color='DarkGreen'>Metrum Research Group, LLC</font>"
+author: "<font color='DarkGreen'>Metrum Research Group</font>"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 url: 'https\://mrgsolve.github.io/user_guide/'
@@ -50,5 +50,5 @@ issue tracker on the main github repo: https://github.com/metrumresearchgroup/mr
 
 <hr>
 
-This book was assembled on `r date()`.
+This book was assembled on `r date()` with mrgsolve version `r packageVersion("mrgsolve")`.
 

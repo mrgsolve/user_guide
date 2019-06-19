@@ -291,7 +291,8 @@ double ke = CL/VC;
 ### `$ODE` \ {#block-ode}
 
 __Syntax__: C++   
-__Multiple allowed__: no   
+__Multiple allowed__: no  
+__Options__: `@param`
 
 Use `$ODE` to define model differential equations.  For all compartments assign 
 the value of the differential equation to `dxdt_CMT` where `CMT` is the name 

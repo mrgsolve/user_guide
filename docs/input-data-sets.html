@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Input data sets | mrgsolve User Guide</title>
-  <meta name="description" content="A guide to using mrgsolve.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="A guide to using mrgsolve." />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Input data sets | mrgsolve User Guide" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="A guide to using mrgsolve." />
   
 
-<meta name="author" content="Metrum Research Group, LLC">
+<meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2019-03-11">
+<meta name="date" content="2019-06-18" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="model-specification.html">
@@ -51,41 +50,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="bookstyle.css" type="text/css" />
@@ -232,7 +257,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="topics.html"><a href="topics.html#topic-tgrid"><i class="fa fa-check"></i><b>6.4</b> Time grid objects</a></li>
 <li class="chapter" data-level="6.5" data-path="topics.html"><a href="topics.html#topic-designs"><i class="fa fa-check"></i><b>6.5</b> Individualized sampling designs</a></li>
-<li class="chapter" data-level="6.6" data-path="topics.html"><a href="topics.html#some-helpful-c"><i class="fa fa-check"></i><b>6.6</b> Some helpful <code>C++</code></a></li>
+<li class="chapter" data-level="6.6" data-path="topics.html"><a href="topics.html#some-helpful-c"><i class="fa fa-check"></i><b>6.6</b> Some helpful <code>C++</code></a><ul>
+<li class="chapter" data-level="6.6.1" data-path="topics.html"><a href="topics.html#semi-colons"><i class="fa fa-check"></i><b>6.6.1</b> Semi-colons</a></li>
+<li class="chapter" data-level="6.6.2" data-path="topics.html"><a href="topics.html#if-else"><i class="fa fa-check"></i><b>6.6.2</b> if-else</a></li>
+<li class="chapter" data-level="6.6.3" data-path="topics.html"><a href="topics.html#functions-1"><i class="fa fa-check"></i><b>6.6.3</b> Functions</a></li>
+<li class="chapter" data-level="6.6.4" data-path="topics.html"><a href="topics.html#integer-division"><i class="fa fa-check"></i><b>6.6.4</b> Integer division</a></li>
+</ul></li>
 <li class="chapter" data-level="6.7" data-path="topics.html"><a href="topics.html#resimulate-eta-and-eps"><i class="fa fa-check"></i><b>6.7</b> Resimulate <code>ETA</code> and <code>EPS</code></a></li>
 <li class="chapter" data-level="6.8" data-path="topics.html"><a href="topics.html#topic-matrix-update"><i class="fa fa-check"></i><b>6.8</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a><ul>
 <li class="chapter" data-level="6.8.1" data-path="topics.html"><a href="topics.html#matrix-helper-functions"><i class="fa fa-check"></i><b>6.8.1</b> Matrix helper functions</a></li>
@@ -267,18 +297,36 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="input-data-sets" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Input data sets</h1>
-<p>Input data sets are used in mrgsolve to allow the user to specify interventions and input data items.</p>
-<p>Please see the mrgsolve help topic <code>?exdatasets</code> for examples of all of the data sets discussed in this chapter. The example data sets are embedded in the mrgsolve package and may be used at any time.</p>
+<p>Input data sets are used in mrgsolve to allow the user to specify
+interventions and input data items.</p>
+<p>Please see the mrgsolve help topic <code>?exdatasets</code> for examples of all of the
+data sets discussed in this chapter. The example data sets are embedded in the
+mrgsolve package and may be used at any time.</p>
 <div id="datasets" class="section level2">
 <h2><span class="header-section-number">3.1</span> Overview</h2>
-<p>Data sets are the primary mechanism for establishing the scope of your simulations in <code>mrsolve</code>, including individuals, interventions, observation times, and parameter values. For both <code>data_set</code> and <code>idata_set</code> (see below), you may include columns in the data sets that have the same names as the parameters in your model (section <a href="model-components.html#component-param">1.1</a>, <a href="model-specification.html#block-param">2.2.3</a>). mrgsolve can recognize these columns and update the parameter list as the simulation proceeds. This process is of key importance when planning and executing complex simulations and is further discussed in section <a href="topics.html#topic-parameter-update">6.3</a>.</p>
+<p>Data sets are the primary mechanism for establishing the scope of your
+simulations in <code>mrsolve</code>, including individuals, interventions, observation
+times, and parameter values. For both <code>data_set</code> and <code>idata_set</code> (see below),
+you may include columns in the data sets that have the same names as the
+parameters in your model (section <a href="model-components.html#component-param">1.1</a>, <a href="model-specification.html#block-param">2.2.3</a>).
+mrgsolve can recognize these columns and update the parameter list as the
+simulation proceeds. This process is of key importance when planning and
+executing complex simulations and is further discussed in section
+<a href="topics.html#topic-parameter-update">6.3</a>.</p>
 </div>
 <div id="data-set" class="section level2">
 <h2><span class="header-section-number">3.2</span> Event data sets (<code>data</code>)</h2>
-<p>Event data sets are entered as <code>data.frame</code>, with one event per row. Events may be observations, doses, or other type events. In mrgsolve documentation, we refer to these data sets as <code>data</code> or <code>data_set</code> (after the function that is used to associate the data set with the model object prior to simulation).</p>
-<p>Event data sets have several special column names that mrgsolve is always aware of:</p>
+<p>Event data sets are entered as <code>data.frame</code>, with one event per row. Events may
+be observations, doses, or other type events. In mrgsolve documentation, we
+refer to these data sets as <code>data</code> or <code>data_set</code> (after the function that is
+used to associate the data set with the model object prior to simulation).</p>
+<p>Event data sets have several special column names that mrgsolve is always
+aware of:</p>
 <ul>
-<li><code>ID</code> the subject id. This id does not need to be unique in the <code>data_set</code>: mrgsolve detects an new individual when the current value of <code>ID</code> is different from the immediate preceding value of <code>ID</code>. However, we always recommend using unique <code>ID</code>.</li>
+<li><code>ID</code> the subject id. This id does not need to be unique in the <code>data_set</code>:
+mrgsolve detects an new individual when the current value of <code>ID</code> is different
+from the immediate preceding value of <code>ID</code>. However, we always recommend using
+unique <code>ID</code>.</li>
 <li><code>time</code> or <code>TIME</code>: states the time of the data record</li>
 <li><p><code>evid</code> or <code>EVID</code>: the event id indicator. <code>evid</code> can take the values:</p>
 <ul>
@@ -290,26 +338,62 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><strong>8</strong> = replace the amount in the compartment with <code>amt</code></li>
 </ul></li>
 <li><code>amt</code> or <code>AMT</code>: the dose amount (if <code>evid==1</code>)</li>
-<li><code>cmt</code> or <code>CMT</code>: the dosing compartment number. This may also be a character value naming the compartment name. The compartment number must be consistent with the number of compartments in the model for dosing records (<code>evid</code>==1).<br />
-For observation records, a <code>cmt</code> value of 0 is acceptable. Use a negative compartment number with <code>evid</code> 2 to turn a compartment off.<br />
+<li><code>cmt</code> or <code>CMT</code>: the dosing compartment number. This may also be a character
+value naming the compartment name. The compartment number must be consistent
+with the number of compartments in the model for dosing records (<code>evid</code>==1).<br />
+For observation records, a <code>cmt</code> value of 0 is acceptable. Use a negative
+compartment number with <code>evid</code> 2 to turn a compartment off.<br />
 </li>
-<li><code>rate</code> or <code>RATE</code>: if non-zero and <code>evid=1</code> or <code>evid=4</code>, implements a zero-order infusion of duration <code>F_CMT*amt/rate</code>, where <code>F_CMT</code> is the bioavailability fraction for the dosing compartment. Use <code>rate = -1</code> to model the infusion rate and <code>rate = -2</code> to model the infusion duration, both in <code>$MAIN</code> (see sections <a href="model-specification.html#block-main">2.2.6</a>, <a href="model-specification.html#spec-f">2.3.15</a>,<a href="model-specification.html#spec-r">2.3.17</a>, <a href="model-specification.html#spec-d">2.3.18</a>).</li>
-<li><code>ii</code> or <code>II</code>: inter-dose interval; <code>ii=24</code> means daily dosing when the model time unit is hours</li>
-<li><code>addl</code> or <code>ADDL</code>: additional doses; a non-zero value in <code>addl</code> requires non-zero <code>ii</code> on the same record</li>
-<li><p><code>ss</code> or <code>SS</code> steady state indicator; use 1 to implement steady-state dosing; 0 otherwise. mrgsolve also recognizes dosing records where <code>ss=2</code>. This allows combination of different steady state dosing regimens under linear kinetics (e.g. 10 mg QAM and 20 mg QPM daily to steady state).</p></li>
+<li><code>rate</code> or <code>RATE</code>: if non-zero and <code>evid=1</code> or <code>evid=4</code>, implements a
+zero-order infusion of duration <code>F_CMT*amt/rate</code>, where <code>F_CMT</code> is the
+bioavailability fraction for the dosing compartment. Use <code>rate = -1</code> to model
+the infusion rate and <code>rate = -2</code> to model the infusion duration, both in
+<code>$MAIN</code> (see sections <a href="model-specification.html#block-main">2.2.6</a>, <a href="model-specification.html#spec-f">2.3.15</a>,<a href="model-specification.html#spec-r">2.3.17</a>,
+<a href="model-specification.html#spec-d">2.3.18</a>).</li>
+<li><code>ii</code> or <code>II</code>: inter-dose interval; <code>ii=24</code> means daily dosing when the model
+time unit is hours</li>
+<li><code>addl</code> or <code>ADDL</code>: additional doses; a non-zero value in <code>addl</code> requires
+non-zero <code>ii</code> on the same record</li>
+<li><p><code>ss</code> or <code>SS</code> steady state indicator; use 1 to implement steady-state dosing; 0
+otherwise. mrgsolve also recognizes dosing records where <code>ss=2</code>. This allows
+combination of different steady state dosing regimens under linear kinetics
+(e.g. 10 mg QAM and 20 mg QPM daily to steady state).</p></li>
 </ul>
-<p>The column names in the preceding list were written either as lower case form (e.g. <code>amt</code>) or upper case form (e.g. <code>AMT</code>). Either may be used, however the data set will be checked for consistency of usage. An error will be issued in case a mixture of lower and upper case names are found.</p>
-<p>In addition to these special column names, mrgsolve will recognize columns in <code>data_set</code> that have the same name as items in the parameter list (see <a href="model-specification.html#block-param">2.2.3</a> and <a href="model-components.html#component-param">1.1</a>). When mrgsolve sees that the names match up, it will update the values of those matching names based on what it finds as it moves through the data set (see section @(topic-parameter-update)).</p>
+<p>The column names in the preceding list were written either as lower case form
+(e.g. <code>amt</code>) or upper case form (e.g. <code>AMT</code>). Either may be used, however
+the data set will be checked for consistency of usage. An error will be
+issued in case a mixture of lower and upper case names are found.</p>
+<p>In addition to these special column names, mrgsolve will recognize columns in
+<code>data_set</code> that have the same name as items in the parameter list (see
+<a href="model-specification.html#block-param">2.2.3</a> and <a href="model-components.html#component-param">1.1</a>). When mrgsolve sees that the
+names match up, it will update the values of those matching names based on what
+it finds as it moves through the data set (see section
+<a href="topics.html#topic-parameter-update">6.3</a>).</p>
 <div id="two-types-of-data_set" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Two types of <code>data_set</code></h3>
-<p>mrgsolve distinguishes between two types of data sets: data sets that have <em>at least one observation record</em> (<code>evid=0</code>) and data sets that have <em>no records with <code>evid=0</code></em>.</p>
+<p>mrgsolve distinguishes between two types of data sets: data sets that have <em>at
+least one observation record</em> (<code>evid=0</code>) and data sets that have <em>no records
+with <code>evid=0</code></em>.</p>
 <ul>
-<li><strong>Full data sets</strong> have a mix of observations and dosing events (likely, but not required). When mrgsolve finds one record with <code>evid=0</code>, it assumes that <strong>ALL</strong> output observation times are to come from the data set. In this case the simulation output time grid discussed in <a href="model-components.html#component-stime">1.3</a> is ignored and only observations found in the data set appear in the simulated output. Use full data sets when you want a highly customized sampling schedule or you are working with a clinical data set.</li>
-<li><strong>Condensed data sets</strong> have no records with <code>evid=0</code>. In this case, mrgsolve will fill the simulated output with observations at times specified by the output time grid ( section <a href="model-components.html#component-stime">1.3</a> and see section <a href="topics.html#topic-designs">6.5</a>). These are very convenient to use because there is less data assembly burden and output data sets can easily be created with very dense sampling scheme or highly customized sampling schemes with very little work. Use a condensed data set when you want a uniform set of sampling times for all subjects in the data set.</li>
+<li><strong>Full data sets</strong> have a mix of observations and dosing events (likely, but
+not required). When mrgsolve finds one record with <code>evid=0</code>, it assumes that
+<strong>ALL</strong> output observation times are to come from the data set. In this case the
+simulation output time grid discussed in <a href="model-components.html#component-stime">1.3</a> is ignored and
+only observations found in the data set appear in the simulated output. Use
+full data sets when you want a highly customized sampling schedule or you are
+working with a clinical data set.</li>
+<li><strong>Condensed data sets</strong> have no records with <code>evid=0</code>. In this case,
+mrgsolve will fill the simulated output with observations at times specified
+by the output time grid ( section <a href="model-components.html#component-stime">1.3</a> and see section
+<a href="topics.html#topic-designs">6.5</a>). These are very convenient to use because there is less
+data assembly burden and output data sets can easily be created with very dense
+sampling scheme or highly customized sampling schemes with very little work.
+Use a condensed data set when you want a uniform set of sampling times for all
+subjects in the data set.</li>
 </ul>
 <p><strong>Example of condensed data set</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(extran1, <span class="dt">package =</span> <span class="st">&quot;mrgsolve&quot;</span>)
-extran1</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(extran1, <span class="dt">package =</span> <span class="st">&quot;mrgsolve&quot;</span>)
+extran1</code></pre>
 <pre><code>.   ID  amt cmt time addl ii rate evid
 . 1  1 1000   1    0    3 24    0    1
 . 2  2 1000   2    0    0  0   20    1
@@ -322,9 +406,9 @@ extran1</code></pre></div>
 . 9  5 5000   1   24    0  0   60    1</code></pre>
 <p>See <code>?exdatasets</code> in the <code>R</code> help system after loading mrgsolve.</p>
 <p><strong>Example of full data set</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(exTheoph, <span class="dt">package =</span> <span class="st">&quot;mrgsolve&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(exTheoph, <span class="dt">package =</span> <span class="st">&quot;mrgsolve&quot;</span>)
 
-<span class="kw">head</span>(exTheoph)</code></pre></div>
+<span class="kw">head</span>(exTheoph)</code></pre>
 <pre><code>.   ID   WT Dose time  conc cmt  amt evid
 . 1  1 79.6 4.02 0.00  0.00   1 4.02    1
 . 2  1 79.6 4.02 0.25  2.84   0 0.00    0
@@ -333,9 +417,14 @@ extran1</code></pre></div>
 . 5  1 79.6 4.02 2.02  9.66   0 0.00    0
 . 6  1 79.6 4.02 3.82  8.58   0 0.00    0</code></pre>
 <p>See <code>?exdatasets</code> in the <code>R</code> help system after loading mrgsolve.</p>
-<p><strong>Augmenting observations in a clinical data set</strong> Occasionally, we want to simulate from a clinical data set (with observation records as actually observed in a population of patients) but we also want to augment those observations with a regular sequence of times (for example, to make a smooth profile on a plot). In that case, you can set <code>obsaug  = TRUE</code> when calling <code>mrgsim</code>.</p>
+<p><strong>Augmenting observations in a clinical data set</strong>
+Occasionally, we want to simulate from a clinical data set (with observation
+records as actually observed in a population of patients) but we also want to
+augment those observations with a regular sequence of times (for example, to
+make a smooth profile on a plot). In that case, you can set <code>obsaug  = TRUE</code>
+when calling <code>mrgsim</code>.</p>
 <p>For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()
+<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()
 
 out &lt;-<span class="st"> </span>
 <span class="st">  </span>mod <span class="op">%&gt;%</span>
@@ -344,7 +433,7 @@ out &lt;-<span class="st"> </span>
 <span class="st">    </span>obsaug <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="dv">24</span>, <span class="dt">delta=</span><span class="dv">1</span>)
 
-out</code></pre></div>
+out</code></pre>
 <pre><code>. Model:  housemodel 
 . Dim:    36 x 8 
 . Time:   0 to 24.37 
@@ -358,63 +447,87 @@ out</code></pre></div>
 . [6,]  1 1.12     0 1.0484 2.875 49.57 0.12643 0.12643
 . [7,]  1 2.00     1 0.3647 3.422 49.34 0.15048 0.15048
 . [8,]  1 2.02     0 0.3560 3.428 49.33 0.15072 0.15072</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">out <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(time) <span class="op">%&gt;%</span><span class="st"> </span>unlist <span class="op">%&gt;%</span><span class="st"> </span>unname</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">out <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(time) <span class="op">%&gt;%</span><span class="st"> </span>unlist <span class="op">%&gt;%</span><span class="st"> </span>unname</code></pre>
 <pre><code>.  [1]  0.00  0.00  0.25  0.57  1.00  1.12  2.00  2.02  3.00  3.82  4.00
 . [12]  5.00  5.10  6.00  7.00  7.03  8.00  9.00  9.05 10.00 11.00 12.00
 . [23] 12.12 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00
 . [34] 23.00 24.00 24.37</code></pre>
-<p><code>obsaug</code> requests that the data set be augmented with observations from the simulation time grid. We can optionally request an indicator called <code>a.u.g</code> to appear in the output that takes value of 1 for augmented observations and 0 for observations from the data set.</p>
+<p><code>obsaug</code> requests that the data set be augmented with observations from the
+simulation time grid. We can optionally request an indicator called <code>a.u.g</code> to
+appear in the output that takes value of 1 for augmented observations and 0 for
+observations from the data set.</p>
 </div>
 <div id="sorting-requirements" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> Sorting requirements</h3>
-<p>The <code>ID</code>s in the data set can appear in any order. However, an error will be generated if <code>time</code> on any record is less that <code>time</code> on the previous record within any <code>ID</code>.</p>
+<p>The <code>ID</code>s in the data set can appear in any order. However, an error will be
+generated if <code>time</code> on any record is less that <code>time</code> on the previous record
+within any <code>ID</code>.</p>
 </div>
 <div id="creating-data-sets" class="section level3">
 <h3><span class="header-section-number">3.2.3</span> Creating data sets</h3>
-<p>The <code>expand.ev</code> function is provided by mrgsolve to help in creating data sets of a certain style. But any <code>R</code> code that produces a valid data set is fine to use.</p>
+<p>The <code>expand.ev</code> function is provided by mrgsolve to help in creating data sets
+of a certain style. But any <code>R</code> code that produces a valid data set is fine to
+use.</p>
 </div>
 <div id="example" class="section level3">
 <h3><span class="header-section-number">3.2.4</span> Example</h3>
 <p>To create a data set of 3 people each receiving <strong>250 mg every 8 hours for 12 total doses</strong>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">expand.ev</span>(<span class="dt">ID=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">amt=</span><span class="dv">250</span>, <span class="dt">ii=</span><span class="dv">8</span>, <span class="dt">addl=</span><span class="dv">11</span>)
+<pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">expand.ev</span>(<span class="dt">ID=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">amt=</span><span class="dv">250</span>, <span class="dt">ii=</span><span class="dv">8</span>, <span class="dt">addl=</span><span class="dv">11</span>)
 
-data</code></pre></div>
+data</code></pre>
 <pre><code>.   ID amt ii addl evid cmt time
 . 1  1 250  8   11    1   1    0
 . 2  2 250  8   11    1   1    0
 . 3  3 250  8   11    1   1    0</code></pre>
-<p>Notice that <code>expand.ev</code> assumes that <code>time</code> is 0 and <code>cmt</code> is 1. To dose as a 2-hour infusion into the second compartment use:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">expand.ev</span>(<span class="dt">ID=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">amt=</span><span class="dv">250</span>, <span class="dt">rate=</span><span class="dv">125</span>, <span class="dt">ii=</span><span class="dv">8</span>, <span class="dt">addl=</span><span class="dv">11</span>, <span class="dt">cmt=</span><span class="dv">2</span>)
+<p>Notice that <code>expand.ev</code> assumes that <code>time</code> is 0 and <code>cmt</code> is 1. To dose as a
+2-hour infusion into the second compartment use:</p>
+<pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">expand.ev</span>(<span class="dt">ID=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">amt=</span><span class="dv">250</span>, <span class="dt">rate=</span><span class="dv">125</span>, <span class="dt">ii=</span><span class="dv">8</span>, <span class="dt">addl=</span><span class="dv">11</span>, <span class="dt">cmt=</span><span class="dv">2</span>)
 
-data</code></pre></div>
+data</code></pre>
 <pre><code>.   ID amt rate ii addl cmt evid time
 . 1  1 250  125  8   11   2    1    0
 . 2  2 250  125  8   11   2    1    0
 . 3  3 250  125  8   11   2    1    0</code></pre>
 <p>Use <code>data_set</code> to pass the data into the problem.</p>
 <p>For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()
+<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()
 
 mod <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="dv">240</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">plot</span>(CP<span class="op">~</span>time<span class="op">|</span><span class="kw">factor</span>(ID))</code></pre></div>
+<span class="st">  </span><span class="kw">plot</span>(CP<span class="op">~</span>time<span class="op">|</span><span class="kw">factor</span>(ID))</code></pre>
 <p><img src="user-guide_files/figure-html/data_set-1-1.png" width="672" /></p>
 </div>
 </div>
 <div id="idata-set" class="section level2">
 <h2><span class="header-section-number">3.3</span> Individual data sets (<code>idata</code>)</h2>
-<p>Individual data sets carry individual-level data. This individual data is used in several different ways:</p>
+<p>Individual data sets carry individual-level data. This individual data is used
+in several different ways:</p>
 <ul>
-<li><strong>Individual-level parameters</strong>: Just prior to simulating any individual, mrgsolve checks the appropriate row in <code>idata</code> (if supplied) for any columns with parameter names. If parameter names are found, the parameter list is updated and that update remains in effect for the duration of that individual’s data records.</li>
-<li><strong>Individual- or group-level designs</strong>: Each individual or group of individual may be assigned a different sampling design. For example, individuals in arm 1 may need to be simulated for 4 weeks whereas individuals in arm 2 may need to be simulated for 8 weeks. <code>idata</code> may be used to identify one of several sampling designs for each individual or group of individuals.</li>
-<li><strong>Individual-level compartment initialization</strong>: if a model has a compartment called <code>CMT</code> and mrgsolve finds a column in <code>idata</code> called <code>CMT_0</code>, the value of <code>CMT_0</code> will be used to initialize that compartment with, potentially a different value for each individual. Note that there are several other ways to initialize compartments detailed in <a href="topics.html#topic-init">6.2</a>.</li>
+<li><strong>Individual-level parameters</strong>: Just prior to simulating any individual,
+mrgsolve checks the appropriate row in <code>idata</code> (if supplied) for any columns
+with parameter names. If parameter names are found, the parameter list is
+updated and that update remains in effect for the duration of that individual’s
+data records.</li>
+<li><strong>Individual- or group-level designs</strong>: Each individual or group of individual
+may be assigned a different sampling design. For example, individuals in arm 1
+may need to be simulated for 4 weeks whereas individuals in arm 2 may need to be
+simulated for 8 weeks. <code>idata</code> may be used to identify one of several sampling
+designs for each individual or group of individuals.</li>
+<li><strong>Individual-level compartment initialization</strong>: if a model has a compartment
+called <code>CMT</code> and mrgsolve finds a column in <code>idata</code> called <code>CMT_0</code>, the value
+of <code>CMT_0</code> will be used to initialize that compartment with, potentially a
+different value for each individual. Note that there are several other ways to
+initialize compartments detailed in <a href="topics.html#topic-init">6.2</a>.</li>
 </ul>
-<p><code>idata_set</code> are entered as <code>data.frame</code> with one unique <code>ID</code> per row. In mrgsolve documentation, we refer to individual data sets <code>idata</code> or <code>idata_set</code> to distinguish them from event data sets (see section <a href="input-data-sets.html#data-set">3.2</a>).</p>
+<p><code>idata_set</code> are entered as <code>data.frame</code> with one unique <code>ID</code> per row. In
+mrgsolve documentation, we refer to individual data sets <code>idata</code> or
+<code>idata_set</code> to distinguish them from event data sets (see section
+<a href="input-data-sets.html#data-set">3.2</a>).</p>
 <p>An <code>idata_set</code> looks like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(exidata)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(exidata)
 
-exidata</code></pre></div>
+exidata</code></pre>
 <pre><code>.    ID    CL    VC     KA  KOUT  IC50 FOO
 . 1   1 1.050 47.80 0.8390 2.450 1.280   4
 . 2   2 0.730 30.10 0.0684 2.510 1.840   6
@@ -426,34 +539,48 @@ exidata</code></pre></div>
 . 8   8 1.440 31.20 0.0931 4.030 1.310   7
 . 9   9 2.570 18.20 0.0570 0.862 1.950   3
 . 10 10 2.000  6.51 0.1540 3.220 0.699   9</code></pre>
-<p>Here we have an <code>idata_set</code> with 10 subjects, one subject per row. The <code>ID</code> column connects the data in each row to the data in a <code>data_set</code>, which also requires an <code>ID</code> column.</p>
-<p>The <code>ID</code> column is the only required column name in <code>idata_set</code> and <code>ID</code> should always be a unique identifier for that row.</p>
+<p>Here we have an <code>idata_set</code> with 10 subjects, one subject per row. The <code>ID</code>
+column connects the data in each row to the data in a <code>data_set</code>, which also
+requires an <code>ID</code> column.</p>
+<p>The <code>ID</code> column is the only required column name in <code>idata_set</code> and <code>ID</code> should
+always be a unique identifier for that row.</p>
 <div id="use-case" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> Use case</h3>
-<p><code>idata_set</code> is usually helpful for implementing a batch of simulations when a <code>data_set</code> is not used. The batch may be as a sensitivity analysis or for population simulation. Usually, an events object is used with <code>idata</code>, but it is not required.</p>
+<p><code>idata_set</code> is usually helpful for implementing a batch of simulations when a
+<code>data_set</code> is not used. The batch may be as a sensitivity analysis or for
+population simulation. Usually, an events object is used with <code>idata</code>, but it
+is not required.</p>
 <p>Use the <code>idata_set</code> function to pass the data set into the problem.</p>
 <p>For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()
+<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()
 
 mod <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">idata_set</span>(exidata) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ev</span>(<span class="dt">amt=</span><span class="dv">100</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</code></pre></div>
+<span class="st">  </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</code></pre>
 <p><img src="user-guide_files/figure-html/idata_set-1-1.png" width="672" /></p>
-<p>Because there were 10 subjects in the <code>idata_set</code>, we get 10 profiles in the output. Each “individual” or “unit” received the same 100 mg dose. We would use a <code>data_set</code> to assign different doses to different individuals.</p>
+<p>Because there were 10 subjects in the <code>idata_set</code>, we get 10 profiles in the
+output. Each “individual” or “unit” received the same 100 mg dose. We would
+use a <code>data_set</code> to assign different doses to different individuals.</p>
 </div>
 </div>
 <div id="numeric-only" class="section level2">
 <h2><span class="header-section-number">3.4</span> Numeric data only</h2>
-<p>The <code>data.frame</code> holding the <code>data_set</code> or <code>idata_set</code> may have any type of data in its columns. However, only numeric data can actually get passed into the simulation engine. mrgsolve will automatically look for non-numeric columns and drop them from the <code>data_set</code> or <code>idata_set</code> with a warning.</p>
+<p>The <code>data.frame</code> holding the <code>data_set</code> or <code>idata_set</code> may have any type of data
+in its columns. However, only numeric data can actually get passed into the
+simulation engine. mrgsolve will automatically look for non-numeric columns
+and drop them from the <code>data_set</code> or <code>idata_set</code> with a warning.</p>
 </div>
 <div id="valid_data_set" class="section level2">
 <h2><span class="header-section-number">3.5</span> Data set validation</h2>
-<p>A the time of simulation, mrgsolve will validate the input data set, removing character column, checking for missing values in parameter columns, checking compartment numbers etc.</p>
-<p>Users can pre-validate the data set so that this does not need to happen at run time.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(exTheoph)
+<p>A the time of simulation, mrgsolve will validate the input data set, removing
+character column, checking for missing values in parameter columns, checking
+compartment numbers etc.</p>
+<p>Users can pre-validate the data set so that this does not need to happen at
+run time.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(exTheoph)
 
-<span class="kw">head</span>(exTheoph)</code></pre></div>
+<span class="kw">head</span>(exTheoph)</code></pre>
 <pre><code>.   ID   WT Dose time  conc cmt  amt evid
 . 1  1 79.6 4.02 0.00  0.00   1 4.02    1
 . 2  1 79.6 4.02 0.25  2.84   0 0.00    0
@@ -461,23 +588,28 @@ mod <span class="op">%&gt;%</span>
 . 4  1 79.6 4.02 1.12 10.50   0 0.00    0
 . 5  1 79.6 4.02 2.02  9.66   0 0.00    0
 . 6  1 79.6 4.02 3.82  8.58   0 0.00    0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">modlib</span>(<span class="st">&quot;pk1&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">modlib</span>(<span class="st">&quot;pk1&quot;</span>)</code></pre>
 <pre><code>. Loading model from cache.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">valid &lt;-<span class="st"> </span><span class="kw">valid_data_set</span>(exTheoph,mod)
+<pre class="sourceCode r"><code class="sourceCode r">valid &lt;-<span class="st"> </span><span class="kw">valid_data_set</span>(exTheoph,mod)
 
-<span class="kw">str</span>(valid)</code></pre></div>
+<span class="kw">str</span>(valid)</code></pre>
 <pre><code>.  &#39;valid_data_set&#39; num [1:132, 1:9] 1 1 1 1 1 1 1 1 1 1 ...
 .  - attr(*, &quot;dimnames&quot;)=List of 2
 .   ..$ : chr [1:132] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
 .   ..$ : chr [1:9] &quot;ID&quot; &quot;WT&quot; &quot;Dose&quot; &quot;time&quot; ...</code></pre>
-<p>This can improve efficiency when performing a very large number of replicate simulations on the same data set, but is unlikely to provide a meaningful speed-up for a single simulation or a small number of simulations.</p>
+<p>This can improve efficiency when performing a very large number of replicate
+simulations on the same data set, but is unlikely to provide a meaningful
+speed-up for a single simulation or a small number of simulations.</p>
 </div>
 <div id="pred-data" class="section level2">
 <h2><span class="header-section-number">3.6</span> Data sets for use with <code>$PRED</code></h2>
-<p>Because there are no compartments involved, there are relaxed data set requirements for models that utilize <code>$PRED</code>.</p>
+<p>Because there are no compartments involved, there are relaxed data set
+requirements for models that utilize <code>$PRED</code>.</p>
 <ul>
-<li><code>time</code> or <code>TIME</code> is not required as input; when this is not supplied, a <code>time</code> column will be included in output with value 0</li>
-<li>When <code>time</code> or <code>TIME</code> is supplied, it may be negative; but records must still be sorted by <code>time</code> or <code>TIME</code></li>
+<li><code>time</code> or <code>TIME</code> is not required as input; when this is not supplied, a
+<code>time</code> column will be included in output with value 0</li>
+<li>When <code>time</code> or <code>TIME</code> is supplied, it may be negative; but records must still
+be sorted by <code>time</code> or <code>TIME</code></li>
 <li>If supplied, <code>cmt</code> or <code>CMT</code> must be zero</li>
 <li>An error is generated if <code>rate</code> or <code>RATE</code> is supplied</li>
 <li>An error is generated if <code>ss</code> or <code>SS</code> is supplied</li>
@@ -542,7 +674,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

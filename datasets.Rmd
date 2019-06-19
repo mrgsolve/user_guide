@@ -78,7 +78,7 @@ In addition to these special column names, mrgsolve will recognize columns in
 \@ref(block-param) and \@ref(component-param)).  When mrgsolve sees that the
 names match up, it will update the values of those matching names based on what
 it finds as it moves through the data set (see section
-\ref@(topic-parameter-update)).
+\@ref(topic-parameter-update)).
 
 ### Two types of `data_set`
 mrgsolve distinguishes between two types of data sets: data sets that have *at

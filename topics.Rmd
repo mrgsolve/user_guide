@@ -710,30 +710,170 @@ plot(out, CP~time|GRP)
 
 ## Some helpful `C++`
 
-```{c,eval=FALSE}
+Recall that the following blocks require valid `C++` code:
 
-// If
-if(a == 2) b = 2;
+1. `$PREAMBLE`
+1. `$MAIN`
+1. `$ODE`
+1. `$TABLE`
+1. `$GLOBAL`
+1. `$PRED`
 
-// If else
-if(b <= 2) {
-c=3;
-} else {
-c=4;
-}
+We don't want users to have to be proficient in `C++` to be able to use mrgsolve.
+and we've created several macros to help simplify things as much as possible.   
+However, it is required to become familiar with some of the basics and certainly
+additional knowledge of how to do more than just the basics will help you 
+code more and more complicated models in mrgsolve.  
 
-// x <- ifelse(c == 4, 8, 10)
-double x = c == 4 ? 8 : 10;
+There are an unending stream of tutorials, references and help pages on `C++`
+to be found on the interweb.  As a general source, I like to use 
+https://en.cppreference.com/.  But, again, there many other good resources 
+out there that can suit your needs.  
 
-double d = pow(base,exponent);
-double e = exp(3);
-double f = fabs(-4);
-double g = sqrt(5);
-double h = log(6);
-double i = log10(7);
-double j = floor(4.2);
-double k = ceil(4.2);
+The rest of this section provides a very general reference of the types of 
+`C++` code and functions that you might be using in your model. 
+
+### Semi-colons
+
+Every statement in `C++` must end with a semi-colon.  For example;
+
+```{c, eval=FALSE}
+[ MAIN ] 
+double CL = exp(log_TVCL + ETA(1));
 ```
+
+or
+
+```{c, eval=FALSE}
+[ ODE ] 
+
+dxdt_DEPOT = -KA * DEPOT;
+```
+
+### if-else
+
+```{c,eval=FALSE}
+if(a == 2) b = 2;
+```
+
+```{c,eval=FALSE}
+if(a==2) {
+  b = 2;  
+}
+```
+
+
+```{c,eval=FALSE}
+if(a == 2) {
+  b=2;
+} else {
+  b=3;
+}
+```
+
+This is the equivalent of `x <- ifelse(c == 4, 8, 10)` in R
+```{c,eval=FALSE}
+double x = c == 4 ? 8 : 10;
+```
+
+### Functions
+
+The following functions are hopefully understandable based on the function 
+name.  Consult https://cppreference.com for further details.
+
+```{c, eval=FALSE}
+# base^exponent
+double d = pow(base,exponent);
+
+double e = exp(3);
+
+# absolute value
+double f = fabs(-4);
+
+double g = sqrt(5);
+
+double h = log(6);
+
+double i = log10(7);
+
+double j = floor(4.2);
+
+double k = ceil(4.2);
+
+double l = std::max(0.0, -3.0);
+
+double m = std::min(0.0, -3.0);
+```
+
+### Integer division
+
+The user is warned about division with two integers.  In `R`, the following 
+statement evaluates to `0.75`:
+
+```{r}
+3/4
+```
+
+But in `C++` it evaluates to 0:
+
+```{c, eval=FALSE}
+double x = 3/4;
+```
+
+This is because both the `3` and the `4` are taken as integer literals.  This 
+produces the same result as
+
+```{c, eval=FALSE}
+int a = 3;
+int b = 4;
+double x = a/b;
+```
+
+When one integer is divided by another integer, the remainder is discarded (the 
+result is rounded down).  This is the way `C++` works.  The user is warned. 
+
+Note that parameters in mrgsolve are `doubles` so this will evaluate to `0.75`
+
+```{c, eval=FALSE}
+[ PARAM ] a = 3
+
+[ MAIN ] 
+double x = a/4;
+```
+
+Since `a` is a parameter the operation of `a/4` is not integer division and 
+the result is `0.75`.  
+
+Unless you are already very comfortable with this concept, users are encouraged
+to add `.0` suffix to any literal number __written as C++ code__.  For example:
+
+```{c,eval=FALSE}
+double x = 3.0 / 4.0;
+```
+
+I think it's fair to say that the vast majority of time you want this to 
+evaluate to `0.75` and writing `3.0/4.0` rather than `3/4` will ensure you 
+will not discard any remainder here.
+
+If you would like to experiment with these concepts, try running this code
+
+```{r, cache=TRUE}
+library(mrgsolve)
+
+code <- '
+[ param ] a = 3
+
+[ main ] 
+capture x = 3/4;
+capture y = 3.0/4.0;
+capture z = a/4;
+'
+mod <- mcode("foo", code)
+
+mrgsim(mod)
+```
+
+
 
 ## Resimulate `ETA` and `EPS`
 
