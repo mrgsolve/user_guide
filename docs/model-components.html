@@ -392,7 +392,8 @@ the problem is started. Settings include: <code>atol</code>, <code>rtol</code>, 
 (compartments) that are becoming very small and possibly turning negative. For
 example:</p>
 <pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">modlib</span>(<span class="st">&quot;viral1&quot;</span>, <span class="dt">end =</span> <span class="dv">144</span>) </code></pre>
-<pre><code>. Loading model from cache.</code></pre>
+<pre><code>. Creating build directory: build</code></pre>
+<pre><code>. Building viral1 ... done.</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">out &lt;-<span class="st"> </span><span class="kw">mrgsim_e</span>(mod, <span class="kw">ev</span>(<span class="dt">amt =</span> <span class="dv">1000</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(V <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)
 
 out</code></pre>
@@ -611,7 +612,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["user-guide.pdf"],
+"download": null,
 "toc": {
 "collapse": "none",
 "sharing": false

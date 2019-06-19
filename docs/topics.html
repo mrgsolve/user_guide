@@ -459,15 +459,15 @@ condition as seen here:</p>
 . Dim:    25 x 3 
 . Time:   0 to 24 
 . ID:     1 
-.      ID time RESP
-. [1,]  1    0   40
-. [2,]  1    1   40
-. [3,]  1    2   40
-. [4,]  1    3   40
-. [5,]  1    4   40
-. [6,]  1    5   40
-. [7,]  1    6   40
-. [8,]  1    7   40</code></pre>
+.     ID time RESP
+. 1:   1    0   40
+. 2:   1    1   40
+. 3:   1    2   40
+. 4:   1    3   40
+. 5:   1    4   40
+. 6:   1    5   40
+. 7:   1    6   40
+. 8:   1    7   40</code></pre>
 </div>
 <div id="remember-calling-init-will-let-you-check-to-see-what-is-going-on" class="section level3">
 <h3><span class="header-section-number">6.2.4</span> Remember: calling <code>init</code> will let you check to see what is going on</h3>
@@ -480,12 +480,12 @@ does any calculation you have in there; so the result is the calculated initials
 <pre><code>. 
 .  Model initial conditions (N=1):
 .  name       value . name    value
-.  RESP (1)   0     | . ...   .</code></pre>
+.  RESP (1)   40    | . ...   .</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(<span class="dt">KIN=</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>init</code></pre>
 <pre><code>. 
 .  Model initial conditions (N=1):
 .  name       value . name    value
-.  RESP (1)   0     | . ...   .</code></pre>
+.  RESP (1)   20    | . ...   .</code></pre>
 </div>
 <div id="set-initial-conditions-via-idata" class="section level3">
 <h3><span class="header-section-number">6.2.5</span> Set initial conditions via <code>idata</code></h3>
@@ -866,15 +866,15 @@ df &lt;-<span class="st"> </span>exTheoph
 . Dim:    5904 x 4 
 . Time:   0 to 120 
 . ID:     12 
-.      ID time a.u.g      CP
-. [1,]  1 0.00     1 0.00000
-. [2,]  1 0.00     0 0.00000
-. [3,]  1 0.25     1 0.04552
-. [4,]  1 0.25     0 0.04552
-. [5,]  1 0.50     1 0.07870
-. [6,]  1 0.57     0 0.08624
-. [7,]  1 0.75     1 0.10274
-. [8,]  1 1.00     1 0.12001</code></pre>
+.     ID time a.u.g      CP
+. 1:   1 0.00     1 0.00000
+. 2:   1 0.00     0 0.00000
+. 3:   1 0.25     1 0.04552
+. 4:   1 0.25     0 0.04552
+. 5:   1 0.50     1 0.07870
+. 6:   1 0.57     0 0.08624
+. 7:   1 0.75     1 0.10274
+. 8:   1 1.00     1 0.12001</code></pre>
 <p>Now, define two time grid objects: <code>des1</code> runs from 0 to 24 and <code>des2</code> runs from
 0 to 96, both every hour.</p>
 <pre class="sourceCode r"><code class="sourceCode r">des1 &lt;-<span class="st"> </span><span class="kw">tgrid</span>(<span class="dv">0</span>,<span class="dv">24</span>,<span class="dv">1</span>)
@@ -1091,12 +1091,12 @@ sum &lt;-<span class="st"> </span><span class="kw">summary</span>(out)
 
 sum</code></pre>
 <pre><code>.        ID              time        EWT                  WT       
-.  Min.   :  1.00   Min.   :0   Min.   :-0.147157   Min.   :60.42  
-.  1st Qu.: 25.75   1st Qu.:0   1st Qu.:-0.067350   1st Qu.:65.44  
-.  Median : 50.50   Median :0   Median : 0.002623   Median :70.18  
-.  Mean   : 50.50   Mean   :0   Mean   :-0.006769   Mean   :69.73  
-.  3rd Qu.: 75.25   3rd Qu.:0   3rd Qu.: 0.053306   3rd Qu.:73.83  
-.  Max.   :100.00   Max.   :0   Max.   : 0.126415   Max.   :79.43</code></pre>
+.  Min.   :  1.00   Min.   :0   Min.   :-0.154078   Min.   :60.00  
+.  1st Qu.: 25.75   1st Qu.:0   1st Qu.:-0.057657   1st Qu.:66.08  
+.  Median : 50.50   Median :0   Median : 0.003114   Median :70.22  
+.  Mean   : 50.50   Mean   :0   Mean   :-0.002681   Mean   :70.02  
+.  3rd Qu.: 75.25   3rd Qu.:0   3rd Qu.: 0.067365   3rd Qu.:74.88  
+.  Max.   :100.00   Max.   :0   Max.   : 0.125673   Max.   :79.37</code></pre>
 <p><strong>Call <code>simeps()</code> to resimulate <code>EPS</code></strong></p>
 <ul>
 <li>No <code>$PLUGIN</code> is required</li>
@@ -1133,12 +1133,12 @@ sum &lt;-<span class="st"> </span><span class="kw">summary</span>(out)
 
 sum</code></pre>
 <pre><code>.        ID         time            CENT              CP         
-.  Min.   :1   Min.   : 0.00   Min.   :  0.00   Min.   : 0.4829  
-.  1st Qu.:1   1st Qu.:11.25   1st Qu.: 15.93   1st Qu.: 3.4087  
-.  Median :1   Median :23.50   Median : 29.38   Median : 6.4026  
-.  Mean   :1   Mean   :23.52   Mean   : 37.47   Mean   : 6.9016  
-.  3rd Qu.:1   3rd Qu.:35.75   3rd Qu.: 54.21   3rd Qu.: 9.1498  
-.  Max.   :1   Max.   :48.00   Max.   :100.00   Max.   :19.5884</code></pre>
+.  Min.   :1   Min.   : 0.00   Min.   :  0.00   Min.   : 0.2246  
+.  1st Qu.:1   1st Qu.:11.25   1st Qu.: 15.93   1st Qu.: 2.9799  
+.  Median :1   Median :23.50   Median : 29.38   Median : 6.9451  
+.  Mean   :1   Mean   :23.52   Mean   : 37.47   Mean   : 7.1551  
+.  3rd Qu.:1   3rd Qu.:35.75   3rd Qu.: 54.21   3rd Qu.:10.1900  
+.  Max.   :1   Max.   :48.00   Max.   :100.00   Max.   :19.7676</code></pre>
 <p><strong>A safety check is recommended</strong>
 Note that in both examples, we implement a safety check: an integer counter is
 incremented every time we resimulated. The resimulation process stops if we
@@ -1440,7 +1440,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["user-guide.pdf"],
+"download": null,
 "toc": {
 "collapse": "none",
 "sharing": false
