@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Model specification | mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve." />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Model specification | mrgsolve User Guide" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2019-06-18" />
+<meta name="date" content="2019-11-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="model-components.html">
-<link rel="next" href="input-data-sets.html">
+<link rel="prev" href="model-components.html"/>
+<link rel="next" href="data-set-chapter.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -55,7 +58,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -216,20 +218,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.3" data-path="model-specification.html"><a href="model-specification.html#population-pk-model-with-covariates-and-iov"><i class="fa fa-check"></i><b>2.5.3</b> Population PK model with covariates and IOV</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="input-data-sets.html"><a href="input-data-sets.html"><i class="fa fa-check"></i><b>3</b> Input data sets</a><ul>
-<li class="chapter" data-level="3.1" data-path="input-data-sets.html"><a href="input-data-sets.html#datasets"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
-<li class="chapter" data-level="3.2" data-path="input-data-sets.html"><a href="input-data-sets.html#data-set"><i class="fa fa-check"></i><b>3.2</b> Event data sets (<code>data</code>)</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="input-data-sets.html"><a href="input-data-sets.html#two-types-of-data_set"><i class="fa fa-check"></i><b>3.2.1</b> Two types of <code>data_set</code></a></li>
-<li class="chapter" data-level="3.2.2" data-path="input-data-sets.html"><a href="input-data-sets.html#sorting-requirements"><i class="fa fa-check"></i><b>3.2.2</b> Sorting requirements</a></li>
-<li class="chapter" data-level="3.2.3" data-path="input-data-sets.html"><a href="input-data-sets.html#creating-data-sets"><i class="fa fa-check"></i><b>3.2.3</b> Creating data sets</a></li>
-<li class="chapter" data-level="3.2.4" data-path="input-data-sets.html"><a href="input-data-sets.html#example"><i class="fa fa-check"></i><b>3.2.4</b> Example</a></li>
+<li class="chapter" data-level="3" data-path="data-set-chapter.html"><a href="data-set-chapter.html"><i class="fa fa-check"></i><b>3</b> Input data sets</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-set-chapter.html"><a href="data-set-chapter.html#datasets"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="data-set-chapter.html"><a href="data-set-chapter.html#data-set"><i class="fa fa-check"></i><b>3.2</b> Event data sets (<code>data</code>)</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-set-chapter.html"><a href="data-set-chapter.html#two-types-of-data_set"><i class="fa fa-check"></i><b>3.2.1</b> Two types of <code>data_set</code></a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-set-chapter.html"><a href="data-set-chapter.html#sorting-requirements"><i class="fa fa-check"></i><b>3.2.2</b> Sorting requirements</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-set-chapter.html"><a href="data-set-chapter.html#creating-data-sets"><i class="fa fa-check"></i><b>3.2.3</b> Creating data sets</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-set-chapter.html"><a href="data-set-chapter.html#example"><i class="fa fa-check"></i><b>3.2.4</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="input-data-sets.html"><a href="input-data-sets.html#idata-set"><i class="fa fa-check"></i><b>3.3</b> Individual data sets (<code>idata</code>)</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="input-data-sets.html"><a href="input-data-sets.html#use-case"><i class="fa fa-check"></i><b>3.3.1</b> Use case</a></li>
+<li class="chapter" data-level="3.3" data-path="data-set-chapter.html"><a href="data-set-chapter.html#idata-set"><i class="fa fa-check"></i><b>3.3</b> Individual data sets (<code>idata</code>)</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="data-set-chapter.html"><a href="data-set-chapter.html#use-case"><i class="fa fa-check"></i><b>3.3.1</b> Use case</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="input-data-sets.html"><a href="input-data-sets.html#numeric-only"><i class="fa fa-check"></i><b>3.4</b> Numeric data only</a></li>
-<li class="chapter" data-level="3.5" data-path="input-data-sets.html"><a href="input-data-sets.html#valid_data_set"><i class="fa fa-check"></i><b>3.5</b> Data set validation</a></li>
-<li class="chapter" data-level="3.6" data-path="input-data-sets.html"><a href="input-data-sets.html#pred-data"><i class="fa fa-check"></i><b>3.6</b> Data sets for use with <code>$PRED</code></a></li>
+<li class="chapter" data-level="3.4" data-path="data-set-chapter.html"><a href="data-set-chapter.html#numeric-only"><i class="fa fa-check"></i><b>3.4</b> Numeric data only</a></li>
+<li class="chapter" data-level="3.5" data-path="data-set-chapter.html"><a href="data-set-chapter.html#valid_data_set"><i class="fa fa-check"></i><b>3.5</b> Data set validation</a></li>
+<li class="chapter" data-level="3.6" data-path="data-set-chapter.html"><a href="data-set-chapter.html#pred-data"><i class="fa fa-check"></i><b>3.6</b> Data sets for use with <code>$PRED</code></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>4</b> Simulated output</a><ul>
 <li class="chapter" data-level="4.1" data-path="simulated-output.html"><a href="simulated-output.html#coercion-methods"><i class="fa fa-check"></i><b>4.1</b> Coercion methods</a></li>
@@ -312,17 +314,17 @@ specification elements.</p>
 <p>Use the <code>mread()</code> function to read and parse this file. For the model
 called <code>mymodel</code> saved in <code>mymodel.cpp</code> (in the current working directory),
 issue the command:</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">mread</span>(<span class="st">&quot;mymodel&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">mread</span>(<span class="st">&quot;mymodel&quot;</span>)</a></code></pre></div>
 <p><code>mread()</code> returns a model object from which you can simulate.</p>
 </div>
 <div id="spec-inline" class="section level3">
 <h3><span class="header-section-number">2.1.2</span> Inline / <code>code</code>  </h3>
 <p>Often it is more convenient to write a model right in your <code>R</code> script. The
 model might look something like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">code &lt;-<span class="st"> &#39;</span>
-<span class="st">$PARAM CL = 1, VC = 20</span>
-<span class="st">$PKMODEL ncmt=1</span>
-<span class="st">&#39;</span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">$PARAM CL = 1, VC = 20</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">$PKMODEL ncmt=1</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="st">&#39;</span></a></code></pre></div>
 <p>Here, we created a character vector of length 1 and saved it to the <code>R</code> object
 called <code>code</code>. The name of this object is irrelevant. But <code>code</code> will be
 passed into <code>mrgsolve</code> as the model definition. When <code>mrgsolve</code> gets a model
@@ -330,11 +332,11 @@ like this along with a “name” for the model, mrgsolve will write the code to
 file called <code>&lt;model-name&gt;.cpp</code> and read it right back in as if you had typed
 the code into this file (section <a href="model-specification.html#spec-separate-file">2.1.1</a>).</p>
 <p>To parse and load this model, use the <code>mcode()</code> command:</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;mymodel&quot;</span>, code)</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;mymodel&quot;</span>, code)</a></code></pre></div>
 <p><code>mcode()</code> is a convenience wrapper for <code>mread()</code>. <code>mcode</code> writes the code to
 <code>mymodel.cpp</code> in <code>tempdir()</code>, reads it back in, compiles and loads.</p>
 <p>The <code>mcode</code> call is equivalent to:</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">mread</span>(<span class="st">&quot;mymodel&quot;</span>, <span class="kw">tempdir</span>(), code)</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">mread</span>(<span class="st">&quot;mymodel&quot;</span>, <span class="kw">tempdir</span>(), code)</a></code></pre></div>
 <p>For help, see <code>?mread</code> , <code>?mcode</code> in the <code>R</code> help system after loading
 <code>mrgsolve</code>.</p>
 </div>
@@ -348,14 +350,14 @@ the code into this file (section <a href="model-specification.html#spec-separate
 separated by block identifiers. There are two ways to formulate block identifiers that
 can be used in mrgsolve. In the first type, a dollar-sign is placed at the
 start of the block name</p>
-<pre class="sourceCode c"><code class="sourceCode c">$BLOCKNAME
-&lt;block-code&gt;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb12-1" data-line-number="1">$BLOCKNAME</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">&lt;block-code&gt;</a></code></pre></div>
 <p>For example, a block of parameters would be</p>
-<pre class="sourceCode c"><code class="sourceCode c">$PARAM
-CL = <span class="dv">1</span></code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb13-1" data-line-number="1">$PARAM</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">CL = <span class="dv">1</span></a></code></pre></div>
 <p>The second way to write this is with brackets</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ BLOCKNAME ] 
-&lt;block-code&gt;</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb14-1" data-line-number="1">[ BLOCKNAME ] </a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">&lt;block-code&gt;</a></code></pre></div>
 <p>There is no functional difference between the dollar-sign notation and the
 brackets. When model specification code is saved into a file with a <code>.cpp</code>
 extension, the code editor may make certain assumptions about formatting or
@@ -397,14 +399,14 @@ for every parameter name. Names (and numbers) of parameters must be set at the
 time the model is compiled, but parameter values may be updated without
 re-compiling the model.</p>
 <p>Example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ PARAM ] CL = <span class="dv">1</span>, VC = <span class="dv">20</span>, KA = <span class="fl">1.2</span>
-KM = <span class="dv">25</span>, VMAX = <span class="dv">400</span>, FLAG = <span class="dv">1</span>, WT = <span class="dv">80</span>
-SEX = <span class="dv">0</span>, N = sqrt(<span class="dv">25</span>)</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb15-1" data-line-number="1">[ PARAM ] CL = <span class="dv">1</span>, VC = <span class="dv">20</span>, KA = <span class="fl">1.2</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">KM = <span class="dv">25</span>, VMAX = <span class="dv">400</span>, FLAG = <span class="dv">1</span>, WT = <span class="dv">80</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">SEX = <span class="dv">0</span>, N = sqrt(<span class="dv">25</span>)</a></code></pre></div>
 <p>Annotated example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ PARAM ] @annotated
-CL :   <span class="dv">1</span> : Clearance (L/hr)
-VC :  <span class="dv">20</span> : Volume of distribution (L)
-KA:  <span class="fl">1.2</span> : Absorption rate constant (<span class="dv">1</span>/hr)</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb16-1" data-line-number="1">[ PARAM ] @annotated</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">CL :   <span class="dv">1</span> : Clearance (L/hr)</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">VC :  <span class="dv">20</span> : Volume of distribution (L)</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">KA:  <span class="fl">1.2</span> : Absorption rate constant (<span class="dv">1</span>/hr)</a></code></pre></div>
 <p>Notes:</p>
 <ul>
 <li>Multiple blocks are allowed</li>
@@ -429,13 +431,13 @@ to be updated, you can move them to a <code>$FIXED</code> block to get a modest 
 in efficiency of the simulation.</p>
 <p>Items in <code>$FIXED</code> will not be shown when parameters are queried.</p>
 <p>Example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ PARAM ] CL = <span class="dv">2</span>, VC = <span class="dv">20</span>
-
-[ FIXED ]
-g = <span class="fl">9.8</span></code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb17-1" data-line-number="1">[ PARAM ] CL = <span class="dv">2</span>, VC = <span class="dv">20</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">[ FIXED ]</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">g = <span class="fl">9.8</span></a></code></pre></div>
 <p>Annotated example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$FIXED @annotated
-g : <span class="fl">9.8</span> : Acceleration due to gravity (m/s^<span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb18-1" data-line-number="1">$FIXED @annotated</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">g : <span class="fl">9.8</span> : Acceleration due to gravity (m/s^<span class="dv">2</span>)</a></code></pre></div>
 <p>See also: section <a href="model-specification.html#block-param">2.2.3</a> and <a href="model-specification.html#block-theta">2.2.18</a>.</p>
 <p>Notes:</p>
 <ul>
@@ -454,17 +456,17 @@ g : <span class="fl">9.8</span> : Acceleration due to gravity (m/s^<span class="
 <li>For <code>$INIT</code> give the name and initial value for all compartments</li>
 </ul>
 <p>Examples:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ CMT ] GUT CENT RESPONSE</code></pre>
-<pre class="sourceCode c"><code class="sourceCode c">[ INIT ] GUT  = <span class="dv">0</span>, CENT = <span class="dv">0</span>, RESPONSE = <span class="dv">25</span></code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb19-1" data-line-number="1">[ CMT ] GUT CENT RESPONSE</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb20-1" data-line-number="1">[ INIT ] GUT  = <span class="dv">0</span>, CENT = <span class="dv">0</span>, RESPONSE = <span class="dv">25</span></a></code></pre></div>
 <p>Annotated examples:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ CMT ] @annotated
-GUT      : Dosing compartment (mg)
-CENT     : Central PK compartment (mg)
-RESPONSE : Response</code></pre>
-<pre class="sourceCode c"><code class="sourceCode c">$INIT @annotated
-GUT      :   <span class="dv">0</span> : Dosing compartment (mg)
-CENT     :   <span class="dv">0</span> : Central PK compartment (mg)
-RESPONSE :  <span class="dv">25</span> : Response</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb21-1" data-line-number="1">[ CMT ] @annotated</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">GUT      : Dosing compartment (mg)</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">CENT     : Central PK compartment (mg)</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">RESPONSE : Response</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb22-1" data-line-number="1">$INIT @annotated</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">GUT      :   <span class="dv">0</span> : Dosing compartment (mg)</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">CENT     :   <span class="dv">0</span> : Central PK compartment (mg)</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">RESPONSE :  <span class="dv">25</span> : Response</a></code></pre></div>
 <p>See <code>?init</code> in the <code>R</code> help system after loading <code>mrgsolve</code>.</p>
 </div>
 <div id="block-main" class="section level3">
@@ -487,15 +489,15 @@ gets called every time the model initial conditions are queried with <code>init(
 <p>New variables may be declared in <code>$MAIN</code>. See section <a href="model-specification.html#new-variables">2.4</a>
 for details.</p>
 <p>Examples:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ CMT ] CENT RESP
-
-[ PARAM ] KIN = <span class="dv">100</span>, KOUT = <span class="dv">2</span>, CL = <span class="dv">1</span>, VC = <span class="dv">20</span>
-
-[ MAIN ]
-
-RESP_0 = KIN/KOUT;
-
-<span class="dt">double</span> ke = CL/VC;</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb23-1" data-line-number="1">[ CMT ] CENT RESP</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">[ PARAM ] KIN = <span class="dv">100</span>, KOUT = <span class="dv">2</span>, CL = <span class="dv">1</span>, VC = <span class="dv">20</span></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">[ MAIN ]</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb23-7" data-line-number="7">RESP_0 = KIN/KOUT;</a>
+<a class="sourceLine" id="cb23-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb23-9" data-line-number="9"><span class="dt">double</span> ke = CL/VC;</a></code></pre></div>
 </div>
 <div id="block-ode" class="section level3">
 <h3><span class="header-section-number">2.2.7</span> <code>$ODE</code>  </h3>
@@ -508,11 +510,11 @@ of the compartment. The <code>dxdt_</code> equation may be a function of model
 parameters (via <code>$PARAM</code>), the current value of any compartment (<code>CMT</code>)
 or any user-derived variable.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ CMT ] GUT CENT
-
-[ ODE ]
-dxdt_GUT = -KA*GUT;
-dxdt_CENT = KA*GUT - KE*CENT;</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb24-1" data-line-number="1">[ CMT ] GUT CENT</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">[ ODE ]</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">dxdt_GUT = -KA*GUT;</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5">dxdt_CENT = KA*GUT - KE*CENT;</a></code></pre></div>
 <p>It is important to make sure that there is a <code>dxdt_</code> expression defined for
 every compartment listed in <code>$CMT</code> or <code>$INIT</code>, even if it is <code>dxdt_CMT = 0;</code></p>
 <p>The <code>$ODE</code> function is called repeatedly during a simulation run. So it is
@@ -523,14 +525,14 @@ written in <code>$ODE</code>.</p>
 <p>New variables may be declared in <code>$ODE</code>. See section <a href="model-specification.html#new-variables">2.4</a>
 for details.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$CMT CENT RESP
-$PARAM VC = <span class="dv">100</span>, KE = <span class="fl">0.2</span>, KOUT = <span class="dv">2</span>, KIN = <span class="dv">100</span>
-$ODE
-<span class="dt">double</span> CP = CENT/VC;
-<span class="dt">double</span> INH = CP/(IMAX+CP)
-
-dxdt_CENT = -KE*CENT;
-dxdt_RESP =  KIN*(<span class="dv">1</span> - INH) - RESP*KOUT;</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb25-1" data-line-number="1">$CMT CENT RESP</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">$PARAM VC = <span class="dv">100</span>, KE = <span class="fl">0.2</span>, KOUT = <span class="dv">2</span>, KIN = <span class="dv">100</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">$ODE</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="dt">double</span> CP = CENT/VC;</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="dt">double</span> INH = CP/(IMAX+CP)</a>
+<a class="sourceLine" id="cb25-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">dxdt_CENT = -KE*CENT;</a>
+<a class="sourceLine" id="cb25-8" data-line-number="8">dxdt_RESP =  KIN*(<span class="dv">1</span> - INH) - RESP*KOUT;</a></code></pre></div>
 <p>If the model needs to refer to the current time, use the <code>SOLVERTIME</code> variable.</p>
 <p>Notes:</p>
 <ul>
@@ -545,8 +547,8 @@ dxdt_RESP =  KIN*(<span class="dv">1</span> - INH) - RESP*KOUT;</code></pre>
 <p>Use <code>$TABLE</code> to interact with parameters, compartment values, and other
 user-defined variables <strong>after</strong> the system advances to the next time.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ TABLE ]
-<span class="dt">double</span> CP = CENT/VC;</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb26-1" data-line-number="1">[ TABLE ]</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="dt">double</span> CP = CENT/VC;</a></code></pre></div>
 <p><strong>NOTE</strong>
 <code>mrgsolve</code> formerly had a <code>table()</code> macro for inserting derived values into
 simulated output. This macro has been deprecated. The only way to insert
@@ -571,20 +573,20 @@ only called one time during the simulation run (right at the start). The code
 in this block is typically used to configure or initialize C++ variables or data
 structures that were declared in <code>$GLOBAL</code>.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ PLUGIN ] Rcpp
-
-[ GLOBAL ]
-namespace{
-  Rcpp::NumericVector x;
-}
-
-[ PREAMBLE ]
-x.push_back(<span class="dv">1</span>);
-x.push_back(<span class="dv">2</span>);
-x.push_back(<span class="dv">3</span>);
-
-[ MAIN ]
-&lt;some code that uses x vector&gt;</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb27-1" data-line-number="1">[ PLUGIN ] Rcpp</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">[ GLOBAL ]</a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">namespace{</a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">  Rcpp::NumericVector x;</a>
+<a class="sourceLine" id="cb27-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb27-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb27-8" data-line-number="8">[ PREAMBLE ]</a>
+<a class="sourceLine" id="cb27-9" data-line-number="9">x.push_back(<span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb27-10" data-line-number="10">x.push_back(<span class="dv">2</span>);</a>
+<a class="sourceLine" id="cb27-11" data-line-number="11">x.push_back(<span class="dv">3</span>);</a>
+<a class="sourceLine" id="cb27-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb27-13" data-line-number="13">[ MAIN ]</a>
+<a class="sourceLine" id="cb27-14" data-line-number="14">&lt;some code that uses x vector&gt;</a></code></pre></div>
 <p>In this example, we want to use a numeric vector <code>x</code> and declare it in <code>$GLOBAL</code>
 so that we can use it anywhere else in the code (the declaration is also made in
 an unnamed namespace to ensure that the variable is local to the model file).
@@ -610,16 +612,16 @@ model file)</li>
 write all algebraic expressions for derived parameters, the response, and
 any other derived output quantities.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ PARAM ] TVE0 = <span class="dv">100</span>, AUC50 = <span class="dv">100</span>, IMAX = <span class="dv">40</span>, AUC = <span class="dv">0</span>
-
-[ PRED ]
-<span class="dt">double</span> E0 = EVE0*exp(ETA(<span class="dv">1</span>));
-
-<span class="dt">double</span> RESP = E0 - IMAX*AUC/(AUC50+AUC);</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb28-1" data-line-number="1">[ PARAM ] TVE0 = <span class="dv">100</span>, AUC50 = <span class="dv">100</span>, IMAX = <span class="dv">40</span>, AUC = <span class="dv">0</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">[ PRED ]</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="dt">double</span> E0 = EVE0*exp(ETA(<span class="dv">1</span>));</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb28-6" data-line-number="6"><span class="dt">double</span> RESP = E0 - IMAX*AUC/(AUC50+AUC);</a></code></pre></div>
 <p>In this example, the entire model is written in the <code>$PRED</code> block. It is an
 error to include the following blocks when <code>$PRED</code> is being used: <code>$MAIN</code>,
 <code>$TABLE</code>, <code>$PKMODEL</code>, <code>$ODE</code>, <code>$CMT</code>, <code>$INIT</code>.</p>
-<p>See the section <a href="input-data-sets.html#pred-data">3.6</a> for additional information regarding data sets
+<p>See the section <a href="data-set-chapter.html#pred-data">3.6</a> for additional information regarding data sets
 in use with <code>$PRED</code> block.</p>
 </div>
 <div id="block-capture" class="section level3">
@@ -630,48 +632,48 @@ in use with <code>$PRED</code> block.</p>
 <p>This is a block to identify variables that should be captured in the simulated
 output.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ PARAM ] A = <span class="dv">1</span>, B = <span class="dv">2</span>
-
-[ MAIN ]
-<span class="dt">double</span> C = <span class="dv">3</span>;
-<span class="dt">bool</span> yes = true;
-
-[ CAPTURE ] A B C yes</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb29-1" data-line-number="1">[ PARAM ] A = <span class="dv">1</span>, B = <span class="dv">2</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">[ MAIN ]</a>
+<a class="sourceLine" id="cb29-4" data-line-number="4"><span class="dt">double</span> C = <span class="dv">3</span>;</a>
+<a class="sourceLine" id="cb29-5" data-line-number="5"><span class="dt">bool</span> yes = true;</a>
+<a class="sourceLine" id="cb29-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb29-7" data-line-number="7">[ CAPTURE ] A B C yes</a></code></pre></div>
 <p>This construct will result in 4 additional columns in the simulated output
 with names <code>A</code>, <code>B</code>, <code>C</code>, and <code>yes</code>.</p>
 <p>Users can also rename captured variables by providing a
 <code>newname = oldname</code> specification.</p>
-<pre class="sourceCode c"><code class="sourceCode c">$PARAM WT = <span class="dv">70</span>, THETA1 = <span class="fl">2.2</span>
-
-$MAIN
-<span class="dt">double</span> CL = THETA1*pow(WT/<span class="dv">70</span>,<span class="fl">0.75</span>)*exp(ETA(<span class="dv">1</span>));
-
-$OMEGA <span class="dv">1</span>
-
-$CAPTURE WEIGHT = WT TVCL = THETA2 CL  ETA(<span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb30-1" data-line-number="1">$PARAM WT = <span class="dv">70</span>, THETA1 = <span class="fl">2.2</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">$MAIN</a>
+<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="dt">double</span> CL = THETA1*pow(WT/<span class="dv">70</span>,<span class="fl">0.75</span>)*exp(ETA(<span class="dv">1</span>));</a>
+<a class="sourceLine" id="cb30-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb30-6" data-line-number="6">$OMEGA <span class="dv">1</span></a>
+<a class="sourceLine" id="cb30-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb30-8" data-line-number="8">$CAPTURE WEIGHT = WT TVCL = THETA2 CL  ETA(<span class="dv">1</span>)</a></code></pre></div>
 <p>In this example, the names of the captured data items will be
 <code>WEIGHT,TVCL,CL,ETA_1</code>.</p>
 <p>Users can use the <code>capture</code> type to declare variables in <code>$MAIN</code> and <code>$TABLE</code>.
 <code>capture</code> types are really <code>double</code>s, but using that type will signal <code>mrgsolve</code>
 to automatically capture that value. For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$PARAM VC = <span class="dv">300</span>
-
-$CMT CENT
-
-$TABLE
-capture DV = (CENT/VC);</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb31-1" data-line-number="1">$PARAM VC = <span class="dv">300</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">$CMT CENT</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb31-5" data-line-number="5">$TABLE</a>
+<a class="sourceLine" id="cb31-6" data-line-number="6">capture DV = (CENT/VC);</a></code></pre></div>
 <p>Since we used type <code>capture</code> for <code>DV</code>, <code>DV</code> will show up as a column in the
 simulated data.</p>
 <p>Annotated example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$MAIN
-<span class="dt">double</span> CLi = TVCL*exp(ECL);
-
-$TABLE
-<span class="dt">double</span> DV = (CENT/VC)*exp(PROP);
-
-$CAPTURE @annotated
-CLi : Individual clearance (L/hr)
-DV  : Plasma concentration (mcg/ml)</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb32-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="dt">double</span> CLi = TVCL*exp(ECL);</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">$TABLE</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5"><span class="dt">double</span> DV = (CENT/VC)*exp(PROP);</a>
+<a class="sourceLine" id="cb32-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb32-7" data-line-number="7">$CAPTURE @annotated</a>
+<a class="sourceLine" id="cb32-8" data-line-number="8">CLi : Individual clearance (L/hr)</a>
+<a class="sourceLine" id="cb32-9" data-line-number="9">DV  : Plasma concentration (mcg/ml)</a></code></pre></div>
 <p>New variables may be declared in <code>$TABLE</code>. See section <a href="model-specification.html#new-variables">2.4</a> for
 details.</p>
 </div>
@@ -686,38 +688,38 @@ effects drawn from multivariate normal distribution. All random effects are
 assumed to have mean of 0. Off diagonal elements for block matrices are assumed
 to be correlation coefficients if the <code>@correlation</code> option is used (see below).</p>
 <p>By default, a <strong>diagonal</strong> matrix is assumed. So:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$OMEGA
-<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb33-1" data-line-number="1">$OMEGA</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></a></code></pre></div>
 <p>will generate a 3x3 omega matrix.</p>
 <p>A <strong>block</strong> matrix may be entered by using <code>block=TRUE</code>. So:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$OMEGA @block
-<span class="fl">0.1</span> <span class="fl">0.02</span> <span class="fl">0.3</span></code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb34-1" data-line-number="1">$OMEGA @block</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="fl">0.1</span> <span class="fl">0.02</span> <span class="fl">0.3</span></a></code></pre></div>
 <p>will generate a 2x2 matrix with covariance 0.02.</p>
 <p>A 2x2 matrix where the off-diagonal element is a correlation, not a covariance
 can be specified like this:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$OMEGA @correlation
-<span class="fl">0.1</span> <span class="fl">0.67</span> <span class="fl">0.3</span></code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb35-1" data-line-number="1">$OMEGA @correlation</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="fl">0.1</span> <span class="fl">0.67</span> <span class="fl">0.3</span></a></code></pre></div>
 <p>Here, the correlation is 0.67. <code>mrgsolve</code> will calculate the covariances and
 substitute these values. The matrix will be stored and used with these
 covariances, not the correlation.</p>
 <p>A name can be assigned to each matrix:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$OMEGA @name PK @block
-<span class="fl">0.2</span> <span class="fl">0.02</span> <span class="fl">0.3</span>
-
-$OMEGA @name PD
-<span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span> <span class="fl">0.5</span></code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb36-1" data-line-number="1">$OMEGA @name PK @block</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="fl">0.2</span> <span class="fl">0.02</span> <span class="fl">0.3</span></a>
+<a class="sourceLine" id="cb36-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">$OMEGA @name PD</a>
+<a class="sourceLine" id="cb36-5" data-line-number="5"><span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span> <span class="fl">0.5</span></a></code></pre></div>
 <p>to distinguish between multiple <code>$OMEGA</code> blocks and to facilitate updating later. The model in the preceding example will have two
 <code>$OMEGA</code> matrices: 2x2 and 4x4.</p>
 <p>Annotated example (diagonal matrix):</p>
-<pre class="sourceCode c"><code class="sourceCode c">$OMEGA @annotated
-ECL: <span class="fl">0.09</span> : ETA on clearance
-EVC: <span class="fl">0.19</span> : ETA on volume
-EKA: <span class="fl">0.45</span> : ETA on absorption rate constant</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb37-1" data-line-number="1">$OMEGA @annotated</a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">ECL: <span class="fl">0.09</span> : ETA on clearance</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">EVC: <span class="fl">0.19</span> : ETA on volume</a>
+<a class="sourceLine" id="cb37-4" data-line-number="4">EKA: <span class="fl">0.45</span> : ETA on absorption rate constant</a></code></pre></div>
 <p>Annotated example (block matrix):</p>
-<pre class="sourceCode c"><code class="sourceCode c">$OMEGA @annotated @block
-ECL: <span class="fl">0.09</span> : ETA on clearance
-EVC: <span class="fl">0.001</span> <span class="fl">0.19</span> : ETA on volume
-EKA: <span class="fl">0.001</span> <span class="fl">0.001</span> <span class="fl">0.45</span> : ETA on absorption rate constant</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb38-1" data-line-number="1">$OMEGA @annotated @block</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">ECL: <span class="fl">0.09</span> : ETA on clearance</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">EVC: <span class="fl">0.001</span> <span class="fl">0.19</span> : ETA on volume</a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">EKA: <span class="fl">0.001</span> <span class="fl">0.001</span> <span class="fl">0.45</span> : ETA on absorption rate constant</a></code></pre></div>
 <p>Notes:</p>
 <ul>
 <li>Multiple <code>$OMEGA</code> blocks are allowed</li>
@@ -743,7 +745,7 @@ to be correlation coefficients if the <code>@correlation</code> option is used (
 <code>name=value</code> format, where <code>value</code> is evaluated by the <code>R</code> interpreter.</p>
 <p>Most of the options that can be entered in <code>$SET</code> are passed to <code>update</code>.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ SET ] end = <span class="dv">240</span>, delta=<span class="fl">0.5</span>, req=s(RESP)</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb39-1" data-line-number="1">[ SET ] end = <span class="dv">240</span>, delta=<span class="fl">0.5</span>, req=s(RESP)</a></code></pre></div>
 <p>Here, we set the simulation <code>end</code> time to 240, set the time difference between
 two adjacent time points to 0.25 time units, and request only the <code>RESP</code>
 compartment in the simulated output.</p>
@@ -765,8 +767,8 @@ However there are two more-common uses:</p>
 Preprocessor <code>#define</code> directives are direct substitutions that the <code>C++</code>
 preprocessor makes prior to compiling your code.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ GLOBAL ]
-<span class="pp">#define CP (CENT/VC)</span></code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb40-1" data-line-number="1">[ GLOBAL ]</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="pp">#define CP (CENT/VC)</span></a></code></pre></div>
 <p>When this preprocessor directive is included, everywhere the preprocessor finds
 a <code>CP</code> token it will substitute <code>(CENT/VC)</code>. Both <code>CENT</code> and <code>VC</code> must be
 defined and the ratio of <code>CENT</code> to <code>VC</code> will be calculated depending on whatever
@@ -776,8 +778,8 @@ operations involving <code>CP</code>.</p>
 <p><strong>Declaring global variables</strong>
 Sometimes, you may wish to use global variables and have more control over how
 they get declared.</p>
-<pre class="sourceCode c"><code class="sourceCode c">$GLOBAL
-<span class="dt">bool</span> cure = false;</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb41-1" data-line-number="1">$GLOBAL</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="dt">bool</span> cure = false;</a></code></pre></div>
 <p>With this construct, the boolean variable <code>cure</code> is declared and defined right
 as the model is compiled.</p>
 </div>
@@ -797,12 +799,12 @@ specification file.</p>
 <p>The <code>$CMT</code> or <code>$INIT</code> block must also be included with an appropriate number of
 compartments. Compartment names, however, may be determined by the user.</p>
 <p>Example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ CMT ] GUT CENT PERIPH
-
-[ PKMODEL ] ncmt=<span class="dv">2</span>, depot=TRUE</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb42-1" data-line-number="1">[ CMT ] GUT CENT PERIPH</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">[ PKMODEL ] ncmt=<span class="dv">2</span>, depot=TRUE</a></code></pre></div>
 <p>As of version <code>0.8.2</code>, we can alternatively specify the compartments
 right in the <code>$PKMODEL</code> block:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$PKMODEL cmt=<span class="st">&quot;GUT CENT PERIPH&quot;</span>, depot = TRUE</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb43-1" data-line-number="1">$PKMODEL cmt=<span class="st">&quot;GUT CENT PERIPH&quot;</span>, depot = TRUE</a></code></pre></div>
 <p>Specifying three compartments with <code>depot=TRUE</code> implies <code>ncmt=2</code>. Notice that a
 separate <code>$CMT</code> block is not appropriate when <code>cmt</code> is specified in <code>$PKMODEL</code>.</p>
 </div>
@@ -827,7 +829,7 @@ at the top of your model file</li>
 </ul></li>
 </ul>
 <p>You recruit a plugin in the <code>$PLUGIN</code> block</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ PLUGIN ] Rcpp</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb44-1" data-line-number="1">[ PLUGIN ] Rcpp</a></code></pre></div>
 <p>The example above will bring <code>Rcpp</code> headers into the model code.</p>
 <p>Plugins that you can use:
 - <code>Rcpp</code> to write any <code>Rcpp</code> code
@@ -839,19 +841,19 @@ headers. To take advantage of that, you will need to know how to use <code>Rcpp<
 <code>boost</code> etc. For the <code>BH</code> plugin, no headers are included for you; you must
 include the proper headers you want to use in <code>$GLOBAL</code>.</p>
 <p><strong>Rcpp</strong> example</p>
-<pre class="sourceCode c"><code class="sourceCode c">
-[ PLUGIN ] Rcpp
-
-[ MAIN ]
-
-<span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {
-  <span class="dt">double</span> wt = R::rnorm(<span class="dv">70</span>,<span class="dv">20</span>);
-  <span class="dt">double</span> sex = R::rbinom(<span class="dv">1</span>,<span class="fl">0.51</span>);
-}</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb45-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb45-2" data-line-number="2">[ PLUGIN ] Rcpp</a>
+<a class="sourceLine" id="cb45-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">[ MAIN ]</a>
+<a class="sourceLine" id="cb45-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb45-6" data-line-number="6"><span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb45-7" data-line-number="7">  <span class="dt">double</span> wt = R::rnorm(<span class="dv">70</span>,<span class="dv">20</span>);</a>
+<a class="sourceLine" id="cb45-8" data-line-number="8">  <span class="dt">double</span> sex = R::rbinom(<span class="dv">1</span>,<span class="fl">0.51</span>);</a>
+<a class="sourceLine" id="cb45-9" data-line-number="9">}</a></code></pre></div>
 <p><strong>mrgx</strong></p>
 <p>For example</p>
-<pre class="sourceCode c"><code class="sourceCode c">
-$PLUGIN Rcpp mrgx</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb46-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">$PLUGIN Rcpp mrgx</a></code></pre></div>
 <p>Functions provided by <code>mrgx</code>:</p>
 <ul>
 <li><code>T get&lt;T&gt;(std::string &lt;pkgname&gt;, std::string &lt;objectname&gt;)</code>
@@ -885,37 +887,37 @@ to call these functions you must include <code>mrgx::</code> namespace identifie
 front of the function name. For example, don’t use <code>rnorm(50,20,40,140)</code>; use
 <code>mrgx::rnorm(50,20,40,140)</code>.</p>
 <p><strong>Get a numeric vector from <code>$ENV</code></strong></p>
-<pre class="sourceCode c"><code class="sourceCode c">[ PLUGIN ] Rcpp mrgx
-
-[ ENV ]
-x &lt;- c(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)
-
-[ GLOBAL ]
-Rcpp::NumericVector x;
-
-[ PREAMBLE ]
-x = mrgx::get&lt;Rcpp::NumericVector&gt;(<span class="st">&quot;x&quot;</span>, self);</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb47-1" data-line-number="1">[ PLUGIN ] Rcpp mrgx</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb47-3" data-line-number="3">[ ENV ]</a>
+<a class="sourceLine" id="cb47-4" data-line-number="4">x &lt;- c(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb47-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb47-6" data-line-number="6">[ GLOBAL ]</a>
+<a class="sourceLine" id="cb47-7" data-line-number="7">Rcpp::NumericVector x;</a>
+<a class="sourceLine" id="cb47-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb47-9" data-line-number="9">[ PREAMBLE ]</a>
+<a class="sourceLine" id="cb47-10" data-line-number="10">x = mrgx::get&lt;Rcpp::NumericVector&gt;(<span class="st">&quot;x&quot;</span>, self);</a></code></pre></div>
 <p><strong>Get the <code>print</code> function from <code>package:base</code></strong></p>
-<pre class="sourceCode c"><code class="sourceCode c">$PLUGIN Rcpp mrgx
-
-$GLOBAL
-Rcpp::Function print = mrgx::mt_fun();
-
-$PREAMBLE
-print = mrgx::get&lt;Rcpp::Function&gt;(<span class="st">&quot;base&quot;</span>, <span class="st">&quot;print&quot;</span>);
-
-$MAIN
-print(self.rown);</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb48-1" data-line-number="1">$PLUGIN Rcpp mrgx</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">$GLOBAL</a>
+<a class="sourceLine" id="cb48-4" data-line-number="4">Rcpp::Function print = mrgx::mt_fun();</a>
+<a class="sourceLine" id="cb48-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb48-6" data-line-number="6">$PREAMBLE</a>
+<a class="sourceLine" id="cb48-7" data-line-number="7">print = mrgx::get&lt;Rcpp::Function&gt;(<span class="st">&quot;base&quot;</span>, <span class="st">&quot;print&quot;</span>);</a>
+<a class="sourceLine" id="cb48-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb48-9" data-line-number="9">$MAIN</a>
+<a class="sourceLine" id="cb48-10" data-line-number="10">print(self.rown);</a></code></pre></div>
 <p>Note that we declare the <code>print</code> in <code>$GLOBAL</code> and use the <code>mt_fun()</code> place holder.</p>
 <p><strong>Simulate truncated normal variables</strong>
 This simulates a weight that has mean 80, standard deviation 20 and is greater
 than 40 and less than 140.</p>
-<pre class="sourceCode c"><code class="sourceCode c">$PLUGIN Rcpp mrgx
-
-$MAIN
-<span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {
-  <span class="dt">double</span> WT = mrgx::rnorm(<span class="dv">80</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">140</span>);
-}</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb49-1" data-line-number="1">$PLUGIN Rcpp mrgx</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb49-3" data-line-number="3">$MAIN</a>
+<a class="sourceLine" id="cb49-4" data-line-number="4"><span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb49-5" data-line-number="5">  <span class="dt">double</span> WT = mrgx::rnorm(<span class="dv">80</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">140</span>);</a>
+<a class="sourceLine" id="cb49-6" data-line-number="6">}</a></code></pre></div>
 <p>See also: <a href="model-specification.html#block-preamble">2.2.9</a>.</p>
 </div>
 <div id="block-theta" class="section level3">
@@ -927,20 +929,20 @@ $MAIN
 are determined by a prefix and a number. By default, the prefix is <code>THETA</code> and
 the number sequentially numbers the input values.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ THETA ]
-<span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span></code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb50-1" data-line-number="1">[ THETA ]</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span></a></code></pre></div>
 <p>is equivalent to</p>
-<pre class="sourceCode c"><code class="sourceCode c">$PARAM THETA1 = <span class="fl">0.1</span>, THETA2 = <span class="fl">0.2</span>, THETA3 = <span class="fl">0.3</span></code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb51-1" data-line-number="1">$PARAM THETA1 = <span class="fl">0.1</span>, THETA2 = <span class="fl">0.2</span>, THETA3 = <span class="fl">0.3</span></a></code></pre></div>
 <p>Annotated example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$THETA @annotated
-<span class="fl">0.1</span> : Typical value of clearance (L/hr)
-<span class="fl">0.2</span> : Typical value of volume (L)
-<span class="fl">0.3</span> : Typical value of ka (<span class="dv">1</span>/hr)</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb52-1" data-line-number="1">$THETA @annotated</a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="fl">0.1</span> : Typical value of clearance (L/hr)</a>
+<a class="sourceLine" id="cb52-3" data-line-number="3"><span class="fl">0.2</span> : Typical value of volume (L)</a>
+<a class="sourceLine" id="cb52-4" data-line-number="4"><span class="fl">0.3</span> : Typical value of ka (<span class="dv">1</span>/hr)</a></code></pre></div>
 <p>To change the prefix, use <code>@name</code> option</p>
-<pre class="sourceCode c"><code class="sourceCode c">$THETA @name theta
-<span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span></code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb53-1" data-line-number="1">$THETA @name theta</a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span></a></code></pre></div>
 <p>would be equivalent to</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ PARAM ] theta1 = <span class="fl">0.1</span>, theta2 = <span class="fl">0.2</span>, theta3 = <span class="fl">0.3</span></code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb54-1" data-line-number="1">[ PARAM ] theta1 = <span class="fl">0.1</span>, theta2 = <span class="fl">0.2</span>, theta3 = <span class="fl">0.3</span></a></code></pre></div>
 <p>See also: <a href="model-specification.html#block-param">2.2.3</a> .</p>
 </div>
 <div id="block-nmxml" class="section level3">
@@ -965,8 +967,8 @@ working directory.</p>
 help topic in your <code>R</code> session after loading the <code>mrgsolve</code> package.</p>
 <p><strong>An example</strong></p>
 <p>There is a NONMEM run embedded in the <code>mrgsolve</code> package</p>
-<pre class="sourceCode r"><code class="sourceCode r">path &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">path.package</span>(<span class="st">&quot;mrgsolve&quot;</span>),<span class="st">&quot;nonmem&quot;</span>)
-<span class="kw">list.files</span>(path, <span class="dt">recursive=</span><span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">path &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">path.package</span>(<span class="st">&quot;mrgsolve&quot;</span>),<span class="st">&quot;nonmem&quot;</span>)</a>
+<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="kw">list.files</span>(path, <span class="dt">recursive=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>.  [1] &quot;1005/1005.cat&quot;    &quot;1005/1005.coi&quot;    &quot;1005/1005.cor&quot;   
 .  [4] &quot;1005/1005.cov&quot;    &quot;1005/1005.cpu&quot;    &quot;1005/1005.ctl&quot;   
 .  [7] &quot;1005/1005.ext&quot;    &quot;1005/1005.grd&quot;    &quot;1005/1005.lst&quot;   
@@ -975,41 +977,41 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 . [16] &quot;1005/INTER&quot;</code></pre>
 <p>We can create a <code>mrgsolve</code> control stream that will import <code>THETA</code>, <code>OMEGA</code> and
 <code>SIGMA</code> from that run using the <code>$NMXML</code> code block.</p>
-<pre class="sourceCode r"><code class="sourceCode r">code &lt;-<span class="st"> &#39;</span>
-<span class="st">$NMXML</span>
-<span class="st">run = 1005</span>
-<span class="st">project = path</span>
-<span class="st">olabels = s_(ECL, EVC, EKA)</span>
-<span class="st">slabels = s_(PROP, ADD)</span>
-
-<span class="st">$MAIN</span>
-<span class="st">double CL = THETA1*exp(ECL);</span>
-<span class="st">double V2 = THETA2*exp(EVC);</span>
-<span class="st">double KA = THETA3*exp(EKA);</span>
-<span class="st">double Q = THETA4;</span>
-<span class="st">double V3 = THETA5;</span>
-
-<span class="st">$PKMODEL ncmt=2, depot=TRUE</span>
-
-<span class="st">$CMT GUT CENT PERIPH</span>
-
-<span class="st">$TABLE</span>
-<span class="st">double CP = (CENT/V2)*(1+PROP) + ADD/5;</span>
-
-<span class="st">$CAPTURE CP</span>
-
-<span class="st">$SET delta=4, end=96</span>
-<span class="st">&#39;</span></code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
+<a class="sourceLine" id="cb57-2" data-line-number="2"><span class="st">$NMXML</span></a>
+<a class="sourceLine" id="cb57-3" data-line-number="3"><span class="st">run = 1005</span></a>
+<a class="sourceLine" id="cb57-4" data-line-number="4"><span class="st">project = path</span></a>
+<a class="sourceLine" id="cb57-5" data-line-number="5"><span class="st">olabels = s_(ECL, EVC, EKA)</span></a>
+<a class="sourceLine" id="cb57-6" data-line-number="6"><span class="st">slabels = s_(PROP, ADD)</span></a>
+<a class="sourceLine" id="cb57-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb57-8" data-line-number="8"><span class="st">$MAIN</span></a>
+<a class="sourceLine" id="cb57-9" data-line-number="9"><span class="st">double CL = THETA1*exp(ECL);</span></a>
+<a class="sourceLine" id="cb57-10" data-line-number="10"><span class="st">double V2 = THETA2*exp(EVC);</span></a>
+<a class="sourceLine" id="cb57-11" data-line-number="11"><span class="st">double KA = THETA3*exp(EKA);</span></a>
+<a class="sourceLine" id="cb57-12" data-line-number="12"><span class="st">double Q = THETA4;</span></a>
+<a class="sourceLine" id="cb57-13" data-line-number="13"><span class="st">double V3 = THETA5;</span></a>
+<a class="sourceLine" id="cb57-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb57-15" data-line-number="15"><span class="st">$PKMODEL ncmt=2, depot=TRUE</span></a>
+<a class="sourceLine" id="cb57-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb57-17" data-line-number="17"><span class="st">$CMT GUT CENT PERIPH</span></a>
+<a class="sourceLine" id="cb57-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb57-19" data-line-number="19"><span class="st">$TABLE</span></a>
+<a class="sourceLine" id="cb57-20" data-line-number="20"><span class="st">double CP = (CENT/V2)*(1+PROP) + ADD/5;</span></a>
+<a class="sourceLine" id="cb57-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb57-22" data-line-number="22"><span class="st">$CAPTURE CP</span></a>
+<a class="sourceLine" id="cb57-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb57-24" data-line-number="24"><span class="st">$SET delta=4, end=96</span></a>
+<a class="sourceLine" id="cb57-25" data-line-number="25"><span class="st">&#39;</span></a></code></pre></div>
 <p><strong>NOTE</strong>: in order to use this code, we need to install the <code>xml2</code> package.</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;nmxml&quot;</span>, code, <span class="dt">quiet=</span><span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;nmxml&quot;</span>, code, <span class="dt">quiet=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>. Loading required namespace: xml2</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">mod</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">mod</a></code></pre></div>
 <pre><code>. 
 . 
-. ---------------  source: nmxml.cpp  ---------------
+. ----------------  source: nmxml.cpp  ----------------
 . 
-.   project: /private/var/fol.../T/RtmpIMTSWV
-.   shared object: nmxml-so-dcf377bef78f 
+.   project: /private/var/fol.../T/RtmpPLbygK
+.   shared object: nmxml-so-148006363d084 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
@@ -1021,8 +1023,9 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 .   omega:         3x3 
 .   sigma:         2x2 
 . 
-.   solver:        atol: 1e-08 rtol: 1e-08 maxsteps: 5000</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">param</span>(mod)</code></pre>
+.   solver:        atol: 1e-08 rtol: 1e-08 maxsteps: 20k
+. ------------------------------------------------------</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">param</span>(mod)</a></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=7):
 .  name   value  . name   value
@@ -1030,7 +1033,7 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 .  THETA2 22.8   | THETA6 1.02 
 .  THETA3 0.0714 | THETA7 1.19 
 .  THETA4 3.47   | .      .</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">revar</span>(mod)</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">revar</span>(mod)</a></code></pre></div>
 <pre><code>. $omega
 . $...
 .              [,1]        [,2]        [,3]
@@ -1050,12 +1053,12 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 <p><strong>Syntax</strong>: text<br />
 <strong>Multiple allowed</strong>: no</p>
 <p>To include your own header file(s) in a model use <code>$INCLUDE</code></p>
-<pre class="sourceCode c"><code class="sourceCode c">$INCLUDE
-mystuff.h
-otherstuff.h</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb66-1" data-line-number="1">$INCLUDE</a>
+<a class="sourceLine" id="cb66-2" data-line-number="2">mystuff.h</a>
+<a class="sourceLine" id="cb66-3" data-line-number="3">otherstuff.h</a></code></pre></div>
 <p>or</p>
-<pre class="sourceCode c"><code class="sourceCode c">$INCLUDE
-mystuff.h,  otherstuff.h</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb67-1" data-line-number="1">$INCLUDE</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">mystuff.h,  otherstuff.h</a></code></pre></div>
 <p><code>mrgsolve</code> will insert proper <code>#include</code> preprocessor directives into the <code>C++</code>
 code that gets compiled.</p>
 <p><strong>Requirements</strong></p>
@@ -1076,8 +1079,8 @@ for header files listed in <code>$INCLUDE</code> (see below)</li>
 </ul>
 <p>For applications that don’t fit into the requirements listed above, users can
 always include header files in the model in <code>$GLOBAL</code> like this:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$GLOBAL
-<span class="pp">#include </span><span class="im">&quot;/Users/me/libs/mystuff.h&quot;</span></code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb68-1" data-line-number="1">$GLOBAL</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="pp">#include </span><span class="im">&quot;/Users/me/libs/mystuff.h&quot;</span></a></code></pre></div>
 <p>But be careful when doing this: if there are changes to <code>mystuff.h</code> but not to
 any other part of the model specification, the model may not be fully compiled
 when calling <code>mread</code>. In this case, always use <code>preclean=TRUE</code> argument to
@@ -1092,17 +1095,17 @@ The code is parsed and evaluated into a new environment when the model is
 compiled. Objects inside <code>$ENV</code> can be utilized in different C++ functions
 (see <a href="model-specification.html#block-plugin">2.2.17</a>) or other parts of the simulation process.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$ENV
-
-Sigma &lt;- cmat(<span class="dv">1</span>,<span class="fl">0.6</span>,<span class="dv">2</span>)
-
-mu &lt;- c(<span class="dv">2</span>,<span class="dv">4</span>)
-
-cama &lt;- function(mod) {
-  mod %&gt;%
-    ev(amt=<span class="dv">100</span>, ii=<span class="dv">12</span>, addl=<span class="dv">10</span>) %&gt;% 
-    mrgsim(obsonly=TRUE,end=<span class="dv">120</span>)
-}</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb69-1" data-line-number="1">$ENV</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb69-3" data-line-number="3">Sigma &lt;- cmat(<span class="dv">1</span>,<span class="fl">0.6</span>,<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb69-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb69-5" data-line-number="5">mu &lt;- c(<span class="dv">2</span>,<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb69-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb69-7" data-line-number="7">cama &lt;- function(mod) {</a>
+<a class="sourceLine" id="cb69-8" data-line-number="8">  mod %&gt;%</a>
+<a class="sourceLine" id="cb69-9" data-line-number="9">    ev(amt=<span class="dv">100</span>, ii=<span class="dv">12</span>, addl=<span class="dv">10</span>) %&gt;% </a>
+<a class="sourceLine" id="cb69-10" data-line-number="10">    mrgsim(obsonly=TRUE,end=<span class="dv">120</span>)</a>
+<a class="sourceLine" id="cb69-11" data-line-number="11">}</a></code></pre></div>
 </div>
 </div>
 <div id="variables-and-macros" class="section level2">
@@ -1153,13 +1156,13 @@ be used in <code>$ODE</code></em>. Contrast with <code>TIME</code>.</p>
 <li>2 for subsequent event record for an individual</li>
 </ul>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ GLOBAL ]
-<span class="dt">int</span> counter = <span class="dv">0</span>;
-
-[ MAIN ]
-<span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {
-  counter  = <span class="dv">0</span>;
-}</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb70-1" data-line-number="1">[ GLOBAL ]</a>
+<a class="sourceLine" id="cb70-2" data-line-number="2"><span class="dt">int</span> counter = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb70-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb70-4" data-line-number="4">[ MAIN ]</a>
+<a class="sourceLine" id="cb70-5" data-line-number="5"><span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb70-6" data-line-number="6">  counter  = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb70-7" data-line-number="7">}</a></code></pre></div>
 <p><code>NEWIND</code> is an alias for <code>self.newind</code>.</p>
 </div>
 <div id="self.cmt" class="section level3">
@@ -1167,24 +1170,24 @@ be used in <code>$ODE</code></em>. Contrast with <code>TIME</code>.</p>
 <p>The current compartment number regardless of whether it was given as <code>cmt</code> or
 <code>CMT</code> in the data set. There is no alias for <code>self.cmt</code>.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$TABLE
-
-<span class="dt">double</span> DV = CENT/VC + EPS(<span class="dv">1</span>);
-
-<span class="cf">if</span>(self.cmt==<span class="dv">3</span>) DV = RESPOSE + EPS(<span class="dv">2</span>);</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb71-1" data-line-number="1">$TABLE</a>
+<a class="sourceLine" id="cb71-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="dt">double</span> DV = CENT/VC + EPS(<span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb71-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb71-5" data-line-number="5"><span class="cf">if</span>(self.cmt==<span class="dv">3</span>) DV = RESPOSE + EPS(<span class="dv">2</span>);</a></code></pre></div>
 </div>
 <div id="self.amt" class="section level3">
 <h3><span class="header-section-number">2.3.7</span> <code>self.amt</code></h3>
 <p>The current <code>amt</code> value regardless of whether it was given as <code>amt</code> or <code>AMT</code>
 in the data set. There is no alias for <code>self.amt</code>.</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ PREAMBLE ]
-<span class="dt">double</span> last_dose = <span class="dv">0</span>;
-
-[ MAIN ]
-
-<span class="cf">if</span>(EVID==<span class="dv">1</span>) {
-  last_dose = self.amt;  
-}</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb72-1" data-line-number="1">[ PREAMBLE ]</a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"><span class="dt">double</span> last_dose = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb72-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb72-4" data-line-number="4">[ MAIN ]</a>
+<a class="sourceLine" id="cb72-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb72-6" data-line-number="6"><span class="cf">if</span>(EVID==<span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb72-7" data-line-number="7">  last_dose = self.amt;  </a>
+<a class="sourceLine" id="cb72-8" data-line-number="8">}</a></code></pre></div>
 </div>
 <div id="self.nid" class="section level3">
 <h3><span class="header-section-number">2.3.8</span> <code>self.nid</code></h3>
@@ -1209,13 +1212,13 @@ in the data set. There is no alias for <code>self.amt</code>.</p>
 they may be used in a model even if appropriate <code>OMEGA</code> matrices have not been
 provided.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$OMEGA
-<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>
-
-$MAIN
-<span class="dt">double</span> CL = TVCL*exp(ETA(<span class="dv">1</span>));
-<span class="dt">double</span> VC = TVVC*exp(ETA(<span class="dv">2</span>));
-<span class="dt">double</span> KA = TVKA*exp(ETA(<span class="dv">3</span>));</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb73-1" data-line-number="1">$OMEGA</a>
+<a class="sourceLine" id="cb73-2" data-line-number="2"><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb73-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb73-4" data-line-number="4">$MAIN</a>
+<a class="sourceLine" id="cb73-5" data-line-number="5"><span class="dt">double</span> CL = TVCL*exp(ETA(<span class="dv">1</span>));</a>
+<a class="sourceLine" id="cb73-6" data-line-number="6"><span class="dt">double</span> VC = TVVC*exp(ETA(<span class="dv">2</span>));</a>
+<a class="sourceLine" id="cb73-7" data-line-number="7"><span class="dt">double</span> KA = TVKA*exp(ETA(<span class="dv">3</span>));</a></code></pre></div>
 <p>Here, we have a 3x3 <code>OMEGA</code> matrix. <code>ETA(1)</code>, <code>ETA(2)</code>, and <code>ETA(3)</code> will be
 populated with variates drawn from this matrix. <code>ETA(4)</code> through <code>ETA(25)</code>
 will be populated with zero.</p>
@@ -1225,41 +1228,41 @@ will be populated with zero.</p>
 <p><code>EPS(n)</code> holds the current value of the observation-level random variates drawn
 from <code>SIGMA</code>. The basic setup is the same as detailed in <code>ETA(n)</code>.</p>
 <p>Example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ CMT ] CENT
-
-[ PARAM ] CL=<span class="dv">1</span>, VC=<span class="dv">20</span>
-
-[ SIGMA ] @labels ADD PROP
-<span class="dv">25</span> <span class="fl">0.0025</span>
-
-[ TABLE ]
-<span class="dt">double</span> DV = (CENT/VC)*(<span class="dv">1</span>+PROP) + ADD;</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb74-1" data-line-number="1">[ CMT ] CENT</a>
+<a class="sourceLine" id="cb74-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb74-3" data-line-number="3">[ PARAM ] CL=<span class="dv">1</span>, VC=<span class="dv">20</span></a>
+<a class="sourceLine" id="cb74-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb74-5" data-line-number="5">[ SIGMA ] @labels ADD PROP</a>
+<a class="sourceLine" id="cb74-6" data-line-number="6"><span class="dv">25</span> <span class="fl">0.0025</span></a>
+<a class="sourceLine" id="cb74-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb74-8" data-line-number="8">[ TABLE ]</a>
+<a class="sourceLine" id="cb74-9" data-line-number="9"><span class="dt">double</span> DV = (CENT/VC)*(<span class="dv">1</span>+PROP) + ADD;</a></code></pre></div>
 </div>
 <div id="tablename" class="section level3">
 <h3><span class="header-section-number">2.3.14</span> <code>table(name)</code></h3>
 <p>This macro has been deprecated. Users should <strong>not</strong> use code like this:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ TABLE ]
-table(CP) = CENT/VC;</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb75-1" data-line-number="1">[ TABLE ]</a>
+<a class="sourceLine" id="cb75-2" data-line-number="2">table(CP) = CENT/VC;</a></code></pre></div>
 <p>But rather this:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$TABLE 
-<span class="dt">double</span> CP = CENT/VC;
-
-$CAPTURE CP</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb76-1" data-line-number="1">$TABLE </a>
+<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="dt">double</span> CP = CENT/VC;</a>
+<a class="sourceLine" id="cb76-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb76-4" data-line-number="4">$CAPTURE CP</a></code></pre></div>
 <p>See: section <a href="model-specification.html#block-table">2.2.8</a> and also <a href="model-specification.html#block-capture">2.2.11</a></p>
 </div>
 <div id="spec-f" class="section level3">
 <h3><span class="header-section-number">2.3.15</span> <code>F_CMT</code>  </h3>
 <p>For the <code>CMT</code> compartment, sets the bioavailability fraction for that compartment.</p>
 <p>Example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$MAIN
-F_CENT = <span class="fl">0.7</span>;</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb77-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb77-2" data-line-number="2">F_CENT = <span class="fl">0.7</span>;</a></code></pre></div>
 </div>
 <div id="spec-alag" class="section level3">
 <h3><span class="header-section-number">2.3.16</span> <code>ALAG_CMT</code>  </h3>
 <p>For the <code>CMT</code> compartment, sets the lag time for doses into that compartment.</p>
 <p>Example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$MAIN
-ALAG_GUT = <span class="fl">0.25</span>;</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb78-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb78-2" data-line-number="2">ALAG_GUT = <span class="fl">0.25</span>;</a></code></pre></div>
 </div>
 <div id="spec-r" class="section level3">
 <h3><span class="header-section-number">2.3.17</span> <code>R_CMT</code>  </h3>
@@ -1267,8 +1270,8 @@ ALAG_GUT = <span class="fl">0.25</span>;</code></pre>
 infusion rate is only set via <code>R_CMT</code> when <code>rate</code> in the data set or event
 object is set to <code>-1</code>.</p>
 <p>Example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$MAIN
-R_CENT = <span class="dv">100</span>;</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb79-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb79-2" data-line-number="2">R_CENT = <span class="dv">100</span>;</a></code></pre></div>
 </div>
 <div id="spec-d" class="section level3">
 <h3><span class="header-section-number">2.3.18</span> <code>D_CMT</code>  </h3>
@@ -1276,8 +1279,8 @@ R_CENT = <span class="dv">100</span>;</code></pre>
 The infusion duration is only set via <code>D_CMT</code> when <code>rate</code> in the data set or
 event object is set to <code>-2</code>.</p>
 <p>Example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$MAIN
-D_CENT = <span class="dv">2</span>;</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb80-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2">D_CENT = <span class="dv">2</span>;</a></code></pre></div>
 </div>
 </div>
 <div id="new-variables" class="section level2">
@@ -1286,13 +1289,13 @@ D_CENT = <span class="dv">2</span>;</code></pre>
 <code>$TABLE</code>. Because these are <code>C++</code> variables, the type of variable being used
 must be declared. For the vast majority of applications, the <code>double</code> type is
 used (double-precision numeric value).</p>
-<pre class="sourceCode c"><code class="sourceCode c">$MAIN
-
-<span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb81-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb81-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb81-3" data-line-number="3"><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a></code></pre></div>
 <p>We want <code>CLi</code> to be a numeric value, so we use <code>double</code>. To initialize a <code>boolean</code>
 variable (true / false), write</p>
-<pre class="sourceCode c"><code class="sourceCode c">$MAIN
-<span class="dt">bool</span> cure = false;</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb82-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="dt">bool</span> cure = false;</a></code></pre></div>
 <div id="special-handling-for-double-int-bool" class="section level3">
 <h3><span class="header-section-number">2.4.1</span> Special handling for <code>double</code>, <code>int</code>, <code>bool</code></h3>
 <p>When variables of the type <code>double</code>, <code>int</code>, and <code>bool</code> are declared and
@@ -1302,32 +1305,32 @@ declared once in <code>$GLOBAL</code> not in <code>$MAIN</code>, <code>$ODE</cod
 that variables declared in one code block (e.g. <code>$MAIN</code>) can be read and
 modified in another code block (e.g. <code>$TABLE</code>).</p>
 <p>For example, in the following code:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$MAIN
-<span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb83-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb83-2" data-line-number="2"><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a></code></pre></div>
 <p>a double-precision numeric variable is created (<code>CLi</code>) in the <code>$MAIN</code> block.
 When mrgsolve parses the model file, this code gets translated to</p>
-<pre class="sourceCode c"><code class="sourceCode c">$GLOBAL
-namespace {
-  <span class="dt">double</span> CLi;
-}
-
-$MAIN
-CLi = TVCL*exp(ETA(<span class="dv">1</span>));</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb84-1" data-line-number="1">$GLOBAL</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2">namespace {</a>
+<a class="sourceLine" id="cb84-3" data-line-number="3">  <span class="dt">double</span> CLi;</a>
+<a class="sourceLine" id="cb84-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb84-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb84-6" data-line-number="6">$MAIN</a>
+<a class="sourceLine" id="cb84-7" data-line-number="7">CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a></code></pre></div>
 <p>That is, <code>CLi</code> is declared in <code>$GLOBAL</code> in an unnamed namespace so that variables
 like this are global variables within the model file only.</p>
 <p>This way, we can still read the <code>CLi</code> variable in <code>$TABLE</code>:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$MAIN
-<span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));
-<span class="dt">double</span> VCi = TVVC*exp(ETA(<span class="dv">2</span>));
-
-$TABLE
-<span class="dt">double</span> KEi = CLi/VCi;
-
-$CAPTURE KEi</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb85-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb85-2" data-line-number="2"><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a>
+<a class="sourceLine" id="cb85-3" data-line-number="3"><span class="dt">double</span> VCi = TVVC*exp(ETA(<span class="dv">2</span>));</a>
+<a class="sourceLine" id="cb85-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb85-5" data-line-number="5">$TABLE</a>
+<a class="sourceLine" id="cb85-6" data-line-number="6"><span class="dt">double</span> KEi = CLi/VCi;</a>
+<a class="sourceLine" id="cb85-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb85-8" data-line-number="8">$CAPTURE KEi</a></code></pre></div>
 <p>To declare a variable that is local to a particular code block:</p>
-<pre class="sourceCode c"><code class="sourceCode c">$MAIN
-
-localdouble CLi = TVCL*exp(ETA(<span class="dv">1</span>));</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb86-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb86-3" data-line-number="3">localdouble CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a></code></pre></div>
 <p>The <code>localdouble</code> type is still just a double-precision variable. The difference
 is that it is protected from this re-declaration process and the variable
 will be local to (in this case) the <code>$MAIN</code> block.</p>
@@ -1340,20 +1343,20 @@ we want to work with other variable types in a global manner. Whenever you
 want a data structure to be accessible across functions (e.g. <code>$MAIN</code>, <code>$TABLE</code>,
 etc.) they should be declared in <code>$GLOBAL</code>, optionally in an unnamed namespace.</p>
 <p>For example:</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ GLOBAL ]
-std::vector&lt;<span class="dt">double</span>&gt; myvec;</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb87-1" data-line-number="1">[ GLOBAL ]</a>
+<a class="sourceLine" id="cb87-2" data-line-number="2">std::vector&lt;<span class="dt">double</span>&gt; myvec;</a></code></pre></div>
 <p>or</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ GLOBAL ]
-namespace {
-  std::vector&lt;<span class="dt">double</span>&gt; myvec;
-}</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb88-1" data-line-number="1">[ GLOBAL ]</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2">namespace {</a>
+<a class="sourceLine" id="cb88-3" data-line-number="3">  std::vector&lt;<span class="dt">double</span>&gt; myvec;</a>
+<a class="sourceLine" id="cb88-4" data-line-number="4">}</a></code></pre></div>
 <p>In case that object needs some configuration prior to starting the problem,
 use <code>$PREAMBLE</code> to do that work</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ GLOBAL ]
-std::vector&lt;<span class="dt">double</span>&gt; myvec;
-
-[ PREAMBLE ] 
-myvec.assign(<span class="dv">3</span>,<span class="dv">1</span>);</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb89-1" data-line-number="1">[ GLOBAL ]</a>
+<a class="sourceLine" id="cb89-2" data-line-number="2">std::vector&lt;<span class="dt">double</span>&gt; myvec;</a>
+<a class="sourceLine" id="cb89-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb89-4" data-line-number="4">[ PREAMBLE ] </a>
+<a class="sourceLine" id="cb89-5" data-line-number="5">myvec.assign(<span class="dv">3</span>,<span class="dv">1</span>);</a></code></pre></div>
 </div>
 </div>
 <div id="examples" class="section level2">
@@ -1378,24 +1381,24 @@ compartment at any particular time (<code>GUT</code> and <code>CENT</code>)</li>
 <li>We derive a variable called <code>CP</code> in <code>$TABLE</code> that has type <code>capture</code>; mrgsolve
 will enter the <code>CP</code> name into the <code>$CAPTURE</code> block list</li>
 </ul>
-<pre class="sourceCode c"><code class="sourceCode c">$PARAM CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span>
-
-$CMT GUT CENT
-
-$ODE
-
-dxdt_GUT = -KA*GUT;
-dxdt_CENT = KA*GUT - (CL/VC)*CENT;
-
-$TABLE
-capture CP = CENT/VC;</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb90-1" data-line-number="1">$PARAM CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></a>
+<a class="sourceLine" id="cb90-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb90-3" data-line-number="3">$CMT GUT CENT</a>
+<a class="sourceLine" id="cb90-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb90-5" data-line-number="5">$ODE</a>
+<a class="sourceLine" id="cb90-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb90-7" data-line-number="7">dxdt_GUT = -KA*GUT;</a>
+<a class="sourceLine" id="cb90-8" data-line-number="8">dxdt_CENT = KA*GUT - (CL/VC)*CENT;</a>
+<a class="sourceLine" id="cb90-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb90-10" data-line-number="10">$TABLE</a>
+<a class="sourceLine" id="cb90-11" data-line-number="11">capture CP = CENT/VC;</a></code></pre></div>
 <p>This model can also be written without differential equations</p>
-<pre class="sourceCode c"><code class="sourceCode c">[ PARAM ] CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span>
-
-[ PKMODEL ] cmt = <span class="st">&quot;CMT GUT CENT&quot;</span>, depot = TRUE
-
-$TABLE
-capture CP = CENT/VC;</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb91-1" data-line-number="1">[ PARAM ] CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></a>
+<a class="sourceLine" id="cb91-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb91-3" data-line-number="3">[ PKMODEL ] cmt = <span class="st">&quot;CMT GUT CENT&quot;</span>, depot = TRUE</a>
+<a class="sourceLine" id="cb91-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb91-5" data-line-number="5">$TABLE</a>
+<a class="sourceLine" id="cb91-6" data-line-number="6">capture CP = CENT/VC;</a></code></pre></div>
 </div>
 <div id="pkpd-model" class="section level3">
 <h3><span class="header-section-number">2.5.2</span> PK/PD model</h3>
@@ -1412,26 +1415,26 @@ function of two parameters <code>KIN/KOUT</code></li>
 <li>Both <code>$MAIN</code> and <code>$ODE</code> are <code>C++</code> code blocks; don’t forget to add the <code>;</code>
 at the end of each statement</li>
 </ul>
-<pre class="sourceCode c"><code class="sourceCode c">$PARAM CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span>
-KIN = <span class="dv">100</span>, KOUT = <span class="dv">2</span>, IC50 = <span class="dv">2</span>
-
-$GLOBAL
-<span class="pp">#define CP (CENT/VC)</span>
-
-$CMT GUT CENT RESP
-
-$MAIN
-RESP_0 = KIN/KOUT;
-
-$ODE
-
-<span class="dt">double</span> INH = CP/(IC50+CP);
-
-dxdt_GUT = -KA*GUT;
-dxdt_CENT = KA*GUT - (CL/VC)*CENT;
-dxdt_RESP = KIN*(<span class="dv">1</span>-INH) - KOUT*CENT;
-
-$CAPTURE CP</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb92-1" data-line-number="1">$PARAM CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></a>
+<a class="sourceLine" id="cb92-2" data-line-number="2">KIN = <span class="dv">100</span>, KOUT = <span class="dv">2</span>, IC50 = <span class="dv">2</span></a>
+<a class="sourceLine" id="cb92-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb92-4" data-line-number="4">$GLOBAL</a>
+<a class="sourceLine" id="cb92-5" data-line-number="5"><span class="pp">#define CP (CENT/VC)</span></a>
+<a class="sourceLine" id="cb92-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb92-7" data-line-number="7">$CMT GUT CENT RESP</a>
+<a class="sourceLine" id="cb92-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb92-9" data-line-number="9">$MAIN</a>
+<a class="sourceLine" id="cb92-10" data-line-number="10">RESP_0 = KIN/KOUT;</a>
+<a class="sourceLine" id="cb92-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb92-12" data-line-number="12">$ODE</a>
+<a class="sourceLine" id="cb92-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb92-14" data-line-number="14"><span class="dt">double</span> INH = CP/(IC50+CP);</a>
+<a class="sourceLine" id="cb92-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb92-16" data-line-number="16">dxdt_GUT = -KA*GUT;</a>
+<a class="sourceLine" id="cb92-17" data-line-number="17">dxdt_CENT = KA*GUT - (CL/VC)*CENT;</a>
+<a class="sourceLine" id="cb92-18" data-line-number="18">dxdt_RESP = KIN*(<span class="dv">1</span>-INH) - KOUT*CENT;</a>
+<a class="sourceLine" id="cb92-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb92-20" data-line-number="20">$CAPTURE CP</a></code></pre></div>
 </div>
 <div id="population-pk-model-with-covariates-and-iov" class="section level3">
 <h3><span class="header-section-number">2.5.3</span> Population PK model with covariates and IOV</h3>
@@ -1447,36 +1450,36 @@ $CAPTURE CP</code></pre>
 <li>We added zeros for both <code>$OMEGA</code> matrices; all the etas will be zero until we
 populate those matrices (section <a href="topics.html#topic-matrix-update">6.8</a>)</li>
 </ul>
-<pre class="sourceCode c"><code class="sourceCode c">$PARAM TVCL = <span class="fl">1.3</span>, TVVC=<span class="dv">28</span>, TVKA=<span class="fl">0.6</span>, WT=<span class="dv">70</span>, OCC=<span class="dv">1</span>
-
-$SET delta=<span class="fl">0.1</span>, end=<span class="dv">240</span>
-
-$CMT GUT CENT
-
-$MAIN
-
-<span class="dt">double</span> IOV = IOV1
-<span class="cf">if</span>(OCC==<span class="dv">2</span>) IOV = IOV2;
-
-<span class="dt">double</span> CLi = exp(log(TVCL) + <span class="fl">0.75</span>*log(WT/<span class="dv">70</span>) + ECL + IOV);
-<span class="dt">double</span> VCi = exp(log(TVVC) + EVC);
-<span class="dt">double</span> KAi = exp(log(TVKA) + EKA);
-
-$OMEGA @name IIV @labels ECL EVC EKA
-<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>
-$OMEGA @name IOV @labels IOV1 IOV2
-<span class="dv">0</span> <span class="dv">0</span>
-
-$SIGMA <span class="dv">0</span>
-
-$ODE
-dxdt_GUT = -KAi*GUT;
-dxdt_CENT = KAi*GUT - (CLi/VCi)*CENT;
-
-$TABLE
-capture CP = CENT/VCi;
-
-$CAPTURE IOV ECL EVC</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb93-1" data-line-number="1">$PARAM TVCL = <span class="fl">1.3</span>, TVVC=<span class="dv">28</span>, TVKA=<span class="fl">0.6</span>, WT=<span class="dv">70</span>, OCC=<span class="dv">1</span></a>
+<a class="sourceLine" id="cb93-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb93-3" data-line-number="3">$SET delta=<span class="fl">0.1</span>, end=<span class="dv">240</span></a>
+<a class="sourceLine" id="cb93-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb93-5" data-line-number="5">$CMT GUT CENT</a>
+<a class="sourceLine" id="cb93-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb93-7" data-line-number="7">$MAIN</a>
+<a class="sourceLine" id="cb93-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb93-9" data-line-number="9"><span class="dt">double</span> IOV = IOV1</a>
+<a class="sourceLine" id="cb93-10" data-line-number="10"><span class="cf">if</span>(OCC==<span class="dv">2</span>) IOV = IOV2;</a>
+<a class="sourceLine" id="cb93-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb93-12" data-line-number="12"><span class="dt">double</span> CLi = exp(log(TVCL) + <span class="fl">0.75</span>*log(WT/<span class="dv">70</span>) + ECL + IOV);</a>
+<a class="sourceLine" id="cb93-13" data-line-number="13"><span class="dt">double</span> VCi = exp(log(TVVC) + EVC);</a>
+<a class="sourceLine" id="cb93-14" data-line-number="14"><span class="dt">double</span> KAi = exp(log(TVKA) + EKA);</a>
+<a class="sourceLine" id="cb93-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb93-16" data-line-number="16">$OMEGA @name IIV @labels ECL EVC EKA</a>
+<a class="sourceLine" id="cb93-17" data-line-number="17"><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb93-18" data-line-number="18">$OMEGA @name IOV @labels IOV1 IOV2</a>
+<a class="sourceLine" id="cb93-19" data-line-number="19"><span class="dv">0</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb93-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb93-21" data-line-number="21">$SIGMA <span class="dv">0</span></a>
+<a class="sourceLine" id="cb93-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb93-23" data-line-number="23">$ODE</a>
+<a class="sourceLine" id="cb93-24" data-line-number="24">dxdt_GUT = -KAi*GUT;</a>
+<a class="sourceLine" id="cb93-25" data-line-number="25">dxdt_CENT = KAi*GUT - (CLi/VCi)*CENT;</a>
+<a class="sourceLine" id="cb93-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb93-27" data-line-number="27">$TABLE</a>
+<a class="sourceLine" id="cb93-28" data-line-number="28">capture CP = CENT/VCi;</a>
+<a class="sourceLine" id="cb93-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb93-30" data-line-number="30">$CAPTURE IOV ECL EVC</a></code></pre></div>
 
 </div>
 </div>
@@ -1487,16 +1490,18 @@ $CAPTURE IOV ECL EVC</code></pre>
         </div>
       </div>
 <a href="model-components.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="input-data-sets.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-set-chapter.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -1524,7 +1529,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["user-guide.pdf"],
 "toc": {
 "collapse": "none",
 "sharing": false
@@ -1540,8 +1545,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
