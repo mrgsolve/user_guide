@@ -962,12 +962,9 @@ __NOTE__: in order to use this code, we need to install the `xml2` package.
 ```{r}
 mod <- mcode("nmxml", code, quiet=TRUE)
 
-mod
-
 param(mod)
 
 revar(mod)
-
 ```
 
 ### `$INCLUDE`  \ {#block-include}
