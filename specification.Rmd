@@ -1087,6 +1087,19 @@ be used in `$ODE`*.  Contrast with `TIME`.
 
 `EVID` is an alias for `self.evid`.
 
+### `CMT`
+
+`CMT` is the current compartment number.
+
+`CMT` is an alias for `self.cmt`.
+
+### `AMT`
+
+`AMT` is the current value of dose amount.
+
+`AMT` is an alias for `self.amt`.
+
+
 ### `NEWIND`
 `NEWIND` is a new individual indicator, taking the following values:
 
@@ -1149,6 +1162,85 @@ The number of rows in the output data set.
 
 ### `self.rown`
 The current row number.  Numbers start at 0 and increase by one to `self.rown-1`. 
+
+### `self.tad()`
+
+This is a function that calculates and returns the time after the most recent
+dose.  This function should be called in `$MAIN` every time `$MAIN` is called.
+
+For example:
+
+```{c, eval = FALSE}
+$MAIN
+
+double TAD = self.tad();
+```
+
+Do not make this calculation depend on any test or condition; it must be called
+every time `$MAIN` is called in order to see every dose.
+
+### `self.mtime(<time>)`
+
+This is a function that creates a modeled even time.  The only argument is a 
+numeric time in the future for the current individual that indicates when a 
+discontinuity should be included in the simulation.  
+
+When when `self.mtime()` is called, a new record is added to the current 
+individual's record set with `EVID` set to 2.  This means that when the system
+advances to this record (this time), the differential equation solver will 
+reset and restart, creating the discontinuity.  The function returns the time of
+this event so the user can work with it in subsequent code. 
+
+For example, 
+
+```{c, eval = FALSE}
+$PARAM change_point = 5.13;
+
+$MAIN
+
+double KA = 1.1;
+
+double mt1 = self.mtime(change_point);
+
+if(TIME >= mt1) KA = 2.1;  
+
+```
+
+### `self.stop()`
+
+This `self` function is available to be called from `$PREAMBLE`, `$MAIN`, 
+and `$TABLE`. When this function is called, the entire problem is stopped upon
+processing the next simulation record. 
+
+This might be called when something really bad happened and you just want to 
+stop the simulation with an error.
+
+### `self.stop_id()`
+
+This `self` function is available to be called from `$PREAMBLE`, `$MAIN`, 
+and `$TABLE`. When this function is called, processing of the current individual
+is stopped and missing values (`NA_real`) are filled in for remaining compartment'
+and capture outputs. 
+
+This might be called when some condition is reached in the current individual
+that indicates either that the rest of the outputs are inconsequential or there
+was a problem with this particular individual.
+
+See also `self.stop_id()` and `self.stop()`.
+
+### `self.stop_id_cf()`
+
+This `self` function is available to be called from `$PREAMBLE`, `$MAIN`, 
+and `$TABLE`. When this function is called, processing of the current individual
+is stopped and current values are carried forward (`cf`) for the remaining
+output records for that individual. 
+
+This might be called when some condition is reached in the current individual
+that indicates either that the rest of the outputs are inconsequential or there
+was a problem with this particular individual.
+
+See also `self.stop_id_cf()` and `self.stop()`.
+
 
 ### `ETA(n)`
 `ETA(n)` is the value of the subject-level variate drawn from the model 
