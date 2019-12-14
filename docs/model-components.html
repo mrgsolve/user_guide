@@ -209,7 +209,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.18" data-path="model-specification.html"><a href="model-specification.html#self.stop_id_cf"><i class="fa fa-check"></i><b>2.3.18</b> <code>self.stop_id_cf()</code></a></li>
 <li class="chapter" data-level="2.3.19" data-path="model-specification.html"><a href="model-specification.html#etan"><i class="fa fa-check"></i><b>2.3.19</b> <code>ETA(n)</code></a></li>
 <li class="chapter" data-level="2.3.20" data-path="model-specification.html"><a href="model-specification.html#epsn"><i class="fa fa-check"></i><b>2.3.20</b> <code>EPS(n)</code></a></li>
-<li class="chapter" data-level="2.3.21" data-path="model-specification.html"><a href="model-specification.html#tablename"><i class="fa fa-check"></i><b>2.3.21</b> <code>table(name)</code></a></li>
+<li class="chapter" data-level="2.3.21" data-path="model-specification.html"><a href="model-specification.html#tablename"><i class="fa fa-check"></i><b>2.3.21</b> <code>table(&lt;name&gt;)</code></a></li>
 <li class="chapter" data-level="2.3.22" data-path="model-specification.html"><a href="model-specification.html#spec-f"><i class="fa fa-check"></i><b>2.3.22</b> <code>F_CMT</code>  </a></li>
 <li class="chapter" data-level="2.3.23" data-path="model-specification.html"><a href="model-specification.html#spec-alag"><i class="fa fa-check"></i><b>2.3.23</b> <code>ALAG_CMT</code>  </a></li>
 <li class="chapter" data-level="2.3.24" data-path="model-specification.html"><a href="model-specification.html#spec-r"><i class="fa fa-check"></i><b>2.3.24</b> <code>R_CMT</code>  </a></li>
@@ -401,11 +401,10 @@ the problem is started. Settings include: <code>atol</code>, <code>rtol</code>, 
 (compartments) that are becoming very small and possibly turning negative. For
 example:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">modlib</span>(<span class="st">&quot;viral1&quot;</span>, <span class="dt">end =</span> <span class="dv">144</span>) </a></code></pre></div>
-<pre><code>. Creating build directory: build</code></pre>
-<pre><code>. Building viral1 ... done.</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">out &lt;-<span class="st"> </span><span class="kw">mrgsim_e</span>(mod, <span class="kw">ev</span>(<span class="dt">amt =</span> <span class="dv">1000</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(V <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">out</a></code></pre></div>
+<pre><code>. Loading model from cache.</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">out &lt;-<span class="st"> </span><span class="kw">mrgsim_e</span>(mod, <span class="kw">ev</span>(<span class="dt">amt =</span> <span class="dv">1000</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(V <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">out</a></code></pre></div>
 <pre><code>. # A tibble: 6 x 8
 .      ID  time expos        T         I         V  logV logChange
 .   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
@@ -416,7 +415,7 @@ example:</p>
 . 5     1 125    1000 6455422. -1.97e-10 -1.30e-12   NaN       NaN
 . 6     1 128.   1000 6555459. -7.81e-11 -5.21e-13   NaN       NaN</code></pre>
 <p>Adjusting <code>atol</code> to <code>1E-20</code> or <code>1E-30</code> will prevent this.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">mrgsim_e</span>(mod, <span class="kw">ev</span>(<span class="dt">amt =</span> <span class="dv">1000</span>), <span class="dt">atol =</span> <span class="fl">1E-20</span>)  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(time <span class="op">%in%</span><span class="st"> </span>out<span class="op">$</span>time)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">mrgsim_e</span>(mod, <span class="kw">ev</span>(<span class="dt">amt =</span> <span class="dv">1000</span>), <span class="dt">atol =</span> <span class="fl">1E-20</span>)  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(time <span class="op">%in%</span><span class="st"> </span>out<span class="op">$</span>time)</a></code></pre></div>
 <pre><code>. # A tibble: 6 x 8
 .      ID  time expos        T        I        V  logV logChange
 .   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
@@ -437,18 +436,18 @@ precision around the calculation of state variables as the system advances.</p>
 <p>This is the maximum number of steps the solver will take when advancing from one
 time to the next. If the solver can’t make it in <code>maxsteps</code> it will stop and
 give an error message like this:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb8-1" data-line-number="1">DLSODA-  At current T (=R1), MXSTEP (=I1) steps   </a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">      taken on this call before reaching TOUT     </a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">In above message, I = </a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">[<span class="dv">1</span>] <span class="dv">2000</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">In above message, R = </a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">[<span class="dv">1</span>] <span class="fl">0.0004049985</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">DLSODA-  ISTATE (=I1) illegal.</a>
-<a class="sourceLine" id="cb8-8" data-line-number="8">In above message, I = </a>
-<a class="sourceLine" id="cb8-9" data-line-number="9">[<span class="dv">1</span>] <span class="dv">-1</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10">DLSODA-  Run aborted.. apparent infinite loop.    </a>
-<a class="sourceLine" id="cb8-11" data-line-number="11">Error in (function (x, data, idata = null_idata, carry.out = character(<span class="dv">0</span>),  : </a>
-<a class="sourceLine" id="cb8-12" data-line-number="12">  error from XERRWD</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb7-1" data-line-number="1">DLSODA-  At current T (=R1), MXSTEP (=I1) steps   </a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">      taken on this call before reaching TOUT     </a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">In above message, I = </a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">[<span class="dv">1</span>] <span class="dv">2000</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">In above message, R = </a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">[<span class="dv">1</span>] <span class="fl">0.0004049985</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">DLSODA-  ISTATE (=I1) illegal.</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">In above message, I = </a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">[<span class="dv">1</span>] <span class="dv">-1</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">DLSODA-  Run aborted.. apparent infinite loop.    </a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">Error in (function (x, data, idata = null_idata, carry.out = character(<span class="dv">0</span>),  : </a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">  error from XERRWD</a></code></pre></div>
 <p>You might see this when you have to integrate along time between records in a
 data set. There isn’t necessarily a problem, but the solver might have to
 advance over many doses to get to the next record and it only has a limited
@@ -626,7 +625,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["user-guide.pdf"],
 "toc": {
 "collapse": "none",
 "sharing": false

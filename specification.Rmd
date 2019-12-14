@@ -1280,7 +1280,7 @@ double DV = (CENT/VC)*(1+PROP) + ADD;
 
 ```
 
-### `table(name) `
+### `table(<name>) `
 This macro has been deprecated.  Users should __not__ use code like this:
 
 ```{c,eval=FALSE}
