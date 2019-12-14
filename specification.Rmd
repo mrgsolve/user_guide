@@ -1086,7 +1086,22 @@ be used in `$ODE`*.  Contrast with `TIME`.
 
 ### `CMT`
 
-`CMT` is the current compartment number.
+`CMT` is the current compartment number.  In this case, `CMT` is used literally
+(not a stand-in for the name of a compartment).   For example:
+
+```{c, eval=FALSE}
+$CMT GUT CENT PERIPH
+
+$MAIN
+
+if(CMT==2) {
+  // ....
+}
+```
+
+In the example, `GUT`, `CENT` and `PERIPH` are the amounts in the respective
+compartments and `CMT` refers to the value of `CMT` in the data record / 
+data set.
 
 `CMT` is an alias for `self.cmt`.
 

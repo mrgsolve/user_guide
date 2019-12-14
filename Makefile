@@ -2,6 +2,9 @@ SHELL := /bin/bash
 export PATH := /Applications/RStudio.app/Contents/MacOS/pandoc:$(PATH)
 DEST := ../../mrgsolve/mrgsolve.github.io/user_guide
 
+all:
+	make publish
+
 spelling:
 	Rscript _spelling.R
 
@@ -32,9 +35,6 @@ edits:
 
 render:
 	Rscript -e "bookdown::render_book('index.Rmd', quiet=TRUE)"
-
-all:
-	make render
 
 
 .PHONY: doxygen

@@ -1134,7 +1134,18 @@ be used in <code>$ODE</code></em>. Contrast with <code>TIME</code>.</p>
 </div>
 <div id="cmt" class="section level3">
 <h3><span class="header-section-number">2.3.5</span> <code>CMT</code></h3>
-<p><code>CMT</code> is the current compartment number.</p>
+<p><code>CMT</code> is the current compartment number. In this case, <code>CMT</code> is used literally
+(not a stand-in for the name of a compartment). For example:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb68-1" data-line-number="1">$CMT GUT CENT PERIPH</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb68-3" data-line-number="3">$MAIN</a>
+<a class="sourceLine" id="cb68-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb68-5" data-line-number="5"><span class="cf">if</span>(CMT==<span class="dv">2</span>) {</a>
+<a class="sourceLine" id="cb68-6" data-line-number="6">  <span class="co">// ....</span></a>
+<a class="sourceLine" id="cb68-7" data-line-number="7">}</a></code></pre></div>
+<p>In the example, <code>GUT</code>, <code>CENT</code> and <code>PERIPH</code> are the amounts in the respective
+compartments and <code>CMT</code> refers to the value of <code>CMT</code> in the data record /
+data set.</p>
 <p><code>CMT</code> is an alias for <code>self.cmt</code>.</p>
 </div>
 <div id="amt" class="section level3">
@@ -1151,13 +1162,13 @@ be used in <code>$ODE</code></em>. Contrast with <code>TIME</code>.</p>
 <li>2 for subsequent event record for an individual</li>
 </ul>
 <p>For example:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb68-1" data-line-number="1">[ GLOBAL ]</a>
-<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="dt">int</span> counter = <span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb68-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb68-4" data-line-number="4">[ MAIN ]</a>
-<a class="sourceLine" id="cb68-5" data-line-number="5"><span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb68-6" data-line-number="6">  counter  = <span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb68-7" data-line-number="7">}</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb69-1" data-line-number="1">[ GLOBAL ]</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="dt">int</span> counter = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb69-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb69-4" data-line-number="4">[ MAIN ]</a>
+<a class="sourceLine" id="cb69-5" data-line-number="5"><span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb69-6" data-line-number="6">  counter  = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb69-7" data-line-number="7">}</a></code></pre></div>
 <p><code>NEWIND</code> is an alias for <code>self.newind</code>.</p>
 </div>
 <div id="self.cmt" class="section level3">
@@ -1165,24 +1176,24 @@ be used in <code>$ODE</code></em>. Contrast with <code>TIME</code>.</p>
 <p>The current compartment number regardless of whether it was given as <code>cmt</code> or
 <code>CMT</code> in the data set. There is no alias for <code>self.cmt</code>.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb69-1" data-line-number="1">$TABLE</a>
-<a class="sourceLine" id="cb69-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb69-3" data-line-number="3"><span class="dt">double</span> DV = CENT/VC + EPS(<span class="dv">1</span>);</a>
-<a class="sourceLine" id="cb69-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb69-5" data-line-number="5"><span class="cf">if</span>(self.cmt==<span class="dv">3</span>) DV = RESPOSE + EPS(<span class="dv">2</span>);</a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb70-1" data-line-number="1">$TABLE</a>
+<a class="sourceLine" id="cb70-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb70-3" data-line-number="3"><span class="dt">double</span> DV = CENT/VC + EPS(<span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb70-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb70-5" data-line-number="5"><span class="cf">if</span>(self.cmt==<span class="dv">3</span>) DV = RESPOSE + EPS(<span class="dv">2</span>);</a></code></pre></div>
 </div>
 <div id="self.amt" class="section level3">
 <h3><span class="header-section-number">2.3.9</span> <code>self.amt</code></h3>
 <p>The current <code>amt</code> value regardless of whether it was given as <code>amt</code> or <code>AMT</code>
 in the data set. There is no alias for <code>self.amt</code>.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb70-1" data-line-number="1">[ PREAMBLE ]</a>
-<a class="sourceLine" id="cb70-2" data-line-number="2"><span class="dt">double</span> last_dose = <span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb70-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb70-4" data-line-number="4">[ MAIN ]</a>
-<a class="sourceLine" id="cb70-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb70-6" data-line-number="6"><span class="cf">if</span>(EVID==<span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb70-7" data-line-number="7">  last_dose = self.amt;  </a>
-<a class="sourceLine" id="cb70-8" data-line-number="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb71-1" data-line-number="1">[ PREAMBLE ]</a>
+<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="dt">double</span> last_dose = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb71-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb71-4" data-line-number="4">[ MAIN ]</a>
+<a class="sourceLine" id="cb71-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb71-6" data-line-number="6"><span class="cf">if</span>(EVID==<span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb71-7" data-line-number="7">  last_dose = self.amt;  </a>
+<a class="sourceLine" id="cb71-8" data-line-number="8">}</a></code></pre></div>
 </div>
 <div id="self.nid" class="section level3">
 <h3><span class="header-section-number">2.3.10</span> <code>self.nid</code></h3>
@@ -1205,9 +1216,9 @@ in the data set. There is no alias for <code>self.amt</code>.</p>
 <p>This is a function that calculates and returns the time after the most recent
 dose. This function should be called in <code>$MAIN</code> every time <code>$MAIN</code> is called.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb71-1" data-line-number="1">$MAIN</a>
-<a class="sourceLine" id="cb71-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="dt">double</span> TAD = self.tad();</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb72-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb72-3" data-line-number="3"><span class="dt">double</span> TAD = self.tad();</a></code></pre></div>
 <p>Do not make this calculation depend on any test or condition; it must be called
 every time <code>$MAIN</code> is called in order to see every dose.</p>
 </div>
@@ -1222,15 +1233,15 @@ advances to this record (this time), the differential equation solver will
 reset and restart, creating the discontinuity. The function returns the time of
 this event so the user can work with it in subsequent code.</p>
 <p>For example,</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb72-1" data-line-number="1">$PARAM change_point = <span class="fl">5.13</span>;</a>
-<a class="sourceLine" id="cb72-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb72-3" data-line-number="3">$MAIN</a>
-<a class="sourceLine" id="cb72-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb72-5" data-line-number="5"><span class="dt">double</span> KA = <span class="fl">1.1</span>;</a>
-<a class="sourceLine" id="cb72-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb72-7" data-line-number="7"><span class="dt">double</span> mt1 = self.mtime(change_point);</a>
-<a class="sourceLine" id="cb72-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb72-9" data-line-number="9"><span class="cf">if</span>(TIME &gt;= mt1) KA = <span class="fl">2.1</span>;  </a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb73-1" data-line-number="1">$PARAM change_point = <span class="fl">5.13</span>;</a>
+<a class="sourceLine" id="cb73-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb73-3" data-line-number="3">$MAIN</a>
+<a class="sourceLine" id="cb73-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb73-5" data-line-number="5"><span class="dt">double</span> KA = <span class="fl">1.1</span>;</a>
+<a class="sourceLine" id="cb73-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb73-7" data-line-number="7"><span class="dt">double</span> mt1 = self.mtime(change_point);</a>
+<a class="sourceLine" id="cb73-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb73-9" data-line-number="9"><span class="cf">if</span>(TIME &gt;= mt1) KA = <span class="fl">2.1</span>;  </a></code></pre></div>
 </div>
 <div id="self.stop" class="section level3">
 <h3><span class="header-section-number">2.3.16</span> <code>self.stop()</code></h3>
@@ -1269,13 +1280,13 @@ was a problem with this particular individual.</p>
 they may be used in a model even if appropriate <code>OMEGA</code> matrices have not been
 provided.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb73-1" data-line-number="1">$OMEGA</a>
-<a class="sourceLine" id="cb73-2" data-line-number="2"><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></a>
-<a class="sourceLine" id="cb73-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb73-4" data-line-number="4">$MAIN</a>
-<a class="sourceLine" id="cb73-5" data-line-number="5"><span class="dt">double</span> CL = TVCL*exp(ETA(<span class="dv">1</span>));</a>
-<a class="sourceLine" id="cb73-6" data-line-number="6"><span class="dt">double</span> VC = TVVC*exp(ETA(<span class="dv">2</span>));</a>
-<a class="sourceLine" id="cb73-7" data-line-number="7"><span class="dt">double</span> KA = TVKA*exp(ETA(<span class="dv">3</span>));</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb74-1" data-line-number="1">$OMEGA</a>
+<a class="sourceLine" id="cb74-2" data-line-number="2"><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb74-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb74-4" data-line-number="4">$MAIN</a>
+<a class="sourceLine" id="cb74-5" data-line-number="5"><span class="dt">double</span> CL = TVCL*exp(ETA(<span class="dv">1</span>));</a>
+<a class="sourceLine" id="cb74-6" data-line-number="6"><span class="dt">double</span> VC = TVVC*exp(ETA(<span class="dv">2</span>));</a>
+<a class="sourceLine" id="cb74-7" data-line-number="7"><span class="dt">double</span> KA = TVKA*exp(ETA(<span class="dv">3</span>));</a></code></pre></div>
 <p>Here, we have a 3x3 <code>OMEGA</code> matrix. <code>ETA(1)</code>, <code>ETA(2)</code>, and <code>ETA(3)</code> will be
 populated with variates drawn from this matrix. <code>ETA(4)</code> through <code>ETA(25)</code>
 will be populated with zero.</p>
@@ -1285,41 +1296,41 @@ will be populated with zero.</p>
 <p><code>EPS(n)</code> holds the current value of the observation-level random variates drawn
 from <code>SIGMA</code>. The basic setup is the same as detailed in <code>ETA(n)</code>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb74-1" data-line-number="1">[ CMT ] CENT</a>
-<a class="sourceLine" id="cb74-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb74-3" data-line-number="3">[ PARAM ] CL=<span class="dv">1</span>, VC=<span class="dv">20</span></a>
-<a class="sourceLine" id="cb74-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb74-5" data-line-number="5">[ SIGMA ] @labels ADD PROP</a>
-<a class="sourceLine" id="cb74-6" data-line-number="6"><span class="dv">25</span> <span class="fl">0.0025</span></a>
-<a class="sourceLine" id="cb74-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb74-8" data-line-number="8">[ TABLE ]</a>
-<a class="sourceLine" id="cb74-9" data-line-number="9"><span class="dt">double</span> DV = (CENT/VC)*(<span class="dv">1</span>+PROP) + ADD;</a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb75-1" data-line-number="1">[ CMT ] CENT</a>
+<a class="sourceLine" id="cb75-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb75-3" data-line-number="3">[ PARAM ] CL=<span class="dv">1</span>, VC=<span class="dv">20</span></a>
+<a class="sourceLine" id="cb75-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb75-5" data-line-number="5">[ SIGMA ] @labels ADD PROP</a>
+<a class="sourceLine" id="cb75-6" data-line-number="6"><span class="dv">25</span> <span class="fl">0.0025</span></a>
+<a class="sourceLine" id="cb75-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb75-8" data-line-number="8">[ TABLE ]</a>
+<a class="sourceLine" id="cb75-9" data-line-number="9"><span class="dt">double</span> DV = (CENT/VC)*(<span class="dv">1</span>+PROP) + ADD;</a></code></pre></div>
 </div>
 <div id="tablename" class="section level3">
 <h3><span class="header-section-number">2.3.21</span> <code>table(&lt;name&gt;)</code></h3>
 <p>This macro has been deprecated. Users should <strong>not</strong> use code like this:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb75-1" data-line-number="1">[ TABLE ]</a>
-<a class="sourceLine" id="cb75-2" data-line-number="2">table(CP) = CENT/VC;</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb76-1" data-line-number="1">[ TABLE ]</a>
+<a class="sourceLine" id="cb76-2" data-line-number="2">table(CP) = CENT/VC;</a></code></pre></div>
 <p>But rather this:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb76-1" data-line-number="1">$TABLE </a>
-<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="dt">double</span> CP = CENT/VC;</a>
-<a class="sourceLine" id="cb76-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb76-4" data-line-number="4">$CAPTURE CP</a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb77-1" data-line-number="1">$TABLE </a>
+<a class="sourceLine" id="cb77-2" data-line-number="2"><span class="dt">double</span> CP = CENT/VC;</a>
+<a class="sourceLine" id="cb77-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb77-4" data-line-number="4">$CAPTURE CP</a></code></pre></div>
 <p>See: section <a href="model-specification.html#block-table">2.2.8</a> and also <a href="model-specification.html#block-capture">2.2.11</a></p>
 </div>
 <div id="spec-f" class="section level3">
 <h3><span class="header-section-number">2.3.22</span> <code>F_CMT</code>  </h3>
 <p>For the <code>CMT</code> compartment, sets the bioavailability fraction for that compartment.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb77-1" data-line-number="1">$MAIN</a>
-<a class="sourceLine" id="cb77-2" data-line-number="2">F_CENT = <span class="fl">0.7</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb78-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb78-2" data-line-number="2">F_CENT = <span class="fl">0.7</span>;</a></code></pre></div>
 </div>
 <div id="spec-alag" class="section level3">
 <h3><span class="header-section-number">2.3.23</span> <code>ALAG_CMT</code>  </h3>
 <p>For the <code>CMT</code> compartment, sets the lag time for doses into that compartment.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb78-1" data-line-number="1">$MAIN</a>
-<a class="sourceLine" id="cb78-2" data-line-number="2">ALAG_GUT = <span class="fl">0.25</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb79-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb79-2" data-line-number="2">ALAG_GUT = <span class="fl">0.25</span>;</a></code></pre></div>
 </div>
 <div id="spec-r" class="section level3">
 <h3><span class="header-section-number">2.3.24</span> <code>R_CMT</code>  </h3>
@@ -1327,8 +1338,8 @@ from <code>SIGMA</code>. The basic setup is the same as detailed in <code>ETA(n)
 infusion rate is only set via <code>R_CMT</code> when <code>rate</code> in the data set or event
 object is set to <code>-1</code>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb79-1" data-line-number="1">$MAIN</a>
-<a class="sourceLine" id="cb79-2" data-line-number="2">R_CENT = <span class="dv">100</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb80-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2">R_CENT = <span class="dv">100</span>;</a></code></pre></div>
 </div>
 <div id="spec-d" class="section level3">
 <h3><span class="header-section-number">2.3.25</span> <code>D_CMT</code>  </h3>
@@ -1336,8 +1347,8 @@ object is set to <code>-1</code>.</p>
 The infusion duration is only set via <code>D_CMT</code> when <code>rate</code> in the data set or
 event object is set to <code>-2</code>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb80-1" data-line-number="1">$MAIN</a>
-<a class="sourceLine" id="cb80-2" data-line-number="2">D_CENT = <span class="dv">2</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb81-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb81-2" data-line-number="2">D_CENT = <span class="dv">2</span>;</a></code></pre></div>
 </div>
 </div>
 <div id="new-variables" class="section level2">
@@ -1346,13 +1357,13 @@ event object is set to <code>-2</code>.</p>
 <code>$TABLE</code>. Because these are <code>C++</code> variables, the type of variable being used
 must be declared. For the vast majority of applications, the <code>double</code> type is
 used (double-precision numeric value).</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb81-1" data-line-number="1">$MAIN</a>
-<a class="sourceLine" id="cb81-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb81-3" data-line-number="3"><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb82-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb82-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb82-3" data-line-number="3"><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a></code></pre></div>
 <p>We want <code>CLi</code> to be a numeric value, so we use <code>double</code>. To initialize a <code>boolean</code>
 variable (true / false), write</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb82-1" data-line-number="1">$MAIN</a>
-<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="dt">bool</span> cure = false;</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb83-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb83-2" data-line-number="2"><span class="dt">bool</span> cure = false;</a></code></pre></div>
 <div id="special-handling-for-double-int-bool" class="section level3">
 <h3><span class="header-section-number">2.4.1</span> Special handling for <code>double</code>, <code>int</code>, <code>bool</code></h3>
 <p>When variables of the type <code>double</code>, <code>int</code>, and <code>bool</code> are declared and
@@ -1362,32 +1373,32 @@ declared once in <code>$GLOBAL</code> not in <code>$MAIN</code>, <code>$ODE</cod
 that variables declared in one code block (e.g. <code>$MAIN</code>) can be read and
 modified in another code block (e.g. <code>$TABLE</code>).</p>
 <p>For example, in the following code:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb83-1" data-line-number="1">$MAIN</a>
-<a class="sourceLine" id="cb83-2" data-line-number="2"><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb84-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2"><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a></code></pre></div>
 <p>a double-precision numeric variable is created (<code>CLi</code>) in the <code>$MAIN</code> block.
 When mrgsolve parses the model file, this code gets translated to</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb84-1" data-line-number="1">$GLOBAL</a>
-<a class="sourceLine" id="cb84-2" data-line-number="2">namespace {</a>
-<a class="sourceLine" id="cb84-3" data-line-number="3">  <span class="dt">double</span> CLi;</a>
-<a class="sourceLine" id="cb84-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb84-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb84-6" data-line-number="6">$MAIN</a>
-<a class="sourceLine" id="cb84-7" data-line-number="7">CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb85-1" data-line-number="1">$GLOBAL</a>
+<a class="sourceLine" id="cb85-2" data-line-number="2">namespace {</a>
+<a class="sourceLine" id="cb85-3" data-line-number="3">  <span class="dt">double</span> CLi;</a>
+<a class="sourceLine" id="cb85-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb85-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb85-6" data-line-number="6">$MAIN</a>
+<a class="sourceLine" id="cb85-7" data-line-number="7">CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a></code></pre></div>
 <p>That is, <code>CLi</code> is declared in <code>$GLOBAL</code> in an unnamed namespace so that variables
 like this are global variables within the model file only.</p>
 <p>This way, we can still read the <code>CLi</code> variable in <code>$TABLE</code>:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb85-1" data-line-number="1">$MAIN</a>
-<a class="sourceLine" id="cb85-2" data-line-number="2"><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a>
-<a class="sourceLine" id="cb85-3" data-line-number="3"><span class="dt">double</span> VCi = TVVC*exp(ETA(<span class="dv">2</span>));</a>
-<a class="sourceLine" id="cb85-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb85-5" data-line-number="5">$TABLE</a>
-<a class="sourceLine" id="cb85-6" data-line-number="6"><span class="dt">double</span> KEi = CLi/VCi;</a>
-<a class="sourceLine" id="cb85-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb85-8" data-line-number="8">$CAPTURE KEi</a></code></pre></div>
-<p>To declare a variable that is local to a particular code block:</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb86-1" data-line-number="1">$MAIN</a>
-<a class="sourceLine" id="cb86-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb86-3" data-line-number="3">localdouble CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a></code></pre></div>
+<a class="sourceLine" id="cb86-2" data-line-number="2"><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a>
+<a class="sourceLine" id="cb86-3" data-line-number="3"><span class="dt">double</span> VCi = TVVC*exp(ETA(<span class="dv">2</span>));</a>
+<a class="sourceLine" id="cb86-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb86-5" data-line-number="5">$TABLE</a>
+<a class="sourceLine" id="cb86-6" data-line-number="6"><span class="dt">double</span> KEi = CLi/VCi;</a>
+<a class="sourceLine" id="cb86-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb86-8" data-line-number="8">$CAPTURE KEi</a></code></pre></div>
+<p>To declare a variable that is local to a particular code block:</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb87-1" data-line-number="1">$MAIN</a>
+<a class="sourceLine" id="cb87-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb87-3" data-line-number="3">localdouble CLi = TVCL*exp(ETA(<span class="dv">1</span>));</a></code></pre></div>
 <p>The <code>localdouble</code> type is still just a double-precision variable. The difference
 is that it is protected from this re-declaration process and the variable
 will be local to (in this case) the <code>$MAIN</code> block.</p>
@@ -1400,20 +1411,20 @@ we want to work with other variable types in a global manner. Whenever you
 want a data structure to be accessible across functions (e.g. <code>$MAIN</code>, <code>$TABLE</code>,
 etc.) they should be declared in <code>$GLOBAL</code>, optionally in an unnamed namespace.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb87-1" data-line-number="1">[ GLOBAL ]</a>
-<a class="sourceLine" id="cb87-2" data-line-number="2">std::vector&lt;<span class="dt">double</span>&gt; myvec;</a></code></pre></div>
-<p>or</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb88-1" data-line-number="1">[ GLOBAL ]</a>
-<a class="sourceLine" id="cb88-2" data-line-number="2">namespace {</a>
-<a class="sourceLine" id="cb88-3" data-line-number="3">  std::vector&lt;<span class="dt">double</span>&gt; myvec;</a>
-<a class="sourceLine" id="cb88-4" data-line-number="4">}</a></code></pre></div>
+<a class="sourceLine" id="cb88-2" data-line-number="2">std::vector&lt;<span class="dt">double</span>&gt; myvec;</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb89-1" data-line-number="1">[ GLOBAL ]</a>
+<a class="sourceLine" id="cb89-2" data-line-number="2">namespace {</a>
+<a class="sourceLine" id="cb89-3" data-line-number="3">  std::vector&lt;<span class="dt">double</span>&gt; myvec;</a>
+<a class="sourceLine" id="cb89-4" data-line-number="4">}</a></code></pre></div>
 <p>In case that object needs some configuration prior to starting the problem,
 use <code>$PREAMBLE</code> to do that work</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb89-1" data-line-number="1">[ GLOBAL ]</a>
-<a class="sourceLine" id="cb89-2" data-line-number="2">std::vector&lt;<span class="dt">double</span>&gt; myvec;</a>
-<a class="sourceLine" id="cb89-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb89-4" data-line-number="4">[ PREAMBLE ] </a>
-<a class="sourceLine" id="cb89-5" data-line-number="5">myvec.assign(<span class="dv">3</span>,<span class="dv">1</span>);</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb90-1" data-line-number="1">[ GLOBAL ]</a>
+<a class="sourceLine" id="cb90-2" data-line-number="2">std::vector&lt;<span class="dt">double</span>&gt; myvec;</a>
+<a class="sourceLine" id="cb90-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb90-4" data-line-number="4">[ PREAMBLE ] </a>
+<a class="sourceLine" id="cb90-5" data-line-number="5">myvec.assign(<span class="dv">3</span>,<span class="dv">1</span>);</a></code></pre></div>
 </div>
 </div>
 <div id="examples" class="section level2">
@@ -1438,24 +1449,24 @@ compartment at any particular time (<code>GUT</code> and <code>CENT</code>)</li>
 <li>We derive a variable called <code>CP</code> in <code>$TABLE</code> that has type <code>capture</code>; mrgsolve
 will enter the <code>CP</code> name into the <code>$CAPTURE</code> block list</li>
 </ul>
-<div class="sourceCode" id="cb90"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb90-1" data-line-number="1">$PARAM CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></a>
-<a class="sourceLine" id="cb90-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb90-3" data-line-number="3">$CMT GUT CENT</a>
-<a class="sourceLine" id="cb90-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb90-5" data-line-number="5">$ODE</a>
-<a class="sourceLine" id="cb90-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb90-7" data-line-number="7">dxdt_GUT = -KA*GUT;</a>
-<a class="sourceLine" id="cb90-8" data-line-number="8">dxdt_CENT = KA*GUT - (CL/VC)*CENT;</a>
-<a class="sourceLine" id="cb90-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb90-10" data-line-number="10">$TABLE</a>
-<a class="sourceLine" id="cb90-11" data-line-number="11">capture CP = CENT/VC;</a></code></pre></div>
-<p>This model can also be written without differential equations</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb91-1" data-line-number="1">[ PARAM ] CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></a>
+<div class="sourceCode" id="cb91"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb91-1" data-line-number="1">$PARAM CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></a>
 <a class="sourceLine" id="cb91-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb91-3" data-line-number="3">[ PKMODEL ] cmt = <span class="st">&quot;CMT GUT CENT&quot;</span>, depot = TRUE</a>
+<a class="sourceLine" id="cb91-3" data-line-number="3">$CMT GUT CENT</a>
 <a class="sourceLine" id="cb91-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb91-5" data-line-number="5">$TABLE</a>
-<a class="sourceLine" id="cb91-6" data-line-number="6">capture CP = CENT/VC;</a></code></pre></div>
+<a class="sourceLine" id="cb91-5" data-line-number="5">$ODE</a>
+<a class="sourceLine" id="cb91-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb91-7" data-line-number="7">dxdt_GUT = -KA*GUT;</a>
+<a class="sourceLine" id="cb91-8" data-line-number="8">dxdt_CENT = KA*GUT - (CL/VC)*CENT;</a>
+<a class="sourceLine" id="cb91-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb91-10" data-line-number="10">$TABLE</a>
+<a class="sourceLine" id="cb91-11" data-line-number="11">capture CP = CENT/VC;</a></code></pre></div>
+<p>This model can also be written without differential equations</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb92-1" data-line-number="1">[ PARAM ] CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></a>
+<a class="sourceLine" id="cb92-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb92-3" data-line-number="3">[ PKMODEL ] cmt = <span class="st">&quot;CMT GUT CENT&quot;</span>, depot = TRUE</a>
+<a class="sourceLine" id="cb92-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb92-5" data-line-number="5">$TABLE</a>
+<a class="sourceLine" id="cb92-6" data-line-number="6">capture CP = CENT/VC;</a></code></pre></div>
 </div>
 <div id="pkpd-model" class="section level3">
 <h3><span class="header-section-number">2.5.2</span> PK/PD model</h3>
@@ -1472,26 +1483,26 @@ function of two parameters <code>KIN/KOUT</code></li>
 <li>Both <code>$MAIN</code> and <code>$ODE</code> are <code>C++</code> code blocks; don’t forget to add the <code>;</code>
 at the end of each statement</li>
 </ul>
-<div class="sourceCode" id="cb92"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb92-1" data-line-number="1">$PARAM CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></a>
-<a class="sourceLine" id="cb92-2" data-line-number="2">KIN = <span class="dv">100</span>, KOUT = <span class="dv">2</span>, IC50 = <span class="dv">2</span></a>
-<a class="sourceLine" id="cb92-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb92-4" data-line-number="4">$GLOBAL</a>
-<a class="sourceLine" id="cb92-5" data-line-number="5"><span class="pp">#define CP (CENT/VC)</span></a>
-<a class="sourceLine" id="cb92-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb92-7" data-line-number="7">$CMT GUT CENT RESP</a>
-<a class="sourceLine" id="cb92-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb92-9" data-line-number="9">$MAIN</a>
-<a class="sourceLine" id="cb92-10" data-line-number="10">RESP_0 = KIN/KOUT;</a>
-<a class="sourceLine" id="cb92-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb92-12" data-line-number="12">$ODE</a>
-<a class="sourceLine" id="cb92-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb92-14" data-line-number="14"><span class="dt">double</span> INH = CP/(IC50+CP);</a>
-<a class="sourceLine" id="cb92-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb92-16" data-line-number="16">dxdt_GUT = -KA*GUT;</a>
-<a class="sourceLine" id="cb92-17" data-line-number="17">dxdt_CENT = KA*GUT - (CL/VC)*CENT;</a>
-<a class="sourceLine" id="cb92-18" data-line-number="18">dxdt_RESP = KIN*(<span class="dv">1</span>-INH) - KOUT*CENT;</a>
-<a class="sourceLine" id="cb92-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb92-20" data-line-number="20">$CAPTURE CP</a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb93-1" data-line-number="1">$PARAM CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></a>
+<a class="sourceLine" id="cb93-2" data-line-number="2">KIN = <span class="dv">100</span>, KOUT = <span class="dv">2</span>, IC50 = <span class="dv">2</span></a>
+<a class="sourceLine" id="cb93-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb93-4" data-line-number="4">$GLOBAL</a>
+<a class="sourceLine" id="cb93-5" data-line-number="5"><span class="pp">#define CP (CENT/VC)</span></a>
+<a class="sourceLine" id="cb93-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb93-7" data-line-number="7">$CMT GUT CENT RESP</a>
+<a class="sourceLine" id="cb93-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb93-9" data-line-number="9">$MAIN</a>
+<a class="sourceLine" id="cb93-10" data-line-number="10">RESP_0 = KIN/KOUT;</a>
+<a class="sourceLine" id="cb93-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb93-12" data-line-number="12">$ODE</a>
+<a class="sourceLine" id="cb93-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb93-14" data-line-number="14"><span class="dt">double</span> INH = CP/(IC50+CP);</a>
+<a class="sourceLine" id="cb93-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb93-16" data-line-number="16">dxdt_GUT = -KA*GUT;</a>
+<a class="sourceLine" id="cb93-17" data-line-number="17">dxdt_CENT = KA*GUT - (CL/VC)*CENT;</a>
+<a class="sourceLine" id="cb93-18" data-line-number="18">dxdt_RESP = KIN*(<span class="dv">1</span>-INH) - KOUT*CENT;</a>
+<a class="sourceLine" id="cb93-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb93-20" data-line-number="20">$CAPTURE CP</a></code></pre></div>
 </div>
 <div id="population-pk-model-with-covariates-and-iov" class="section level3">
 <h3><span class="header-section-number">2.5.3</span> Population PK model with covariates and IOV</h3>
@@ -1507,36 +1518,36 @@ at the end of each statement</li>
 <li>We added zeros for both <code>$OMEGA</code> matrices; all the etas will be zero until we
 populate those matrices (section <a href="topics.html#topic-matrix-update">6.8</a>)</li>
 </ul>
-<div class="sourceCode" id="cb93"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb93-1" data-line-number="1">$PARAM TVCL = <span class="fl">1.3</span>, TVVC=<span class="dv">28</span>, TVKA=<span class="fl">0.6</span>, WT=<span class="dv">70</span>, OCC=<span class="dv">1</span></a>
-<a class="sourceLine" id="cb93-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb93-3" data-line-number="3">$SET delta=<span class="fl">0.1</span>, end=<span class="dv">240</span></a>
-<a class="sourceLine" id="cb93-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb93-5" data-line-number="5">$CMT GUT CENT</a>
-<a class="sourceLine" id="cb93-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb93-7" data-line-number="7">$MAIN</a>
-<a class="sourceLine" id="cb93-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb93-9" data-line-number="9"><span class="dt">double</span> IOV = IOV1</a>
-<a class="sourceLine" id="cb93-10" data-line-number="10"><span class="cf">if</span>(OCC==<span class="dv">2</span>) IOV = IOV2;</a>
-<a class="sourceLine" id="cb93-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb93-12" data-line-number="12"><span class="dt">double</span> CLi = exp(log(TVCL) + <span class="fl">0.75</span>*log(WT/<span class="dv">70</span>) + ECL + IOV);</a>
-<a class="sourceLine" id="cb93-13" data-line-number="13"><span class="dt">double</span> VCi = exp(log(TVVC) + EVC);</a>
-<a class="sourceLine" id="cb93-14" data-line-number="14"><span class="dt">double</span> KAi = exp(log(TVKA) + EKA);</a>
-<a class="sourceLine" id="cb93-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb93-16" data-line-number="16">$OMEGA @name IIV @labels ECL EVC EKA</a>
-<a class="sourceLine" id="cb93-17" data-line-number="17"><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span></a>
-<a class="sourceLine" id="cb93-18" data-line-number="18">$OMEGA @name IOV @labels IOV1 IOV2</a>
-<a class="sourceLine" id="cb93-19" data-line-number="19"><span class="dv">0</span> <span class="dv">0</span></a>
-<a class="sourceLine" id="cb93-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb93-21" data-line-number="21">$SIGMA <span class="dv">0</span></a>
-<a class="sourceLine" id="cb93-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb93-23" data-line-number="23">$ODE</a>
-<a class="sourceLine" id="cb93-24" data-line-number="24">dxdt_GUT = -KAi*GUT;</a>
-<a class="sourceLine" id="cb93-25" data-line-number="25">dxdt_CENT = KAi*GUT - (CLi/VCi)*CENT;</a>
-<a class="sourceLine" id="cb93-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb93-27" data-line-number="27">$TABLE</a>
-<a class="sourceLine" id="cb93-28" data-line-number="28">capture CP = CENT/VCi;</a>
-<a class="sourceLine" id="cb93-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb93-30" data-line-number="30">$CAPTURE IOV ECL EVC</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb94-1" data-line-number="1">$PARAM TVCL = <span class="fl">1.3</span>, TVVC=<span class="dv">28</span>, TVKA=<span class="fl">0.6</span>, WT=<span class="dv">70</span>, OCC=<span class="dv">1</span></a>
+<a class="sourceLine" id="cb94-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb94-3" data-line-number="3">$SET delta=<span class="fl">0.1</span>, end=<span class="dv">240</span></a>
+<a class="sourceLine" id="cb94-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb94-5" data-line-number="5">$CMT GUT CENT</a>
+<a class="sourceLine" id="cb94-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb94-7" data-line-number="7">$MAIN</a>
+<a class="sourceLine" id="cb94-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb94-9" data-line-number="9"><span class="dt">double</span> IOV = IOV1</a>
+<a class="sourceLine" id="cb94-10" data-line-number="10"><span class="cf">if</span>(OCC==<span class="dv">2</span>) IOV = IOV2;</a>
+<a class="sourceLine" id="cb94-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb94-12" data-line-number="12"><span class="dt">double</span> CLi = exp(log(TVCL) + <span class="fl">0.75</span>*log(WT/<span class="dv">70</span>) + ECL + IOV);</a>
+<a class="sourceLine" id="cb94-13" data-line-number="13"><span class="dt">double</span> VCi = exp(log(TVVC) + EVC);</a>
+<a class="sourceLine" id="cb94-14" data-line-number="14"><span class="dt">double</span> KAi = exp(log(TVKA) + EKA);</a>
+<a class="sourceLine" id="cb94-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb94-16" data-line-number="16">$OMEGA @name IIV @labels ECL EVC EKA</a>
+<a class="sourceLine" id="cb94-17" data-line-number="17"><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb94-18" data-line-number="18">$OMEGA @name IOV @labels IOV1 IOV2</a>
+<a class="sourceLine" id="cb94-19" data-line-number="19"><span class="dv">0</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb94-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb94-21" data-line-number="21">$SIGMA <span class="dv">0</span></a>
+<a class="sourceLine" id="cb94-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb94-23" data-line-number="23">$ODE</a>
+<a class="sourceLine" id="cb94-24" data-line-number="24">dxdt_GUT = -KAi*GUT;</a>
+<a class="sourceLine" id="cb94-25" data-line-number="25">dxdt_CENT = KAi*GUT - (CLi/VCi)*CENT;</a>
+<a class="sourceLine" id="cb94-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb94-27" data-line-number="27">$TABLE</a>
+<a class="sourceLine" id="cb94-28" data-line-number="28">capture CP = CENT/VCi;</a>
+<a class="sourceLine" id="cb94-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb94-30" data-line-number="30">$CAPTURE IOV ECL EVC</a></code></pre></div>
 
 </div>
 </div>
