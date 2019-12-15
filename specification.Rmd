@@ -169,7 +169,7 @@ See the `popex` model for an example of using `@covariates`
 obj <- as.list(mod <- modlib("popex",compile = FALSE))
 ```
 
-```{c,echo=FALSE }
+```{r,echo=FALSE}
 blocks(mod,PARAM)
 ```
 
