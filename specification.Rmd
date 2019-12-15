@@ -143,6 +143,11 @@ for every parameter name.  Names (and numbers) of parameters must be set at the
 time the model is compiled, but parameter values may be updated without 
 re-compiling the model. 
 
+The `@covariates` option allows you to tag a collection of parameters as 
+"covariates".  It does not change the functionality of the model or simulation
+workflow in any way, but allows you to get that list of covariate names out
+of the model object.
+
 Example:
 ```{c, eval=FALSE}
 [ PARAM ] CL = 1, VC = 20, KA = 1.2
@@ -156,6 +161,24 @@ Annotated example:
 CL :   1 : Clearance (L/hr)
 VC :  20 : Volume of distribution (L)
 KA:  1.2 : Absorption rate constant (1/hr)
+```
+
+See the `popex` model for an example of using `@covariates`
+
+```{r,include = FALSE, message = FALSE}
+obj <- as.list(modlib("popex",compile = FALSE))
+```
+
+```{c, eval=FALSE, code = obj[["code"]] }
+```
+
+then
+```{r, eval  = FALSE}
+mod <- modlib("popex")
+```
+
+```{r}
+as.list(mod)$covariates
 ```
 
 Notes:
