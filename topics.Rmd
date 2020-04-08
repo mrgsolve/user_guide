@@ -358,7 +358,7 @@ __The parameters in the base list can be changed or updated in `R`__
 Use the `param()` function to both set and get:
 
 ```{r}
-mod %<>% param(CL=2.1)
+mod <-  param(mod, CL=2.1)
 ```
 
 ```{r}
@@ -675,7 +675,7 @@ range(stime(des2))
 Now, derive an `idata_set` after adding a grouping column (`GRP`) that splits
 the data set into two groups
 ```{r}
-df %<>% mutate(GRP = as.integer(ID > 5))
+df <-  mutate(df, GRP = as.integer(ID > 5))
 
 id <- df %>% distinct(ID,GRP) 
 
