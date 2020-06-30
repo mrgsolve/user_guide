@@ -1034,8 +1034,8 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 . 
 . ----------------  source: nmxml.cpp  ----------------
 . 
-.   project: /private/var/fol.../T/Rtmp0fJfhe
-.   shared object: nmxml-so-167e62861f49e 
+.   project: /private/var/fol.../T/Rtmp6Zcmcw
+.   shared object: nmxml-so-16b4a489576a8 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
@@ -1318,7 +1318,10 @@ in the data set. There is no alias for <code>self.amt</code>.</p>
 <div id="self.tad" class="section level3">
 <h3><span class="header-section-number">2.3.14</span> <code>self.tad()</code></h3>
 <p>This is a function that calculates and returns the time after the most recent
-dose. This function should be called in <code>$MAIN</code> every time <code>$MAIN</code> is called.</p>
+dose event record (any record with EVID equal to 1 or 4). <code>self.tad()</code> will
+return <code>-1</code> when it is called before the first dose record within an individual
+(<code>NEWIND &lt;= 1</code>).</p>
+<p>This function should be called in <code>$MAIN</code> every time <code>$MAIN</code> is called.</p>
 <p>For example:</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb81-1" data-line-number="1">$MAIN</a>
 <a class="sourceLine" id="cb81-2" data-line-number="2"></a>
