@@ -1000,7 +1000,7 @@ be passed to `$NMXML`.
 See also: \@ref(block-nmext).
 
 
-### `$NMEXT`  \ {$block-nmext}
+### `$NMEXT`  \ {#block-nmext}
 
 __Syntax__: R   
 __Multiple allowed__: yes   
