@@ -185,8 +185,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.17" data-path="model-specification.html"><a href="model-specification.html#block-plugin"><i class="fa fa-check"></i><b>2.2.17</b> <code>$PLUGIN</code>  </a></li>
 <li class="chapter" data-level="2.2.18" data-path="model-specification.html"><a href="model-specification.html#block-theta"><i class="fa fa-check"></i><b>2.2.18</b> <code>$THETA</code>  </a></li>
 <li class="chapter" data-level="2.2.19" data-path="model-specification.html"><a href="model-specification.html#block-nmxml"><i class="fa fa-check"></i><b>2.2.19</b> <code>$NMXML</code>  </a></li>
-<li class="chapter" data-level="2.2.20" data-path="model-specification.html"><a href="model-specification.html#block-include"><i class="fa fa-check"></i><b>2.2.20</b> <code>$INCLUDE</code>  </a></li>
-<li class="chapter" data-level="2.2.21" data-path="model-specification.html"><a href="model-specification.html#block-env"><i class="fa fa-check"></i><b>2.2.21</b> <code>$ENV</code>  </a></li>
+<li class="chapter" data-level="2.2.20" data-path="model-specification.html"><a href="model-specification.html#nmext-block-nmext"><i class="fa fa-check"></i><b>2.2.20</b> <code>$NMEXT</code>  {$block-nmext}</a></li>
+<li class="chapter" data-level="2.2.21" data-path="model-specification.html"><a href="model-specification.html#block-include"><i class="fa fa-check"></i><b>2.2.21</b> <code>$INCLUDE</code>  </a></li>
+<li class="chapter" data-level="2.2.22" data-path="model-specification.html"><a href="model-specification.html#block-env"><i class="fa fa-check"></i><b>2.2.22</b> <code>$ENV</code>  </a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="model-specification.html"><a href="model-specification.html#variables-and-macros"><i class="fa fa-check"></i><b>2.3</b> Variables and Macros</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="model-specification.html"><a href="model-specification.html#id"><i class="fa fa-check"></i><b>2.3.1</b> <code>ID</code></a></li>
@@ -336,14 +337,14 @@ coercing the simulation matrix into other <code>R</code> objects.</p>
 <h2><span class="header-section-number">4.3</span> Methods for <code>dplyr</code> verbs</h2>
 <p><code>mrgsolve</code> provides several S3 methods to make it possible to include <code>dplyr</code> verbs in your simulation pipeline.</p>
 <p>For example</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb121-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb121-3" data-line-number="3">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()</a>
-<a class="sourceLine" id="cb121-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb121-5" data-line-number="5">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb121-6" data-line-number="6"><span class="st">  </span><span class="kw">ev</span>(<span class="dt">amt=</span><span class="dv">100</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb121-7" data-line-number="7"><span class="st">  </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb121-8" data-line-number="8"><span class="st">  </span><span class="kw">filter</span>(time <span class="op">&gt;=</span><span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb126-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb126-3" data-line-number="3">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()</a>
+<a class="sourceLine" id="cb126-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb126-5" data-line-number="5">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb126-6" data-line-number="6"><span class="st">  </span><span class="kw">ev</span>(<span class="dt">amt=</span><span class="dv">100</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb126-7" data-line-number="7"><span class="st">  </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb126-8" data-line-number="8"><span class="st">  </span><span class="kw">filter</span>(time <span class="op">&gt;=</span><span class="dv">10</span>)</a></code></pre></div>
 <pre><code>. # A tibble: 441 x 7
 .       ID  time       GUT  CENT  RESP    DV    CP
 .    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;

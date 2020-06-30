@@ -912,7 +912,7 @@ would be equivalent to
 ```
 
 
-See also: \@ref(block-param) .
+See also: \@ref(block-param).
 
 
 ### `$NMXML`  \ {#block-nmxml}
@@ -986,10 +986,89 @@ __NOTE__: in order to use this code, we need to install the `xml2` package.
 ```{r}
 mod <- mcode("nmxml", code, quiet=TRUE)
 
+mod
+
 param(mod)
 
 revar(mod)
+
 ```
+
+Please see the `?nmxml` help topic for more information on arguments that can 
+be passed to `$NMXML`.
+
+See also: \@ref(block-nmext).
+
+
+### `$NMEXT`  \ {$block-nmext}
+
+__Syntax__: R   
+__Multiple allowed__: yes   
+
+Like `$NMXML`, `$NMEXT` allows the import of `$THETA`, `$OMEGA`, and `$SIGMA`
+from your NONMEM run into your mrgsolve model, but the estimates are read from
+the `.ext` file output. `$NMEXT` is able to import the NONMEM estimates much 
+faster than `$NMXML` when loading from sampling based methods (mainly 
+`METHOD=BAYES`). 
+
+We can load the same mode as the `$NMXML` example above with the following 
+code:
+
+```{r}
+path <- file.path(path.package("mrgsolve"),"nonmem")
+
+code <- '
+$NMEXT
+run = 1005
+project = path
+olabels = s_(ECL, EVC, EKA)
+slabels = s_(PROP, ADD)
+
+$MAIN
+double CL = THETA1*exp(ECL);
+double V2 = THETA2*exp(EVC);
+double KA = THETA3*exp(EKA);
+double Q = THETA4;
+double V3 = THETA5;
+
+$PKMODEL ncmt=2, depot=TRUE
+
+$CMT GUT CENT PERIPH
+
+$TABLE
+double CP = (CENT/V2)*(1+PROP) + ADD/5;
+
+$CAPTURE CP
+
+$SET delta=4, end=96
+'
+
+```
+
+
+```{r}
+mod <- mcode("nmext", code, quiet=TRUE)
+
+param(mod)
+
+```
+
+
+__IMPORTANT__: while `$NMEXT` works very similarly to `$NMXML`, there is one 
+key difference between the two: when using `$NMEXT`, you will always get one 
+`$OMEGA` matrix and one `$SIGMA` matrix, regardless of the block structure used
+in the NONMEM control stream. When using `$NMXML`, you get the same block 
+structure in the mrgsolve model as the NONMEM model.  For example: in the 
+NONMEM control stream, `$OMEGA` is one 2x2 matrix and one 3x3 matrix. Importing
+those estimates with `$NMEXT` will give you one 5x5 matrix, while importing 
+the estimates with `$NMXML` will give you a list of one 2x2 and one 3x3 matrix.
+
+See the `?nmext` R help topic for arguments that can be passed to `$NMEXT` block.
+Notably, the user can select the function to read in the ext file.  By default, 
+mrgsolve will try to load data.table and use the `fread` function.  If 
+data.table can't be loaded, then mrgsolve will use `utils::read.table`.
+
+See also: \@ref(block-nmxml).
 
 ### `$INCLUDE`  \ {#block-include}
 
