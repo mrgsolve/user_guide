@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Topics | mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve." />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Topics | mrgsolve User Guide" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2020-04-08" />
+<meta name="date" content="2020-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -269,7 +269,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="topics.html"><a href="topics.html#some-helpful-c"><i class="fa fa-check"></i><b>6.6</b> Some helpful <code>C++</code></a><ul>
 <li class="chapter" data-level="6.6.1" data-path="topics.html"><a href="topics.html#semi-colons"><i class="fa fa-check"></i><b>6.6.1</b> Semi-colons</a></li>
 <li class="chapter" data-level="6.6.2" data-path="topics.html"><a href="topics.html#if-else"><i class="fa fa-check"></i><b>6.6.2</b> if-else</a></li>
-<li class="chapter" data-level="6.6.3" data-path="topics.html"><a href="topics.html#functions-1"><i class="fa fa-check"></i><b>6.6.3</b> Functions</a></li>
+<li class="chapter" data-level="6.6.3" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>6.6.3</b> Functions</a></li>
 <li class="chapter" data-level="6.6.4" data-path="topics.html"><a href="topics.html#integer-division"><i class="fa fa-check"></i><b>6.6.4</b> Integer division</a></li>
 </ul></li>
 <li class="chapter" data-level="6.7" data-path="topics.html"><a href="topics.html#resimulate-eta-and-eps"><i class="fa fa-check"></i><b>6.7</b> Resimulate <code>ETA</code> and <code>EPS</code></a></li>
@@ -675,8 +675,10 @@ their individual parameter.</p>
 <div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1">data &lt;-<span class="st"> </span></a>
 <a class="sourceLine" id="cb178-2" data-line-number="2"><span class="st">  </span><span class="kw">data_frame</span>(<span class="dt">CL=</span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">5</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb178-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">evid=</span><span class="dv">0</span>,<span class="dt">ID=</span><span class="dv">1</span>,<span class="dt">cmt=</span><span class="dv">1</span>,<span class="dt">time=</span>CL<span class="dv">-1</span>,<span class="dt">amt=</span><span class="dv">0</span>)</a></code></pre></div>
-<pre><code>. Warning: `data_frame()` is deprecated, use `tibble()`.
-. This warning is displayed once per session.</code></pre>
+<pre><code>. Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+. Please use `tibble()` instead.
+. This warning is displayed once every 8 hours.
+. Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1">mod <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb180-2" data-line-number="2"><span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb180-3" data-line-number="3"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>)</a></code></pre></div>
@@ -980,7 +982,7 @@ out there that can suit your needs.</p>
 <p>This is the equivalent of <code>x &lt;- ifelse(c == 4, 8, 10)</code> in R</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="dt">double</span> x = c == <span class="dv">4</span> ? <span class="dv">8</span> : <span class="dv">10</span>;</a></code></pre></div>
 </div>
-<div id="functions-1" class="section level3">
+<div id="functions" class="section level3">
 <h3><span class="header-section-number">6.6.3</span> Functions</h3>
 <p>The following functions are hopefully understandable based on the function
 name. Consult <a href="https://cppreference.com" class="uri">https://cppreference.com</a> for further details.</p>
