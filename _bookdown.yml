@@ -8,6 +8,7 @@ rmd_files: [
   "datasets.Rmd", 
   "output.Rmd", 
   "sequence.Rmd",
+  "steady-state.Rmd",
   "topics.Rmd", 
   "install.Rmd"
 ]

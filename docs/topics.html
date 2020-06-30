@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Topics | mrgsolve User Guide</title>
+  <title>Chapter 7 Topics | mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Topics | mrgsolve User Guide" />
+  <meta property="og:title" content="Chapter 7 Topics | mrgsolve User Guide" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://mrgsolve.github.io/user_guide/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="mrgsolve/user_guide" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Topics | mrgsolve User Guide" />
+  <meta name="twitter:title" content="Chapter 7 Topics | mrgsolve User Guide" />
   <meta name="twitter:site" content="@mrgsolve" />
   <meta name="twitter:description" content="A guide to using mrgsolve." />
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="section-sequence.html"/>
+<link rel="prev" href="steady-state.html"/>
 <link rel="next" href="install.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -252,38 +252,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="section-sequence.html"><a href="section-sequence.html#subject-initiation"><i class="fa fa-check"></i><b>5.3</b> Subject initiation</a></li>
 <li class="chapter" data-level="5.4" data-path="section-sequence.html"><a href="section-sequence.html#sequence-for-a-single-record"><i class="fa fa-check"></i><b>5.4</b> Sequence for a single record</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="topics.html"><a href="topics.html"><i class="fa fa-check"></i><b>6</b> Topics</a><ul>
-<li class="chapter" data-level="6.1" data-path="topics.html"><a href="topics.html#topic-annotated"><i class="fa fa-check"></i><b>6.1</b> Annotated model specification</a></li>
-<li class="chapter" data-level="6.2" data-path="topics.html"><a href="topics.html#topic-init"><i class="fa fa-check"></i><b>6.2</b> Set initial conditions</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="topics.html"><a href="topics.html#summary"><i class="fa fa-check"></i><b>6.2.1</b> Summary</a></li>
-<li class="chapter" data-level="6.2.2" data-path="topics.html"><a href="topics.html#make-a-model-only-to-examine-init-behavior"><i class="fa fa-check"></i><b>6.2.2</b> Make a model only to examine <code>init</code> behavior</a></li>
-<li class="chapter" data-level="6.2.3" data-path="topics.html"><a href="topics.html#example-pkpd-model-with-initial-condition"><i class="fa fa-check"></i><b>6.2.3</b> Example PK/PD model with initial condition</a></li>
-<li class="chapter" data-level="6.2.4" data-path="topics.html"><a href="topics.html#remember-calling-init-will-let-you-check-to-see-what-is-going-on"><i class="fa fa-check"></i><b>6.2.4</b> Remember: calling <code>init</code> will let you check to see what is going on</a></li>
-<li class="chapter" data-level="6.2.5" data-path="topics.html"><a href="topics.html#set-initial-conditions-via-idata"><i class="fa fa-check"></i><b>6.2.5</b> Set initial conditions via <code>idata</code></a></li>
+<li class="chapter" data-level="6" data-path="steady-state.html"><a href="steady-state.html"><i class="fa fa-check"></i><b>6</b> Steady state</a><ul>
+<li class="chapter" data-level="6.1" data-path="index.html"><a href="index.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="steady-state.html"><a href="steady-state.html#intermittent-doses"><i class="fa fa-check"></i><b>6.1.1</b> Intermittent doses</a></li>
+<li class="chapter" data-level="6.1.2" data-path="steady-state.html"><a href="steady-state.html#continuous-infusion"><i class="fa fa-check"></i><b>6.1.2</b> Continuous infusion</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="topics.html"><a href="topics.html#topic-parameter-update"><i class="fa fa-check"></i><b>6.3</b> Updating parameters</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="topics.html"><a href="topics.html#parameter-update-hierarchy"><i class="fa fa-check"></i><b>6.3.1</b> Parameter update hierarchy</a></li>
-<li class="chapter" data-level="6.3.2" data-path="topics.html"><a href="topics.html#topic-parameter-update-base"><i class="fa fa-check"></i><b>6.3.2</b> Updating the base parameter list</a></li>
+<li class="chapter" data-level="6.2" data-path="steady-state.html"><a href="steady-state.html#advance-to-ss"><i class="fa fa-check"></i><b>6.2</b> Advance to SS</a></li>
+<li class="chapter" data-level="6.3" data-path="steady-state.html"><a href="steady-state.html#control-advance-to-ss"><i class="fa fa-check"></i><b>6.3</b> Control advance to SS</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="steady-state.html"><a href="steady-state.html#tolerances-for-ss"><i class="fa fa-check"></i><b>6.3.1</b> Tolerances for SS</a></li>
+<li class="chapter" data-level="6.3.2" data-path="steady-state.html"><a href="steady-state.html#max-dose-number"><i class="fa fa-check"></i><b>6.3.2</b> Max dose number</a></li>
+<li class="chapter" data-level="6.3.3" data-path="steady-state.html"><a href="steady-state.html#include-exclude-compartments-for-ss"><i class="fa fa-check"></i><b>6.3.3</b> Include / exclude compartments for SS</a></li>
+<li class="chapter" data-level="6.3.4" data-path="steady-state.html"><a href="steady-state.html#ss_advance-flag"><i class="fa fa-check"></i><b>6.3.4</b> SS_ADVANCE flag</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="topics.html"><a href="topics.html#topic-tgrid"><i class="fa fa-check"></i><b>6.4</b> Time grid objects</a></li>
-<li class="chapter" data-level="6.5" data-path="topics.html"><a href="topics.html#topic-designs"><i class="fa fa-check"></i><b>6.5</b> Individualized sampling designs</a></li>
-<li class="chapter" data-level="6.6" data-path="topics.html"><a href="topics.html#some-helpful-c"><i class="fa fa-check"></i><b>6.6</b> Some helpful <code>C++</code></a><ul>
-<li class="chapter" data-level="6.6.1" data-path="topics.html"><a href="topics.html#semi-colons"><i class="fa fa-check"></i><b>6.6.1</b> Semi-colons</a></li>
-<li class="chapter" data-level="6.6.2" data-path="topics.html"><a href="topics.html#if-else"><i class="fa fa-check"></i><b>6.6.2</b> if-else</a></li>
-<li class="chapter" data-level="6.6.3" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>6.6.3</b> Functions</a></li>
-<li class="chapter" data-level="6.6.4" data-path="topics.html"><a href="topics.html#integer-division"><i class="fa fa-check"></i><b>6.6.4</b> Integer division</a></li>
 </ul></li>
-<li class="chapter" data-level="6.7" data-path="topics.html"><a href="topics.html#resimulate-eta-and-eps"><i class="fa fa-check"></i><b>6.7</b> Resimulate <code>ETA</code> and <code>EPS</code></a></li>
-<li class="chapter" data-level="6.8" data-path="topics.html"><a href="topics.html#topic-matrix-update"><i class="fa fa-check"></i><b>6.8</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a><ul>
-<li class="chapter" data-level="6.8.1" data-path="topics.html"><a href="topics.html#matrix-helper-functions"><i class="fa fa-check"></i><b>6.8.1</b> Matrix helper functions</a></li>
-<li class="chapter" data-level="6.8.2" data-path="topics.html"><a href="topics.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>6.8.2</b> Fill a matrix with zeros</a></li>
-<li class="chapter" data-level="6.8.3" data-path="topics.html"><a href="topics.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>6.8.3</b> Example: unnamed matrix</a></li>
-<li class="chapter" data-level="6.8.4" data-path="topics.html"><a href="topics.html#example-named-matrices"><i class="fa fa-check"></i><b>6.8.4</b> Example: named matrices</a></li>
-<li class="chapter" data-level="6.8.5" data-path="topics.html"><a href="topics.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>6.8.5</b> Example: unnamed matrices</a></li>
+<li class="chapter" data-level="7" data-path="topics.html"><a href="topics.html"><i class="fa fa-check"></i><b>7</b> Topics</a><ul>
+<li class="chapter" data-level="7.1" data-path="topics.html"><a href="topics.html#topic-annotated"><i class="fa fa-check"></i><b>7.1</b> Annotated model specification</a></li>
+<li class="chapter" data-level="7.2" data-path="topics.html"><a href="topics.html#topic-init"><i class="fa fa-check"></i><b>7.2</b> Set initial conditions</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="topics.html"><a href="topics.html#summary"><i class="fa fa-check"></i><b>7.2.1</b> Summary</a></li>
+<li class="chapter" data-level="7.2.2" data-path="topics.html"><a href="topics.html#make-a-model-only-to-examine-init-behavior"><i class="fa fa-check"></i><b>7.2.2</b> Make a model only to examine <code>init</code> behavior</a></li>
+<li class="chapter" data-level="7.2.3" data-path="topics.html"><a href="topics.html#example-pkpd-model-with-initial-condition"><i class="fa fa-check"></i><b>7.2.3</b> Example PK/PD model with initial condition</a></li>
+<li class="chapter" data-level="7.2.4" data-path="topics.html"><a href="topics.html#remember-calling-init-will-let-you-check-to-see-what-is-going-on"><i class="fa fa-check"></i><b>7.2.4</b> Remember: calling <code>init</code> will let you check to see what is going on</a></li>
+<li class="chapter" data-level="7.2.5" data-path="topics.html"><a href="topics.html#set-initial-conditions-via-idata"><i class="fa fa-check"></i><b>7.2.5</b> Set initial conditions via <code>idata</code></a></li>
 </ul></li>
-<li class="chapter" data-level="6.9" data-path="topics.html"><a href="topics.html#topics-time-varying"><i class="fa fa-check"></i><b>6.9</b> Time varying covariates</a></li>
+<li class="chapter" data-level="7.3" data-path="topics.html"><a href="topics.html#topic-parameter-update"><i class="fa fa-check"></i><b>7.3</b> Updating parameters</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="topics.html"><a href="topics.html#parameter-update-hierarchy"><i class="fa fa-check"></i><b>7.3.1</b> Parameter update hierarchy</a></li>
+<li class="chapter" data-level="7.3.2" data-path="topics.html"><a href="topics.html#topic-parameter-update-base"><i class="fa fa-check"></i><b>7.3.2</b> Updating the base parameter list</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>7</b> Installation</a></li>
+<li class="chapter" data-level="7.4" data-path="topics.html"><a href="topics.html#topic-tgrid"><i class="fa fa-check"></i><b>7.4</b> Time grid objects</a></li>
+<li class="chapter" data-level="7.5" data-path="topics.html"><a href="topics.html#topic-designs"><i class="fa fa-check"></i><b>7.5</b> Individualized sampling designs</a></li>
+<li class="chapter" data-level="7.6" data-path="topics.html"><a href="topics.html#some-helpful-c"><i class="fa fa-check"></i><b>7.6</b> Some helpful <code>C++</code></a><ul>
+<li class="chapter" data-level="7.6.1" data-path="topics.html"><a href="topics.html#semi-colons"><i class="fa fa-check"></i><b>7.6.1</b> Semi-colons</a></li>
+<li class="chapter" data-level="7.6.2" data-path="topics.html"><a href="topics.html#if-else"><i class="fa fa-check"></i><b>7.6.2</b> if-else</a></li>
+<li class="chapter" data-level="7.6.3" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>7.6.3</b> Functions</a></li>
+<li class="chapter" data-level="7.6.4" data-path="topics.html"><a href="topics.html#integer-division"><i class="fa fa-check"></i><b>7.6.4</b> Integer division</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="topics.html"><a href="topics.html#resimulate-eta-and-eps"><i class="fa fa-check"></i><b>7.7</b> Resimulate <code>ETA</code> and <code>EPS</code></a></li>
+<li class="chapter" data-level="7.8" data-path="topics.html"><a href="topics.html#topic-matrix-update"><i class="fa fa-check"></i><b>7.8</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a><ul>
+<li class="chapter" data-level="7.8.1" data-path="topics.html"><a href="topics.html#matrix-helper-functions"><i class="fa fa-check"></i><b>7.8.1</b> Matrix helper functions</a></li>
+<li class="chapter" data-level="7.8.2" data-path="topics.html"><a href="topics.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>7.8.2</b> Fill a matrix with zeros</a></li>
+<li class="chapter" data-level="7.8.3" data-path="topics.html"><a href="topics.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>7.8.3</b> Example: unnamed matrix</a></li>
+<li class="chapter" data-level="7.8.4" data-path="topics.html"><a href="topics.html#example-named-matrices"><i class="fa fa-check"></i><b>7.8.4</b> Example: named matrices</a></li>
+<li class="chapter" data-level="7.8.5" data-path="topics.html"><a href="topics.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>7.8.5</b> Example: unnamed matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="topics.html"><a href="topics.html#topics-time-varying"><i class="fa fa-check"></i><b>7.9</b> Time varying covariates</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>8</b> Installation</a></li>
 <li class="divider"></li>
 <li><a href="https://mrgsolve.github.io" target="blank">https://mrgsolve.github.io</a></li>
 <li><a href="https:/metrumrg.com" target="blank">https://metrumrg.com</a></li>
@@ -306,65 +319,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="topics" class="section level1">
-<h1><span class="header-section-number">Chapter 6</span> Topics</h1>
+<h1><span class="header-section-number">Chapter 7</span> Topics</h1>
 <div id="topic-annotated" class="section level2">
-<h2><span class="header-section-number">6.1</span> Annotated model specification</h2>
+<h2><span class="header-section-number">7.1</span> Annotated model specification</h2>
 <p>Here is a complete annotated <code>mrgsolve</code> model. The goal was to get in several
 of the most common blocks that you might want to annotate. The different code
 blocks are rendered here separately for clarity in presentation; but users
 should include all relevant blocks in a single file (or R string).</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="op">$</span>PROB</a>
-<a class="sourceLine" id="cb128-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb128-3" data-line-number="3"><span class="co"># Final PK model</span></a>
-<a class="sourceLine" id="cb128-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb128-5" data-line-number="5"><span class="op">-</span><span class="st"> </span>Author<span class="op">:</span><span class="st"> </span>Pmetrics Scientist</a>
-<a class="sourceLine" id="cb128-6" data-line-number="6"><span class="op">-</span><span class="st"> </span>Client<span class="op">:</span><span class="st"> </span>Pharmaco, Inc.</a>
-<a class="sourceLine" id="cb128-7" data-line-number="7"><span class="op">-</span><span class="st"> </span>Date<span class="op">:</span><span class="st"> `</span><span class="dt">r Sys.Date()</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb128-8" data-line-number="8"><span class="op">-</span><span class="st"> </span>NONMEM Run<span class="op">:</span><span class="st"> </span><span class="dv">12345</span></a>
-<a class="sourceLine" id="cb128-9" data-line-number="9"><span class="op">-</span><span class="st"> </span>Structure<span class="op">:</span><span class="st"> </span>one compartment, first order absorption</a>
-<a class="sourceLine" id="cb128-10" data-line-number="10"><span class="op">-</span><span class="st"> </span>Implementation<span class="op">:</span><span class="st"> </span>closed form solutions</a>
-<a class="sourceLine" id="cb128-11" data-line-number="11"><span class="op">-</span><span class="st"> </span>Error model<span class="op">:</span><span class="st"> </span>Additive <span class="op">+</span><span class="st"> </span>proportional</a>
-<a class="sourceLine" id="cb128-12" data-line-number="12"><span class="op">-</span><span class="st"> </span>Covariates<span class="op">:</span></a>
-<a class="sourceLine" id="cb128-13" data-line-number="13"><span class="st">  </span><span class="op">-</span><span class="st"> </span>WT on clearance</a>
-<a class="sourceLine" id="cb128-14" data-line-number="14"><span class="op">-</span><span class="st"> </span>SEX on volume</a>
-<a class="sourceLine" id="cb128-15" data-line-number="15"><span class="op">-</span><span class="st"> </span>Random effects on<span class="op">:</span><span class="st"> `</span><span class="dt">CL</span><span class="st">`</span>, <span class="st">`</span><span class="dt">V</span><span class="st">`</span>, <span class="st">`</span><span class="dt">KA</span><span class="st">`</span></a></code></pre></div>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">[PARAM] <span class="op">@</span>annotated</a>
-<a class="sourceLine" id="cb129-2" data-line-number="2">TVCL <span class="op">:</span><span class="st"> </span><span class="fl">1.1</span>   <span class="op">:</span><span class="st"> </span><span class="kw">Clearance</span> (L<span class="op">/</span>hr)</a>
-<a class="sourceLine" id="cb129-3" data-line-number="3">TVV  <span class="op">:</span><span class="st"> </span><span class="fl">35.6</span>  <span class="op">:</span><span class="st"> </span>Volume of <span class="kw">distribution</span> (L)</a>
-<a class="sourceLine" id="cb129-4" data-line-number="4">TVKA <span class="op">:</span><span class="st"> </span><span class="fl">1.35</span>  <span class="op">:</span><span class="st"> </span>Absorption rate <span class="kw">constant</span> (<span class="dv">1</span><span class="op">/</span>hr)</a>
-<a class="sourceLine" id="cb129-5" data-line-number="5">WT   <span class="op">:</span><span class="st"> </span><span class="dv">70</span>    <span class="op">:</span><span class="st"> </span><span class="kw">Weight</span> (kg)</a>
-<a class="sourceLine" id="cb129-6" data-line-number="6">SEX  <span class="op">:</span><span class="st"> </span><span class="dv">1</span>     <span class="op">:</span><span class="st"> </span>Male =<span class="st"> </span><span class="dv">0</span>, Female <span class="dv">1</span></a>
-<a class="sourceLine" id="cb129-7" data-line-number="7">WTCL <span class="op">:</span><span class="st"> </span><span class="fl">0.75</span>  <span class="op">:</span><span class="st"> </span>Exponent weight on CL</a>
-<a class="sourceLine" id="cb129-8" data-line-number="8">SEXV <span class="op">:</span><span class="st"> </span><span class="fl">0.878</span> <span class="op">:</span><span class="st"> </span>Volume female<span class="op">/</span>Volume male</a></code></pre></div>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">[MAIN]</a>
-<a class="sourceLine" id="cb130-2" data-line-number="2">double CL =<span class="st"> </span>TVCL<span class="op">*</span><span class="kw">pow</span>(WT<span class="op">/</span><span class="dv">70</span>,WTCL)<span class="op">*</span><span class="kw">exp</span>(ECL);</a>
-<a class="sourceLine" id="cb130-3" data-line-number="3">double V  =<span class="st"> </span>TVV <span class="op">*</span><span class="kw">pow</span>(SEXVC,SEX)<span class="op">*</span><span class="kw">exp</span>(EV);</a>
-<a class="sourceLine" id="cb130-4" data-line-number="4">double KA =<span class="st"> </span>TVKA<span class="op">*</span><span class="kw">exp</span>(EKA);</a></code></pre></div>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1">[OMEGA] <span class="op">@</span>name OMGA <span class="op">@</span>correlation <span class="op">@</span>block</a>
-<a class="sourceLine" id="cb131-2" data-line-number="2">ECL <span class="op">:</span><span class="st"> </span><span class="fl">1.23</span> <span class="op">:</span><span class="st"> </span>Random effect on CL</a>
-<a class="sourceLine" id="cb131-3" data-line-number="3">EV  <span class="op">:</span><span class="st"> </span><span class="fl">0.67</span> <span class="fl">0.4</span> <span class="op">:</span><span class="st"> </span>Random effect on V</a>
-<a class="sourceLine" id="cb131-4" data-line-number="4">EKA <span class="op">:</span><span class="st"> </span><span class="fl">0.25</span> <span class="fl">0.87</span> <span class="fl">0.2</span> <span class="op">:</span><span class="st"> </span>Random effect on KA</a></code></pre></div>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">[SIGMA] <span class="op">@</span>name SGMA </a>
-<a class="sourceLine" id="cb132-2" data-line-number="2">PROP<span class="op">:</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">:</span><span class="st"> </span>Proportional residual error</a>
-<a class="sourceLine" id="cb132-3" data-line-number="3">ADD <span class="op">:</span><span class="st"> </span><span class="dv">25</span>   <span class="op">:</span><span class="st"> </span>Additive residual error</a></code></pre></div>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1">[CMT]</a>
-<a class="sourceLine" id="cb133-2" data-line-number="2">GUT  <span class="op">:</span><span class="st"> </span>Dosing <span class="kw">compartment</span>  (mg)</a>
-<a class="sourceLine" id="cb133-3" data-line-number="3">CENT <span class="op">:</span><span class="st"> </span>Central <span class="kw">compartment</span> (mg)</a></code></pre></div>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1">[PKMODEL] ncmt =<span class="st"> </span><span class="dv">1</span>, depot=<span class="ot">TRUE</span></a></code></pre></div>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1">[TABLE]</a>
-<a class="sourceLine" id="cb135-2" data-line-number="2">capture IPRED =<span class="st"> </span>CENT<span class="op">/</span>V;</a>
-<a class="sourceLine" id="cb135-3" data-line-number="3">double DV =<span class="st"> </span>IPRED<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>PROP) <span class="op">+</span><span class="st"> </span>ADD;</a></code></pre></div>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1">[CAPTURE]</a>
-<a class="sourceLine" id="cb136-2" data-line-number="2">DV  <span class="op">:</span><span class="st"> </span><span class="kw">Concentration</span> (mg<span class="op">/</span>L)</a>
-<a class="sourceLine" id="cb136-3" data-line-number="3">ECL <span class="op">:</span><span class="st"> </span>Random effect on CL</a>
-<a class="sourceLine" id="cb136-4" data-line-number="4">CL  <span class="op">:</span><span class="st"> </span>Individual <span class="kw">clearance</span> (L<span class="op">/</span>hr)</a></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1"><span class="op">$</span>PROB</a>
+<a class="sourceLine" id="cb140-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb140-3" data-line-number="3"><span class="co"># Final PK model</span></a>
+<a class="sourceLine" id="cb140-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb140-5" data-line-number="5"><span class="op">-</span><span class="st"> </span>Author<span class="op">:</span><span class="st"> </span>Pmetrics Scientist</a>
+<a class="sourceLine" id="cb140-6" data-line-number="6"><span class="op">-</span><span class="st"> </span>Client<span class="op">:</span><span class="st"> </span>Pharmaco, Inc.</a>
+<a class="sourceLine" id="cb140-7" data-line-number="7"><span class="op">-</span><span class="st"> </span>Date<span class="op">:</span><span class="st"> `</span><span class="dt">r Sys.Date()</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb140-8" data-line-number="8"><span class="op">-</span><span class="st"> </span>NONMEM Run<span class="op">:</span><span class="st"> </span><span class="dv">12345</span></a>
+<a class="sourceLine" id="cb140-9" data-line-number="9"><span class="op">-</span><span class="st"> </span>Structure<span class="op">:</span><span class="st"> </span>one compartment, first order absorption</a>
+<a class="sourceLine" id="cb140-10" data-line-number="10"><span class="op">-</span><span class="st"> </span>Implementation<span class="op">:</span><span class="st"> </span>closed form solutions</a>
+<a class="sourceLine" id="cb140-11" data-line-number="11"><span class="op">-</span><span class="st"> </span>Error model<span class="op">:</span><span class="st"> </span>Additive <span class="op">+</span><span class="st"> </span>proportional</a>
+<a class="sourceLine" id="cb140-12" data-line-number="12"><span class="op">-</span><span class="st"> </span>Covariates<span class="op">:</span></a>
+<a class="sourceLine" id="cb140-13" data-line-number="13"><span class="st">  </span><span class="op">-</span><span class="st"> </span>WT on clearance</a>
+<a class="sourceLine" id="cb140-14" data-line-number="14"><span class="op">-</span><span class="st"> </span>SEX on volume</a>
+<a class="sourceLine" id="cb140-15" data-line-number="15"><span class="op">-</span><span class="st"> </span>Random effects on<span class="op">:</span><span class="st"> `</span><span class="dt">CL</span><span class="st">`</span>, <span class="st">`</span><span class="dt">V</span><span class="st">`</span>, <span class="st">`</span><span class="dt">KA</span><span class="st">`</span></a></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1">[PARAM] <span class="op">@</span>annotated</a>
+<a class="sourceLine" id="cb141-2" data-line-number="2">TVCL <span class="op">:</span><span class="st"> </span><span class="fl">1.1</span>   <span class="op">:</span><span class="st"> </span><span class="kw">Clearance</span> (L<span class="op">/</span>hr)</a>
+<a class="sourceLine" id="cb141-3" data-line-number="3">TVV  <span class="op">:</span><span class="st"> </span><span class="fl">35.6</span>  <span class="op">:</span><span class="st"> </span>Volume of <span class="kw">distribution</span> (L)</a>
+<a class="sourceLine" id="cb141-4" data-line-number="4">TVKA <span class="op">:</span><span class="st"> </span><span class="fl">1.35</span>  <span class="op">:</span><span class="st"> </span>Absorption rate <span class="kw">constant</span> (<span class="dv">1</span><span class="op">/</span>hr)</a>
+<a class="sourceLine" id="cb141-5" data-line-number="5">WT   <span class="op">:</span><span class="st"> </span><span class="dv">70</span>    <span class="op">:</span><span class="st"> </span><span class="kw">Weight</span> (kg)</a>
+<a class="sourceLine" id="cb141-6" data-line-number="6">SEX  <span class="op">:</span><span class="st"> </span><span class="dv">1</span>     <span class="op">:</span><span class="st"> </span>Male =<span class="st"> </span><span class="dv">0</span>, Female <span class="dv">1</span></a>
+<a class="sourceLine" id="cb141-7" data-line-number="7">WTCL <span class="op">:</span><span class="st"> </span><span class="fl">0.75</span>  <span class="op">:</span><span class="st"> </span>Exponent weight on CL</a>
+<a class="sourceLine" id="cb141-8" data-line-number="8">SEXV <span class="op">:</span><span class="st"> </span><span class="fl">0.878</span> <span class="op">:</span><span class="st"> </span>Volume female<span class="op">/</span>Volume male</a></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1">[MAIN]</a>
+<a class="sourceLine" id="cb142-2" data-line-number="2">double CL =<span class="st"> </span>TVCL<span class="op">*</span><span class="kw">pow</span>(WT<span class="op">/</span><span class="dv">70</span>,WTCL)<span class="op">*</span><span class="kw">exp</span>(ECL);</a>
+<a class="sourceLine" id="cb142-3" data-line-number="3">double V  =<span class="st"> </span>TVV <span class="op">*</span><span class="kw">pow</span>(SEXVC,SEX)<span class="op">*</span><span class="kw">exp</span>(EV);</a>
+<a class="sourceLine" id="cb142-4" data-line-number="4">double KA =<span class="st"> </span>TVKA<span class="op">*</span><span class="kw">exp</span>(EKA);</a></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1">[OMEGA] <span class="op">@</span>name OMGA <span class="op">@</span>correlation <span class="op">@</span>block</a>
+<a class="sourceLine" id="cb143-2" data-line-number="2">ECL <span class="op">:</span><span class="st"> </span><span class="fl">1.23</span> <span class="op">:</span><span class="st"> </span>Random effect on CL</a>
+<a class="sourceLine" id="cb143-3" data-line-number="3">EV  <span class="op">:</span><span class="st"> </span><span class="fl">0.67</span> <span class="fl">0.4</span> <span class="op">:</span><span class="st"> </span>Random effect on V</a>
+<a class="sourceLine" id="cb143-4" data-line-number="4">EKA <span class="op">:</span><span class="st"> </span><span class="fl">0.25</span> <span class="fl">0.87</span> <span class="fl">0.2</span> <span class="op">:</span><span class="st"> </span>Random effect on KA</a></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1">[SIGMA] <span class="op">@</span>name SGMA </a>
+<a class="sourceLine" id="cb144-2" data-line-number="2">PROP<span class="op">:</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">:</span><span class="st"> </span>Proportional residual error</a>
+<a class="sourceLine" id="cb144-3" data-line-number="3">ADD <span class="op">:</span><span class="st"> </span><span class="dv">25</span>   <span class="op">:</span><span class="st"> </span>Additive residual error</a></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">[CMT]</a>
+<a class="sourceLine" id="cb145-2" data-line-number="2">GUT  <span class="op">:</span><span class="st"> </span>Dosing <span class="kw">compartment</span>  (mg)</a>
+<a class="sourceLine" id="cb145-3" data-line-number="3">CENT <span class="op">:</span><span class="st"> </span>Central <span class="kw">compartment</span> (mg)</a></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1">[PKMODEL] ncmt =<span class="st"> </span><span class="dv">1</span>, depot=<span class="ot">TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1">[TABLE]</a>
+<a class="sourceLine" id="cb147-2" data-line-number="2">capture IPRED =<span class="st"> </span>CENT<span class="op">/</span>V;</a>
+<a class="sourceLine" id="cb147-3" data-line-number="3">double DV =<span class="st"> </span>IPRED<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>PROP) <span class="op">+</span><span class="st"> </span>ADD;</a></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">[CAPTURE]</a>
+<a class="sourceLine" id="cb148-2" data-line-number="2">DV  <span class="op">:</span><span class="st"> </span><span class="kw">Concentration</span> (mg<span class="op">/</span>L)</a>
+<a class="sourceLine" id="cb148-3" data-line-number="3">ECL <span class="op">:</span><span class="st"> </span>Random effect on CL</a>
+<a class="sourceLine" id="cb148-4" data-line-number="4">CL  <span class="op">:</span><span class="st"> </span>Individual <span class="kw">clearance</span> (L<span class="op">/</span>hr)</a></code></pre></div>
 </div>
 <div id="topic-init" class="section level2">
-<h2><span class="header-section-number">6.2</span> Set initial conditions</h2>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="kw">library</span>(mrgsolve)</a>
-<a class="sourceLine" id="cb137-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a></code></pre></div>
+<h2><span class="header-section-number">7.2</span> Set initial conditions</h2>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="kw">library</span>(mrgsolve)</a>
+<a class="sourceLine" id="cb149-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a></code></pre></div>
 <div id="summary" class="section level3">
-<h3><span class="header-section-number">6.2.1</span> Summary</h3>
+<h3><span class="header-section-number">7.2.1</span> Summary</h3>
 <ul>
 <li><code>mrgsolve</code> keeps a base list of compartments and initial conditions that
 you can update <strong>either</strong> from <code>R</code> or from inside the model specification</li>
@@ -386,7 +399,7 @@ of a parameter</li>
 </ul>
 </div>
 <div id="make-a-model-only-to-examine-init-behavior" class="section level3">
-<h3><span class="header-section-number">6.2.2</span> Make a model only to examine <code>init</code> behavior</h3>
+<h3><span class="header-section-number">7.2.2</span> Make a model only to examine <code>init</code> behavior</h3>
 <p>Note: <code>IFLAG</code> is my invention only for this demo. The demo is always responsible
 for setting and interpreting the value (it is not reserved in any way and
 <code>mrgsolve</code> does not control the value).</p>
@@ -396,20 +409,20 @@ for setting and interpreting the value (it is not reserved in any way and
 <li>Compartment <code>A</code> initial condition will get set to <code>BASE</code> <strong>only</strong> if <code>IFLAG  &gt; 0</code></li>
 <li>Compartment <code>A</code> always stays at the initial condition</li>
 </ul>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
-<a class="sourceLine" id="cb138-2" data-line-number="2"><span class="st">$PARAM BASE=100, IFLAG = 0</span></a>
-<a class="sourceLine" id="cb138-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb138-4" data-line-number="4"><span class="st">$CMT A</span></a>
-<a class="sourceLine" id="cb138-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb138-6" data-line-number="6"><span class="st">$MAIN</span></a>
-<a class="sourceLine" id="cb138-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb138-8" data-line-number="8"><span class="st">if(IFLAG &gt; 0) A_0 = BASE;</span></a>
-<a class="sourceLine" id="cb138-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb138-10" data-line-number="10"><span class="st">$ODE dxdt_A = 0;</span></a>
-<a class="sourceLine" id="cb138-11" data-line-number="11"><span class="st">&#39;</span></a></code></pre></div>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;init&quot;</span>,code)</a></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
+<a class="sourceLine" id="cb150-2" data-line-number="2"><span class="st">$PARAM BASE=100, IFLAG = 0</span></a>
+<a class="sourceLine" id="cb150-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb150-4" data-line-number="4"><span class="st">$CMT A</span></a>
+<a class="sourceLine" id="cb150-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb150-6" data-line-number="6"><span class="st">$MAIN</span></a>
+<a class="sourceLine" id="cb150-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb150-8" data-line-number="8"><span class="st">if(IFLAG &gt; 0) A_0 = BASE;</span></a>
+<a class="sourceLine" id="cb150-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb150-10" data-line-number="10"><span class="st">$ODE dxdt_A = 0;</span></a>
+<a class="sourceLine" id="cb150-11" data-line-number="11"><span class="st">&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;init&quot;</span>,code)</a></code></pre></div>
 <p><strong>Check the initial condition</strong></p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1"><span class="kw">init</span>(mod)</a></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="kw">init</span>(mod)</a></code></pre></div>
 <pre><code>. 
 .  Model initial conditions (N=1):
 .  name    value . name    value
@@ -422,14 +435,14 @@ condition for <code>A</code> is set to 0</li>
 <li>So, if we don’t update something in <code>$MAIN</code> the initial condition is as we
 set it in the base list</li>
 </ul>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
 <p><img src="user-guide_files/figure-html/topic-init-2-1.png" width="672" /></p>
 <p><strong>Next, we update the base initial condition for <code>A</code> to 50</strong></p>
 <p>Note:</p>
 <ul>
 <li>The code in <code>$MAIN</code> still doesn’t get run because <code>IFLAG</code> is 0</li>
 </ul>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">init</span>(<span class="dt">A =</span> <span class="dv">50</span>) <span class="op">%&gt;%</span><span class="st"> </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">init</span>(<span class="dt">A =</span> <span class="dv">50</span>) <span class="op">%&gt;%</span><span class="st"> </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
 <p><img src="user-guide_files/figure-html/topic-init-3-1.png" width="672" /></p>
 <p><strong>Now, turn on <code>IFLAG</code></strong></p>
 <p>Note:</p>
@@ -437,34 +450,34 @@ set it in the base list</li>
 <li>Now, that code in <code>$MAIN</code> gets run</li>
 <li><code>A_0</code> is set to the value of <code>BASE</code></li>
 </ul>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(<span class="dt">IFLAG=</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(<span class="dt">IFLAG=</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
 <p><img src="user-guide_files/figure-html/topic-init-4-1.png" width="672" /></p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(<span class="dt">IFLAG=</span><span class="dv">1</span>, <span class="dt">BASE=</span><span class="dv">300</span>) <span class="op">%&gt;%</span><span class="st"> </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(<span class="dt">IFLAG=</span><span class="dv">1</span>, <span class="dt">BASE=</span><span class="dv">300</span>) <span class="op">%&gt;%</span><span class="st"> </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
 <p><img src="user-guide_files/figure-html/topic-init-5-1.png" width="672" /></p>
 </div>
 <div id="example-pkpd-model-with-initial-condition" class="section level3">
-<h3><span class="header-section-number">6.2.3</span> Example PK/PD model with initial condition</h3>
+<h3><span class="header-section-number">7.2.3</span> Example PK/PD model with initial condition</h3>
 <p>Just to be clear, there is no need to set any sort of flag to set the initial
 condition as seen here:</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
-<a class="sourceLine" id="cb146-2" data-line-number="2"><span class="st">$PARAM AUC=0, AUC50 = 75, KIN=200, KOUT=5</span></a>
-<a class="sourceLine" id="cb146-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb146-4" data-line-number="4"><span class="st">$CMT RESP</span></a>
-<a class="sourceLine" id="cb146-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb146-6" data-line-number="6"><span class="st">$MAIN </span></a>
-<a class="sourceLine" id="cb146-7" data-line-number="7"><span class="st">RESP_0 = KIN/KOUT;</span></a>
-<a class="sourceLine" id="cb146-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb146-9" data-line-number="9"><span class="st">$ODE</span></a>
-<a class="sourceLine" id="cb146-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb146-11" data-line-number="11"><span class="st">dxdt_RESP = KIN*(1-AUC/(AUC50+AUC)) - KOUT*RESP;</span></a>
-<a class="sourceLine" id="cb146-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb146-13" data-line-number="13"><span class="st">&#39;</span></a></code></pre></div>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;init2&quot;</span>, code)</a></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
+<a class="sourceLine" id="cb158-2" data-line-number="2"><span class="st">$PARAM AUC=0, AUC50 = 75, KIN=200, KOUT=5</span></a>
+<a class="sourceLine" id="cb158-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb158-4" data-line-number="4"><span class="st">$CMT RESP</span></a>
+<a class="sourceLine" id="cb158-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb158-6" data-line-number="6"><span class="st">$MAIN </span></a>
+<a class="sourceLine" id="cb158-7" data-line-number="7"><span class="st">RESP_0 = KIN/KOUT;</span></a>
+<a class="sourceLine" id="cb158-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb158-9" data-line-number="9"><span class="st">$ODE</span></a>
+<a class="sourceLine" id="cb158-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb158-11" data-line-number="11"><span class="st">dxdt_RESP = KIN*(1-AUC/(AUC50+AUC)) - KOUT*RESP;</span></a>
+<a class="sourceLine" id="cb158-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb158-13" data-line-number="13"><span class="st">&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;init2&quot;</span>, code)</a></code></pre></div>
 <p>The initial condition is set to 40 per the values of <code>KIN</code> and <code>KOUT</code></p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
 <p><img src="user-guide_files/figure-html/topic-init-7-1.png" width="672" /></p>
 <p>Even when we change <code>RESP_0</code> in <code>R</code>, the calculation in <code>$MAIN</code> gets the final say</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">init</span>(<span class="dt">RESP=</span><span class="fl">1E9</span>) <span class="op">%&gt;%</span><span class="st"> </span>mrgsim</a></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">init</span>(<span class="dt">RESP=</span><span class="fl">1E9</span>) <span class="op">%&gt;%</span><span class="st"> </span>mrgsim</a></code></pre></div>
 <pre><code>. Model:  init2 
 . Dim:    25 x 3 
 . Time:   0 to 24 
@@ -480,28 +493,28 @@ condition as seen here:</p>
 . 8:   1    7   40</code></pre>
 </div>
 <div id="remember-calling-init-will-let-you-check-to-see-what-is-going-on" class="section level3">
-<h3><span class="header-section-number">6.2.4</span> Remember: calling <code>init</code> will let you check to see what is going on</h3>
+<h3><span class="header-section-number">7.2.4</span> Remember: calling <code>init</code> will let you check to see what is going on</h3>
 <ul>
 <li>It’s a good idea to get in the habit of doing this when things aren’t clear</li>
 <li><code>init</code> first takes the base initial condition list, then calls <code>$MAIN</code> and
 does any calculation you have in there; so the result is the calculated initials</li>
 </ul>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="kw">init</span>(mod)</a></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="kw">init</span>(mod)</a></code></pre></div>
 <pre><code>. 
 .  Model initial conditions (N=1):
 .  name       value . name    value
 .  RESP (1)   0     | . ...   .</code></pre>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(<span class="dt">KIN=</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>init</a></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(<span class="dt">KIN=</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>init</a></code></pre></div>
 <pre><code>. 
 .  Model initial conditions (N=1):
 .  name       value . name    value
 .  RESP (1)   0     | . ...   .</code></pre>
 </div>
 <div id="set-initial-conditions-via-idata" class="section level3">
-<h3><span class="header-section-number">6.2.5</span> Set initial conditions via <code>idata</code></h3>
+<h3><span class="header-section-number">7.2.5</span> Set initial conditions via <code>idata</code></h3>
 <p>Go back to house model</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()</a></code></pre></div>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1"><span class="kw">init</span>(mod)</a></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="kw">init</span>(mod)</a></code></pre></div>
 <pre><code>. 
 .  Model initial conditions (N=3):
 .  name       value . name       value
@@ -515,8 +528,8 @@ list for that subject.</li>
 <li>But note that if <code>CMT_0</code> is set in <code>$MAIN</code>, that will override the <code>idata</code>
 update.</li>
 </ul>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1">idata &lt;-<span class="st"> </span><span class="kw">expand.idata</span>(<span class="dt">CENT_0 =</span> <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">25</span>,<span class="dv">1</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1">idata <span class="op">%&gt;%</span><span class="st"> </span>head</a></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1">idata &lt;-<span class="st"> </span><span class="kw">expand.idata</span>(<span class="dt">CENT_0 =</span> <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">25</span>,<span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1">idata <span class="op">%&gt;%</span><span class="st"> </span>head</a></code></pre></div>
 <pre><code>.   ID CENT_0
 . 1  1      0
 . 2  2      1
@@ -524,16 +537,16 @@ update.</li>
 . 4  4      3
 . 5  5      4
 . 6  6      5</code></pre>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1">out &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb161-2" data-line-number="2"><span class="st">  </span>mod <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb161-3" data-line-number="3"><span class="st">  </span><span class="kw">idata_set</span>(idata) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb161-4" data-line-number="4"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="dv">40</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1"><span class="kw">plot</span>(out, CENT<span class="op">~</span>.)</a></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1">out &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb173-2" data-line-number="2"><span class="st">  </span>mod <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb173-3" data-line-number="3"><span class="st">  </span><span class="kw">idata_set</span>(idata) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb173-4" data-line-number="4"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="dv">40</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="kw">plot</span>(out, CENT<span class="op">~</span>.)</a></code></pre></div>
 <p><img src="user-guide_files/figure-html/topic-init-11-1.png" width="672" /></p>
 </div>
 </div>
 <div id="topic-parameter-update" class="section level2">
-<h2><span class="header-section-number">6.3</span> Updating parameters</h2>
+<h2><span class="header-section-number">7.3</span> Updating parameters</h2>
 <p>The parameter list was introduced in section <a href="model-components.html#component-param">1.1</a> and the
 <code>$PARAM</code> code block was shown in <a href="model-specification.html#block-param">2.2.3</a>. Once a model is compiled,
 the names and number of parameters in a model is fixed. However, the values of
@@ -547,7 +560,7 @@ list</li>
 </ul>
 <p>Both of these methods are discussed and illustrated in the following sections.</p>
 <div id="parameter-update-hierarchy" class="section level3">
-<h3><span class="header-section-number">6.3.1</span> Parameter update hierarchy</h3>
+<h3><span class="header-section-number">7.3.1</span> Parameter update hierarchy</h3>
 <p>As we noted above, new parameter values can come from three potential sources:</p>
 <ol style="list-style-type: decimal">
 <li>Modification of the (base) parameter list</li>
@@ -575,13 +588,13 @@ both the <code>idata_set</code> and the <code>data_set</code>). In other words, 
 <li>No changing the names or numbers of parameters once the model is compiled</li>
 <li>But, several ways to change the values</li>
 </ul>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
-<a class="sourceLine" id="cb163-2" data-line-number="2"><span class="st">$VCMT KYLE</span></a>
-<a class="sourceLine" id="cb163-3" data-line-number="3"><span class="st">$PARAM CL = 1.1, VC=23.1, KA=1.7, KM=10</span></a>
-<a class="sourceLine" id="cb163-4" data-line-number="4"><span class="st">$CAPTURE CL VC KA KM</span></a>
-<a class="sourceLine" id="cb163-5" data-line-number="5"><span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb163-6" data-line-number="6">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;tmp&quot;</span>, code, <span class="dt">warn=</span><span class="ot">FALSE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1"><span class="kw">param</span>(mod)</a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
+<a class="sourceLine" id="cb175-2" data-line-number="2"><span class="st">$VCMT KYLE</span></a>
+<a class="sourceLine" id="cb175-3" data-line-number="3"><span class="st">$PARAM CL = 1.1, VC=23.1, KA=1.7, KM=10</span></a>
+<a class="sourceLine" id="cb175-4" data-line-number="4"><span class="st">$CAPTURE CL VC KA KM</span></a>
+<a class="sourceLine" id="cb175-5" data-line-number="5"><span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb175-6" data-line-number="6">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;tmp&quot;</span>, code, <span class="dt">warn=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1"><span class="kw">param</span>(mod)</a></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=4):
 .  name value . name value
@@ -592,24 +605,24 @@ both the <code>idata_set</code> and the <code>data_set</code>). In other words, 
 data; there are some default values in place.</p>
 <p><strong>The parameters in the base list can be changed or updated in <code>R</code></strong></p>
 <p>Use the <code>param()</code> function to both set and get:</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1">mod &lt;-<span class="st">  </span><span class="kw">param</span>(mod, <span class="dt">CL=</span><span class="fl">2.1</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="kw">param</span>(mod)</a></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1">mod &lt;-<span class="st">  </span><span class="kw">param</span>(mod, <span class="dt">CL=</span><span class="fl">2.1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="kw">param</span>(mod)</a></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=4):
 .  name value . name value
 .  CL   2.1   | KM   10   
 .  KA   1.7   | VC   23.1</code></pre>
 <p>But whatever you’ve done in <code>R</code>, there is a base set (with values) to use.
-See section <a href="topics.html#topic-parameter-update-base">6.3.2</a> for a more detailed discussion
+See section <a href="topics.html#topic-parameter-update-base">7.3.2</a> for a more detailed discussion
 of using <code>param()</code> to updated the base list.</p>
 <p><strong>Parameters can also be updated during the simulation run</strong></p>
 <p>Parameters can be updated by putting columns in <code>idata</code> set or <code>data_set</code> that
 have the same name as one of the parameters in the parameter list. But there
 is no changing values in the base parameter set once the simulation starts.<br />
 That is, the following model specification will not compile:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb169-1" data-line-number="1">$PARAM CL = <span class="dv">2</span></a>
-<a class="sourceLine" id="cb169-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb169-3" data-line-number="3">$MAIN CL = <span class="dv">3</span>; <span class="co">// ERROR</span></a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb181-1" data-line-number="1">$PARAM CL = <span class="dv">2</span></a>
+<a class="sourceLine" id="cb181-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb181-3" data-line-number="3">$MAIN CL = <span class="dv">3</span>; <span class="co">// ERROR</span></a></code></pre></div>
 <p>You cannot over-write the value of a parameter in the model specification.<br />
 Let <code>mrgsolve</code> do the updating.</p>
 <p><code>mrgsolve</code> always reverts to the base parameter set when starting work on a
@@ -617,8 +630,8 @@ new individual.</p>
 <p><strong>Parameters updated from <code>idata_set</code></strong></p>
 <p>When <code>mrgsolve</code> finds parameters in <code>idata</code>, it will update the base parameter
 list with those parameters prior to starting that individual.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1"><span class="kw">data</span>(exidata)</a>
-<a class="sourceLine" id="cb170-2" data-line-number="2"><span class="kw">head</span>(exidata)</a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1"><span class="kw">data</span>(exidata)</a>
+<a class="sourceLine" id="cb182-2" data-line-number="2"><span class="kw">head</span>(exidata)</a></code></pre></div>
 <pre><code>.   ID    CL    VC     KA KOUT  IC50 FOO
 . 1  1 1.050 47.80 0.8390 2.45 1.280   4
 . 2  2 0.730 30.10 0.0684 2.51 1.840   6
@@ -628,17 +641,17 @@ list with those parameters prior to starting that individual.</p>
 . 6  6 3.620 39.80 0.1260 1.89 4.240   1</code></pre>
 <p>Notice that there are several columns in <code>exidata</code> that match up with the names
 in the parameter list</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1"><span class="kw">names</span>(exidata)</a></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">names</span>(exidata)</a></code></pre></div>
 <pre><code>. [1] &quot;ID&quot;   &quot;CL&quot;   &quot;VC&quot;   &quot;KA&quot;   &quot;KOUT&quot; &quot;IC50&quot; &quot;FOO&quot;</code></pre>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="kw">names</span>(<span class="kw">param</span>(mod))</a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="kw">names</span>(<span class="kw">param</span>(mod))</a></code></pre></div>
 <pre><code>. [1] &quot;CL&quot; &quot;VC&quot; &quot;KA&quot; &quot;KM&quot;</code></pre>
 <p>The matching names tell <code>mrgsolve</code> to update, assigning each individual
 their individual parameter.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1">out &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb176-2" data-line-number="2"><span class="st">  </span>mod <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb176-3" data-line-number="3"><span class="st">  </span><span class="kw">idata_set</span>(exidata) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb176-4" data-line-number="4"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span> , <span class="dt">add=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1">out</a></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1">out &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb188-2" data-line-number="2"><span class="st">  </span>mod <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb188-3" data-line-number="3"><span class="st">  </span><span class="kw">idata_set</span>(exidata) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb188-4" data-line-number="4"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span> , <span class="dt">add=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1">out</a></code></pre></div>
 <pre><code>. Model:  tmp 
 . Dim:    20 x 7 
 . Time:   0 to 2 
@@ -654,13 +667,13 @@ their individual parameter.</p>
 . 8:   4    2    0 0.552 26.3 0.4950 10</code></pre>
 <p><strong>Parameters updated from <code>data_set</code></strong></p>
 <p>Like an <code>idata</code> set, we can put parameters on a <code>data</code> set</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1">data &lt;-<span class="st"> </span><span class="kw">expand.ev</span>(<span class="dt">amt=</span><span class="dv">0</span>, <span class="dt">CL=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">VC=</span><span class="dv">30</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1">out &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb180-2" data-line-number="2"><span class="st">  </span>mod <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb180-3" data-line-number="3"><span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb180-4" data-line-number="4"><span class="st">  </span>obsonly <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb180-5" data-line-number="5"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>, <span class="dt">add=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1">out</a></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1">data &lt;-<span class="st"> </span><span class="kw">expand.ev</span>(<span class="dt">amt=</span><span class="dv">0</span>, <span class="dt">CL=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">VC=</span><span class="dv">30</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1">out &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb192-2" data-line-number="2"><span class="st">  </span>mod <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb192-3" data-line-number="3"><span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb192-4" data-line-number="4"><span class="st">  </span>obsonly <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb192-5" data-line-number="5"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>, <span class="dt">add=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1">out</a></code></pre></div>
 <pre><code>. Model:  tmp 
 . Dim:    6 x 7 
 . Time:   0 to 2 
@@ -673,16 +686,16 @@ their individual parameter.</p>
 . 5:   3    0    0  3 30 1.7 10
 . 6:   3    2    0  3 30 1.7 10</code></pre>
 <p>This is how we do time-varying parameters:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1">data &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb183-2" data-line-number="2"><span class="st">  </span><span class="kw">data_frame</span>(<span class="dt">CL=</span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">5</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb183-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">evid=</span><span class="dv">0</span>,<span class="dt">ID=</span><span class="dv">1</span>,<span class="dt">cmt=</span><span class="dv">1</span>,<span class="dt">time=</span>CL<span class="dv">-1</span>,<span class="dt">amt=</span><span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1">data &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb195-2" data-line-number="2"><span class="st">  </span><span class="kw">data_frame</span>(<span class="dt">CL=</span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">5</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb195-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">evid=</span><span class="dv">0</span>,<span class="dt">ID=</span><span class="dv">1</span>,<span class="dt">cmt=</span><span class="dv">1</span>,<span class="dt">time=</span>CL<span class="dv">-1</span>,<span class="dt">amt=</span><span class="dv">0</span>)</a></code></pre></div>
 <pre><code>. Warning: `data_frame()` is deprecated as of tibble 1.1.0.
 . Please use `tibble()` instead.
 . This warning is displayed once every 8 hours.
 . Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1">mod <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb185-2" data-line-number="2"><span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb185-3" data-line-number="3"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1">mod <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb197-2" data-line-number="2"><span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb197-3" data-line-number="3"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>)</a></code></pre></div>
 <pre><code>. Model:  tmp 
 . Dim:    5 x 7 
 . Time:   0 to 4 
@@ -694,17 +707,17 @@ their individual parameter.</p>
 . 4:   1    3    0  4 23.1 1.7 10
 . 5:   1    4    0  5 23.1 1.7 10</code></pre>
 <p>For more information on time-varying covariates
-(parameters), see sections <a href="topics.html#topics-time-varying">6.9</a> and <a href="section-sequence.html#section-sequence">5</a>.</p>
+(parameters), see sections <a href="topics.html#topics-time-varying">7.9</a> and <a href="section-sequence.html#section-sequence">5</a>.</p>
 <p><strong>Parameters are carried back when first record isn’t at <code>time == 0</code></strong></p>
 <p>What about this?</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1">data &lt;-<span class="st"> </span><span class="kw">expand.ev</span>(<span class="dt">amt=</span><span class="dv">100</span>,<span class="dt">time=</span><span class="dv">24</span>,<span class="dt">CL=</span><span class="dv">5</span>,<span class="dt">VC=</span><span class="dv">32</span>)</a>
-<a class="sourceLine" id="cb187-2" data-line-number="2">data</a></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1">data &lt;-<span class="st"> </span><span class="kw">expand.ev</span>(<span class="dt">amt=</span><span class="dv">100</span>,<span class="dt">time=</span><span class="dv">24</span>,<span class="dt">CL=</span><span class="dv">5</span>,<span class="dt">VC=</span><span class="dv">32</span>)</a>
+<a class="sourceLine" id="cb199-2" data-line-number="2">data</a></code></pre></div>
 <pre><code>.   ID time amt cmt evid CL VC
 . 1  1   24 100   1    1  5 32</code></pre>
 <p>The first <code>data</code> record happens at <code>time==24</code></p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb189-2" data-line-number="2"><span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb189-3" data-line-number="3"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>, <span class="dt">add=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb201-2" data-line-number="2"><span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb201-3" data-line-number="3"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>, <span class="dt">add=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>))</a></code></pre></div>
 <pre><code>. Model:  tmp 
 . Dim:    3 x 7 
 . Time:   0 to 24 
@@ -719,9 +732,9 @@ doesn’t change from the base parameter set until then.</p>
 the simulation. This is by design … by far the more useful configuration.</p>
 <p>If you wanted the base parameter set in play until that first data set record,
 do this:</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1">mod <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb191-2" data-line-number="2"><span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb191-3" data-line-number="3"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>,<span class="dt">add=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>), <span class="dt">filbak=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1">mod <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb203-2" data-line-number="2"><span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb203-3" data-line-number="3"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>,<span class="dt">add=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>), <span class="dt">filbak=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>. Model:  tmp 
 . Dim:    3 x 7 
 . Time:   0 to 24 
@@ -731,17 +744,17 @@ do this:</p>
 . 2:   1    2    0 2.1 23.1 1.7 10
 . 3:   1   24  100 5.0 32.0 1.7 10</code></pre>
 <p>Will this work?</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1">idata &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;expand.idata&quot;</span>, <span class="kw">as.list</span>(<span class="kw">param</span>(mod)))</a>
-<a class="sourceLine" id="cb193-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb193-3" data-line-number="3">idata</a></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1">idata &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;expand.idata&quot;</span>, <span class="kw">as.list</span>(<span class="kw">param</span>(mod)))</a>
+<a class="sourceLine" id="cb205-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb205-3" data-line-number="3">idata</a></code></pre></div>
 <pre><code>.   ID  CL   VC  KA KM
 . 1  1 2.1 23.1 1.7 10</code></pre>
 <p>Here, we’ll pass in <strong>both</strong> <code>data_set</code> and <code>idata_set</code> and they have
 conflicting values for the parameters.</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1">mod <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb195-2" data-line-number="2"><span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb195-3" data-line-number="3"><span class="st">  </span><span class="kw">idata_set</span>(idata) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb195-4" data-line-number="4"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>,<span class="dt">add=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1">mod <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb207-2" data-line-number="2"><span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb207-3" data-line-number="3"><span class="st">  </span><span class="kw">idata_set</span>(idata) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb207-4" data-line-number="4"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>,<span class="dt">add=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>))</a></code></pre></div>
 <pre><code>. Model:  tmp 
 . Dim:    3 x 7 
 . Time:   0 to 24 
@@ -753,9 +766,9 @@ conflicting values for the parameters.</p>
 <p>The data set always gets the last word.</p>
 </div>
 <div id="topic-parameter-update-base" class="section level3">
-<h3><span class="header-section-number">6.3.2</span> Updating the base parameter list</h3>
+<h3><span class="header-section-number">7.3.2</span> Updating the base parameter list</h3>
 <p>From the previous section</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="kw">param</span>(mod)</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">param</span>(mod)</a></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=4):
 .  name value . name value
@@ -764,16 +777,16 @@ conflicting values for the parameters.</p>
 <p><strong>Update with <code>name-value</code> pairs</strong></p>
 <p>We can call <code>param()</code> to update the model object, directly naming the parameter
 to update and the new value to take</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(<span class="dt">CL =</span> <span class="dv">777</span>, <span class="dt">KM =</span> <span class="dv">999</span>) <span class="op">%&gt;%</span><span class="st"> </span>param</a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(<span class="dt">CL =</span> <span class="dv">777</span>, <span class="dt">KM =</span> <span class="dv">999</span>) <span class="op">%&gt;%</span><span class="st"> </span>param</a></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=4):
 .  name value . name value
 .  CL   777   | KM   999  
 .  KA   1.7   | VC   23.1</code></pre>
 <p>The parameter list can also be updated by scanning the names in a list</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1">what &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">CL =</span> <span class="dv">555</span>, <span class="dt">VC =</span> <span class="dv">888</span>, <span class="dt">KYLE =</span> <span class="dv">123</span>, <span class="dt">MN =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb201-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb201-3" data-line-number="3">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(what) <span class="op">%&gt;%</span><span class="st"> </span>param</a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1">what &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">CL =</span> <span class="dv">555</span>, <span class="dt">VC =</span> <span class="dv">888</span>, <span class="dt">KYLE =</span> <span class="dv">123</span>, <span class="dt">MN =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb213-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb213-3" data-line-number="3">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(what) <span class="op">%&gt;%</span><span class="st"> </span>param</a></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=4):
 .  name value . name value
@@ -783,9 +796,9 @@ to update and the new value to take</p>
 and <code>MN</code> (not in the model anywhere) are ignored.</p>
 <p>Alternatively, we can pick a row from a data frame to provide the input for the
 update</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1">d &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">CL=</span><span class="kw">c</span>(<span class="dv">9</span>,<span class="dv">10</span>), <span class="dt">VC=</span><span class="kw">c</span>(<span class="dv">11</span>,<span class="dv">12</span>), <span class="dt">KTB=</span><span class="kw">c</span>(<span class="dv">13</span>,<span class="dv">14</span>))</a>
-<a class="sourceLine" id="cb203-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb203-3" data-line-number="3">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(d[<span class="dv">2</span>,]) <span class="op">%&gt;%</span><span class="st"> </span>param</a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1">d &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">CL=</span><span class="kw">c</span>(<span class="dv">9</span>,<span class="dv">10</span>), <span class="dt">VC=</span><span class="kw">c</span>(<span class="dv">11</span>,<span class="dv">12</span>), <span class="dt">KTB=</span><span class="kw">c</span>(<span class="dv">13</span>,<span class="dv">14</span>))</a>
+<a class="sourceLine" id="cb215-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb215-3" data-line-number="3">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(d[<span class="dv">2</span>,]) <span class="op">%&gt;%</span><span class="st"> </span>param</a></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=4):
 .  name value . name value
@@ -793,21 +806,21 @@ update</p>
 .  KA   1.7   | VC   12</code></pre>
 <p>Here the second row in the data frame drives the update. Other names are ignored.</p>
 <p>A warning will be issued if an update is attempted, but no matching names are found</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(<span class="dt">ZIP =</span> <span class="dv">1</span>, <span class="dt">CODE =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span>param</a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">param</span>(<span class="dt">ZIP =</span> <span class="dv">1</span>, <span class="dt">CODE =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span>param</a></code></pre></div>
 <pre><code>Warning message:
 Found nothing to update: param </code></pre>
 </div>
 </div>
 <div id="topic-tgrid" class="section level2">
-<h2><span class="header-section-number">6.4</span> Time grid objects</h2>
+<h2><span class="header-section-number">7.4</span> Time grid objects</h2>
 <p><strong>Simulation times in <code>mrgsolve</code></strong></p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">Req</span>(CP) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ev</span>(<span class="dt">amt=</span><span class="dv">1000</span>,<span class="dt">ii=</span><span class="dv">24</span>, <span class="dt">addl=</span><span class="dv">1000</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">Req</span>(CP) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ev</span>(<span class="dt">amt=</span><span class="dv">1000</span>,<span class="dt">ii=</span><span class="dv">24</span>, <span class="dt">addl=</span><span class="dv">1000</span>) </a></code></pre></div>
 <p><code>mrgsolve</code> keeps track of a simulation <code>start</code> and <code>end</code> time and a fixed size
 step between <code>start</code> and <code>end</code> (called <code>delta</code>). <code>mrgsolve</code> also keeps an
 arbitrary vector of simulation times called <code>add</code>.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1">mod <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb208-2" data-line-number="2"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="dv">4</span>,<span class="dt">delta=</span><span class="dv">2</span>,<span class="dt">add=</span><span class="kw">c</span>(<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">50</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb208-3" data-line-number="3"><span class="st">  </span>as.data.frame</a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1">mod <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb220-2" data-line-number="2"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="dv">4</span>,<span class="dt">delta=</span><span class="dv">2</span>,<span class="dt">add=</span><span class="kw">c</span>(<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">50</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb220-3" data-line-number="3"><span class="st">  </span>as.data.frame</a></code></pre></div>
 <pre><code>.   ID time       CP
 . 1  1    0  0.00000
 . 2  1    0  0.00000
@@ -820,47 +833,47 @@ arbitrary vector of simulation times called <code>add</code>.</p>
 <p>The <code>tgrid</code> object abstracts this setup and allows us to make complicated
 sampling designs from elementary building blocks.</p>
 <p><strong>Make a day 1 sampling with intensive sampling around the peak and sparser otherwise</strong></p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1">peak1 &lt;-<span class="st"> </span><span class="kw">tgrid</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb210-2" data-line-number="2">sparse1 &lt;-<span class="st"> </span><span class="kw">tgrid</span>(<span class="dv">0</span>,<span class="dv">24</span>,<span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" data-line-number="1">peak1 &lt;-<span class="st"> </span><span class="kw">tgrid</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb222-2" data-line-number="2">sparse1 &lt;-<span class="st"> </span><span class="kw">tgrid</span>(<span class="dv">0</span>,<span class="dv">24</span>,<span class="dv">4</span>)</a></code></pre></div>
 <p><strong>Use the <code>c</code> operator to combine simpler designs into more complicated designs</strong></p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1">day1 &lt;-<span class="st"> </span><span class="kw">c</span>(peak1,sparse1)</a></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1">day1 &lt;-<span class="st"> </span><span class="kw">c</span>(peak1,sparse1)</a></code></pre></div>
 <p>Check this by calling <code>stime</code></p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1"><span class="kw">stime</span>(day1)</a></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1"><span class="kw">stime</span>(day1)</a></code></pre></div>
 <pre><code>.  [1]  0.0  1.0  1.1  1.2  1.3  1.4  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3
 . [16]  2.4  2.5  2.6  2.7  2.8  2.9  3.0  3.1  3.2  3.3  3.4  3.5  3.6  3.7  3.8
 . [31]  3.9  4.0  8.0 12.0 16.0 20.0 24.0</code></pre>
 <p>Pass this object in to <code>mrgsim</code> as <code>tgrid</code>. It will override the default
 <code>start/end/delta/add</code> sequence.</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb214-2" data-line-number="2"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">tgrid=</span>day1) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb214-3" data-line-number="3"><span class="st">  </span><span class="kw">plot</span>(<span class="dt">type=</span><span class="st">&#39;b&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb226-2" data-line-number="2"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">tgrid=</span>day1) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb226-3" data-line-number="3"><span class="st">  </span><span class="kw">plot</span>(<span class="dt">type=</span><span class="st">&#39;b&#39;</span>)</a></code></pre></div>
 <p><img src="user-guide_files/figure-html/topic-tgrid-1-1.png" width="672" /></p>
 <p><strong>Now, look at both day 1 and day 10</strong>:</p>
 <p>Adding a number to a <code>tgrid</code> object will offset those times by that amount.</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1">des &lt;-<span class="st"> </span><span class="kw">c</span>(day1, day1<span class="op">+</span><span class="dv">10</span><span class="op">*</span><span class="dv">24</span>)</a>
-<a class="sourceLine" id="cb215-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb215-3" data-line-number="3">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb215-4" data-line-number="4"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">tgrid=</span>des) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb215-5" data-line-number="5"><span class="st">  </span><span class="kw">plot</span>(<span class="dt">type=</span><span class="st">&#39;b&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" data-line-number="1">des &lt;-<span class="st"> </span><span class="kw">c</span>(day1, day1<span class="op">+</span><span class="dv">10</span><span class="op">*</span><span class="dv">24</span>)</a>
+<a class="sourceLine" id="cb227-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb227-3" data-line-number="3">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb227-4" data-line-number="4"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">tgrid=</span>des) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb227-5" data-line-number="5"><span class="st">  </span><span class="kw">plot</span>(<span class="dt">type=</span><span class="st">&#39;b&#39;</span>)</a></code></pre></div>
 <p><img src="user-guide_files/figure-html/topic-tgrid-2-1.png" width="672" /></p>
 <p>Pick up day 5 as well</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1">des &lt;-<span class="st"> </span><span class="kw">c</span>(des, day1<span class="op">+</span><span class="dv">5</span><span class="op">*</span><span class="dv">24</span>)</a>
-<a class="sourceLine" id="cb216-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb216-3" data-line-number="3">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb216-4" data-line-number="4"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">tgrid=</span>des) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb216-5" data-line-number="5"><span class="st">  </span><span class="kw">plot</span>(<span class="dt">type=</span><span class="st">&#39;b&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1">des &lt;-<span class="st"> </span><span class="kw">c</span>(des, day1<span class="op">+</span><span class="dv">5</span><span class="op">*</span><span class="dv">24</span>)</a>
+<a class="sourceLine" id="cb228-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb228-3" data-line-number="3">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb228-4" data-line-number="4"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">tgrid=</span>des) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb228-5" data-line-number="5"><span class="st">  </span><span class="kw">plot</span>(<span class="dt">type=</span><span class="st">&#39;b&#39;</span>)</a></code></pre></div>
 <p><img src="user-guide_files/figure-html/topic-tgrid-3-1.png" width="672" /></p>
 </div>
 <div id="topic-designs" class="section level2">
-<h2><span class="header-section-number">6.5</span> Individualized sampling designs</h2>
+<h2><span class="header-section-number">7.5</span> Individualized sampling designs</h2>
 <p>Here is a PopPK model and a full <code>data_set</code>.</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()</a>
-<a class="sourceLine" id="cb217-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb217-3" data-line-number="3"><span class="kw">data</span>(exTheoph)</a>
-<a class="sourceLine" id="cb217-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb217-5" data-line-number="5">df &lt;-<span class="st"> </span>exTheoph</a>
-<a class="sourceLine" id="cb217-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb217-7" data-line-number="7"><span class="kw">head</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()</a>
+<a class="sourceLine" id="cb229-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb229-3" data-line-number="3"><span class="kw">data</span>(exTheoph)</a>
+<a class="sourceLine" id="cb229-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb229-5" data-line-number="5">df &lt;-<span class="st"> </span>exTheoph</a>
+<a class="sourceLine" id="cb229-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb229-7" data-line-number="7"><span class="kw">head</span>(df)</a></code></pre></div>
 <pre><code>.   ID   WT Dose time  conc cmt  amt evid
 . 1  1 79.6 4.02 0.00  0.00   1 4.02    1
 . 2  1 79.6 4.02 0.25  2.84   0 0.00    0
@@ -868,12 +881,12 @@ sampling designs from elementary building blocks.</p>
 . 4  1 79.6 4.02 1.12 10.50   0 0.00    0
 . 5  1 79.6 4.02 2.02  9.66   0 0.00    0
 . 6  1 79.6 4.02 3.82  8.58   0 0.00    0</code></pre>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb219-2" data-line-number="2"><span class="st">  </span><span class="kw">Req</span>(CP) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb219-3" data-line-number="3"><span class="st">  </span><span class="kw">carry.out</span>(a.u.g) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb219-4" data-line-number="4"><span class="st">  </span><span class="kw">data_set</span>(df) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb219-5" data-line-number="5"><span class="st">  </span>obsaug <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb219-6" data-line-number="6"><span class="st">  </span>mrgsim </a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb231-2" data-line-number="2"><span class="st">  </span><span class="kw">Req</span>(CP) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb231-3" data-line-number="3"><span class="st">  </span><span class="kw">carry.out</span>(a.u.g) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb231-4" data-line-number="4"><span class="st">  </span><span class="kw">data_set</span>(df) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb231-5" data-line-number="5"><span class="st">  </span>obsaug <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb231-6" data-line-number="6"><span class="st">  </span>mrgsim </a></code></pre></div>
 <pre><code>. Model:  housemodel 
 . Dim:    5904 x 4 
 . Time:   0 to 120 
@@ -889,20 +902,20 @@ sampling designs from elementary building blocks.</p>
 . 8:   1 1.00     1 0.12001</code></pre>
 <p>Now, define two time grid objects: <code>des1</code> runs from 0 to 24 and <code>des2</code> runs from
 0 to 96, both every hour.</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1">des1 &lt;-<span class="st"> </span><span class="kw">tgrid</span>(<span class="dv">0</span>,<span class="dv">24</span>,<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb221-2" data-line-number="2">des2 &lt;-<span class="st"> </span><span class="kw">tgrid</span>(<span class="dv">0</span>,<span class="dv">96</span>,<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb221-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb221-4" data-line-number="4"><span class="kw">range</span>(<span class="kw">stime</span>(des1))</a></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" data-line-number="1">des1 &lt;-<span class="st"> </span><span class="kw">tgrid</span>(<span class="dv">0</span>,<span class="dv">24</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb233-2" data-line-number="2">des2 &lt;-<span class="st"> </span><span class="kw">tgrid</span>(<span class="dv">0</span>,<span class="dv">96</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb233-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb233-4" data-line-number="4"><span class="kw">range</span>(<span class="kw">stime</span>(des1))</a></code></pre></div>
 <pre><code>. [1]  0 24</code></pre>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1"><span class="kw">range</span>(<span class="kw">stime</span>(des2))</a></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1"><span class="kw">range</span>(<span class="kw">stime</span>(des2))</a></code></pre></div>
 <pre><code>. [1]  0 96</code></pre>
 <p>Now, derive an <code>idata_set</code> after adding a grouping column (<code>GRP</code>) that splits
 the data set into two groups</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1">df &lt;-<span class="st">  </span><span class="kw">mutate</span>(df, <span class="dt">GRP =</span> <span class="kw">as.integer</span>(ID <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb225-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb225-3" data-line-number="3">id &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">distinct</span>(ID,GRP) </a>
-<a class="sourceLine" id="cb225-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb225-5" data-line-number="5">id</a></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1">df &lt;-<span class="st">  </span><span class="kw">mutate</span>(df, <span class="dt">GRP =</span> <span class="kw">as.integer</span>(ID <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb237-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb237-3" data-line-number="3">id &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">distinct</span>(ID,GRP) </a>
+<a class="sourceLine" id="cb237-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb237-5" data-line-number="5">id</a></code></pre></div>
 <pre><code>.    ID GRP
 . 1   1   0
 . 2   2   0
@@ -924,21 +937,21 @@ the data set into two groups</p>
 <li>Pass in a list of designs; it <strong>must</strong> be at least two because there are two levels in <code>GRP</code></li>
 </ul>
 <p>When we simulate, the individuals in <code>GRP 1</code> will get <code>des1</code> and those in <code>GRP 2</code> will get <code>des2</code></p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" data-line-number="1">out &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb227-2" data-line-number="2"><span class="st">  </span>mod <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb227-3" data-line-number="3"><span class="st">  </span><span class="kw">Req</span>(CP) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb227-4" data-line-number="4"><span class="st">  </span><span class="kw">carry.out</span>(a.u.g,GRP) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb227-5" data-line-number="5"><span class="st">  </span><span class="kw">idata_set</span>(id) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb227-6" data-line-number="6"><span class="st">  </span><span class="kw">data_set</span>(df) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb227-7" data-line-number="7"><span class="st">  </span><span class="kw">design</span>(<span class="dt">descol=</span><span class="st">&quot;GRP&quot;</span>, <span class="dt">deslist=</span><span class="kw">list</span>(des1,des2)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb227-8" data-line-number="8"><span class="st">  </span>obsaug <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb227-9" data-line-number="9"><span class="st">  </span>mrgsim </a>
-<a class="sourceLine" id="cb227-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb227-11" data-line-number="11"><span class="kw">plot</span>(out, CP<span class="op">~</span>time<span class="op">|</span>GRP)</a></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1">out &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb239-2" data-line-number="2"><span class="st">  </span>mod <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb239-3" data-line-number="3"><span class="st">  </span><span class="kw">Req</span>(CP) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb239-4" data-line-number="4"><span class="st">  </span><span class="kw">carry.out</span>(a.u.g,GRP) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb239-5" data-line-number="5"><span class="st">  </span><span class="kw">idata_set</span>(id) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb239-6" data-line-number="6"><span class="st">  </span><span class="kw">data_set</span>(df) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb239-7" data-line-number="7"><span class="st">  </span><span class="kw">design</span>(<span class="dt">descol=</span><span class="st">&quot;GRP&quot;</span>, <span class="dt">deslist=</span><span class="kw">list</span>(des1,des2)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb239-8" data-line-number="8"><span class="st">  </span>obsaug <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb239-9" data-line-number="9"><span class="st">  </span>mrgsim </a>
+<a class="sourceLine" id="cb239-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb239-11" data-line-number="11"><span class="kw">plot</span>(out, CP<span class="op">~</span>time<span class="op">|</span>GRP)</a></code></pre></div>
 <p><img src="user-guide_files/figure-html/topic-design-1-1.png" width="672" /></p>
 </div>
 <div id="some-helpful-c" class="section level2">
-<h2><span class="header-section-number">6.6</span> Some helpful <code>C++</code></h2>
+<h2><span class="header-section-number">7.6</span> Some helpful <code>C++</code></h2>
 <p>Recall that the following blocks require valid <code>C++</code> code:</p>
 <ol style="list-style-type: decimal">
 <li><code>$PREAMBLE</code></li>
@@ -960,97 +973,97 @@ out there that can suit your needs.</p>
 <p>The rest of this section provides a very general reference of the types of
 <code>C++</code> code and functions that you might be using in your model.</p>
 <div id="semi-colons" class="section level3">
-<h3><span class="header-section-number">6.6.1</span> Semi-colons</h3>
+<h3><span class="header-section-number">7.6.1</span> Semi-colons</h3>
 <p>Every statement in <code>C++</code> must end with a semi-colon. For example;</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb228-1" data-line-number="1">[ MAIN ] </a>
-<a class="sourceLine" id="cb228-2" data-line-number="2"><span class="dt">double</span> CL = exp(log_TVCL + ETA(<span class="dv">1</span>));</a></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb240-1" data-line-number="1">[ MAIN ] </a>
+<a class="sourceLine" id="cb240-2" data-line-number="2"><span class="dt">double</span> CL = exp(log_TVCL + ETA(<span class="dv">1</span>));</a></code></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb229-1" data-line-number="1">[ ODE ] </a>
-<a class="sourceLine" id="cb229-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb229-3" data-line-number="3">dxdt_DEPOT = -KA * DEPOT;</a></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb241-1" data-line-number="1">[ ODE ] </a>
+<a class="sourceLine" id="cb241-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb241-3" data-line-number="3">dxdt_DEPOT = -KA * DEPOT;</a></code></pre></div>
 </div>
 <div id="if-else" class="section level3">
-<h3><span class="header-section-number">6.6.2</span> if-else</h3>
-<div class="sourceCode" id="cb230"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb230-1" data-line-number="1"><span class="cf">if</span>(a == <span class="dv">2</span>) b = <span class="dv">2</span>;</a></code></pre></div>
-<div class="sourceCode" id="cb231"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb231-1" data-line-number="1"><span class="cf">if</span>(a==<span class="dv">2</span>) {</a>
-<a class="sourceLine" id="cb231-2" data-line-number="2">  b = <span class="dv">2</span>;  </a>
-<a class="sourceLine" id="cb231-3" data-line-number="3">}</a></code></pre></div>
-<div class="sourceCode" id="cb232"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb232-1" data-line-number="1"><span class="cf">if</span>(a == <span class="dv">2</span>) {</a>
-<a class="sourceLine" id="cb232-2" data-line-number="2">  b=<span class="dv">2</span>;</a>
-<a class="sourceLine" id="cb232-3" data-line-number="3">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb232-4" data-line-number="4">  b=<span class="dv">3</span>;</a>
-<a class="sourceLine" id="cb232-5" data-line-number="5">}</a></code></pre></div>
+<h3><span class="header-section-number">7.6.2</span> if-else</h3>
+<div class="sourceCode" id="cb242"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb242-1" data-line-number="1"><span class="cf">if</span>(a == <span class="dv">2</span>) b = <span class="dv">2</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb243-1" data-line-number="1"><span class="cf">if</span>(a==<span class="dv">2</span>) {</a>
+<a class="sourceLine" id="cb243-2" data-line-number="2">  b = <span class="dv">2</span>;  </a>
+<a class="sourceLine" id="cb243-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb244-1" data-line-number="1"><span class="cf">if</span>(a == <span class="dv">2</span>) {</a>
+<a class="sourceLine" id="cb244-2" data-line-number="2">  b=<span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb244-3" data-line-number="3">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb244-4" data-line-number="4">  b=<span class="dv">3</span>;</a>
+<a class="sourceLine" id="cb244-5" data-line-number="5">}</a></code></pre></div>
 <p>This is the equivalent of <code>x &lt;- ifelse(c == 4, 8, 10)</code> in R</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb233-1" data-line-number="1"><span class="dt">double</span> x = c == <span class="dv">4</span> ? <span class="dv">8</span> : <span class="dv">10</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb245-1" data-line-number="1"><span class="dt">double</span> x = c == <span class="dv">4</span> ? <span class="dv">8</span> : <span class="dv">10</span>;</a></code></pre></div>
 </div>
 <div id="functions" class="section level3">
-<h3><span class="header-section-number">6.6.3</span> Functions</h3>
+<h3><span class="header-section-number">7.6.3</span> Functions</h3>
 <p>The following functions are hopefully understandable based on the function
 name. Consult <a href="https://cppreference.com" class="uri">https://cppreference.com</a> for further details.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb234-1" data-line-number="1"><span class="er"># base^exponent</span></a>
-<a class="sourceLine" id="cb234-2" data-line-number="2"><span class="dt">double</span> d = pow(base,exponent);</a>
-<a class="sourceLine" id="cb234-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb234-4" data-line-number="4"><span class="dt">double</span> e = exp(<span class="dv">3</span>);</a>
-<a class="sourceLine" id="cb234-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb234-6" data-line-number="6"><span class="er"># absolute value</span></a>
-<a class="sourceLine" id="cb234-7" data-line-number="7"><span class="dt">double</span> f = fabs(-<span class="dv">4</span>);</a>
-<a class="sourceLine" id="cb234-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb234-9" data-line-number="9"><span class="dt">double</span> g = sqrt(<span class="dv">5</span>);</a>
-<a class="sourceLine" id="cb234-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb234-11" data-line-number="11"><span class="dt">double</span> h = log(<span class="dv">6</span>);</a>
-<a class="sourceLine" id="cb234-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb234-13" data-line-number="13"><span class="dt">double</span> i = log10(<span class="dv">7</span>);</a>
-<a class="sourceLine" id="cb234-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb234-15" data-line-number="15"><span class="dt">double</span> j = floor(<span class="fl">4.2</span>);</a>
-<a class="sourceLine" id="cb234-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb234-17" data-line-number="17"><span class="dt">double</span> k = ceil(<span class="fl">4.2</span>);</a>
-<a class="sourceLine" id="cb234-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb234-19" data-line-number="19"><span class="dt">double</span> l = std::max(<span class="fl">0.0</span>, <span class="fl">-3.0</span>);</a>
-<a class="sourceLine" id="cb234-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb234-21" data-line-number="21"><span class="dt">double</span> m = std::min(<span class="fl">0.0</span>, <span class="fl">-3.0</span>);</a></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb246-1" data-line-number="1"><span class="er"># base^exponent</span></a>
+<a class="sourceLine" id="cb246-2" data-line-number="2"><span class="dt">double</span> d = pow(base,exponent);</a>
+<a class="sourceLine" id="cb246-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb246-4" data-line-number="4"><span class="dt">double</span> e = exp(<span class="dv">3</span>);</a>
+<a class="sourceLine" id="cb246-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb246-6" data-line-number="6"><span class="er"># absolute value</span></a>
+<a class="sourceLine" id="cb246-7" data-line-number="7"><span class="dt">double</span> f = fabs(-<span class="dv">4</span>);</a>
+<a class="sourceLine" id="cb246-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb246-9" data-line-number="9"><span class="dt">double</span> g = sqrt(<span class="dv">5</span>);</a>
+<a class="sourceLine" id="cb246-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb246-11" data-line-number="11"><span class="dt">double</span> h = log(<span class="dv">6</span>);</a>
+<a class="sourceLine" id="cb246-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb246-13" data-line-number="13"><span class="dt">double</span> i = log10(<span class="dv">7</span>);</a>
+<a class="sourceLine" id="cb246-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb246-15" data-line-number="15"><span class="dt">double</span> j = floor(<span class="fl">4.2</span>);</a>
+<a class="sourceLine" id="cb246-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb246-17" data-line-number="17"><span class="dt">double</span> k = ceil(<span class="fl">4.2</span>);</a>
+<a class="sourceLine" id="cb246-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb246-19" data-line-number="19"><span class="dt">double</span> l = std::max(<span class="fl">0.0</span>, <span class="fl">-3.0</span>);</a>
+<a class="sourceLine" id="cb246-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb246-21" data-line-number="21"><span class="dt">double</span> m = std::min(<span class="fl">0.0</span>, <span class="fl">-3.0</span>);</a></code></pre></div>
 </div>
 <div id="integer-division" class="section level3">
-<h3><span class="header-section-number">6.6.4</span> Integer division</h3>
+<h3><span class="header-section-number">7.6.4</span> Integer division</h3>
 <p>The user is warned about division with two integers. In <code>R</code>, the following
 statement evaluates to <code>0.75</code>:</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1"><span class="dv">3</span><span class="op">/</span><span class="dv">4</span></a></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1"><span class="dv">3</span><span class="op">/</span><span class="dv">4</span></a></code></pre></div>
 <pre><code>. [1] 0.75</code></pre>
 <p>But in <code>C++</code> it evaluates to 0:</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb237-1" data-line-number="1"><span class="dt">double</span> x = <span class="dv">3</span>/<span class="dv">4</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb249-1" data-line-number="1"><span class="dt">double</span> x = <span class="dv">3</span>/<span class="dv">4</span>;</a></code></pre></div>
 <p>This is because both the <code>3</code> and the <code>4</code> are taken as integer literals. This
 produces the same result as</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb238-1" data-line-number="1"><span class="dt">int</span> a = <span class="dv">3</span>;</a>
-<a class="sourceLine" id="cb238-2" data-line-number="2"><span class="dt">int</span> b = <span class="dv">4</span>;</a>
-<a class="sourceLine" id="cb238-3" data-line-number="3"><span class="dt">double</span> x = a/b;</a></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb250-1" data-line-number="1"><span class="dt">int</span> a = <span class="dv">3</span>;</a>
+<a class="sourceLine" id="cb250-2" data-line-number="2"><span class="dt">int</span> b = <span class="dv">4</span>;</a>
+<a class="sourceLine" id="cb250-3" data-line-number="3"><span class="dt">double</span> x = a/b;</a></code></pre></div>
 <p>When one integer is divided by another integer, the remainder is discarded (the
 result is rounded down). This is the way <code>C++</code> works. The user is warned.</p>
 <p>Note that parameters in mrgsolve are <code>doubles</code> so this will evaluate to <code>0.75</code></p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb239-1" data-line-number="1">[ PARAM ] a = <span class="dv">3</span></a>
-<a class="sourceLine" id="cb239-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb239-3" data-line-number="3">[ MAIN ] </a>
-<a class="sourceLine" id="cb239-4" data-line-number="4"><span class="dt">double</span> x = a/<span class="dv">4</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb251-1" data-line-number="1">[ PARAM ] a = <span class="dv">3</span></a>
+<a class="sourceLine" id="cb251-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb251-3" data-line-number="3">[ MAIN ] </a>
+<a class="sourceLine" id="cb251-4" data-line-number="4"><span class="dt">double</span> x = a/<span class="dv">4</span>;</a></code></pre></div>
 <p>Since <code>a</code> is a parameter the operation of <code>a/4</code> is not integer division and
 the result is <code>0.75</code>.</p>
 <p>Unless you are already very comfortable with this concept, users are encouraged
 to add <code>.0</code> suffix to any literal number <strong>written as C++ code</strong>. For example:</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb240-1" data-line-number="1"><span class="dt">double</span> x = <span class="fl">3.0</span> / <span class="fl">4.0</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="dt">double</span> x = <span class="fl">3.0</span> / <span class="fl">4.0</span>;</a></code></pre></div>
 <p>I think it’s fair to say that the vast majority of time you want this to
 evaluate to <code>0.75</code> and writing <code>3.0/4.0</code> rather than <code>3/4</code> will ensure you
 will not discard any remainder here.</p>
 <p>If you would like to experiment with these concepts, try running this code</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" data-line-number="1"><span class="kw">library</span>(mrgsolve)</a>
-<a class="sourceLine" id="cb241-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb241-3" data-line-number="3">code &lt;-<span class="st"> &#39;</span></a>
-<a class="sourceLine" id="cb241-4" data-line-number="4"><span class="st">[ param ] a = 3</span></a>
-<a class="sourceLine" id="cb241-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb241-6" data-line-number="6"><span class="st">[ main ] </span></a>
-<a class="sourceLine" id="cb241-7" data-line-number="7"><span class="st">capture x = 3/4;</span></a>
-<a class="sourceLine" id="cb241-8" data-line-number="8"><span class="st">capture y = 3.0/4.0;</span></a>
-<a class="sourceLine" id="cb241-9" data-line-number="9"><span class="st">capture z = a/4;</span></a>
-<a class="sourceLine" id="cb241-10" data-line-number="10"><span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb241-11" data-line-number="11">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;foo&quot;</span>, code)</a>
-<a class="sourceLine" id="cb241-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb241-13" data-line-number="13"><span class="kw">mrgsim</span>(mod)</a></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="kw">library</span>(mrgsolve)</a>
+<a class="sourceLine" id="cb253-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb253-3" data-line-number="3">code &lt;-<span class="st"> &#39;</span></a>
+<a class="sourceLine" id="cb253-4" data-line-number="4"><span class="st">[ param ] a = 3</span></a>
+<a class="sourceLine" id="cb253-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb253-6" data-line-number="6"><span class="st">[ main ] </span></a>
+<a class="sourceLine" id="cb253-7" data-line-number="7"><span class="st">capture x = 3/4;</span></a>
+<a class="sourceLine" id="cb253-8" data-line-number="8"><span class="st">capture y = 3.0/4.0;</span></a>
+<a class="sourceLine" id="cb253-9" data-line-number="9"><span class="st">capture z = a/4;</span></a>
+<a class="sourceLine" id="cb253-10" data-line-number="10"><span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb253-11" data-line-number="11">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;foo&quot;</span>, code)</a>
+<a class="sourceLine" id="cb253-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb253-13" data-line-number="13"><span class="kw">mrgsim</span>(mod)</a></code></pre></div>
 <pre><code>. Model:  foo 
 . Dim:    25 x 5 
 . Time:   0 to 24 
@@ -1067,7 +1080,7 @@ will not discard any remainder here.</p>
 </div>
 </div>
 <div id="resimulate-eta-and-eps" class="section level2">
-<h2><span class="header-section-number">6.7</span> Resimulate <code>ETA</code> and <code>EPS</code></h2>
+<h2><span class="header-section-number">7.7</span> Resimulate <code>ETA</code> and <code>EPS</code></h2>
 <p><strong>Call <code>simeps()</code> to resimulate <code>ETA</code></strong></p>
 <ul>
 <li>No <code>$PLUGIN</code> is required</li>
@@ -1075,33 +1088,33 @@ will not discard any remainder here.</p>
 </ul>
 <p>For example, we can simulate individual-level covariates
 within a certain range:</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
-<a class="sourceLine" id="cb243-2" data-line-number="2"><span class="st">$PARAM TVCL = 1, TVWT = 70</span></a>
-<a class="sourceLine" id="cb243-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb243-4" data-line-number="4"><span class="st">$MAIN </span></a>
-<a class="sourceLine" id="cb243-5" data-line-number="5"><span class="st">capture WT = TVWT*exp(EWT);</span></a>
-<a class="sourceLine" id="cb243-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb243-7" data-line-number="7"><span class="st">int i = 0;</span></a>
-<a class="sourceLine" id="cb243-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb243-9" data-line-number="9"><span class="st">while((WT &lt; 60) || (WT &gt; 80)) {</span></a>
-<a class="sourceLine" id="cb243-10" data-line-number="10"><span class="st">  if(++i &gt; 100) break;</span></a>
-<a class="sourceLine" id="cb243-11" data-line-number="11"><span class="st">  simeta();</span></a>
-<a class="sourceLine" id="cb243-12" data-line-number="12"><span class="st">  WT = TVWT*exp(EWT);</span></a>
-<a class="sourceLine" id="cb243-13" data-line-number="13"><span class="st">}</span></a>
-<a class="sourceLine" id="cb243-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb243-15" data-line-number="15"><span class="st">$OMEGA @labels EWT</span></a>
-<a class="sourceLine" id="cb243-16" data-line-number="16"><span class="st">4</span></a>
-<a class="sourceLine" id="cb243-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb243-18" data-line-number="18"><span class="st">$CAPTURE EWT WT</span></a>
-<a class="sourceLine" id="cb243-19" data-line-number="19"><span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb243-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb243-21" data-line-number="21">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;simeta&quot;</span>, code)</a>
-<a class="sourceLine" id="cb243-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb243-23" data-line-number="23">out &lt;-<span class="st"> </span>mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mrgsim</span>(<span class="dt">nid=</span><span class="dv">100</span>, <span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb243-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb243-25" data-line-number="25">sum &lt;-<span class="st"> </span><span class="kw">summary</span>(out)</a>
-<a class="sourceLine" id="cb243-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb243-27" data-line-number="27">sum</a></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
+<a class="sourceLine" id="cb255-2" data-line-number="2"><span class="st">$PARAM TVCL = 1, TVWT = 70</span></a>
+<a class="sourceLine" id="cb255-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb255-4" data-line-number="4"><span class="st">$MAIN </span></a>
+<a class="sourceLine" id="cb255-5" data-line-number="5"><span class="st">capture WT = TVWT*exp(EWT);</span></a>
+<a class="sourceLine" id="cb255-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb255-7" data-line-number="7"><span class="st">int i = 0;</span></a>
+<a class="sourceLine" id="cb255-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb255-9" data-line-number="9"><span class="st">while((WT &lt; 60) || (WT &gt; 80)) {</span></a>
+<a class="sourceLine" id="cb255-10" data-line-number="10"><span class="st">  if(++i &gt; 100) break;</span></a>
+<a class="sourceLine" id="cb255-11" data-line-number="11"><span class="st">  simeta();</span></a>
+<a class="sourceLine" id="cb255-12" data-line-number="12"><span class="st">  WT = TVWT*exp(EWT);</span></a>
+<a class="sourceLine" id="cb255-13" data-line-number="13"><span class="st">}</span></a>
+<a class="sourceLine" id="cb255-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb255-15" data-line-number="15"><span class="st">$OMEGA @labels EWT</span></a>
+<a class="sourceLine" id="cb255-16" data-line-number="16"><span class="st">4</span></a>
+<a class="sourceLine" id="cb255-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb255-18" data-line-number="18"><span class="st">$CAPTURE EWT WT</span></a>
+<a class="sourceLine" id="cb255-19" data-line-number="19"><span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb255-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb255-21" data-line-number="21">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;simeta&quot;</span>, code)</a>
+<a class="sourceLine" id="cb255-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb255-23" data-line-number="23">out &lt;-<span class="st"> </span>mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mrgsim</span>(<span class="dt">nid=</span><span class="dv">100</span>, <span class="dt">end=</span><span class="op">-</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb255-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb255-25" data-line-number="25">sum &lt;-<span class="st"> </span><span class="kw">summary</span>(out)</a>
+<a class="sourceLine" id="cb255-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb255-27" data-line-number="27">sum</a></code></pre></div>
 <pre><code>.        ID              time        EWT                  WT        
 .  Min.   :  1.00   Min.   :0   Min.   :-0.154014   Min.   : 60.01  
 .  1st Qu.: 25.75   1st Qu.:0   1st Qu.:-0.083784   1st Qu.: 64.37  
@@ -1116,34 +1129,34 @@ within a certain range:</p>
 </ul>
 <p>For example, we can resimulate until all
 concentrations are greater than zero:</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
-<a class="sourceLine" id="cb245-2" data-line-number="2"><span class="st">$PARAM CL = 1, V = 20,</span></a>
-<a class="sourceLine" id="cb245-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb245-4" data-line-number="4"><span class="st">$CMT CENT</span></a>
-<a class="sourceLine" id="cb245-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb245-6" data-line-number="6"><span class="st">$SIGMA 50</span></a>
-<a class="sourceLine" id="cb245-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb245-8" data-line-number="8"><span class="st">$PKMODEL ncmt=1</span></a>
-<a class="sourceLine" id="cb245-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb245-10" data-line-number="10"><span class="st">$TABLE</span></a>
-<a class="sourceLine" id="cb245-11" data-line-number="11"><span class="st">capture CP = CENT/V + EPS(1);</span></a>
-<a class="sourceLine" id="cb245-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb245-13" data-line-number="13"><span class="st">int i = 0;</span></a>
-<a class="sourceLine" id="cb245-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb245-15" data-line-number="15"><span class="st">while(CP &lt; 0 &amp;&amp; i &lt; 100) {</span></a>
-<a class="sourceLine" id="cb245-16" data-line-number="16"><span class="st">  simeps();</span></a>
-<a class="sourceLine" id="cb245-17" data-line-number="17"><span class="st">  CP = CENT/V + EPS(1);</span></a>
-<a class="sourceLine" id="cb245-18" data-line-number="18"><span class="st">  ++i;</span></a>
-<a class="sourceLine" id="cb245-19" data-line-number="19"><span class="st">}</span></a>
-<a class="sourceLine" id="cb245-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb245-21" data-line-number="21"><span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb245-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb245-23" data-line-number="23">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;simeps&quot;</span>, code)</a>
-<a class="sourceLine" id="cb245-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb245-25" data-line-number="25">out &lt;-<span class="st"> </span>mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ev</span>(<span class="dt">amt=</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="dv">48</span>)</a>
-<a class="sourceLine" id="cb245-26" data-line-number="26">sum &lt;-<span class="st"> </span><span class="kw">summary</span>(out)</a>
-<a class="sourceLine" id="cb245-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb245-28" data-line-number="28">sum</a></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
+<a class="sourceLine" id="cb257-2" data-line-number="2"><span class="st">$PARAM CL = 1, V = 20,</span></a>
+<a class="sourceLine" id="cb257-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb257-4" data-line-number="4"><span class="st">$CMT CENT</span></a>
+<a class="sourceLine" id="cb257-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb257-6" data-line-number="6"><span class="st">$SIGMA 50</span></a>
+<a class="sourceLine" id="cb257-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb257-8" data-line-number="8"><span class="st">$PKMODEL ncmt=1</span></a>
+<a class="sourceLine" id="cb257-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb257-10" data-line-number="10"><span class="st">$TABLE</span></a>
+<a class="sourceLine" id="cb257-11" data-line-number="11"><span class="st">capture CP = CENT/V + EPS(1);</span></a>
+<a class="sourceLine" id="cb257-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb257-13" data-line-number="13"><span class="st">int i = 0;</span></a>
+<a class="sourceLine" id="cb257-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb257-15" data-line-number="15"><span class="st">while(CP &lt; 0 &amp;&amp; i &lt; 100) {</span></a>
+<a class="sourceLine" id="cb257-16" data-line-number="16"><span class="st">  simeps();</span></a>
+<a class="sourceLine" id="cb257-17" data-line-number="17"><span class="st">  CP = CENT/V + EPS(1);</span></a>
+<a class="sourceLine" id="cb257-18" data-line-number="18"><span class="st">  ++i;</span></a>
+<a class="sourceLine" id="cb257-19" data-line-number="19"><span class="st">}</span></a>
+<a class="sourceLine" id="cb257-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb257-21" data-line-number="21"><span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb257-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb257-23" data-line-number="23">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;simeps&quot;</span>, code)</a>
+<a class="sourceLine" id="cb257-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb257-25" data-line-number="25">out &lt;-<span class="st"> </span>mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ev</span>(<span class="dt">amt=</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="dv">48</span>)</a>
+<a class="sourceLine" id="cb257-26" data-line-number="26">sum &lt;-<span class="st"> </span><span class="kw">summary</span>(out)</a>
+<a class="sourceLine" id="cb257-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb257-28" data-line-number="28">sum</a></code></pre></div>
 <pre><code>.        ID         time            CENT              CP          
 .  Min.   :1   Min.   : 0.00   Min.   :  0.00   Min.   : 0.09436  
 .  1st Qu.:1   1st Qu.:11.25   1st Qu.: 15.93   1st Qu.: 3.57350  
@@ -1159,12 +1172,12 @@ consider issuing a message or a flag in the simulated data if you are not able
 to reach the desired condition.</p>
 </div>
 <div id="topic-matrix-update" class="section level2">
-<h2><span class="header-section-number">6.8</span> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </h2>
+<h2><span class="header-section-number">7.8</span> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </h2>
 <p>Like the values of parameters in the parameter list, we may want to update the
 values in <code>$OMEGA</code> and <code>$SIGMA</code> matrices. We can do so without re-compiling the
 model.</p>
 <div id="matrix-helper-functions" class="section level3">
-<h3><span class="header-section-number">6.8.1</span> Matrix helper functions</h3>
+<h3><span class="header-section-number">7.8.1</span> Matrix helper functions</h3>
 <p><code>mrgsolve</code> keeps <code>$OMEGA</code> and <code>$SIGMA</code> in block matrices (regardless of whether
 the off-diagonal elements are zeros or not). Recall that in the model
 specification file we can enter data for <code>$OMEGA</code> and <code>$SIGMA</code> as the lower
@@ -1173,19 +1186,19 @@ provide a matrix (as an <code>R</code> object). <code>mrgsolve</code> provides s
 functions to help … allowing the user to enter lower diagonals instead of the
 full matrix.</p>
 <p><code>dmat()</code> for diagonal matrix</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1"><span class="kw">dmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" data-line-number="1"><span class="kw">dmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</a></code></pre></div>
 <pre><code>.      [,1] [,2] [,3]
 . [1,]    1    0    0
 . [2,]    0    2    0
 . [3,]    0    0    3</code></pre>
 <p><code>bmat()</code> for block matrix</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" data-line-number="1"><span class="kw">bmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" data-line-number="1"><span class="kw">bmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</a></code></pre></div>
 <pre><code>.      [,1] [,2]
 . [1,]    1    2
 . [2,]    2    3</code></pre>
 <p><code>cmat()</code> for a block matrix where the diagonal elements are variances and the
 off-diagonals are taken to be correlations, not covariances</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1"><span class="kw">cmat</span>(<span class="fl">0.1</span>, <span class="fl">0.87</span>,<span class="fl">0.3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" data-line-number="1"><span class="kw">cmat</span>(<span class="fl">0.1</span>, <span class="fl">0.87</span>,<span class="fl">0.3</span>)</a></code></pre></div>
 <pre><code>.           [,1]      [,2]
 . [1,] 0.1000000 0.1506884
 . [2,] 0.1506884 0.3000000</code></pre>
@@ -1193,18 +1206,18 @@ off-diagonals are taken to be correlations, not covariances</p>
 <p><code>mrgsolve</code> also provides <code>as_bmat()</code> and <code>as_dmat()</code> for converting other <code>R</code>
 objects to matrices or lists of matrices.</p>
 <p>Consider this list with named elements holding the data for a matrix:</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">OMEGA1.1 =</span> <span class="fl">0.9</span>, <span class="dt">OMEGA2.1 =</span> <span class="fl">0.3</span>, <span class="dt">OMEGA2.2 =</span> <span class="fl">0.4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">OMEGA1.1 =</span> <span class="fl">0.9</span>, <span class="dt">OMEGA2.1 =</span> <span class="fl">0.3</span>, <span class="dt">OMEGA2.2 =</span> <span class="fl">0.4</span>)</a></code></pre></div>
 <p>These data could form either a 3x3 diagonal matrix or a 2x2 block matrix. But
 the names suggest a 2x2 form. <code>as_bmat()</code> can make the matrix like this</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1"><span class="kw">as_bmat</span>(m, <span class="st">&quot;OMEGA&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" data-line-number="1"><span class="kw">as_bmat</span>(m, <span class="st">&quot;OMEGA&quot;</span>)</a></code></pre></div>
 <pre><code>.      [,1] [,2]
 . [1,]  0.9  0.3
 . [2,]  0.3  0.4</code></pre>
 <p>The second argument is a regular expression that <code>mrgsolve</code> uses to find
 elements in the list to use for building the matrix.</p>
 <p>Frequently, we have estimates in a data frame like this</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1"><span class="kw">data</span>(exBoot)</a>
-<a class="sourceLine" id="cb256-2" data-line-number="2"><span class="kw">head</span>(exBoot)</a></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" data-line-number="1"><span class="kw">data</span>(exBoot)</a>
+<a class="sourceLine" id="cb268-2" data-line-number="2"><span class="kw">head</span>(exBoot)</a></code></pre></div>
 <pre><code>.   run  THETA1 THETA2  THETA3 OMEGA11   OMEGA21 OMEGA22 OMEGA31  OMEGA32 OMEGA33
 . 1   1 -0.7634  2.280  0.8472 0.12860  0.046130  0.2874 0.13820 -0.02164  0.3933
 . 2   2 -0.4816  2.076  0.5355 0.12000  0.051000  0.2409 0.06754 -0.07759  0.3342
@@ -1220,30 +1233,30 @@ elements in the list to use for building the matrix.</p>
 . 5 0.001606       0  0.8996
 . 6 0.002134       0  0.9744</code></pre>
 <p>We can use <code>as_bmat()</code> with this data frame to extract the <code>$OMEGA</code> matrices</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" data-line-number="1">omegas &lt;-<span class="st"> </span><span class="kw">as_bmat</span>(exBoot, <span class="st">&quot;OMEGA&quot;</span>)</a>
-<a class="sourceLine" id="cb258-2" data-line-number="2"><span class="kw">length</span>(omegas)</a></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" data-line-number="1">omegas &lt;-<span class="st"> </span><span class="kw">as_bmat</span>(exBoot, <span class="st">&quot;OMEGA&quot;</span>)</a>
+<a class="sourceLine" id="cb270-2" data-line-number="2"><span class="kw">length</span>(omegas)</a></code></pre></div>
 <pre><code>. [1] 100</code></pre>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" data-line-number="1"><span class="kw">dim</span>(exBoot)</a></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" data-line-number="1"><span class="kw">dim</span>(exBoot)</a></code></pre></div>
 <pre><code>. [1] 100  13</code></pre>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" data-line-number="1">omegas[[<span class="dv">6</span>]]</a></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" data-line-number="1">omegas[[<span class="dv">6</span>]]</a></code></pre></div>
 <pre><code>.          [,1]     [,2]    [,3]
 . [1,]  0.13390 -0.01927  0.1074
 . [2,] -0.01927  0.16400 -0.0117
 . [3,]  0.10740 -0.01170  0.3412</code></pre>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" data-line-number="1">omegas[[<span class="dv">16</span>]]</a></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" data-line-number="1">omegas[[<span class="dv">16</span>]]</a></code></pre></div>
 <pre><code>.         [,1]    [,2]   [,3]
 . [1,] 0.08126 0.01252 0.1050
 . [2,] 0.01252 0.16860 0.0149
 . [3,] 0.10500 0.01490 0.4062</code></pre>
 <p>The result of calling <code>as_bmat</code> or <code>as_dmat</code> is a list of matrices, one for each row in the data frame.</p>
 <p>Note in this example, we could have called</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" data-line-number="1">sigmas &lt;-<span class="st"> </span><span class="kw">as_bmat</span>(exBoot,<span class="st">&quot;SIGMA&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" data-line-number="1">sigmas &lt;-<span class="st"> </span><span class="kw">as_bmat</span>(exBoot,<span class="st">&quot;SIGMA&quot;</span>) </a></code></pre></div>
 <p>to grab the <code>$SIGMA</code> matrices.</p>
 <p>For help on these helper functions, see <code>?dmat</code>, <code>?bmat</code>, <code>?cmat</code>, <code>?as_bmat</code>,
 <code>?as_dmat</code> in the <code>R</code> help system after loading <code>mrgsolve</code>.</p>
 </div>
 <div id="fill-a-matrix-with-zeros" class="section level3">
-<h3><span class="header-section-number">6.8.2</span> Fill a matrix with zeros</h3>
+<h3><span class="header-section-number">7.8.2</span> Fill a matrix with zeros</h3>
 <p>Sometimes we write a population model that includes random effects, but we would
 like to simulate from that same model without the random effects implemented.
 For example, we want to simulate some typical PK profiles from a population PK
@@ -1254,16 +1267,16 @@ will convert all <code>$OMEGA</code> and <code>$SIGMA</code> matrix elements to 
 file (<code>?zero_re</code>) to see some options for selectively zeroing out only one or
 the other.</p>
 <p>For example we have this population PK model</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">modlib</span>(<span class="st">&quot;popex&quot;</span>, <span class="dt">compile =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb267-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb267-3" data-line-number="3"><span class="kw">omat</span>(mod)</a></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">modlib</span>(<span class="st">&quot;popex&quot;</span>, <span class="dt">compile =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb279-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb279-3" data-line-number="3"><span class="kw">omat</span>(mod)</a></code></pre></div>
 <pre><code>. $...
 .       [,1] [,2] [,3]
 . ECL:   0.3  0.0  0.0
 . EV:    0.0  0.1  0.0
 . EKA:   0.0  0.0  0.5</code></pre>
 <p>We can turn that matrix to all zeros with</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">zero_re</span>() <span class="op">%&gt;%</span><span class="st"> </span>omat</a></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">zero_re</span>() <span class="op">%&gt;%</span><span class="st"> </span>omat</a></code></pre></div>
 <pre><code>. $...
 .       [,1] [,2] [,3]
 . ECL:     0    0    0
@@ -1272,39 +1285,39 @@ the other.</p>
 <p>And when we simulate right after that, all <code>ETA(n)</code> will be zero as well
 and you’ll get your fixed-effects simulation (the following is for example
 only and is not evaluated)</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb271-2" data-line-number="2"><span class="st">  </span><span class="kw">zero_re</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb271-3" data-line-number="3"><span class="st">  </span><span class="kw">ev</span>(<span class="dt">amt =</span> <span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb271-4" data-line-number="4"><span class="st">  </span><span class="kw">mrgsim</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb271-5" data-line-number="5"><span class="st">  </span><span class="kw">plot</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb283-2" data-line-number="2"><span class="st">  </span><span class="kw">zero_re</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb283-3" data-line-number="3"><span class="st">  </span><span class="kw">ev</span>(<span class="dt">amt =</span> <span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb283-4" data-line-number="4"><span class="st">  </span><span class="kw">mrgsim</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb283-5" data-line-number="5"><span class="st">  </span><span class="kw">plot</span>()</a></code></pre></div>
 </div>
 <div id="example-unnamed-matrix" class="section level3">
-<h3><span class="header-section-number">6.8.3</span> Example: unnamed matrix</h3>
+<h3><span class="header-section-number">7.8.3</span> Example: unnamed matrix</h3>
 <p>Here is a model with only a 3x3 <code>$OMEGA</code> matrix</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
-<a class="sourceLine" id="cb272-2" data-line-number="2"><span class="st">$OMEGA</span></a>
-<a class="sourceLine" id="cb272-3" data-line-number="3"><span class="st">1 2 3</span></a>
-<a class="sourceLine" id="cb272-4" data-line-number="4"><span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb272-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb272-6" data-line-number="6">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;matrix&quot;</span>, code, <span class="dt">compile=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
+<a class="sourceLine" id="cb284-2" data-line-number="2"><span class="st">$OMEGA</span></a>
+<a class="sourceLine" id="cb284-3" data-line-number="3"><span class="st">1 2 3</span></a>
+<a class="sourceLine" id="cb284-4" data-line-number="4"><span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb284-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb284-6" data-line-number="6">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;matrix&quot;</span>, code, <span class="dt">compile=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Let’s check the values in the matrix using <code>omat()</code></p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span>omat</a></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span>omat</a></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     1    0    0
 . 2:     0    2    0
 . 3:     0    0    3</code></pre>
 <p>We also use <code>omat()</code> to update the values in the matrix</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">omat</span>(<span class="kw">dmat</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)) <span class="op">%&gt;%</span><span class="st"> </span>omat</a></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb287-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">omat</span>(<span class="kw">dmat</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)) <span class="op">%&gt;%</span><span class="st"> </span>omat</a></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     4    0    0
 . 2:     0    5    0
 . 3:     0    0    6</code></pre>
 <p>To update <code>$OMEGA</code>, we must provide a matrix of the same dimension, in this case 3x3. An error is generated if we provide a matrix with the wrong dimension.</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" data-line-number="1">ans &lt;-<span class="st"> </span><span class="kw">try</span>(mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">omat</span>(<span class="kw">dmat</span>(<span class="dv">11</span>,<span class="dv">23</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" data-line-number="1">ans &lt;-<span class="st"> </span><span class="kw">try</span>(mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">omat</span>(<span class="kw">dmat</span>(<span class="dv">11</span>,<span class="dv">23</span>)))</a></code></pre></div>
 <pre><code>. Error : improper signature: omat</code></pre>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" data-line-number="1">ans</a></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" data-line-number="1">ans</a></code></pre></div>
 <pre><code>. [1] &quot;Error : improper signature: omat\n&quot;
 . attr(,&quot;class&quot;)
 . [1] &quot;try-error&quot;
@@ -1312,17 +1325,17 @@ only and is not evaluated)</p>
 . &lt;simpleError: improper signature: omat&gt;</code></pre>
 </div>
 <div id="example-named-matrices" class="section level3">
-<h3><span class="header-section-number">6.8.4</span> Example: named matrices</h3>
+<h3><span class="header-section-number">7.8.4</span> Example: named matrices</h3>
 <p>When there are multiple <code>$OMEGA</code> matrices, it can be helpful to assign them names. Here, there are two matrices: one for interindividual variability (<code>IIV</code>) and one for interoccasion variability (<code>IOV</code>).</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
-<a class="sourceLine" id="cb281-2" data-line-number="2"><span class="st">$OMEGA @name IIV</span></a>
-<a class="sourceLine" id="cb281-3" data-line-number="3"><span class="st">1 2 3</span></a>
-<a class="sourceLine" id="cb281-4" data-line-number="4"><span class="st">$OMEGA @name IOV</span></a>
-<a class="sourceLine" id="cb281-5" data-line-number="5"><span class="st">4 5</span></a>
-<a class="sourceLine" id="cb281-6" data-line-number="6"><span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb281-7" data-line-number="7">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;iov&quot;</span>, code, <span class="dt">compile=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb281-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb281-9" data-line-number="9"><span class="kw">revar</span>(mod)</a></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
+<a class="sourceLine" id="cb293-2" data-line-number="2"><span class="st">$OMEGA @name IIV</span></a>
+<a class="sourceLine" id="cb293-3" data-line-number="3"><span class="st">1 2 3</span></a>
+<a class="sourceLine" id="cb293-4" data-line-number="4"><span class="st">$OMEGA @name IOV</span></a>
+<a class="sourceLine" id="cb293-5" data-line-number="5"><span class="st">4 5</span></a>
+<a class="sourceLine" id="cb293-6" data-line-number="6"><span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb293-7" data-line-number="7">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;iov&quot;</span>, code, <span class="dt">compile=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb293-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb293-9" data-line-number="9"><span class="kw">revar</span>(mod)</a></code></pre></div>
 <pre><code>. $omega
 . $IIV
 .     [,1] [,2] [,3]
@@ -1339,9 +1352,9 @@ only and is not evaluated)</p>
 . $sigma
 . No matrices found</code></pre>
 <p>Now, we can update either <code>IIV</code> or <code>IOV</code> (or both) by name</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb283-2" data-line-number="2"><span class="st">  </span><span class="kw">omat</span>(<span class="dt">IOV =</span> <span class="kw">dmat</span>(<span class="dv">11</span>,<span class="dv">12</span>), <span class="dt">IIV =</span> <span class="kw">dmat</span>(<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">15</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb283-3" data-line-number="3"><span class="st">  </span>omat</a></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb295-2" data-line-number="2"><span class="st">  </span><span class="kw">omat</span>(<span class="dt">IOV =</span> <span class="kw">dmat</span>(<span class="dv">11</span>,<span class="dv">12</span>), <span class="dt">IIV =</span> <span class="kw">dmat</span>(<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">15</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb295-3" data-line-number="3"><span class="st">  </span>omat</a></code></pre></div>
 <pre><code>. $IIV
 .     [,1] [,2] [,3]
 . 1:    13    0    0
@@ -1353,9 +1366,9 @@ only and is not evaluated)</p>
 . 4:    11    0
 . 5:     0   12</code></pre>
 <p>Again, an error is generated if we try to assign a 3x3 matrix to the <code>IOV</code> position</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" data-line-number="1">ans &lt;-<span class="st"> </span><span class="kw">try</span>(mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">omat</span>(<span class="dt">IIV=</span><span class="kw">dmat</span>(<span class="dv">1</span>,<span class="dv">2</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" data-line-number="1">ans &lt;-<span class="st"> </span><span class="kw">try</span>(mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">omat</span>(<span class="dt">IIV=</span><span class="kw">dmat</span>(<span class="dv">1</span>,<span class="dv">2</span>)))</a></code></pre></div>
 <pre><code>. Error : improper dimension: omat</code></pre>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb287-1" data-line-number="1">ans</a></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" data-line-number="1">ans</a></code></pre></div>
 <pre><code>. [1] &quot;Error : improper dimension: omat\n&quot;
 . attr(,&quot;class&quot;)
 . [1] &quot;try-error&quot;
@@ -1363,19 +1376,19 @@ only and is not evaluated)</p>
 . &lt;simpleError: improper dimension: omat&gt;</code></pre>
 </div>
 <div id="example-unnamed-matrices" class="section level3">
-<h3><span class="header-section-number">6.8.5</span> Example: unnamed matrices</h3>
+<h3><span class="header-section-number">7.8.5</span> Example: unnamed matrices</h3>
 <p>If we do write the model with unnamed matrices, we can still update them</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
-<a class="sourceLine" id="cb289-2" data-line-number="2"><span class="st">$OMEGA</span></a>
-<a class="sourceLine" id="cb289-3" data-line-number="3"><span class="st">1 2 3</span></a>
-<a class="sourceLine" id="cb289-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb289-5" data-line-number="5"><span class="st">$OMEGA </span></a>
-<a class="sourceLine" id="cb289-6" data-line-number="6"><span class="st">4 5</span></a>
-<a class="sourceLine" id="cb289-7" data-line-number="7"><span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb289-8" data-line-number="8">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;multi&quot;</span>, code, <span class="dt">compile=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" data-line-number="1">code &lt;-<span class="st"> &#39;</span></a>
+<a class="sourceLine" id="cb301-2" data-line-number="2"><span class="st">$OMEGA</span></a>
+<a class="sourceLine" id="cb301-3" data-line-number="3"><span class="st">1 2 3</span></a>
+<a class="sourceLine" id="cb301-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb301-5" data-line-number="5"><span class="st">$OMEGA </span></a>
+<a class="sourceLine" id="cb301-6" data-line-number="6"><span class="st">4 5</span></a>
+<a class="sourceLine" id="cb301-7" data-line-number="7"><span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb301-8" data-line-number="8">mod &lt;-<span class="st"> </span><span class="kw">mcode</span>(<span class="st">&quot;multi&quot;</span>, code, <span class="dt">compile=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 <p>In this case, the only way to update is to pass in a <strong>list</strong> of matrices, where
 (in this example) the first matrix is 3x3 and the second is 2x2</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">omat</span>(<span class="kw">list</span>(<span class="kw">dmat</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>),<span class="kw">dmat</span>(<span class="dv">8</span>,<span class="dv">9</span>))) <span class="op">%&gt;%</span><span class="st"> </span>omat</a></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">omat</span>(<span class="kw">list</span>(<span class="kw">dmat</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>),<span class="kw">dmat</span>(<span class="dv">8</span>,<span class="dv">9</span>))) <span class="op">%&gt;%</span><span class="st"> </span>omat</a></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     5    0    0
@@ -1389,7 +1402,7 @@ only and is not evaluated)</p>
 </div>
 </div>
 <div id="topics-time-varying" class="section level2">
-<h2><span class="header-section-number">6.9</span> Time varying covariates</h2>
+<h2><span class="header-section-number">7.9</span> Time varying covariates</h2>
 <p>A note in a previous section showed how to implement time-varying covariates or
 other time-varying parameters by including those parameters as column in the
 data set.</p>
@@ -1402,7 +1415,7 @@ covariate <code>COV1</code>.</p>
 so that the system uses the value of <code>COV1</code> to advance from <code>TIME1</code> to <code>TIME2</code>.
 To use <code>locf</code> advance, set <code>nocb</code> to <code>FALSE</code> when calling <code>mrgsim</code>. For
 example,</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mrgsim</span>(<span class="dt">nocb =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" data-line-number="1">mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mrgsim</span>(<span class="dt">nocb =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Note that time-varying covariates are not possible when using <code>qsim</code> simulation.</p>
 <p>There is additional information about the sequence of events that takes place
 during system advance in section <a href="section-sequence.html#section-sequence">5</a>.</p>
@@ -1414,7 +1427,7 @@ during system advance in section <a href="section-sequence.html#section-sequence
           </div>
         </div>
       </div>
-<a href="section-sequence.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="steady-state.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="install.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
