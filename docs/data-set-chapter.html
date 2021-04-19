@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Input data sets | mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Input data sets | mrgsolve User Guide" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2020-06-29" />
+<meta name="date" content="2021-04-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="model-specification.html"/>
 <link rel="next" href="simulated-output.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -53,25 +54,26 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +82,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -132,15 +134,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="1" data-path="model-components.html"><a href="model-components.html"><i class="fa fa-check"></i><b>1</b> Model components</a><ul>
-<li class="chapter" data-level="1.1" data-path="model-components.html"><a href="model-components.html#component-param"><i class="fa fa-check"></i><b>1.1</b> Parameter list</a><ul>
+<li class="chapter" data-level="1" data-path="model-components.html"><a href="model-components.html"><i class="fa fa-check"></i><b>1</b> Model components</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="model-components.html"><a href="model-components.html#component-param"><i class="fa fa-check"></i><b>1.1</b> Parameter list</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="model-components.html"><a href="model-components.html#central-role-of-parameters-in-planning-simulations"><i class="fa fa-check"></i><b>1.1.1</b> Central role of parameters in planning simulations</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="model-components.html"><a href="model-components.html#component-init"><i class="fa fa-check"></i><b>1.2</b> Compartment list</a></li>
-<li class="chapter" data-level="1.3" data-path="model-components.html"><a href="model-components.html#component-stime"><i class="fa fa-check"></i><b>1.3</b> Simulation time grid</a><ul>
+<li class="chapter" data-level="1.3" data-path="model-components.html"><a href="model-components.html#component-stime"><i class="fa fa-check"></i><b>1.3</b> Simulation time grid</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="model-components.html"><a href="model-components.html#component-tgrid"><i class="fa fa-check"></i><b>1.3.1</b> <code>tgrid</code> objects</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="model-components.html"><a href="model-components.html#solver-settings"><i class="fa fa-check"></i><b>1.4</b> Solver settings</a><ul>
+<li class="chapter" data-level="1.4" data-path="model-components.html"><a href="model-components.html#solver-settings"><i class="fa fa-check"></i><b>1.4</b> Solver settings</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="model-components.html"><a href="model-components.html#atol"><i class="fa fa-check"></i><b>1.4.1</b> <code>atol</code></a></li>
 <li class="chapter" data-level="1.4.2" data-path="model-components.html"><a href="model-components.html#rtol"><i class="fa fa-check"></i><b>1.4.2</b> <code>rtol</code></a></li>
 <li class="chapter" data-level="1.4.3" data-path="model-components.html"><a href="model-components.html#maxsteps"><i class="fa fa-check"></i><b>1.4.3</b> <code>maxsteps</code></a></li>
@@ -149,23 +155,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4.6" data-path="model-components.html"><a href="model-components.html#ixpr"><i class="fa fa-check"></i><b>1.4.6</b> <code>ixpr</code></a></li>
 <li class="chapter" data-level="1.4.7" data-path="model-components.html"><a href="model-components.html#mxhnil"><i class="fa fa-check"></i><b>1.4.7</b> <code>mxhnil</code></a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>1.5</b> Functions</a><ul>
+<li class="chapter" data-level="1.5" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>1.5</b> Functions</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="model-components.html"><a href="model-components.html#the-preamble-function"><i class="fa fa-check"></i><b>1.5.1</b> The <code>$PREAMBLE</code> function</a></li>
 <li class="chapter" data-level="1.5.2" data-path="model-components.html"><a href="model-components.html#the-main-function"><i class="fa fa-check"></i><b>1.5.2</b> The <code>$MAIN</code> function</a></li>
 <li class="chapter" data-level="1.5.3" data-path="model-components.html"><a href="model-components.html#the-ode-function"><i class="fa fa-check"></i><b>1.5.3</b> The <code>$ODE</code> function</a></li>
 <li class="chapter" data-level="1.5.4" data-path="model-components.html"><a href="model-components.html#the-table-function"><i class="fa fa-check"></i><b>1.5.4</b> The <code>$TABLE</code> function</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="model-components.html"><a href="model-components.html#random-effect-variances"><i class="fa fa-check"></i><b>1.6</b> Random effect variances</a><ul>
+<li class="chapter" data-level="1.6" data-path="model-components.html"><a href="model-components.html#random-effect-variances"><i class="fa fa-check"></i><b>1.6</b> Random effect variances</a>
+<ul>
 <li class="chapter" data-level="1.6.1" data-path="model-components.html"><a href="model-components.html#omega"><i class="fa fa-check"></i><b>1.6.1</b> <code>OMEGA</code></a></li>
 <li class="chapter" data-level="1.6.2" data-path="model-components.html"><a href="model-components.html#sigma"><i class="fa fa-check"></i><b>1.6.2</b> <code>SIGMA</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="model-specification.html"><a href="model-specification.html"><i class="fa fa-check"></i><b>2</b> Model specification</a><ul>
-<li class="chapter" data-level="2.1" data-path="model-specification.html"><a href="model-specification.html#how-where-to-write-a-model"><i class="fa fa-check"></i><b>2.1</b> How / where to write a model</a><ul>
+<li class="chapter" data-level="2" data-path="model-specification.html"><a href="model-specification.html"><i class="fa fa-check"></i><b>2</b> Model specification</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="model-specification.html"><a href="model-specification.html#how-where-to-write-a-model"><i class="fa fa-check"></i><b>2.1</b> How / where to write a model</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="model-specification.html"><a href="model-specification.html#spec-separate-file"><i class="fa fa-check"></i><b>2.1.1</b> Separate file</a></li>
 <li class="chapter" data-level="2.1.2" data-path="model-specification.html"><a href="model-specification.html#spec-inline"><i class="fa fa-check"></i><b>2.1.2</b> Inline / <code>code</code>  </a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="model-specification.html"><a href="model-specification.html#code-blocks"><i class="fa fa-check"></i><b>2.2</b> Code blocks</a><ul>
+<li class="chapter" data-level="2.2" data-path="model-specification.html"><a href="model-specification.html#code-blocks"><i class="fa fa-check"></i><b>2.2</b> Code blocks</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="model-specification.html"><a href="model-specification.html#about-code-blocks"><i class="fa fa-check"></i><b>2.2.1</b> About code blocks</a></li>
 <li class="chapter" data-level="2.2.2" data-path="model-specification.html"><a href="model-specification.html#block-prob"><i class="fa fa-check"></i><b>2.2.2</b> <code>$PROB</code>  </a></li>
 <li class="chapter" data-level="2.2.3" data-path="model-specification.html"><a href="model-specification.html#block-param"><i class="fa fa-check"></i><b>2.2.3</b> <code>$PARAM</code>  </a></li>
@@ -189,7 +200,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.21" data-path="model-specification.html"><a href="model-specification.html#block-include"><i class="fa fa-check"></i><b>2.2.21</b> <code>$INCLUDE</code>  </a></li>
 <li class="chapter" data-level="2.2.22" data-path="model-specification.html"><a href="model-specification.html#block-env"><i class="fa fa-check"></i><b>2.2.22</b> <code>$ENV</code>  </a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="model-specification.html"><a href="model-specification.html#variables-and-macros"><i class="fa fa-check"></i><b>2.3</b> Variables and Macros</a><ul>
+<li class="chapter" data-level="2.3" data-path="model-specification.html"><a href="model-specification.html#variables-and-macros"><i class="fa fa-check"></i><b>2.3</b> Variables and Macros</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="model-specification.html"><a href="model-specification.html#id"><i class="fa fa-check"></i><b>2.3.1</b> <code>ID</code></a></li>
 <li class="chapter" data-level="2.3.2" data-path="model-specification.html"><a href="model-specification.html#time"><i class="fa fa-check"></i><b>2.3.2</b> <code>TIME</code></a></li>
 <li class="chapter" data-level="2.3.3" data-path="model-specification.html"><a href="model-specification.html#solvertime"><i class="fa fa-check"></i><b>2.3.3</b> <code>SOLVERTIME</code></a></li>
@@ -216,78 +228,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.24" data-path="model-specification.html"><a href="model-specification.html#spec-r"><i class="fa fa-check"></i><b>2.3.24</b> <code>R_CMT</code>  </a></li>
 <li class="chapter" data-level="2.3.25" data-path="model-specification.html"><a href="model-specification.html#spec-d"><i class="fa fa-check"></i><b>2.3.25</b> <code>D_CMT</code>  </a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="model-specification.html"><a href="model-specification.html#new-variables"><i class="fa fa-check"></i><b>2.4</b> Derive new variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="model-specification.html"><a href="model-specification.html#new-variables"><i class="fa fa-check"></i><b>2.4</b> Derive new variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="model-specification.html"><a href="model-specification.html#special-handling-for-double-int-bool"><i class="fa fa-check"></i><b>2.4.1</b> Special handling for <code>double</code>, <code>int</code>, <code>bool</code></a></li>
 <li class="chapter" data-level="2.4.2" data-path="model-specification.html"><a href="model-specification.html#using-other-types-globally"><i class="fa fa-check"></i><b>2.4.2</b> Using other types globally</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="model-specification.html"><a href="model-specification.html#examples"><i class="fa fa-check"></i><b>2.5</b> Examples</a><ul>
+<li class="chapter" data-level="2.5" data-path="model-specification.html"><a href="model-specification.html#examples"><i class="fa fa-check"></i><b>2.5</b> Examples</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="model-specification.html"><a href="model-specification.html#simple-pk-model"><i class="fa fa-check"></i><b>2.5.1</b> Simple PK model</a></li>
 <li class="chapter" data-level="2.5.2" data-path="model-specification.html"><a href="model-specification.html#pkpd-model"><i class="fa fa-check"></i><b>2.5.2</b> PK/PD model</a></li>
 <li class="chapter" data-level="2.5.3" data-path="model-specification.html"><a href="model-specification.html#population-pk-model-with-covariates-and-iov"><i class="fa fa-check"></i><b>2.5.3</b> Population PK model with covariates and IOV</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-set-chapter.html"><a href="data-set-chapter.html"><i class="fa fa-check"></i><b>3</b> Input data sets</a><ul>
+<li class="chapter" data-level="3" data-path="data-set-chapter.html"><a href="data-set-chapter.html"><i class="fa fa-check"></i><b>3</b> Input data sets</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="data-set-chapter.html"><a href="data-set-chapter.html#datasets"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
-<li class="chapter" data-level="3.2" data-path="data-set-chapter.html"><a href="data-set-chapter.html#data-set"><i class="fa fa-check"></i><b>3.2</b> Event data sets (<code>data</code>)</a><ul>
+<li class="chapter" data-level="3.2" data-path="data-set-chapter.html"><a href="data-set-chapter.html#data-set"><i class="fa fa-check"></i><b>3.2</b> Event data sets (<code>data</code>)</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="data-set-chapter.html"><a href="data-set-chapter.html#two-types-of-data_set"><i class="fa fa-check"></i><b>3.2.1</b> Two types of <code>data_set</code></a></li>
 <li class="chapter" data-level="3.2.2" data-path="data-set-chapter.html"><a href="data-set-chapter.html#sorting-requirements"><i class="fa fa-check"></i><b>3.2.2</b> Sorting requirements</a></li>
 <li class="chapter" data-level="3.2.3" data-path="data-set-chapter.html"><a href="data-set-chapter.html#creating-data-sets"><i class="fa fa-check"></i><b>3.2.3</b> Creating data sets</a></li>
 <li class="chapter" data-level="3.2.4" data-path="data-set-chapter.html"><a href="data-set-chapter.html#example"><i class="fa fa-check"></i><b>3.2.4</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="data-set-chapter.html"><a href="data-set-chapter.html#idata-set"><i class="fa fa-check"></i><b>3.3</b> Individual data sets (<code>idata</code>)</a><ul>
+<li class="chapter" data-level="3.3" data-path="data-set-chapter.html"><a href="data-set-chapter.html#idata-set"><i class="fa fa-check"></i><b>3.3</b> Individual data sets (<code>idata</code>)</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="data-set-chapter.html"><a href="data-set-chapter.html#use-case"><i class="fa fa-check"></i><b>3.3.1</b> Use case</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="data-set-chapter.html"><a href="data-set-chapter.html#numeric-only"><i class="fa fa-check"></i><b>3.4</b> Numeric data only</a></li>
 <li class="chapter" data-level="3.5" data-path="data-set-chapter.html"><a href="data-set-chapter.html#valid_data_set"><i class="fa fa-check"></i><b>3.5</b> Data set validation</a></li>
 <li class="chapter" data-level="3.6" data-path="data-set-chapter.html"><a href="data-set-chapter.html#pred-data"><i class="fa fa-check"></i><b>3.6</b> Data sets for use with <code>$PRED</code></a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>4</b> Simulated output</a><ul>
+<li class="chapter" data-level="4" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>4</b> Simulated output</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="simulated-output.html"><a href="simulated-output.html#coercion-methods"><i class="fa fa-check"></i><b>4.1</b> Coercion methods</a></li>
 <li class="chapter" data-level="4.2" data-path="simulated-output.html"><a href="simulated-output.html#query-methods"><i class="fa fa-check"></i><b>4.2</b> Query methods</a></li>
 <li class="chapter" data-level="4.3" data-path="simulated-output.html"><a href="simulated-output.html#methods-for-dplyr-verbs"><i class="fa fa-check"></i><b>4.3</b> Methods for <code>dplyr</code> verbs</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="section-sequence.html"><a href="section-sequence.html"><i class="fa fa-check"></i><b>5</b> Simulation sequence</a><ul>
+<li class="chapter" data-level="5" data-path="section-sequence.html"><a href="section-sequence.html"><i class="fa fa-check"></i><b>5</b> Simulation sequence</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="section-sequence.html"><a href="section-sequence.html#functions-to-call"><i class="fa fa-check"></i><b>5.1</b> Functions to call</a></li>
 <li class="chapter" data-level="5.2" data-path="section-sequence.html"><a href="section-sequence.html#problem-initiation"><i class="fa fa-check"></i><b>5.2</b> Problem initiation</a></li>
 <li class="chapter" data-level="5.3" data-path="section-sequence.html"><a href="section-sequence.html#subject-initiation"><i class="fa fa-check"></i><b>5.3</b> Subject initiation</a></li>
 <li class="chapter" data-level="5.4" data-path="section-sequence.html"><a href="section-sequence.html#sequence-for-a-single-record"><i class="fa fa-check"></i><b>5.4</b> Sequence for a single record</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="steady-state.html"><a href="steady-state.html"><i class="fa fa-check"></i><b>6</b> Steady state</a><ul>
-<li class="chapter" data-level="6.1" data-path="index.html"><a href="index.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a><ul>
+<li class="chapter" data-level="6" data-path="steady-state.html"><a href="steady-state.html"><i class="fa fa-check"></i><b>6</b> Steady state</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="steady-state.html"><a href="steady-state.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="steady-state.html"><a href="steady-state.html#intermittent-doses"><i class="fa fa-check"></i><b>6.1.1</b> Intermittent doses</a></li>
 <li class="chapter" data-level="6.1.2" data-path="steady-state.html"><a href="steady-state.html#continuous-infusion"><i class="fa fa-check"></i><b>6.1.2</b> Continuous infusion</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="steady-state.html"><a href="steady-state.html#advance-to-ss"><i class="fa fa-check"></i><b>6.2</b> Advance to SS</a></li>
-<li class="chapter" data-level="6.3" data-path="steady-state.html"><a href="steady-state.html#control-advance-to-ss"><i class="fa fa-check"></i><b>6.3</b> Control advance to SS</a><ul>
+<li class="chapter" data-level="6.3" data-path="steady-state.html"><a href="steady-state.html#control-advance-to-ss"><i class="fa fa-check"></i><b>6.3</b> Control advance to SS</a>
+<ul>
 <li class="chapter" data-level="6.3.1" data-path="steady-state.html"><a href="steady-state.html#tolerances-for-ss"><i class="fa fa-check"></i><b>6.3.1</b> Tolerances for SS</a></li>
 <li class="chapter" data-level="6.3.2" data-path="steady-state.html"><a href="steady-state.html#max-dose-number"><i class="fa fa-check"></i><b>6.3.2</b> Max dose number</a></li>
 <li class="chapter" data-level="6.3.3" data-path="steady-state.html"><a href="steady-state.html#include-exclude-compartments-for-ss"><i class="fa fa-check"></i><b>6.3.3</b> Include / exclude compartments for SS</a></li>
 <li class="chapter" data-level="6.3.4" data-path="steady-state.html"><a href="steady-state.html#ss_advance-flag"><i class="fa fa-check"></i><b>6.3.4</b> SS_ADVANCE flag</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="topics.html"><a href="topics.html"><i class="fa fa-check"></i><b>7</b> Topics</a><ul>
+<li class="chapter" data-level="7" data-path="topics.html"><a href="topics.html"><i class="fa fa-check"></i><b>7</b> Topics</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="topics.html"><a href="topics.html#topic-annotated"><i class="fa fa-check"></i><b>7.1</b> Annotated model specification</a></li>
-<li class="chapter" data-level="7.2" data-path="topics.html"><a href="topics.html#topic-init"><i class="fa fa-check"></i><b>7.2</b> Set initial conditions</a><ul>
+<li class="chapter" data-level="7.2" data-path="topics.html"><a href="topics.html#topic-init"><i class="fa fa-check"></i><b>7.2</b> Set initial conditions</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="topics.html"><a href="topics.html#summary"><i class="fa fa-check"></i><b>7.2.1</b> Summary</a></li>
 <li class="chapter" data-level="7.2.2" data-path="topics.html"><a href="topics.html#make-a-model-only-to-examine-init-behavior"><i class="fa fa-check"></i><b>7.2.2</b> Make a model only to examine <code>init</code> behavior</a></li>
 <li class="chapter" data-level="7.2.3" data-path="topics.html"><a href="topics.html#example-pkpd-model-with-initial-condition"><i class="fa fa-check"></i><b>7.2.3</b> Example PK/PD model with initial condition</a></li>
 <li class="chapter" data-level="7.2.4" data-path="topics.html"><a href="topics.html#remember-calling-init-will-let-you-check-to-see-what-is-going-on"><i class="fa fa-check"></i><b>7.2.4</b> Remember: calling <code>init</code> will let you check to see what is going on</a></li>
 <li class="chapter" data-level="7.2.5" data-path="topics.html"><a href="topics.html#set-initial-conditions-via-idata"><i class="fa fa-check"></i><b>7.2.5</b> Set initial conditions via <code>idata</code></a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="topics.html"><a href="topics.html#topic-parameter-update"><i class="fa fa-check"></i><b>7.3</b> Updating parameters</a><ul>
+<li class="chapter" data-level="7.3" data-path="topics.html"><a href="topics.html#topic-parameter-update"><i class="fa fa-check"></i><b>7.3</b> Updating parameters</a>
+<ul>
 <li class="chapter" data-level="7.3.1" data-path="topics.html"><a href="topics.html#parameter-update-hierarchy"><i class="fa fa-check"></i><b>7.3.1</b> Parameter update hierarchy</a></li>
 <li class="chapter" data-level="7.3.2" data-path="topics.html"><a href="topics.html#topic-parameter-update-base"><i class="fa fa-check"></i><b>7.3.2</b> Updating the base parameter list</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="topics.html"><a href="topics.html#topic-tgrid"><i class="fa fa-check"></i><b>7.4</b> Time grid objects</a></li>
 <li class="chapter" data-level="7.5" data-path="topics.html"><a href="topics.html#topic-designs"><i class="fa fa-check"></i><b>7.5</b> Individualized sampling designs</a></li>
-<li class="chapter" data-level="7.6" data-path="topics.html"><a href="topics.html#some-helpful-c"><i class="fa fa-check"></i><b>7.6</b> Some helpful <code>C++</code></a><ul>
+<li class="chapter" data-level="7.6" data-path="topics.html"><a href="topics.html#some-helpful-c"><i class="fa fa-check"></i><b>7.6</b> Some helpful <code>C++</code></a>
+<ul>
 <li class="chapter" data-level="7.6.1" data-path="topics.html"><a href="topics.html#semi-colons"><i class="fa fa-check"></i><b>7.6.1</b> Semi-colons</a></li>
 <li class="chapter" data-level="7.6.2" data-path="topics.html"><a href="topics.html#if-else"><i class="fa fa-check"></i><b>7.6.2</b> if-else</a></li>
-<li class="chapter" data-level="7.6.3" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>7.6.3</b> Functions</a></li>
+<li class="chapter" data-level="7.6.3" data-path="topics.html"><a href="topics.html#functions-1"><i class="fa fa-check"></i><b>7.6.3</b> Functions</a></li>
 <li class="chapter" data-level="7.6.4" data-path="topics.html"><a href="topics.html#integer-division"><i class="fa fa-check"></i><b>7.6.4</b> Integer division</a></li>
 </ul></li>
 <li class="chapter" data-level="7.7" data-path="topics.html"><a href="topics.html#resimulate-eta-and-eps"><i class="fa fa-check"></i><b>7.7</b> Resimulate <code>ETA</code> and <code>EPS</code></a></li>
-<li class="chapter" data-level="7.8" data-path="topics.html"><a href="topics.html#topic-matrix-update"><i class="fa fa-check"></i><b>7.8</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a><ul>
+<li class="chapter" data-level="7.8" data-path="topics.html"><a href="topics.html#topic-matrix-update"><i class="fa fa-check"></i><b>7.8</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
+<ul>
 <li class="chapter" data-level="7.8.1" data-path="topics.html"><a href="topics.html#matrix-helper-functions"><i class="fa fa-check"></i><b>7.8.1</b> Matrix helper functions</a></li>
 <li class="chapter" data-level="7.8.2" data-path="topics.html"><a href="topics.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>7.8.2</b> Fill a matrix with zeros</a></li>
 <li class="chapter" data-level="7.8.3" data-path="topics.html"><a href="topics.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>7.8.3</b> Example: unnamed matrix</a></li>
@@ -318,14 +345,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-set-chapter" class="section level1">
+<div id="data-set-chapter" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Input data sets</h1>
 <p>Input data sets are used in mrgsolve to allow the user to specify
 interventions and input data items.</p>
 <p>Please see the mrgsolve help topic <code>?exdatasets</code> for examples of all of the
 data sets discussed in this chapter. The example data sets are embedded in the
 mrgsolve package and may be used at any time.</p>
-<div id="datasets" class="section level2">
+<div id="datasets" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Overview</h2>
 <p>Data sets are the primary mechanism for establishing the scope of your
 simulations in <code>mrsolve</code>, including individuals, interventions, observation
@@ -337,7 +364,7 @@ simulation proceeds. This process is of key importance when planning and
 executing complex simulations and is further discussed in section
 <a href="topics.html#topic-parameter-update">7.3</a>.</p>
 </div>
-<div id="data-set" class="section level2">
+<div id="data-set" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Event data sets (<code>data</code>)</h2>
 <p>Event data sets are entered as <code>data.frame</code>, with one event per row. Events may
 be observations, doses, or other type events. In mrgsolve documentation, we
@@ -346,11 +373,11 @@ used to associate the data set with the model object prior to simulation).</p>
 <p>Event data sets have several special column names that mrgsolve is always
 aware of:</p>
 <ul>
-<li><code>ID</code> the subject id. This id does not need to be unique in the <code>data_set</code>:
+<li><p><code>ID</code> the subject id. This id does not need to be unique in the <code>data_set</code>:
 mrgsolve detects an new individual when the current value of <code>ID</code> is different
 from the immediate preceding value of <code>ID</code>. However, we always recommend using
-unique <code>ID</code>.</li>
-<li><code>time</code> or <code>TIME</code>: states the time of the data record</li>
+unique <code>ID</code>.</p></li>
+<li><p><code>time</code> or <code>TIME</code>: states the time of the data record</p></li>
 <li><p><code>evid</code> or <code>EVID</code>: the event id indicator. <code>evid</code> can take the values:</p>
 <ul>
 <li><strong>0</strong> = observation record</li>
@@ -360,30 +387,30 @@ unique <code>ID</code>.</li>
 <li><strong>4</strong> = reset and dose</li>
 <li><strong>8</strong> = replace the amount in the compartment with <code>amt</code></li>
 </ul></li>
-<li><code>amt</code> or <code>AMT</code>: the dose amount (if <code>evid==1</code>)</li>
-<li><code>cmt</code> or <code>CMT</code>: the dosing compartment number. This may also be a character
+<li><p><code>amt</code> or <code>AMT</code>: the dose amount (if <code>evid==1</code>)</p></li>
+<li><p><code>cmt</code> or <code>CMT</code>: the dosing compartment number. This may also be a character
 value naming the compartment name. The compartment number must be consistent
 with the number of compartments in the model for dosing records (<code>evid</code>==1).<br />
 For observation records, a <code>cmt</code> value of 0 is acceptable. Use a negative
 compartment number with <code>evid</code> 2 to turn a compartment off.<br />
-</li>
-<li><code>rate</code> or <code>RATE</code>: if non-zero and <code>evid=1</code> or <code>evid=4</code>, implements a
+</p></li>
+<li><p><code>rate</code> or <code>RATE</code>: if non-zero and <code>evid=1</code> or <code>evid=4</code>, implements a
 zero-order infusion of duration <code>F_CMT*amt/rate</code>, where <code>F_CMT</code> is the
 bioavailability fraction for the dosing compartment. Use <code>rate = -1</code> to model
 the infusion rate and <code>rate = -2</code> to model the infusion duration, both in
 <code>$MAIN</code> (see sections <a href="model-specification.html#block-main">2.2.6</a>, <a href="model-specification.html#spec-f">2.3.22</a>,<a href="model-specification.html#spec-r">2.3.24</a>,
-<a href="model-specification.html#spec-d">2.3.25</a>).</li>
-<li><code>ii</code> or <code>II</code>: inter-dose interval; <code>ii=24</code> means daily dosing when the model
-time unit is hours</li>
-<li><code>addl</code> or <code>ADDL</code>: additional doses; a non-zero value in <code>addl</code> requires
-non-zero <code>ii</code> on the same record</li>
+<a href="model-specification.html#spec-d">2.3.25</a>).</p></li>
+<li><p><code>ii</code> or <code>II</code>: inter-dose interval; <code>ii=24</code> means daily dosing when the model
+time unit is hours</p></li>
+<li><p><code>addl</code> or <code>ADDL</code>: additional doses; a non-zero value in <code>addl</code> requires
+non-zero <code>ii</code> on the same record</p></li>
 <li><p><code>ss</code> or <code>SS</code> steady state indicator; use 1 to implement steady-state dosing; 0
 otherwise. mrgsolve also recognizes dosing records where <code>ss=2</code>. This allows
 combination of different steady state dosing regimens under linear kinetics
 (e.g. 10 mg QAM and 20 mg QPM daily to steady state).</p></li>
 </ul>
 <p>The column names in the preceding list were written either as lower case form
-(e.g. <code>amt</code>) or upper case form (e.g. <code>AMT</code>). Either may be used, however
+(e.g. <code>amt</code>) or upper case form (e.g. <code>AMT</code>). Either may be used, however
 the data set will be checked for consistency of usage. An error will be
 issued in case a mixture of lower and upper case names are found.</p>
 <p>In addition to these special column names, mrgsolve will recognize columns in
@@ -392,7 +419,7 @@ issued in case a mixture of lower and upper case names are found.</p>
 names match up, it will update the values of those matching names based on what
 it finds as it moves through the data set (see section
 <a href="topics.html#topic-parameter-update">7.3</a>).</p>
-<div id="two-types-of-data_set" class="section level3">
+<div id="two-types-of-data_set" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Two types of <code>data_set</code></h3>
 <p>mrgsolve distinguishes between two types of data sets: data sets that have <em>at
 least one observation record</em> (<code>evid=0</code>) and data sets that have <em>no records
@@ -415,8 +442,8 @@ Use a condensed data set when you want a uniform set of sampling times for all
 subjects in the data set.</li>
 </ul>
 <p><strong>Example of condensed data set</strong></p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="kw">data</span>(extran1, <span class="dt">package =</span> <span class="st">&quot;mrgsolve&quot;</span>)</a>
-<a class="sourceLine" id="cb104-2" data-line-number="2">extran1</a></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="data-set-chapter.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(extran1, <span class="at">package =</span> <span class="st">&quot;mrgsolve&quot;</span>)</span>
+<span id="cb106-2"><a href="data-set-chapter.html#cb106-2" aria-hidden="true" tabindex="-1"></a>extran1</span></code></pre></div>
 <pre><code>.   ID  amt cmt time addl ii rate evid
 . 1  1 1000   1    0    3 24    0    1
 . 2  2 1000   2    0    0  0   20    1
@@ -429,9 +456,9 @@ subjects in the data set.</li>
 . 9  5 5000   1   24    0  0   60    1</code></pre>
 <p>See <code>?exdatasets</code> in the <code>R</code> help system after loading mrgsolve.</p>
 <p><strong>Example of full data set</strong></p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="kw">data</span>(exTheoph, <span class="dt">package =</span> <span class="st">&quot;mrgsolve&quot;</span>)</a>
-<a class="sourceLine" id="cb106-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb106-3" data-line-number="3"><span class="kw">head</span>(exTheoph)</a></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="data-set-chapter.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(exTheoph, <span class="at">package =</span> <span class="st">&quot;mrgsolve&quot;</span>)</span>
+<span id="cb108-2"><a href="data-set-chapter.html#cb108-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-3"><a href="data-set-chapter.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(exTheoph)</span></code></pre></div>
 <pre><code>.   ID   WT Dose time  conc cmt  amt evid
 . 1  1 79.6 4.02 0.00  0.00   1 4.02    1
 . 2  1 79.6 4.02 0.25  2.84   0 0.00    0
@@ -447,16 +474,16 @@ augment those observations with a regular sequence of times (for example, to
 make a smooth profile on a plot). In that case, you can set <code>obsaug  = TRUE</code>
 when calling <code>mrgsim</code>.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()</a>
-<a class="sourceLine" id="cb108-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb108-3" data-line-number="3">out &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb108-4" data-line-number="4"><span class="st">  </span>mod <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb108-5" data-line-number="5"><span class="st">    </span><span class="kw">data_set</span>(exTheoph, ID<span class="op">==</span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb108-6" data-line-number="6"><span class="st">    </span><span class="kw">carry.out</span>(a.u.g) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb108-7" data-line-number="7"><span class="st">    </span>obsaug <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb108-8" data-line-number="8"><span class="st">    </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="dv">24</span>, <span class="dt">delta=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb108-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb108-10" data-line-number="10">out</a></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="data-set-chapter.html#cb110-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
+<span id="cb110-2"><a href="data-set-chapter.html#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="data-set-chapter.html#cb110-3" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> </span>
+<span id="cb110-4"><a href="data-set-chapter.html#cb110-4" aria-hidden="true" tabindex="-1"></a>  mod <span class="sc">%&gt;%</span></span>
+<span id="cb110-5"><a href="data-set-chapter.html#cb110-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data_set</span>(exTheoph, ID<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb110-6"><a href="data-set-chapter.html#cb110-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">carry.out</span>(a.u.g) <span class="sc">%&gt;%</span></span>
+<span id="cb110-7"><a href="data-set-chapter.html#cb110-7" aria-hidden="true" tabindex="-1"></a>    obsaug <span class="sc">%&gt;%</span></span>
+<span id="cb110-8"><a href="data-set-chapter.html#cb110-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mrgsim</span>(<span class="at">end=</span><span class="dv">24</span>, <span class="at">delta=</span><span class="dv">1</span>)</span>
+<span id="cb110-9"><a href="data-set-chapter.html#cb110-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-10"><a href="data-set-chapter.html#cb110-10" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div>
 <pre><code>. Model:  housemodel 
 . Dim:    36 x 8 
 . Time:   0 to 24.37 
@@ -470,7 +497,7 @@ when calling <code>mrgsim</code>.</p>
 . 6:   1 1.12     0 1.0484 2.875 49.57 0.12643 0.12643
 . 7:   1 2.00     1 0.3647 3.422 49.34 0.15048 0.15048
 . 8:   1 2.02     0 0.3560 3.428 49.33 0.15072 0.15072</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1">out <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(time) <span class="op">%&gt;%</span><span class="st"> </span>unlist <span class="op">%&gt;%</span><span class="st"> </span>unname</a></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="data-set-chapter.html#cb112-1" aria-hidden="true" tabindex="-1"></a>out <span class="sc">%&gt;%</span> <span class="fu">select</span>(time) <span class="sc">%&gt;%</span> unlist <span class="sc">%&gt;%</span> unname</span></code></pre></div>
 <pre><code>.  [1]  0.00  0.00  0.25  0.57  1.00  1.12  2.00  2.02  3.00  3.82  4.00  5.00
 . [13]  5.10  6.00  7.00  7.03  8.00  9.00  9.05 10.00 11.00 12.00 12.12 13.00
 . [25] 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 24.37</code></pre>
@@ -479,49 +506,49 @@ simulation time grid. We can optionally request an indicator called <code>a.u.g<
 appear in the output that takes value of 1 for augmented observations and 0 for
 observations from the data set.</p>
 </div>
-<div id="sorting-requirements" class="section level3">
+<div id="sorting-requirements" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Sorting requirements</h3>
 <p>The <code>ID</code>s in the data set can appear in any order. However, an error will be
 generated if <code>time</code> on any record is less that <code>time</code> on the previous record
 within any <code>ID</code>.</p>
 </div>
-<div id="creating-data-sets" class="section level3">
+<div id="creating-data-sets" class="section level3" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> Creating data sets</h3>
 <p>The <code>expand.ev</code> function is provided by mrgsolve to help in creating data sets
 of a certain style. But any <code>R</code> code that produces a valid data set is fine to
 use.</p>
 </div>
-<div id="example" class="section level3">
+<div id="example" class="section level3" number="3.2.4">
 <h3><span class="header-section-number">3.2.4</span> Example</h3>
 <p>To create a data set of 3 people each receiving <strong>250 mg every 8 hours for 12 total doses</strong>:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">data &lt;-<span class="st"> </span><span class="kw">expand.ev</span>(<span class="dt">ID=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">amt=</span><span class="dv">250</span>, <span class="dt">ii=</span><span class="dv">8</span>, <span class="dt">addl=</span><span class="dv">11</span>)</a>
-<a class="sourceLine" id="cb112-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb112-3" data-line-number="3">data</a></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="data-set-chapter.html#cb114-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">expand.ev</span>(<span class="at">ID=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">amt=</span><span class="dv">250</span>, <span class="at">ii=</span><span class="dv">8</span>, <span class="at">addl=</span><span class="dv">11</span>)</span>
+<span id="cb114-2"><a href="data-set-chapter.html#cb114-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-3"><a href="data-set-chapter.html#cb114-3" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
 <pre><code>.   ID time amt ii addl cmt evid
 . 1  1    0 250  8   11   1    1
 . 2  2    0 250  8   11   1    1
 . 3  3    0 250  8   11   1    1</code></pre>
 <p>Notice that <code>expand.ev</code> assumes that <code>time</code> is 0 and <code>cmt</code> is 1. To dose as a
 2-hour infusion into the second compartment use:</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1">data &lt;-<span class="st"> </span><span class="kw">expand.ev</span>(<span class="dt">ID=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">amt=</span><span class="dv">250</span>, <span class="dt">rate=</span><span class="dv">125</span>, <span class="dt">ii=</span><span class="dv">8</span>, <span class="dt">addl=</span><span class="dv">11</span>, <span class="dt">cmt=</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb114-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb114-3" data-line-number="3">data</a></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="data-set-chapter.html#cb116-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">expand.ev</span>(<span class="at">ID=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">amt=</span><span class="dv">250</span>, <span class="at">rate=</span><span class="dv">125</span>, <span class="at">ii=</span><span class="dv">8</span>, <span class="at">addl=</span><span class="dv">11</span>, <span class="at">cmt=</span><span class="dv">2</span>)</span>
+<span id="cb116-2"><a href="data-set-chapter.html#cb116-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-3"><a href="data-set-chapter.html#cb116-3" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
 <pre><code>.   ID time amt rate ii addl cmt evid
 . 1  1    0 250  125  8   11   2    1
 . 2  2    0 250  125  8   11   2    1
 . 3  3    0 250  125  8   11   2    1</code></pre>
 <p>Use <code>data_set</code> to pass the data into the problem.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()</a>
-<a class="sourceLine" id="cb116-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb116-3" data-line-number="3">mod <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb116-4" data-line-number="4"><span class="st">  </span><span class="kw">data_set</span>(data) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb116-5" data-line-number="5"><span class="st">  </span><span class="kw">mrgsim</span>(<span class="dt">end=</span><span class="dv">240</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb116-6" data-line-number="6"><span class="st">  </span><span class="kw">plot</span>(CP<span class="op">~</span>time<span class="op">|</span><span class="kw">factor</span>(ID))</a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="data-set-chapter.html#cb118-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
+<span id="cb118-2"><a href="data-set-chapter.html#cb118-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-3"><a href="data-set-chapter.html#cb118-3" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span></span>
+<span id="cb118-4"><a href="data-set-chapter.html#cb118-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_set</span>(data) <span class="sc">%&gt;%</span></span>
+<span id="cb118-5"><a href="data-set-chapter.html#cb118-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrgsim</span>(<span class="at">end=</span><span class="dv">240</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb118-6"><a href="data-set-chapter.html#cb118-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(CP<span class="sc">~</span>time<span class="sc">|</span><span class="fu">factor</span>(ID))</span></code></pre></div>
 <p><img src="user-guide_files/figure-html/data_set-1-1.png" width="672" /></p>
 </div>
 </div>
-<div id="idata-set" class="section level2">
+<div id="idata-set" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Individual data sets (<code>idata</code>)</h2>
 <p>Individual data sets carry individual-level data. This individual data is used
 in several different ways:</p>
@@ -547,9 +574,9 @@ mrgsolve documentation, we refer to individual data sets <code>idata</code> or
 <code>idata_set</code> to distinguish them from event data sets (see section
 <a href="data-set-chapter.html#data-set">3.2</a>).</p>
 <p>An <code>idata_set</code> looks like this:</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="kw">data</span>(exidata)</a>
-<a class="sourceLine" id="cb117-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb117-3" data-line-number="3">exidata</a></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="data-set-chapter.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(exidata)</span>
+<span id="cb119-2"><a href="data-set-chapter.html#cb119-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-3"><a href="data-set-chapter.html#cb119-3" aria-hidden="true" tabindex="-1"></a>exidata</span></code></pre></div>
 <pre><code>.    ID    CL    VC     KA  KOUT  IC50 FOO
 . 1   1 1.050 47.80 0.8390 2.450 1.280   4
 . 2   2 0.730 30.10 0.0684 2.510 1.840   6
@@ -566,7 +593,7 @@ column connects the data in each row to the data in a <code>data_set</code>, whi
 requires an <code>ID</code> column.</p>
 <p>The <code>ID</code> column is the only required column name in <code>idata_set</code> and <code>ID</code> should
 always be a unique identifier for that row.</p>
-<div id="use-case" class="section level3">
+<div id="use-case" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Use case</h3>
 <p><code>idata_set</code> is usually helpful for implementing a batch of simulations when a
 <code>data_set</code> is not used. The batch may be as a sensitivity analysis or for
@@ -574,35 +601,35 @@ population simulation. Usually, an events object is used with <code>idata</code>
 is not required.</p>
 <p>Use the <code>idata_set</code> function to pass the data set into the problem.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">mod &lt;-<span class="st"> </span>mrgsolve<span class="op">:::</span><span class="kw">house</span>()</a>
-<a class="sourceLine" id="cb119-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb119-3" data-line-number="3">mod <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb119-4" data-line-number="4"><span class="st">  </span><span class="kw">idata_set</span>(exidata) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb119-5" data-line-number="5"><span class="st">  </span><span class="kw">ev</span>(<span class="dt">amt=</span><span class="dv">100</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb119-6" data-line-number="6"><span class="st">  </span>mrgsim <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="data-set-chapter.html#cb121-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
+<span id="cb121-2"><a href="data-set-chapter.html#cb121-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-3"><a href="data-set-chapter.html#cb121-3" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span></span>
+<span id="cb121-4"><a href="data-set-chapter.html#cb121-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">idata_set</span>(exidata) <span class="sc">%&gt;%</span></span>
+<span id="cb121-5"><a href="data-set-chapter.html#cb121-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb121-6"><a href="data-set-chapter.html#cb121-6" aria-hidden="true" tabindex="-1"></a>  mrgsim <span class="sc">%&gt;%</span> plot</span></code></pre></div>
 <p><img src="user-guide_files/figure-html/idata_set-1-1.png" width="672" /></p>
 <p>Because there were 10 subjects in the <code>idata_set</code>, we get 10 profiles in the
 output. Each “individual” or “unit” received the same 100 mg dose. We would
 use a <code>data_set</code> to assign different doses to different individuals.</p>
 </div>
 </div>
-<div id="numeric-only" class="section level2">
+<div id="numeric-only" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Numeric data only</h2>
 <p>The <code>data.frame</code> holding the <code>data_set</code> or <code>idata_set</code> may have any type of data
 in its columns. However, only numeric data can actually get passed into the
 simulation engine. mrgsolve will automatically look for non-numeric columns
 and drop them from the <code>data_set</code> or <code>idata_set</code> with a warning.</p>
 </div>
-<div id="valid_data_set" class="section level2">
+<div id="valid_data_set" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Data set validation</h2>
 <p>A the time of simulation, mrgsolve will validate the input data set, removing
 character column, checking for missing values in parameter columns, checking
 compartment numbers etc.</p>
 <p>Users can pre-validate the data set so that this does not need to happen at
 run time.</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="kw">data</span>(exTheoph)</a>
-<a class="sourceLine" id="cb120-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb120-3" data-line-number="3"><span class="kw">head</span>(exTheoph)</a></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="data-set-chapter.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(exTheoph)</span>
+<span id="cb122-2"><a href="data-set-chapter.html#cb122-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-3"><a href="data-set-chapter.html#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(exTheoph)</span></code></pre></div>
 <pre><code>.   ID   WT Dose time  conc cmt  amt evid
 . 1  1 79.6 4.02 0.00  0.00   1 4.02    1
 . 2  1 79.6 4.02 0.25  2.84   0 0.00    0
@@ -610,11 +637,11 @@ run time.</p>
 . 4  1 79.6 4.02 1.12 10.50   0 0.00    0
 . 5  1 79.6 4.02 2.02  9.66   0 0.00    0
 . 6  1 79.6 4.02 3.82  8.58   0 0.00    0</code></pre>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">modlib</span>(<span class="st">&quot;pk1&quot;</span>)</a></code></pre></div>
-<pre><code>. Loading model from cache.</code></pre>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">valid &lt;-<span class="st"> </span><span class="kw">valid_data_set</span>(exTheoph,mod)</a>
-<a class="sourceLine" id="cb124-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb124-3" data-line-number="3"><span class="kw">str</span>(valid)</a></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="data-set-chapter.html#cb124-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;pk1&quot;</span>)</span></code></pre></div>
+<pre><code>. Building pk1 ... done.</code></pre>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="data-set-chapter.html#cb126-1" aria-hidden="true" tabindex="-1"></a>valid <span class="ot">&lt;-</span> <span class="fu">valid_data_set</span>(exTheoph,mod)</span>
+<span id="cb126-2"><a href="data-set-chapter.html#cb126-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-3"><a href="data-set-chapter.html#cb126-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(valid)</span></code></pre></div>
 <pre><code>.  &#39;valid_data_set&#39; num [1:132, 1:9] 1 1 1 1 1 1 1 1 1 1 ...
 .  - attr(*, &quot;dimnames&quot;)=List of 2
 .   ..$ : chr [1:132] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
@@ -623,7 +650,7 @@ run time.</p>
 simulations on the same data set, but is unlikely to provide a meaningful
 speed-up for a single simulation or a small number of simulations.</p>
 </div>
-<div id="pred-data" class="section level2">
+<div id="pred-data" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Data sets for use with <code>$PRED</code></h2>
 <p>Because there are no compartments involved, there are relaxed data set
 requirements for models that utilize <code>$PRED</code>.</p>
@@ -687,7 +714,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["user-guide.pdf"],
+"download": null,
 "toc": {
 "collapse": "none",
 "sharing": false

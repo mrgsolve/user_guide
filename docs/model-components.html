@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Model components | mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Model components | mrgsolve User Guide" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2020-06-29" />
+<meta name="date" content="2021-04-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="model-specification.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -53,25 +54,26 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +82,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -132,15 +134,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="1" data-path="model-components.html"><a href="model-components.html"><i class="fa fa-check"></i><b>1</b> Model components</a><ul>
-<li class="chapter" data-level="1.1" data-path="model-components.html"><a href="model-components.html#component-param"><i class="fa fa-check"></i><b>1.1</b> Parameter list</a><ul>
+<li class="chapter" data-level="1" data-path="model-components.html"><a href="model-components.html"><i class="fa fa-check"></i><b>1</b> Model components</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="model-components.html"><a href="model-components.html#component-param"><i class="fa fa-check"></i><b>1.1</b> Parameter list</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="model-components.html"><a href="model-components.html#central-role-of-parameters-in-planning-simulations"><i class="fa fa-check"></i><b>1.1.1</b> Central role of parameters in planning simulations</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="model-components.html"><a href="model-components.html#component-init"><i class="fa fa-check"></i><b>1.2</b> Compartment list</a></li>
-<li class="chapter" data-level="1.3" data-path="model-components.html"><a href="model-components.html#component-stime"><i class="fa fa-check"></i><b>1.3</b> Simulation time grid</a><ul>
+<li class="chapter" data-level="1.3" data-path="model-components.html"><a href="model-components.html#component-stime"><i class="fa fa-check"></i><b>1.3</b> Simulation time grid</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="model-components.html"><a href="model-components.html#component-tgrid"><i class="fa fa-check"></i><b>1.3.1</b> <code>tgrid</code> objects</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="model-components.html"><a href="model-components.html#solver-settings"><i class="fa fa-check"></i><b>1.4</b> Solver settings</a><ul>
+<li class="chapter" data-level="1.4" data-path="model-components.html"><a href="model-components.html#solver-settings"><i class="fa fa-check"></i><b>1.4</b> Solver settings</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="model-components.html"><a href="model-components.html#atol"><i class="fa fa-check"></i><b>1.4.1</b> <code>atol</code></a></li>
 <li class="chapter" data-level="1.4.2" data-path="model-components.html"><a href="model-components.html#rtol"><i class="fa fa-check"></i><b>1.4.2</b> <code>rtol</code></a></li>
 <li class="chapter" data-level="1.4.3" data-path="model-components.html"><a href="model-components.html#maxsteps"><i class="fa fa-check"></i><b>1.4.3</b> <code>maxsteps</code></a></li>
@@ -149,23 +155,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4.6" data-path="model-components.html"><a href="model-components.html#ixpr"><i class="fa fa-check"></i><b>1.4.6</b> <code>ixpr</code></a></li>
 <li class="chapter" data-level="1.4.7" data-path="model-components.html"><a href="model-components.html#mxhnil"><i class="fa fa-check"></i><b>1.4.7</b> <code>mxhnil</code></a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>1.5</b> Functions</a><ul>
+<li class="chapter" data-level="1.5" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>1.5</b> Functions</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="model-components.html"><a href="model-components.html#the-preamble-function"><i class="fa fa-check"></i><b>1.5.1</b> The <code>$PREAMBLE</code> function</a></li>
 <li class="chapter" data-level="1.5.2" data-path="model-components.html"><a href="model-components.html#the-main-function"><i class="fa fa-check"></i><b>1.5.2</b> The <code>$MAIN</code> function</a></li>
 <li class="chapter" data-level="1.5.3" data-path="model-components.html"><a href="model-components.html#the-ode-function"><i class="fa fa-check"></i><b>1.5.3</b> The <code>$ODE</code> function</a></li>
 <li class="chapter" data-level="1.5.4" data-path="model-components.html"><a href="model-components.html#the-table-function"><i class="fa fa-check"></i><b>1.5.4</b> The <code>$TABLE</code> function</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="model-components.html"><a href="model-components.html#random-effect-variances"><i class="fa fa-check"></i><b>1.6</b> Random effect variances</a><ul>
+<li class="chapter" data-level="1.6" data-path="model-components.html"><a href="model-components.html#random-effect-variances"><i class="fa fa-check"></i><b>1.6</b> Random effect variances</a>
+<ul>
 <li class="chapter" data-level="1.6.1" data-path="model-components.html"><a href="model-components.html#omega"><i class="fa fa-check"></i><b>1.6.1</b> <code>OMEGA</code></a></li>
 <li class="chapter" data-level="1.6.2" data-path="model-components.html"><a href="model-components.html#sigma"><i class="fa fa-check"></i><b>1.6.2</b> <code>SIGMA</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="model-specification.html"><a href="model-specification.html"><i class="fa fa-check"></i><b>2</b> Model specification</a><ul>
-<li class="chapter" data-level="2.1" data-path="model-specification.html"><a href="model-specification.html#how-where-to-write-a-model"><i class="fa fa-check"></i><b>2.1</b> How / where to write a model</a><ul>
+<li class="chapter" data-level="2" data-path="model-specification.html"><a href="model-specification.html"><i class="fa fa-check"></i><b>2</b> Model specification</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="model-specification.html"><a href="model-specification.html#how-where-to-write-a-model"><i class="fa fa-check"></i><b>2.1</b> How / where to write a model</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="model-specification.html"><a href="model-specification.html#spec-separate-file"><i class="fa fa-check"></i><b>2.1.1</b> Separate file</a></li>
 <li class="chapter" data-level="2.1.2" data-path="model-specification.html"><a href="model-specification.html#spec-inline"><i class="fa fa-check"></i><b>2.1.2</b> Inline / <code>code</code>  </a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="model-specification.html"><a href="model-specification.html#code-blocks"><i class="fa fa-check"></i><b>2.2</b> Code blocks</a><ul>
+<li class="chapter" data-level="2.2" data-path="model-specification.html"><a href="model-specification.html#code-blocks"><i class="fa fa-check"></i><b>2.2</b> Code blocks</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="model-specification.html"><a href="model-specification.html#about-code-blocks"><i class="fa fa-check"></i><b>2.2.1</b> About code blocks</a></li>
 <li class="chapter" data-level="2.2.2" data-path="model-specification.html"><a href="model-specification.html#block-prob"><i class="fa fa-check"></i><b>2.2.2</b> <code>$PROB</code>  </a></li>
 <li class="chapter" data-level="2.2.3" data-path="model-specification.html"><a href="model-specification.html#block-param"><i class="fa fa-check"></i><b>2.2.3</b> <code>$PARAM</code>  </a></li>
@@ -189,7 +200,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.21" data-path="model-specification.html"><a href="model-specification.html#block-include"><i class="fa fa-check"></i><b>2.2.21</b> <code>$INCLUDE</code>  </a></li>
 <li class="chapter" data-level="2.2.22" data-path="model-specification.html"><a href="model-specification.html#block-env"><i class="fa fa-check"></i><b>2.2.22</b> <code>$ENV</code>  </a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="model-specification.html"><a href="model-specification.html#variables-and-macros"><i class="fa fa-check"></i><b>2.3</b> Variables and Macros</a><ul>
+<li class="chapter" data-level="2.3" data-path="model-specification.html"><a href="model-specification.html#variables-and-macros"><i class="fa fa-check"></i><b>2.3</b> Variables and Macros</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="model-specification.html"><a href="model-specification.html#id"><i class="fa fa-check"></i><b>2.3.1</b> <code>ID</code></a></li>
 <li class="chapter" data-level="2.3.2" data-path="model-specification.html"><a href="model-specification.html#time"><i class="fa fa-check"></i><b>2.3.2</b> <code>TIME</code></a></li>
 <li class="chapter" data-level="2.3.3" data-path="model-specification.html"><a href="model-specification.html#solvertime"><i class="fa fa-check"></i><b>2.3.3</b> <code>SOLVERTIME</code></a></li>
@@ -216,78 +228,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.24" data-path="model-specification.html"><a href="model-specification.html#spec-r"><i class="fa fa-check"></i><b>2.3.24</b> <code>R_CMT</code>  </a></li>
 <li class="chapter" data-level="2.3.25" data-path="model-specification.html"><a href="model-specification.html#spec-d"><i class="fa fa-check"></i><b>2.3.25</b> <code>D_CMT</code>  </a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="model-specification.html"><a href="model-specification.html#new-variables"><i class="fa fa-check"></i><b>2.4</b> Derive new variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="model-specification.html"><a href="model-specification.html#new-variables"><i class="fa fa-check"></i><b>2.4</b> Derive new variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="model-specification.html"><a href="model-specification.html#special-handling-for-double-int-bool"><i class="fa fa-check"></i><b>2.4.1</b> Special handling for <code>double</code>, <code>int</code>, <code>bool</code></a></li>
 <li class="chapter" data-level="2.4.2" data-path="model-specification.html"><a href="model-specification.html#using-other-types-globally"><i class="fa fa-check"></i><b>2.4.2</b> Using other types globally</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="model-specification.html"><a href="model-specification.html#examples"><i class="fa fa-check"></i><b>2.5</b> Examples</a><ul>
+<li class="chapter" data-level="2.5" data-path="model-specification.html"><a href="model-specification.html#examples"><i class="fa fa-check"></i><b>2.5</b> Examples</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="model-specification.html"><a href="model-specification.html#simple-pk-model"><i class="fa fa-check"></i><b>2.5.1</b> Simple PK model</a></li>
 <li class="chapter" data-level="2.5.2" data-path="model-specification.html"><a href="model-specification.html#pkpd-model"><i class="fa fa-check"></i><b>2.5.2</b> PK/PD model</a></li>
 <li class="chapter" data-level="2.5.3" data-path="model-specification.html"><a href="model-specification.html#population-pk-model-with-covariates-and-iov"><i class="fa fa-check"></i><b>2.5.3</b> Population PK model with covariates and IOV</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-set-chapter.html"><a href="data-set-chapter.html"><i class="fa fa-check"></i><b>3</b> Input data sets</a><ul>
+<li class="chapter" data-level="3" data-path="data-set-chapter.html"><a href="data-set-chapter.html"><i class="fa fa-check"></i><b>3</b> Input data sets</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="data-set-chapter.html"><a href="data-set-chapter.html#datasets"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
-<li class="chapter" data-level="3.2" data-path="data-set-chapter.html"><a href="data-set-chapter.html#data-set"><i class="fa fa-check"></i><b>3.2</b> Event data sets (<code>data</code>)</a><ul>
+<li class="chapter" data-level="3.2" data-path="data-set-chapter.html"><a href="data-set-chapter.html#data-set"><i class="fa fa-check"></i><b>3.2</b> Event data sets (<code>data</code>)</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="data-set-chapter.html"><a href="data-set-chapter.html#two-types-of-data_set"><i class="fa fa-check"></i><b>3.2.1</b> Two types of <code>data_set</code></a></li>
 <li class="chapter" data-level="3.2.2" data-path="data-set-chapter.html"><a href="data-set-chapter.html#sorting-requirements"><i class="fa fa-check"></i><b>3.2.2</b> Sorting requirements</a></li>
 <li class="chapter" data-level="3.2.3" data-path="data-set-chapter.html"><a href="data-set-chapter.html#creating-data-sets"><i class="fa fa-check"></i><b>3.2.3</b> Creating data sets</a></li>
 <li class="chapter" data-level="3.2.4" data-path="data-set-chapter.html"><a href="data-set-chapter.html#example"><i class="fa fa-check"></i><b>3.2.4</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="data-set-chapter.html"><a href="data-set-chapter.html#idata-set"><i class="fa fa-check"></i><b>3.3</b> Individual data sets (<code>idata</code>)</a><ul>
+<li class="chapter" data-level="3.3" data-path="data-set-chapter.html"><a href="data-set-chapter.html#idata-set"><i class="fa fa-check"></i><b>3.3</b> Individual data sets (<code>idata</code>)</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="data-set-chapter.html"><a href="data-set-chapter.html#use-case"><i class="fa fa-check"></i><b>3.3.1</b> Use case</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="data-set-chapter.html"><a href="data-set-chapter.html#numeric-only"><i class="fa fa-check"></i><b>3.4</b> Numeric data only</a></li>
 <li class="chapter" data-level="3.5" data-path="data-set-chapter.html"><a href="data-set-chapter.html#valid_data_set"><i class="fa fa-check"></i><b>3.5</b> Data set validation</a></li>
 <li class="chapter" data-level="3.6" data-path="data-set-chapter.html"><a href="data-set-chapter.html#pred-data"><i class="fa fa-check"></i><b>3.6</b> Data sets for use with <code>$PRED</code></a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>4</b> Simulated output</a><ul>
+<li class="chapter" data-level="4" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>4</b> Simulated output</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="simulated-output.html"><a href="simulated-output.html#coercion-methods"><i class="fa fa-check"></i><b>4.1</b> Coercion methods</a></li>
 <li class="chapter" data-level="4.2" data-path="simulated-output.html"><a href="simulated-output.html#query-methods"><i class="fa fa-check"></i><b>4.2</b> Query methods</a></li>
 <li class="chapter" data-level="4.3" data-path="simulated-output.html"><a href="simulated-output.html#methods-for-dplyr-verbs"><i class="fa fa-check"></i><b>4.3</b> Methods for <code>dplyr</code> verbs</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="section-sequence.html"><a href="section-sequence.html"><i class="fa fa-check"></i><b>5</b> Simulation sequence</a><ul>
+<li class="chapter" data-level="5" data-path="section-sequence.html"><a href="section-sequence.html"><i class="fa fa-check"></i><b>5</b> Simulation sequence</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="section-sequence.html"><a href="section-sequence.html#functions-to-call"><i class="fa fa-check"></i><b>5.1</b> Functions to call</a></li>
 <li class="chapter" data-level="5.2" data-path="section-sequence.html"><a href="section-sequence.html#problem-initiation"><i class="fa fa-check"></i><b>5.2</b> Problem initiation</a></li>
 <li class="chapter" data-level="5.3" data-path="section-sequence.html"><a href="section-sequence.html#subject-initiation"><i class="fa fa-check"></i><b>5.3</b> Subject initiation</a></li>
 <li class="chapter" data-level="5.4" data-path="section-sequence.html"><a href="section-sequence.html#sequence-for-a-single-record"><i class="fa fa-check"></i><b>5.4</b> Sequence for a single record</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="steady-state.html"><a href="steady-state.html"><i class="fa fa-check"></i><b>6</b> Steady state</a><ul>
-<li class="chapter" data-level="6.1" data-path="index.html"><a href="index.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a><ul>
+<li class="chapter" data-level="6" data-path="steady-state.html"><a href="steady-state.html"><i class="fa fa-check"></i><b>6</b> Steady state</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="steady-state.html"><a href="steady-state.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="steady-state.html"><a href="steady-state.html#intermittent-doses"><i class="fa fa-check"></i><b>6.1.1</b> Intermittent doses</a></li>
 <li class="chapter" data-level="6.1.2" data-path="steady-state.html"><a href="steady-state.html#continuous-infusion"><i class="fa fa-check"></i><b>6.1.2</b> Continuous infusion</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="steady-state.html"><a href="steady-state.html#advance-to-ss"><i class="fa fa-check"></i><b>6.2</b> Advance to SS</a></li>
-<li class="chapter" data-level="6.3" data-path="steady-state.html"><a href="steady-state.html#control-advance-to-ss"><i class="fa fa-check"></i><b>6.3</b> Control advance to SS</a><ul>
+<li class="chapter" data-level="6.3" data-path="steady-state.html"><a href="steady-state.html#control-advance-to-ss"><i class="fa fa-check"></i><b>6.3</b> Control advance to SS</a>
+<ul>
 <li class="chapter" data-level="6.3.1" data-path="steady-state.html"><a href="steady-state.html#tolerances-for-ss"><i class="fa fa-check"></i><b>6.3.1</b> Tolerances for SS</a></li>
 <li class="chapter" data-level="6.3.2" data-path="steady-state.html"><a href="steady-state.html#max-dose-number"><i class="fa fa-check"></i><b>6.3.2</b> Max dose number</a></li>
 <li class="chapter" data-level="6.3.3" data-path="steady-state.html"><a href="steady-state.html#include-exclude-compartments-for-ss"><i class="fa fa-check"></i><b>6.3.3</b> Include / exclude compartments for SS</a></li>
 <li class="chapter" data-level="6.3.4" data-path="steady-state.html"><a href="steady-state.html#ss_advance-flag"><i class="fa fa-check"></i><b>6.3.4</b> SS_ADVANCE flag</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="topics.html"><a href="topics.html"><i class="fa fa-check"></i><b>7</b> Topics</a><ul>
+<li class="chapter" data-level="7" data-path="topics.html"><a href="topics.html"><i class="fa fa-check"></i><b>7</b> Topics</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="topics.html"><a href="topics.html#topic-annotated"><i class="fa fa-check"></i><b>7.1</b> Annotated model specification</a></li>
-<li class="chapter" data-level="7.2" data-path="topics.html"><a href="topics.html#topic-init"><i class="fa fa-check"></i><b>7.2</b> Set initial conditions</a><ul>
+<li class="chapter" data-level="7.2" data-path="topics.html"><a href="topics.html#topic-init"><i class="fa fa-check"></i><b>7.2</b> Set initial conditions</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="topics.html"><a href="topics.html#summary"><i class="fa fa-check"></i><b>7.2.1</b> Summary</a></li>
 <li class="chapter" data-level="7.2.2" data-path="topics.html"><a href="topics.html#make-a-model-only-to-examine-init-behavior"><i class="fa fa-check"></i><b>7.2.2</b> Make a model only to examine <code>init</code> behavior</a></li>
 <li class="chapter" data-level="7.2.3" data-path="topics.html"><a href="topics.html#example-pkpd-model-with-initial-condition"><i class="fa fa-check"></i><b>7.2.3</b> Example PK/PD model with initial condition</a></li>
 <li class="chapter" data-level="7.2.4" data-path="topics.html"><a href="topics.html#remember-calling-init-will-let-you-check-to-see-what-is-going-on"><i class="fa fa-check"></i><b>7.2.4</b> Remember: calling <code>init</code> will let you check to see what is going on</a></li>
 <li class="chapter" data-level="7.2.5" data-path="topics.html"><a href="topics.html#set-initial-conditions-via-idata"><i class="fa fa-check"></i><b>7.2.5</b> Set initial conditions via <code>idata</code></a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="topics.html"><a href="topics.html#topic-parameter-update"><i class="fa fa-check"></i><b>7.3</b> Updating parameters</a><ul>
+<li class="chapter" data-level="7.3" data-path="topics.html"><a href="topics.html#topic-parameter-update"><i class="fa fa-check"></i><b>7.3</b> Updating parameters</a>
+<ul>
 <li class="chapter" data-level="7.3.1" data-path="topics.html"><a href="topics.html#parameter-update-hierarchy"><i class="fa fa-check"></i><b>7.3.1</b> Parameter update hierarchy</a></li>
 <li class="chapter" data-level="7.3.2" data-path="topics.html"><a href="topics.html#topic-parameter-update-base"><i class="fa fa-check"></i><b>7.3.2</b> Updating the base parameter list</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="topics.html"><a href="topics.html#topic-tgrid"><i class="fa fa-check"></i><b>7.4</b> Time grid objects</a></li>
 <li class="chapter" data-level="7.5" data-path="topics.html"><a href="topics.html#topic-designs"><i class="fa fa-check"></i><b>7.5</b> Individualized sampling designs</a></li>
-<li class="chapter" data-level="7.6" data-path="topics.html"><a href="topics.html#some-helpful-c"><i class="fa fa-check"></i><b>7.6</b> Some helpful <code>C++</code></a><ul>
+<li class="chapter" data-level="7.6" data-path="topics.html"><a href="topics.html#some-helpful-c"><i class="fa fa-check"></i><b>7.6</b> Some helpful <code>C++</code></a>
+<ul>
 <li class="chapter" data-level="7.6.1" data-path="topics.html"><a href="topics.html#semi-colons"><i class="fa fa-check"></i><b>7.6.1</b> Semi-colons</a></li>
 <li class="chapter" data-level="7.6.2" data-path="topics.html"><a href="topics.html#if-else"><i class="fa fa-check"></i><b>7.6.2</b> if-else</a></li>
-<li class="chapter" data-level="7.6.3" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>7.6.3</b> Functions</a></li>
+<li class="chapter" data-level="7.6.3" data-path="topics.html"><a href="topics.html#functions-1"><i class="fa fa-check"></i><b>7.6.3</b> Functions</a></li>
 <li class="chapter" data-level="7.6.4" data-path="topics.html"><a href="topics.html#integer-division"><i class="fa fa-check"></i><b>7.6.4</b> Integer division</a></li>
 </ul></li>
 <li class="chapter" data-level="7.7" data-path="topics.html"><a href="topics.html#resimulate-eta-and-eps"><i class="fa fa-check"></i><b>7.7</b> Resimulate <code>ETA</code> and <code>EPS</code></a></li>
-<li class="chapter" data-level="7.8" data-path="topics.html"><a href="topics.html#topic-matrix-update"><i class="fa fa-check"></i><b>7.8</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a><ul>
+<li class="chapter" data-level="7.8" data-path="topics.html"><a href="topics.html#topic-matrix-update"><i class="fa fa-check"></i><b>7.8</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
+<ul>
 <li class="chapter" data-level="7.8.1" data-path="topics.html"><a href="topics.html#matrix-helper-functions"><i class="fa fa-check"></i><b>7.8.1</b> Matrix helper functions</a></li>
 <li class="chapter" data-level="7.8.2" data-path="topics.html"><a href="topics.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>7.8.2</b> Fill a matrix with zeros</a></li>
 <li class="chapter" data-level="7.8.3" data-path="topics.html"><a href="topics.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>7.8.3</b> Example: unnamed matrix</a></li>
@@ -318,20 +345,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-components" class="section level1">
+<div id="model-components" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Model components</h1>
 <p>This chapter details the different components of a model in <code>mrgsolve</code>. Each
-component listed here is maintained within a “model object”. This is an
+component listed here is maintained within a “model object.” This is an
 updatable S4 object in <code>R</code> that contains all of the basic information required
 to properly configure and simulate from the model.</p>
-<div id="component-param" class="section level2">
+<div id="component-param" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Parameter list</h2>
 <p>The parameter list is an updatable set of name-value pairs. Referencing the name
 of an item in the parameter list will substitute the current value associated
 with that name. While the name “parameter” may have a certain connotation in
 the modeling world, in <code>mrgsolve</code> a “parameter” could be any category of numeric
-data: covariates (e.g. <code>WT</code>, <code>AGE</code>, <code>SEX</code>), flags, other numeric data that we
-commonly call “parameter” (e.g. <code>CL</code> or <code>VC</code>).</p>
+data: covariates (e.g. <code>WT</code>, <code>AGE</code>, <code>SEX</code>), flags, other numeric data that we
+commonly call “parameter” (e.g. <code>CL</code> or <code>VC</code>).</p>
 <p>The parameter list is declared in the code block <code>$PARAM</code>. While there may be
 multiple <code>$PARAM</code> blocks in a model, these are condensed to a single parameter
 list stored in the model object. The names and numbers of all parameters in the
@@ -342,7 +369,7 @@ of each parameter may be updated in one of several ways.</p>
 <code>param()</code> function.</p>
 <p>See also: <a href="model-specification.html#block-param">2.2.3</a>, <code>?param</code> in the <code>R</code> help system after
 loading <code>mrgsolve</code>.</p>
-<div id="central-role-of-parameters-in-planning-simulations" class="section level3">
+<div id="central-role-of-parameters-in-planning-simulations" class="section level3" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> Central role of parameters in planning simulations</h3>
 <p>The data items in the parameter list are more than just values associated with a
 name. When an name is added to the parameter list, that name becomes a key word
@@ -358,13 +385,13 @@ data set (from person to person or from time to time), the value of <code>WT</co
 updated so that the symbol <code>WT</code> in <code>$MAIN</code> or <code>$ODE</code> or <code>$TABLE</code> always points
 to the value of <code>WT</code>. If the <code>WT</code> name is not in the parameter list, it won’t
 matter if it is in the data set or not. Only listing a name in <code>$PARAM</code> gets it
-“into the game”.</p>
+“into the game.”</p>
 <p>Understanding the parameter update mechanism is very important for planning
 complicated simulations with <code>mrgsolve</code>. Please see the information in
 <a href="data-set-chapter.html#datasets">3.1</a> and in <a href="topics.html#topic-parameter-update">7.3</a>.</p>
 </div>
 </div>
-<div id="component-init" class="section level2">
+<div id="component-init" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Compartment list</h2>
 <p>Like the parameter list, the compartment list is a series of name-value pairs.
 The compartment list defines the number, names, and initial values of each
@@ -382,7 +409,7 @@ model; section <a href="topics.html#topic-init">7.2</a> illustrates several of t
 <p>See also: section <a href="topics.html#topic-init">7.2</a> and <code>?init</code> in the <code>R</code> help system after
 loading <code>mrgsolve</code>.</p>
 </div>
-<div id="component-stime" class="section level2">
+<div id="component-stime" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Simulation time grid</h2>
 <p>The <code>mrgsolve</code> model object stores the parameters for the series of time points
 to be output for a a simulation. This is the default output time grid that will
@@ -395,7 +422,7 @@ function or by printing the model object to the <code>R</code> console.</p>
 <p>See also section <a href="data-set-chapter.html#data-set">3.2</a> for discussion of the simulation time grid
 and input data sets and <a href="model-components.html#component-tgrid">1.3.1</a> and <a href="topics.html#topic-tgrid">7.4</a> for
 using time grid objects .</p>
-<div id="component-tgrid" class="section level3">
+<div id="component-tgrid" class="section level3" number="1.3.1">
 <h3><span class="header-section-number">1.3.1</span> <code>tgrid</code> objects</h3>
 <p>A <code>tgrid</code> object has <code>start</code>, <code>end</code>, <code>delta</code> and <code>add</code> attributes. This object
 is independent of the model object. <code>tgrid</code> objects may be created and combined
@@ -403,22 +430,22 @@ to create complex sampling designs.</p>
 <p>See section <a href="topics.html#topic-tgrid">7.4</a> for examples and usage.</p>
 </div>
 </div>
-<div id="solver-settings" class="section level2">
+<div id="solver-settings" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Solver settings</h2>
 <p><code>mrgsolve</code> uses the <code>DLSODA</code> solver from <code>ODEPACK</code>. Several of the settings
 for that solver are stored in the model object and passed to the solver when
 the problem is started. Settings include: <code>atol</code>, <code>rtol</code>, <code>maxsteps</code>, <code>hmax</code>,
 <code>hmin</code>, <code>ixpr</code>, <code>mxhnil</code>.</p>
-<div id="atol" class="section level3">
+<div id="atol" class="section level3" number="1.4.1">
 <h3><span class="header-section-number">1.4.1</span> <code>atol</code></h3>
 <p>Absolute tolerance parameter. Adjust this value lower when you see state variables
 (compartments) that are becoming very small and possibly turning negative. For
 example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">modlib</span>(<span class="st">&quot;viral1&quot;</span>, <span class="dt">end =</span> <span class="dv">144</span>) </a></code></pre></div>
-<pre><code>. Loading model from cache.</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">out &lt;-<span class="st"> </span><span class="kw">mrgsim_e</span>(mod, <span class="kw">ev</span>(<span class="dt">amt =</span> <span class="dv">1000</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(V <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">out</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="model-components.html#cb1-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;viral1&quot;</span>, <span class="at">end =</span> <span class="dv">144</span>) </span></code></pre></div>
+<pre><code>. Building viral1 ... done.</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="model-components.html#cb3-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim_e</span>(mod, <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">1000</span>)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(V <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb3-2"><a href="model-components.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="model-components.html#cb3-3" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div>
 <pre><code>. # A tibble: 6 x 8
 .      ID  time expos        T         I         V  logV logChange
 .   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
@@ -429,7 +456,7 @@ example:</p>
 . 5     1 125    1000 6455422. -1.97e-10 -1.30e-12   NaN       NaN
 . 6     1 128.   1000 6555459. -7.81e-11 -5.21e-13   NaN       NaN</code></pre>
 <p>Adjusting <code>atol</code> to <code>1E-20</code> or <code>1E-30</code> will prevent this.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">mrgsim_e</span>(mod, <span class="kw">ev</span>(<span class="dt">amt =</span> <span class="dv">1000</span>), <span class="dt">atol =</span> <span class="fl">1E-20</span>)  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(time <span class="op">%in%</span><span class="st"> </span>out<span class="op">$</span>time)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="model-components.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim_e</span>(mod, <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">1000</span>), <span class="at">atol =</span> <span class="fl">1E-20</span>)  <span class="sc">%&gt;%</span> <span class="fu">filter</span>(time <span class="sc">%in%</span> out<span class="sc">$</span>time)</span></code></pre></div>
 <pre><code>. # A tibble: 6 x 8
 .      ID  time expos        T        I        V  logV logChange
 .   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
@@ -440,28 +467,28 @@ example:</p>
 . 5     1 125    1000 6455422. 1.54e-16 1.01e-18 -18.0     -23.7
 . 6     1 128.   1000 6555459. 5.99e-17 3.92e-19 -18.4     -24.1</code></pre>
 </div>
-<div id="rtol" class="section level3">
+<div id="rtol" class="section level3" number="1.4.2">
 <h3><span class="header-section-number">1.4.2</span> <code>rtol</code></h3>
 <p>Relative tolerance parameter. Adjust this value lower when you want more
 precision around the calculation of state variables as the system advances.</p>
 </div>
-<div id="maxsteps" class="section level3">
+<div id="maxsteps" class="section level3" number="1.4.3">
 <h3><span class="header-section-number">1.4.3</span> <code>maxsteps</code></h3>
 <p>This is the maximum number of steps the solver will take when advancing from one
 time to the next. If the solver can’t make it in <code>maxsteps</code> it will stop and
 give an error message like this:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb7-1" data-line-number="1">DLSODA-  At current T (=R1), MXSTEP (=I1) steps   </a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">      taken on this call before reaching TOUT     </a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">In above message, I = </a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">[<span class="dv">1</span>] <span class="dv">2000</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">In above message, R = </a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">[<span class="dv">1</span>] <span class="fl">0.0004049985</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">DLSODA-  ISTATE (=I1) illegal.</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">In above message, I = </a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">[<span class="dv">1</span>] <span class="dv">-1</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">DLSODA-  Run aborted.. apparent infinite loop.    </a>
-<a class="sourceLine" id="cb7-11" data-line-number="11">Error in (function (x, data, idata = null_idata, carry.out = character(<span class="dv">0</span>),  : </a>
-<a class="sourceLine" id="cb7-12" data-line-number="12">  error from XERRWD</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="model-components.html#cb7-1" aria-hidden="true" tabindex="-1"></a>DLSODA-  At current T (=R1), MXSTEP (=I1) steps   </span>
+<span id="cb7-2"><a href="model-components.html#cb7-2" aria-hidden="true" tabindex="-1"></a>      taken on this call before reaching TOUT     </span>
+<span id="cb7-3"><a href="model-components.html#cb7-3" aria-hidden="true" tabindex="-1"></a>In above message, I = </span>
+<span id="cb7-4"><a href="model-components.html#cb7-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">2000</span></span>
+<span id="cb7-5"><a href="model-components.html#cb7-5" aria-hidden="true" tabindex="-1"></a>In above message, R = </span>
+<span id="cb7-6"><a href="model-components.html#cb7-6" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">0.0004049985</span></span>
+<span id="cb7-7"><a href="model-components.html#cb7-7" aria-hidden="true" tabindex="-1"></a>DLSODA-  ISTATE (=I1) illegal.</span>
+<span id="cb7-8"><a href="model-components.html#cb7-8" aria-hidden="true" tabindex="-1"></a>In above message, I = </span>
+<span id="cb7-9"><a href="model-components.html#cb7-9" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] -<span class="dv">1</span></span>
+<span id="cb7-10"><a href="model-components.html#cb7-10" aria-hidden="true" tabindex="-1"></a>DLSODA-  Run aborted.. apparent infinite loop.    </span>
+<span id="cb7-11"><a href="model-components.html#cb7-11" aria-hidden="true" tabindex="-1"></a>Error in (function (x, data, idata = null_idata, carry.out = character(<span class="dv">0</span>),  : </span>
+<span id="cb7-12"><a href="model-components.html#cb7-12" aria-hidden="true" tabindex="-1"></a>  error from XERRWD</span></code></pre></div>
 <p>You might see this when you have to integrate along time between records in a
 data set. There isn’t necessarily a problem, but the solver might have to
 advance over many doses to get to the next record and it only has a limited
@@ -473,7 +500,7 @@ because there are issues with the model. It might take thousands of steps to
 make it 24 hours down the road. In that case, go back to the model code and
 look for problems in how it is coded.</p>
 </div>
-<div id="hmax" class="section level3">
+<div id="hmax" class="section level3" number="1.4.4">
 <h3><span class="header-section-number">1.4.4</span> <code>hmax</code></h3>
 <p>The <strong>maximum</strong> step size. By default, the solver will take steps of different
 sizes based on what is happening in the simulation. Setting <code>hmax</code> tells the
@@ -486,22 +513,22 @@ should be reserved for troubleshooting situations. If your model doesn’t give
 the results that you want without setting <code>hmax</code>, we’d recommend a new setup
 where this isn’t needed.</p>
 </div>
-<div id="hmin" class="section level3">
+<div id="hmin" class="section level3" number="1.4.5">
 <h3><span class="header-section-number">1.4.5</span> <code>hmin</code></h3>
 <p>The <strong>minimum</strong> step size. Only set this if you know what you’re doing.</p>
 </div>
-<div id="ixpr" class="section level3">
+<div id="ixpr" class="section level3" number="1.4.6">
 <h3><span class="header-section-number">1.4.6</span> <code>ixpr</code></h3>
 <p>A flag to enable printing messages to the R console when the solver
 switches between non-stiff and stiff solving modes. Rarely used.</p>
 </div>
-<div id="mxhnil" class="section level3">
+<div id="mxhnil" class="section level3" number="1.4.7">
 <h3><span class="header-section-number">1.4.7</span> <code>mxhnil</code></h3>
 <p>The maximum number of messages printed when the model is solving. If you
 have a lot of messages, keep working on your model code.</p>
 </div>
 </div>
-<div id="functions" class="section level2">
+<div id="functions" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Functions</h2>
 <p>There are four <code>C++</code> functions that <code>mrgsolve</code> creates and manages: <code>PREAMBLE</code>,
 <code>MAIN</code>, <code>ODE</code>, <code>TABLE</code>. Each function is created from an entire code block in
@@ -527,7 +554,7 @@ of the data set</li>
 </ol>
 <p>But the order in which they are coded will not affect model compilation or the
 simulation result.</p>
-<div id="the-preamble-function" class="section level3">
+<div id="the-preamble-function" class="section level3" number="1.5.1">
 <h3><span class="header-section-number">1.5.1</span> The <code>$PREAMBLE</code> function</h3>
 <p>The <code>PREAMBLE</code> function gets called only once, just prior to processing the
 first record of the data set. This function is composed of <code>C++</code> code and is
@@ -535,7 +562,7 @@ used to initialize variables and get them set up prior to starting on
 the problem.</p>
 <p>See <a href="model-specification.html#block-preamble">2.2.9</a> for details.</p>
 </div>
-<div id="the-main-function" class="section level3">
+<div id="the-main-function" class="section level3" number="1.5.2">
 <h3><span class="header-section-number">1.5.2</span> The <code>$MAIN</code> function</h3>
 <p>The <code>MAIN</code> function gets called at least once before the the solver advances
 from the current time (<code>T1</code>) to the next time (<code>T2</code>). In the <code>MAIN</code> function,
@@ -545,14 +572,14 @@ the user may:</p>
 <li>Derive new variables to be used in the model</li>
 <li>Write covariate models</li>
 <li>Add between-subject variability to quantities to structural model
-parameters (e.g. <code>CL</code> or <code>VC</code>).</li>
+parameters (e.g. <code>CL</code> or <code>VC</code>).</li>
 </ul>
 <p>In addition to getting called once per record, the <code>MAIN</code> function may be
 called several times prior to starting the simulation run. The <code>MAIN</code>
 function is also called whenever the user queries the compartment list.</p>
 <p>See <a href="model-specification.html#block-main">2.2.6</a> for details.</p>
 </div>
-<div id="the-ode-function" class="section level3">
+<div id="the-ode-function" class="section level3" number="1.5.3">
 <h3><span class="header-section-number">1.5.3</span> The <code>$ODE</code> function</h3>
 <p>The <code>ODE</code> function is where the user writes the model differential equations.<br />
 Any derived quantity that depends on a state variable and is used to
@@ -561,7 +588,7 @@ function is called repeatedly during the simulation run, so any calculation
 that <strong>can</strong> be moved out of <code>$ODE</code> (for example: to <code>$MAIN</code>) should be.</p>
 <p>See <a href="model-specification.html#block-ode">2.2.7</a> for details.</p>
 </div>
-<div id="the-table-function" class="section level3">
+<div id="the-table-function" class="section level3" number="1.5.4">
 <h3><span class="header-section-number">1.5.4</span> The <code>$TABLE</code> function</h3>
 <p>The <code>TABLE</code> function is called <strong>after</strong> the solver advances in time. The
 purpose of <code>TABLE</code> is to allow the user to interact with the values of the
@@ -570,7 +597,7 @@ insert different outputs into the table of simulated results.</p>
 <p>See <a href="model-specification.html#block-table">2.2.8</a> for details.</p>
 </div>
 </div>
-<div id="random-effect-variances" class="section level2">
+<div id="random-effect-variances" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> Random effect variances</h2>
 <p>The <code>mrgsolve</code> model object keeps track of a arbitrary number of block matrices
 that are used to simulate variates from multivariate normal distributions.
@@ -578,12 +605,12 @@ Users can specify <code>OMEGA</code> matrices for simulating between-subject ran
 (one draw per individual) or <code>SIGMA</code> matrices for simulating within-subject
 random effects (one draw per observation).</p>
 <p>The user may use the <code>revar()</code> function to query both <code>OMEGA</code> and <code>SIGMA</code>.</p>
-<div id="omega" class="section level3">
+<div id="omega" class="section level3" number="1.6.1">
 <h3><span class="header-section-number">1.6.1</span> <code>OMEGA</code></h3>
 <p>The matrices are specified in <code>$OMEGA</code> blocks in the model specification file.</p>
 <p><code>OMEGA</code> may be queried or updated with the <code>omat()</code> function.</p>
 </div>
-<div id="sigma" class="section level3">
+<div id="sigma" class="section level3" number="1.6.2">
 <h3><span class="header-section-number">1.6.2</span> <code>SIGMA</code></h3>
 <p>The matrices are specified in <code>$SIGMA</code> blocks in the model specification file.</p>
 <p><code>SIGMA</code> may be queried or updated by the <code>smat()</code> function.</p>
@@ -639,7 +666,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["user-guide.pdf"],
+"download": null,
 "toc": {
 "collapse": "none",
 "sharing": false

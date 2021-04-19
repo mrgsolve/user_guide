@@ -117,6 +117,50 @@ __Block options__
 Options may be specified on some code blocks that signal how the code is 
 to be parsed or used in the simulation.  
 
+We note two specific options (`@object` and `@as_object`) that have similar 
+function across multiple blocks.  
+
+The `@object` option lets you name an object defined in `$ENV` to use to 
+instantiate the block data.  For example, to specify a series of parameters
+using the `@object` option, you'd write
+
+```{c, eval = FALSE}
+$ENV
+params <- list(CL = 1, V = 20, KA = 1.2)
+
+$PARAM @object params
+```
+
+This tells mrgsolve that there is an object called `params` that it is in 
+the `$ENV` environment and mrgsolve will use that to define the names and 
+values. This is a trivial example to show how a simple series of parameters
+could be defined. However, the intended use for this functionality is to allow
+efficient creation of a large, systematically-named series of parameters in 
+a large model. 
+
+The `@as_object` option is a boolean option that tells mrgsolve that the 
+block code will actually return the object (rather than asking mrgsolve to 
+look in `$ENV` for the object). The equivalent specification for the block 
+above would be:
+
+```{c, eval = FALSE} 
+$PARAM @as_object
+list(CL = 1, V = 20, KA = 1.2)
+```
+
+The following blocks contain both the `@object` and `@as_object` options:
+
+- `$PARAM`
+- `$THETA`
+- `$CMT`
+- `$INT`
+- `$OMEGA`
+- `$SIGMA`
+
+Please see the specific block documentation for more details on the specific
+type of object that should be returned when this syntax is invoked. 
+
+
 ### `$PROB` \ {#block-prob}
 
 __Syntax__: text   
@@ -135,7 +179,7 @@ See the annotated model in section \@ref(topic-annotated) for an example.
 
 __Syntax__: R   
 __Multiple allowed__: yes   
-__Options__: `@annotated`, `@covariates`
+__Options__: `@annotated`, `@covariates`, `@object`, `@as_object`
 
 Define the parameter list in the current model. Parameters are names associated
 with values that can be used throughout the model.  A value must be given 
@@ -187,6 +231,9 @@ Notes:
 * Multiple blocks are allowed
 * Values are evaluated by the `R` interpreter
 
+The `@object` and `@as_object` options should name or return a named list of 
+parameters.
+
 See also: section \@ref(block-theta) and \@ref(block-fixed).
 
 See `?param` in the `R` help system after loading `mrgsolve`.
@@ -195,7 +242,8 @@ See `?param` in the `R` help system after loading `mrgsolve`.
 
 __Syntax__: R   
 __Multiple allowed__: yes   
-__Options__: `@annotated`   
+__Options__: `@annotated`, `@object`, `@as_object`
+
 
 Like `$PARAM`, `$FIXED` is used to specify `name=value` pairs.  Unlike 
 `$PARAM`, however, the values associated with names in `$FIXED` are not able 
@@ -238,7 +286,7 @@ Notes:
 
 __Syntax__: text   
 __Multiple allowed__: yes   
-__Options__: `@annotated`   
+__Options__: `@annotated`, `@object`, `@as_object`
 
 Declare the names of all compartments in the model. 
 
@@ -269,7 +317,9 @@ CENT     :   0 : Central PK compartment (mg)
 RESPONSE :  25 : Response
 ```
 
-
+The `@object` and `@as_object` options should name or return a named list of 
+compartments and initial values when used in `$INIT` and a character vector
+of compartment names when used in `$CMT`.
 
 See `?init` in the `R` help system after loading `mrgsolve`.
 
@@ -554,7 +604,7 @@ details.
 
 __Syntax__: text   
 __Multiple allowed__: yes   
-__Options__: `@annotated`, `@block`, `@correlation`, `@labels`, `@name`   
+__Options__: `@annotated`, `@block`, `@correlation`, `@labels`, `@name`, `@object`, `@as_object`   
 
 See `?modMATRIX` for more details about options for this block.
 
@@ -617,6 +667,9 @@ EVC: 0.001 0.19 : ETA on volume
 EKA: 0.001 0.001 0.45 : ETA on absorption rate constant
 ```
 
+The `@object` and `@as_object` options should name or return a square numeric 
+matrix. If `rownames` are included in the matrix, then they will be used to 
+form labels for the realized ETAs. 
 
 Notes:
 
@@ -627,7 +680,7 @@ Notes:
 
 __Syntax__: text   
 __Multiple allowed__: yes   
-__Options__: `@annotated`, `@block`, `@correlation`, `@labels`, `@name`   
+__Options__: `@annotated`, `@block`, `@correlation`, `@labels`, `@name`, `@object`, `@as_object`  
 
 See `?modMATRIX` for more details about options for this block.
 
@@ -635,6 +688,10 @@ Use this block to enter variance/covariance matrices for within-subject random
 effects drawn from multivariate normal distribution. All random effects are
 assumed to have mean of 0.  Off diagonal elements for block matrices are assumed
 to be correlation coefficients if the `@correlation` option is used (see below).
+
+The `@object` and `@as_object` options should name or return a square numeric 
+matrix. If `rownames` are included in the matrix, then they will be used to 
+form labels for the realized EPS values. 
 
 The `$SIGMA` block functions like the `$OMEGA` block.  See `$OMEGA` for details. 
 
@@ -873,7 +930,7 @@ See also: \@ref(block-preamble).
 
 __Syntax__: text   
 __Multiple allowed__: yes   
-__Options__: `@annotated`, `@name`   
+__Options__: `@annotated`, `@name`, `@object`, `@as_object`
 
 Use this code block as an efficient way to add to the parameter list where names
 are determined by a prefix and a number.  By default, the prefix is `THETA` and
@@ -911,6 +968,8 @@ would be equivalent to
 [ PARAM ] theta1 = 0.1, theta2 = 0.2, theta3 = 0.3
 ```
 
+The `@object` and `@as_object` options should name or return an unnamed vector
+of parameter values (names are ignored).
 
 See also: \@ref(block-param).
 
