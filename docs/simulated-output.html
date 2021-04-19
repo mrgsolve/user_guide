@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2021-04-18" />
+<meta name="date" content="2021-04-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -379,14 +379,14 @@ coercing the simulation matrix into other <code>R</code> objects.</p>
 <h2><span class="header-section-number">4.3</span> Methods for <code>dplyr</code> verbs</h2>
 <p><code>mrgsolve</code> provides several S3 methods to make it possible to include <code>dplyr</code> verbs in your simulation pipeline.</p>
 <p>For example</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="simulated-output.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb130-2"><a href="simulated-output.html#cb130-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-3"><a href="simulated-output.html#cb130-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
-<span id="cb130-4"><a href="simulated-output.html#cb130-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-5"><a href="simulated-output.html#cb130-5" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb130-6"><a href="simulated-output.html#cb130-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb130-7"><a href="simulated-output.html#cb130-7" aria-hidden="true" tabindex="-1"></a>  mrgsim <span class="sc">%&gt;%</span> </span>
-<span id="cb130-8"><a href="simulated-output.html#cb130-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time <span class="sc">&gt;=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="simulated-output.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb132-2"><a href="simulated-output.html#cb132-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-3"><a href="simulated-output.html#cb132-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
+<span id="cb132-4"><a href="simulated-output.html#cb132-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-5"><a href="simulated-output.html#cb132-5" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb132-6"><a href="simulated-output.html#cb132-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb132-7"><a href="simulated-output.html#cb132-7" aria-hidden="true" tabindex="-1"></a>  mrgsim <span class="sc">%&gt;%</span> </span>
+<span id="cb132-8"><a href="simulated-output.html#cb132-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time <span class="sc">&gt;=</span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>. # A tibble: 441 x 7
 .       ID  time       GUT  CENT  RESP    DV    CP
 .    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;

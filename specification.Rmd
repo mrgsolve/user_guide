@@ -1016,8 +1016,10 @@ code <- '
 $NMXML
 run = 1005
 project = path
-olabels = s_(ECL, EVC, EKA)
-slabels = s_(PROP, ADD)
+root = "cppfile"
+
+olabels = c("ECL", "EVC", "EKA")
+slabels = c("PROP", "ADD")
 
 $MAIN
 double CL = THETA1*exp(ECL);
@@ -1043,7 +1045,7 @@ $SET delta=4, end=96
 __NOTE__: in order to use this code, we need to install the `xml2` package.
 
 ```{r}
-mod <- mcode("nmxml", code, quiet=TRUE)
+mod <- mcode("nmxml", code, quiet = TRUE)
 
 mod
 
@@ -1052,6 +1054,18 @@ param(mod)
 revar(mod)
 
 ```
+
+__root argument__: please use the `root = "cppfile"` argument going forward. 
+
+As of mrgsolve `0.11.0`, we added an argument called `root` to `$NMXML` that 
+tells mrgsolve the location where it should read the `xml` file from. The 
+default behavior is the `"working"` directory. When this is the case, mrgsolve
+assumes that the the `xml` file can be found relative to the "working" 
+directory. The only other value that `root` can take is `"cppfile"`. When 
+`root = "cppfile"`, then mrgsolve will look for the `xml` file in a directory 
+that is relative to **where the model source code file is located**. Please
+take a look at section \@ref(block-nmext) for more discussion and examples. 
+
 
 Please see the `?nmxml` help topic for more information on arguments that can 
 be passed to `$NMXML`.
@@ -1080,8 +1094,10 @@ code <- '
 $NMEXT
 run = 1005
 project = path
-olabels = s_(ECL, EVC, EKA)
-slabels = s_(PROP, ADD)
+root = "cppfile"
+
+olabels = c("ECL", "EVC", "EKA")
+slabels = c("PROP", "ADD")
 
 $MAIN
 double CL = THETA1*exp(ECL);
@@ -1109,7 +1125,6 @@ $SET delta=4, end=96
 mod <- mcode("nmext", code, quiet=TRUE)
 
 param(mod)
-
 ```
 
 
@@ -1122,9 +1137,49 @@ NONMEM control stream, `$OMEGA` is one 2x2 matrix and one 3x3 matrix. Importing
 those estimates with `$NMEXT` will give you one 5x5 matrix, while importing 
 the estimates with `$NMXML` will give you a list of one 2x2 and one 3x3 matrix.
 
+__root argument__: please use the `root = "cppfile"` argument going forward. 
+
+As of mrgsolve `0.11.0`, we added an argument called `root` to `$NMEXT` that 
+tells mrgsolve the location where it should read the `ext` file from. The 
+default behavior is the `"working"` directory. When this is the case, mrgsolve
+assumes that the the `ext` file can be found relative to the "working" 
+directory. The only other value that `root` can take is `"cppfile"`. When 
+`root = "cppfile"`, then mrgsolve will look for the `ext` file in a directory 
+that is relative to **where the model source code file is located**. 
+
+We recommend that users start using the `root` argument and set it to "cppfile". 
+This will eventually become the default. For example:
+
+```{c, eval = FALSE}
+$NMEXT
+run = 1005
+project = "../../model/pk"
+root = "cppfile"
+```
+
+This tells mrgsolve to find the nonmem run back two directories (`../../`) 
+and then into `model --> pk --> 1005` relative to where the mrgsolve model 
+file is located. This is in contrast to the previous expected behavior that 
+the path should be relative to the current working directory.
+
+We also note here that when users pass an absolute path, the relative path 
+doesn't matter at all. Users are free to use pathing tools to generate the 
+absolute path to the project.  For example, the `here::here()` function can 
+be used like this
+
+```{c, eval = FALSE}
+$NMEXT
+run = 1005
+project = here::here("model/pk")
+```
+
+When used in the proper context, `here()` will generate an absolute path from 
+your projects root directory to the nonmem project directory. Please refer to 
+the `here::here()` documentation for proper use of this function. 
+
 See the `?nmext` R help topic for arguments that can be passed to `$NMEXT` block.
-Notably, the user can select the function to read in the ext file.  By default, 
-mrgsolve will try to load data.table and use the `fread` function.  If 
+Notably, the user can select the function to read in the ext file.By default, 
+mrgsolve will try to load data.table and use the `fread` function. If 
 data.table can't be loaded, then mrgsolve will use `utils::read.table`.
 
 See also: \@ref(block-nmxml).
