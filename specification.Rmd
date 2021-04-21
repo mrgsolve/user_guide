@@ -120,6 +120,13 @@ to be parsed or used in the simulation.
 We note two specific options (`@object` and `@as_object`) that have similar 
 function across multiple blocks.  
 
+### Programmatic or bulk initialization 
+
+The following describes syntax for initializing blocks as R objects using
+R code. This can be helpful, say, when you need to initialize a 50x50
+OMEGA matrix or a series of systematically named parameters. We will describe
+the `@object` and `@as_object` options that are available on select blocks.
+
 The `@object` option lets you name an object defined in `$ENV` to use to 
 instantiate the block data.  For example, to specify a series of parameters
 using the `@object` option, you'd write
