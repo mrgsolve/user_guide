@@ -765,6 +765,31 @@ bool cure = false;
 With this construct, the boolean variable `cure` is declared and defined right 
 as the model is compiled.  
 
+__Declare in bulk__
+
+If you have a large number of variables to declare, you can do that in 
+bulk in `$GLOBAL`. For example, we know we will need a long list of `double` 
+precision variable for covariate modeling, we can declare them all at once like 
+this:
+
+```{c, eval = FALSE}
+[ global ] 
+double TVCL, TVV2, TVQ = 0, TVV3 = 0;
+
+[ main ] 
+
+TVCL = THETA1 * pow(WT / 70.0, 0.75);
+TVV2 = THETA2 * WT / 70.0;
+TVQ  = THETA3 * pow(WT / 70.0, 0.75);
+TVV3 = THETA4 * WT / 70.0;
+```
+
+This isn't a terribly long list, but let's pretend it is to illustrate how to 
+do this. You can also declare `int`, `bool` and other types like this. I've 
+initialized the last two (`TVVQ` and `TVV3`) to illustrate how to do this. It's
+good practice to do that but not necessary as long as everything gets
+initialized to **something** before they are used.
+
 ### `$PKMODEL`
 
 __Syntax__: R   
@@ -1002,6 +1027,16 @@ you will need to provide the `file` argument, which should be the path to the
 `run.xml` file, either as a full path or as a path relative to the current 
 working directory.
 
+Once the model object is obtained, the path to the `xml` file that formed 
+the source for imported parameters can be retrieved by coercing the 
+model object to list and looking for `nm_import`:
+
+```{r, eval = FALSE}
+mod <- modlib("1005", compile = FALSE)
+
+as.list(mod)$nm_import
+```
+
 For help on the arguments / options for `$NMXML`, please see the `?nmxml` 
 help topic in your `R` session after loading the `mrgsolve` package.
 
@@ -1122,7 +1157,7 @@ double CP = (CENT/V2)*(1+PROP) + ADD/5;
 
 $CAPTURE CP
 
-$SET delta=4, end=96
+$SET delta = 4, end = 96
 '
 
 ```
@@ -1133,6 +1168,11 @@ mod <- mcode("nmext", code, quiet=TRUE)
 
 param(mod)
 ```
+
+Once the model object is obtained, the path to the `ext` file that formed 
+the source for imported parameters can be retrieved by coercing the 
+model object to list and looking for `nm_import`. See the `$NMXML` topic 
+in section \@ref(block-nmxml) for an example of equivalent functionality.
 
 
 __IMPORTANT__: while `$NMEXT` works very similarly to `$NMXML`, there is one 
