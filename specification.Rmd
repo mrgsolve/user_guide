@@ -78,9 +78,9 @@ For help, see `?mread` , `?mcode` in the `R` help system after loading
 __Block identifier__
 
 Different types of code are organized in the model specification file and 
-separated by block identifiers. There are two ways to formulate block identifiers that
-can be used in mrgsolve.  In the first type, a dollar-sign is placed at the 
-start of the block name
+separated by block identifiers. There are two ways to formulate block 
+identifiers that can be used in mrgsolve.  In the first type, a dollar-sign is 
+placed at the start of the block name
 
 ```{c,eval=FALSE}
 $BLOCKNAME
@@ -106,6 +106,18 @@ brackets.  When model specification code is saved into a file with a `.cpp`
 extension, the code editor may make certain assumptions about formatting or
 styling the code.  Using brackets will most-likely work better with the 
 editor in that case.  
+
+Block identifiers are case-insensitive so all of these also work
+
+```{c, eval = FALSE} 
+$param 
+CL = 1
+```
+
+```{c, eval = FALSE}
+[ param ] 
+CL = 1
+```
 
 Users are free to include block code on the same line as the block identifier,
 but must include a space after the identifier. For example, the parser will
