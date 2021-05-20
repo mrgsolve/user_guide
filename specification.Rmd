@@ -9,6 +9,13 @@ This chapter details the `mrgsolve` model specification format.
 ## How / where to write a model
 There are two ways to write your model:
 
+1. Code in a __separate file__ and source into your R script 
+2. Code __inline__ as a character string already in your R script
+
+We recommend method `1` (separate file) for any non-trivial modeling work. 
+Method `2` is handy for quickly coding a model and you'll also see us using 
+that approach frequently when demonstrating how to use `mrgsolve`.
+
 ### Separate file {#spec-separate-file}
 Open a text editor and type the model into a file with name that has the 
 format `<model-name>.cpp`.  This filename format identifies a "name" for your 

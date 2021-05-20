@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2021-04-21" />
+<meta name="date" content="2021-05-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -354,6 +354,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="how-where-to-write-a-model" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> How / where to write a model</h2>
 <p>There are two ways to write your model:</p>
+<ol style="list-style-type: decimal">
+<li>Code in a <strong>separate file</strong> and source into your R script</li>
+<li>Code <strong>inline</strong> as a character string already in your R script</li>
+</ol>
+<p>We recommend method <code>1</code> (separate file) for any non-trivial modeling work.
+Method <code>2</code> is handy for quickly coding a model and you’ll also see us using
+that approach frequently when demonstrating how to use <code>mrgsolve</code>.</p>
 <div id="spec-separate-file" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Separate file</h3>
 <p>Open a text editor and type the model into a file with name that has the
@@ -1157,8 +1164,8 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 . 
 . ----------------  source: nmxml.cpp  ----------------
 . 
-.   project: /private/var/fol.../T/RtmpU3Zaoy
-.   shared object: nmxml-so-21f4150fc4ad 
+.   project: /private/var/fol.../T/RtmpI5RHqv
+.   shared object: nmxml-so-3098fa593e2 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
