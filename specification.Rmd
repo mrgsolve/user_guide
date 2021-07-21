@@ -875,6 +875,9 @@ Plugins that you can use:
 - `mrgx` additional functions provided by `mrgsolve` that help use `Rcpp` in your model
 - `RcppArmadillo` to write any `Rcpp` or `RcppArmadillo` code
 - `BH` to link to `boost` headers
+- `CXX11` to compile your model with C++11 standard; this adds
+  the compiler flag `-std=c++11`
+- `tad` to calculate time after dose inside your model code
 
 Note that `Rcpp`, `RcppArmadillo` and `BH` only allow you to link to those
 headers.  To take advantage of that, you will need to know how to use `Rcpp`,
