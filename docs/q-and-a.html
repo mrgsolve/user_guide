@@ -408,8 +408,8 @@ one step) or set to negative number to never check.</p>
 <h2><span class="header-section-number">10.2</span> Can I pass compiler flags to my model?</h2>
 <p>Compiler flags can be passed to your model by setting <code>PKG_CXXFLAGS</code> in
 <code>$ENV</code>. For example</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb328-1"><a href="q-and-a.html#cb328-1" aria-hidden="true" tabindex="-1"></a>$ENV</span>
-<span id="cb328-2"><a href="q-and-a.html#cb328-2" aria-hidden="true" tabindex="-1"></a>PKG_CXXFLAGS = <span class="st">&quot;-std=c++11&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb330-1"><a href="q-and-a.html#cb330-1" aria-hidden="true" tabindex="-1"></a>$ENV</span>
+<span id="cb330-2"><a href="q-and-a.html#cb330-2" aria-hidden="true" tabindex="-1"></a>PKG_CXXFLAGS = <span class="st">&quot;-std=c++11&quot;</span></span></code></pre></div>
 <p>will compile your model according to <code>C++11</code> standard (but note that there is a
 special plugin that will do this automatically for you; see Section
 <a href="plugins.html#plugin-cxx11">7.2</a>).</p>
@@ -423,13 +423,13 @@ special plugin that will do this automatically for you; see Section
 <p>There are three approaches</p>
 <p><strong>tad argument to mrgsim()</strong></p>
 <p>To get time after dose into your output you can call</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="q-and-a.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">tad =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="q-and-a.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">tad =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>and the output will have a <code>tad</code> column. Note this does not let you interact
 with the <code>tad</code> value inside your model.</p>
 <p><strong>Simple calculation in the model</strong></p>
 <p>Most applications will call <code>self.tad()</code> (Section @ref(self.tad)). For example</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb330-1"><a href="q-and-a.html#cb330-1" aria-hidden="true" tabindex="-1"></a>[ main ] </span>
-<span id="cb330-2"><a href="q-and-a.html#cb330-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad = self.tad();</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb332-1"><a href="q-and-a.html#cb332-1" aria-hidden="true" tabindex="-1"></a>[ main ] </span>
+<span id="cb332-2"><a href="q-and-a.html#cb332-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad = self.tad();</span></code></pre></div>
 <p><strong>More complicated calculation in the model</strong></p>
 <p>You can get more control and track <code>tad</code> in a specific compartment by using
 the <code>tad</code> plugin. See Section <a href="plugins.html#plugin-tad">7.1</a> for details.</p>

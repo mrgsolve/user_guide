@@ -31,7 +31,7 @@ mrg::tadose tad_cmt_1(1);
 mrg::tadose tad_cmt_2(2);
 ```
 
-Notice that we refer to the compartment number that we want to track in each 
+Notice that we pass the compartment number that we want to track in each 
 case and also that we refer to the `mrg::` namespace for the `tadose` class. 
 
 The `tadose` objects contain the following (public) members
@@ -47,6 +47,13 @@ The `tadose` objects contain the following (public) members
     value of `-1.0` is returned
 - `reset()` resets the state of the object; be sure to reset prior to simulating
   a new individual
+
+As an example, you can call the `reset()` method on one of the `tadose` objects
+
+```{c, eval = FALSE}
+tad_cmt_1.reset();
+```
+
 
 You can find the source code for this object 
 [here](https://github.com/metrumresearchgroup/mrgsolve/blob/master/inst/base/mrgsolve-tad.h).

@@ -114,7 +114,17 @@ Once the object is created, you can modify the following public members
 - `now`: should the dose be given immediately? (`bool`)
 
 If you are using this (lower-level) interface, chances are you will want to 
-set at least `amt` and `cmt`. 
+set at least `amt` and `cmt`.  As an example, we will dose 100 mg into 
+compartment 2 immediately (now)
+
+```{c, eval = FALSE}
+ev.amt = 100;
+ev.cmt = 2;
+ev.now = true;
+```
+
+The other members are set in a similar way.
+
 
 __Push the evdata object into the self object__
 
