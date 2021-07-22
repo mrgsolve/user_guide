@@ -43,7 +43,7 @@ Yes, you can do this by invoking the `CXX11` plugin (Section \@ref(plugin-cxx11)
 
 There are three approaches
 
-__tad argument to mrgsim()___
+__tad argument to mrgsim()__
 
 To get time after dose into your output you can call
 
@@ -54,9 +54,9 @@ mrgsim(mod, tad = TRUE)
 and the output will have a `tad` column. Note this does not let you interact
 with the `tad` value inside your model.
 
-__Simple calculation in the model___
+__Simple calculation in the model__
 
-Most applications will call `self.tad()` (Section \@ref{self.tad}). For example
+Most applications will call `self.tad()` (Section \@ref(self.tad)). For example
 
 ```{c, eval = FALSE}
 [ main ] 
@@ -66,6 +66,6 @@ double tad = self.tad();
 __More complicated calculation in the model__
 
 You can get more control and track `tad` in a specific compartment by using 
-the `tad` plugin.  See Section \@ref{plugin-tad} for details.
+the `tad` plugin.  See Section \@ref(plugin-tad) for details.
 
 

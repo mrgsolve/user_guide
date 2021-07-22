@@ -416,18 +416,18 @@ special plugin that will do this automatically for you; see Section
 <div id="how-can-i-calculate-time-after-dose" class="section level2" number="10.4">
 <h2><span class="header-section-number">10.4</span> How can I calculate time after dose?</h2>
 <p>There are three approaches</p>
-<p><strong>tad argument to mrgsim()</strong>_</p>
+<p><strong>tad argument to mrgsim()</strong></p>
 <p>To get time after dose into your output you can call</p>
 <div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="q-and-a.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">tad =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>and the output will have a <code>tad</code> column. Note this does not let you interact
 with the <code>tad</code> value inside your model.</p>
-<p><strong>Simple calculation in the model</strong>_</p>
-<p>Most applications will call <code>self.tad()</code> (Section @ref{self.tad}). For example</p>
+<p><strong>Simple calculation in the model</strong></p>
+<p>Most applications will call <code>self.tad()</code> (Section @ref(self.tad)). For example</p>
 <div class="sourceCode" id="cb330"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb330-1"><a href="q-and-a.html#cb330-1" aria-hidden="true" tabindex="-1"></a>[ main ] </span>
 <span id="cb330-2"><a href="q-and-a.html#cb330-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad = self.tad();</span></code></pre></div>
 <p><strong>More complicated calculation in the model</strong></p>
 <p>You can get more control and track <code>tad</code> in a specific compartment by using
-the <code>tad</code> plugin. See Section @ref{plugin-tad} for details.</p>
+the <code>tad</code> plugin. See Section <a href="plugins.html#plugin-tad">7.1</a> for details.</p>
 
 </div>
 </div>
