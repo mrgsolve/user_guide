@@ -4,7 +4,38 @@ source("setup.R")
 
 # Plugins {#plugins}
 
-## CXX11
+## tad
+
+__Purpose__
+Advanced calculation time after dose within your model. We call this "advanced"
+because it lets you track doses in multiple compartments. See the note below 
+about a simpler way to calculate time after dose that should work fine if doses
+are only in a single compartment. This functionality is provided by mrgsolve. 
+
+__Usage__
+
+First, tell `mrgsolve` that you want to use the `tad` plugin
+
+```{c, eval = FALSE}
+$PLUGIN tad
+```
+
+
+__Note__
+Note there is a simpler way to calculate time after dose when only dosing into
+a single compartment
+
+```{c, eval = FALSE}
+[ main ]
+
+double tad = self.tad();
+```
+
+The `self` object (Section \@ref(self-tad)) contains a `tad()` member which 
+will track time after dose. Note that this needs to be called every record. 
+
+
+## CXX11  {#plugin-cxx11}
 
 __Purpose__
 
@@ -13,7 +44,7 @@ Compile your model file with `C++11` standard.
 __Usage__ 
 
 ```{c, eval = FALSE}
-$PLUGINS CXX11
+$PLUGIN CXX11
 ```
 
 ## Rcpp
@@ -25,42 +56,45 @@ Link to `Rcpp` headers into your model.
 __Usage__ 
 
 ```{c, eval = FALSE}
-$PLUGINS Rcpp
+$PLUGIN Rcpp
 ```
 
 Note that once your model is linked to `Rcpp`, you can start using that 
 functionality immediately (without including `Rcpp.h`).
 
+Information about `Rcpp` can be found here: https://github.com/RcppCore/Rcpp
+
 ## Rcpp
 
 __Purpose__
 
-Link to `RcppArmadillo` headers into your model.
+Link to `RcppArmadillo` headers into your model. 
 
 __Usage__ 
 
 ```{c, eval = FALSE}
-$PLUGINS RcppArmadillo
+$PLUGIN RcppArmadillo
 ```
 
-
+Information about `armadillo` can be found here: http://arma.sourceforge.net/
+Information about `RcppArmadillo` can be found here: 
+https://github.com/RcppCore/RcppArmadillo
 
 ## BH
 
 __Purpose__
 
-Link to `boost` headers into your model.
+Link to `boost` headers into your model. 
 
 __Usage__ 
 
 ```{c, eval = FALSE}
-$PLUGINS BH
+$PLUGIN BH
 ```
 
 Note that once your model is linked to `BH` (`boost`), you will be able to 
 include the `boost` header file that you need. You have to include the header
 file that contains the `boost` function you want to use.
 
-
-
-
+Information about `boost` can be found here: https://boost.org. Information 
+about `BH` can be found here: https://github.com/eddelbuettel/bh

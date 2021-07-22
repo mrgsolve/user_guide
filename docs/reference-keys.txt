@@ -32,8 +32,11 @@ block-param
 block-fixed
 cmt-and-init
 block-main
+block-pk
 block-ode
+block-des
 block-table
+block-error
 block-preamble
 block-pred
 block-capture
@@ -57,15 +60,16 @@ evid
 cmt
 amt
 newind
-self.cmt
-self.amt
 simetan
 simepsn
+self-object
+self.cmt
+self.amt
 self.nid
 self.idn
 self.nrow
 self.rown
-self.tad
+self-tad
 self.mtimetime
 self.stop
 self.stop_id
@@ -116,7 +120,8 @@ max-dose-number
 include-exclude-compartments-for-ss
 ss_advance-flag
 plugins
-cxx11
+tad
+plugin-cxx11
 rcpp
 rcpp-1
 bh
@@ -148,4 +153,5 @@ example-unnamed-matrices
 topics-time-varying
 q-and-a
 can-i-interrupt-a-simulation
+can-i-pass-compiler-flags-to-my-model
 install

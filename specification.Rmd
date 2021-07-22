@@ -387,6 +387,10 @@ double ke = CL/VC;
 
 ```
 
+### `$PK` \ {#block-pk}
+
+This is an alias for `$MAIN`.
+
 
 ### `$ODE` \ {#block-ode}
 
@@ -443,6 +447,10 @@ Notes:
 * `$ODE` is written in `C++` syntax; every line must end in `;`
 * There may be only one `$ODE` block in a model
 
+### `$DES` \ {#block-des}
+
+This is an alias for `$ODE`.
+
 
 ### `$TABLE` \ {#block-table}
 
@@ -469,6 +477,9 @@ those variables are saved at the __end__ of the `$TABLE` function.  This process
 is carried out automatically by `mrgsolve` and therefore requires no user
 intervention.
 
+### `$ERROR` \ {#block-error}
+
+This is an alias for `$TABLE`.
 
 ### `$PREAMBLE` \ {#block-preamble}
 
@@ -727,13 +738,13 @@ __Syntax__: R
 __Multiple allowed__: no   
 
 Use this code block to set different options for the simulation. Use a 
-`name=value` format, where `value` is evaluated by the `R` interpreter.  
+`name = value` format, where `value` is evaluated by the `R` interpreter.  
 
 Most of the options that can be entered in `$SET` are passed to `update`. 
 
 For example:
 ```{c,eval=FALSE}
-[ SET ] end = 240, delta=0.5, req=s(RESP)
+[ SET ] end = 240, delta = 0.5, req = "RESP"
 ```
 
 Here, we set the simulation `end` time to 240, set the time difference between 
@@ -853,6 +864,8 @@ __Multiple allowed__: no
 Plugins are a way to add extensions to your `mrgsolve` model. Plugins can either 
 link your model to external libraries (like `boost` or `Rcpp`) or they can 
 open up access to additional functionality provided by `mrgsolve` itself. 
+
+Plugins are listed and discussed in more detail in  Chapter \@ref(plugins).
 
 __Usage__
 
@@ -1402,6 +1415,73 @@ if(NEWIND <=1) {
 
 `NEWIND` is an alias for `self.newind`.
 
+
+### `simeta(n)`
+
+The `simeta(n)` function can be used to re-simulate ETA values. As of version 
+`0.11.0`, `simeta()` accepts an integer argument for the ETA number to be 
+re-simulated.  For example, 
+
+```{c, eval = FALSE}
+$MAIN
+simeta(2);
+```
+
+will re-simulate `ETA(2)`. Multiple calls to `simeta(n)` may be made. For 
+example, we can resimulate both ETA 2 and ETA 4 by:
+
+```{c, eval = FALSE}
+$MAIN
+simeta(2); 
+simeta(4);
+```
+
+It is also possible to resimulate all ETAs by calling `simeta()` with no integer 
+argument. We are currently encouraging use of `simeta(n)` rather than `simeta()` 
+since for most applications only one or two ETAs might need to be re-simulated. 
+
+### `simeps(n)`
+
+`simeps(n)` works like `simeta(n)`, but the EPS values are re-simulated rather
+than the ETA values. We are also encouraging the use of `simeps(n)` rather 
+than `simeps()`. The latter is currently supported but we are evaluating 
+whether this will be supported going forward. 
+
+
+### `self` \ {#self-object}
+
+`self` is an object that gets passed to your model function that contains 
+data items and functions that can be called. It is a `struct`  (see
+the source code 
+[here](https://github.com/metrumresearchgroup/mrgsolve/blob/master/inst/base/mrgsolv.h). 
+A partial list of members are documented in the following sections. 
+
+`self` functions include
+
+- `self.tad()`
+- `self.mtime()`
+- `self.mevent()`
+- `self.stop()`
+- `self.stop_id()`
+- `self.stop_id_cf()`
+
+`self` data members include
+
+- `self.id` (`ID`)
+- `self.amt` (`AMT`)
+- `self.cmt` (`CMT`)
+- `self.evid` (`EVID`)
+- `self.newind` (`NEWIND`)
+- `self.nid` 
+- `self.idn`
+- `self.rown`
+- `self.nrow`
+
+This information is provided for transparency and is not exhaustive. 
+We provide an interface to these data items through pre-processor directives
+with simpler names (e.g. `EVID` will translate to `self.evid`) and users are 
+encouraged to use the simpler, API name. 
+
 ### `self.cmt`
 The current compartment number regardless of whether it was given as `cmt` or 
 `CMT` in the data set.  There is no alias for `self.cmt`.
@@ -1433,38 +1513,6 @@ if(EVID==1) {
 
 ```
 
-### `simeta(n)`
-
-The `simeta(n)` function can be used to re-simulate ETA values. As of version 
-`0.11.0`, `simeta()` accepts an integer argument for the ETA number to be 
-re-simulated.  For example, 
-
-```{c, eval = FALSE}
-$MAIN
-simeta(2);
-```
-
-will re-simulate `ETA(2)`. Multiple calls to `simeta(n)` may be made. For 
-example, we can resimulate both ETA 2 and ETA 4 by:
-
-```{c, eval = FALSE}
-$MAIN
-simeta(2); 
-simeta(4);
-```
-
-
-It is also possible to resimulate all ETAs by calling `simeta()` with no integer 
-argument. We are currently encouraging use of `simeta(n)` rather than `simeta()` 
-since for most applications only one or two ETAs might need to be re-simulated. 
-
-### `simeps(n)`
-
-`simeps(n)` works like `simeta(n)`, but the EPS values are re-simulated rather
-than the ETA values. We are also encouraging the use of `simeps(n)` rather 
-than `simeps()`. The latter is currently supported but we are evaluating 
-whether this will be supported going forward. 
-
 ### `self.nid`
 The number of IDs in the data set.
 
@@ -1477,7 +1525,7 @@ The number of rows in the output data set.
 ### `self.rown`
 The current row number.  Numbers start at 0 and increase by one to `self.rown-1`. 
 
-### `self.tad()`
+### `self.tad()` \ {#self-tad}
 
 This is a function that calculates and returns the time after the most recent
 dose event record (any record with EVID equal to 1 or 4). `self.tad()` will 
