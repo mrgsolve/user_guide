@@ -235,7 +235,7 @@ KA:  1.2 : Absorption rate constant (1/hr)
 
 See the `popex` model for an example of using `@covariates`
 
-```{r,include = FALSE, message = FALSE}
+```{r, include = FALSE, message = FALSE}
 obj <- as.list(mod <- modlib("popex",compile = FALSE))
 ```
 
