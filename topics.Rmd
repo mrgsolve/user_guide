@@ -878,10 +878,10 @@ mrgsim(mod)
 ## Resimulate `ETA` and `EPS`
 
 
-__Call `simeps()` to resimulate `ETA`__
+__Call `simeps(n)` to resimulate `ETA`__
 
 - No `$PLUGIN` is required
-- `simeta()` takes no arguments
+- `simeta(n)` takes a single argument (`n`), the ETA number to resimulate
 
 For example, we can simulate individual-level covariates
 within a certain range:
@@ -897,7 +897,7 @@ int i = 0;
 
 while((WT < 60) || (WT > 80)) {
   if(++i > 100) break;
-  simeta();
+  simeta(1);
   WT = TVWT*exp(EWT);
 }
 
@@ -917,10 +917,10 @@ sum
 ```
 
 
-__Call `simeps()` to resimulate `EPS`__
+__Call `simeps(n)` to resimulate `EPS`__
 
 - No `$PLUGIN` is required
-- `simeps()` takes no arguments
+- `simeps()` takes a single argument (`n`), the EPS number to resimulate
 
 For example, we can resimulate until all 
 concentrations are greater than zero:
@@ -941,7 +941,7 @@ capture CP = CENT/V + EPS(1);
 int i = 0;
 
 while(CP < 0 && i < 100) {
-  simeps();
+  simeps(1);
   CP = CENT/V + EPS(1);
   ++i;
 }
@@ -1188,26 +1188,5 @@ example,
 mod %>% mrgsim(nocb = FALSE)
 ```
 
-
-Note that time-varying covariates are not possible when using `qsim` simulation.
-
 There is additional information about the sequence of events that takes place
 during system advance in section \@ref(section-sequence).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

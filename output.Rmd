@@ -1,4 +1,4 @@
-# Simulated output
+# Simulated output {#simulated-output}
 
 When `mrgsim` is used to simulate from a model, it returns an object with class 
 `mrgsims`.  It is an S4 object containing a matrix of simulated output and a 

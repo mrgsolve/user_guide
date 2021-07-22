@@ -9,6 +9,25 @@ editor_options:
 source("setup.R")
 ```
 
+## Key information
+
+Keep reading for all the details; I'm including this brief list of key items
+up front for your convenience.
+
+- Use `ss_rtol` and `ss_atol` arguments to `mrgsim()` to control the local error
+  estimate when `mrgsolve` is finding steady state
+- Use `ss_n` to limit the number of doses that will be administered when 
+  advancing to steady state; if the number of doses exceeds `ss_n` then a warning
+  is issued and `mrgsolve` moves on 
+- Use `ss_fixed = TRUE` to silence the warning when `ss_n` is exceeded; you are
+  essentially saying dose up to `ss_n` and then give up and move on without 
+  warning
+- Use `SS_ADVANCE` in `$ODE` to check if the system is currently being advanced
+- Use `ss_cmt` in `[ set ]` (inside your model) to select the compartments to 
+  be considered when finding steady state; you might have better success / 
+  efficiency if you focus on key compartments (or exclude unhelpful compartments
+  like a depot compartment)
+
 ## Introduction
 
 Within mrgsolve, the term "steady state" (`SS`) applies specifically to the 
@@ -17,6 +36,7 @@ is equal to the rate of drug elimination. Steady state dosing can take the form
 of repeated intermittent doses (bolus or infusion, administered intermittently
 at a given dosing interval) or a continuous infusion administered to steady
 state.
+
 
 ### Intermittent doses
 

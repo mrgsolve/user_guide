@@ -1328,7 +1328,7 @@ cama <- function(mod) {
 
 ```
 
-## Variables and Macros
+## Variables and Macros {#variables-macros}
 
 This section describes some macros and internal variables that can be used in
 model specification files.  In the following section, we adopt the convention
