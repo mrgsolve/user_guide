@@ -871,6 +871,7 @@ You recruit a plugin in the `$PLUGIN` block
 The example above will bring `Rcpp` headers into the model code.  
 
 Plugins that you can use:
+
 - `Rcpp` to write any `Rcpp` code
 - `mrgx` additional functions provided by `mrgsolve` that help use `Rcpp` in your model
 - `RcppArmadillo` to write any `Rcpp` or `RcppArmadillo` code
@@ -878,6 +879,9 @@ Plugins that you can use:
 - `CXX11` to compile your model with C++11 standard; this adds
   the compiler flag `-std=c++11`
 - `tad` to calculate time after dose inside your model code
+- `N_CMT` to make available symbols that will let you access a compartment's 
+  number by the name; so if `PERIPH` is the third compartment, you can 
+  use `N_PERIPH` to reference that number
 
 Note that `Rcpp`, `RcppArmadillo` and `BH` only allow you to link to those
 headers.  To take advantage of that, you will need to know how to use `Rcpp`,

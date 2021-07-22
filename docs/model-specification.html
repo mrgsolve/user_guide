@@ -985,14 +985,19 @@ at the top of your model file</li>
 <p>You recruit a plugin in the <code>$PLUGIN</code> block</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb53-1"><a href="model-specification.html#cb53-1" aria-hidden="true" tabindex="-1"></a>[ PLUGIN ] Rcpp</span></code></pre></div>
 <p>The example above will bring <code>Rcpp</code> headers into the model code.</p>
-<p>Plugins that you can use:
-- <code>Rcpp</code> to write any <code>Rcpp</code> code
-- <code>mrgx</code> additional functions provided by <code>mrgsolve</code> that help use <code>Rcpp</code> in your model
-- <code>RcppArmadillo</code> to write any <code>Rcpp</code> or <code>RcppArmadillo</code> code
-- <code>BH</code> to link to <code>boost</code> headers
-- <code>CXX11</code> to compile your model with C++11 standard; this adds
-the compiler flag <code>-std=c++11</code>
-- <code>tad</code> to calculate time after dose inside your model code</p>
+<p>Plugins that you can use:</p>
+<ul>
+<li><code>Rcpp</code> to write any <code>Rcpp</code> code</li>
+<li><code>mrgx</code> additional functions provided by <code>mrgsolve</code> that help use <code>Rcpp</code> in your model</li>
+<li><code>RcppArmadillo</code> to write any <code>Rcpp</code> or <code>RcppArmadillo</code> code</li>
+<li><code>BH</code> to link to <code>boost</code> headers</li>
+<li><code>CXX11</code> to compile your model with C++11 standard; this adds
+the compiler flag <code>-std=c++11</code></li>
+<li><code>tad</code> to calculate time after dose inside your model code</li>
+<li><code>N_CMT</code> to make available symbols that will let you access a compartment’s
+number by the name; so if <code>PERIPH</code> is the third compartment, you can
+use <code>N_PERIPH</code> to reference that number</li>
+</ul>
 <p>Note that <code>Rcpp</code>, <code>RcppArmadillo</code> and <code>BH</code> only allow you to link to those
 headers. To take advantage of that, you will need to know how to use <code>Rcpp</code>,
 <code>boost</code> etc. For the <code>BH</code> plugin, no headers are included for you; you must
@@ -1176,8 +1181,8 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 . 
 . ----------------  source: nmxml.cpp  ----------------
 . 
-.   project: /private/var/fol.../T/Rtmph5Q4e6
-.   shared object: nmxml-so-11c53582e5d6b 
+.   project: /private/var/fol.../T/Rtmpyz5tfh
+.   shared object: nmxml-so-120c27871ca08 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
