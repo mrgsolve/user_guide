@@ -10,5 +10,6 @@ rmd_files: [
   "sequence.Rmd",
   "steady-state.Rmd",
   "topics.Rmd", 
+  "q-and-a.Rmd",
   "install.Rmd"
 ]

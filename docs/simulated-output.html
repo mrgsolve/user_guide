@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2021-07-21" />
+<meta name="date" content="2021-07-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -330,7 +330,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.9" data-path="topics.html"><a href="topics.html#topics-time-varying"><i class="fa fa-check"></i><b>7.9</b> Time varying covariates</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>8</b> Installation</a></li>
+<li class="chapter" data-level="8" data-path="q-and-a.html"><a href="q-and-a.html"><i class="fa fa-check"></i><b>8</b> Questions and Answers</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="q-and-a.html"><a href="q-and-a.html#can-i-interrupt-a-simulation"><i class="fa fa-check"></i><b>8.1</b> Can I interrupt a simulation?</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>9</b> Installation</a></li>
 <li class="divider"></li>
 <li><a href="https://mrgsolve.github.io" target="blank">https://mrgsolve.github.io</a></li>
 <li><a href="https:/metrumrg.com" target="blank">https://metrumrg.com</a></li>
@@ -384,14 +388,14 @@ coercing the simulation matrix into other <code>R</code> objects.</p>
 <h2><span class="header-section-number">4.3</span> Methods for <code>dplyr</code> verbs</h2>
 <p><code>mrgsolve</code> provides several S3 methods to make it possible to include <code>dplyr</code> verbs in your simulation pipeline.</p>
 <p>For example</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="simulated-output.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb136-2"><a href="simulated-output.html#cb136-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb136-3"><a href="simulated-output.html#cb136-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
-<span id="cb136-4"><a href="simulated-output.html#cb136-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb136-5"><a href="simulated-output.html#cb136-5" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb136-6"><a href="simulated-output.html#cb136-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb136-7"><a href="simulated-output.html#cb136-7" aria-hidden="true" tabindex="-1"></a>  mrgsim <span class="sc">%&gt;%</span> </span>
-<span id="cb136-8"><a href="simulated-output.html#cb136-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time <span class="sc">&gt;=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="simulated-output.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb134-2"><a href="simulated-output.html#cb134-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-3"><a href="simulated-output.html#cb134-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
+<span id="cb134-4"><a href="simulated-output.html#cb134-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-5"><a href="simulated-output.html#cb134-5" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb134-6"><a href="simulated-output.html#cb134-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb134-7"><a href="simulated-output.html#cb134-7" aria-hidden="true" tabindex="-1"></a>  mrgsim <span class="sc">%&gt;%</span> </span>
+<span id="cb134-8"><a href="simulated-output.html#cb134-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time <span class="sc">&gt;=</span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>. # A tibble: 441 x 7
 .       ID  time       GUT  CENT  RESP    DV    CP
 .    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;

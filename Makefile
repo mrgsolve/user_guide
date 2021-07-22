@@ -12,6 +12,7 @@ html:
 	make render
 	rm -rf docs/*
 	cp -r _book/* docs/
+	make spelling
 
 publish:
 	make render

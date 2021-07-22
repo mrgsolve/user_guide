@@ -850,38 +850,38 @@ separate `$CMT` block is not appropriate when `cmt` is specified in `$PKMODEL`.
 __Syntax__: text   
 __Multiple allowed__: no   
 
-Plugins are a way to add extensions to your `mrgsolve` model.  When a plugin is 
-recruited into the model, `mrgsolve` may do one or more of the following:
+Plugins are a way to add extensions to your `mrgsolve` model. Plugins can either 
+link your model to external libraries (like `boost` or `Rcpp`) or they can 
+open up access to additional functionality provided by `mrgsolve` itself. 
 
-- Link to another `R` package during compilation, including
-    - `Rcpp` to allow you to write `Rcpp` code in your specification
-    - `mrgx` to provide some extra C++ functions (see below)
-    - `RcppArmadillo` to both `Rcpp` and `Armadillo` in your specification
-    - `BH` to use `boost` headers
-- Include appropriate header files during compilation
-    - For example, when the `Rcpp` plugin is called, `mrgsolve` will `#include <Rcpp.h>` 
-      at the top of your model file
+__Usage__
 
-You recruit a plugin in the `$PLUGIN` block
+To invoke a plugin, list the plugin name in the code block. For requesting
+`Rcpp` headers in your model, call
 
-```{c, eval=FALSE}
-[ PLUGIN ] Rcpp
+```{c, eval = FALSE}
+$PLUGIN Rcpp
 ```
 
-The example above will bring `Rcpp` headers into the model code.  
+__Available plugins__
 
-Plugins that you can use:
+The following plugins make additional mrgsolve-specific functionality available
 
-- `Rcpp` to write any `Rcpp` code
-- `mrgx` additional functions provided by `mrgsolve` that help use `Rcpp` in your model
-- `RcppArmadillo` to write any `Rcpp` or `RcppArmadillo` code
-- `BH` to link to `boost` headers
-- `CXX11` to compile your model with C++11 standard; this adds
+- `mrgx`: extra `C++` functions (see below)
+- `tad`: track time after dose in your model 
+- `N_CMT`: get the number of a compartment
+
+The following plugin lets you customize how your model is compiled
+
+- `CXX11`: compile your model with `C++11` standard; this adds
   the compiler flag `-std=c++11`
-- `tad` to calculate time after dose inside your model code
-- `N_CMT` to make available symbols that will let you access a compartment's 
-  number by the name; so if `PERIPH` is the third compartment, you can 
-  use `N_PERIPH` to reference that number
+
+The following plugins will let you link to external libraries
+
+- `Rcpp`: include `Rcpp` headers int your model
+- `BH`: include `boost` headers in your model 
+- `RcppArmadillo`: include `Armadillo` headers in your model
+
 
 Note that `Rcpp`, `RcppArmadillo` and `BH` only allow you to link to those
 headers.  To take advantage of that, you will need to know how to use `Rcpp`,
@@ -889,30 +889,8 @@ headers.  To take advantage of that, you will need to know how to use `Rcpp`,
 include the proper headers you want to use in `$GLOBAL`.
 
 
-__Rcpp__ example
-
-```{c,eval=FALSE}
-
-[ PLUGIN ] Rcpp
-
-[ MAIN ]
-
-if(NEWIND <=1) {
-  double wt = R::rnorm(70,20);
-  double sex = R::rbinom(1,0.51);
-}
-
-```
-
 __mrgx__
-
-For example
-
-```{c,eval=FALSE}
-
-$PLUGIN Rcpp mrgx
-
-```
+This is a general collection of functions that we made available. 
 
 Functions provided by `mrgx`:
 
@@ -936,6 +914,8 @@ to call these functions you must include `mrgx::` namespace identifier to the
 front of the function name.  For example, don't use `rnorm(50,20,40,140)`; use
 `mrgx::rnorm(50,20,40,140)`.
 
+
+#### Some examples
 
 __Get a numeric vector from `$ENV`__
 ```{c,eval=FALSE}

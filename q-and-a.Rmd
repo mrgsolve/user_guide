@@ -1,0 +1,26 @@
+```{r,echo=FALSE,message=FALSE}
+source("setup.R")
+```
+
+# Questions and Answers {#q-and-a}
+
+I'm using this chapter as a place to provide miscellaneous information that 
+might not have an obvious place to live. I'd call this a FAQ, but not all of 
+the questions are asked frequently or at all. 
+
+## Can I interrupt a simulation?
+
+Starting with `mrgsolve` version `0.11.1`, you can interrupt a long simulation
+by pressing `Control-C` or `Esc`, the standard way to pass an interrupt signal
+through R. `mrgsolve` will stop every so often to look for the interrupt 
+signal.  
+
+You can control the frequency with which `mrgsolve` looks for the interrupt 
+signal through an argument to `mrgsim` (default: 256 simulation records).
+Increase to check less frequently, increase to check more frequently (this might
+be needed for a model where a large amount of work is required to advance
+one step) or set to negative number to never check.
+
+
+
+

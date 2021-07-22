@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2021-07-21" />
+<meta name="date" content="2021-07-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -330,7 +330,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.9" data-path="topics.html"><a href="topics.html#topics-time-varying"><i class="fa fa-check"></i><b>7.9</b> Time varying covariates</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>8</b> Installation</a></li>
+<li class="chapter" data-level="8" data-path="q-and-a.html"><a href="q-and-a.html"><i class="fa fa-check"></i><b>8</b> Questions and Answers</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="q-and-a.html"><a href="q-and-a.html#can-i-interrupt-a-simulation"><i class="fa fa-check"></i><b>8.1</b> Can I interrupt a simulation?</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>9</b> Installation</a></li>
 <li class="divider"></li>
 <li><a href="https://mrgsolve.github.io" target="blank">https://mrgsolve.github.io</a></li>
 <li><a href="https:/metrumrg.com" target="blank">https://metrumrg.com</a></li>
@@ -966,56 +970,37 @@ separate <code>$CMT</code> block is not appropriate when <code>cmt</code> is spe
 <h3><span class="header-section-number">2.2.18</span> <code>$PLUGIN</code>  </h3>
 <p><strong>Syntax</strong>: text<br />
 <strong>Multiple allowed</strong>: no</p>
-<p>Plugins are a way to add extensions to your <code>mrgsolve</code> model. When a plugin is
-recruited into the model, <code>mrgsolve</code> may do one or more of the following:</p>
+<p>Plugins are a way to add extensions to your <code>mrgsolve</code> model. Plugins can either
+link your model to external libraries (like <code>boost</code> or <code>Rcpp</code>) or they can
+open up access to additional functionality provided by <code>mrgsolve</code> itself.</p>
+<p><strong>Usage</strong></p>
+<p>To invoke a plugin, list the plugin name in the code block. For requesting
+<code>Rcpp</code> headers in your model, call</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb53-1"><a href="model-specification.html#cb53-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN Rcpp</span></code></pre></div>
+<p><strong>Available plugins</strong></p>
+<p>The following plugins make additional mrgsolve-specific functionality available</p>
 <ul>
-<li>Link to another <code>R</code> package during compilation, including
-<ul>
-<li><code>Rcpp</code> to allow you to write <code>Rcpp</code> code in your specification</li>
-<li><code>mrgx</code> to provide some extra C++ functions (see below)</li>
-<li><code>RcppArmadillo</code> to both <code>Rcpp</code> and <code>Armadillo</code> in your specification</li>
-<li><code>BH</code> to use <code>boost</code> headers</li>
-</ul></li>
-<li>Include appropriate header files during compilation
-<ul>
-<li>For example, when the <code>Rcpp</code> plugin is called, <code>mrgsolve</code> will <code>#include &lt;Rcpp.h&gt;</code>
-at the top of your model file</li>
-</ul></li>
+<li><code>mrgx</code>: extra <code>C++</code> functions (see below)</li>
+<li><code>tad</code>: track time after dose in your model</li>
+<li><code>N_CMT</code>: get the number of a compartment</li>
 </ul>
-<p>You recruit a plugin in the <code>$PLUGIN</code> block</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb53-1"><a href="model-specification.html#cb53-1" aria-hidden="true" tabindex="-1"></a>[ PLUGIN ] Rcpp</span></code></pre></div>
-<p>The example above will bring <code>Rcpp</code> headers into the model code.</p>
-<p>Plugins that you can use:</p>
+<p>The following plugin lets you customize how your model is compiled</p>
 <ul>
-<li><code>Rcpp</code> to write any <code>Rcpp</code> code</li>
-<li><code>mrgx</code> additional functions provided by <code>mrgsolve</code> that help use <code>Rcpp</code> in your model</li>
-<li><code>RcppArmadillo</code> to write any <code>Rcpp</code> or <code>RcppArmadillo</code> code</li>
-<li><code>BH</code> to link to <code>boost</code> headers</li>
-<li><code>CXX11</code> to compile your model with C++11 standard; this adds
+<li><code>CXX11</code>: compile your model with <code>C++11</code> standard; this adds
 the compiler flag <code>-std=c++11</code></li>
-<li><code>tad</code> to calculate time after dose inside your model code</li>
-<li><code>N_CMT</code> to make available symbols that will let you access a compartment’s
-number by the name; so if <code>PERIPH</code> is the third compartment, you can
-use <code>N_PERIPH</code> to reference that number</li>
+</ul>
+<p>The following plugins will let you link to external libraries</p>
+<ul>
+<li><code>Rcpp</code>: include <code>Rcpp</code> headers int your model</li>
+<li><code>BH</code>: include <code>boost</code> headers in your model</li>
+<li><code>RcppArmadillo</code>: include <code>Armadillo</code> headers in your model</li>
 </ul>
 <p>Note that <code>Rcpp</code>, <code>RcppArmadillo</code> and <code>BH</code> only allow you to link to those
 headers. To take advantage of that, you will need to know how to use <code>Rcpp</code>,
 <code>boost</code> etc. For the <code>BH</code> plugin, no headers are included for you; you must
 include the proper headers you want to use in <code>$GLOBAL</code>.</p>
-<p><strong>Rcpp</strong> example</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb54-1"><a href="model-specification.html#cb54-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-2"><a href="model-specification.html#cb54-2" aria-hidden="true" tabindex="-1"></a>[ PLUGIN ] Rcpp</span>
-<span id="cb54-3"><a href="model-specification.html#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-4"><a href="model-specification.html#cb54-4" aria-hidden="true" tabindex="-1"></a>[ MAIN ]</span>
-<span id="cb54-5"><a href="model-specification.html#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-6"><a href="model-specification.html#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {</span>
-<span id="cb54-7"><a href="model-specification.html#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> wt = R::rnorm(<span class="dv">70</span>,<span class="dv">20</span>);</span>
-<span id="cb54-8"><a href="model-specification.html#cb54-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> sex = R::rbinom(<span class="dv">1</span>,<span class="fl">0.51</span>);</span>
-<span id="cb54-9"><a href="model-specification.html#cb54-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p><strong>mrgx</strong></p>
-<p>For example</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb55-1"><a href="model-specification.html#cb55-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-2"><a href="model-specification.html#cb55-2" aria-hidden="true" tabindex="-1"></a>$PLUGIN Rcpp mrgx</span></code></pre></div>
+<p><strong>mrgx</strong>
+This is a general collection of functions that we made available.</p>
 <p>Functions provided by <code>mrgx</code>:</p>
 <ul>
 <li><code>T get&lt;T&gt;(std::string &lt;pkgname&gt;, std::string &lt;objectname&gt;)</code>
@@ -1048,39 +1033,42 @@ include the proper headers you want to use in <code>$GLOBAL</code>.</p>
 to call these functions you must include <code>mrgx::</code> namespace identifier to the
 front of the function name. For example, don’t use <code>rnorm(50,20,40,140)</code>; use
 <code>mrgx::rnorm(50,20,40,140)</code>.</p>
+<div id="some-examples" class="section level4" number="2.2.18.1">
+<h4><span class="header-section-number">2.2.18.1</span> Some examples</h4>
 <p><strong>Get a numeric vector from <code>$ENV</code></strong></p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb56-1"><a href="model-specification.html#cb56-1" aria-hidden="true" tabindex="-1"></a>[ PLUGIN ] Rcpp mrgx</span>
-<span id="cb56-2"><a href="model-specification.html#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-3"><a href="model-specification.html#cb56-3" aria-hidden="true" tabindex="-1"></a>[ ENV ]</span>
-<span id="cb56-4"><a href="model-specification.html#cb56-4" aria-hidden="true" tabindex="-1"></a>x &lt;- c(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
-<span id="cb56-5"><a href="model-specification.html#cb56-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-6"><a href="model-specification.html#cb56-6" aria-hidden="true" tabindex="-1"></a>[ GLOBAL ]</span>
-<span id="cb56-7"><a href="model-specification.html#cb56-7" aria-hidden="true" tabindex="-1"></a>Rcpp::NumericVector x;</span>
-<span id="cb56-8"><a href="model-specification.html#cb56-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-9"><a href="model-specification.html#cb56-9" aria-hidden="true" tabindex="-1"></a>[ PREAMBLE ]</span>
-<span id="cb56-10"><a href="model-specification.html#cb56-10" aria-hidden="true" tabindex="-1"></a>x = mrgx::get&lt;Rcpp::NumericVector&gt;(<span class="st">&quot;x&quot;</span>, self);</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb54-1"><a href="model-specification.html#cb54-1" aria-hidden="true" tabindex="-1"></a>[ PLUGIN ] Rcpp mrgx</span>
+<span id="cb54-2"><a href="model-specification.html#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="model-specification.html#cb54-3" aria-hidden="true" tabindex="-1"></a>[ ENV ]</span>
+<span id="cb54-4"><a href="model-specification.html#cb54-4" aria-hidden="true" tabindex="-1"></a>x &lt;- c(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb54-5"><a href="model-specification.html#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="model-specification.html#cb54-6" aria-hidden="true" tabindex="-1"></a>[ GLOBAL ]</span>
+<span id="cb54-7"><a href="model-specification.html#cb54-7" aria-hidden="true" tabindex="-1"></a>Rcpp::NumericVector x;</span>
+<span id="cb54-8"><a href="model-specification.html#cb54-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-9"><a href="model-specification.html#cb54-9" aria-hidden="true" tabindex="-1"></a>[ PREAMBLE ]</span>
+<span id="cb54-10"><a href="model-specification.html#cb54-10" aria-hidden="true" tabindex="-1"></a>x = mrgx::get&lt;Rcpp::NumericVector&gt;(<span class="st">&quot;x&quot;</span>, self);</span></code></pre></div>
 <p><strong>Get the <code>print</code> function from <code>package:base</code></strong></p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb57-1"><a href="model-specification.html#cb57-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN Rcpp mrgx</span>
-<span id="cb57-2"><a href="model-specification.html#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-3"><a href="model-specification.html#cb57-3" aria-hidden="true" tabindex="-1"></a>$GLOBAL</span>
-<span id="cb57-4"><a href="model-specification.html#cb57-4" aria-hidden="true" tabindex="-1"></a>Rcpp::Function print = mrgx::mt_fun();</span>
-<span id="cb57-5"><a href="model-specification.html#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-6"><a href="model-specification.html#cb57-6" aria-hidden="true" tabindex="-1"></a>$PREAMBLE</span>
-<span id="cb57-7"><a href="model-specification.html#cb57-7" aria-hidden="true" tabindex="-1"></a>print = mrgx::get&lt;Rcpp::Function&gt;(<span class="st">&quot;base&quot;</span>, <span class="st">&quot;print&quot;</span>);</span>
-<span id="cb57-8"><a href="model-specification.html#cb57-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-9"><a href="model-specification.html#cb57-9" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb57-10"><a href="model-specification.html#cb57-10" aria-hidden="true" tabindex="-1"></a>print(self.rown);</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb55-1"><a href="model-specification.html#cb55-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN Rcpp mrgx</span>
+<span id="cb55-2"><a href="model-specification.html#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="model-specification.html#cb55-3" aria-hidden="true" tabindex="-1"></a>$GLOBAL</span>
+<span id="cb55-4"><a href="model-specification.html#cb55-4" aria-hidden="true" tabindex="-1"></a>Rcpp::Function print = mrgx::mt_fun();</span>
+<span id="cb55-5"><a href="model-specification.html#cb55-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="model-specification.html#cb55-6" aria-hidden="true" tabindex="-1"></a>$PREAMBLE</span>
+<span id="cb55-7"><a href="model-specification.html#cb55-7" aria-hidden="true" tabindex="-1"></a>print = mrgx::get&lt;Rcpp::Function&gt;(<span class="st">&quot;base&quot;</span>, <span class="st">&quot;print&quot;</span>);</span>
+<span id="cb55-8"><a href="model-specification.html#cb55-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-9"><a href="model-specification.html#cb55-9" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb55-10"><a href="model-specification.html#cb55-10" aria-hidden="true" tabindex="-1"></a>print(self.rown);</span></code></pre></div>
 <p>Note that we declare the <code>print</code> in <code>$GLOBAL</code> and use the <code>mt_fun()</code> place holder.</p>
 <p><strong>Simulate truncated normal variables</strong>
 This simulates a weight that has mean 80, standard deviation 20 and is greater
 than 40 and less than 140.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb58-1"><a href="model-specification.html#cb58-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN Rcpp mrgx</span>
-<span id="cb58-2"><a href="model-specification.html#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-3"><a href="model-specification.html#cb58-3" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb58-4"><a href="model-specification.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {</span>
-<span id="cb58-5"><a href="model-specification.html#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> WT = mrgx::rnorm(<span class="dv">80</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">140</span>);</span>
-<span id="cb58-6"><a href="model-specification.html#cb58-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb56-1"><a href="model-specification.html#cb56-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN Rcpp mrgx</span>
+<span id="cb56-2"><a href="model-specification.html#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="model-specification.html#cb56-3" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb56-4"><a href="model-specification.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {</span>
+<span id="cb56-5"><a href="model-specification.html#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> WT = mrgx::rnorm(<span class="dv">80</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">140</span>);</span>
+<span id="cb56-6"><a href="model-specification.html#cb56-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>See also: <a href="model-specification.html#block-preamble">2.2.10</a>.</p>
+</div>
 </div>
 <div id="block-theta" class="section level3" number="2.2.19">
 <h3><span class="header-section-number">2.2.19</span> <code>$THETA</code>  </h3>
@@ -1091,20 +1079,20 @@ than 40 and less than 140.</p>
 are determined by a prefix and a number. By default, the prefix is <code>THETA</code> and
 the number sequentially numbers the input values.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb59-1"><a href="model-specification.html#cb59-1" aria-hidden="true" tabindex="-1"></a>[ THETA ]</span>
-<span id="cb59-2"><a href="model-specification.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb57-1"><a href="model-specification.html#cb57-1" aria-hidden="true" tabindex="-1"></a>[ THETA ]</span>
+<span id="cb57-2"><a href="model-specification.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span></span></code></pre></div>
 <p>is equivalent to</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb60-1"><a href="model-specification.html#cb60-1" aria-hidden="true" tabindex="-1"></a>$PARAM THETA1 = <span class="fl">0.1</span>, THETA2 = <span class="fl">0.2</span>, THETA3 = <span class="fl">0.3</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb58-1"><a href="model-specification.html#cb58-1" aria-hidden="true" tabindex="-1"></a>$PARAM THETA1 = <span class="fl">0.1</span>, THETA2 = <span class="fl">0.2</span>, THETA3 = <span class="fl">0.3</span></span></code></pre></div>
 <p>Annotated example:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb61-1"><a href="model-specification.html#cb61-1" aria-hidden="true" tabindex="-1"></a>$THETA @annotated</span>
-<span id="cb61-2"><a href="model-specification.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fl">0.1</span> : Typical value of clearance (L/hr)</span>
-<span id="cb61-3"><a href="model-specification.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fl">0.2</span> : Typical value of volume (L)</span>
-<span id="cb61-4"><a href="model-specification.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="fl">0.3</span> : Typical value of ka (<span class="dv">1</span>/hr)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb59-1"><a href="model-specification.html#cb59-1" aria-hidden="true" tabindex="-1"></a>$THETA @annotated</span>
+<span id="cb59-2"><a href="model-specification.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fl">0.1</span> : Typical value of clearance (L/hr)</span>
+<span id="cb59-3"><a href="model-specification.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fl">0.2</span> : Typical value of volume (L)</span>
+<span id="cb59-4"><a href="model-specification.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fl">0.3</span> : Typical value of ka (<span class="dv">1</span>/hr)</span></code></pre></div>
 <p>To change the prefix, use <code>@name</code> option</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb62-1"><a href="model-specification.html#cb62-1" aria-hidden="true" tabindex="-1"></a>$THETA @name theta</span>
-<span id="cb62-2"><a href="model-specification.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb60-1"><a href="model-specification.html#cb60-1" aria-hidden="true" tabindex="-1"></a>$THETA @name theta</span>
+<span id="cb60-2"><a href="model-specification.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span></span></code></pre></div>
 <p>would be equivalent to</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb63-1"><a href="model-specification.html#cb63-1" aria-hidden="true" tabindex="-1"></a>[ PARAM ] theta1 = <span class="fl">0.1</span>, theta2 = <span class="fl">0.2</span>, theta3 = <span class="fl">0.3</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb61-1"><a href="model-specification.html#cb61-1" aria-hidden="true" tabindex="-1"></a>[ PARAM ] theta1 = <span class="fl">0.1</span>, theta2 = <span class="fl">0.2</span>, theta3 = <span class="fl">0.3</span></span></code></pre></div>
 <p>The <code>@object</code> and <code>@as_object</code> options should name or return an unnamed vector
 of parameter values (names are ignored).</p>
 <p>See also: <a href="model-specification.html#block-param">2.2.4</a>.</p>
@@ -1130,15 +1118,15 @@ working directory.</p>
 <p>Once the model object is obtained, the path to the <code>xml</code> file that formed
 the source for imported parameters can be retrieved by coercing the
 model object to list and looking for <code>nm_import</code>:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="model-specification.html#cb64-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;1005&quot;</span>, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb64-2"><a href="model-specification.html#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-3"><a href="model-specification.html#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(mod)<span class="sc">$</span>nm_import</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="model-specification.html#cb62-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;1005&quot;</span>, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb62-2"><a href="model-specification.html#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="model-specification.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(mod)<span class="sc">$</span>nm_import</span></code></pre></div>
 <p>For help on the arguments / options for <code>$NMXML</code>, please see the <code>?nmxml</code>
 help topic in your <code>R</code> session after loading the <code>mrgsolve</code> package.</p>
 <p><strong>An example</strong></p>
 <p>There is a NONMEM run embedded in the <code>mrgsolve</code> package</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="model-specification.html#cb65-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">path.package</span>(<span class="st">&quot;mrgsolve&quot;</span>),<span class="st">&quot;nonmem&quot;</span>)</span>
-<span id="cb65-2"><a href="model-specification.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(path, <span class="at">recursive=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="model-specification.html#cb63-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">path.package</span>(<span class="st">&quot;mrgsolve&quot;</span>),<span class="st">&quot;nonmem&quot;</span>)</span>
+<span id="cb63-2"><a href="model-specification.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(path, <span class="at">recursive=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>.  [1] &quot;1005/1005.cat&quot;    &quot;1005/1005.coi&quot;    &quot;1005/1005.cor&quot;    &quot;1005/1005.cov&quot;   
 .  [5] &quot;1005/1005.cpu&quot;    &quot;1005/1005.ctl&quot;    &quot;1005/1005.ext&quot;    &quot;1005/1005.grd&quot;   
 .  [9] &quot;1005/1005.lst&quot;    &quot;1005/1005.phi&quot;    &quot;1005/1005.shk&quot;    &quot;1005/1005.shm&quot;   
@@ -1146,43 +1134,43 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 . [17] &quot;2005/2005.ext&quot;</code></pre>
 <p>We can create a <code>mrgsolve</code> control stream that will import <code>THETA</code>, <code>OMEGA</code> and
 <code>SIGMA</code> from that run using the <code>$NMXML</code> code block.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="model-specification.html#cb67-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb67-2"><a href="model-specification.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="st">$NMXML</span></span>
-<span id="cb67-3"><a href="model-specification.html#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="st">run = 1005</span></span>
-<span id="cb67-4"><a href="model-specification.html#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="st">project = path</span></span>
-<span id="cb67-5"><a href="model-specification.html#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="st">root = &quot;cppfile&quot;</span></span>
-<span id="cb67-6"><a href="model-specification.html#cb67-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-7"><a href="model-specification.html#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="st">olabels = c(&quot;ECL&quot;, &quot;EVC&quot;, &quot;EKA&quot;)</span></span>
-<span id="cb67-8"><a href="model-specification.html#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="st">slabels = c(&quot;PROP&quot;, &quot;ADD&quot;)</span></span>
-<span id="cb67-9"><a href="model-specification.html#cb67-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-10"><a href="model-specification.html#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="st">$MAIN</span></span>
-<span id="cb67-11"><a href="model-specification.html#cb67-11" aria-hidden="true" tabindex="-1"></a><span class="st">double CL = THETA1*exp(ECL);</span></span>
-<span id="cb67-12"><a href="model-specification.html#cb67-12" aria-hidden="true" tabindex="-1"></a><span class="st">double V2 = THETA2*exp(EVC);</span></span>
-<span id="cb67-13"><a href="model-specification.html#cb67-13" aria-hidden="true" tabindex="-1"></a><span class="st">double KA = THETA3*exp(EKA);</span></span>
-<span id="cb67-14"><a href="model-specification.html#cb67-14" aria-hidden="true" tabindex="-1"></a><span class="st">double Q = THETA4;</span></span>
-<span id="cb67-15"><a href="model-specification.html#cb67-15" aria-hidden="true" tabindex="-1"></a><span class="st">double V3 = THETA5;</span></span>
-<span id="cb67-16"><a href="model-specification.html#cb67-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-17"><a href="model-specification.html#cb67-17" aria-hidden="true" tabindex="-1"></a><span class="st">$PKMODEL ncmt=2, depot=TRUE</span></span>
-<span id="cb67-18"><a href="model-specification.html#cb67-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-19"><a href="model-specification.html#cb67-19" aria-hidden="true" tabindex="-1"></a><span class="st">$CMT GUT CENT PERIPH</span></span>
-<span id="cb67-20"><a href="model-specification.html#cb67-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-21"><a href="model-specification.html#cb67-21" aria-hidden="true" tabindex="-1"></a><span class="st">$TABLE</span></span>
-<span id="cb67-22"><a href="model-specification.html#cb67-22" aria-hidden="true" tabindex="-1"></a><span class="st">double CP = (CENT/V2)*(1+PROP) + ADD/5;</span></span>
-<span id="cb67-23"><a href="model-specification.html#cb67-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-24"><a href="model-specification.html#cb67-24" aria-hidden="true" tabindex="-1"></a><span class="st">$CAPTURE CP</span></span>
-<span id="cb67-25"><a href="model-specification.html#cb67-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-26"><a href="model-specification.html#cb67-26" aria-hidden="true" tabindex="-1"></a><span class="st">$SET delta=4, end=96</span></span>
-<span id="cb67-27"><a href="model-specification.html#cb67-27" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="model-specification.html#cb65-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb65-2"><a href="model-specification.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="st">$NMXML</span></span>
+<span id="cb65-3"><a href="model-specification.html#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="st">run = 1005</span></span>
+<span id="cb65-4"><a href="model-specification.html#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="st">project = path</span></span>
+<span id="cb65-5"><a href="model-specification.html#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="st">root = &quot;cppfile&quot;</span></span>
+<span id="cb65-6"><a href="model-specification.html#cb65-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-7"><a href="model-specification.html#cb65-7" aria-hidden="true" tabindex="-1"></a><span class="st">olabels = c(&quot;ECL&quot;, &quot;EVC&quot;, &quot;EKA&quot;)</span></span>
+<span id="cb65-8"><a href="model-specification.html#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="st">slabels = c(&quot;PROP&quot;, &quot;ADD&quot;)</span></span>
+<span id="cb65-9"><a href="model-specification.html#cb65-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-10"><a href="model-specification.html#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="st">$MAIN</span></span>
+<span id="cb65-11"><a href="model-specification.html#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="st">double CL = THETA1*exp(ECL);</span></span>
+<span id="cb65-12"><a href="model-specification.html#cb65-12" aria-hidden="true" tabindex="-1"></a><span class="st">double V2 = THETA2*exp(EVC);</span></span>
+<span id="cb65-13"><a href="model-specification.html#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="st">double KA = THETA3*exp(EKA);</span></span>
+<span id="cb65-14"><a href="model-specification.html#cb65-14" aria-hidden="true" tabindex="-1"></a><span class="st">double Q = THETA4;</span></span>
+<span id="cb65-15"><a href="model-specification.html#cb65-15" aria-hidden="true" tabindex="-1"></a><span class="st">double V3 = THETA5;</span></span>
+<span id="cb65-16"><a href="model-specification.html#cb65-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-17"><a href="model-specification.html#cb65-17" aria-hidden="true" tabindex="-1"></a><span class="st">$PKMODEL ncmt=2, depot=TRUE</span></span>
+<span id="cb65-18"><a href="model-specification.html#cb65-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-19"><a href="model-specification.html#cb65-19" aria-hidden="true" tabindex="-1"></a><span class="st">$CMT GUT CENT PERIPH</span></span>
+<span id="cb65-20"><a href="model-specification.html#cb65-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-21"><a href="model-specification.html#cb65-21" aria-hidden="true" tabindex="-1"></a><span class="st">$TABLE</span></span>
+<span id="cb65-22"><a href="model-specification.html#cb65-22" aria-hidden="true" tabindex="-1"></a><span class="st">double CP = (CENT/V2)*(1+PROP) + ADD/5;</span></span>
+<span id="cb65-23"><a href="model-specification.html#cb65-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-24"><a href="model-specification.html#cb65-24" aria-hidden="true" tabindex="-1"></a><span class="st">$CAPTURE CP</span></span>
+<span id="cb65-25"><a href="model-specification.html#cb65-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-26"><a href="model-specification.html#cb65-26" aria-hidden="true" tabindex="-1"></a><span class="st">$SET delta=4, end=96</span></span>
+<span id="cb65-27"><a href="model-specification.html#cb65-27" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span></code></pre></div>
 <p><strong>NOTE</strong>: in order to use this code, we need to install the <code>xml2</code> package.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="model-specification.html#cb68-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;nmxml&quot;</span>, code, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="model-specification.html#cb66-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;nmxml&quot;</span>, code, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>. Loading required namespace: xml2</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="model-specification.html#cb70-1" aria-hidden="true" tabindex="-1"></a>mod</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="model-specification.html#cb68-1" aria-hidden="true" tabindex="-1"></a>mod</span></code></pre></div>
 <pre><code>. 
 . 
 . ----------------  source: nmxml.cpp  ----------------
 . 
-.   project: /private/var/fol.../T/Rtmp4g9qUJ
-.   shared object: nmxml-so-1235167415dc8 
+.   project: /private/var/fol.../T/Rtmp1MDCcN
+.   shared object: nmxml-so-12ca477d68c8 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
@@ -1196,7 +1184,7 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 . 
 .   solver:        atol: 1e-08 rtol: 1e-08 maxsteps: 20k
 . ------------------------------------------------------</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="model-specification.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">param</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="model-specification.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">param</span>(mod)</span></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=7):
 .  name   value  . name   value
@@ -1204,7 +1192,7 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 .  THETA2 22.8   | THETA6 1.02 
 .  THETA3 0.0714 | THETA7 1.19 
 .  THETA4 3.47   | .      .</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="model-specification.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">revar</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="model-specification.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">revar</span>(mod)</span></code></pre></div>
 <pre><code>. $omega
 . $...
 .              [,1]        [,2]        [,3]
@@ -1242,38 +1230,38 @@ faster than <code>$NMXML</code> when loading from sampling based methods (mainly
 <code>METHOD=BAYES</code>).</p>
 <p>We can load the same mode as the <code>$NMXML</code> example above with the following
 code:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="model-specification.html#cb76-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">path.package</span>(<span class="st">&quot;mrgsolve&quot;</span>),<span class="st">&quot;nonmem&quot;</span>)</span>
-<span id="cb76-2"><a href="model-specification.html#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-3"><a href="model-specification.html#cb76-3" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb76-4"><a href="model-specification.html#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="st">$NMEXT</span></span>
-<span id="cb76-5"><a href="model-specification.html#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="st">run = 1005</span></span>
-<span id="cb76-6"><a href="model-specification.html#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="st">project = path</span></span>
-<span id="cb76-7"><a href="model-specification.html#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="st">root = &quot;cppfile&quot;</span></span>
-<span id="cb76-8"><a href="model-specification.html#cb76-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-9"><a href="model-specification.html#cb76-9" aria-hidden="true" tabindex="-1"></a><span class="st">olabels = c(&quot;ECL&quot;, &quot;EVC&quot;, &quot;EKA&quot;)</span></span>
-<span id="cb76-10"><a href="model-specification.html#cb76-10" aria-hidden="true" tabindex="-1"></a><span class="st">slabels = c(&quot;PROP&quot;, &quot;ADD&quot;)</span></span>
-<span id="cb76-11"><a href="model-specification.html#cb76-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-12"><a href="model-specification.html#cb76-12" aria-hidden="true" tabindex="-1"></a><span class="st">$MAIN</span></span>
-<span id="cb76-13"><a href="model-specification.html#cb76-13" aria-hidden="true" tabindex="-1"></a><span class="st">double CL = THETA1*exp(ECL);</span></span>
-<span id="cb76-14"><a href="model-specification.html#cb76-14" aria-hidden="true" tabindex="-1"></a><span class="st">double V2 = THETA2*exp(EVC);</span></span>
-<span id="cb76-15"><a href="model-specification.html#cb76-15" aria-hidden="true" tabindex="-1"></a><span class="st">double KA = THETA3*exp(EKA);</span></span>
-<span id="cb76-16"><a href="model-specification.html#cb76-16" aria-hidden="true" tabindex="-1"></a><span class="st">double Q = THETA4;</span></span>
-<span id="cb76-17"><a href="model-specification.html#cb76-17" aria-hidden="true" tabindex="-1"></a><span class="st">double V3 = THETA5;</span></span>
-<span id="cb76-18"><a href="model-specification.html#cb76-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-19"><a href="model-specification.html#cb76-19" aria-hidden="true" tabindex="-1"></a><span class="st">$PKMODEL ncmt=2, depot=TRUE</span></span>
-<span id="cb76-20"><a href="model-specification.html#cb76-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-21"><a href="model-specification.html#cb76-21" aria-hidden="true" tabindex="-1"></a><span class="st">$CMT GUT CENT PERIPH</span></span>
-<span id="cb76-22"><a href="model-specification.html#cb76-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-23"><a href="model-specification.html#cb76-23" aria-hidden="true" tabindex="-1"></a><span class="st">$TABLE</span></span>
-<span id="cb76-24"><a href="model-specification.html#cb76-24" aria-hidden="true" tabindex="-1"></a><span class="st">double CP = (CENT/V2)*(1+PROP) + ADD/5;</span></span>
-<span id="cb76-25"><a href="model-specification.html#cb76-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-26"><a href="model-specification.html#cb76-26" aria-hidden="true" tabindex="-1"></a><span class="st">$CAPTURE CP</span></span>
-<span id="cb76-27"><a href="model-specification.html#cb76-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-28"><a href="model-specification.html#cb76-28" aria-hidden="true" tabindex="-1"></a><span class="st">$SET delta = 4, end = 96</span></span>
-<span id="cb76-29"><a href="model-specification.html#cb76-29" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span></code></pre></div>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="model-specification.html#cb77-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;nmext&quot;</span>, code, <span class="at">quiet=</span><span class="cn">TRUE</span>)</span>
-<span id="cb77-2"><a href="model-specification.html#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-3"><a href="model-specification.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">param</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="model-specification.html#cb74-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">path.package</span>(<span class="st">&quot;mrgsolve&quot;</span>),<span class="st">&quot;nonmem&quot;</span>)</span>
+<span id="cb74-2"><a href="model-specification.html#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-3"><a href="model-specification.html#cb74-3" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb74-4"><a href="model-specification.html#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="st">$NMEXT</span></span>
+<span id="cb74-5"><a href="model-specification.html#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="st">run = 1005</span></span>
+<span id="cb74-6"><a href="model-specification.html#cb74-6" aria-hidden="true" tabindex="-1"></a><span class="st">project = path</span></span>
+<span id="cb74-7"><a href="model-specification.html#cb74-7" aria-hidden="true" tabindex="-1"></a><span class="st">root = &quot;cppfile&quot;</span></span>
+<span id="cb74-8"><a href="model-specification.html#cb74-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-9"><a href="model-specification.html#cb74-9" aria-hidden="true" tabindex="-1"></a><span class="st">olabels = c(&quot;ECL&quot;, &quot;EVC&quot;, &quot;EKA&quot;)</span></span>
+<span id="cb74-10"><a href="model-specification.html#cb74-10" aria-hidden="true" tabindex="-1"></a><span class="st">slabels = c(&quot;PROP&quot;, &quot;ADD&quot;)</span></span>
+<span id="cb74-11"><a href="model-specification.html#cb74-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-12"><a href="model-specification.html#cb74-12" aria-hidden="true" tabindex="-1"></a><span class="st">$MAIN</span></span>
+<span id="cb74-13"><a href="model-specification.html#cb74-13" aria-hidden="true" tabindex="-1"></a><span class="st">double CL = THETA1*exp(ECL);</span></span>
+<span id="cb74-14"><a href="model-specification.html#cb74-14" aria-hidden="true" tabindex="-1"></a><span class="st">double V2 = THETA2*exp(EVC);</span></span>
+<span id="cb74-15"><a href="model-specification.html#cb74-15" aria-hidden="true" tabindex="-1"></a><span class="st">double KA = THETA3*exp(EKA);</span></span>
+<span id="cb74-16"><a href="model-specification.html#cb74-16" aria-hidden="true" tabindex="-1"></a><span class="st">double Q = THETA4;</span></span>
+<span id="cb74-17"><a href="model-specification.html#cb74-17" aria-hidden="true" tabindex="-1"></a><span class="st">double V3 = THETA5;</span></span>
+<span id="cb74-18"><a href="model-specification.html#cb74-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-19"><a href="model-specification.html#cb74-19" aria-hidden="true" tabindex="-1"></a><span class="st">$PKMODEL ncmt=2, depot=TRUE</span></span>
+<span id="cb74-20"><a href="model-specification.html#cb74-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-21"><a href="model-specification.html#cb74-21" aria-hidden="true" tabindex="-1"></a><span class="st">$CMT GUT CENT PERIPH</span></span>
+<span id="cb74-22"><a href="model-specification.html#cb74-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-23"><a href="model-specification.html#cb74-23" aria-hidden="true" tabindex="-1"></a><span class="st">$TABLE</span></span>
+<span id="cb74-24"><a href="model-specification.html#cb74-24" aria-hidden="true" tabindex="-1"></a><span class="st">double CP = (CENT/V2)*(1+PROP) + ADD/5;</span></span>
+<span id="cb74-25"><a href="model-specification.html#cb74-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-26"><a href="model-specification.html#cb74-26" aria-hidden="true" tabindex="-1"></a><span class="st">$CAPTURE CP</span></span>
+<span id="cb74-27"><a href="model-specification.html#cb74-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-28"><a href="model-specification.html#cb74-28" aria-hidden="true" tabindex="-1"></a><span class="st">$SET delta = 4, end = 96</span></span>
+<span id="cb74-29"><a href="model-specification.html#cb74-29" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="model-specification.html#cb75-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;nmext&quot;</span>, code, <span class="at">quiet=</span><span class="cn">TRUE</span>)</span>
+<span id="cb75-2"><a href="model-specification.html#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="model-specification.html#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">param</span>(mod)</span></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=7):
 .  name   value  . name   value
@@ -1303,10 +1291,10 @@ directory. The only other value that <code>root</code> can take is <code>"cppfil
 that is relative to <strong>where the model source code file is located</strong>.</p>
 <p>We recommend that users start using the <code>root</code> argument and set it to “cppfile.”
 This will eventually become the default. For example:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb79-1"><a href="model-specification.html#cb79-1" aria-hidden="true" tabindex="-1"></a>$NMEXT</span>
-<span id="cb79-2"><a href="model-specification.html#cb79-2" aria-hidden="true" tabindex="-1"></a>run = <span class="dv">1005</span></span>
-<span id="cb79-3"><a href="model-specification.html#cb79-3" aria-hidden="true" tabindex="-1"></a>project = <span class="st">&quot;../../model/pk&quot;</span></span>
-<span id="cb79-4"><a href="model-specification.html#cb79-4" aria-hidden="true" tabindex="-1"></a>root = <span class="st">&quot;cppfile&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb77-1"><a href="model-specification.html#cb77-1" aria-hidden="true" tabindex="-1"></a>$NMEXT</span>
+<span id="cb77-2"><a href="model-specification.html#cb77-2" aria-hidden="true" tabindex="-1"></a>run = <span class="dv">1005</span></span>
+<span id="cb77-3"><a href="model-specification.html#cb77-3" aria-hidden="true" tabindex="-1"></a>project = <span class="st">&quot;../../model/pk&quot;</span></span>
+<span id="cb77-4"><a href="model-specification.html#cb77-4" aria-hidden="true" tabindex="-1"></a>root = <span class="st">&quot;cppfile&quot;</span></span></code></pre></div>
 <p>This tells mrgsolve to find the nonmem run back two directories (<code>../../</code>)
 and then into <code>model --&gt; pk --&gt; 1005</code> relative to where the mrgsolve model
 file is located. This is in contrast to the previous expected behavior that
@@ -1315,9 +1303,9 @@ the path should be relative to the current working directory.</p>
 doesn’t matter at all. Users are free to use pathing tools to generate the
 absolute path to the project. For example, the <code>here::here()</code> function can
 be used like this</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb80-1"><a href="model-specification.html#cb80-1" aria-hidden="true" tabindex="-1"></a>$NMEXT</span>
-<span id="cb80-2"><a href="model-specification.html#cb80-2" aria-hidden="true" tabindex="-1"></a>run = <span class="dv">1005</span></span>
-<span id="cb80-3"><a href="model-specification.html#cb80-3" aria-hidden="true" tabindex="-1"></a>project = here::here(<span class="st">&quot;model/pk&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb78-1"><a href="model-specification.html#cb78-1" aria-hidden="true" tabindex="-1"></a>$NMEXT</span>
+<span id="cb78-2"><a href="model-specification.html#cb78-2" aria-hidden="true" tabindex="-1"></a>run = <span class="dv">1005</span></span>
+<span id="cb78-3"><a href="model-specification.html#cb78-3" aria-hidden="true" tabindex="-1"></a>project = here::here(<span class="st">&quot;model/pk&quot;</span>)</span></code></pre></div>
 <p>When used in the proper context, <code>here()</code> will generate an absolute path from
 your projects root directory to the nonmem project directory. Please refer to
 the <code>here::here()</code> documentation for proper use of this function.</p>
@@ -1332,12 +1320,12 @@ data.table can’t be loaded, then mrgsolve will use <code>utils::read.table</co
 <p><strong>Syntax</strong>: text<br />
 <strong>Multiple allowed</strong>: no</p>
 <p>To include your own header file(s) in a model use <code>$INCLUDE</code></p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb81-1"><a href="model-specification.html#cb81-1" aria-hidden="true" tabindex="-1"></a>$INCLUDE</span>
-<span id="cb81-2"><a href="model-specification.html#cb81-2" aria-hidden="true" tabindex="-1"></a>mystuff.h</span>
-<span id="cb81-3"><a href="model-specification.html#cb81-3" aria-hidden="true" tabindex="-1"></a>otherstuff.h</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb79-1"><a href="model-specification.html#cb79-1" aria-hidden="true" tabindex="-1"></a>$INCLUDE</span>
+<span id="cb79-2"><a href="model-specification.html#cb79-2" aria-hidden="true" tabindex="-1"></a>mystuff.h</span>
+<span id="cb79-3"><a href="model-specification.html#cb79-3" aria-hidden="true" tabindex="-1"></a>otherstuff.h</span></code></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb82-1"><a href="model-specification.html#cb82-1" aria-hidden="true" tabindex="-1"></a>$INCLUDE</span>
-<span id="cb82-2"><a href="model-specification.html#cb82-2" aria-hidden="true" tabindex="-1"></a>mystuff.h,  otherstuff.h</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb80-1"><a href="model-specification.html#cb80-1" aria-hidden="true" tabindex="-1"></a>$INCLUDE</span>
+<span id="cb80-2"><a href="model-specification.html#cb80-2" aria-hidden="true" tabindex="-1"></a>mystuff.h,  otherstuff.h</span></code></pre></div>
 <p><code>mrgsolve</code> will insert proper <code>#include</code> preprocessor directives into the <code>C++</code>
 code that gets compiled.</p>
 <p><strong>Requirements</strong></p>
@@ -1358,8 +1346,8 @@ for header files listed in <code>$INCLUDE</code> (see below)</li>
 </ul>
 <p>For applications that don’t fit into the requirements listed above, users can
 always include header files in the model in <code>$GLOBAL</code> like this:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb83-1"><a href="model-specification.html#cb83-1" aria-hidden="true" tabindex="-1"></a>$GLOBAL</span>
-<span id="cb83-2"><a href="model-specification.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;/Users/me/libs/mystuff.h&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb81-1"><a href="model-specification.html#cb81-1" aria-hidden="true" tabindex="-1"></a>$GLOBAL</span>
+<span id="cb81-2"><a href="model-specification.html#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;/Users/me/libs/mystuff.h&quot;</span></span></code></pre></div>
 <p>But be careful when doing this: if there are changes to <code>mystuff.h</code> but not to
 any other part of the model specification, the model may not be fully compiled
 when calling <code>mread</code>. In this case, always use <code>preclean=TRUE</code> argument to
@@ -1374,17 +1362,17 @@ The code is parsed and evaluated into a new environment when the model is
 compiled. Objects inside <code>$ENV</code> can be utilized in different C++ functions
 (see <a href="model-specification.html#block-plugin">2.2.18</a>) or other parts of the simulation process.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb84-1"><a href="model-specification.html#cb84-1" aria-hidden="true" tabindex="-1"></a>$ENV</span>
-<span id="cb84-2"><a href="model-specification.html#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-3"><a href="model-specification.html#cb84-3" aria-hidden="true" tabindex="-1"></a>Sigma &lt;- cmat(<span class="dv">1</span>,<span class="fl">0.6</span>,<span class="dv">2</span>)</span>
-<span id="cb84-4"><a href="model-specification.html#cb84-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-5"><a href="model-specification.html#cb84-5" aria-hidden="true" tabindex="-1"></a>mu &lt;- c(<span class="dv">2</span>,<span class="dv">4</span>)</span>
-<span id="cb84-6"><a href="model-specification.html#cb84-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-7"><a href="model-specification.html#cb84-7" aria-hidden="true" tabindex="-1"></a>cama &lt;- function(mod) {</span>
-<span id="cb84-8"><a href="model-specification.html#cb84-8" aria-hidden="true" tabindex="-1"></a>  mod %&gt;%</span>
-<span id="cb84-9"><a href="model-specification.html#cb84-9" aria-hidden="true" tabindex="-1"></a>    ev(amt=<span class="dv">100</span>, ii=<span class="dv">12</span>, addl=<span class="dv">10</span>) %&gt;% </span>
-<span id="cb84-10"><a href="model-specification.html#cb84-10" aria-hidden="true" tabindex="-1"></a>    mrgsim(obsonly=TRUE,end=<span class="dv">120</span>)</span>
-<span id="cb84-11"><a href="model-specification.html#cb84-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb82-1"><a href="model-specification.html#cb82-1" aria-hidden="true" tabindex="-1"></a>$ENV</span>
+<span id="cb82-2"><a href="model-specification.html#cb82-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-3"><a href="model-specification.html#cb82-3" aria-hidden="true" tabindex="-1"></a>Sigma &lt;- cmat(<span class="dv">1</span>,<span class="fl">0.6</span>,<span class="dv">2</span>)</span>
+<span id="cb82-4"><a href="model-specification.html#cb82-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-5"><a href="model-specification.html#cb82-5" aria-hidden="true" tabindex="-1"></a>mu &lt;- c(<span class="dv">2</span>,<span class="dv">4</span>)</span>
+<span id="cb82-6"><a href="model-specification.html#cb82-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-7"><a href="model-specification.html#cb82-7" aria-hidden="true" tabindex="-1"></a>cama &lt;- function(mod) {</span>
+<span id="cb82-8"><a href="model-specification.html#cb82-8" aria-hidden="true" tabindex="-1"></a>  mod %&gt;%</span>
+<span id="cb82-9"><a href="model-specification.html#cb82-9" aria-hidden="true" tabindex="-1"></a>    ev(amt=<span class="dv">100</span>, ii=<span class="dv">12</span>, addl=<span class="dv">10</span>) %&gt;% </span>
+<span id="cb82-10"><a href="model-specification.html#cb82-10" aria-hidden="true" tabindex="-1"></a>    mrgsim(obsonly=TRUE,end=<span class="dv">120</span>)</span>
+<span id="cb82-11"><a href="model-specification.html#cb82-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 </div>
 <div id="variables-and-macros" class="section level2" number="2.3">
@@ -1430,13 +1418,13 @@ be used in <code>$ODE</code></em>. Contrast with <code>TIME</code>.</p>
 <h3><span class="header-section-number">2.3.5</span> <code>CMT</code></h3>
 <p><code>CMT</code> is the current compartment number. In this case, <code>CMT</code> is used literally
 (not a stand-in for the name of a compartment). For example:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb85-1"><a href="model-specification.html#cb85-1" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT PERIPH</span>
-<span id="cb85-2"><a href="model-specification.html#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-3"><a href="model-specification.html#cb85-3" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb85-4"><a href="model-specification.html#cb85-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-5"><a href="model-specification.html#cb85-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(CMT==<span class="dv">2</span>) {</span>
-<span id="cb85-6"><a href="model-specification.html#cb85-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ....</span></span>
-<span id="cb85-7"><a href="model-specification.html#cb85-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb83-1"><a href="model-specification.html#cb83-1" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT PERIPH</span>
+<span id="cb83-2"><a href="model-specification.html#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-3"><a href="model-specification.html#cb83-3" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb83-4"><a href="model-specification.html#cb83-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-5"><a href="model-specification.html#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(CMT==<span class="dv">2</span>) {</span>
+<span id="cb83-6"><a href="model-specification.html#cb83-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ....</span></span>
+<span id="cb83-7"><a href="model-specification.html#cb83-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>In the example, <code>GUT</code>, <code>CENT</code> and <code>PERIPH</code> are the amounts in the respective
 compartments and <code>CMT</code> refers to the value of <code>CMT</code> in the data record /
 data set.</p>
@@ -1456,13 +1444,13 @@ data set.</p>
 <li>2 for subsequent event record for an individual</li>
 </ul>
 <p>For example:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb86-1"><a href="model-specification.html#cb86-1" aria-hidden="true" tabindex="-1"></a>[ GLOBAL ]</span>
-<span id="cb86-2"><a href="model-specification.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> counter = <span class="dv">0</span>;</span>
-<span id="cb86-3"><a href="model-specification.html#cb86-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-4"><a href="model-specification.html#cb86-4" aria-hidden="true" tabindex="-1"></a>[ MAIN ]</span>
-<span id="cb86-5"><a href="model-specification.html#cb86-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {</span>
-<span id="cb86-6"><a href="model-specification.html#cb86-6" aria-hidden="true" tabindex="-1"></a>  counter  = <span class="dv">0</span>;</span>
-<span id="cb86-7"><a href="model-specification.html#cb86-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb84-1"><a href="model-specification.html#cb84-1" aria-hidden="true" tabindex="-1"></a>[ GLOBAL ]</span>
+<span id="cb84-2"><a href="model-specification.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> counter = <span class="dv">0</span>;</span>
+<span id="cb84-3"><a href="model-specification.html#cb84-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-4"><a href="model-specification.html#cb84-4" aria-hidden="true" tabindex="-1"></a>[ MAIN ]</span>
+<span id="cb84-5"><a href="model-specification.html#cb84-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(NEWIND &lt;=<span class="dv">1</span>) {</span>
+<span id="cb84-6"><a href="model-specification.html#cb84-6" aria-hidden="true" tabindex="-1"></a>  counter  = <span class="dv">0</span>;</span>
+<span id="cb84-7"><a href="model-specification.html#cb84-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><code>NEWIND</code> is an alias for <code>self.newind</code>.</p>
 </div>
 <div id="self.cmt" class="section level3" number="2.3.8">
@@ -1470,37 +1458,37 @@ data set.</p>
 <p>The current compartment number regardless of whether it was given as <code>cmt</code> or
 <code>CMT</code> in the data set. There is no alias for <code>self.cmt</code>.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb87-1"><a href="model-specification.html#cb87-1" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
-<span id="cb87-2"><a href="model-specification.html#cb87-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-3"><a href="model-specification.html#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> DV = CENT/VC + EPS(<span class="dv">1</span>);</span>
-<span id="cb87-4"><a href="model-specification.html#cb87-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-5"><a href="model-specification.html#cb87-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(self.cmt==<span class="dv">3</span>) DV = RESPOSE + EPS(<span class="dv">2</span>);</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb85-1"><a href="model-specification.html#cb85-1" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
+<span id="cb85-2"><a href="model-specification.html#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-3"><a href="model-specification.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> DV = CENT/VC + EPS(<span class="dv">1</span>);</span>
+<span id="cb85-4"><a href="model-specification.html#cb85-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-5"><a href="model-specification.html#cb85-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(self.cmt==<span class="dv">3</span>) DV = RESPOSE + EPS(<span class="dv">2</span>);</span></code></pre></div>
 </div>
 <div id="self.amt" class="section level3" number="2.3.9">
 <h3><span class="header-section-number">2.3.9</span> <code>self.amt</code></h3>
 <p>The current <code>amt</code> value regardless of whether it was given as <code>amt</code> or <code>AMT</code>
 in the data set. There is no alias for <code>self.amt</code>.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb88-1"><a href="model-specification.html#cb88-1" aria-hidden="true" tabindex="-1"></a>[ PREAMBLE ]</span>
-<span id="cb88-2"><a href="model-specification.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> last_dose = <span class="dv">0</span>;</span>
-<span id="cb88-3"><a href="model-specification.html#cb88-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-4"><a href="model-specification.html#cb88-4" aria-hidden="true" tabindex="-1"></a>[ MAIN ]</span>
-<span id="cb88-5"><a href="model-specification.html#cb88-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-6"><a href="model-specification.html#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(EVID==<span class="dv">1</span>) {</span>
-<span id="cb88-7"><a href="model-specification.html#cb88-7" aria-hidden="true" tabindex="-1"></a>  last_dose = self.amt;  </span>
-<span id="cb88-8"><a href="model-specification.html#cb88-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb86-1"><a href="model-specification.html#cb86-1" aria-hidden="true" tabindex="-1"></a>[ PREAMBLE ]</span>
+<span id="cb86-2"><a href="model-specification.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> last_dose = <span class="dv">0</span>;</span>
+<span id="cb86-3"><a href="model-specification.html#cb86-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-4"><a href="model-specification.html#cb86-4" aria-hidden="true" tabindex="-1"></a>[ MAIN ]</span>
+<span id="cb86-5"><a href="model-specification.html#cb86-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-6"><a href="model-specification.html#cb86-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(EVID==<span class="dv">1</span>) {</span>
+<span id="cb86-7"><a href="model-specification.html#cb86-7" aria-hidden="true" tabindex="-1"></a>  last_dose = self.amt;  </span>
+<span id="cb86-8"><a href="model-specification.html#cb86-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="simetan" class="section level3" number="2.3.10">
 <h3><span class="header-section-number">2.3.10</span> <code>simeta(n)</code></h3>
 <p>The <code>simeta(n)</code> function can be used to re-simulate ETA values. As of version
 <code>0.11.0</code>, <code>simeta()</code> accepts an integer argument for the ETA number to be
 re-simulated. For example,</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb89-1"><a href="model-specification.html#cb89-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb89-2"><a href="model-specification.html#cb89-2" aria-hidden="true" tabindex="-1"></a>simeta(<span class="dv">2</span>);</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb87-1"><a href="model-specification.html#cb87-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb87-2"><a href="model-specification.html#cb87-2" aria-hidden="true" tabindex="-1"></a>simeta(<span class="dv">2</span>);</span></code></pre></div>
 <p>will re-simulate <code>ETA(2)</code>. Multiple calls to <code>simeta(n)</code> may be made. For
 example, we can resimulate both ETA 2 and ETA 4 by:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb90-1"><a href="model-specification.html#cb90-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb90-2"><a href="model-specification.html#cb90-2" aria-hidden="true" tabindex="-1"></a>simeta(<span class="dv">2</span>); </span>
-<span id="cb90-3"><a href="model-specification.html#cb90-3" aria-hidden="true" tabindex="-1"></a>simeta(<span class="dv">4</span>);</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb88-1"><a href="model-specification.html#cb88-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb88-2"><a href="model-specification.html#cb88-2" aria-hidden="true" tabindex="-1"></a>simeta(<span class="dv">2</span>); </span>
+<span id="cb88-3"><a href="model-specification.html#cb88-3" aria-hidden="true" tabindex="-1"></a>simeta(<span class="dv">4</span>);</span></code></pre></div>
 <p>It is also possible to resimulate all ETAs by calling <code>simeta()</code> with no integer
 argument. We are currently encouraging use of <code>simeta(n)</code> rather than <code>simeta()</code>
 since for most applications only one or two ETAs might need to be re-simulated.</p>
@@ -1536,9 +1524,9 @@ return <code>-1</code> when it is called before the first dose record within an 
 (<code>NEWIND &lt;= 1</code>).</p>
 <p>This function should be called in <code>$MAIN</code> every time <code>$MAIN</code> is called.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb91-1"><a href="model-specification.html#cb91-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb91-2"><a href="model-specification.html#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-3"><a href="model-specification.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> TAD = self.tad();</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb89-1"><a href="model-specification.html#cb89-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb89-2"><a href="model-specification.html#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-3"><a href="model-specification.html#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> TAD = self.tad();</span></code></pre></div>
 <p>Do not make this calculation depend on any test or condition; it must be called
 every time <code>$MAIN</code> is called in order to see every dose.</p>
 </div>
@@ -1553,15 +1541,15 @@ advances to this record (this time), the differential equation solver will
 reset and restart, creating the discontinuity. The function returns the time of
 this event so the user can work with it in subsequent code.</p>
 <p>For example,</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb92-1"><a href="model-specification.html#cb92-1" aria-hidden="true" tabindex="-1"></a>$PARAM change_point = <span class="fl">5.13</span>;</span>
-<span id="cb92-2"><a href="model-specification.html#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-3"><a href="model-specification.html#cb92-3" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb92-4"><a href="model-specification.html#cb92-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-5"><a href="model-specification.html#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KA = <span class="fl">1.1</span>;</span>
-<span id="cb92-6"><a href="model-specification.html#cb92-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-7"><a href="model-specification.html#cb92-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mt1 = self.mtime(change_point);</span>
-<span id="cb92-8"><a href="model-specification.html#cb92-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-9"><a href="model-specification.html#cb92-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(TIME &gt;= mt1) KA = <span class="fl">2.1</span>;  </span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb90-1"><a href="model-specification.html#cb90-1" aria-hidden="true" tabindex="-1"></a>$PARAM change_point = <span class="fl">5.13</span>;</span>
+<span id="cb90-2"><a href="model-specification.html#cb90-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-3"><a href="model-specification.html#cb90-3" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb90-4"><a href="model-specification.html#cb90-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-5"><a href="model-specification.html#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KA = <span class="fl">1.1</span>;</span>
+<span id="cb90-6"><a href="model-specification.html#cb90-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-7"><a href="model-specification.html#cb90-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mt1 = self.mtime(change_point);</span>
+<span id="cb90-8"><a href="model-specification.html#cb90-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-9"><a href="model-specification.html#cb90-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(TIME &gt;= mt1) KA = <span class="fl">2.1</span>;  </span></code></pre></div>
 </div>
 <div id="self.stop" class="section level3" number="2.3.18">
 <h3><span class="header-section-number">2.3.18</span> <code>self.stop()</code></h3>
@@ -1600,13 +1588,13 @@ was a problem with this particular individual.</p>
 they may be used in a model even if appropriate <code>OMEGA</code> matrices have not been
 provided.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb93-1"><a href="model-specification.html#cb93-1" aria-hidden="true" tabindex="-1"></a>$OMEGA</span>
-<span id="cb93-2"><a href="model-specification.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></span>
-<span id="cb93-3"><a href="model-specification.html#cb93-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-4"><a href="model-specification.html#cb93-4" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb93-5"><a href="model-specification.html#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CL = TVCL*exp(ETA(<span class="dv">1</span>));</span>
-<span id="cb93-6"><a href="model-specification.html#cb93-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> VC = TVVC*exp(ETA(<span class="dv">2</span>));</span>
-<span id="cb93-7"><a href="model-specification.html#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KA = TVKA*exp(ETA(<span class="dv">3</span>));</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb91-1"><a href="model-specification.html#cb91-1" aria-hidden="true" tabindex="-1"></a>$OMEGA</span>
+<span id="cb91-2"><a href="model-specification.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></span>
+<span id="cb91-3"><a href="model-specification.html#cb91-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-4"><a href="model-specification.html#cb91-4" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb91-5"><a href="model-specification.html#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CL = TVCL*exp(ETA(<span class="dv">1</span>));</span>
+<span id="cb91-6"><a href="model-specification.html#cb91-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> VC = TVVC*exp(ETA(<span class="dv">2</span>));</span>
+<span id="cb91-7"><a href="model-specification.html#cb91-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KA = TVKA*exp(ETA(<span class="dv">3</span>));</span></code></pre></div>
 <p>Here, we have a 3x3 <code>OMEGA</code> matrix. <code>ETA(1)</code>, <code>ETA(2)</code>, and <code>ETA(3)</code> will be
 populated with variates drawn from this matrix. <code>ETA(4)</code> through <code>ETA(25)</code>
 will be populated with zero.</p>
@@ -1616,41 +1604,41 @@ will be populated with zero.</p>
 <p><code>EPS(n)</code> holds the current value of the observation-level random variates drawn
 from <code>SIGMA</code>. The basic setup is the same as detailed in <code>ETA(n)</code>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb94-1"><a href="model-specification.html#cb94-1" aria-hidden="true" tabindex="-1"></a>[ CMT ] CENT</span>
-<span id="cb94-2"><a href="model-specification.html#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-3"><a href="model-specification.html#cb94-3" aria-hidden="true" tabindex="-1"></a>[ PARAM ] CL=<span class="dv">1</span>, VC=<span class="dv">20</span></span>
-<span id="cb94-4"><a href="model-specification.html#cb94-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-5"><a href="model-specification.html#cb94-5" aria-hidden="true" tabindex="-1"></a>[ SIGMA ] @labels ADD PROP</span>
-<span id="cb94-6"><a href="model-specification.html#cb94-6" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span> <span class="fl">0.0025</span></span>
-<span id="cb94-7"><a href="model-specification.html#cb94-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-8"><a href="model-specification.html#cb94-8" aria-hidden="true" tabindex="-1"></a>[ TABLE ]</span>
-<span id="cb94-9"><a href="model-specification.html#cb94-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> DV = (CENT/VC)*(<span class="dv">1</span>+PROP) + ADD;</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb92-1"><a href="model-specification.html#cb92-1" aria-hidden="true" tabindex="-1"></a>[ CMT ] CENT</span>
+<span id="cb92-2"><a href="model-specification.html#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="model-specification.html#cb92-3" aria-hidden="true" tabindex="-1"></a>[ PARAM ] CL=<span class="dv">1</span>, VC=<span class="dv">20</span></span>
+<span id="cb92-4"><a href="model-specification.html#cb92-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-5"><a href="model-specification.html#cb92-5" aria-hidden="true" tabindex="-1"></a>[ SIGMA ] @labels ADD PROP</span>
+<span id="cb92-6"><a href="model-specification.html#cb92-6" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span> <span class="fl">0.0025</span></span>
+<span id="cb92-7"><a href="model-specification.html#cb92-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-8"><a href="model-specification.html#cb92-8" aria-hidden="true" tabindex="-1"></a>[ TABLE ]</span>
+<span id="cb92-9"><a href="model-specification.html#cb92-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> DV = (CENT/VC)*(<span class="dv">1</span>+PROP) + ADD;</span></code></pre></div>
 </div>
 <div id="tablename" class="section level3" number="2.3.23">
 <h3><span class="header-section-number">2.3.23</span> <code>table(&lt;name&gt;)</code></h3>
 <p>This macro has been deprecated. Users should <strong>not</strong> use code like this:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb95-1"><a href="model-specification.html#cb95-1" aria-hidden="true" tabindex="-1"></a>[ TABLE ]</span>
-<span id="cb95-2"><a href="model-specification.html#cb95-2" aria-hidden="true" tabindex="-1"></a>table(CP) = CENT/VC;</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb93-1"><a href="model-specification.html#cb93-1" aria-hidden="true" tabindex="-1"></a>[ TABLE ]</span>
+<span id="cb93-2"><a href="model-specification.html#cb93-2" aria-hidden="true" tabindex="-1"></a>table(CP) = CENT/VC;</span></code></pre></div>
 <p>But rather this:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb96-1"><a href="model-specification.html#cb96-1" aria-hidden="true" tabindex="-1"></a>$TABLE </span>
-<span id="cb96-2"><a href="model-specification.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CP = CENT/VC;</span>
-<span id="cb96-3"><a href="model-specification.html#cb96-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-4"><a href="model-specification.html#cb96-4" aria-hidden="true" tabindex="-1"></a>$CAPTURE CP</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb94-1"><a href="model-specification.html#cb94-1" aria-hidden="true" tabindex="-1"></a>$TABLE </span>
+<span id="cb94-2"><a href="model-specification.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CP = CENT/VC;</span>
+<span id="cb94-3"><a href="model-specification.html#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="model-specification.html#cb94-4" aria-hidden="true" tabindex="-1"></a>$CAPTURE CP</span></code></pre></div>
 <p>See: section <a href="model-specification.html#block-table">2.2.9</a> and also <a href="model-specification.html#block-capture">2.2.12</a></p>
 </div>
 <div id="spec-f" class="section level3" number="2.3.24">
 <h3><span class="header-section-number">2.3.24</span> <code>F_CMT</code>  </h3>
 <p>For the <code>CMT</code> compartment, sets the bioavailability fraction for that compartment.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb97-1"><a href="model-specification.html#cb97-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb97-2"><a href="model-specification.html#cb97-2" aria-hidden="true" tabindex="-1"></a>F_CENT = <span class="fl">0.7</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb95-1"><a href="model-specification.html#cb95-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb95-2"><a href="model-specification.html#cb95-2" aria-hidden="true" tabindex="-1"></a>F_CENT = <span class="fl">0.7</span>;</span></code></pre></div>
 </div>
 <div id="spec-alag" class="section level3" number="2.3.25">
 <h3><span class="header-section-number">2.3.25</span> <code>ALAG_CMT</code>  </h3>
 <p>For the <code>CMT</code> compartment, sets the lag time for doses into that compartment.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb98-1"><a href="model-specification.html#cb98-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb98-2"><a href="model-specification.html#cb98-2" aria-hidden="true" tabindex="-1"></a>ALAG_GUT = <span class="fl">0.25</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb96-1"><a href="model-specification.html#cb96-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb96-2"><a href="model-specification.html#cb96-2" aria-hidden="true" tabindex="-1"></a>ALAG_GUT = <span class="fl">0.25</span>;</span></code></pre></div>
 </div>
 <div id="spec-r" class="section level3" number="2.3.26">
 <h3><span class="header-section-number">2.3.26</span> <code>R_CMT</code>  </h3>
@@ -1658,8 +1646,8 @@ from <code>SIGMA</code>. The basic setup is the same as detailed in <code>ETA(n)
 infusion rate is only set via <code>R_CMT</code> when <code>rate</code> in the data set or event
 object is set to <code>-1</code>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb99-1"><a href="model-specification.html#cb99-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb99-2"><a href="model-specification.html#cb99-2" aria-hidden="true" tabindex="-1"></a>R_CENT = <span class="dv">100</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb97-1"><a href="model-specification.html#cb97-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb97-2"><a href="model-specification.html#cb97-2" aria-hidden="true" tabindex="-1"></a>R_CENT = <span class="dv">100</span>;</span></code></pre></div>
 </div>
 <div id="spec-d" class="section level3" number="2.3.27">
 <h3><span class="header-section-number">2.3.27</span> <code>D_CMT</code>  </h3>
@@ -1667,8 +1655,8 @@ object is set to <code>-1</code>.</p>
 The infusion duration is only set via <code>D_CMT</code> when <code>rate</code> in the data set or
 event object is set to <code>-2</code>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb100-1"><a href="model-specification.html#cb100-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb100-2"><a href="model-specification.html#cb100-2" aria-hidden="true" tabindex="-1"></a>D_CENT = <span class="dv">2</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb98-1"><a href="model-specification.html#cb98-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb98-2"><a href="model-specification.html#cb98-2" aria-hidden="true" tabindex="-1"></a>D_CENT = <span class="dv">2</span>;</span></code></pre></div>
 </div>
 </div>
 <div id="new-variables" class="section level2" number="2.4">
@@ -1677,13 +1665,13 @@ event object is set to <code>-2</code>.</p>
 <code>$TABLE</code>. Because these are <code>C++</code> variables, the type of variable being used
 must be declared. For the vast majority of applications, the <code>double</code> type is
 used (double-precision numeric value).</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb101-1"><a href="model-specification.html#cb101-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb101-2"><a href="model-specification.html#cb101-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb101-3"><a href="model-specification.html#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb99-1"><a href="model-specification.html#cb99-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb99-2"><a href="model-specification.html#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="model-specification.html#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</span></code></pre></div>
 <p>We want <code>CLi</code> to be a numeric value, so we use <code>double</code>. To initialize a <code>boolean</code>
 variable (true / false), write</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb102-1"><a href="model-specification.html#cb102-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb102-2"><a href="model-specification.html#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> cure = false;</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb100-1"><a href="model-specification.html#cb100-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb100-2"><a href="model-specification.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> cure = false;</span></code></pre></div>
 <div id="special-handling-for-double-int-bool" class="section level3" number="2.4.1">
 <h3><span class="header-section-number">2.4.1</span> Special handling for <code>double</code>, <code>int</code>, <code>bool</code></h3>
 <p>When variables of the type <code>double</code>, <code>int</code>, and <code>bool</code> are declared and
@@ -1693,32 +1681,32 @@ declared once in <code>$GLOBAL</code> not in <code>$MAIN</code>, <code>$ODE</cod
 that variables declared in one code block (e.g. <code>$MAIN</code>) can be read and
 modified in another code block (e.g. <code>$TABLE</code>).</p>
 <p>For example, in the following code:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb103-1"><a href="model-specification.html#cb103-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb103-2"><a href="model-specification.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb101-1"><a href="model-specification.html#cb101-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb101-2"><a href="model-specification.html#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</span></code></pre></div>
 <p>a double-precision numeric variable is created (<code>CLi</code>) in the <code>$MAIN</code> block.
 When mrgsolve parses the model file, this code gets translated to</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb104-1"><a href="model-specification.html#cb104-1" aria-hidden="true" tabindex="-1"></a>$GLOBAL</span>
-<span id="cb104-2"><a href="model-specification.html#cb104-2" aria-hidden="true" tabindex="-1"></a>namespace {</span>
-<span id="cb104-3"><a href="model-specification.html#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> CLi;</span>
-<span id="cb104-4"><a href="model-specification.html#cb104-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb104-5"><a href="model-specification.html#cb104-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-6"><a href="model-specification.html#cb104-6" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb104-7"><a href="model-specification.html#cb104-7" aria-hidden="true" tabindex="-1"></a>CLi = TVCL*exp(ETA(<span class="dv">1</span>));</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb102-1"><a href="model-specification.html#cb102-1" aria-hidden="true" tabindex="-1"></a>$GLOBAL</span>
+<span id="cb102-2"><a href="model-specification.html#cb102-2" aria-hidden="true" tabindex="-1"></a>namespace {</span>
+<span id="cb102-3"><a href="model-specification.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> CLi;</span>
+<span id="cb102-4"><a href="model-specification.html#cb102-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb102-5"><a href="model-specification.html#cb102-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-6"><a href="model-specification.html#cb102-6" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb102-7"><a href="model-specification.html#cb102-7" aria-hidden="true" tabindex="-1"></a>CLi = TVCL*exp(ETA(<span class="dv">1</span>));</span></code></pre></div>
 <p>That is, <code>CLi</code> is declared in <code>$GLOBAL</code> in an unnamed namespace so that variables
 like this are global variables within the model file only.</p>
 <p>This way, we can still read the <code>CLi</code> variable in <code>$TABLE</code>:</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb105-1"><a href="model-specification.html#cb105-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb105-2"><a href="model-specification.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</span>
-<span id="cb105-3"><a href="model-specification.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> VCi = TVVC*exp(ETA(<span class="dv">2</span>));</span>
-<span id="cb105-4"><a href="model-specification.html#cb105-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-5"><a href="model-specification.html#cb105-5" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
-<span id="cb105-6"><a href="model-specification.html#cb105-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KEi = CLi/VCi;</span>
-<span id="cb105-7"><a href="model-specification.html#cb105-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-8"><a href="model-specification.html#cb105-8" aria-hidden="true" tabindex="-1"></a>$CAPTURE KEi</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb103-1"><a href="model-specification.html#cb103-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb103-2"><a href="model-specification.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi = TVCL*exp(ETA(<span class="dv">1</span>));</span>
+<span id="cb103-3"><a href="model-specification.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> VCi = TVVC*exp(ETA(<span class="dv">2</span>));</span>
+<span id="cb103-4"><a href="model-specification.html#cb103-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-5"><a href="model-specification.html#cb103-5" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
+<span id="cb103-6"><a href="model-specification.html#cb103-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KEi = CLi/VCi;</span>
+<span id="cb103-7"><a href="model-specification.html#cb103-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-8"><a href="model-specification.html#cb103-8" aria-hidden="true" tabindex="-1"></a>$CAPTURE KEi</span></code></pre></div>
 <p>To declare a variable that is local to a particular code block:</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb106-1"><a href="model-specification.html#cb106-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb106-2"><a href="model-specification.html#cb106-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-3"><a href="model-specification.html#cb106-3" aria-hidden="true" tabindex="-1"></a>localdouble CLi = TVCL*exp(ETA(<span class="dv">1</span>));</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb104-1"><a href="model-specification.html#cb104-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb104-2"><a href="model-specification.html#cb104-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-3"><a href="model-specification.html#cb104-3" aria-hidden="true" tabindex="-1"></a>localdouble CLi = TVCL*exp(ETA(<span class="dv">1</span>));</span></code></pre></div>
 <p>The <code>localdouble</code> type is still just a double-precision variable. The difference
 is that it is protected from this re-declaration process and the variable
 will be local to (in this case) the <code>$MAIN</code> block.</p>
@@ -1731,20 +1719,20 @@ we want to work with other variable types in a global manner. Whenever you
 want a data structure to be accessible across functions (e.g. <code>$MAIN</code>, <code>$TABLE</code>,
 etc.) they should be declared in <code>$GLOBAL</code>, optionally in an unnamed namespace.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb107-1"><a href="model-specification.html#cb107-1" aria-hidden="true" tabindex="-1"></a>[ GLOBAL ]</span>
-<span id="cb107-2"><a href="model-specification.html#cb107-2" aria-hidden="true" tabindex="-1"></a>std::vector&lt;<span class="dt">double</span>&gt; myvec;</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb105-1"><a href="model-specification.html#cb105-1" aria-hidden="true" tabindex="-1"></a>[ GLOBAL ]</span>
+<span id="cb105-2"><a href="model-specification.html#cb105-2" aria-hidden="true" tabindex="-1"></a>std::vector&lt;<span class="dt">double</span>&gt; myvec;</span></code></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb108-1"><a href="model-specification.html#cb108-1" aria-hidden="true" tabindex="-1"></a>[ GLOBAL ]</span>
-<span id="cb108-2"><a href="model-specification.html#cb108-2" aria-hidden="true" tabindex="-1"></a>namespace {</span>
-<span id="cb108-3"><a href="model-specification.html#cb108-3" aria-hidden="true" tabindex="-1"></a>  std::vector&lt;<span class="dt">double</span>&gt; myvec;</span>
-<span id="cb108-4"><a href="model-specification.html#cb108-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb106-1"><a href="model-specification.html#cb106-1" aria-hidden="true" tabindex="-1"></a>[ GLOBAL ]</span>
+<span id="cb106-2"><a href="model-specification.html#cb106-2" aria-hidden="true" tabindex="-1"></a>namespace {</span>
+<span id="cb106-3"><a href="model-specification.html#cb106-3" aria-hidden="true" tabindex="-1"></a>  std::vector&lt;<span class="dt">double</span>&gt; myvec;</span>
+<span id="cb106-4"><a href="model-specification.html#cb106-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>In case that object needs some configuration prior to starting the problem,
 use <code>$PREAMBLE</code> to do that work</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb109-1"><a href="model-specification.html#cb109-1" aria-hidden="true" tabindex="-1"></a>[ GLOBAL ]</span>
-<span id="cb109-2"><a href="model-specification.html#cb109-2" aria-hidden="true" tabindex="-1"></a>std::vector&lt;<span class="dt">double</span>&gt; myvec;</span>
-<span id="cb109-3"><a href="model-specification.html#cb109-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-4"><a href="model-specification.html#cb109-4" aria-hidden="true" tabindex="-1"></a>[ PREAMBLE ] </span>
-<span id="cb109-5"><a href="model-specification.html#cb109-5" aria-hidden="true" tabindex="-1"></a>myvec.assign(<span class="dv">3</span>,<span class="dv">1</span>);</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb107-1"><a href="model-specification.html#cb107-1" aria-hidden="true" tabindex="-1"></a>[ GLOBAL ]</span>
+<span id="cb107-2"><a href="model-specification.html#cb107-2" aria-hidden="true" tabindex="-1"></a>std::vector&lt;<span class="dt">double</span>&gt; myvec;</span>
+<span id="cb107-3"><a href="model-specification.html#cb107-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-4"><a href="model-specification.html#cb107-4" aria-hidden="true" tabindex="-1"></a>[ PREAMBLE ] </span>
+<span id="cb107-5"><a href="model-specification.html#cb107-5" aria-hidden="true" tabindex="-1"></a>myvec.assign(<span class="dv">3</span>,<span class="dv">1</span>);</span></code></pre></div>
 </div>
 </div>
 <div id="examples" class="section level2" number="2.5">
@@ -1769,24 +1757,24 @@ compartment at any particular time (<code>GUT</code> and <code>CENT</code>)</li>
 <li>We derive a variable called <code>CP</code> in <code>$TABLE</code> that has type <code>capture</code>; mrgsolve
 will enter the <code>CP</code> name into the <code>$CAPTURE</code> block list</li>
 </ul>
-<div class="sourceCode" id="cb110"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb110-1"><a href="model-specification.html#cb110-1" aria-hidden="true" tabindex="-1"></a>$PARAM CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></span>
-<span id="cb110-2"><a href="model-specification.html#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-3"><a href="model-specification.html#cb110-3" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT</span>
-<span id="cb110-4"><a href="model-specification.html#cb110-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-5"><a href="model-specification.html#cb110-5" aria-hidden="true" tabindex="-1"></a>$ODE</span>
-<span id="cb110-6"><a href="model-specification.html#cb110-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-7"><a href="model-specification.html#cb110-7" aria-hidden="true" tabindex="-1"></a>dxdt_GUT = -KA*GUT;</span>
-<span id="cb110-8"><a href="model-specification.html#cb110-8" aria-hidden="true" tabindex="-1"></a>dxdt_CENT = KA*GUT - (CL/VC)*CENT;</span>
-<span id="cb110-9"><a href="model-specification.html#cb110-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-10"><a href="model-specification.html#cb110-10" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
-<span id="cb110-11"><a href="model-specification.html#cb110-11" aria-hidden="true" tabindex="-1"></a>capture CP = CENT/VC;</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb108-1"><a href="model-specification.html#cb108-1" aria-hidden="true" tabindex="-1"></a>$PARAM CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></span>
+<span id="cb108-2"><a href="model-specification.html#cb108-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-3"><a href="model-specification.html#cb108-3" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT</span>
+<span id="cb108-4"><a href="model-specification.html#cb108-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-5"><a href="model-specification.html#cb108-5" aria-hidden="true" tabindex="-1"></a>$ODE</span>
+<span id="cb108-6"><a href="model-specification.html#cb108-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-7"><a href="model-specification.html#cb108-7" aria-hidden="true" tabindex="-1"></a>dxdt_GUT = -KA*GUT;</span>
+<span id="cb108-8"><a href="model-specification.html#cb108-8" aria-hidden="true" tabindex="-1"></a>dxdt_CENT = KA*GUT - (CL/VC)*CENT;</span>
+<span id="cb108-9"><a href="model-specification.html#cb108-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-10"><a href="model-specification.html#cb108-10" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
+<span id="cb108-11"><a href="model-specification.html#cb108-11" aria-hidden="true" tabindex="-1"></a>capture CP = CENT/VC;</span></code></pre></div>
 <p>This model can also be written without differential equations</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb111-1"><a href="model-specification.html#cb111-1" aria-hidden="true" tabindex="-1"></a>[ PARAM ] CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></span>
-<span id="cb111-2"><a href="model-specification.html#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-3"><a href="model-specification.html#cb111-3" aria-hidden="true" tabindex="-1"></a>[ PKMODEL ] cmt = <span class="st">&quot;CMT GUT CENT&quot;</span>, depot = TRUE</span>
-<span id="cb111-4"><a href="model-specification.html#cb111-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-5"><a href="model-specification.html#cb111-5" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
-<span id="cb111-6"><a href="model-specification.html#cb111-6" aria-hidden="true" tabindex="-1"></a>capture CP = CENT/VC;</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb109-1"><a href="model-specification.html#cb109-1" aria-hidden="true" tabindex="-1"></a>[ PARAM ] CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></span>
+<span id="cb109-2"><a href="model-specification.html#cb109-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-3"><a href="model-specification.html#cb109-3" aria-hidden="true" tabindex="-1"></a>[ PKMODEL ] cmt = <span class="st">&quot;CMT GUT CENT&quot;</span>, depot = TRUE</span>
+<span id="cb109-4"><a href="model-specification.html#cb109-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-5"><a href="model-specification.html#cb109-5" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
+<span id="cb109-6"><a href="model-specification.html#cb109-6" aria-hidden="true" tabindex="-1"></a>capture CP = CENT/VC;</span></code></pre></div>
 </div>
 <div id="pkpd-model" class="section level3" number="2.5.2">
 <h3><span class="header-section-number">2.5.2</span> PK/PD model</h3>
@@ -1803,26 +1791,26 @@ function of two parameters <code>KIN/KOUT</code></li>
 <li>Both <code>$MAIN</code> and <code>$ODE</code> are <code>C++</code> code blocks; don’t forget to add the <code>;</code>
 at the end of each statement</li>
 </ul>
-<div class="sourceCode" id="cb112"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb112-1"><a href="model-specification.html#cb112-1" aria-hidden="true" tabindex="-1"></a>$PARAM CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></span>
-<span id="cb112-2"><a href="model-specification.html#cb112-2" aria-hidden="true" tabindex="-1"></a>KIN = <span class="dv">100</span>, KOUT = <span class="dv">2</span>, IC50 = <span class="dv">2</span></span>
-<span id="cb112-3"><a href="model-specification.html#cb112-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-4"><a href="model-specification.html#cb112-4" aria-hidden="true" tabindex="-1"></a>$GLOBAL</span>
-<span id="cb112-5"><a href="model-specification.html#cb112-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CP (CENT/VC)</span></span>
-<span id="cb112-6"><a href="model-specification.html#cb112-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-7"><a href="model-specification.html#cb112-7" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT RESP</span>
-<span id="cb112-8"><a href="model-specification.html#cb112-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-9"><a href="model-specification.html#cb112-9" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb112-10"><a href="model-specification.html#cb112-10" aria-hidden="true" tabindex="-1"></a>RESP_0 = KIN/KOUT;</span>
-<span id="cb112-11"><a href="model-specification.html#cb112-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-12"><a href="model-specification.html#cb112-12" aria-hidden="true" tabindex="-1"></a>$ODE</span>
-<span id="cb112-13"><a href="model-specification.html#cb112-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-14"><a href="model-specification.html#cb112-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> INH = CP/(IC50+CP);</span>
-<span id="cb112-15"><a href="model-specification.html#cb112-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-16"><a href="model-specification.html#cb112-16" aria-hidden="true" tabindex="-1"></a>dxdt_GUT = -KA*GUT;</span>
-<span id="cb112-17"><a href="model-specification.html#cb112-17" aria-hidden="true" tabindex="-1"></a>dxdt_CENT = KA*GUT - (CL/VC)*CENT;</span>
-<span id="cb112-18"><a href="model-specification.html#cb112-18" aria-hidden="true" tabindex="-1"></a>dxdt_RESP = KIN*(<span class="dv">1</span>-INH) - KOUT*CENT;</span>
-<span id="cb112-19"><a href="model-specification.html#cb112-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-20"><a href="model-specification.html#cb112-20" aria-hidden="true" tabindex="-1"></a>$CAPTURE CP</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb110-1"><a href="model-specification.html#cb110-1" aria-hidden="true" tabindex="-1"></a>$PARAM CL = <span class="dv">1</span>, VC = <span class="dv">30</span>, KA = <span class="fl">1.3</span></span>
+<span id="cb110-2"><a href="model-specification.html#cb110-2" aria-hidden="true" tabindex="-1"></a>KIN = <span class="dv">100</span>, KOUT = <span class="dv">2</span>, IC50 = <span class="dv">2</span></span>
+<span id="cb110-3"><a href="model-specification.html#cb110-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-4"><a href="model-specification.html#cb110-4" aria-hidden="true" tabindex="-1"></a>$GLOBAL</span>
+<span id="cb110-5"><a href="model-specification.html#cb110-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CP (CENT/VC)</span></span>
+<span id="cb110-6"><a href="model-specification.html#cb110-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-7"><a href="model-specification.html#cb110-7" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT RESP</span>
+<span id="cb110-8"><a href="model-specification.html#cb110-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-9"><a href="model-specification.html#cb110-9" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb110-10"><a href="model-specification.html#cb110-10" aria-hidden="true" tabindex="-1"></a>RESP_0 = KIN/KOUT;</span>
+<span id="cb110-11"><a href="model-specification.html#cb110-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-12"><a href="model-specification.html#cb110-12" aria-hidden="true" tabindex="-1"></a>$ODE</span>
+<span id="cb110-13"><a href="model-specification.html#cb110-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-14"><a href="model-specification.html#cb110-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> INH = CP/(IC50+CP);</span>
+<span id="cb110-15"><a href="model-specification.html#cb110-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-16"><a href="model-specification.html#cb110-16" aria-hidden="true" tabindex="-1"></a>dxdt_GUT = -KA*GUT;</span>
+<span id="cb110-17"><a href="model-specification.html#cb110-17" aria-hidden="true" tabindex="-1"></a>dxdt_CENT = KA*GUT - (CL/VC)*CENT;</span>
+<span id="cb110-18"><a href="model-specification.html#cb110-18" aria-hidden="true" tabindex="-1"></a>dxdt_RESP = KIN*(<span class="dv">1</span>-INH) - KOUT*CENT;</span>
+<span id="cb110-19"><a href="model-specification.html#cb110-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-20"><a href="model-specification.html#cb110-20" aria-hidden="true" tabindex="-1"></a>$CAPTURE CP</span></code></pre></div>
 </div>
 <div id="population-pk-model-with-covariates-and-iov" class="section level3" number="2.5.3">
 <h3><span class="header-section-number">2.5.3</span> Population PK model with covariates and IOV</h3>
@@ -1838,36 +1826,36 @@ at the end of each statement</li>
 <li>We added zeros for both <code>$OMEGA</code> matrices; all the etas will be zero until we
 populate those matrices (section <a href="topics.html#topic-matrix-update">7.8</a>)</li>
 </ul>
-<div class="sourceCode" id="cb113"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb113-1"><a href="model-specification.html#cb113-1" aria-hidden="true" tabindex="-1"></a>$PARAM TVCL = <span class="fl">1.3</span>, TVVC=<span class="dv">28</span>, TVKA=<span class="fl">0.6</span>, WT=<span class="dv">70</span>, OCC=<span class="dv">1</span></span>
-<span id="cb113-2"><a href="model-specification.html#cb113-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-3"><a href="model-specification.html#cb113-3" aria-hidden="true" tabindex="-1"></a>$SET delta=<span class="fl">0.1</span>, end=<span class="dv">240</span></span>
-<span id="cb113-4"><a href="model-specification.html#cb113-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-5"><a href="model-specification.html#cb113-5" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT</span>
-<span id="cb113-6"><a href="model-specification.html#cb113-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-7"><a href="model-specification.html#cb113-7" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb113-8"><a href="model-specification.html#cb113-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-9"><a href="model-specification.html#cb113-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> IOV = IOV1</span>
-<span id="cb113-10"><a href="model-specification.html#cb113-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(OCC==<span class="dv">2</span>) IOV = IOV2;</span>
-<span id="cb113-11"><a href="model-specification.html#cb113-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-12"><a href="model-specification.html#cb113-12" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi = exp(log(TVCL) + <span class="fl">0.75</span>*log(WT/<span class="dv">70</span>) + ECL + IOV);</span>
-<span id="cb113-13"><a href="model-specification.html#cb113-13" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> VCi = exp(log(TVVC) + EVC);</span>
-<span id="cb113-14"><a href="model-specification.html#cb113-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KAi = exp(log(TVKA) + EKA);</span>
-<span id="cb113-15"><a href="model-specification.html#cb113-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-16"><a href="model-specification.html#cb113-16" aria-hidden="true" tabindex="-1"></a>$OMEGA @name IIV @labels ECL EVC EKA</span>
-<span id="cb113-17"><a href="model-specification.html#cb113-17" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb113-18"><a href="model-specification.html#cb113-18" aria-hidden="true" tabindex="-1"></a>$OMEGA @name IOV @labels IOV1 IOV2</span>
-<span id="cb113-19"><a href="model-specification.html#cb113-19" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb113-20"><a href="model-specification.html#cb113-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-21"><a href="model-specification.html#cb113-21" aria-hidden="true" tabindex="-1"></a>$SIGMA <span class="dv">0</span></span>
-<span id="cb113-22"><a href="model-specification.html#cb113-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-23"><a href="model-specification.html#cb113-23" aria-hidden="true" tabindex="-1"></a>$ODE</span>
-<span id="cb113-24"><a href="model-specification.html#cb113-24" aria-hidden="true" tabindex="-1"></a>dxdt_GUT = -KAi*GUT;</span>
-<span id="cb113-25"><a href="model-specification.html#cb113-25" aria-hidden="true" tabindex="-1"></a>dxdt_CENT = KAi*GUT - (CLi/VCi)*CENT;</span>
-<span id="cb113-26"><a href="model-specification.html#cb113-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-27"><a href="model-specification.html#cb113-27" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
-<span id="cb113-28"><a href="model-specification.html#cb113-28" aria-hidden="true" tabindex="-1"></a>capture CP = CENT/VCi;</span>
-<span id="cb113-29"><a href="model-specification.html#cb113-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-30"><a href="model-specification.html#cb113-30" aria-hidden="true" tabindex="-1"></a>$CAPTURE IOV ECL EVC</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb111-1"><a href="model-specification.html#cb111-1" aria-hidden="true" tabindex="-1"></a>$PARAM TVCL = <span class="fl">1.3</span>, TVVC=<span class="dv">28</span>, TVKA=<span class="fl">0.6</span>, WT=<span class="dv">70</span>, OCC=<span class="dv">1</span></span>
+<span id="cb111-2"><a href="model-specification.html#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-3"><a href="model-specification.html#cb111-3" aria-hidden="true" tabindex="-1"></a>$SET delta=<span class="fl">0.1</span>, end=<span class="dv">240</span></span>
+<span id="cb111-4"><a href="model-specification.html#cb111-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-5"><a href="model-specification.html#cb111-5" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT</span>
+<span id="cb111-6"><a href="model-specification.html#cb111-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-7"><a href="model-specification.html#cb111-7" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb111-8"><a href="model-specification.html#cb111-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-9"><a href="model-specification.html#cb111-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> IOV = IOV1</span>
+<span id="cb111-10"><a href="model-specification.html#cb111-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(OCC==<span class="dv">2</span>) IOV = IOV2;</span>
+<span id="cb111-11"><a href="model-specification.html#cb111-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-12"><a href="model-specification.html#cb111-12" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi = exp(log(TVCL) + <span class="fl">0.75</span>*log(WT/<span class="dv">70</span>) + ECL + IOV);</span>
+<span id="cb111-13"><a href="model-specification.html#cb111-13" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> VCi = exp(log(TVVC) + EVC);</span>
+<span id="cb111-14"><a href="model-specification.html#cb111-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KAi = exp(log(TVKA) + EKA);</span>
+<span id="cb111-15"><a href="model-specification.html#cb111-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-16"><a href="model-specification.html#cb111-16" aria-hidden="true" tabindex="-1"></a>$OMEGA @name IIV @labels ECL EVC EKA</span>
+<span id="cb111-17"><a href="model-specification.html#cb111-17" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb111-18"><a href="model-specification.html#cb111-18" aria-hidden="true" tabindex="-1"></a>$OMEGA @name IOV @labels IOV1 IOV2</span>
+<span id="cb111-19"><a href="model-specification.html#cb111-19" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb111-20"><a href="model-specification.html#cb111-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-21"><a href="model-specification.html#cb111-21" aria-hidden="true" tabindex="-1"></a>$SIGMA <span class="dv">0</span></span>
+<span id="cb111-22"><a href="model-specification.html#cb111-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-23"><a href="model-specification.html#cb111-23" aria-hidden="true" tabindex="-1"></a>$ODE</span>
+<span id="cb111-24"><a href="model-specification.html#cb111-24" aria-hidden="true" tabindex="-1"></a>dxdt_GUT = -KAi*GUT;</span>
+<span id="cb111-25"><a href="model-specification.html#cb111-25" aria-hidden="true" tabindex="-1"></a>dxdt_CENT = KAi*GUT - (CLi/VCi)*CENT;</span>
+<span id="cb111-26"><a href="model-specification.html#cb111-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-27"><a href="model-specification.html#cb111-27" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
+<span id="cb111-28"><a href="model-specification.html#cb111-28" aria-hidden="true" tabindex="-1"></a>capture CP = CENT/VCi;</span>
+<span id="cb111-29"><a href="model-specification.html#cb111-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-30"><a href="model-specification.html#cb111-30" aria-hidden="true" tabindex="-1"></a>$CAPTURE IOV ECL EVC</span></code></pre></div>
 
 </div>
 </div>
