@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Steady state
+# Steady state {#steady-state}
 
 ```{r, setup,  echo=FALSE,message=FALSE}
 source("setup.R")

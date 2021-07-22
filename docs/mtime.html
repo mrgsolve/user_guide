@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Questions and Answers | mrgsolve User Guide</title>
+  <title>Chapter 8 Modeled events | mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Questions and Answers | mrgsolve User Guide" />
+  <meta property="og:title" content="Chapter 8 Modeled events | mrgsolve User Guide" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://mrgsolve.github.io/user_guide/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="mrgsolve/user_guide" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Questions and Answers | mrgsolve User Guide" />
+  <meta name="twitter:title" content="Chapter 8 Modeled events | mrgsolve User Guide" />
   <meta name="twitter:site" content="@mrgsolve" />
   <meta name="twitter:description" content="A guide to using mrgsolve." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="topics.html"/>
-<link rel="next" href="install.html"/>
+<link rel="prev" href="plugins.html"/>
+<link rel="next" href="topics.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -382,52 +382,104 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="q-and-a" class="section level1" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Questions and Answers</h1>
-<p>I’m using this chapter as a place to provide miscellaneous information that
-might not have an obvious place to live. I’d call this a FAQ, but not all of
-the questions are asked frequently or at all.</p>
-<div id="can-i-interrupt-a-simulation" class="section level2" number="10.1">
-<h2><span class="header-section-number">10.1</span> Can I interrupt a simulation?</h2>
-<p>Starting with <code>mrgsolve</code> version <code>0.11.1</code>, you can interrupt a long simulation
-by pressing <code>Control-C</code> or <code>Esc</code>, the standard way to pass an interrupt signal
-through R. <code>mrgsolve</code> will stop every so often to look for the interrupt
-signal.</p>
-<p>You can control the frequency with which <code>mrgsolve</code> looks for the interrupt
-signal through an argument to <code>mrgsim</code> (default: 256 simulation records).
-Increase to check less frequently, increase to check more frequently (this might
-be needed for a model where a large amount of work is required to advance
-one step) or set to negative number to never check.</p>
+<div id="mtime" class="section level1" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Modeled events</h1>
+<p>Modeled events are interventions that you can introduce into your
+simulation from within your model. These aren’t any different in substance to
+the dosing records (<code>EVID=1</code>) or other intervention type records (<code>EVID=2</code>)
+that you might include in your input data set when you know what they are
+before you run the simulation. Modeled events do the same thing (stop the
+simulation and execute some event at some time) but you don’t need to know
+about them prior to running the simulation. These are similar to the <code>MTIME</code>
+functionality that you get in NONMEM but they have a very different syntax and
+there is more functionality provided.</p>
+<p>Note that there is no way to get additional records in your simulated output.
+Regardless of the approach or level of complexity, you will not see modeled
+events in your simulated output. These are always executed under the hood and
+the number of rows in the simulated output and their times will be the same
+regardless of what modeled events you set up as discussed here.</p>
+<div id="simple-mtime" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Simple MTIME</h2>
+<p>Use this when you just want to introduce a non-dose discontinuity in your
+simulation at a specific time. For example, you want a parameter to change
+value at a specific time and you don’t know about the values or times prior
+to simulating.</p>
+<p>To schedule a discontinuity, call the <code>mtime()</code> member (Section @ref(self.time))
+of the <code>self</code> object (Section <a href="model-specification.html#self-object">2.3.11</a>). This is typically done in
+the <code>$MAIN</code> block.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb158-1"><a href="mtime.html#cb158-1" aria-hidden="true" tabindex="-1"></a>[ main ]</span>
+<span id="cb158-2"><a href="mtime.html#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mt = self.mtime(<span class="fl">14.12</span>);</span>
+<span id="cb158-3"><a href="mtime.html#cb158-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-4"><a href="mtime.html#cb158-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(TIME &gt;= mt) {</span>
+<span id="cb158-5"><a href="mtime.html#cb158-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something  </span></span>
+<span id="cb158-6"><a href="mtime.html#cb158-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Here, we have told <code>mrgsolve</code> to stop at <code>14.12</code> hours so we can do something.
+Notice that <code>self.mtime()</code> returns the value of the modeled even time so you
+can check it later.</p>
+<p>We can also schedule an event to happen some amount of time in the future</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb159-1"><a href="mtime.html#cb159-1" aria-hidden="true" tabindex="-1"></a>[ main ]</span>
+<span id="cb159-2"><a href="mtime.html#cb159-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(NEWIND &lt;= <span class="dv">1</span>) {</span>
+<span id="cb159-3"><a href="mtime.html#cb159-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mt = <span class="fl">1e9</span>;  </span>
+<span id="cb159-4"><a href="mtime.html#cb159-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb159-5"><a href="mtime.html#cb159-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb159-6"><a href="mtime.html#cb159-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(EVID==<span class="dv">1</span>) {</span>
+<span id="cb159-7"><a href="mtime.html#cb159-7" aria-hidden="true" tabindex="-1"></a>  mt = self.mtime(TIME + <span class="fl">8.2</span>);</span>
+<span id="cb159-8"><a href="mtime.html#cb159-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb159-9"><a href="mtime.html#cb159-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb159-10"><a href="mtime.html#cb159-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(TIME &gt;= mt) {</span>
+<span id="cb159-11"><a href="mtime.html#cb159-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something  </span></span>
+<span id="cb159-12"><a href="mtime.html#cb159-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="can-i-pass-compiler-flags-to-my-model" class="section level2" number="10.2">
-<h2><span class="header-section-number">10.2</span> Can I pass compiler flags to my model?</h2>
-<p>Compiler flags can be passed to your model by setting <code>PKG_CXXFLAGS</code> in
-<code>$ENV</code>. For example</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb328-1"><a href="q-and-a.html#cb328-1" aria-hidden="true" tabindex="-1"></a>$ENV</span>
-<span id="cb328-2"><a href="q-and-a.html#cb328-2" aria-hidden="true" tabindex="-1"></a>PKG_CXXFLAGS = <span class="st">&quot;-std=c++11&quot;</span></span></code></pre></div>
-<p>will compile your model according to <code>C++11</code> standard (but note that there is a
-special plugin that will do this automatically for you; see Section
-<a href="plugins.html#plugin-cxx11">7.2</a>).</p>
+<div id="mtime-with-specific-evid" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> MTIME with specific EVID</h2>
+<p>You can call <code>self.mevent()</code> and pass both <code>time</code> and <code>evid</code> and then check
+for when that <code>EVID</code> comes around again. For example</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb160-1"><a href="mtime.html#cb160-1" aria-hidden="true" tabindex="-1"></a>self.mevent(TIME + <span class="fl">8.2</span>, <span class="dv">33</span>);</span>
+<span id="cb160-2"><a href="mtime.html#cb160-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-3"><a href="mtime.html#cb160-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(EVID==<span class="dv">33</span>) {</span>
+<span id="cb160-4"><a href="mtime.html#cb160-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something  </span></span>
+<span id="cb160-5"><a href="mtime.html#cb160-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>This is similar in functionality to <code>self.mevent()</code>.</p>
 </div>
-<div id="can-i-compile-my-model-with-c11" class="section level2" number="10.3">
-<h2><span class="header-section-number">10.3</span> Can I compile my model with <code>C++11</code>?</h2>
-<p>Yes, you can do this by invoking the <code>CXX11</code> plugin (Section <a href="plugins.html#plugin-cxx11">7.2</a>).</p>
-</div>
-<div id="how-can-i-calculate-time-after-dose" class="section level2" number="10.4">
-<h2><span class="header-section-number">10.4</span> How can I calculate time after dose?</h2>
-<p>There are three approaches</p>
-<p><strong>tad argument to mrgsim()</strong>_</p>
-<p>To get time after dose into your output you can call</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="q-and-a.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">tad =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p>and the output will have a <code>tad</code> column. Note this does not let you interact
-with the <code>tad</code> value inside your model.</p>
-<p><strong>Simple calculation in the model</strong>_</p>
-<p>Most applications will call <code>self.tad()</code> (Section @ref{self.tad}). For example</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb330-1"><a href="q-and-a.html#cb330-1" aria-hidden="true" tabindex="-1"></a>[ main ] </span>
-<span id="cb330-2"><a href="q-and-a.html#cb330-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad = self.tad();</span></code></pre></div>
-<p><strong>More complicated calculation in the model</strong></p>
-<p>You can get more control and track <code>tad</code> in a specific compartment by using
-the <code>tad</code> plugin. See Section @ref{plugin-tad} for details.</p>
+<div id="modeled-doses" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Modeled doses</h2>
+<p>The previous examples showed you how to get the simulation to stop so you
+can do something in <code>$MAIN</code>. In this section, we show you how to schedule
+doses in a similar way. This will take some extra coding and will also serve
+to uncover how <code>self.mtime()</code> and <code>self.mevent()</code> work.</p>
+<p>You can set up the following code in either <code>$MAIN</code> or <code>$TABLE</code>.</p>
+<p><strong><em>Create an evdata object</em></strong></p>
+<p>Once you know when you want the dose, create an <code>evdata</code> object.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb161-1"><a href="mtime.html#cb161-1" aria-hidden="true" tabindex="-1"></a>mrg::evdata ev(<span class="fl">14.2</span>, <span class="dv">1</span>);</span></code></pre></div>
+<p>This will create (construct) an object called <code>ev</code> with class <code>evdata</code>. The
+constructor takes two arguments:</p>
+<ol style="list-style-type: decimal">
+<li>the <code>TIME</code> the event should happen</li>
+<li>the <code>EVID</code> for the event</li>
+</ol>
+<p>This is the only available constructor for <code>evdata</code> objects. You can browse
+the source code for the <code>evdata</code> object
+<a href="https://github.com/metrumresearchgroup/mrgsolve/blob/develop/inst/base/mrgsolv.h">here</a>.</p>
+<p><strong>Modify the evdata object</strong>
+Once the object is created, you can modify the following public members</p>
+<ul>
+<li><code>time</code>: the event time (<code>double</code>)</li>
+<li><code>evid</code>: the event ID (<code>int</code>)</li>
+<li><code>amt</code>: the dose amount (<code>double</code>)</li>
+<li><code>cmt</code>: the compartment number (<code>int</code>)</li>
+<li><code>rate</code>: the rate to infuse <code>amt</code> (<code>double</code>)</li>
+<li><code>now</code>: should the dose be given immediately? (<code>bool</code>)</li>
+</ul>
+<p>If you are using this (lower-level) interface, chances are you will want to
+set at least <code>amt</code> and <code>cmt</code>.</p>
+<p><strong>Push the evdata object into the self object</strong></p>
+<p>After the object has been created and modified, you have to attach this object
+to the <code>self</code> object in order to make it available to mrgsolve. Do this by
+calling <code>push_back()</code> on <code>self.mevector</code></p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb162-1"><a href="mtime.html#cb162-1" aria-hidden="true" tabindex="-1"></a>self.mevector.push_back(ev);</span></code></pre></div>
+<p>Again, this sequence should get called in either <code>$MAIN</code> or <code>$TABLE</code>. When that
+code block finishes running (for the current record), <code>mrgsolve</code> will find the
+event record and add that event to the simulation sequence.</p>
 
 </div>
 </div>
@@ -436,8 +488,8 @@ the <code>tad</code> plugin. See Section @ref{plugin-tad} for details.</p>
           </div>
         </div>
       </div>
-<a href="topics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="install.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="plugins.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="topics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

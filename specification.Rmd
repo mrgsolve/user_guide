@@ -1415,6 +1415,25 @@ if(NEWIND <=1) {
 
 `NEWIND` is an alias for `self.newind`.
 
+### `SS_ADVANCE`
+
+This is a `bool` data item (either `true` or `false`) which is always `false` 
+unless `mrgsolve` is currently advancing the system to steady state
+(Chapter \@ref(steady-state)); then it will be `true`. This variable is only 
+available in the `$ODE` (or `$DES`) block. 
+
+Use this variable to modify the calculation of your model differential equations
+while the system is advancing to steady state. One use case is when you have
+an accumulation compartment to calculate `AUC` but you want to halt accumulation
+while the system is working toward steady state
+
+```{c, eval = FALSE}
+$ODE
+dxdt_CENT = -(CL/V) * CENT;
+dxdt_AUC = CENT/V;
+if(SS_ADVANCE) dxdt_AUC = 0;
+```
+
 
 ### `simeta(n)`
 
@@ -1546,7 +1565,7 @@ Do not make this calculation depend on any test or condition; it must be called
 every time `$MAIN` is called in order to see every dose.
 
 
-### `self.mtime(<time>)`
+### `self.mtime(<time>)` \ {#self.mtime}
 
 This is a function that creates a modeled even time.  The only argument is a 
 numeric time in the future for the current individual that indicates when a 
@@ -1572,6 +1591,26 @@ double mt1 = self.mtime(change_point);
 if(TIME >= mt1) KA = 2.1;  
 
 ```
+
+### `self.mevent(<time>, <evid>)`
+
+Related to `self.mtime()` (Section \@ref(self.mtime)), except you can set a 
+specific `EVID` for this intervention and you track the change time via `EVID`
+rather than the time. You'd use this if you want to anchor 
+several events in the future and be sure you can distinguish between them. 
+For example
+
+
+```{c, eval = FALSE}
+[ main ] 
+self.mevent(change_point1, 33);
+self.mevent(change_point2, 34);
+```
+
+Now, you can look for `EVID==33` to know you have hit `change_point1` or 
+`EVID==34` to indicate that you have hit `change_point2`. Notice that 
+`self.mevent()` doesn't return any value. You will know that you've hit the 
+change time by checking `EVID`.
 
 ### `self.stop()`
 

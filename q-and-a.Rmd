@@ -35,3 +35,37 @@ will compile your model according to `C++11` standard (but note that there is a
 special plugin that will do this automatically for you; see Section 
 \@ref(plugin-cxx11)).
 
+## Can I compile my model with `C++11`?
+
+Yes, you can do this by invoking the `CXX11` plugin (Section \@ref(plugin-cxx11)).
+
+## How can I calculate time after dose?
+
+There are three approaches
+
+__tad argument to mrgsim()___
+
+To get time after dose into your output you can call
+
+```{r, eval = FALSE}
+mrgsim(mod, tad = TRUE)
+```
+
+and the output will have a `tad` column. Note this does not let you interact
+with the `tad` value inside your model.
+
+__Simple calculation in the model___
+
+Most applications will call `self.tad()` (Section \@ref{self.tad}). For example
+
+```{c, eval = FALSE}
+[ main ] 
+double tad = self.tad();
+```
+
+__More complicated calculation in the model__
+
+You can get more control and track `tad` in a specific compartment by using 
+the `tad` plugin.  See Section \@ref{plugin-tad} for details.
+
+

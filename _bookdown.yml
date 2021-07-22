@@ -10,6 +10,7 @@ rmd_files: [
   "sequence.Rmd",
   "steady-state.Rmd",
   "plugins.Rmd",
+  "mtime.Rmd",
   "topics.Rmd", 
   "q-and-a.Rmd",
   "install.Rmd"

@@ -4,7 +4,7 @@ source("setup.R")
 
 # Plugins {#plugins}
 
-## tad
+## tad {#plugin-tad}
 
 __Purpose__
 Advanced calculation time after dose within your model. We call this "advanced"
@@ -20,14 +20,69 @@ First, tell `mrgsolve` that you want to use the `tad` plugin
 $PLUGIN tad
 ```
 
+The create `tadose` objects, one for each compartment where you want to track
+time after dose. One approach is to do this in `[ global ]`
 
-__Note__
+```{c, eval = FALSE}
+[plugin] tad
+
+[ global ] 
+mrg::tadose tad_cmt_1(1); 
+mrg::tadose tad_cmt_2(2);
+```
+
+Notice that we refer to the compartment number that we want to track in each 
+case and also that we refer to the `mrg::` namespace for the `tadose` class. 
+
+The `tadose` objects contain the following (public) members
+
+- `cmt` the compartment to track
+- `told` the time of last dose; defaults to `-1e9`
+- `had_dose` indicates if a dose has already been given for the current 
+  individual
+- `tad(self)` the function to call to calculate time after dose
+  - the `self` object (Section \@ref(self-object)) must be passed as the only
+    argument
+  - when the member function is called prior to the first administered dose, a 
+    value of `-1.0` is returned
+- `reset()` resets the state of the object; be sure to reset prior to simulating
+  a new individual
+
+You can find the source code for this object 
+[here](https://github.com/metrumresearchgroup/mrgsolve/blob/master/inst/base/mrgsolve-tad.h).
+
+A working example model that tracks doses in compartments `1` and `2` is
+provided here
+
+```{c, eval = FALSE}
+[plugin] tad
+
+[ global ] 
+mrg::tadose tad_cmt_1(1); 
+mrg::tadose tad_cmt_2(2);
+
+[ pkmodel ] cmt = "GUT,CENT", depot = TRUE
+
+[ param ] CL = 1, V = 20, KA = 1
+
+[ main ] 
+capture tad1 = tad_cmt_1.tad(self); 
+capture tad2 = tad_cmt_2.tad(self);
+```
+
+__Static approach__
+
+Another approach would be to make these static in `[ main ]` but this approach
+would only work if you only use these in `[ main ]`; the `[ global ]` approach 
+is preferable since then you can access the object in any block (function). 
+
+
+### Note
 Note there is a simpler way to calculate time after dose when only dosing into
 a single compartment
 
 ```{c, eval = FALSE}
 [ main ]
-
 double tad = self.tad();
 ```
 

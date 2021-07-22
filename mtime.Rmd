@@ -1,0 +1,131 @@
+```{r,echo=FALSE,message=FALSE}
+source("setup.R")
+```
+
+# Modeled events {#mtime}
+
+Modeled events are interventions that you can introduce into your 
+simulation from within your model. These aren't any different in substance to 
+the dosing records (`EVID=1`) or other intervention type records (`EVID=2`) 
+that you might include in your input data set when you know what they are
+before you run the simulation. Modeled events do the same thing (stop the 
+simulation and execute some event at some time) but you don't need to know
+about them prior to running the simulation. These are similar to the `MTIME` 
+functionality that you get in NONMEM but they have a very different syntax and 
+there is more functionality provided. 
+
+Note that there is no way to get additional records in your simulated output.
+Regardless of the approach or level of complexity, you will not see modeled 
+events in your simulated output. These are always executed under the hood and 
+the number of rows in the simulated output and their times will be the same 
+regardless of what modeled events you set up as discussed here.
+
+## Simple MTIME
+
+Use this when you just want to introduce a non-dose discontinuity in your 
+simulation at a specific time. For example, you want a parameter to change 
+value at a specific time and you don't know about the values or times prior 
+to simulating. 
+
+To schedule a discontinuity, call the `mtime()` member (Section \@ref(self.time)) 
+of the `self` object (Section \@ref(self-object)). This is typically done in 
+the `$MAIN` block.
+
+```{c, eval = FALSE}
+[ main ]
+double mt = self.mtime(14.12);
+
+if(TIME >= mt) {
+  // do something  
+}
+```
+
+Here, we have told `mrgsolve` to stop at `14.12` hours so we can do something.
+Notice that `self.mtime()` returns the value of the modeled even time so you 
+can check it later. 
+
+We can also schedule an event to happen some amount of time in the future
+
+```{c, eval = FALSE}
+[ main ]
+if(NEWIND <= 1) {
+  double mt = 1e9;  
+}
+
+if(EVID==1) {
+  mt = self.mtime(TIME + 8.2);
+}
+
+if(TIME >= mt) {
+  // do something  
+}
+```
+
+## MTIME with specific EVID
+
+You can call `self.mevent()` and pass both `time` and `evid` and then check 
+for when that `EVID` comes around again. For example
+
+```{c, eval = FALSE}
+self.mevent(TIME + 8.2, 33);
+
+if(EVID==33) {
+  // do something  
+}
+```
+
+This is similar in functionality to `self.mevent()`.
+
+## Modeled doses
+
+The previous examples showed you how to get the simulation to stop so you 
+can do something in `$MAIN`. In this section, we show you how to schedule 
+doses in a similar way. This will take some extra coding and will also serve
+to uncover how `self.mtime()` and `self.mevent()` work.
+
+You can set up the following code in either `$MAIN` or `$TABLE`.
+
+___Create an evdata object___
+
+Once you know when you want the dose, create an `evdata` object. 
+
+```{c, eval = FALSE}
+mrg::evdata ev(14.2, 1);
+```
+
+This will create (construct) an object called `ev` with class `evdata`. The 
+constructor takes two arguments:
+
+1. the `TIME` the event should happen
+1. the `EVID` for the event 
+
+This is the only available constructor for `evdata` objects. You can browse
+the source code for the `evdata` object
+[here](https://github.com/metrumresearchgroup/mrgsolve/blob/develop/inst/base/mrgsolv.h).
+
+__Modify the evdata object__
+Once the object is created, you can modify the following public members
+
+- `time`: the event time (`double`)
+- `evid`: the event ID (`int`)
+- `amt`: the dose amount (`double`)
+- `cmt`: the compartment number (`int`)
+- `rate`: the rate to infuse `amt` (`double`)
+- `now`: should the dose be given immediately? (`bool`)
+
+If you are using this (lower-level) interface, chances are you will want to 
+set at least `amt` and `cmt`. 
+
+__Push the evdata object into the self object__
+
+After the object has been created and modified, you have to attach this object
+to the `self` object in order to make it available to mrgsolve. Do this by 
+calling `push_back()` on `self.mevector`
+
+```{c, eval = FALSE}
+self.mevector.push_back(ev);
+```
+
+Again, this sequence should get called in either `$MAIN` or `$TABLE`. When that 
+code block finishes running (for the current record), `mrgsolve` will find the 
+event record and add that event to the simulation sequence. 
