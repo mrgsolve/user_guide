@@ -1,0 +1,66 @@
+```{r,echo=FALSE,message=FALSE}
+source("setup.R")
+```
+
+# Plugins {#plugins}
+
+## CXX11
+
+__Purpose__
+
+Compile your model file with `C++11` standard.
+
+__Usage__ 
+
+```{c, eval = FALSE}
+$PLUGINS CXX11
+```
+
+## Rcpp
+
+__Purpose__
+
+Link to `Rcpp` headers into your model.
+
+__Usage__ 
+
+```{c, eval = FALSE}
+$PLUGINS Rcpp
+```
+
+Note that once your model is linked to `Rcpp`, you can start using that 
+functionality immediately (without including `Rcpp.h`).
+
+## Rcpp
+
+__Purpose__
+
+Link to `RcppArmadillo` headers into your model.
+
+__Usage__ 
+
+```{c, eval = FALSE}
+$PLUGINS RcppArmadillo
+```
+
+
+
+## BH
+
+__Purpose__
+
+Link to `boost` headers into your model.
+
+__Usage__ 
+
+```{c, eval = FALSE}
+$PLUGINS BH
+```
+
+Note that once your model is linked to `BH` (`boost`), you will be able to 
+include the `boost` header file that you need. You have to include the header
+file that contains the `boost` function you want to use.
+
+
+
+
