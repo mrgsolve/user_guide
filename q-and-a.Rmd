@@ -68,4 +68,49 @@ __More complicated calculation in the model__
 You can get more control and track `tad` in a specific compartment by using 
 the `tad` plugin.  See Section \@ref(plugin-tad) for details.
 
+## My model failed to compile; what now?
 
+The model can fail to compile for a variety of reasons, including an error 
+in the `C++` code or inability of R to find the compiler and other pieces of
+the tool chain. 
+
+If your model is not compiling, try the `recover` argument to `mread()` (or 
+`mcode()`)
+
+```{r, eval = FALSE}
+mod <- mread(..., recover = TRUE)
+```
+
+You will see a warning on the console and `mread()` will return a list of 
+build information. You can look into that information or share it in the 
+[mrgsolve issue tracker](https://github.com/metrumresearchgroup/mrgsolve/issues) 
+on GitHub.
+
+If your model has `C++` syntax problems, the errors should be printed on the 
+console. If you possibly have problems with the compiler or the rest of the 
+toolchain, take a look at the `pkgbuild` package, which provides some helpful
+tools, especially if you are working on a Windows platform
+
+```{r, eval = FALSE}
+pkgbuild::check_build_tools()
+pkgbuild::has_build_tools()
+pkgbuild::has_rtools()
+```
+
+
+## Can I run mrgsolve on a network drive?
+
+No; do not run mrgsolve on a network drive. Your R installation, mrgsolve 
+installation, and R working directory should be on a local hard disk.
+
+## Can I run mrgsolve on a cloud-synced folder?
+
+No; do not run mrgsolve in a synced folder for cloud services like OneDrive, 
+GoogleDrive, DropBox etc. Your R installation, mrgsolve installation, and R 
+working directory should be on a local hard disk. 
+
+## Can I run mrgsolve in a path that includes spaces?
+
+No; do not run mrgsolve in a path that includes spaces. Your R installation, 
+mrgsolve installation, and R working directory should all be in locations 
+whose paths do not include spaces.

@@ -364,6 +364,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="q-and-a.html"><a href="q-and-a.html#can-i-pass-compiler-flags-to-my-model"><i class="fa fa-check"></i><b>10.2</b> Can I pass compiler flags to my model?</a></li>
 <li class="chapter" data-level="10.3" data-path="q-and-a.html"><a href="q-and-a.html#can-i-compile-my-model-with-c11"><i class="fa fa-check"></i><b>10.3</b> Can I compile my model with <code>C++11</code>?</a></li>
 <li class="chapter" data-level="10.4" data-path="q-and-a.html"><a href="q-and-a.html#how-can-i-calculate-time-after-dose"><i class="fa fa-check"></i><b>10.4</b> How can I calculate time after dose?</a></li>
+<li class="chapter" data-level="10.5" data-path="q-and-a.html"><a href="q-and-a.html#my-model-failed-to-compile-what-now"><i class="fa fa-check"></i><b>10.5</b> My model failed to compile; what now?</a></li>
+<li class="chapter" data-level="10.6" data-path="q-and-a.html"><a href="q-and-a.html#can-i-run-mrgsolve-on-a-network-drive"><i class="fa fa-check"></i><b>10.6</b> Can I run mrgsolve on a network drive?</a></li>
+<li class="chapter" data-level="10.7" data-path="q-and-a.html"><a href="q-and-a.html#can-i-run-mrgsolve-on-a-cloud-synced-folder"><i class="fa fa-check"></i><b>10.7</b> Can I run mrgsolve on a cloud-synced folder?</a></li>
+<li class="chapter" data-level="10.8" data-path="q-and-a.html"><a href="q-and-a.html#can-i-run-mrgsolve-in-a-path-that-includes-spaces"><i class="fa fa-check"></i><b>10.8</b> Can I run mrgsolve in a path that includes spaces?</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>11</b> Installation</a></li>
 <li class="divider"></li>
@@ -433,6 +437,43 @@ with the <code>tad</code> value inside your model.</p>
 <p><strong>More complicated calculation in the model</strong></p>
 <p>You can get more control and track <code>tad</code> in a specific compartment by using
 the <code>tad</code> plugin. See Section <a href="plugins.html#plugin-tad">7.1</a> for details.</p>
+</div>
+<div id="my-model-failed-to-compile-what-now" class="section level2" number="10.5">
+<h2><span class="header-section-number">10.5</span> My model failed to compile; what now?</h2>
+<p>The model can fail to compile for a variety of reasons, including an error
+in the <code>C++</code> code or inability of R to find the compiler and other pieces of
+the tool chain.</p>
+<p>If your model is not compiling, try the <code>recover</code> argument to <code>mread()</code> (or
+<code>mcode()</code>)</p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="q-and-a.html#cb333-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mread</span>(..., <span class="at">recover =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>You will see a warning on the console and <code>mread()</code> will return a list of
+build information. You can look into that information or share it in the
+<a href="https://github.com/metrumresearchgroup/mrgsolve/issues">mrgsolve issue tracker</a>
+on GitHub.</p>
+<p>If your model has <code>C++</code> syntax problems, the errors should be printed on the
+console. If you possibly have problems with the compiler or the rest of the
+toolchain, take a look at the <code>pkgbuild</code> package, which provides some helpful
+tools, especially if you are working on a Windows platform</p>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="q-and-a.html#cb334-1" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">check_build_tools</span>()</span>
+<span id="cb334-2"><a href="q-and-a.html#cb334-2" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">has_build_tools</span>()</span>
+<span id="cb334-3"><a href="q-and-a.html#cb334-3" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">has_rtools</span>()</span></code></pre></div>
+</div>
+<div id="can-i-run-mrgsolve-on-a-network-drive" class="section level2" number="10.6">
+<h2><span class="header-section-number">10.6</span> Can I run mrgsolve on a network drive?</h2>
+<p>No; do not run mrgsolve on a network drive. Your R installation, mrgsolve
+installation, and R working directory should be on a local hard disk.</p>
+</div>
+<div id="can-i-run-mrgsolve-on-a-cloud-synced-folder" class="section level2" number="10.7">
+<h2><span class="header-section-number">10.7</span> Can I run mrgsolve on a cloud-synced folder?</h2>
+<p>No; do not run mrgsolve in a synced folder for cloud services like OneDrive,
+GoogleDrive, DropBox etc. Your R installation, mrgsolve installation, and R
+working directory should be on a local hard disk.</p>
+</div>
+<div id="can-i-run-mrgsolve-in-a-path-that-includes-spaces" class="section level2" number="10.8">
+<h2><span class="header-section-number">10.8</span> Can I run mrgsolve in a path that includes spaces?</h2>
+<p>No; do not run mrgsolve in a path that includes spaces. Your R installation,
+mrgsolve installation, and R working directory should all be in locations
+whose paths do not include spaces.</p>
 
 </div>
 </div>
