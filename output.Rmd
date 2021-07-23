@@ -1,55 +1,113 @@
 # Simulated output {#simulated-output}
 
-When `mrgsim` is used to simulate from a model, it returns an object with class 
-`mrgsims`.  It is an S4 object containing a matrix of simulated output and a 
-handful of other pieces of data related to the simulation run.  
+## Output types
+
+When `mrgsim()` is used to simulate from a model, it by default returns an object with class 
+`mrgsims`.  This is an S4 object containing a data.frame of simulated output and a 
+handful of other pieces of data related to the simulation run that can be coerced to other
+types (like `data.frame` or `tibble`). 
+
+For simulations with large outputs or extremely brief simulations where efficiency is 
+important, users can request the output be returned as a data frame. This is most efficient
+when the features provided by the `mrgsims` object are not needed. To do this, pass
+the `output` argument to `mrgsim()`
+
+```{r, eval = FALSE}
+out <- mrgsim(mod, ..., output = "df")
+```
+or use `mrgsim_df()`
+
+```{r, eval = FALSE}
+out <- mrgsim_df(mod, ....)
+```
+
+## Methods for mrgsim output
 
 `mrgsolve` provides several methods for working with `mrgsims` objects or 
-coercing the simulation matrix into other `R` objects.
+coercing the simulation matrix into other `R` objects. Note the discussion in the 
+following subsections all refer to working with `mrgsims` objects, not data.frame output.
 
-## Coercion methods
+### Coercion methods
 
-* `as.data.frame` convert to `data.frame`
-* `as.matrix` convert to `matrix`
-* `as.tbl` convert to `tbl`
-* `as_data_frame` convert to `tbl` via `tibble` package
+* `as_tibble()`: convert to `tibble`
+* `as.data.frame()`: convert to `data.frame`
+* `as.matrix()`: convert to `matrix`
+
+### Query methods
+* `head()`: shows the first `n = 5` rows
+* `tail()`: shows the last `n = 5` rows
+* `names()`: shows the column names
+* `dim()`: shows the number of rows and columns
+* `summary()`: shows a numeric summary of all columns
+* `$`: extracts a column
+
+### Graphical methods
+
+There is a `plot()` methods for simulated output that is aware of independent and dependent
+variables from the simulation. If `out` is the simulated output (an `mrgsims` object)
+
+```{r, eval = FALSE}
+plot(out)
+```
+Plot with a formula; the following example selects only the `CP` and `RESPONSE` outputs
+and plots them versus time
+
+```{r, eval = FALSE}
+plot(out, CP + RESPONSE ~ time)
+```
+
+To select a large number of responses to plot, pass a character vector or comma-separated
+character data containing output columns to plot
+
+```{r, eval = FALSE}
+plot(out, "CP, RESPONSE, WT, DOSE")
+```
 
 
-## Query methods
-* `head`
-* `tail`
-* `names`
-* `dim`
-* `summary`
-* `show`
-* `$`
-
-
-## Methods for `dplyr` verbs
-`mrgsolve` provides several S3 methods to make it possible to include `dplyr` verbs in your simulation pipeline. 
+### Methods for `dplyr` verbs
+`mrgsolve` provides several S3 methods to make it possible to include `dplyr` verbs in 
+your simulation pipeline. 
 
 For example
-```{r}
+
+```{r, eval = FALSE}
 library(dplyr)
+library(mrgsolve)
 
 mod <- mrgsolve:::house()
 
 mod %>% 
   ev(amt=100) %>%
-  mrgsim %>% 
-  filter(time >=10)
+  mrgsim() %>% 
+  filter(time >= 10)
 ```
 
-Here, `mrgsim` returns an `mrgsims` object.  When `dplyr` is also loaded, this object can be piped directly to `dplyr::summarise`.
+Here, `mrgsim()` returns an `mrgsims` object.  When `dplyr` is also loaded, this object 
+can be piped directly to `dplyr::filter()` or `dplyr::mutate()` etc.
+
+It is important to note that when `mrgsims` output is piped to `dplyr` functionality, 
+it is coerced to `tibble` (`data.frame`) and there is no way to get the data back to 
+`mrgsims` object. Most of the time, this is desirable and there is no need to explicitly
+coerce to `tibble()` when calling `dplyr` verbs on simulated output. 
+
 
 Other `dplyr` functions that can be used with `mrgsims` objects
 
-* `group_by`
-* `mutate`
-* `filter`
-* `summarise`
-* `select`
-* `slice`
-* `summarise.each` (use a `<dot>` not an `<underscore>`)
+* `group_by()`
+* `mutate()`
+* `filter()`
+* `summarise()`
+* `select()`
+* `slice()`
+* `pull()`
+* `distinct()`
+* `slice()`
 
+### Modify methods
+
+You can modify the underlying data in the `mrgsims` object and keep it as an `mrgsims` object.
+
+- `filter_sims()`: calls `dplyr::filter()` to pick rows to keep or discard
+- `select_sims()`: calls `dplyr::select()`; note that `ID` and `time` columns are always retained
+- `mutate_sims()`: calls `dplyr::mutate()` to add or modify columns
 

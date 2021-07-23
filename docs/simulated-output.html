@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2021-07-22" />
+<meta name="date" content="2021-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -277,9 +277,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>4</b> Simulated output</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="simulated-output.html"><a href="simulated-output.html#coercion-methods"><i class="fa fa-check"></i><b>4.1</b> Coercion methods</a></li>
-<li class="chapter" data-level="4.2" data-path="simulated-output.html"><a href="simulated-output.html#query-methods"><i class="fa fa-check"></i><b>4.2</b> Query methods</a></li>
-<li class="chapter" data-level="4.3" data-path="simulated-output.html"><a href="simulated-output.html#methods-for-dplyr-verbs"><i class="fa fa-check"></i><b>4.3</b> Methods for <code>dplyr</code> verbs</a></li>
+<li class="chapter" data-level="4.1" data-path="simulated-output.html"><a href="simulated-output.html#output-types"><i class="fa fa-check"></i><b>4.1</b> Output types</a></li>
+<li class="chapter" data-level="4.2" data-path="simulated-output.html"><a href="simulated-output.html#methods-for-mrgsim-output"><i class="fa fa-check"></i><b>4.2</b> Methods for mrgsim output</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="simulated-output.html"><a href="simulated-output.html#coercion-methods"><i class="fa fa-check"></i><b>4.2.1</b> Coercion methods</a></li>
+<li class="chapter" data-level="4.2.2" data-path="simulated-output.html"><a href="simulated-output.html#query-methods"><i class="fa fa-check"></i><b>4.2.2</b> Query methods</a></li>
+<li class="chapter" data-level="4.2.3" data-path="simulated-output.html"><a href="simulated-output.html#graphical-methods"><i class="fa fa-check"></i><b>4.2.3</b> Graphical methods</a></li>
+<li class="chapter" data-level="4.2.4" data-path="simulated-output.html"><a href="simulated-output.html#methods-for-dplyr-verbs"><i class="fa fa-check"></i><b>4.2.4</b> Methods for <code>dplyr</code> verbs</a></li>
+<li class="chapter" data-level="4.2.5" data-path="simulated-output.html"><a href="simulated-output.html#modify-methods"><i class="fa fa-check"></i><b>4.2.5</b> Modify methods</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="section-sequence.html"><a href="section-sequence.html"><i class="fa fa-check"></i><b>5</b> Simulation sequence</a>
 <ul>
@@ -393,70 +399,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="simulated-output" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Simulated output</h1>
-<p>When <code>mrgsim</code> is used to simulate from a model, it returns an object with class
-<code>mrgsims</code>. It is an S4 object containing a matrix of simulated output and a
-handful of other pieces of data related to the simulation run.</p>
+<div id="output-types" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Output types</h2>
+<p>When <code>mrgsim()</code> is used to simulate from a model, it by default returns an object with class
+<code>mrgsims</code>. This is an S4 object containing a data.frame of simulated output and a
+handful of other pieces of data related to the simulation run that can be coerced to other
+types (like <code>data.frame</code> or <code>tibble</code>).</p>
+<p>For simulations with large outputs or extremely brief simulations where efficiency is
+important, users can request the output be returned as a data frame. This is most efficient
+when the features provided by the <code>mrgsims</code> object are not needed. To do this, pass
+the <code>output</code> argument to <code>mrgsim()</code></p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="simulated-output.html#cb136-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(mod, ..., <span class="at">output =</span> <span class="st">&quot;df&quot;</span>)</span></code></pre></div>
+<p>or use <code>mrgsim_df()</code></p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="simulated-output.html#cb137-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim_df</span>(mod, ....)</span></code></pre></div>
+</div>
+<div id="methods-for-mrgsim-output" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Methods for mrgsim output</h2>
 <p><code>mrgsolve</code> provides several methods for working with <code>mrgsims</code> objects or
-coercing the simulation matrix into other <code>R</code> objects.</p>
-<div id="coercion-methods" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Coercion methods</h2>
+coercing the simulation matrix into other <code>R</code> objects. Note the discussion in the
+following subsections all refer to working with <code>mrgsims</code> objects, not data.frame output.</p>
+<div id="coercion-methods" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Coercion methods</h3>
 <ul>
-<li><code>as.data.frame</code> convert to <code>data.frame</code></li>
-<li><code>as.matrix</code> convert to <code>matrix</code></li>
-<li><code>as.tbl</code> convert to <code>tbl</code></li>
-<li><code>as_data_frame</code> convert to <code>tbl</code> via <code>tibble</code> package</li>
+<li><code>as_tibble()</code>: convert to <code>tibble</code></li>
+<li><code>as.data.frame()</code>: convert to <code>data.frame</code></li>
+<li><code>as.matrix()</code>: convert to <code>matrix</code></li>
 </ul>
 </div>
-<div id="query-methods" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Query methods</h2>
+<div id="query-methods" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Query methods</h3>
 <ul>
-<li><code>head</code></li>
-<li><code>tail</code></li>
-<li><code>names</code></li>
-<li><code>dim</code></li>
-<li><code>summary</code></li>
-<li><code>show</code></li>
-<li><code>$</code></li>
+<li><code>head()</code>: shows the first <code>n = 5</code> rows</li>
+<li><code>tail()</code>: shows the last <code>n = 5</code> rows</li>
+<li><code>names()</code>: shows the column names</li>
+<li><code>dim()</code>: shows the number of rows and columns</li>
+<li><code>summary()</code>: shows a numeric summary of all columns</li>
+<li><code>$</code>: extracts a column</li>
 </ul>
 </div>
-<div id="methods-for-dplyr-verbs" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Methods for <code>dplyr</code> verbs</h2>
-<p><code>mrgsolve</code> provides several S3 methods to make it possible to include <code>dplyr</code> verbs in your simulation pipeline.</p>
+<div id="graphical-methods" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Graphical methods</h3>
+<p>There is a <code>plot()</code> methods for simulated output that is aware of independent and dependent
+variables from the simulation. If <code>out</code> is the simulated output (an <code>mrgsims</code> object)</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="simulated-output.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out)</span></code></pre></div>
+<p>Plot with a formula; the following example selects only the <code>CP</code> and <code>RESPONSE</code> outputs
+and plots them versus time</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="simulated-output.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, CP <span class="sc">+</span> RESPONSE <span class="sc">~</span> time)</span></code></pre></div>
+<p>To select a large number of responses to plot, pass a character vector or comma-separated
+character data containing output columns to plot</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="simulated-output.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="st">&quot;CP, RESPONSE, WT, DOSE&quot;</span>)</span></code></pre></div>
+</div>
+<div id="methods-for-dplyr-verbs" class="section level3" number="4.2.4">
+<h3><span class="header-section-number">4.2.4</span> Methods for <code>dplyr</code> verbs</h3>
+<p><code>mrgsolve</code> provides several S3 methods to make it possible to include <code>dplyr</code> verbs in
+your simulation pipeline.</p>
 <p>For example</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="simulated-output.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb136-2"><a href="simulated-output.html#cb136-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb136-3"><a href="simulated-output.html#cb136-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
-<span id="cb136-4"><a href="simulated-output.html#cb136-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb136-5"><a href="simulated-output.html#cb136-5" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb136-6"><a href="simulated-output.html#cb136-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb136-7"><a href="simulated-output.html#cb136-7" aria-hidden="true" tabindex="-1"></a>  mrgsim <span class="sc">%&gt;%</span> </span>
-<span id="cb136-8"><a href="simulated-output.html#cb136-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time <span class="sc">&gt;=</span><span class="dv">10</span>)</span></code></pre></div>
-<pre><code>. # A tibble: 441 x 7
-.       ID  time       GUT  CENT  RESP    DV    CP
-.    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-.  1     1  10   0.000614   63.3  37.7  3.16  3.16
-.  2     1  10.2 0.000455   62.5  37.9  3.13  3.13
-.  3     1  10.5 0.000337   61.7  38.0  3.09  3.09
-.  4     1  10.8 0.000250   61.0  38.1  3.05  3.05
-.  5     1  11   0.000185   60.2  38.2  3.01  3.01
-.  6     1  11.2 0.000137   59.5  38.3  2.97  2.97
-.  7     1  11.5 0.000102   58.7  38.4  2.94  2.94
-.  8     1  11.8 0.0000752  58.0  38.5  2.90  2.90
-.  9     1  12   0.0000557  57.3  38.7  2.86  2.86
-. 10     1  12.2 0.0000413  56.6  38.8  2.83  2.83
-. # … with 431 more rows</code></pre>
-<p>Here, <code>mrgsim</code> returns an <code>mrgsims</code> object. When <code>dplyr</code> is also loaded, this object can be piped directly to <code>dplyr::summarise</code>.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="simulated-output.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb141-2"><a href="simulated-output.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mrgsolve)</span>
+<span id="cb141-3"><a href="simulated-output.html#cb141-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb141-4"><a href="simulated-output.html#cb141-4" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
+<span id="cb141-5"><a href="simulated-output.html#cb141-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb141-6"><a href="simulated-output.html#cb141-6" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb141-7"><a href="simulated-output.html#cb141-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb141-8"><a href="simulated-output.html#cb141-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb141-9"><a href="simulated-output.html#cb141-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
+<p>Here, <code>mrgsim()</code> returns an <code>mrgsims</code> object. When <code>dplyr</code> is also loaded, this object
+can be piped directly to <code>dplyr::filter()</code> or <code>dplyr::mutate()</code> etc.</p>
+<p>It is important to note that when <code>mrgsims</code> output is piped to <code>dplyr</code> functionality,
+it is coerced to <code>tibble</code> (<code>data.frame</code>) and there is no way to get the data back to
+<code>mrgsims</code> object. Most of the time, this is desirable and there is no need to explicitly
+coerce to <code>tibble()</code> when calling <code>dplyr</code> verbs on simulated output.</p>
 <p>Other <code>dplyr</code> functions that can be used with <code>mrgsims</code> objects</p>
 <ul>
-<li><code>group_by</code></li>
-<li><code>mutate</code></li>
-<li><code>filter</code></li>
-<li><code>summarise</code></li>
-<li><code>select</code></li>
-<li><code>slice</code></li>
-<li><code>summarise.each</code> (use a <code>&lt;dot&gt;</code> not an <code>&lt;underscore&gt;</code>)</li>
+<li><code>group_by()</code></li>
+<li><code>mutate()</code></li>
+<li><code>filter()</code></li>
+<li><code>summarise()</code></li>
+<li><code>select()</code></li>
+<li><code>slice()</code></li>
+<li><code>pull()</code></li>
+<li><code>distinct()</code></li>
+<li><code>slice()</code></li>
+</ul>
+</div>
+<div id="modify-methods" class="section level3" number="4.2.5">
+<h3><span class="header-section-number">4.2.5</span> Modify methods</h3>
+<p>You can modify the underlying data in the <code>mrgsims</code> object and keep it as an <code>mrgsims</code> object.</p>
+<ul>
+<li><code>filter_sims()</code>: calls <code>dplyr::filter()</code> to pick rows to keep or discard</li>
+<li><code>select_sims()</code>: calls <code>dplyr::select()</code>; note that <code>ID</code> and <code>time</code> columns are always retained</li>
+<li><code>mutate_sims()</code>: calls <code>dplyr::mutate()</code> to add or modify columns</li>
 </ul>
 
+</div>
 </div>
 </div>
             </section>
