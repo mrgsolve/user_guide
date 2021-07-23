@@ -50,7 +50,7 @@ variables from the simulation. If `out` is the simulated output (an `mrgsims` ob
 plot(out)
 ```
 Plot with a formula; the following example selects only the `CP` and `RESPONSE` outputs
-and plots them versus time
+and plots them versus `time`
 
 ```{r, eval = FALSE}
 plot(out, CP + RESPONSE ~ time)
@@ -110,4 +110,72 @@ You can modify the underlying data in the `mrgsims` object and keep it as an `mr
 - `filter_sims()`: calls `dplyr::filter()` to pick rows to keep or discard
 - `select_sims()`: calls `dplyr::select()`; note that `ID` and `time` columns are always retained
 - `mutate_sims()`: calls `dplyr::mutate()` to add or modify columns
+
+## Controlling output scope
+
+### Background
+
+Limiting the volume of simulated data can have a major impact on simulation efficiency, 
+memory footprint, and ease (or lack of ease) in reviewing and dealing with the output.
+For any large simulation or any simulation from a large model, the user should consider
+selecting what gets returned when the simulation is performed.
+
+By default, `mrgsim()` returns a data.frame with the following
+
+1. `ID`: regardless of whether you simulated a population or not
+1. `time` / `TIME`: the independent variable
+1. Simulated values for all model compartments
+1. Simulated values for derived outputs listed in `$CAPTURE`
+
+You will always get `ID` and `time` and the compartments and any captured items must
+be written into the model file. This defines the list of data items that 
+**could (possibly)** get returned under items 3 and 4 above. Again: this must be 
+written into the model file and is locked at the time the model is compiled. 
+
+However, `mrgsolve` allows the user to pick what is actually returned at run time. 
+Because this is done at run time, different runs can return different data items. 
+And (importantly) `mrgsim()` only allocates space in the output for data items 
+that are requested. So, opting **out** of unneeded outputs will decrease memory 
+consumption and increase efficiency.
+
+### Implementation
+
+The mrgsolve model object tracks compartments and captures that are currently 
+being requested. This can be queried using `outvars()`
+
+```{r}
+mod <- house()
+
+outvars(mod)
+```
+
+Items are listed under `cmt` and `capture`. The user can update the model object
+with the names of columns that are being requested by passing `outvars` to `update()`
+
+```{r}
+mod <- update(mod, outvars = "CP, RESP")
+
+outvars(mod)
+```
+
+This will exclude anything that isn't named in the update. The `outvars` list can 
+be reset by passing `(all)`
+
+```{r}
+mod <- update(mod, outvars = "(all)")
+```
+
+Remember that `...` passed to `mrgsim()` are also passed to `update()` so it is possible
+to select outputs right in your `mrgsim()` call
+
+```{r, eval = FALSE}
+out <- mrgsim(mod, outvars = "CP, RESP")
+```
+
+### Copy items from data to simulated output
+
+Users can also use `carry_out` and `recover` to copy items from the input data into the
+output. This is covered in a different chapter. 
+
+
 

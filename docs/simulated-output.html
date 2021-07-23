@@ -286,6 +286,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.4" data-path="simulated-output.html"><a href="simulated-output.html#methods-for-dplyr-verbs"><i class="fa fa-check"></i><b>4.2.4</b> Methods for <code>dplyr</code> verbs</a></li>
 <li class="chapter" data-level="4.2.5" data-path="simulated-output.html"><a href="simulated-output.html#modify-methods"><i class="fa fa-check"></i><b>4.2.5</b> Modify methods</a></li>
 </ul></li>
+<li class="chapter" data-level="4.3" data-path="simulated-output.html"><a href="simulated-output.html#controlling-output-scope"><i class="fa fa-check"></i><b>4.3</b> Controlling output scope</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="simulated-output.html"><a href="simulated-output.html#background"><i class="fa fa-check"></i><b>4.3.1</b> Background</a></li>
+<li class="chapter" data-level="4.3.2" data-path="simulated-output.html"><a href="simulated-output.html#implementation"><i class="fa fa-check"></i><b>4.3.2</b> Implementation</a></li>
+<li class="chapter" data-level="4.3.3" data-path="simulated-output.html"><a href="simulated-output.html#copy-items-from-data-to-simulated-output"><i class="fa fa-check"></i><b>4.3.3</b> Copy items from data to simulated output</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="section-sequence.html"><a href="section-sequence.html"><i class="fa fa-check"></i><b>5</b> Simulation sequence</a>
 <ul>
@@ -443,7 +449,7 @@ following subsections all refer to working with <code>mrgsims</code> objects, no
 variables from the simulation. If <code>out</code> is the simulated output (an <code>mrgsims</code> object)</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="simulated-output.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out)</span></code></pre></div>
 <p>Plot with a formula; the following example selects only the <code>CP</code> and <code>RESPONSE</code> outputs
-and plots them versus time</p>
+and plots them versus <code>time</code></p>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="simulated-output.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, CP <span class="sc">+</span> RESPONSE <span class="sc">~</span> time)</span></code></pre></div>
 <p>To select a large number of responses to plot, pass a character vector or comma-separated
 character data containing output columns to plot</p>
@@ -490,6 +496,66 @@ coerce to <code>tibble()</code> when calling <code>dplyr</code> verbs on simulat
 <li><code>select_sims()</code>: calls <code>dplyr::select()</code>; note that <code>ID</code> and <code>time</code> columns are always retained</li>
 <li><code>mutate_sims()</code>: calls <code>dplyr::mutate()</code> to add or modify columns</li>
 </ul>
+</div>
+</div>
+<div id="controlling-output-scope" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Controlling output scope</h2>
+<div id="background" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Background</h3>
+<p>Limiting the volume of simulated data can have a major impact on simulation efficiency,
+memory footprint, and ease (or lack of ease) in reviewing and dealing with the output.
+For any large simulation or any simulation from a large model, the user should consider
+selecting what gets returned when the simulation is performed.</p>
+<p>By default, <code>mrgsim()</code> returns a data.frame with the following</p>
+<ol style="list-style-type: decimal">
+<li><code>ID</code>: regardless of whether you simulated a population or not</li>
+<li><code>time</code> / <code>TIME</code>: the independent variable</li>
+<li>Simulated values for all model compartments</li>
+<li>Simulated values for derived outputs listed in <code>$CAPTURE</code></li>
+</ol>
+<p>You will always get <code>ID</code> and <code>time</code> and the compartments and any captured items must
+be written into the model file. This defines the list of data items that
+<strong>could (possibly)</strong> get returned under items 3 and 4 above. Again: this must be
+written into the model file and is locked at the time the model is compiled.</p>
+<p>However, <code>mrgsolve</code> allows the user to pick what is actually returned at run time.
+Because this is done at run time, different runs can return different data items.
+And (importantly) <code>mrgsim()</code> only allocates space in the output for data items
+that are requested. So, opting <strong>out</strong> of unneeded outputs will decrease memory
+consumption and increase efficiency.</p>
+</div>
+<div id="implementation" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Implementation</h3>
+<p>The mrgsolve model object tracks compartments and captures that are currently
+being requested. This can be queried using <code>outvars()</code></p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="simulated-output.html#cb142-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>()</span>
+<span id="cb142-2"><a href="simulated-output.html#cb142-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-3"><a href="simulated-output.html#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="fu">outvars</span>(mod)</span></code></pre></div>
+<pre><code>. $cmt
+. [1] &quot;GUT&quot;  &quot;CENT&quot; &quot;RESP&quot;
+. 
+. $capture
+. [1] &quot;DV&quot; &quot;CP&quot;</code></pre>
+<p>Items are listed under <code>cmt</code> and <code>capture</code>. The user can update the model object
+with the names of columns that are being requested by passing <code>outvars</code> to <code>update()</code></p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="simulated-output.html#cb144-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">update</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;CP, RESP&quot;</span>)</span>
+<span id="cb144-2"><a href="simulated-output.html#cb144-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb144-3"><a href="simulated-output.html#cb144-3" aria-hidden="true" tabindex="-1"></a><span class="fu">outvars</span>(mod)</span></code></pre></div>
+<pre><code>. $cmt
+. [1] &quot;RESP&quot;
+. 
+. $capture
+. [1] &quot;CP&quot;</code></pre>
+<p>This will exclude anything that isn’t named in the update. The <code>outvars</code> list can
+be reset by passing <code>(all)</code></p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="simulated-output.html#cb146-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">update</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;(all)&quot;</span>)</span></code></pre></div>
+<p>Remember that <code>...</code> passed to <code>mrgsim()</code> are also passed to <code>update()</code> so it is possible
+to select outputs right in your <code>mrgsim()</code> call</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="simulated-output.html#cb147-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;CP, RESP&quot;</span>)</span></code></pre></div>
+</div>
+<div id="copy-items-from-data-to-simulated-output" class="section level3" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Copy items from data to simulated output</h3>
+<p>Users can also use <code>carry_out</code> and <code>recover</code> to copy items from the input data into the
+output. This is covered in a different chapter.</p>
 
 </div>
 </div>
