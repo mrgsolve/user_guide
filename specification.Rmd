@@ -1748,6 +1748,31 @@ $MAIN
 D_CENT = 2;
 ```
 
+## Reserved words
+
+Reserved words cannot be used as names for parameters, compartments or other 
+derived variables in the model. **Note** that some of these words are "reserved"
+for you to use in your data set. 
+
+```{r, comment = " ", eval = FALSE, code = mrgsolve:::Reserved}
+
+```
+
+
+Other reserved words depend on the compartment names in your model. For 
+example, if you have a compartment called `CENT` in the model, then the 
+the following will be reserved
+
+
+```{r, eval = FALSE}
+F_CENT
+R_CENT
+D_CENT 
+ALAG_CENT
+N_CENT
+```
+
+
 ## Derive new variables {#new-variables}
 New `C++` variables may be derived in `$GLOBAL`, `$PREAMBLE` `$MAIN`, `$ODE` and
 `$TABLE`. Because these are `C++` variables, the type of variable being used
