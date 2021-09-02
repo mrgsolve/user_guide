@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2021-08-19" />
+<meta name="date" content="2021-09-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -501,7 +501,7 @@ the problem is started. Settings include: <code>atol</code>, <code>rtol</code>, 
 (compartments) that are becoming very small and possibly turning negative. For
 example:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="model-components.html#cb1-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;viral1&quot;</span>, <span class="at">end =</span> <span class="dv">144</span>) </span></code></pre></div>
-<pre><code>. Loading model from cache.</code></pre>
+<pre><code>. Building viral1 ... done.</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="model-components.html#cb3-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim_e</span>(mod, <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">1000</span>)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(V <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
 <span id="cb3-2"><a href="model-components.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="model-components.html#cb3-3" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div>

@@ -1965,10 +1965,9 @@ double INH = CP/(IC50+CP);
 
 dxdt_GUT = -KA*GUT;
 dxdt_CENT = KA*GUT - (CL/VC)*CENT;
-dxdt_RESP = KIN*(1-INH) - KOUT*CENT;
+dxdt_RESP = KIN*(1-INH) - KOUT*RESP;
 
 $CAPTURE CP
-
 ```
 
 ### Population PK model with covariates and IOV
