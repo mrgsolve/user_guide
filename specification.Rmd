@@ -1495,6 +1495,7 @@ A partial list of members are documented in the following sections.
 - `self.idn`
 - `self.rown`
 - `self.nrow`
+- `self.envir` (see note below)
 
 This information is provided for transparency and is not exhaustive. 
 We provide an interface to these data items through pre-processor directives
@@ -1536,13 +1537,47 @@ if(EVID==1) {
 The number of IDs in the data set.
 
 ### `self.idn`
-The current id number.  Numbers start at 0 and increase by one to `self.nid-1`. 
+The current ID number.  Numbers start at 0 and increase by one to `self.nid-1`. 
+So if you want to test for the last ID in the output data set, you would write:
+
+```{c, eval = FALSE}
+[ table ]
+
+if(self.idn == (self.nid-1)) {
+  // do something ....
+}
+```
 
 ### `self.nrow`
-The number of rows in the output data set.
+The total number of rows in the output data set.
 
 ### `self.rown`
 The current row number.  Numbers start at 0 and increase by one to `self.rown-1`. 
+So if you want to test for the last row in the output data set, you would write:
+
+```{c, eval = FALSE}
+[ table ]
+
+if(self.rown == (self.nrow-1)) {
+  // do something ....
+}
+```
+
+### `self.envir`
+
+This item is a null pointer that can be cast to an `Rcpp::Environment` only 
+when the `Rcpp` plugin is invoked (see Section \@ref(plugin-rcpp)).
+
+For example
+
+```{c, eval = FALSE}
+[ plugin ] Rcpp mrgx
+  
+[ preamble ] 
+Rcpp::Environment env = mrgx::get_envir(self);
+```
+
+
 
 ### `self.tad()` \ {#self-tad}
 
