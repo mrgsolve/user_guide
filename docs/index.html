@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="mrgsolve User Guide" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2021-09-09" />
+<meta name="date" content="2021-12-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 
 <link rel="next" href="model-components.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -365,6 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.6.2" data-path="topics.html"><a href="topics.html#if-else"><i class="fa fa-check"></i><b>9.6.2</b> if-else</a></li>
 <li class="chapter" data-level="9.6.3" data-path="topics.html"><a href="topics.html#functions-1"><i class="fa fa-check"></i><b>9.6.3</b> Functions</a></li>
 <li class="chapter" data-level="9.6.4" data-path="topics.html"><a href="topics.html#integer-division"><i class="fa fa-check"></i><b>9.6.4</b> Integer division</a></li>
+<li class="chapter" data-level="9.6.5" data-path="topics.html"><a href="topics.html#pre-processor-directives"><i class="fa fa-check"></i><b>9.6.5</b> Pre-processor directives</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="topics.html"><a href="topics.html#resimulate-eta-and-eps"><i class="fa fa-check"></i><b>9.7</b> Resimulate <code>ETA</code> and <code>EPS</code></a></li>
 <li class="chapter" data-level="9.8" data-path="topics.html"><a href="topics.html#topic-matrix-update"><i class="fa fa-check"></i><b>9.8</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
@@ -388,7 +389,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7" data-path="q-and-a.html"><a href="q-and-a.html#can-i-run-mrgsolve-on-a-cloud-synced-folder"><i class="fa fa-check"></i><b>10.7</b> Can I run mrgsolve on a cloud-synced folder?</a></li>
 <li class="chapter" data-level="10.8" data-path="q-and-a.html"><a href="q-and-a.html#can-i-run-mrgsolve-in-a-path-that-includes-spaces"><i class="fa fa-check"></i><b>10.8</b> Can I run mrgsolve in a path that includes spaces?</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>11</b> Installation</a></li>
+<li class="chapter" data-level="11" data-path="internals.html"><a href="internals.html"><i class="fa fa-check"></i><b>11</b> Internals</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="internals.html"><a href="internals.html#model-object"><i class="fa fa-check"></i><b>11.1</b> Model object</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="internals.html"><a href="internals.html#slots"><i class="fa fa-check"></i><b>11.1.1</b> Slots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>12</b> Installation</a></li>
 <li class="divider"></li>
 <li><a href="https://mrgsolve.github.io" target="blank">https://mrgsolve.github.io</a></li>
 <li><a href="https:/metrumrg.com" target="blank">https://metrumrg.com</a></li>
@@ -413,7 +421,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">mrgsolve User Guide</h1>
 <p class="author"><em><font color='DarkGreen'>Metrum Research Group</font></em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-09-09</em></p>
+<p class="date"><em>2021-12-04</em></p>
 </div>
 <div id="introduction" class="section level1 unnumbered">
 <h1>Introduction</h1>
@@ -461,7 +469,7 @@ data set)</li>
 <li>Chapter <a href="topics.html#topics">9</a> is a collection of applied examples on different topics</li>
 <li>Chapter <a href="q-and-a.html#q-and-a">10</a> are brief questions and answers providing some bits
 of information that don’t obviously fit into another chapter</li>
-<li>Chapter <a href="install.html#install">11</a> provides links to some Wiki pages that can help with
+<li>Chapter <a href="install.html#install">12</a> provides links to some Wiki pages that can help with
 installation</li>
 </ul>
 </div>
@@ -474,7 +482,7 @@ installation</li>
 <li>Gallery: <a href="https://github.com/mrgsolve/gallery">github.com/mrgsolve/gallery</a></li>
 </ul>
 <hr>
-<p>This book was assembled on Thu Sep 9 23:30:36 2021 with mrgsolve version 0.11.2.</p>
+<p>This book was assembled on Sat Dec 4 18:00:19 2021 with mrgsolve version 0.11.2.9000.</p>
 
 </div>
 </div>
@@ -488,7 +496,6 @@ installation</li>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -528,6 +535,10 @@ gitbook.start({
 "text": null
 },
 "download": ["user-guide.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none",
 "sharing": false

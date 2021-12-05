@@ -874,6 +874,33 @@ mrgsim(mod)
 ```
 
 
+### Pre-processor directives
+
+Pre-processor directives are global substitutions that are made in your 
+model code at the time the model is compiled. For example
+
+```{c, eval = FALSE}
+$GLOBAL 
+
+#define CP (CENT/VC)
+```
+
+When you write this into your model, the pre-processor will find every 
+instance of `CP` and __replace__ it with `(CENT/VC)`. This substitution 
+happens right as the model is compiled; you won't see this substitution happen
+anywhere, but think of it as literal replacement of `CP` with `(CENT/VC)`. 
+
+__Note__:
+
+- Put all pre-processor directives in `$GLOBAL`.
+- It is usually a good idea to enclose the substituted coded in parentheses; 
+  this ensures that, for example, `CENT/VC` is evaluated as is, regardless of 
+  the surrounding code where it is evaluated.
+- Under the hood, mrgsolve uses lots of pre-processor directives to define
+  parameter names, compartment names and other variables; you will see a compiler
+  error if you try to re-define an existing pre-processor directive. If so, 
+  just choose another name for your directive.
+
 
 ## Resimulate `ETA` and `EPS`
 

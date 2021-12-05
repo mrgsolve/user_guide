@@ -13,5 +13,6 @@ rmd_files: [
   "mtime.Rmd",
   "topics.Rmd", 
   "q-and-a.Rmd",
+  "internals.Rmd",
   "install.Rmd"
 ]

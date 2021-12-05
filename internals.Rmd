@@ -1,0 +1,135 @@
+```{r, echo = FALSE, message = FALSE, include = FALSE}
+source("setup.R")
+```
+
+# Internals {#internals}
+
+This chapter describes some of the mrgsolve internals, including the model 
+object, the model itself, and the workflow for building the model. This chapter
+is a work in progress that will continue to be developed as time allows. 
+
+__NOTE__ Some of the code chunks in the following sections will be evaluated, 
+and some won't. If you don't see output, that means it was suppressed but you 
+can try the code on your own.
+
+## Model object
+
+The model object is an S4 object. The object has the following slots
+
+
+```{r}
+mod <- modlib("pk1")
+
+slotNames(mod)
+```
+
+### Slots
+
+__model__
+
+Type: `<character>`
+
+This is the name of your model
+
+```{r}
+mod@model
+```
+
+The build location and several internal C++ functions are named according to 
+this model name; mrgsolve will assume that two models with the same name are 
+just different iterations of the same model.
+
+__package__
+
+Type: `<character>`
+
+This is the name of the compiled shared object. 
+
+```{r}
+mod@package
+```
+
+Note that the `house()` model is compiled into the mrgsolve package shared 
+object, so `package` for that model is mrgsolve
+
+```{r}
+house()@package
+```
+
+__soloc__
+
+Type: `<character>`
+
+This is the location of the shared object; it is where the model is actually 
+compiled. 
+
+```{r}
+mod@soloc
+```
+
+You can change the model build location with the `soloc` argument to `mread()`.
+
+__project__
+
+Type: `<character>`
+
+This is the location of the model source files. We are using an example model
+from an internal library, so the location will be where the mrgsolve package
+is installed. 
+
+```{r}
+mod@project
+```
+
+For most applications, this will be the location where you create and save
+your model file(s).
+
+__code__
+
+Type: `<character>`
+
+This is the source code from the model file
+
+```{r}
+head(mod@code)
+```
+
+__start__, __end__, __delta__, __add__
+
+Type: `<numeric>`
+
+These form the internal simulation time grid
+
+```{r}
+mod@start
+mod@end
+mod@delta
+mod@add
+```
+
+__param__
+
+This is an object of class `parameterlist`
+```{r}
+class(mod@param)
+mod@param
+```
+
+The `parameterlist` inherits from `numericlist`
+
+```{r}
+inherits(mod@param, "numericlist")
+```
+
+The parameter list can be extracted with param
+
+```{r, eval = FALSE}
+param(mod)
+```
+
+The parameter list can be coerced to an R list
+
+```{r, eval = FALSE}
+as.list(mod@param)
+```
+

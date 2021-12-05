@@ -76,7 +76,7 @@ pretty clear in the pdfbook).
 - Main resource page: [mrgsolve.github.io](https://mrgsolve.github.io)
 - Vignettes: [mrgsolve.github.io/vignettes](https://mrgsolve.github.io/vignettes)
 - R documentation: [mrgsolve.github.io/docs](https://mrgsolve.github.io/docs)
-- Gallery: [github.com/mrgsolve/gallery](https://github.com/mrgsolve/gallery)
+- Gallery: [github.com/mrgsolve/gallery](https://github.com/mrgsolve/gallery) 
 
 
 <hr>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Plugins | mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Plugins | mrgsolve User Guide" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2021-09-09" />
+<meta name="date" content="2021-12-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="steady-state.html"/>
 <link rel="next" href="mtime.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -365,6 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.6.2" data-path="topics.html"><a href="topics.html#if-else"><i class="fa fa-check"></i><b>9.6.2</b> if-else</a></li>
 <li class="chapter" data-level="9.6.3" data-path="topics.html"><a href="topics.html#functions-1"><i class="fa fa-check"></i><b>9.6.3</b> Functions</a></li>
 <li class="chapter" data-level="9.6.4" data-path="topics.html"><a href="topics.html#integer-division"><i class="fa fa-check"></i><b>9.6.4</b> Integer division</a></li>
+<li class="chapter" data-level="9.6.5" data-path="topics.html"><a href="topics.html#pre-processor-directives"><i class="fa fa-check"></i><b>9.6.5</b> Pre-processor directives</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="topics.html"><a href="topics.html#resimulate-eta-and-eps"><i class="fa fa-check"></i><b>9.7</b> Resimulate <code>ETA</code> and <code>EPS</code></a></li>
 <li class="chapter" data-level="9.8" data-path="topics.html"><a href="topics.html#topic-matrix-update"><i class="fa fa-check"></i><b>9.8</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
@@ -388,7 +389,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7" data-path="q-and-a.html"><a href="q-and-a.html#can-i-run-mrgsolve-on-a-cloud-synced-folder"><i class="fa fa-check"></i><b>10.7</b> Can I run mrgsolve on a cloud-synced folder?</a></li>
 <li class="chapter" data-level="10.8" data-path="q-and-a.html"><a href="q-and-a.html#can-i-run-mrgsolve-in-a-path-that-includes-spaces"><i class="fa fa-check"></i><b>10.8</b> Can I run mrgsolve in a path that includes spaces?</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>11</b> Installation</a></li>
+<li class="chapter" data-level="11" data-path="internals.html"><a href="internals.html"><i class="fa fa-check"></i><b>11</b> Internals</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="internals.html"><a href="internals.html#model-object"><i class="fa fa-check"></i><b>11.1</b> Model object</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="internals.html"><a href="internals.html#slots"><i class="fa fa-check"></i><b>11.1.1</b> Slots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>12</b> Installation</a></li>
 <li class="divider"></li>
 <li><a href="https://mrgsolve.github.io" target="blank">https://mrgsolve.github.io</a></li>
 <li><a href="https:/metrumrg.com" target="blank">https://metrumrg.com</a></li>
@@ -424,11 +432,11 @@ are only in a single compartment. This functionality is provided by mrgsolve.</p
 <div class="sourceCode" id="cb165"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb165-1"><a href="plugins.html#cb165-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN tad</span></code></pre></div>
 <p>The create <code>tadose</code> objects, one for each compartment where you want to track
 time after dose. One approach is to do this in <code>[ global ]</code></p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb166-1"><a href="plugins.html#cb166-1" aria-hidden="true" tabindex="-1"></a>[plugin] tad</span>
+<div class="sourceCode" id="cb166"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb166-1"><a href="plugins.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>plugin<span class="op">]</span> tad</span>
 <span id="cb166-2"><a href="plugins.html#cb166-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb166-3"><a href="plugins.html#cb166-3" aria-hidden="true" tabindex="-1"></a>[ global ] </span>
-<span id="cb166-4"><a href="plugins.html#cb166-4" aria-hidden="true" tabindex="-1"></a>mrg::tadose tad_cmt_1(<span class="dv">1</span>); </span>
-<span id="cb166-5"><a href="plugins.html#cb166-5" aria-hidden="true" tabindex="-1"></a>mrg::tadose tad_cmt_2(<span class="dv">2</span>);</span></code></pre></div>
+<span id="cb166-3"><a href="plugins.html#cb166-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> global <span class="op">]</span> </span>
+<span id="cb166-4"><a href="plugins.html#cb166-4" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_1<span class="op">(</span><span class="dv">1</span><span class="op">);</span> </span>
+<span id="cb166-5"><a href="plugins.html#cb166-5" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_2<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span></code></pre></div>
 <p>Notice that we pass the compartment number that we want to track in each
 case and also that we refer to the <code>mrg::</code> namespace for the <code>tadose</code> class.</p>
 <p>The <code>tadose</code> objects contain the following (public) members</p>
@@ -448,24 +456,24 @@ value of <code>-1.0</code> is returned</li>
 a new individual</li>
 </ul>
 <p>As an example, you can call the <code>reset()</code> method on one of the <code>tadose</code> objects</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb167-1"><a href="plugins.html#cb167-1" aria-hidden="true" tabindex="-1"></a>tad_cmt_1.reset();</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb167-1"><a href="plugins.html#cb167-1" aria-hidden="true" tabindex="-1"></a>tad_cmt_1<span class="op">.</span>reset<span class="op">();</span></span></code></pre></div>
 <p>You can find the source code for this object
 <a href="https://github.com/metrumresearchgroup/mrgsolve/blob/master/inst/base/mrgsolve-tad.h">here</a>.</p>
 <p>A working example model that tracks doses in compartments <code>1</code> and <code>2</code> is
 provided here</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb168-1"><a href="plugins.html#cb168-1" aria-hidden="true" tabindex="-1"></a>[plugin] tad</span>
+<div class="sourceCode" id="cb168"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb168-1"><a href="plugins.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>plugin<span class="op">]</span> tad</span>
 <span id="cb168-2"><a href="plugins.html#cb168-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-3"><a href="plugins.html#cb168-3" aria-hidden="true" tabindex="-1"></a>[ global ] </span>
-<span id="cb168-4"><a href="plugins.html#cb168-4" aria-hidden="true" tabindex="-1"></a>mrg::tadose tad_cmt_1(<span class="dv">1</span>); </span>
-<span id="cb168-5"><a href="plugins.html#cb168-5" aria-hidden="true" tabindex="-1"></a>mrg::tadose tad_cmt_2(<span class="dv">2</span>);</span>
+<span id="cb168-3"><a href="plugins.html#cb168-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> global <span class="op">]</span> </span>
+<span id="cb168-4"><a href="plugins.html#cb168-4" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_1<span class="op">(</span><span class="dv">1</span><span class="op">);</span> </span>
+<span id="cb168-5"><a href="plugins.html#cb168-5" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_2<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span>
 <span id="cb168-6"><a href="plugins.html#cb168-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-7"><a href="plugins.html#cb168-7" aria-hidden="true" tabindex="-1"></a>[ pkmodel ] cmt = <span class="st">&quot;GUT,CENT&quot;</span>, depot = TRUE</span>
+<span id="cb168-7"><a href="plugins.html#cb168-7" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> pkmodel <span class="op">]</span> cmt <span class="op">=</span> <span class="st">&quot;GUT,CENT&quot;</span><span class="op">,</span> depot <span class="op">=</span> TRUE</span>
 <span id="cb168-8"><a href="plugins.html#cb168-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-9"><a href="plugins.html#cb168-9" aria-hidden="true" tabindex="-1"></a>[ param ] CL = <span class="dv">1</span>, V = <span class="dv">20</span>, KA = <span class="dv">1</span></span>
+<span id="cb168-9"><a href="plugins.html#cb168-9" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> param <span class="op">]</span> CL <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> V <span class="op">=</span> <span class="dv">20</span><span class="op">,</span> KA <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb168-10"><a href="plugins.html#cb168-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-11"><a href="plugins.html#cb168-11" aria-hidden="true" tabindex="-1"></a>[ main ] </span>
-<span id="cb168-12"><a href="plugins.html#cb168-12" aria-hidden="true" tabindex="-1"></a>capture tad1 = tad_cmt_1.tad(self); </span>
-<span id="cb168-13"><a href="plugins.html#cb168-13" aria-hidden="true" tabindex="-1"></a>capture tad2 = tad_cmt_2.tad(self);</span></code></pre></div>
+<span id="cb168-11"><a href="plugins.html#cb168-11" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
+<span id="cb168-12"><a href="plugins.html#cb168-12" aria-hidden="true" tabindex="-1"></a>capture tad1 <span class="op">=</span> tad_cmt_1<span class="op">.</span>tad<span class="op">(</span>self<span class="op">);</span> </span>
+<span id="cb168-13"><a href="plugins.html#cb168-13" aria-hidden="true" tabindex="-1"></a>capture tad2 <span class="op">=</span> tad_cmt_2<span class="op">.</span>tad<span class="op">(</span>self<span class="op">);</span></span></code></pre></div>
 <p><strong>Static approach</strong></p>
 <p>Another approach would be to make these static in <code>[ main ]</code> but this approach
 would only work if you only use these in <code>[ main ]</code>; the <code>[ global ]</code> approach
@@ -474,8 +482,8 @@ is preferable since then you can access the object in any block (function).</p>
 <h3><span class="header-section-number">7.1.1</span> Note</h3>
 <p>Note there is a simpler way to calculate time after dose when only dosing into
 a single compartment</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb169-1"><a href="plugins.html#cb169-1" aria-hidden="true" tabindex="-1"></a>[ main ]</span>
-<span id="cb169-2"><a href="plugins.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad = self.tad();</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb169-1"><a href="plugins.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span></span>
+<span id="cb169-2"><a href="plugins.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
 <p>The <code>self</code> object (Section <a href="model-specification.html#self-tad">2.3.19</a>) contains a <code>tad()</code> member which
 will track time after dose. Note that this needs to be called every record.</p>
 </div>
@@ -509,21 +517,21 @@ so to invoke these functions, you always prepend <code>mrgx::</code>.</p>
 <p>Note that your model object (<code>mod</code>) contains an R environment. For
 example</p>
 <div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="plugins.html#cb172-1" aria-hidden="true" tabindex="-1"></a>mrgsolve<span class="sc">::</span><span class="fu">house</span>()<span class="sc">@</span>envir</span></code></pre></div>
-<pre><code>. &lt;environment: 0x7ff6f0434e28&gt;</code></pre>
+<pre><code>. &lt;environment: 0x7fd6f27ca6e8&gt;</code></pre>
 <p>The objects in this environment are created by a block called <code>$ENV</code>
 in your model code (see Section <a href="model-specification.html#block-env">2.2.26</a>);</p>
 <p>To access this environment in your model, call</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb174-1"><a href="plugins.html#cb174-1" aria-hidden="true" tabindex="-1"></a>Rcpp::Environment env = mrgx::get_envir(self);</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb174-1"><a href="plugins.html#cb174-1" aria-hidden="true" tabindex="-1"></a>Rcpp<span class="op">::</span>Environment env <span class="op">=</span> mrgx<span class="op">::</span>get_envir<span class="op">(</span>self<span class="op">);</span></span></code></pre></div>
 </div>
 </div>
 <div id="extract-an-object-from-the-model-environment" class="section level2" number="7.5">
 <h2><span class="header-section-number">7.5</span> Extract an object from the model environment</h2>
 <p>When you have an object created in <code>$ENV</code></p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb175-1"><a href="plugins.html#cb175-1" aria-hidden="true" tabindex="-1"></a>[ env ] </span>
-<span id="cb175-2"><a href="plugins.html#cb175-2" aria-hidden="true" tabindex="-1"></a>rand &lt;- rnorm(<span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb175-1"><a href="plugins.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> env <span class="op">]</span> </span>
+<span id="cb175-2"><a href="plugins.html#cb175-2" aria-hidden="true" tabindex="-1"></a>rand <span class="op">&lt;-</span> rnorm<span class="op">(</span><span class="dv">100</span><span class="op">)</span></span></code></pre></div>
 <p>You can extract this object with</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb176-1"><a href="plugins.html#cb176-1" aria-hidden="true" tabindex="-1"></a>[ preamble ]</span>
-<span id="cb176-2"><a href="plugins.html#cb176-2" aria-hidden="true" tabindex="-1"></a>Rcpp::NumericVector draw = mrgx::get(<span class="st">&quot;rand&quot;</span>, self);</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb176-1"><a href="plugins.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> preamble <span class="op">]</span></span>
+<span id="cb176-2"><a href="plugins.html#cb176-2" aria-hidden="true" tabindex="-1"></a>Rcpp<span class="op">::</span>NumericVector draw <span class="op">=</span> mrgx<span class="op">::</span>get<span class="op">(</span><span class="st">&quot;rand&quot;</span><span class="op">,</span> self<span class="op">);</span></span></code></pre></div>
 </div>
 <div id="rcpparmadillo" class="section level2" number="7.6">
 <h2><span class="header-section-number">7.6</span> RcppArmadillo</h2>
@@ -559,7 +567,6 @@ about <code>BH</code> can be found here: <a href="https://github.com/eddelbuette
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -599,6 +606,10 @@ gitbook.start({
 "text": null
 },
 "download": ["user-guide.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none",
 "sharing": false

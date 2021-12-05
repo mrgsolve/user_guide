@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Topics | mrgsolve User Guide</title>
   <meta name="description" content="A guide to using mrgsolve." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Topics | mrgsolve User Guide" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2021-09-09" />
+<meta name="date" content="2021-12-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="mtime.html"/>
 <link rel="next" href="q-and-a.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -365,6 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.6.2" data-path="topics.html"><a href="topics.html#if-else"><i class="fa fa-check"></i><b>9.6.2</b> if-else</a></li>
 <li class="chapter" data-level="9.6.3" data-path="topics.html"><a href="topics.html#functions-1"><i class="fa fa-check"></i><b>9.6.3</b> Functions</a></li>
 <li class="chapter" data-level="9.6.4" data-path="topics.html"><a href="topics.html#integer-division"><i class="fa fa-check"></i><b>9.6.4</b> Integer division</a></li>
+<li class="chapter" data-level="9.6.5" data-path="topics.html"><a href="topics.html#pre-processor-directives"><i class="fa fa-check"></i><b>9.6.5</b> Pre-processor directives</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="topics.html"><a href="topics.html#resimulate-eta-and-eps"><i class="fa fa-check"></i><b>9.7</b> Resimulate <code>ETA</code> and <code>EPS</code></a></li>
 <li class="chapter" data-level="9.8" data-path="topics.html"><a href="topics.html#topic-matrix-update"><i class="fa fa-check"></i><b>9.8</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
@@ -388,7 +389,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7" data-path="q-and-a.html"><a href="q-and-a.html#can-i-run-mrgsolve-on-a-cloud-synced-folder"><i class="fa fa-check"></i><b>10.7</b> Can I run mrgsolve on a cloud-synced folder?</a></li>
 <li class="chapter" data-level="10.8" data-path="q-and-a.html"><a href="q-and-a.html#can-i-run-mrgsolve-in-a-path-that-includes-spaces"><i class="fa fa-check"></i><b>10.8</b> Can I run mrgsolve in a path that includes spaces?</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>11</b> Installation</a></li>
+<li class="chapter" data-level="11" data-path="internals.html"><a href="internals.html"><i class="fa fa-check"></i><b>11</b> Internals</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="internals.html"><a href="internals.html#model-object"><i class="fa fa-check"></i><b>11.1</b> Model object</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="internals.html"><a href="internals.html#slots"><i class="fa fa-check"></i><b>11.1.1</b> Slots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>12</b> Installation</a></li>
 <li class="divider"></li>
 <li><a href="https://mrgsolve.github.io" target="blank">https://mrgsolve.github.io</a></li>
 <li><a href="https:/metrumrg.com" target="blank">https://metrumrg.com</a></li>
@@ -712,9 +720,9 @@ of using <code>param()</code> to updated the base list.</p>
 have the same name as one of the parameters in the parameter list. But there
 is no changing values in the base parameter set once the simulation starts.<br />
 That is, the following model specification will not compile:</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb226-1"><a href="topics.html#cb226-1" aria-hidden="true" tabindex="-1"></a>$PARAM CL = <span class="dv">2</span></span>
+<div class="sourceCode" id="cb226"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb226-1"><a href="topics.html#cb226-1" aria-hidden="true" tabindex="-1"></a>$PARAM CL <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb226-2"><a href="topics.html#cb226-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-3"><a href="topics.html#cb226-3" aria-hidden="true" tabindex="-1"></a>$MAIN CL = <span class="dv">3</span>; <span class="co">// ERROR</span></span></code></pre></div>
+<span id="cb226-3"><a href="topics.html#cb226-3" aria-hidden="true" tabindex="-1"></a>$MAIN CL <span class="op">=</span> <span class="dv">3</span><span class="op">;</span> <span class="co">// ERROR</span></span></code></pre></div>
 <p>You cannot over-write the value of a parameter in the model specification.<br />
 Let <code>mrgsolve</code> do the updating.</p>
 <p><code>mrgsolve</code> always reverts to the base parameter set when starting work on a
@@ -782,7 +790,9 @@ their individual parameter.</p>
 <span id="cb240-2"><a href="topics.html#cb240-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_frame</span>(<span class="at">CL=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb240-3"><a href="topics.html#cb240-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">evid=</span><span class="dv">0</span>,<span class="at">ID=</span><span class="dv">1</span>,<span class="at">cmt=</span><span class="dv">1</span>,<span class="at">time=</span>CL<span class="dv">-1</span>,<span class="at">amt=</span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>. Warning: `data_frame()` was deprecated in tibble 1.1.0.
-. Please use `tibble()` instead.</code></pre>
+. Please use `tibble()` instead.
+. This warning is displayed once every 8 hours.
+. Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="topics.html#cb242-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span></span>
 <span id="cb242-2"><a href="topics.html#cb242-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_set</span>(data) <span class="sc">%&gt;%</span></span>
 <span id="cb242-3"><a href="topics.html#cb242-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrgsim</span>(<span class="at">end=</span><span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
@@ -1065,52 +1075,52 @@ out there that can suit your needs.</p>
 <div id="semi-colons" class="section level3" number="9.6.1">
 <h3><span class="header-section-number">9.6.1</span> Semi-colons</h3>
 <p>Every statement in <code>C++</code> must end with a semi-colon. For example;</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb285-1"><a href="topics.html#cb285-1" aria-hidden="true" tabindex="-1"></a>[ MAIN ] </span>
-<span id="cb285-2"><a href="topics.html#cb285-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CL = exp(log_TVCL + ETA(<span class="dv">1</span>));</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb285-1"><a href="topics.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> MAIN <span class="op">]</span> </span>
+<span id="cb285-2"><a href="topics.html#cb285-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CL <span class="op">=</span> exp<span class="op">(</span>log_TVCL <span class="op">+</span> ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb286-1"><a href="topics.html#cb286-1" aria-hidden="true" tabindex="-1"></a>[ ODE ] </span>
+<div class="sourceCode" id="cb286"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb286-1"><a href="topics.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> ODE <span class="op">]</span> </span>
 <span id="cb286-2"><a href="topics.html#cb286-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb286-3"><a href="topics.html#cb286-3" aria-hidden="true" tabindex="-1"></a>dxdt_DEPOT = -KA * DEPOT;</span></code></pre></div>
+<span id="cb286-3"><a href="topics.html#cb286-3" aria-hidden="true" tabindex="-1"></a>dxdt_DEPOT <span class="op">=</span> <span class="op">-</span>KA <span class="op">*</span> DEPOT<span class="op">;</span></span></code></pre></div>
 </div>
 <div id="if-else" class="section level3" number="9.6.2">
 <h3><span class="header-section-number">9.6.2</span> if-else</h3>
-<div class="sourceCode" id="cb287"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb287-1"><a href="topics.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(a == <span class="dv">2</span>) b = <span class="dv">2</span>;</span></code></pre></div>
-<div class="sourceCode" id="cb288"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb288-1"><a href="topics.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(a==<span class="dv">2</span>) {</span>
-<span id="cb288-2"><a href="topics.html#cb288-2" aria-hidden="true" tabindex="-1"></a>  b = <span class="dv">2</span>;  </span>
-<span id="cb288-3"><a href="topics.html#cb288-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb289"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb289-1"><a href="topics.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(a == <span class="dv">2</span>) {</span>
-<span id="cb289-2"><a href="topics.html#cb289-2" aria-hidden="true" tabindex="-1"></a>  b=<span class="dv">2</span>;</span>
-<span id="cb289-3"><a href="topics.html#cb289-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb289-4"><a href="topics.html#cb289-4" aria-hidden="true" tabindex="-1"></a>  b=<span class="dv">3</span>;</span>
-<span id="cb289-5"><a href="topics.html#cb289-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb287-1"><a href="topics.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>a <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb288-1"><a href="topics.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>a<span class="op">==</span><span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb288-2"><a href="topics.html#cb288-2" aria-hidden="true" tabindex="-1"></a>  b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>  </span>
+<span id="cb288-3"><a href="topics.html#cb288-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb289-1"><a href="topics.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>a <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb289-2"><a href="topics.html#cb289-2" aria-hidden="true" tabindex="-1"></a>  b<span class="op">=</span><span class="dv">2</span><span class="op">;</span></span>
+<span id="cb289-3"><a href="topics.html#cb289-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb289-4"><a href="topics.html#cb289-4" aria-hidden="true" tabindex="-1"></a>  b<span class="op">=</span><span class="dv">3</span><span class="op">;</span></span>
+<span id="cb289-5"><a href="topics.html#cb289-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>This is the equivalent of <code>x &lt;- ifelse(c == 4, 8, 10)</code> in R</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb290-1"><a href="topics.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x = c == <span class="dv">4</span> ? <span class="dv">8</span> : <span class="dv">10</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb290-1"><a href="topics.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> c <span class="op">==</span> <span class="dv">4</span> <span class="op">?</span> <span class="dv">8</span> <span class="op">:</span> <span class="dv">10</span><span class="op">;</span></span></code></pre></div>
 </div>
 <div id="functions-1" class="section level3" number="9.6.3">
 <h3><span class="header-section-number">9.6.3</span> Functions</h3>
 <p>The following functions are hopefully understandable based on the function
 name. Consult <a href="https://cppreference.com" class="uri">https://cppreference.com</a> for further details.</p>
 <div class="sourceCode" id="cb291"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb291-1"><a href="topics.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="er"># base^exponent</span></span>
-<span id="cb291-2"><a href="topics.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> d = pow(base,exponent);</span>
+<span id="cb291-2"><a href="topics.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> d <span class="op">=</span> pow<span class="op">(</span>base<span class="op">,</span>exponent<span class="op">);</span></span>
 <span id="cb291-3"><a href="topics.html#cb291-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb291-4"><a href="topics.html#cb291-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> e = exp(<span class="dv">3</span>);</span>
+<span id="cb291-4"><a href="topics.html#cb291-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> e <span class="op">=</span> exp<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
 <span id="cb291-5"><a href="topics.html#cb291-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb291-6"><a href="topics.html#cb291-6" aria-hidden="true" tabindex="-1"></a><span class="er"># absolute value</span></span>
-<span id="cb291-7"><a href="topics.html#cb291-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> f = fabs(-<span class="dv">4</span>);</span>
+<span id="cb291-7"><a href="topics.html#cb291-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> f <span class="op">=</span> fabs<span class="op">(-</span><span class="dv">4</span><span class="op">);</span></span>
 <span id="cb291-8"><a href="topics.html#cb291-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb291-9"><a href="topics.html#cb291-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> g = sqrt(<span class="dv">5</span>);</span>
+<span id="cb291-9"><a href="topics.html#cb291-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> g <span class="op">=</span> sqrt<span class="op">(</span><span class="dv">5</span><span class="op">);</span></span>
 <span id="cb291-10"><a href="topics.html#cb291-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb291-11"><a href="topics.html#cb291-11" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> h = log(<span class="dv">6</span>);</span>
+<span id="cb291-11"><a href="topics.html#cb291-11" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> h <span class="op">=</span> log<span class="op">(</span><span class="dv">6</span><span class="op">);</span></span>
 <span id="cb291-12"><a href="topics.html#cb291-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb291-13"><a href="topics.html#cb291-13" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> i = log10(<span class="dv">7</span>);</span>
+<span id="cb291-13"><a href="topics.html#cb291-13" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> i <span class="op">=</span> log10<span class="op">(</span><span class="dv">7</span><span class="op">);</span></span>
 <span id="cb291-14"><a href="topics.html#cb291-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb291-15"><a href="topics.html#cb291-15" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> j = floor(<span class="fl">4.2</span>);</span>
+<span id="cb291-15"><a href="topics.html#cb291-15" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> j <span class="op">=</span> floor<span class="op">(</span><span class="fl">4.2</span><span class="op">);</span></span>
 <span id="cb291-16"><a href="topics.html#cb291-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb291-17"><a href="topics.html#cb291-17" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> k = ceil(<span class="fl">4.2</span>);</span>
+<span id="cb291-17"><a href="topics.html#cb291-17" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> k <span class="op">=</span> ceil<span class="op">(</span><span class="fl">4.2</span><span class="op">);</span></span>
 <span id="cb291-18"><a href="topics.html#cb291-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb291-19"><a href="topics.html#cb291-19" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> l = std::max(<span class="fl">0.0</span>, -<span class="fl">3.0</span>);</span>
+<span id="cb291-19"><a href="topics.html#cb291-19" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> l <span class="op">=</span> std<span class="op">::</span>max<span class="op">(</span><span class="fl">0.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">3.0</span><span class="op">);</span></span>
 <span id="cb291-20"><a href="topics.html#cb291-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb291-21"><a href="topics.html#cb291-21" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> m = std::min(<span class="fl">0.0</span>, -<span class="fl">3.0</span>);</span></code></pre></div>
+<span id="cb291-21"><a href="topics.html#cb291-21" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> m <span class="op">=</span> std<span class="op">::</span>min<span class="op">(</span><span class="fl">0.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">3.0</span><span class="op">);</span></span></code></pre></div>
 </div>
 <div id="integer-division" class="section level3" number="9.6.4">
 <h3><span class="header-section-number">9.6.4</span> Integer division</h3>
@@ -1119,24 +1129,24 @@ statement evaluates to <code>0.75</code>:</p>
 <div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="topics.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">/</span><span class="dv">4</span></span></code></pre></div>
 <pre><code>. [1] 0.75</code></pre>
 <p>But in <code>C++</code> it evaluates to 0:</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb294-1"><a href="topics.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x = <span class="dv">3</span>/<span class="dv">4</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb294-1"><a href="topics.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> <span class="dv">3</span><span class="op">/</span><span class="dv">4</span><span class="op">;</span></span></code></pre></div>
 <p>This is because both the <code>3</code> and the <code>4</code> are taken as integer literals. This
 produces the same result as</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb295-1"><a href="topics.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a = <span class="dv">3</span>;</span>
-<span id="cb295-2"><a href="topics.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b = <span class="dv">4</span>;</span>
-<span id="cb295-3"><a href="topics.html#cb295-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x = a/b;</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb295-1"><a href="topics.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb295-2"><a href="topics.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb295-3"><a href="topics.html#cb295-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> a<span class="op">/</span>b<span class="op">;</span></span></code></pre></div>
 <p>When one integer is divided by another integer, the remainder is discarded (the
 result is rounded down). This is the way <code>C++</code> works. The user is warned.</p>
 <p>Note that parameters in mrgsolve are <code>doubles</code> so this will evaluate to <code>0.75</code></p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb296-1"><a href="topics.html#cb296-1" aria-hidden="true" tabindex="-1"></a>[ PARAM ] a = <span class="dv">3</span></span>
+<div class="sourceCode" id="cb296"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb296-1"><a href="topics.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PARAM <span class="op">]</span> a <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb296-2"><a href="topics.html#cb296-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb296-3"><a href="topics.html#cb296-3" aria-hidden="true" tabindex="-1"></a>[ MAIN ] </span>
-<span id="cb296-4"><a href="topics.html#cb296-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x = a/<span class="dv">4</span>;</span></code></pre></div>
+<span id="cb296-3"><a href="topics.html#cb296-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> MAIN <span class="op">]</span> </span>
+<span id="cb296-4"><a href="topics.html#cb296-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> a<span class="op">/</span><span class="dv">4</span><span class="op">;</span></span></code></pre></div>
 <p>Since <code>a</code> is a parameter the operation of <code>a/4</code> is not integer division and
 the result is <code>0.75</code>.</p>
 <p>Unless you are already very comfortable with this concept, users are encouraged
 to add <code>.0</code> suffix to any literal number <strong>written as C++ code</strong>. For example:</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb297-1"><a href="topics.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x = <span class="fl">3.0</span> / <span class="fl">4.0</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb297-1"><a href="topics.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> <span class="fl">3.0</span> <span class="op">/</span> <span class="fl">4.0</span><span class="op">;</span></span></code></pre></div>
 <p>I think it’s fair to say that the vast majority of time you want this to
 evaluate to <code>0.75</code> and writing <code>3.0/4.0</code> rather than <code>3/4</code> will ensure you
 will not discard any remainder here.</p>
@@ -1168,6 +1178,29 @@ will not discard any remainder here.</p>
 . 7:   1    6 0 0.75 0.75
 . 8:   1    7 0 0.75 0.75</code></pre>
 </div>
+<div id="pre-processor-directives" class="section level3" number="9.6.5">
+<h3><span class="header-section-number">9.6.5</span> Pre-processor directives</h3>
+<p>Pre-processor directives are global substitutions that are made in your
+model code at the time the model is compiled. For example</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb300-1"><a href="topics.html#cb300-1" aria-hidden="true" tabindex="-1"></a>$GLOBAL </span>
+<span id="cb300-2"><a href="topics.html#cb300-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb300-3"><a href="topics.html#cb300-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CP (CENT/VC)</span></span></code></pre></div>
+<p>When you write this into your model, the pre-processor will find every
+instance of <code>CP</code> and <strong>replace</strong> it with <code>(CENT/VC)</code>. This substitution
+happens right as the model is compiled; you won’t see this substitution happen
+anywhere, but think of it as literal replacement of <code>CP</code> with <code>(CENT/VC)</code>.</p>
+<p><strong>Note</strong>:</p>
+<ul>
+<li>Put all pre-processor directives in <code>$GLOBAL</code>.</li>
+<li>It is usually a good idea to enclose the substituted coded in parentheses;
+this ensures that, for example, <code>CENT/VC</code> is evaluated as is, regardless of
+the surrounding code where it is evaluated.</li>
+<li>Under the hood, mrgsolve uses lots of pre-processor directives to define
+parameter names, compartment names and other variables; you will see a compiler
+error if you try to re-define an existing pre-processor directive. If so,
+just choose another name for your directive.</li>
+</ul>
+</div>
 </div>
 <div id="resimulate-eta-and-eps" class="section level2" number="9.7">
 <h2><span class="header-section-number">9.7</span> Resimulate <code>ETA</code> and <code>EPS</code></h2>
@@ -1178,40 +1211,40 @@ will not discard any remainder here.</p>
 </ul>
 <p>For example, we can simulate individual-level covariates
 within a certain range:</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="topics.html#cb300-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb300-2"><a href="topics.html#cb300-2" aria-hidden="true" tabindex="-1"></a><span class="st">$PARAM TVCL = 1, TVWT = 70</span></span>
-<span id="cb300-3"><a href="topics.html#cb300-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb300-4"><a href="topics.html#cb300-4" aria-hidden="true" tabindex="-1"></a><span class="st">$MAIN </span></span>
-<span id="cb300-5"><a href="topics.html#cb300-5" aria-hidden="true" tabindex="-1"></a><span class="st">capture WT = TVWT*exp(EWT);</span></span>
-<span id="cb300-6"><a href="topics.html#cb300-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb300-7"><a href="topics.html#cb300-7" aria-hidden="true" tabindex="-1"></a><span class="st">int i = 0;</span></span>
-<span id="cb300-8"><a href="topics.html#cb300-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb300-9"><a href="topics.html#cb300-9" aria-hidden="true" tabindex="-1"></a><span class="st">while((WT &lt; 60) || (WT &gt; 80)) {</span></span>
-<span id="cb300-10"><a href="topics.html#cb300-10" aria-hidden="true" tabindex="-1"></a><span class="st">  if(++i &gt; 100) break;</span></span>
-<span id="cb300-11"><a href="topics.html#cb300-11" aria-hidden="true" tabindex="-1"></a><span class="st">  simeta(1);</span></span>
-<span id="cb300-12"><a href="topics.html#cb300-12" aria-hidden="true" tabindex="-1"></a><span class="st">  WT = TVWT*exp(EWT);</span></span>
-<span id="cb300-13"><a href="topics.html#cb300-13" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb300-14"><a href="topics.html#cb300-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb300-15"><a href="topics.html#cb300-15" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @labels EWT</span></span>
-<span id="cb300-16"><a href="topics.html#cb300-16" aria-hidden="true" tabindex="-1"></a><span class="st">4</span></span>
-<span id="cb300-17"><a href="topics.html#cb300-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb300-18"><a href="topics.html#cb300-18" aria-hidden="true" tabindex="-1"></a><span class="st">$CAPTURE EWT WT</span></span>
-<span id="cb300-19"><a href="topics.html#cb300-19" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb300-20"><a href="topics.html#cb300-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb300-21"><a href="topics.html#cb300-21" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;simeta&quot;</span>, code)</span>
-<span id="cb300-22"><a href="topics.html#cb300-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb300-23"><a href="topics.html#cb300-23" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> mod <span class="sc">%&gt;%</span> <span class="fu">mrgsim</span>(<span class="at">nid=</span><span class="dv">100</span>, <span class="at">end=</span><span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb300-24"><a href="topics.html#cb300-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb300-25"><a href="topics.html#cb300-25" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(out)</span>
-<span id="cb300-26"><a href="topics.html#cb300-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb300-27"><a href="topics.html#cb300-27" aria-hidden="true" tabindex="-1"></a>sum</span></code></pre></div>
-<pre><code>.        ID              time        EWT                 WT       
-.  Min.   :  1.00   Min.   :0   Min.   :-0.15218   Min.   :60.12  
-.  1st Qu.: 25.75   1st Qu.:0   1st Qu.:-0.09012   1st Qu.:63.97  
-.  Median : 50.50   Median :0   Median :-0.02544   Median :68.24  
-.  Mean   : 50.50   Mean   :0   Mean   :-0.01831   Mean   :68.96  
-.  3rd Qu.: 75.25   3rd Qu.:0   3rd Qu.: 0.06237   3rd Qu.:74.50  
-.  Max.   :100.00   Max.   :0   Max.   : 0.13348   Max.   :80.00</code></pre>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="topics.html#cb301-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb301-2"><a href="topics.html#cb301-2" aria-hidden="true" tabindex="-1"></a><span class="st">$PARAM TVCL = 1, TVWT = 70</span></span>
+<span id="cb301-3"><a href="topics.html#cb301-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-4"><a href="topics.html#cb301-4" aria-hidden="true" tabindex="-1"></a><span class="st">$MAIN </span></span>
+<span id="cb301-5"><a href="topics.html#cb301-5" aria-hidden="true" tabindex="-1"></a><span class="st">capture WT = TVWT*exp(EWT);</span></span>
+<span id="cb301-6"><a href="topics.html#cb301-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-7"><a href="topics.html#cb301-7" aria-hidden="true" tabindex="-1"></a><span class="st">int i = 0;</span></span>
+<span id="cb301-8"><a href="topics.html#cb301-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-9"><a href="topics.html#cb301-9" aria-hidden="true" tabindex="-1"></a><span class="st">while((WT &lt; 60) || (WT &gt; 80)) {</span></span>
+<span id="cb301-10"><a href="topics.html#cb301-10" aria-hidden="true" tabindex="-1"></a><span class="st">  if(++i &gt; 100) break;</span></span>
+<span id="cb301-11"><a href="topics.html#cb301-11" aria-hidden="true" tabindex="-1"></a><span class="st">  simeta(1);</span></span>
+<span id="cb301-12"><a href="topics.html#cb301-12" aria-hidden="true" tabindex="-1"></a><span class="st">  WT = TVWT*exp(EWT);</span></span>
+<span id="cb301-13"><a href="topics.html#cb301-13" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb301-14"><a href="topics.html#cb301-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-15"><a href="topics.html#cb301-15" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @labels EWT</span></span>
+<span id="cb301-16"><a href="topics.html#cb301-16" aria-hidden="true" tabindex="-1"></a><span class="st">4</span></span>
+<span id="cb301-17"><a href="topics.html#cb301-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-18"><a href="topics.html#cb301-18" aria-hidden="true" tabindex="-1"></a><span class="st">$CAPTURE EWT WT</span></span>
+<span id="cb301-19"><a href="topics.html#cb301-19" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb301-20"><a href="topics.html#cb301-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-21"><a href="topics.html#cb301-21" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;simeta&quot;</span>, code)</span>
+<span id="cb301-22"><a href="topics.html#cb301-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-23"><a href="topics.html#cb301-23" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> mod <span class="sc">%&gt;%</span> <span class="fu">mrgsim</span>(<span class="at">nid=</span><span class="dv">100</span>, <span class="at">end=</span><span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb301-24"><a href="topics.html#cb301-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-25"><a href="topics.html#cb301-25" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(out)</span>
+<span id="cb301-26"><a href="topics.html#cb301-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-27"><a href="topics.html#cb301-27" aria-hidden="true" tabindex="-1"></a>sum</span></code></pre></div>
+<pre><code>.        ID              time        EWT                  WT       
+.  Min.   :  1.00   Min.   :0   Min.   :-0.152612   Min.   :60.09  
+.  1st Qu.: 25.75   1st Qu.:0   1st Qu.:-0.087695   1st Qu.:64.12  
+.  Median : 50.50   Median :0   Median :-0.008377   Median :69.42  
+.  Mean   : 50.50   Mean   :0   Mean   :-0.014730   Mean   :69.22  
+.  3rd Qu.: 75.25   3rd Qu.:0   3rd Qu.: 0.052240   3rd Qu.:73.75  
+.  Max.   :100.00   Max.   :0   Max.   : 0.131802   Max.   :79.86</code></pre>
 <p><strong>Call <code>simeps(n)</code> to resimulate <code>EPS</code></strong></p>
 <ul>
 <li>No <code>$PLUGIN</code> is required</li>
@@ -1219,41 +1252,41 @@ within a certain range:</p>
 </ul>
 <p>For example, we can resimulate until all
 concentrations are greater than zero:</p>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="topics.html#cb302-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb302-2"><a href="topics.html#cb302-2" aria-hidden="true" tabindex="-1"></a><span class="st">$PARAM CL = 1, V = 20,</span></span>
-<span id="cb302-3"><a href="topics.html#cb302-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb302-4"><a href="topics.html#cb302-4" aria-hidden="true" tabindex="-1"></a><span class="st">$CMT CENT</span></span>
-<span id="cb302-5"><a href="topics.html#cb302-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb302-6"><a href="topics.html#cb302-6" aria-hidden="true" tabindex="-1"></a><span class="st">$SIGMA 50</span></span>
-<span id="cb302-7"><a href="topics.html#cb302-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb302-8"><a href="topics.html#cb302-8" aria-hidden="true" tabindex="-1"></a><span class="st">$PKMODEL ncmt=1</span></span>
-<span id="cb302-9"><a href="topics.html#cb302-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb302-10"><a href="topics.html#cb302-10" aria-hidden="true" tabindex="-1"></a><span class="st">$TABLE</span></span>
-<span id="cb302-11"><a href="topics.html#cb302-11" aria-hidden="true" tabindex="-1"></a><span class="st">capture CP = CENT/V + EPS(1);</span></span>
-<span id="cb302-12"><a href="topics.html#cb302-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb302-13"><a href="topics.html#cb302-13" aria-hidden="true" tabindex="-1"></a><span class="st">int i = 0;</span></span>
-<span id="cb302-14"><a href="topics.html#cb302-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb302-15"><a href="topics.html#cb302-15" aria-hidden="true" tabindex="-1"></a><span class="st">while(CP &lt; 0 &amp;&amp; i &lt; 100) {</span></span>
-<span id="cb302-16"><a href="topics.html#cb302-16" aria-hidden="true" tabindex="-1"></a><span class="st">  simeps(1);</span></span>
-<span id="cb302-17"><a href="topics.html#cb302-17" aria-hidden="true" tabindex="-1"></a><span class="st">  CP = CENT/V + EPS(1);</span></span>
-<span id="cb302-18"><a href="topics.html#cb302-18" aria-hidden="true" tabindex="-1"></a><span class="st">  ++i;</span></span>
-<span id="cb302-19"><a href="topics.html#cb302-19" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb302-20"><a href="topics.html#cb302-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb302-21"><a href="topics.html#cb302-21" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb302-22"><a href="topics.html#cb302-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb302-23"><a href="topics.html#cb302-23" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;simeps&quot;</span>, code)</span>
-<span id="cb302-24"><a href="topics.html#cb302-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb302-25"><a href="topics.html#cb302-25" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> mod <span class="sc">%&gt;%</span> <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mrgsim</span>(<span class="at">end=</span><span class="dv">48</span>)</span>
-<span id="cb302-26"><a href="topics.html#cb302-26" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(out)</span>
-<span id="cb302-27"><a href="topics.html#cb302-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb302-28"><a href="topics.html#cb302-28" aria-hidden="true" tabindex="-1"></a>sum</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="topics.html#cb303-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb303-2"><a href="topics.html#cb303-2" aria-hidden="true" tabindex="-1"></a><span class="st">$PARAM CL = 1, V = 20,</span></span>
+<span id="cb303-3"><a href="topics.html#cb303-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-4"><a href="topics.html#cb303-4" aria-hidden="true" tabindex="-1"></a><span class="st">$CMT CENT</span></span>
+<span id="cb303-5"><a href="topics.html#cb303-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-6"><a href="topics.html#cb303-6" aria-hidden="true" tabindex="-1"></a><span class="st">$SIGMA 50</span></span>
+<span id="cb303-7"><a href="topics.html#cb303-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-8"><a href="topics.html#cb303-8" aria-hidden="true" tabindex="-1"></a><span class="st">$PKMODEL ncmt=1</span></span>
+<span id="cb303-9"><a href="topics.html#cb303-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-10"><a href="topics.html#cb303-10" aria-hidden="true" tabindex="-1"></a><span class="st">$TABLE</span></span>
+<span id="cb303-11"><a href="topics.html#cb303-11" aria-hidden="true" tabindex="-1"></a><span class="st">capture CP = CENT/V + EPS(1);</span></span>
+<span id="cb303-12"><a href="topics.html#cb303-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-13"><a href="topics.html#cb303-13" aria-hidden="true" tabindex="-1"></a><span class="st">int i = 0;</span></span>
+<span id="cb303-14"><a href="topics.html#cb303-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-15"><a href="topics.html#cb303-15" aria-hidden="true" tabindex="-1"></a><span class="st">while(CP &lt; 0 &amp;&amp; i &lt; 100) {</span></span>
+<span id="cb303-16"><a href="topics.html#cb303-16" aria-hidden="true" tabindex="-1"></a><span class="st">  simeps(1);</span></span>
+<span id="cb303-17"><a href="topics.html#cb303-17" aria-hidden="true" tabindex="-1"></a><span class="st">  CP = CENT/V + EPS(1);</span></span>
+<span id="cb303-18"><a href="topics.html#cb303-18" aria-hidden="true" tabindex="-1"></a><span class="st">  ++i;</span></span>
+<span id="cb303-19"><a href="topics.html#cb303-19" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb303-20"><a href="topics.html#cb303-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-21"><a href="topics.html#cb303-21" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb303-22"><a href="topics.html#cb303-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-23"><a href="topics.html#cb303-23" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;simeps&quot;</span>, code)</span>
+<span id="cb303-24"><a href="topics.html#cb303-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-25"><a href="topics.html#cb303-25" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> mod <span class="sc">%&gt;%</span> <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mrgsim</span>(<span class="at">end=</span><span class="dv">48</span>)</span>
+<span id="cb303-26"><a href="topics.html#cb303-26" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(out)</span>
+<span id="cb303-27"><a href="topics.html#cb303-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-28"><a href="topics.html#cb303-28" aria-hidden="true" tabindex="-1"></a>sum</span></code></pre></div>
 <pre><code>.        ID         time            CENT              CP          
-.  Min.   :1   Min.   : 0.00   Min.   :  0.00   Min.   : 0.03564  
-.  1st Qu.:1   1st Qu.:11.25   1st Qu.: 15.93   1st Qu.: 2.22367  
-.  Median :1   Median :23.50   Median : 29.38   Median : 5.55180  
-.  Mean   :1   Mean   :23.52   Mean   : 37.47   Mean   : 6.37575  
-.  3rd Qu.:1   3rd Qu.:35.75   3rd Qu.: 54.21   3rd Qu.: 9.14213  
-.  Max.   :1   Max.   :48.00   Max.   :100.00   Max.   :18.80384</code></pre>
+.  Min.   :1   Min.   : 0.00   Min.   :  0.00   Min.   : 0.08813  
+.  1st Qu.:1   1st Qu.:11.25   1st Qu.: 15.93   1st Qu.: 2.19641  
+.  Median :1   Median :23.50   Median : 29.38   Median : 4.24709  
+.  Mean   :1   Mean   :23.52   Mean   : 37.47   Mean   : 5.85879  
+.  3rd Qu.:1   3rd Qu.:35.75   3rd Qu.: 54.21   3rd Qu.: 8.32122  
+.  Max.   :1   Max.   :48.00   Max.   :100.00   Max.   :18.84995</code></pre>
 <p><strong>A safety check is recommended</strong>
 Note that in both examples, we implement a safety check: an integer counter is
 incremented every time we resimulated. The resimulation process stops if we
@@ -1276,19 +1309,19 @@ provide a matrix (as an <code>R</code> object). <code>mrgsolve</code> provides s
 functions to help … allowing the user to enter lower diagonals instead of the
 full matrix.</p>
 <p><code>dmat()</code> for diagonal matrix</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="topics.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="topics.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>.      [,1] [,2] [,3]
 . [1,]    1    0    0
 . [2,]    0    2    0
 . [3,]    0    0    3</code></pre>
 <p><code>bmat()</code> for block matrix</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="topics.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="topics.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>.      [,1] [,2]
 . [1,]    1    2
 . [2,]    2    3</code></pre>
 <p><code>cmat()</code> for a block matrix where the diagonal elements are variances and the
 off-diagonals are taken to be correlations, not covariances</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="topics.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmat</span>(<span class="fl">0.1</span>, <span class="fl">0.87</span>,<span class="fl">0.3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="topics.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmat</span>(<span class="fl">0.1</span>, <span class="fl">0.87</span>,<span class="fl">0.3</span>)</span></code></pre></div>
 <pre><code>.           [,1]      [,2]
 . [1,] 0.1000000 0.1506884
 . [2,] 0.1506884 0.3000000</code></pre>
@@ -1296,18 +1329,18 @@ off-diagonals are taken to be correlations, not covariances</p>
 <p><code>mrgsolve</code> also provides <code>as_bmat()</code> and <code>as_dmat()</code> for converting other <code>R</code>
 objects to matrices or lists of matrices.</p>
 <p>Consider this list with named elements holding the data for a matrix:</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="topics.html#cb310-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">OMEGA1.1 =</span> <span class="fl">0.9</span>, <span class="at">OMEGA2.1 =</span> <span class="fl">0.3</span>, <span class="at">OMEGA2.2 =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="topics.html#cb311-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">OMEGA1.1 =</span> <span class="fl">0.9</span>, <span class="at">OMEGA2.1 =</span> <span class="fl">0.3</span>, <span class="at">OMEGA2.2 =</span> <span class="fl">0.4</span>)</span></code></pre></div>
 <p>These data could form either a 3x3 diagonal matrix or a 2x2 block matrix. But
 the names suggest a 2x2 form. <code>as_bmat()</code> can make the matrix like this</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="topics.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_bmat</span>(m, <span class="st">&quot;OMEGA&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="topics.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_bmat</span>(m, <span class="st">&quot;OMEGA&quot;</span>)</span></code></pre></div>
 <pre><code>.      [,1] [,2]
 . [1,]  0.9  0.3
 . [2,]  0.3  0.4</code></pre>
 <p>The second argument is a regular expression that <code>mrgsolve</code> uses to find
 elements in the list to use for building the matrix.</p>
 <p>Frequently, we have estimates in a data frame like this</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="topics.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(exBoot)</span>
-<span id="cb313-2"><a href="topics.html#cb313-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(exBoot)</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="topics.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(exBoot)</span>
+<span id="cb314-2"><a href="topics.html#cb314-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(exBoot)</span></code></pre></div>
 <pre><code>.   run  THETA1 THETA2  THETA3 OMEGA11   OMEGA21 OMEGA22 OMEGA31  OMEGA32 OMEGA33
 . 1   1 -0.7634  2.280  0.8472 0.12860  0.046130  0.2874 0.13820 -0.02164  0.3933
 . 2   2 -0.4816  2.076  0.5355 0.12000  0.051000  0.2409 0.06754 -0.07759  0.3342
@@ -1323,24 +1356,24 @@ elements in the list to use for building the matrix.</p>
 . 5 0.001606       0  0.8996
 . 6 0.002134       0  0.9744</code></pre>
 <p>We can use <code>as_bmat()</code> with this data frame to extract the <code>$OMEGA</code> matrices</p>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="topics.html#cb315-1" aria-hidden="true" tabindex="-1"></a>omegas <span class="ot">&lt;-</span> <span class="fu">as_bmat</span>(exBoot, <span class="st">&quot;OMEGA&quot;</span>)</span>
-<span id="cb315-2"><a href="topics.html#cb315-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(omegas)</span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="topics.html#cb316-1" aria-hidden="true" tabindex="-1"></a>omegas <span class="ot">&lt;-</span> <span class="fu">as_bmat</span>(exBoot, <span class="st">&quot;OMEGA&quot;</span>)</span>
+<span id="cb316-2"><a href="topics.html#cb316-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(omegas)</span></code></pre></div>
 <pre><code>. [1] 100</code></pre>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="topics.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(exBoot)</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="topics.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(exBoot)</span></code></pre></div>
 <pre><code>. [1] 100  13</code></pre>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="topics.html#cb319-1" aria-hidden="true" tabindex="-1"></a>omegas[[<span class="dv">6</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="topics.html#cb320-1" aria-hidden="true" tabindex="-1"></a>omegas[[<span class="dv">6</span>]]</span></code></pre></div>
 <pre><code>.          [,1]     [,2]    [,3]
 . [1,]  0.13390 -0.01927  0.1074
 . [2,] -0.01927  0.16400 -0.0117
 . [3,]  0.10740 -0.01170  0.3412</code></pre>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="topics.html#cb321-1" aria-hidden="true" tabindex="-1"></a>omegas[[<span class="dv">16</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="topics.html#cb322-1" aria-hidden="true" tabindex="-1"></a>omegas[[<span class="dv">16</span>]]</span></code></pre></div>
 <pre><code>.         [,1]    [,2]   [,3]
 . [1,] 0.08126 0.01252 0.1050
 . [2,] 0.01252 0.16860 0.0149
 . [3,] 0.10500 0.01490 0.4062</code></pre>
 <p>The result of calling <code>as_bmat</code> or <code>as_dmat</code> is a list of matrices, one for each row in the data frame.</p>
 <p>Note in this example, we could have called</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="topics.html#cb323-1" aria-hidden="true" tabindex="-1"></a>sigmas <span class="ot">&lt;-</span> <span class="fu">as_bmat</span>(exBoot,<span class="st">&quot;SIGMA&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="topics.html#cb324-1" aria-hidden="true" tabindex="-1"></a>sigmas <span class="ot">&lt;-</span> <span class="fu">as_bmat</span>(exBoot,<span class="st">&quot;SIGMA&quot;</span>) </span></code></pre></div>
 <p>to grab the <code>$SIGMA</code> matrices.</p>
 <p>For help on these helper functions, see <code>?dmat</code>, <code>?bmat</code>, <code>?cmat</code>, <code>?as_bmat</code>,
 <code>?as_dmat</code> in the <code>R</code> help system after loading <code>mrgsolve</code>.</p>
@@ -1357,16 +1390,16 @@ will convert all <code>$OMEGA</code> and <code>$SIGMA</code> matrix elements to 
 file (<code>?zero_re</code>) to see some options for selectively zeroing out only one or
 the other.</p>
 <p>For example we have this population PK model</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="topics.html#cb324-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;popex&quot;</span>, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb324-2"><a href="topics.html#cb324-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb324-3"><a href="topics.html#cb324-3" aria-hidden="true" tabindex="-1"></a><span class="fu">omat</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="topics.html#cb325-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;popex&quot;</span>, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb325-2"><a href="topics.html#cb325-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb325-3"><a href="topics.html#cb325-3" aria-hidden="true" tabindex="-1"></a><span class="fu">omat</span>(mod)</span></code></pre></div>
 <pre><code>. $...
 .       [,1] [,2] [,3]
 . ECL:   0.3  0.0  0.0
 . EV:    0.0  0.1  0.0
 . EKA:   0.0  0.0  0.5</code></pre>
 <p>We can turn that matrix to all zeros with</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="topics.html#cb326-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">zero_re</span>() <span class="sc">%&gt;%</span> omat</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="topics.html#cb327-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">zero_re</span>() <span class="sc">%&gt;%</span> omat</span></code></pre></div>
 <pre><code>. $...
 .       [,1] [,2] [,3]
 . ECL:     0    0    0
@@ -1375,39 +1408,39 @@ the other.</p>
 <p>And when we simulate right after that, all <code>ETA(n)</code> will be zero as well
 and you’ll get your fixed-effects simulation (the following is for example
 only and is not evaluated)</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="topics.html#cb328-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb328-2"><a href="topics.html#cb328-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">zero_re</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb328-3"><a href="topics.html#cb328-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb328-4"><a href="topics.html#cb328-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb328-5"><a href="topics.html#cb328-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="topics.html#cb329-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb329-2"><a href="topics.html#cb329-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">zero_re</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb329-3"><a href="topics.html#cb329-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb329-4"><a href="topics.html#cb329-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb329-5"><a href="topics.html#cb329-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
 </div>
 <div id="example-unnamed-matrix" class="section level3" number="9.8.3">
 <h3><span class="header-section-number">9.8.3</span> Example: unnamed matrix</h3>
 <p>Here is a model with only a 3x3 <code>$OMEGA</code> matrix</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="topics.html#cb329-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb329-2"><a href="topics.html#cb329-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA</span></span>
-<span id="cb329-3"><a href="topics.html#cb329-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
-<span id="cb329-4"><a href="topics.html#cb329-4" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb329-5"><a href="topics.html#cb329-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb329-6"><a href="topics.html#cb329-6" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;matrix&quot;</span>, code, <span class="at">compile=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="topics.html#cb330-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb330-2"><a href="topics.html#cb330-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA</span></span>
+<span id="cb330-3"><a href="topics.html#cb330-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
+<span id="cb330-4"><a href="topics.html#cb330-4" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb330-5"><a href="topics.html#cb330-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb330-6"><a href="topics.html#cb330-6" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;matrix&quot;</span>, code, <span class="at">compile=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Let’s check the values in the matrix using <code>omat()</code></p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="topics.html#cb330-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> omat</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="topics.html#cb331-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> omat</span></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     1    0    0
 . 2:     0    2    0
 . 3:     0    0    3</code></pre>
 <p>We also use <code>omat()</code> to update the values in the matrix</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="topics.html#cb332-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">dmat</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)) <span class="sc">%&gt;%</span> omat</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="topics.html#cb333-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">dmat</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)) <span class="sc">%&gt;%</span> omat</span></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     4    0    0
 . 2:     0    5    0
 . 3:     0    0    6</code></pre>
 <p>To update <code>$OMEGA</code>, we must provide a matrix of the same dimension, in this case 3x3. An error is generated if we provide a matrix with the wrong dimension.</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="topics.html#cb334-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">try</span>(mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">dmat</span>(<span class="dv">11</span>,<span class="dv">23</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="topics.html#cb335-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">try</span>(mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">dmat</span>(<span class="dv">11</span>,<span class="dv">23</span>)))</span></code></pre></div>
 <pre><code>. Error : improper signature: omat</code></pre>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="topics.html#cb336-1" aria-hidden="true" tabindex="-1"></a>ans</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="topics.html#cb337-1" aria-hidden="true" tabindex="-1"></a>ans</span></code></pre></div>
 <pre><code>. [1] &quot;Error : improper signature: omat\n&quot;
 . attr(,&quot;class&quot;)
 . [1] &quot;try-error&quot;
@@ -1417,15 +1450,15 @@ only and is not evaluated)</p>
 <div id="example-named-matrices" class="section level3" number="9.8.4">
 <h3><span class="header-section-number">9.8.4</span> Example: named matrices</h3>
 <p>When there are multiple <code>$OMEGA</code> matrices, it can be helpful to assign them names. Here, there are two matrices: one for interindividual variability (<code>IIV</code>) and one for interoccasion variability (<code>IOV</code>).</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="topics.html#cb338-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb338-2"><a href="topics.html#cb338-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name IIV</span></span>
-<span id="cb338-3"><a href="topics.html#cb338-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
-<span id="cb338-4"><a href="topics.html#cb338-4" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name IOV</span></span>
-<span id="cb338-5"><a href="topics.html#cb338-5" aria-hidden="true" tabindex="-1"></a><span class="st">4 5</span></span>
-<span id="cb338-6"><a href="topics.html#cb338-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb338-7"><a href="topics.html#cb338-7" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;iov&quot;</span>, code, <span class="at">compile=</span><span class="cn">FALSE</span>)</span>
-<span id="cb338-8"><a href="topics.html#cb338-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb338-9"><a href="topics.html#cb338-9" aria-hidden="true" tabindex="-1"></a><span class="fu">revar</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="topics.html#cb339-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb339-2"><a href="topics.html#cb339-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name IIV</span></span>
+<span id="cb339-3"><a href="topics.html#cb339-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
+<span id="cb339-4"><a href="topics.html#cb339-4" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name IOV</span></span>
+<span id="cb339-5"><a href="topics.html#cb339-5" aria-hidden="true" tabindex="-1"></a><span class="st">4 5</span></span>
+<span id="cb339-6"><a href="topics.html#cb339-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb339-7"><a href="topics.html#cb339-7" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;iov&quot;</span>, code, <span class="at">compile=</span><span class="cn">FALSE</span>)</span>
+<span id="cb339-8"><a href="topics.html#cb339-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-9"><a href="topics.html#cb339-9" aria-hidden="true" tabindex="-1"></a><span class="fu">revar</span>(mod)</span></code></pre></div>
 <pre><code>. $omega
 . $IIV
 .     [,1] [,2] [,3]
@@ -1442,9 +1475,9 @@ only and is not evaluated)</p>
 . $sigma
 . No matrices found</code></pre>
 <p>Now, we can update either <code>IIV</code> or <code>IOV</code> (or both) by name</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="topics.html#cb340-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb340-2"><a href="topics.html#cb340-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">omat</span>(<span class="at">IOV =</span> <span class="fu">dmat</span>(<span class="dv">11</span>,<span class="dv">12</span>), <span class="at">IIV =</span> <span class="fu">dmat</span>(<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">15</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb340-3"><a href="topics.html#cb340-3" aria-hidden="true" tabindex="-1"></a>  omat</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="topics.html#cb341-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb341-2"><a href="topics.html#cb341-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">omat</span>(<span class="at">IOV =</span> <span class="fu">dmat</span>(<span class="dv">11</span>,<span class="dv">12</span>), <span class="at">IIV =</span> <span class="fu">dmat</span>(<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">15</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb341-3"><a href="topics.html#cb341-3" aria-hidden="true" tabindex="-1"></a>  omat</span></code></pre></div>
 <pre><code>. $IIV
 .     [,1] [,2] [,3]
 . 1:    13    0    0
@@ -1456,9 +1489,9 @@ only and is not evaluated)</p>
 . 4:    11    0
 . 5:     0   12</code></pre>
 <p>Again, an error is generated if we try to assign a 3x3 matrix to the <code>IOV</code> position</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="topics.html#cb342-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">try</span>(mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="at">IIV=</span><span class="fu">dmat</span>(<span class="dv">1</span>,<span class="dv">2</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="topics.html#cb343-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">try</span>(mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="at">IIV=</span><span class="fu">dmat</span>(<span class="dv">1</span>,<span class="dv">2</span>)))</span></code></pre></div>
 <pre><code>. Error : improper dimension: omat</code></pre>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="topics.html#cb344-1" aria-hidden="true" tabindex="-1"></a>ans</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="topics.html#cb345-1" aria-hidden="true" tabindex="-1"></a>ans</span></code></pre></div>
 <pre><code>. [1] &quot;Error : improper dimension: omat\n&quot;
 . attr(,&quot;class&quot;)
 . [1] &quot;try-error&quot;
@@ -1468,17 +1501,17 @@ only and is not evaluated)</p>
 <div id="example-unnamed-matrices" class="section level3" number="9.8.5">
 <h3><span class="header-section-number">9.8.5</span> Example: unnamed matrices</h3>
 <p>If we do write the model with unnamed matrices, we can still update them</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="topics.html#cb346-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb346-2"><a href="topics.html#cb346-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA</span></span>
-<span id="cb346-3"><a href="topics.html#cb346-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
-<span id="cb346-4"><a href="topics.html#cb346-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb346-5"><a href="topics.html#cb346-5" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA </span></span>
-<span id="cb346-6"><a href="topics.html#cb346-6" aria-hidden="true" tabindex="-1"></a><span class="st">4 5</span></span>
-<span id="cb346-7"><a href="topics.html#cb346-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb346-8"><a href="topics.html#cb346-8" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;multi&quot;</span>, code, <span class="at">compile=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="topics.html#cb347-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb347-2"><a href="topics.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA</span></span>
+<span id="cb347-3"><a href="topics.html#cb347-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
+<span id="cb347-4"><a href="topics.html#cb347-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb347-5"><a href="topics.html#cb347-5" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA </span></span>
+<span id="cb347-6"><a href="topics.html#cb347-6" aria-hidden="true" tabindex="-1"></a><span class="st">4 5</span></span>
+<span id="cb347-7"><a href="topics.html#cb347-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb347-8"><a href="topics.html#cb347-8" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;multi&quot;</span>, code, <span class="at">compile=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p>In this case, the only way to update is to pass in a <strong>list</strong> of matrices, where
 (in this example) the first matrix is 3x3 and the second is 2x2</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="topics.html#cb347-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">list</span>(<span class="fu">dmat</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>),<span class="fu">dmat</span>(<span class="dv">8</span>,<span class="dv">9</span>))) <span class="sc">%&gt;%</span> omat</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="topics.html#cb348-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">list</span>(<span class="fu">dmat</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>),<span class="fu">dmat</span>(<span class="dv">8</span>,<span class="dv">9</span>))) <span class="sc">%&gt;%</span> omat</span></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     5    0    0
@@ -1505,7 +1538,7 @@ covariate <code>COV1</code>.</p>
 so that the system uses the value of <code>COV1</code> to advance from <code>TIME1</code> to <code>TIME2</code>.
 To use <code>locf</code> advance, set <code>nocb</code> to <code>FALSE</code> when calling <code>mrgsim</code>. For
 example,</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="topics.html#cb349-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">mrgsim</span>(<span class="at">nocb =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="topics.html#cb350-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">mrgsim</span>(<span class="at">nocb =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>There is additional information about the sequence of events that takes place
 during system advance in section <a href="section-sequence.html#section-sequence">5</a>.</p>
 
@@ -1521,7 +1554,6 @@ during system advance in section <a href="section-sequence.html#section-sequence
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1561,6 +1593,10 @@ gitbook.start({
 "text": null
 },
 "download": ["user-guide.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none",
 "sharing": false
