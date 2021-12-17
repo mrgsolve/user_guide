@@ -6,6 +6,7 @@ rmd_files: [
   "components.Rmd", 
   "specification.Rmd",
   "datasets.Rmd", 
+  "event.Rmd",
   "output.Rmd", 
   "sequence.Rmd",
   "steady-state.Rmd",
@@ -13,6 +14,5 @@ rmd_files: [
   "mtime.Rmd",
   "topics.Rmd", 
   "q-and-a.Rmd",
-  "internals.Rmd",
   "install.Rmd"
 ]

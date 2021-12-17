@@ -39,6 +39,17 @@ The build location and several internal C++ functions are named according to
 this model name; mrgsolve will assume that two models with the same name are 
 just different iterations of the same model.
 
+__modfile__
+
+Type: `<character>`
+
+This is the name of the file containing the model code
+
+```{r}
+mod@modfile
+```
+
+
 __package__
 
 Type: `<character>`
@@ -100,7 +111,7 @@ Type: `<numeric>`
 
 These form the internal simulation time grid
 
-```{r}
+```{r, eval = FALSE}
 mod@start
 mod@end
 mod@delta
@@ -109,19 +120,22 @@ mod@add
 
 __param__
 
-This is an object of class `parameterlist`
+Type: `<parameterlist>`
+
+
+This is an object that inherits from `parameterlist`
 ```{r}
 class(mod@param)
 mod@param
 ```
 
-The `parameterlist` inherits from `numericlist`
+The parameter list inherits from `numericlist`
 
-```{r}
+```{r, eval = FALSE}
 inherits(mod@param, "numericlist")
 ```
 
-The parameter list can be extracted with param
+The parameter list can be extracted with the `param()` function
 
 ```{r, eval = FALSE}
 param(mod)
@@ -130,6 +144,69 @@ param(mod)
 The parameter list can be coerced to an R list
 
 ```{r, eval = FALSE}
-as.list(mod@param)
+as.list(param(mod))
+```
+
+
+__init__ 
+
+Type: `<cmt_list>`
+
+
+This is an object inheriting from `cmt_list`
+
+```{r}
+class(mod@init)
+mod@init
+```
+
+The compartment list inherits from `numericlist`
+
+```{r, eval = FALSE}
+inherits(mod@init, "numericlist")
+```
+
+The compartment list can be extracted with the `init()` function
+
+```{r, eval = FALSE}
+init(mod)
+```
+
+The compartment list can be coerced to an R list
+
+```{r, eval = FALSE}
+as.list(init(mod))
+```
+
+__maxsteps__
+
+Type: `<numeric>`
+
+This value is passed to the ODE solver. If the solver can't advance to the 
+next time withing `maxsteps` steps, it will stop and throw an error.
+
+```{r}
+mod@maxsteps
+```
+
+__hmax__
+
+Type: `<numeric>`
+
+This value is passed to the ODE solver. This is the maximum step size.
+
+```{r}
+mod@hmax
+```
+
+
+__hmax__
+
+Type: `<numeric>`
+
+This value is passed to the ODE solver. This is the maximum step size.
+
+```{r}
+mod@hmax
 ```
 

@@ -53,6 +53,8 @@ pretty clear in the pdfbook).
   the different model code blocks and Section \@ref(variables-macros) lists
   the different variables that you can get (or set) in the different code blocks
 - Chapter \@ref(data-set-chapter) shows you how to format input data sets
+- Chapter \@ref(event-chapter) shows you how to create and work with simple 
+  data set objects called `event` objects
 - Chapter \@ref(simulated-output) tells you about the simulated output object
   and how you can work with it
 - Chapter \@ref(section-sequence) dives into the simulation sequence, showing 

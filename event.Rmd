@@ -1,0 +1,126 @@
+# Event objects {#event-chapter}
+
+```{r,echo=FALSE,message=FALSE}
+source("setup.R")
+```
+
+Event objects are similar to the data sets described in \@ref(data-set-chapter), 
+but are simpler and easier to create. This is the fastest way to implement a 
+basic intervention (like dosing) into your model. 
+
+## Construction
+
+A new event object can be created with the `ev()` constructor. For a single, 
+100 mg dose it would be
+
+```{r}
+e <- ev(amt = 100)
+```
+
+When you print the object to the R console we see the 100 mg dose along with 
+the following defaults
+
+- `time` set to 0
+- `cmt` set to 1 (the first compartment)
+- `evid` set to 1 (a bolus dose)
+
+```{r}
+e
+```
+
+Of course, we can override any of these defaults or add additional items as
+needed. For a single 100 mg dose infused over 2 hours in compartment 2 one 
+hour after the simulation starts
+
+```{r}
+e <- ev(amt = 100, rate = 50, cmt = 2, time = 1)
+```
+
+To use this event object, we can pass it into `mrgsim()` under the `events` 
+argument
+
+```{r}
+mod <- house(delta = 1, end = 24)
+
+mrgsim(mod, events = e)
+```
+
+Event object inputs can be functions of previously defined inputs. For example
+
+```{r}
+ev(amt = 100, rate = amt / 2)
+```
+
+
+See the `?ev()` help topic for more information on additional arguments 
+when constructing event objects. Here, I'd like to specifically highlight a 
+handful of options that can be helpful when constructing event objects. 
+
+__Infusion duration__
+
+Above, we created some infusion event objects by adding an infusion rate to the 
+input. We can also indicate an infusion by adding an infusion time through 
+the `tinf` argument
+
+```{r}
+ev(amt = 100, tinf = 2)
+```
+
+__Additional data items__
+
+We can also pass through arbitrary data columns through the event object. For
+example, we can pass through `WT`
+
+```{r}
+ev(amt = 100, WT = 80)
+```
+
+## Coerce to data set
+
+As we noted, event objects are very similar to data sets and they are nothing 
+but data sets under the hood. We can take the event objects we created above
+and coerce them to other objects. 
+
+__Using as_data_set__
+
+```{r}
+as_data_set(e)
+```
+
+
+This will ensure that there is an `ID` column in the output and it will 
+be suitable to use for simulation.
+
+__Using as.data.frame__
+
+```{r}
+as.data.frame(e) %>% mutate(ID = 5)
+```
+
+## Extract information
+
+There is a `$` operator for event objects
+
+```{r}
+e$amt
+```
+
+
+## Combining event objects
+
+Coming soon.
+
+## Modifying an event object
+
+Event objects can be mutated
+
+```{r}
+mutate(e, amt = 200)
+```
+
+Columns can be removed from event objects
+
+```{r}
+ev(amt = 100, WT = 50, AGE = 12) %>% select(-WT)
+```
+
