@@ -56,4 +56,10 @@ nonmem
 pathing
 ETAs
 cppfile
+hmax
+maxsteps
+soloc
+RcppArmadillo
+modfile
+
 
