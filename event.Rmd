@@ -117,6 +117,20 @@ the `tinf` argument
 ev(amt = 100, tinf = 2)
 ```
 
+
+__ID__
+
+While the primary use case for event objects are for _single individuals_, 
+we can code a series of IDs into the object too
+
+```{r}
+ev(amt = 100, ID = 1:3)
+```
+
+Here, we asked for 3 IDs in the object. Once this is turned into a simulation
+data set (see below), we'll have a population data set from which to simulate.
+
+
 __Additional data items__
 
 We can also pass through arbitrary data columns through the event object. For
@@ -159,9 +173,153 @@ e$amt
 
 ## Combining event objects
 
-Coming soon.
+
+### Concatenate
+
+Two or more event objects can be concatenated using the `c` operator
+
+```{r}
+e1 <- ev(amt = 100)
+e2 <- ev(amt = 200, time = 24)
+
+c(e1, e2)
+```
+
+This essentially "rbinds" the rows of the individual event objects and 
+sorts the rows by `time`. 
+
+__NOTE__: the result of this manipulation is another event object. 
+
+### Sequence
+
+Event objects can also be combined to happen in a sequence. In the previous
+example, we wanted the 200 mg to happen at 24 hours and we had to code that
+fact into `time` accordingly.
+
+By specifying a dosing interval (`ii`) we can ask mrgsolve to do that 
+automatically by calling the `seq()` method.
+
+```{r}
+e1 <- ev(amt = 100, ii = 24)
+e2 <- ev(amt = 200, ii = 24)
+
+seq(e1, e2)
+```
+
+This was a trivial example to get a simple result. We can try something more 
+complicated to make the point
+
+```{r}
+e3 <- ev(amt = 100, ii = 6,  addl = 28)
+e4 <- ev(amt = 200, ii = 12, addl = 124)
+e5 <- ev(amt = 400, ii = 24, addl = 3)
+
+seq(e3, e4, e5)
+```
+
+__NOTE__: when mrgsolve puts event objects into a sequence, it starts the 
+next segment of the regimen one dosing interval after the previous regimen 
+finished. Going back to the simple example
+
+```{r}
+seq(e1, e2)
+```
+
+`e1` was just a single dose at time 0. mrgsolve will have `e2` start one dosing
+interval (24 hours) after the last (only) dose in `e1`. We can alter the amount
+of time between segments of the regimen by using the `wait` argument. For 
+example, to push `e2` out by an additional 24 hours we'd use
+
+```{r}
+seq(e1, wait = 24, e2)
+```
+
+We can also use a negative value for `wait` to make the next dose happen sooner
+
+```{r}
+seq(e1, wait = -12, e2)
+```
+
+
+Finally, we should note that event objects can be used multiple times in a 
+sequence
+
+```{r}
+seq(e1, e2, wait = 7*24, e2, e1)
+```
+
+### repeat
+
+Like the `seq()` method for event objects, `ev_repeat` will put an event object
+into a sequence `n` times
+
+```{r}
+ev_repeat(e1, n = 3)
+```
+
+By default, this function returns a regular data frame. To return an event 
+object instead call
+
+```{r, eval = FALSE}
+ev_repeat(e1, n = 3, as.ev = TRUE)
+```
+
+
+You can put a waiting period too. To illustrate this, let's compose a more 
+complicated regimen and repeat that
+
+```{r}
+e1 <- ev(amt = 500, ii = 24)
+e2 <- ev(amt = 250, ii = 24, addl = 5)
+e3 <- ev_seq(e1, e2)
+
+e3 %>% realize_addl()
+```
+
+In this regimen, we have daily dosing for 7 doses. The last dose is given 
+at 144 hours. When putting this into a sequence, we'll wait one dosing interval
+and then the `wait` period and then start again
+
+```{r}
+ev_repeat(e3, n = 3, wait = 7*24)
+```
+
+
+### Create a "data_set"
+
+Use the `as_data_set()` function to combine multiple event objects into a single
+data set. 
+
+```{r}
+as_data_set(e1, e2)
+```
+
+It's important to note that 
+
+1. The result is a regular old `data.frame()`; once you call `as_data_set()`, 
+   you exit the event object world
+1. Each event object is given a different `ID`
+
+
+Recall that we can create event objects with multiple `IDs`; `as_data_set()`
+is handy to use with this feature
+
+```{r}
+as_data_set(
+  ev(amt = 100, ID = 1:3), 
+  ev(amt = 200, ID = 1:3), 
+  ev(amt = 300, ID = 1:2)
+)
+```
+
+
+Notice that `as_data_set` has created unique IDs for the 3 subjects in 
+the 100 mg group, the 3 subjects in the 200 mg group, and the 2 subjects in 
+the 300 mg group.
 
 ## Modifying an event object
+
+### Tidy-like manipulation
 
 Event objects can be mutated
 
@@ -174,4 +332,78 @@ Columns can be removed from event objects
 ```{r}
 ev(amt = 100, WT = 50, AGE = 12) %>% select(-WT)
 ```
+
+Rows can be removed from event objects
+
+```{r}
+e <- c(ev(amt = 100), ev(amt = 200, time = 12), ev(amt = 300, time = 24))
+
+filter(e, time <= 12)
+```
+
+
+### realize_addl
+
+"Additional" doses can be made explicit in an event object
+
+```{r}
+ev(amt = 100, ii = 6, addl = 3) %>% realize_addl()
+```
+
+### ev_rep
+
+Event objects can be "expanded" into multiple IDs to create a population; 
+use the `ev_rep()` function for this
+
+```{r}
+ev(amt = 100) %>% ev_rep(1:5)
+```
+
+By default, `ev_rep()` returns a regular data frame. You can request that 
+an event object is returned
+
+```{r, eval = FALSE}
+ev(amt = 100) %>% ev_rep(1:5, as.ev = TRUE)
+```
+
+
+## Creative composition
+
+mrgsolve has a couple of more creative ways to construct event objects. 
+
+### ev_days
+
+`ev_days()` will create dosing sequences when dosing are on certain days (of the 
+week). For example, to dose only on Monday, Wednesday, and Friday for on month
+
+```{r}
+e <- ev_days(ev(amt = 100), ii = 168, addl = 3, days = 'm,w,f')
+e
+```
+
+We can see how this works by simulating the regimen
+
+```{r}
+mrgsim_e(mod, e, end = 168*4) %>% plot("CP")
+```
+
+
+### ev_rx
+
+`ev_rx()` is a way to write a regimen out with notation similar to what you 
+might see on a prescription. For example, 100 mg twice daily for 3 doses into 
+compartment 2 would be
+
+```{r}
+ev_rx("100 mg q12h x3 in 2")
+```
+
+To code an infusion
+
+```{r}
+ev_rx("500 mg over 2 hours q 24 h x3 in 1")
+```
+
+
+See the `ev_rx()` documentation for more details and limitations.
 

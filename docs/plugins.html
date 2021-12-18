@@ -283,8 +283,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="event-chapter.html"><a href="event-chapter.html#construction"><i class="fa fa-check"></i><b>4.2</b> Construction</a></li>
 <li class="chapter" data-level="4.3" data-path="event-chapter.html"><a href="event-chapter.html#coerce-to-data-set"><i class="fa fa-check"></i><b>4.3</b> Coerce to data set</a></li>
 <li class="chapter" data-level="4.4" data-path="event-chapter.html"><a href="event-chapter.html#extract-information"><i class="fa fa-check"></i><b>4.4</b> Extract information</a></li>
-<li class="chapter" data-level="4.5" data-path="event-chapter.html"><a href="event-chapter.html#combining-event-objects"><i class="fa fa-check"></i><b>4.5</b> Combining event objects</a></li>
-<li class="chapter" data-level="4.6" data-path="event-chapter.html"><a href="event-chapter.html#modifying-an-event-object"><i class="fa fa-check"></i><b>4.6</b> Modifying an event object</a></li>
+<li class="chapter" data-level="4.5" data-path="event-chapter.html"><a href="event-chapter.html#combining-event-objects"><i class="fa fa-check"></i><b>4.5</b> Combining event objects</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="event-chapter.html"><a href="event-chapter.html#concatenate"><i class="fa fa-check"></i><b>4.5.1</b> Concatenate</a></li>
+<li class="chapter" data-level="4.5.2" data-path="event-chapter.html"><a href="event-chapter.html#sequence"><i class="fa fa-check"></i><b>4.5.2</b> Sequence</a></li>
+<li class="chapter" data-level="4.5.3" data-path="event-chapter.html"><a href="event-chapter.html#repeat"><i class="fa fa-check"></i><b>4.5.3</b> repeat</a></li>
+<li class="chapter" data-level="4.5.4" data-path="event-chapter.html"><a href="event-chapter.html#create-a-data_set"><i class="fa fa-check"></i><b>4.5.4</b> Create a “data_set”</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="event-chapter.html"><a href="event-chapter.html#modifying-an-event-object"><i class="fa fa-check"></i><b>4.6</b> Modifying an event object</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="event-chapter.html"><a href="event-chapter.html#tidy-like-manipulation"><i class="fa fa-check"></i><b>4.6.1</b> Tidy-like manipulation</a></li>
+<li class="chapter" data-level="4.6.2" data-path="event-chapter.html"><a href="event-chapter.html#realize_addl"><i class="fa fa-check"></i><b>4.6.2</b> realize_addl</a></li>
+<li class="chapter" data-level="4.6.3" data-path="event-chapter.html"><a href="event-chapter.html#ev_rep"><i class="fa fa-check"></i><b>4.6.3</b> ev_rep</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="event-chapter.html"><a href="event-chapter.html#creative-composition"><i class="fa fa-check"></i><b>4.7</b> Creative composition</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="event-chapter.html"><a href="event-chapter.html#ev_days"><i class="fa fa-check"></i><b>4.7.1</b> ev_days</a></li>
+<li class="chapter" data-level="4.7.2" data-path="event-chapter.html"><a href="event-chapter.html#ev_rx"><i class="fa fa-check"></i><b>4.7.2</b> ev_rx</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>5</b> Simulated output</a>
 <ul>
@@ -431,14 +447,14 @@ about a simpler way to calculate time after dose that should work fine if doses
 are only in a single compartment. This functionality is provided by mrgsolve.</p>
 <p><strong>Usage</strong></p>
 <p>First, tell <code>mrgsolve</code> that you want to use the <code>tad</code> plugin</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb191-1"><a href="plugins.html#cb191-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN tad</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb232-1"><a href="plugins.html#cb232-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN tad</span></code></pre></div>
 <p>The create <code>tadose</code> objects, one for each compartment where you want to track
 time after dose. One approach is to do this in <code>[ global ]</code></p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb192-1"><a href="plugins.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>plugin<span class="op">]</span> tad</span>
-<span id="cb192-2"><a href="plugins.html#cb192-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb192-3"><a href="plugins.html#cb192-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> global <span class="op">]</span> </span>
-<span id="cb192-4"><a href="plugins.html#cb192-4" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_1<span class="op">(</span><span class="dv">1</span><span class="op">);</span> </span>
-<span id="cb192-5"><a href="plugins.html#cb192-5" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_2<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb233-1"><a href="plugins.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>plugin<span class="op">]</span> tad</span>
+<span id="cb233-2"><a href="plugins.html#cb233-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb233-3"><a href="plugins.html#cb233-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> global <span class="op">]</span> </span>
+<span id="cb233-4"><a href="plugins.html#cb233-4" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_1<span class="op">(</span><span class="dv">1</span><span class="op">);</span> </span>
+<span id="cb233-5"><a href="plugins.html#cb233-5" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_2<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span></code></pre></div>
 <p>Notice that we pass the compartment number that we want to track in each
 case and also that we refer to the <code>mrg::</code> namespace for the <code>tadose</code> class.</p>
 <p>The <code>tadose</code> objects contain the following (public) members</p>
@@ -458,24 +474,24 @@ value of <code>-1.0</code> is returned</li>
 a new individual</li>
 </ul>
 <p>As an example, you can call the <code>reset()</code> method on one of the <code>tadose</code> objects</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb193-1"><a href="plugins.html#cb193-1" aria-hidden="true" tabindex="-1"></a>tad_cmt_1<span class="op">.</span>reset<span class="op">();</span></span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb234-1"><a href="plugins.html#cb234-1" aria-hidden="true" tabindex="-1"></a>tad_cmt_1<span class="op">.</span>reset<span class="op">();</span></span></code></pre></div>
 <p>You can find the source code for this object
 <a href="https://github.com/metrumresearchgroup/mrgsolve/blob/master/inst/base/mrgsolve-tad.h">here</a>.</p>
 <p>A working example model that tracks doses in compartments <code>1</code> and <code>2</code> is
 provided here</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb194-1"><a href="plugins.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>plugin<span class="op">]</span> tad</span>
-<span id="cb194-2"><a href="plugins.html#cb194-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-3"><a href="plugins.html#cb194-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> global <span class="op">]</span> </span>
-<span id="cb194-4"><a href="plugins.html#cb194-4" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_1<span class="op">(</span><span class="dv">1</span><span class="op">);</span> </span>
-<span id="cb194-5"><a href="plugins.html#cb194-5" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_2<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span>
-<span id="cb194-6"><a href="plugins.html#cb194-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-7"><a href="plugins.html#cb194-7" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> pkmodel <span class="op">]</span> cmt <span class="op">=</span> <span class="st">&quot;GUT,CENT&quot;</span><span class="op">,</span> depot <span class="op">=</span> TRUE</span>
-<span id="cb194-8"><a href="plugins.html#cb194-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-9"><a href="plugins.html#cb194-9" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> param <span class="op">]</span> CL <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> V <span class="op">=</span> <span class="dv">20</span><span class="op">,</span> KA <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb194-10"><a href="plugins.html#cb194-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-11"><a href="plugins.html#cb194-11" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
-<span id="cb194-12"><a href="plugins.html#cb194-12" aria-hidden="true" tabindex="-1"></a>capture tad1 <span class="op">=</span> tad_cmt_1<span class="op">.</span>tad<span class="op">(</span>self<span class="op">);</span> </span>
-<span id="cb194-13"><a href="plugins.html#cb194-13" aria-hidden="true" tabindex="-1"></a>capture tad2 <span class="op">=</span> tad_cmt_2<span class="op">.</span>tad<span class="op">(</span>self<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb235-1"><a href="plugins.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>plugin<span class="op">]</span> tad</span>
+<span id="cb235-2"><a href="plugins.html#cb235-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb235-3"><a href="plugins.html#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> global <span class="op">]</span> </span>
+<span id="cb235-4"><a href="plugins.html#cb235-4" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_1<span class="op">(</span><span class="dv">1</span><span class="op">);</span> </span>
+<span id="cb235-5"><a href="plugins.html#cb235-5" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_2<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span>
+<span id="cb235-6"><a href="plugins.html#cb235-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb235-7"><a href="plugins.html#cb235-7" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> pkmodel <span class="op">]</span> cmt <span class="op">=</span> <span class="st">&quot;GUT,CENT&quot;</span><span class="op">,</span> depot <span class="op">=</span> TRUE</span>
+<span id="cb235-8"><a href="plugins.html#cb235-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb235-9"><a href="plugins.html#cb235-9" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> param <span class="op">]</span> CL <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> V <span class="op">=</span> <span class="dv">20</span><span class="op">,</span> KA <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb235-10"><a href="plugins.html#cb235-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb235-11"><a href="plugins.html#cb235-11" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
+<span id="cb235-12"><a href="plugins.html#cb235-12" aria-hidden="true" tabindex="-1"></a>capture tad1 <span class="op">=</span> tad_cmt_1<span class="op">.</span>tad<span class="op">(</span>self<span class="op">);</span> </span>
+<span id="cb235-13"><a href="plugins.html#cb235-13" aria-hidden="true" tabindex="-1"></a>capture tad2 <span class="op">=</span> tad_cmt_2<span class="op">.</span>tad<span class="op">(</span>self<span class="op">);</span></span></code></pre></div>
 <p><strong>Static approach</strong></p>
 <p>Another approach would be to make these static in <code>[ main ]</code> but this approach
 would only work if you only use these in <code>[ main ]</code>; the <code>[ global ]</code> approach
@@ -484,8 +500,8 @@ is preferable since then you can access the object in any block (function).</p>
 <h3><span class="header-section-number">8.1.1</span> Note</h3>
 <p>Note there is a simpler way to calculate time after dose when only dosing into
 a single compartment</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb195-1"><a href="plugins.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span></span>
-<span id="cb195-2"><a href="plugins.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb236-1"><a href="plugins.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span></span>
+<span id="cb236-2"><a href="plugins.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
 <p>The <code>self</code> object (Section <a href="model-specification.html#self-tad">2.3.19</a>) contains a <code>tad()</code> member which
 will track time after dose. Note that this needs to be called every record.</p>
 </div>
@@ -495,14 +511,14 @@ will track time after dose. Note that this needs to be called every record.</p>
 <p><strong>Purpose</strong></p>
 <p>Compile your model file with <code>C++11</code> standard.</p>
 <p><strong>Usage</strong></p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb196-1"><a href="plugins.html#cb196-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN CXX11</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb237-1"><a href="plugins.html#cb237-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN CXX11</span></code></pre></div>
 </div>
 <div id="plugin-rcpp" class="section level2" number="8.3">
 <h2><span class="header-section-number">8.3</span> Rcpp</h2>
 <p><strong>Purpose</strong></p>
 <p>Link to <code>Rcpp</code> headers into your model.</p>
 <p><strong>Usage</strong></p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb197-1"><a href="plugins.html#cb197-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN Rcpp</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb238-1"><a href="plugins.html#cb238-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN Rcpp</span></code></pre></div>
 <p>Note that once your model is linked to <code>Rcpp</code>, you can start using that
 functionality immediately (without including <code>Rcpp.h</code>).</p>
 <p>Information about <code>Rcpp</code> can be found here: <a href="https://github.com/RcppCore/Rcpp" class="uri">https://github.com/RcppCore/Rcpp</a></p>
@@ -518,29 +534,29 @@ so to invoke these functions, you always prepend <code>mrgx::</code>.</p>
 <h3><span class="header-section-number">8.4.1</span> Get the model environment</h3>
 <p>Note that your model object (<code>mod</code>) contains an R environment. For
 example</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="plugins.html#cb198-1" aria-hidden="true" tabindex="-1"></a>mrgsolve<span class="sc">::</span><span class="fu">house</span>()<span class="sc">@</span>envir</span></code></pre></div>
-<pre><code>. &lt;environment: 0x7fe830ea8ad0&gt;</code></pre>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="plugins.html#cb239-1" aria-hidden="true" tabindex="-1"></a>mrgsolve<span class="sc">::</span><span class="fu">house</span>()<span class="sc">@</span>envir</span></code></pre></div>
+<pre><code>. &lt;environment: 0x7fa6725c99e8&gt;</code></pre>
 <p>The objects in this environment are created by a block called <code>$ENV</code>
 in your model code (see Section <a href="model-specification.html#block-env">2.2.26</a>);</p>
 <p>To access this environment in your model, call</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb200-1"><a href="plugins.html#cb200-1" aria-hidden="true" tabindex="-1"></a>Rcpp<span class="op">::</span>Environment env <span class="op">=</span> mrgx<span class="op">::</span>get_envir<span class="op">(</span>self<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb241-1"><a href="plugins.html#cb241-1" aria-hidden="true" tabindex="-1"></a>Rcpp<span class="op">::</span>Environment env <span class="op">=</span> mrgx<span class="op">::</span>get_envir<span class="op">(</span>self<span class="op">);</span></span></code></pre></div>
 </div>
 </div>
 <div id="extract-an-object-from-the-model-environment" class="section level2" number="8.5">
 <h2><span class="header-section-number">8.5</span> Extract an object from the model environment</h2>
 <p>When you have an object created in <code>$ENV</code></p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb201-1"><a href="plugins.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> env <span class="op">]</span> </span>
-<span id="cb201-2"><a href="plugins.html#cb201-2" aria-hidden="true" tabindex="-1"></a>rand <span class="op">&lt;-</span> rnorm<span class="op">(</span><span class="dv">100</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb242-1"><a href="plugins.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> env <span class="op">]</span> </span>
+<span id="cb242-2"><a href="plugins.html#cb242-2" aria-hidden="true" tabindex="-1"></a>rand <span class="op">&lt;-</span> rnorm<span class="op">(</span><span class="dv">100</span><span class="op">)</span></span></code></pre></div>
 <p>You can extract this object with</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb202-1"><a href="plugins.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> preamble <span class="op">]</span></span>
-<span id="cb202-2"><a href="plugins.html#cb202-2" aria-hidden="true" tabindex="-1"></a>Rcpp<span class="op">::</span>NumericVector draw <span class="op">=</span> mrgx<span class="op">::</span>get<span class="op">(</span><span class="st">&quot;rand&quot;</span><span class="op">,</span> self<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb243-1"><a href="plugins.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> preamble <span class="op">]</span></span>
+<span id="cb243-2"><a href="plugins.html#cb243-2" aria-hidden="true" tabindex="-1"></a>Rcpp<span class="op">::</span>NumericVector draw <span class="op">=</span> mrgx<span class="op">::</span>get<span class="op">(</span><span class="st">&quot;rand&quot;</span><span class="op">,</span> self<span class="op">);</span></span></code></pre></div>
 </div>
 <div id="rcpparmadillo" class="section level2" number="8.6">
 <h2><span class="header-section-number">8.6</span> RcppArmadillo</h2>
 <p><strong>Purpose</strong></p>
 <p>Link to <code>RcppArmadillo</code> headers into your model.</p>
 <p><strong>Usage</strong></p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb203-1"><a href="plugins.html#cb203-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN RcppArmadillo</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb244-1"><a href="plugins.html#cb244-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN RcppArmadillo</span></code></pre></div>
 <p>Information about <code>armadillo</code> can be found here: <a href="http://arma.sourceforge.net/" class="uri">http://arma.sourceforge.net/</a>
 Information about <code>RcppArmadillo</code> can be found here:
 <a href="https://github.com/RcppCore/RcppArmadillo" class="uri">https://github.com/RcppCore/RcppArmadillo</a></p>
@@ -550,7 +566,7 @@ Information about <code>RcppArmadillo</code> can be found here:
 <p><strong>Purpose</strong></p>
 <p>Link to <code>boost</code> headers into your model.</p>
 <p><strong>Usage</strong></p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb204-1"><a href="plugins.html#cb204-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN BH</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb245-1"><a href="plugins.html#cb245-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN BH</span></code></pre></div>
 <p>Note that once your model is linked to <code>BH</code> (<code>boost</code>), you will be able to
 include the <code>boost</code> header file that you need. You have to include the header
 file that contains the <code>boost</code> function you want to use.</p>

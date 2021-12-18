@@ -283,8 +283,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="event-chapter.html"><a href="event-chapter.html#construction"><i class="fa fa-check"></i><b>4.2</b> Construction</a></li>
 <li class="chapter" data-level="4.3" data-path="event-chapter.html"><a href="event-chapter.html#coerce-to-data-set"><i class="fa fa-check"></i><b>4.3</b> Coerce to data set</a></li>
 <li class="chapter" data-level="4.4" data-path="event-chapter.html"><a href="event-chapter.html#extract-information"><i class="fa fa-check"></i><b>4.4</b> Extract information</a></li>
-<li class="chapter" data-level="4.5" data-path="event-chapter.html"><a href="event-chapter.html#combining-event-objects"><i class="fa fa-check"></i><b>4.5</b> Combining event objects</a></li>
-<li class="chapter" data-level="4.6" data-path="event-chapter.html"><a href="event-chapter.html#modifying-an-event-object"><i class="fa fa-check"></i><b>4.6</b> Modifying an event object</a></li>
+<li class="chapter" data-level="4.5" data-path="event-chapter.html"><a href="event-chapter.html#combining-event-objects"><i class="fa fa-check"></i><b>4.5</b> Combining event objects</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="event-chapter.html"><a href="event-chapter.html#concatenate"><i class="fa fa-check"></i><b>4.5.1</b> Concatenate</a></li>
+<li class="chapter" data-level="4.5.2" data-path="event-chapter.html"><a href="event-chapter.html#sequence"><i class="fa fa-check"></i><b>4.5.2</b> Sequence</a></li>
+<li class="chapter" data-level="4.5.3" data-path="event-chapter.html"><a href="event-chapter.html#repeat"><i class="fa fa-check"></i><b>4.5.3</b> repeat</a></li>
+<li class="chapter" data-level="4.5.4" data-path="event-chapter.html"><a href="event-chapter.html#create-a-data_set"><i class="fa fa-check"></i><b>4.5.4</b> Create a “data_set”</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="event-chapter.html"><a href="event-chapter.html#modifying-an-event-object"><i class="fa fa-check"></i><b>4.6</b> Modifying an event object</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="event-chapter.html"><a href="event-chapter.html#tidy-like-manipulation"><i class="fa fa-check"></i><b>4.6.1</b> Tidy-like manipulation</a></li>
+<li class="chapter" data-level="4.6.2" data-path="event-chapter.html"><a href="event-chapter.html#realize_addl"><i class="fa fa-check"></i><b>4.6.2</b> realize_addl</a></li>
+<li class="chapter" data-level="4.6.3" data-path="event-chapter.html"><a href="event-chapter.html#ev_rep"><i class="fa fa-check"></i><b>4.6.3</b> ev_rep</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="event-chapter.html"><a href="event-chapter.html#creative-composition"><i class="fa fa-check"></i><b>4.7</b> Creative composition</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="event-chapter.html"><a href="event-chapter.html#ev_days"><i class="fa fa-check"></i><b>4.7.1</b> ev_days</a></li>
+<li class="chapter" data-level="4.7.2" data-path="event-chapter.html"><a href="event-chapter.html#ev_rx"><i class="fa fa-check"></i><b>4.7.2</b> ev_rx</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>5</b> Simulated output</a>
 <ul>
@@ -440,8 +456,8 @@ step) or set to negative number to never check.</p>
 <h2><span class="header-section-number">11.2</span> Can I pass compiler flags to my model?</h2>
 <p>Compiler flags can be passed to your model by setting <code>PKG_CXXFLAGS</code> in
 <code>$ENV</code>. For example</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb377-1"><a href="q-and-a.html#cb377-1" aria-hidden="true" tabindex="-1"></a>$ENV</span>
-<span id="cb377-2"><a href="q-and-a.html#cb377-2" aria-hidden="true" tabindex="-1"></a>PKG_CXXFLAGS <span class="op">=</span> <span class="st">&quot;-std=c++11&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb418"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb418-1"><a href="q-and-a.html#cb418-1" aria-hidden="true" tabindex="-1"></a>$ENV</span>
+<span id="cb418-2"><a href="q-and-a.html#cb418-2" aria-hidden="true" tabindex="-1"></a>PKG_CXXFLAGS <span class="op">=</span> <span class="st">&quot;-std=c++11&quot;</span></span></code></pre></div>
 <p>will compile your model according to <code>C++11</code> standard (but note that there is a
 special plugin that will do this automatically for you; see Section
 <a href="plugins.html#plugin-cxx11">8.2</a>).</p>
@@ -455,13 +471,13 @@ special plugin that will do this automatically for you; see Section
 <p>There are three approaches</p>
 <p><strong>tad argument to mrgsim()</strong></p>
 <p>To get time after dose into your output you can call</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="q-and-a.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">tad =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="q-and-a.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">tad =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>and the output will have a <code>tad</code> column. Note this does not let you interact
 with the <code>tad</code> value inside your model.</p>
 <p><strong>Simple calculation in the model</strong></p>
 <p>Most applications will call <code>self.tad()</code> (Section @ref(self.tad)). For example</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb379-1"><a href="q-and-a.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
-<span id="cb379-2"><a href="q-and-a.html#cb379-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb420-1"><a href="q-and-a.html#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
+<span id="cb420-2"><a href="q-and-a.html#cb420-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
 <p><strong>More complicated calculation in the model</strong></p>
 <p>You can get more control and track <code>tad</code> in a specific compartment by using
 the <code>tad</code> plugin. See Section <a href="plugins.html#plugin-tad">8.1</a> for details.</p>
@@ -473,7 +489,7 @@ in the <code>C++</code> code or inability of R to find the compiler and other pi
 the tool chain.</p>
 <p>If your model is not compiling, try the <code>recover</code> argument to <code>mread()</code> (or
 <code>mcode()</code>)</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="q-and-a.html#cb380-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mread</span>(..., <span class="at">recover =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="q-and-a.html#cb421-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mread</span>(..., <span class="at">recover =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>You will see a warning on the console and <code>mread()</code> will return a list of
 build information. You can look into that information or share it in the
 <a href="https://github.com/metrumresearchgroup/mrgsolve/issues">mrgsolve issue tracker</a>
@@ -482,9 +498,9 @@ on GitHub.</p>
 console. If you possibly have problems with the compiler or the rest of the
 toolchain, take a look at the <code>pkgbuild</code> package, which provides some helpful
 tools, especially if you are working on a Windows platform</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="q-and-a.html#cb381-1" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">check_build_tools</span>()</span>
-<span id="cb381-2"><a href="q-and-a.html#cb381-2" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">has_build_tools</span>()</span>
-<span id="cb381-3"><a href="q-and-a.html#cb381-3" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">has_rtools</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="q-and-a.html#cb422-1" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">check_build_tools</span>()</span>
+<span id="cb422-2"><a href="q-and-a.html#cb422-2" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">has_build_tools</span>()</span>
+<span id="cb422-3"><a href="q-and-a.html#cb422-3" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">has_rtools</span>()</span></code></pre></div>
 </div>
 <div id="can-i-run-mrgsolve-on-a-network-drive" class="section level2" number="11.6">
 <h2><span class="header-section-number">11.6</span> Can I run mrgsolve on a network drive?</h2>

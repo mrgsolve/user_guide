@@ -283,8 +283,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="event-chapter.html"><a href="event-chapter.html#construction"><i class="fa fa-check"></i><b>4.2</b> Construction</a></li>
 <li class="chapter" data-level="4.3" data-path="event-chapter.html"><a href="event-chapter.html#coerce-to-data-set"><i class="fa fa-check"></i><b>4.3</b> Coerce to data set</a></li>
 <li class="chapter" data-level="4.4" data-path="event-chapter.html"><a href="event-chapter.html#extract-information"><i class="fa fa-check"></i><b>4.4</b> Extract information</a></li>
-<li class="chapter" data-level="4.5" data-path="event-chapter.html"><a href="event-chapter.html#combining-event-objects"><i class="fa fa-check"></i><b>4.5</b> Combining event objects</a></li>
-<li class="chapter" data-level="4.6" data-path="event-chapter.html"><a href="event-chapter.html#modifying-an-event-object"><i class="fa fa-check"></i><b>4.6</b> Modifying an event object</a></li>
+<li class="chapter" data-level="4.5" data-path="event-chapter.html"><a href="event-chapter.html#combining-event-objects"><i class="fa fa-check"></i><b>4.5</b> Combining event objects</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="event-chapter.html"><a href="event-chapter.html#concatenate"><i class="fa fa-check"></i><b>4.5.1</b> Concatenate</a></li>
+<li class="chapter" data-level="4.5.2" data-path="event-chapter.html"><a href="event-chapter.html#sequence"><i class="fa fa-check"></i><b>4.5.2</b> Sequence</a></li>
+<li class="chapter" data-level="4.5.3" data-path="event-chapter.html"><a href="event-chapter.html#repeat"><i class="fa fa-check"></i><b>4.5.3</b> repeat</a></li>
+<li class="chapter" data-level="4.5.4" data-path="event-chapter.html"><a href="event-chapter.html#create-a-data_set"><i class="fa fa-check"></i><b>4.5.4</b> Create a “data_set”</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="event-chapter.html"><a href="event-chapter.html#modifying-an-event-object"><i class="fa fa-check"></i><b>4.6</b> Modifying an event object</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="event-chapter.html"><a href="event-chapter.html#tidy-like-manipulation"><i class="fa fa-check"></i><b>4.6.1</b> Tidy-like manipulation</a></li>
+<li class="chapter" data-level="4.6.2" data-path="event-chapter.html"><a href="event-chapter.html#realize_addl"><i class="fa fa-check"></i><b>4.6.2</b> realize_addl</a></li>
+<li class="chapter" data-level="4.6.3" data-path="event-chapter.html"><a href="event-chapter.html#ev_rep"><i class="fa fa-check"></i><b>4.6.3</b> ev_rep</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="event-chapter.html"><a href="event-chapter.html#creative-composition"><i class="fa fa-check"></i><b>4.7</b> Creative composition</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="event-chapter.html"><a href="event-chapter.html#ev_days"><i class="fa fa-check"></i><b>4.7.1</b> ev_days</a></li>
+<li class="chapter" data-level="4.7.2" data-path="event-chapter.html"><a href="event-chapter.html#ev_rx"><i class="fa fa-check"></i><b>4.7.2</b> ev_rx</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>5</b> Simulated output</a>
 <ul>
@@ -455,12 +471,12 @@ state.</p>
 <p>The user can direct mrgsolve to advance the system to steady state for
 intermittent dosing by including <code>ss=1</code> in an event object or input data set.
 For example:</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="steady-state.html#cb179-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;pk1&quot;</span>, <span class="at">end =</span> <span class="dv">120</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="steady-state.html#cb220-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;pk1&quot;</span>, <span class="at">end =</span> <span class="dv">120</span>)</span></code></pre></div>
 <pre><code>. Loading model from cache.</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="steady-state.html#cb181-1" aria-hidden="true" tabindex="-1"></a>dose <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">12</span>, <span class="at">addl =</span> <span class="dv">4</span>, <span class="at">ss =</span> <span class="dv">1</span>)</span>
-<span id="cb181-2"><a href="steady-state.html#cb181-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb181-3"><a href="steady-state.html#cb181-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, dose, <span class="at">recsort =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span></code></pre></div>
-<p><img src="user-guide_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="steady-state.html#cb222-1" aria-hidden="true" tabindex="-1"></a>dose <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">12</span>, <span class="at">addl =</span> <span class="dv">4</span>, <span class="at">ss =</span> <span class="dv">1</span>)</span>
+<span id="cb222-2"><a href="steady-state.html#cb222-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb222-3"><a href="steady-state.html#cb222-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, dose, <span class="at">recsort =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span></code></pre></div>
+<p><img src="user-guide_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
 <p>In this example, the <code>ss=1</code> flag tells mrgsolve to advance the system to steady
 state under a dosing regimen of 100 mg every 12 hours (and then give a total of
 5 doses). When using the <code>ss=1</code> flag, the user is required to indicate the
@@ -473,10 +489,10 @@ behavior can be achieved for intermittent infusions by setting the infusion
 <p>A continuous infusion can be dosed to steady state by including the <code>ss=1</code> flag,
 a value for <code>rate</code> (any positive rate or -1 if the rate is being modeled), and
 setting the dose amount (<code>amt</code>/<code>AMT</code>) to zero:</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="steady-state.html#cb182-1" aria-hidden="true" tabindex="-1"></a>infus <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">0</span>, <span class="at">rate =</span> <span class="dv">5</span>, <span class="at">ss =</span> <span class="dv">1</span>, <span class="at">cmt =</span> <span class="st">&quot;CENT&quot;</span>)</span>
-<span id="cb182-2"><a href="steady-state.html#cb182-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb182-3"><a href="steady-state.html#cb182-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, infus, <span class="at">recsort =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span></code></pre></div>
-<p><img src="user-guide_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="steady-state.html#cb223-1" aria-hidden="true" tabindex="-1"></a>infus <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">0</span>, <span class="at">rate =</span> <span class="dv">5</span>, <span class="at">ss =</span> <span class="dv">1</span>, <span class="at">cmt =</span> <span class="st">&quot;CENT&quot;</span>)</span>
+<span id="cb223-2"><a href="steady-state.html#cb223-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-3"><a href="steady-state.html#cb223-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, infus, <span class="at">recsort =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span></code></pre></div>
+<p><img src="user-guide_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
 <p>Because <code>CL</code> is equal to 1 in this model, we see that the continuous
 (never-ending) infusion was started at steady state with a value of 5.</p>
 </div>
@@ -512,9 +528,9 @@ steady state. So, increasing <code>ss_rtol</code> (say from 1e-8 to 1e-3) will a
 us to call it “good” with respect to steady state sooner.</p>
 <p>Both tolerances for steady state are stored in the model object and can be set
 with the update method. For example,</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="steady-state.html#cb183-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>()</span>
-<span id="cb183-2"><a href="steady-state.html#cb183-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb183-3"><a href="steady-state.html#cb183-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">update</span>(mod, <span class="at">ss_rtol =</span> <span class="fl">1e-5</span>, <span class="at">ss_atol =</span> <span class="fl">1e-8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="steady-state.html#cb224-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>()</span>
+<span id="cb224-2"><a href="steady-state.html#cb224-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-3"><a href="steady-state.html#cb224-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">update</span>(mod, <span class="at">ss_rtol =</span> <span class="fl">1e-5</span>, <span class="at">ss_atol =</span> <span class="fl">1e-8</span>)</span></code></pre></div>
 </div>
 <div id="max-dose-number" class="section level3" number="7.4.2">
 <h3><span class="header-section-number">7.4.2</span> Max dose number</h3>
@@ -526,9 +542,9 @@ number of doses that will be administered before giving up on trying to find
 steady state. Once this maximum number of doses is exceeded, mrgsolve will
 issue a warning that steady state was not achieved and continue on with the
 problem. For example:</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="steady-state.html#cb184-1" aria-hidden="true" tabindex="-1"></a>dose <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">12</span>, <span class="at">ss =</span> <span class="dv">1</span>, <span class="at">VC =</span> <span class="dv">800</span>)</span>
-<span id="cb184-2"><a href="steady-state.html#cb184-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb184-3"><a href="steady-state.html#cb184-3" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(<span class="fu">house</span>(), dose)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="steady-state.html#cb225-1" aria-hidden="true" tabindex="-1"></a>dose <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">12</span>, <span class="at">ss =</span> <span class="dv">1</span>, <span class="at">VC =</span> <span class="dv">800</span>)</span>
+<span id="cb225-2"><a href="steady-state.html#cb225-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb225-3"><a href="steady-state.html#cb225-3" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(<span class="fu">house</span>(), dose)</span></code></pre></div>
 <pre><code>. Warning in (function (x, data, idata = no_idata_set(), carry_out = carry.out, : [steady_bolus] ID 1 failed to reach steady state
 .   ss_n: 500, ss_rtol: 1e-08, ss_atol: 1e-08</code></pre>
 <p>Here, mrgsolve administered 500 doses and the pre-dose concentrations were still
@@ -536,7 +552,7 @@ not similar enough to declare the system to be at steady state.</p>
 <p>The maximum dose number can be set with the <code>ss_n</code> argument to <code>mrgsim</code> (or one
 of the variants; see <code>?do_mrgsim</code> help topic). This number can be increased to
 prevent the warning:</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="steady-state.html#cb186-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(<span class="fu">house</span>(), dose, <span class="at">ss_n  =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="steady-state.html#cb227-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(<span class="fu">house</span>(), dose, <span class="at">ss_n  =</span> <span class="dv">1000</span>)</span></code></pre></div>
 <p>Alternatively, the <code>ss_fixed</code> argument to mrgsim (see <code>?do_mrgsim</code>) can be
 set to <code>TRUE</code> to silence the warning. In this case, <strong>up to</strong> <code>ss_n</code> doses will
 be administered and if <code>SS</code> is not achieved with that many doses, the problem
@@ -552,19 +568,19 @@ end of the dosing interval).</p>
 <p>mrgsolve allows the user to identify compartments to include or exclude in
 determining <code>SS</code>. This is done through the <code>ss_cmt</code> option in <code>$SET</code>. To
 only consider the <code>CENT</code> compartment, write the following in the model file:</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb187-1"><a href="steady-state.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> set <span class="op">]</span> ss_cmt <span class="op">=</span> <span class="st">&quot;CENT&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb228-1"><a href="steady-state.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> set <span class="op">]</span> ss_cmt <span class="op">=</span> <span class="st">&quot;CENT&quot;</span></span></code></pre></div>
 <p>This says to <strong>only</strong> look at the <code>CENT</code> compartment when determining <code>SS</code>.</p>
 <p>Alternatively, you can exclude certain compartments like this:</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb188-1"><a href="steady-state.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> set <span class="op">]</span> ss_cmt <span class="op">=</span> <span class="st">&quot;-GUT,DEPOT&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb229-1"><a href="steady-state.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> set <span class="op">]</span> ss_cmt <span class="op">=</span> <span class="st">&quot;-GUT,DEPOT&quot;</span></span></code></pre></div>
 <p>This says to ignore the <code>GUT</code> and <code>DEPOT</code> compartments when determining <code>SS</code>.</p>
 <p>As another example, you might want to exclude an accumulator compartment when
 calculating <code>SS</code></p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb189-1"><a href="steady-state.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> set <span class="op">]</span> ss_cmt <span class="op">=</span> <span class="st">&quot;-AUC&quot;</span></span>
-<span id="cb189-2"><a href="steady-state.html#cb189-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb189-3"><a href="steady-state.html#cb189-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> ode <span class="op">]</span> </span>
-<span id="cb189-4"><a href="steady-state.html#cb189-4" aria-hidden="true" tabindex="-1"></a>dxdt_CENT <span class="op">=</span> <span class="op">-</span>kel <span class="op">*</span> CENT<span class="op">;</span></span>
-<span id="cb189-5"><a href="steady-state.html#cb189-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb189-6"><a href="steady-state.html#cb189-6" aria-hidden="true" tabindex="-1"></a>dxdt_AUC <span class="op">=</span> CENT<span class="op">/</span>VC<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb230-1"><a href="steady-state.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> set <span class="op">]</span> ss_cmt <span class="op">=</span> <span class="st">&quot;-AUC&quot;</span></span>
+<span id="cb230-2"><a href="steady-state.html#cb230-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb230-3"><a href="steady-state.html#cb230-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> ode <span class="op">]</span> </span>
+<span id="cb230-4"><a href="steady-state.html#cb230-4" aria-hidden="true" tabindex="-1"></a>dxdt_CENT <span class="op">=</span> <span class="op">-</span>kel <span class="op">*</span> CENT<span class="op">;</span></span>
+<span id="cb230-5"><a href="steady-state.html#cb230-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb230-6"><a href="steady-state.html#cb230-6" aria-hidden="true" tabindex="-1"></a>dxdt_AUC <span class="op">=</span> CENT<span class="op">/</span>VC<span class="op">;</span></span></code></pre></div>
 <p>This is just a partial model snippet, but it shows how you might exclude the
 AUC compartment when determining <code>SS</code>.</p>
 </div>
@@ -574,11 +590,11 @@ AUC compartment when determining <code>SS</code>.</p>
 evaluates to <code>true</code> when the system is being advanced to steady state. So a
 better way to exclude the accumulator compartment from being considered for
 <code>SS</code> calculation would be this:</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb190-1"><a href="steady-state.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> ode <span class="op">]</span> </span>
-<span id="cb190-2"><a href="steady-state.html#cb190-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-3"><a href="steady-state.html#cb190-3" aria-hidden="true" tabindex="-1"></a>dxdt_AUC <span class="op">=</span> CENT<span class="op">/</span>VC<span class="op">;</span></span>
-<span id="cb190-4"><a href="steady-state.html#cb190-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-5"><a href="steady-state.html#cb190-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>SS_ADVANCE<span class="op">)</span> dxdt_AUC <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb231-1"><a href="steady-state.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> ode <span class="op">]</span> </span>
+<span id="cb231-2"><a href="steady-state.html#cb231-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-3"><a href="steady-state.html#cb231-3" aria-hidden="true" tabindex="-1"></a>dxdt_AUC <span class="op">=</span> CENT<span class="op">/</span>VC<span class="op">;</span></span>
+<span id="cb231-4"><a href="steady-state.html#cb231-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-5"><a href="steady-state.html#cb231-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>SS_ADVANCE<span class="op">)</span> dxdt_AUC <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
 <p>This code prevents the <code>AUC</code> compartment from changing during the advance to
 <code>SS</code> and the dose to dose difference in <code>AUC</code> will always be zero, effectively
 excluding this compartment from factoring into the <code>SS</code> determination. This
