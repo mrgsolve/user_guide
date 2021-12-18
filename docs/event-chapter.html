@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2021-12-17" />
+<meta name="date" content="2021-12-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -279,11 +279,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="event-chapter.html"><a href="event-chapter.html"><i class="fa fa-check"></i><b>4</b> Event objects</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="event-chapter.html"><a href="event-chapter.html#construction"><i class="fa fa-check"></i><b>4.1</b> Construction</a></li>
-<li class="chapter" data-level="4.2" data-path="event-chapter.html"><a href="event-chapter.html#coerce-to-data-set"><i class="fa fa-check"></i><b>4.2</b> Coerce to data set</a></li>
-<li class="chapter" data-level="4.3" data-path="event-chapter.html"><a href="event-chapter.html#extract-information"><i class="fa fa-check"></i><b>4.3</b> Extract information</a></li>
-<li class="chapter" data-level="4.4" data-path="event-chapter.html"><a href="event-chapter.html#combining-event-objects"><i class="fa fa-check"></i><b>4.4</b> Combining event objects</a></li>
-<li class="chapter" data-level="4.5" data-path="event-chapter.html"><a href="event-chapter.html#modifying-an-event-object"><i class="fa fa-check"></i><b>4.5</b> Modifying an event object</a></li>
+<li class="chapter" data-level="4.1" data-path="event-chapter.html"><a href="event-chapter.html#usage"><i class="fa fa-check"></i><b>4.1</b> Usage</a></li>
+<li class="chapter" data-level="4.2" data-path="event-chapter.html"><a href="event-chapter.html#construction"><i class="fa fa-check"></i><b>4.2</b> Construction</a></li>
+<li class="chapter" data-level="4.3" data-path="event-chapter.html"><a href="event-chapter.html#coerce-to-data-set"><i class="fa fa-check"></i><b>4.3</b> Coerce to data set</a></li>
+<li class="chapter" data-level="4.4" data-path="event-chapter.html"><a href="event-chapter.html#extract-information"><i class="fa fa-check"></i><b>4.4</b> Extract information</a></li>
+<li class="chapter" data-level="4.5" data-path="event-chapter.html"><a href="event-chapter.html#combining-event-objects"><i class="fa fa-check"></i><b>4.5</b> Combining event objects</a></li>
+<li class="chapter" data-level="4.6" data-path="event-chapter.html"><a href="event-chapter.html#modifying-an-event-object"><i class="fa fa-check"></i><b>4.6</b> Modifying an event object</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>5</b> Simulated output</a>
 <ul>
@@ -423,12 +424,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 4</span> Event objects</h1>
 <p>Event objects are similar to the data sets described in <a href="data-set-chapter.html#data-set-chapter">3</a>,
 but are simpler and easier to create. This is the fastest way to implement a
-basic intervention (like dosing) into your model.</p>
-<div id="construction" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Construction</h2>
+basic intervention (like dosing) for a single “individual” into your model.</p>
+<p>Event objects also offer an elegant way to compose complicated dosing regimens.
+Typically, the different parts of a regimen are composed as individual event
+objects and then combined to create a multi-faceted dose regiment.</p>
+<p>Finally, once an event object is created (either simple or complex), this
+object can be “expanded” into multiple individuals to create a population
+data set for simulation.</p>
+<p>See details in the subsequent sections.</p>
+<div id="usage" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Usage</h2>
+<p>Event objects are frequently used in a pipeline to simulate a dosing regimen.
+For example</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="event-chapter.html#cb141-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>(<span class="at">end =</span> <span class="dv">72</span>) </span>
+<span id="cb141-2"><a href="event-chapter.html#cb141-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb141-3"><a href="event-chapter.html#cb141-3" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">24</span>, <span class="at">addl =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
+<p><img src="user-guide_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<p>This used the <code>ev()</code> constructor to make an event object for two 100 mg doses
+and this is passed into <code>mrgsim()</code> to implement this regimen.</p>
+<p>Alternatively, we can create a standalone object and feed that into the pipeline</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="event-chapter.html#cb142-1" aria-hidden="true" tabindex="-1"></a>regimen <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">24</span>, <span class="at">addl =</span> <span class="dv">1</span>)</span>
+<span id="cb142-2"><a href="event-chapter.html#cb142-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-3"><a href="event-chapter.html#cb142-3" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">ev</span>(regimen) <span class="sc">%&gt;%</span> <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
+<p>If you are not using the pipe syntax, the following would be equivalent
+calls</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="event-chapter.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">events =</span> regimen) <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
+<p>And there are <code>mrgsim()</code> variants that explicitly accept an event object</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="event-chapter.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim_e</span>(mod, regimen) <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
+<p>More will be said about how to create and manipulate event objects in the
+following sections.</p>
+</div>
+<div id="construction" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Construction</h2>
 <p>A new event object can be created with the <code>ev()</code> constructor. For a single,
 100 mg dose it would be</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="event-chapter.html#cb141-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="event-chapter.html#cb145-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>)</span></code></pre></div>
 <p>When you print the object to the R console we see the 100 mg dose along with
 the following defaults</p>
 <ul>
@@ -436,19 +466,19 @@ the following defaults</p>
 <li><code>cmt</code> set to 1 (the first compartment)</li>
 <li><code>evid</code> set to 1 (a bolus dose)</li>
 </ul>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="event-chapter.html#cb142-1" aria-hidden="true" tabindex="-1"></a>e</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="event-chapter.html#cb146-1" aria-hidden="true" tabindex="-1"></a>e</span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid
 . 1    0 100   1    1</code></pre>
 <p>Of course, we can override any of these defaults or add additional items as
 needed. For a single 100 mg dose infused over 2 hours in compartment 2 one
 hour after the simulation starts</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="event-chapter.html#cb144-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">rate =</span> <span class="dv">50</span>, <span class="at">cmt =</span> <span class="dv">2</span>, <span class="at">time =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="event-chapter.html#cb148-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">rate =</span> <span class="dv">50</span>, <span class="at">cmt =</span> <span class="dv">2</span>, <span class="at">time =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>To use this event object, we can pass it into <code>mrgsim()</code> under the <code>events</code>
 argument</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="event-chapter.html#cb145-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>(<span class="at">delta =</span> <span class="dv">1</span>, <span class="at">end =</span> <span class="dv">24</span>)</span>
-<span id="cb145-2"><a href="event-chapter.html#cb145-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb145-3"><a href="event-chapter.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">events =</span> e)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="event-chapter.html#cb149-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>(<span class="at">delta =</span> <span class="dv">1</span>, <span class="at">end =</span> <span class="dv">24</span>)</span>
+<span id="cb149-2"><a href="event-chapter.html#cb149-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb149-3"><a href="event-chapter.html#cb149-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">events =</span> e)</span></code></pre></div>
 <pre><code>. Model:  housemodel 
 . Dim:    26 x 7 
 . Time:   0 to 24 
@@ -463,7 +493,7 @@ argument</p>
 . 7:   1    5   0 86.11 34.75 4.305 4.305
 . 8:   1    6   0 81.91 35.22 4.095 4.095</code></pre>
 <p>Event object inputs can be functions of previously defined inputs. For example</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="event-chapter.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">rate =</span> amt <span class="sc">/</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="event-chapter.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">rate =</span> amt <span class="sc">/</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt rate cmt evid
 . 1    0 100   50   1    1</code></pre>
@@ -474,53 +504,53 @@ handful of options that can be helpful when constructing event objects.</p>
 <p>Above, we created some infusion event objects by adding an infusion rate to the
 input. We can also indicate an infusion by adding an infusion time through
 the <code>tinf</code> argument</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="event-chapter.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">tinf =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="event-chapter.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">tinf =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt rate cmt evid tinf
 . 1    0 100   50   1    1    2</code></pre>
 <p><strong>Additional data items</strong></p>
 <p>We can also pass through arbitrary data columns through the event object. For
 example, we can pass through <code>WT</code></p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="event-chapter.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">WT =</span> <span class="dv">80</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="event-chapter.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">WT =</span> <span class="dv">80</span>)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid WT
 . 1    0 100   1    1 80</code></pre>
 </div>
-<div id="coerce-to-data-set" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Coerce to data set</h2>
+<div id="coerce-to-data-set" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Coerce to data set</h2>
 <p>As we noted, event objects are very similar to data sets and they are nothing
 but data sets under the hood. We can take the event objects we created above
 and coerce them to other objects.</p>
 <p><strong>Using as_data_set</strong></p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="event-chapter.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_data_set</span>(e)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="event-chapter.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_data_set</span>(e)</span></code></pre></div>
 <pre><code>.   time amt rate cmt evid ID
 . 1    1 100   50   2    1  1</code></pre>
 <p>This will ensure that there is an <code>ID</code> column in the output and it will
 be suitable to use for simulation.</p>
 <p><strong>Using as.data.frame</strong></p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="event-chapter.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(e) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ID =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="event-chapter.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(e) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ID =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>.   time amt rate cmt evid ID
 . 1    1 100   50   2    1  5</code></pre>
 </div>
-<div id="extract-information" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Extract information</h2>
+<div id="extract-information" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Extract information</h2>
 <p>There is a <code>$</code> operator for event objects</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="event-chapter.html#cb157-1" aria-hidden="true" tabindex="-1"></a>e<span class="sc">$</span>amt</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="event-chapter.html#cb161-1" aria-hidden="true" tabindex="-1"></a>e<span class="sc">$</span>amt</span></code></pre></div>
 <pre><code>. [1] 100</code></pre>
 </div>
-<div id="combining-event-objects" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> Combining event objects</h2>
+<div id="combining-event-objects" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Combining event objects</h2>
 <p>Coming soon.</p>
 </div>
-<div id="modifying-an-event-object" class="section level2" number="4.5">
-<h2><span class="header-section-number">4.5</span> Modifying an event object</h2>
+<div id="modifying-an-event-object" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> Modifying an event object</h2>
 <p>Event objects can be mutated</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="event-chapter.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(e, <span class="at">amt =</span> <span class="dv">200</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="event-chapter.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(e, <span class="at">amt =</span> <span class="dv">200</span>)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt rate cmt evid
 . 1    1 200   50   2    1</code></pre>
 <p>Columns can be removed from event objects</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="event-chapter.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">WT =</span> <span class="dv">50</span>, <span class="at">AGE =</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>WT)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="event-chapter.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">WT =</span> <span class="dv">50</span>, <span class="at">AGE =</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>WT)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid AGE
 . 1    0 100   1    1  12</code></pre>

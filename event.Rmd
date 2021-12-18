@@ -6,7 +6,58 @@ source("setup.R")
 
 Event objects are similar to the data sets described in \@ref(data-set-chapter), 
 but are simpler and easier to create. This is the fastest way to implement a 
-basic intervention (like dosing) into your model. 
+basic intervention (like dosing) for a single "individual" into your model. 
+
+Event objects also offer an elegant way to compose complicated dosing regimens. 
+Typically, the different parts of a regimen are composed as individual event 
+objects and then combined to create a multi-faceted dose regiment. 
+
+Finally, once an event object is created (either simple or complex), this 
+object can be "expanded" into multiple individuals to create a population 
+data set for simulation. 
+
+See details in the subsequent sections.
+
+## Usage 
+
+Event objects are frequently used in a pipeline to simulate a dosing regimen. 
+For example
+
+```{r}
+mod <- house(end = 72) 
+
+mod %>% ev(amt = 100, ii = 24, addl = 1) %>% mrgsim() %>% plot("CP")
+```
+
+This used the `ev()` constructor to  make an event object for two 100 mg doses 
+and this is passed into `mrgsim()` to implement this regimen. 
+
+Alternatively, we can create a standalone object and feed that into the pipeline
+
+```{r, eval = FALSE}
+regimen <- ev(amt = 100, ii = 24, addl = 1)
+
+mod %>% ev(regimen) %>% mrgsim() %>% plot("CP")
+```
+
+If you are not using the pipe syntax, the following would be equivalent 
+calls
+
+```{r, eval = FALSE}
+mrgsim(mod, events = regimen) %>% plot("CP")
+```
+
+And there are `mrgsim()` variants that explicitly accept an event object
+
+```{r, eval = FALSE}
+mrgsim_e(mod, regimen) %>% plot("CP")
+```
+
+More will be said about how to create and manipulate event objects in the 
+following sections. 
+
+
+
 
 ## Construction
 

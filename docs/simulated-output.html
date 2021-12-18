@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2021-12-17" />
+<meta name="date" content="2021-12-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -279,11 +279,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="event-chapter.html"><a href="event-chapter.html"><i class="fa fa-check"></i><b>4</b> Event objects</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="event-chapter.html"><a href="event-chapter.html#construction"><i class="fa fa-check"></i><b>4.1</b> Construction</a></li>
-<li class="chapter" data-level="4.2" data-path="event-chapter.html"><a href="event-chapter.html#coerce-to-data-set"><i class="fa fa-check"></i><b>4.2</b> Coerce to data set</a></li>
-<li class="chapter" data-level="4.3" data-path="event-chapter.html"><a href="event-chapter.html#extract-information"><i class="fa fa-check"></i><b>4.3</b> Extract information</a></li>
-<li class="chapter" data-level="4.4" data-path="event-chapter.html"><a href="event-chapter.html#combining-event-objects"><i class="fa fa-check"></i><b>4.4</b> Combining event objects</a></li>
-<li class="chapter" data-level="4.5" data-path="event-chapter.html"><a href="event-chapter.html#modifying-an-event-object"><i class="fa fa-check"></i><b>4.5</b> Modifying an event object</a></li>
+<li class="chapter" data-level="4.1" data-path="event-chapter.html"><a href="event-chapter.html#usage"><i class="fa fa-check"></i><b>4.1</b> Usage</a></li>
+<li class="chapter" data-level="4.2" data-path="event-chapter.html"><a href="event-chapter.html#construction"><i class="fa fa-check"></i><b>4.2</b> Construction</a></li>
+<li class="chapter" data-level="4.3" data-path="event-chapter.html"><a href="event-chapter.html#coerce-to-data-set"><i class="fa fa-check"></i><b>4.3</b> Coerce to data set</a></li>
+<li class="chapter" data-level="4.4" data-path="event-chapter.html"><a href="event-chapter.html#extract-information"><i class="fa fa-check"></i><b>4.4</b> Extract information</a></li>
+<li class="chapter" data-level="4.5" data-path="event-chapter.html"><a href="event-chapter.html#combining-event-objects"><i class="fa fa-check"></i><b>4.5</b> Combining event objects</a></li>
+<li class="chapter" data-level="4.6" data-path="event-chapter.html"><a href="event-chapter.html#modifying-an-event-object"><i class="fa fa-check"></i><b>4.6</b> Modifying an event object</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>5</b> Simulated output</a>
 <ul>
@@ -431,9 +432,9 @@ types (like <code>data.frame</code> or <code>tibble</code>).</p>
 important, users can request the output be returned as a data frame. This is most efficient
 when the features provided by the <code>mrgsims</code> object are not needed. To do this, pass
 the <code>output</code> argument to <code>mrgsim()</code></p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="simulated-output.html#cb163-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(mod, ..., <span class="at">output =</span> <span class="st">&quot;df&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="simulated-output.html#cb167-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(mod, ..., <span class="at">output =</span> <span class="st">&quot;df&quot;</span>)</span></code></pre></div>
 <p>or use <code>mrgsim_df()</code></p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="simulated-output.html#cb164-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim_df</span>(mod, ....)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="simulated-output.html#cb168-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim_df</span>(mod, ....)</span></code></pre></div>
 </div>
 <div id="methods-for-mrgsim-output" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Methods for mrgsim output</h2>
@@ -463,28 +464,28 @@ following subsections all refer to working with <code>mrgsims</code> objects, no
 <h3><span class="header-section-number">5.2.3</span> Graphical methods</h3>
 <p>There is a <code>plot()</code> methods for simulated output that is aware of independent and dependent
 variables from the simulation. If <code>out</code> is the simulated output (an <code>mrgsims</code> object)</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="simulated-output.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="simulated-output.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out)</span></code></pre></div>
 <p>Plot with a formula; the following example selects only the <code>CP</code> and <code>RESPONSE</code> outputs
 and plots them versus <code>time</code></p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="simulated-output.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, CP <span class="sc">+</span> RESPONSE <span class="sc">~</span> time)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="simulated-output.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, CP <span class="sc">+</span> RESPONSE <span class="sc">~</span> time)</span></code></pre></div>
 <p>To select a large number of responses to plot, pass a character vector or comma-separated
 character data containing output columns to plot</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="simulated-output.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="st">&quot;CP, RESPONSE, WT, DOSE&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="simulated-output.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="st">&quot;CP, RESPONSE, WT, DOSE&quot;</span>)</span></code></pre></div>
 </div>
 <div id="methods-for-dplyr-verbs" class="section level3" number="5.2.4">
 <h3><span class="header-section-number">5.2.4</span> Methods for <code>dplyr</code> verbs</h3>
 <p><code>mrgsolve</code> provides several S3 methods to make it possible to include <code>dplyr</code> verbs in
 your simulation pipeline.</p>
 <p>For example</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="simulated-output.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb168-2"><a href="simulated-output.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mrgsolve)</span>
-<span id="cb168-3"><a href="simulated-output.html#cb168-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-4"><a href="simulated-output.html#cb168-4" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
-<span id="cb168-5"><a href="simulated-output.html#cb168-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-6"><a href="simulated-output.html#cb168-6" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb168-7"><a href="simulated-output.html#cb168-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb168-8"><a href="simulated-output.html#cb168-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb168-9"><a href="simulated-output.html#cb168-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="simulated-output.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb172-2"><a href="simulated-output.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mrgsolve)</span>
+<span id="cb172-3"><a href="simulated-output.html#cb172-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-4"><a href="simulated-output.html#cb172-4" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
+<span id="cb172-5"><a href="simulated-output.html#cb172-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-6"><a href="simulated-output.html#cb172-6" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb172-7"><a href="simulated-output.html#cb172-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb172-8"><a href="simulated-output.html#cb172-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb172-9"><a href="simulated-output.html#cb172-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
 <p>Here, <code>mrgsim()</code> returns an <code>mrgsims</code> object. When <code>dplyr</code> is also loaded, this object
 can be piped directly to <code>dplyr::filter()</code> or <code>dplyr::mutate()</code> etc.</p>
 <p>It is important to note that when <code>mrgsims</code> output is piped to <code>dplyr</code> functionality,
@@ -543,9 +544,9 @@ consumption and increase efficiency.</p>
 <h3><span class="header-section-number">5.3.2</span> Implementation</h3>
 <p>The mrgsolve model object tracks compartments and captures that are currently
 being requested. This can be queried using <code>outvars()</code></p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="simulated-output.html#cb169-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>()</span>
-<span id="cb169-2"><a href="simulated-output.html#cb169-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb169-3"><a href="simulated-output.html#cb169-3" aria-hidden="true" tabindex="-1"></a><span class="fu">outvars</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="simulated-output.html#cb173-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>()</span>
+<span id="cb173-2"><a href="simulated-output.html#cb173-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb173-3"><a href="simulated-output.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="fu">outvars</span>(mod)</span></code></pre></div>
 <pre><code>. $cmt
 . [1] &quot;GUT&quot;  &quot;CENT&quot; &quot;RESP&quot;
 . 
@@ -553,9 +554,9 @@ being requested. This can be queried using <code>outvars()</code></p>
 . [1] &quot;DV&quot; &quot;CP&quot;</code></pre>
 <p>Items are listed under <code>cmt</code> and <code>capture</code>. The user can update the model object
 with the names of columns that are being requested by passing <code>outvars</code> to <code>update()</code></p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="simulated-output.html#cb171-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">update</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;CP, RESP&quot;</span>)</span>
-<span id="cb171-2"><a href="simulated-output.html#cb171-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb171-3"><a href="simulated-output.html#cb171-3" aria-hidden="true" tabindex="-1"></a><span class="fu">outvars</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="simulated-output.html#cb175-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">update</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;CP, RESP&quot;</span>)</span>
+<span id="cb175-2"><a href="simulated-output.html#cb175-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb175-3"><a href="simulated-output.html#cb175-3" aria-hidden="true" tabindex="-1"></a><span class="fu">outvars</span>(mod)</span></code></pre></div>
 <pre><code>. $cmt
 . [1] &quot;RESP&quot;
 . 
@@ -563,10 +564,10 @@ with the names of columns that are being requested by passing <code>outvars</cod
 . [1] &quot;CP&quot;</code></pre>
 <p>This will exclude anything that isn’t named in the update. The <code>outvars</code> list can
 be reset by passing <code>(all)</code></p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="simulated-output.html#cb173-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">update</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;(all)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="simulated-output.html#cb177-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">update</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;(all)&quot;</span>)</span></code></pre></div>
 <p>Remember that <code>...</code> passed to <code>mrgsim()</code> are also passed to <code>update()</code> so it is possible
 to select outputs right in your <code>mrgsim()</code> call</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="simulated-output.html#cb174-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;CP, RESP&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="simulated-output.html#cb178-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;CP, RESP&quot;</span>)</span></code></pre></div>
 </div>
 <div id="copy-items-from-data-to-simulated-output" class="section level3" number="5.3.3">
 <h3><span class="header-section-number">5.3.3</span> Copy items from data to simulated output</h3>
