@@ -317,6 +317,17 @@ Notice that `as_data_set` has created unique IDs for the 3 subjects in
 the 100 mg group, the 3 subjects in the 200 mg group, and the 2 subjects in 
 the 300 mg group.
 
+We'll cover a function called `ev_rep()` below to "expand" an event object to 
+multiple individuals
+
+```{r, eval = FALSE}
+as_data_set(
+  e1 %>% ev_rep(1:300),
+  e2 %>% ev_rep(1:300)
+)
+```
+
+
 ## Modifying an event object
 
 ### Tidy-like manipulation
@@ -353,7 +364,7 @@ ev(amt = 100, ii = 6, addl = 3) %>% realize_addl()
 ### ev_rep
 
 Event objects can be "expanded" into multiple IDs to create a population; 
-use the `ev_rep()` function for this
+use the `ev_rep()` function for this. 
 
 ```{r}
 ev(amt = 100) %>% ev_rep(1:5)
@@ -365,6 +376,8 @@ an event object is returned
 ```{r, eval = FALSE}
 ev(amt = 100) %>% ev_rep(1:5, as.ev = TRUE)
 ```
+
+`ev_rep()` can work on an event object with any complexity.
 
 
 ## Creative composition

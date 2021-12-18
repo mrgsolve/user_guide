@@ -448,9 +448,9 @@ types (like <code>data.frame</code> or <code>tibble</code>).</p>
 important, users can request the output be returned as a data frame. This is most efficient
 when the features provided by the <code>mrgsims</code> object are not needed. To do this, pass
 the <code>output</code> argument to <code>mrgsim()</code></p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="simulated-output.html#cb208-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(mod, ..., <span class="at">output =</span> <span class="st">&quot;df&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="simulated-output.html#cb209-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(mod, ..., <span class="at">output =</span> <span class="st">&quot;df&quot;</span>)</span></code></pre></div>
 <p>or use <code>mrgsim_df()</code></p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="simulated-output.html#cb209-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim_df</span>(mod, ....)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="simulated-output.html#cb210-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim_df</span>(mod, ....)</span></code></pre></div>
 </div>
 <div id="methods-for-mrgsim-output" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Methods for mrgsim output</h2>
@@ -480,28 +480,28 @@ following subsections all refer to working with <code>mrgsims</code> objects, no
 <h3><span class="header-section-number">5.2.3</span> Graphical methods</h3>
 <p>There is a <code>plot()</code> methods for simulated output that is aware of independent and dependent
 variables from the simulation. If <code>out</code> is the simulated output (an <code>mrgsims</code> object)</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="simulated-output.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out)</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="simulated-output.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out)</span></code></pre></div>
 <p>Plot with a formula; the following example selects only the <code>CP</code> and <code>RESPONSE</code> outputs
 and plots them versus <code>time</code></p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="simulated-output.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, CP <span class="sc">+</span> RESPONSE <span class="sc">~</span> time)</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="simulated-output.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, CP <span class="sc">+</span> RESPONSE <span class="sc">~</span> time)</span></code></pre></div>
 <p>To select a large number of responses to plot, pass a character vector or comma-separated
 character data containing output columns to plot</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="simulated-output.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="st">&quot;CP, RESPONSE, WT, DOSE&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="simulated-output.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="st">&quot;CP, RESPONSE, WT, DOSE&quot;</span>)</span></code></pre></div>
 </div>
 <div id="methods-for-dplyr-verbs" class="section level3" number="5.2.4">
 <h3><span class="header-section-number">5.2.4</span> Methods for <code>dplyr</code> verbs</h3>
 <p><code>mrgsolve</code> provides several S3 methods to make it possible to include <code>dplyr</code> verbs in
 your simulation pipeline.</p>
 <p>For example</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="simulated-output.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb213-2"><a href="simulated-output.html#cb213-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mrgsolve)</span>
-<span id="cb213-3"><a href="simulated-output.html#cb213-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb213-4"><a href="simulated-output.html#cb213-4" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
-<span id="cb213-5"><a href="simulated-output.html#cb213-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb213-6"><a href="simulated-output.html#cb213-6" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb213-7"><a href="simulated-output.html#cb213-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb213-8"><a href="simulated-output.html#cb213-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb213-9"><a href="simulated-output.html#cb213-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="simulated-output.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb214-2"><a href="simulated-output.html#cb214-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mrgsolve)</span>
+<span id="cb214-3"><a href="simulated-output.html#cb214-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb214-4"><a href="simulated-output.html#cb214-4" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> mrgsolve<span class="sc">:::</span><span class="fu">house</span>()</span>
+<span id="cb214-5"><a href="simulated-output.html#cb214-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb214-6"><a href="simulated-output.html#cb214-6" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb214-7"><a href="simulated-output.html#cb214-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt=</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb214-8"><a href="simulated-output.html#cb214-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb214-9"><a href="simulated-output.html#cb214-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
 <p>Here, <code>mrgsim()</code> returns an <code>mrgsims</code> object. When <code>dplyr</code> is also loaded, this object
 can be piped directly to <code>dplyr::filter()</code> or <code>dplyr::mutate()</code> etc.</p>
 <p>It is important to note that when <code>mrgsims</code> output is piped to <code>dplyr</code> functionality,
@@ -560,9 +560,9 @@ consumption and increase efficiency.</p>
 <h3><span class="header-section-number">5.3.2</span> Implementation</h3>
 <p>The mrgsolve model object tracks compartments and captures that are currently
 being requested. This can be queried using <code>outvars()</code></p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="simulated-output.html#cb214-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>()</span>
-<span id="cb214-2"><a href="simulated-output.html#cb214-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb214-3"><a href="simulated-output.html#cb214-3" aria-hidden="true" tabindex="-1"></a><span class="fu">outvars</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="simulated-output.html#cb215-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>()</span>
+<span id="cb215-2"><a href="simulated-output.html#cb215-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb215-3"><a href="simulated-output.html#cb215-3" aria-hidden="true" tabindex="-1"></a><span class="fu">outvars</span>(mod)</span></code></pre></div>
 <pre><code>. $cmt
 . [1] &quot;GUT&quot;  &quot;CENT&quot; &quot;RESP&quot;
 . 
@@ -570,9 +570,9 @@ being requested. This can be queried using <code>outvars()</code></p>
 . [1] &quot;DV&quot; &quot;CP&quot;</code></pre>
 <p>Items are listed under <code>cmt</code> and <code>capture</code>. The user can update the model object
 with the names of columns that are being requested by passing <code>outvars</code> to <code>update()</code></p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="simulated-output.html#cb216-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">update</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;CP, RESP&quot;</span>)</span>
-<span id="cb216-2"><a href="simulated-output.html#cb216-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb216-3"><a href="simulated-output.html#cb216-3" aria-hidden="true" tabindex="-1"></a><span class="fu">outvars</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="simulated-output.html#cb217-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">update</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;CP, RESP&quot;</span>)</span>
+<span id="cb217-2"><a href="simulated-output.html#cb217-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb217-3"><a href="simulated-output.html#cb217-3" aria-hidden="true" tabindex="-1"></a><span class="fu">outvars</span>(mod)</span></code></pre></div>
 <pre><code>. $cmt
 . [1] &quot;RESP&quot;
 . 
@@ -580,10 +580,10 @@ with the names of columns that are being requested by passing <code>outvars</cod
 . [1] &quot;CP&quot;</code></pre>
 <p>This will exclude anything that isn’t named in the update. The <code>outvars</code> list can
 be reset by passing <code>(all)</code></p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="simulated-output.html#cb218-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">update</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;(all)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="simulated-output.html#cb219-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">update</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;(all)&quot;</span>)</span></code></pre></div>
 <p>Remember that <code>...</code> passed to <code>mrgsim()</code> are also passed to <code>update()</code> so it is possible
 to select outputs right in your <code>mrgsim()</code> call</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="simulated-output.html#cb219-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;CP, RESP&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="simulated-output.html#cb220-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">mrgsim</span>(mod, <span class="at">outvars =</span> <span class="st">&quot;CP, RESP&quot;</span>)</span></code></pre></div>
 </div>
 <div id="copy-items-from-data-to-simulated-output" class="section level3" number="5.3.3">
 <h3><span class="header-section-number">5.3.3</span> Copy items from data to simulated output</h3>
