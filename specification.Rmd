@@ -1435,36 +1435,22 @@ if(SS_ADVANCE) dxdt_AUC = 0;
 ```
 
 
-### `simeta(n)`
+### `simeta()`
 
-The `simeta(n)` function can be used to re-simulate ETA values. As of version 
-`0.11.0`, `simeta()` accepts an integer argument for the ETA number to be 
-re-simulated.  For example, 
+The `simeta()` function can be used to re-simulate ETA values. For example, 
 
 ```{c, eval = FALSE}
 $MAIN
-simeta(2);
+simeta();
 ```
 
-will re-simulate `ETA(2)`. Multiple calls to `simeta(n)` may be made. For 
-example, we can resimulate both ETA 2 and ETA 4 by:
+will re-simulate all `ETA(n)`. 
 
-```{c, eval = FALSE}
-$MAIN
-simeta(2); 
-simeta(4);
-```
 
-It is also possible to resimulate all ETAs by calling `simeta()` with no integer 
-argument. We are currently encouraging use of `simeta(n)` rather than `simeta()` 
-since for most applications only one or two ETAs might need to be re-simulated. 
+### `simeps()`
 
-### `simeps(n)`
-
-`simeps(n)` works like `simeta(n)`, but the EPS values are re-simulated rather
-than the ETA values. We are also encouraging the use of `simeps(n)` rather 
-than `simeps()`. The latter is currently supported but we are evaluating 
-whether this will be supported going forward. 
+`simeps()` works like `simeta()`, but all `EPS(n)` values are re-simulated rather
+than the ETA values.
 
 
 ### `self` \ {#self-object}

@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2021-12-18" />
+<meta name="date" content="2022-01-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -222,8 +222,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.6" data-path="model-specification.html"><a href="model-specification.html#amt"><i class="fa fa-check"></i><b>2.3.6</b> <code>AMT</code></a></li>
 <li class="chapter" data-level="2.3.7" data-path="model-specification.html"><a href="model-specification.html#newind"><i class="fa fa-check"></i><b>2.3.7</b> <code>NEWIND</code></a></li>
 <li class="chapter" data-level="2.3.8" data-path="model-specification.html"><a href="model-specification.html#ss_advance"><i class="fa fa-check"></i><b>2.3.8</b> <code>SS_ADVANCE</code></a></li>
-<li class="chapter" data-level="2.3.9" data-path="model-specification.html"><a href="model-specification.html#simetan"><i class="fa fa-check"></i><b>2.3.9</b> <code>simeta(n)</code></a></li>
-<li class="chapter" data-level="2.3.10" data-path="model-specification.html"><a href="model-specification.html#simepsn"><i class="fa fa-check"></i><b>2.3.10</b> <code>simeps(n)</code></a></li>
+<li class="chapter" data-level="2.3.9" data-path="model-specification.html"><a href="model-specification.html#simeta"><i class="fa fa-check"></i><b>2.3.9</b> <code>simeta()</code></a></li>
+<li class="chapter" data-level="2.3.10" data-path="model-specification.html"><a href="model-specification.html#simeps"><i class="fa fa-check"></i><b>2.3.10</b> <code>simeps()</code></a></li>
 <li class="chapter" data-level="2.3.11" data-path="model-specification.html"><a href="model-specification.html#self-object"><i class="fa fa-check"></i><b>2.3.11</b> <code>self</code>  </a></li>
 <li class="chapter" data-level="2.3.12" data-path="model-specification.html"><a href="model-specification.html#self.cmt"><i class="fa fa-check"></i><b>2.3.12</b> <code>self.cmt</code></a></li>
 <li class="chapter" data-level="2.3.13" data-path="model-specification.html"><a href="model-specification.html#self.amt"><i class="fa fa-check"></i><b>2.3.13</b> <code>self.amt</code></a></li>
@@ -1262,8 +1262,8 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 . 
 . ----------------  source: nmxml.cpp  ----------------
 . 
-.   project: /private/var/fol.../T/RtmprKBVBK
-.   shared object: nmxml-so-107141a4c5c1 
+.   project: /private/var/fol.../T/RtmpgQpJ5U
+.   shared object: nmxml-so-c6b728ac2e1c 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
@@ -1561,28 +1561,17 @@ while the system is working toward steady state</p>
 <span id="cb85-3"><a href="model-specification.html#cb85-3" aria-hidden="true" tabindex="-1"></a>dxdt_AUC <span class="op">=</span> CENT<span class="op">/</span>V<span class="op">;</span></span>
 <span id="cb85-4"><a href="model-specification.html#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>SS_ADVANCE<span class="op">)</span> dxdt_AUC <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
 </div>
-<div id="simetan" class="section level3" number="2.3.9">
-<h3><span class="header-section-number">2.3.9</span> <code>simeta(n)</code></h3>
-<p>The <code>simeta(n)</code> function can be used to re-simulate ETA values. As of version
-<code>0.11.0</code>, <code>simeta()</code> accepts an integer argument for the ETA number to be
-re-simulated. For example,</p>
+<div id="simeta" class="section level3" number="2.3.9">
+<h3><span class="header-section-number">2.3.9</span> <code>simeta()</code></h3>
+<p>The <code>simeta()</code> function can be used to re-simulate ETA values. For example,</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb86-1"><a href="model-specification.html#cb86-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb86-2"><a href="model-specification.html#cb86-2" aria-hidden="true" tabindex="-1"></a>simeta<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span></code></pre></div>
-<p>will re-simulate <code>ETA(2)</code>. Multiple calls to <code>simeta(n)</code> may be made. For
-example, we can resimulate both ETA 2 and ETA 4 by:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb87-1"><a href="model-specification.html#cb87-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb87-2"><a href="model-specification.html#cb87-2" aria-hidden="true" tabindex="-1"></a>simeta<span class="op">(</span><span class="dv">2</span><span class="op">);</span> </span>
-<span id="cb87-3"><a href="model-specification.html#cb87-3" aria-hidden="true" tabindex="-1"></a>simeta<span class="op">(</span><span class="dv">4</span><span class="op">);</span></span></code></pre></div>
-<p>It is also possible to resimulate all ETAs by calling <code>simeta()</code> with no integer
-argument. We are currently encouraging use of <code>simeta(n)</code> rather than <code>simeta()</code>
-since for most applications only one or two ETAs might need to be re-simulated.</p>
+<span id="cb86-2"><a href="model-specification.html#cb86-2" aria-hidden="true" tabindex="-1"></a>simeta<span class="op">();</span></span></code></pre></div>
+<p>will re-simulate all <code>ETA(n)</code>.</p>
 </div>
-<div id="simepsn" class="section level3" number="2.3.10">
-<h3><span class="header-section-number">2.3.10</span> <code>simeps(n)</code></h3>
-<p><code>simeps(n)</code> works like <code>simeta(n)</code>, but the EPS values are re-simulated rather
-than the ETA values. We are also encouraging the use of <code>simeps(n)</code> rather
-than <code>simeps()</code>. The latter is currently supported but we are evaluating
-whether this will be supported going forward.</p>
+<div id="simeps" class="section level3" number="2.3.10">
+<h3><span class="header-section-number">2.3.10</span> <code>simeps()</code></h3>
+<p><code>simeps()</code> works like <code>simeta()</code>, but all <code>EPS(n)</code> values are re-simulated rather
+than the ETA values.</p>
 </div>
 <div id="self-object" class="section level3" number="2.3.11">
 <h3><span class="header-section-number">2.3.11</span> <code>self</code>  </h3>
@@ -1623,24 +1612,24 @@ encouraged to use the simpler, API name.</p>
 <p>The current compartment number regardless of whether it was given as <code>cmt</code> or
 <code>CMT</code> in the data set. There is no alias for <code>self.cmt</code>.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb88-1"><a href="model-specification.html#cb88-1" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
-<span id="cb88-2"><a href="model-specification.html#cb88-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-3"><a href="model-specification.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> DV <span class="op">=</span> CENT<span class="op">/</span>VC <span class="op">+</span> EPS<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb88-4"><a href="model-specification.html#cb88-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-5"><a href="model-specification.html#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>self<span class="op">.</span>cmt<span class="op">==</span><span class="dv">3</span><span class="op">)</span> DV <span class="op">=</span> RESPOSE <span class="op">+</span> EPS<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb87-1"><a href="model-specification.html#cb87-1" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
+<span id="cb87-2"><a href="model-specification.html#cb87-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-3"><a href="model-specification.html#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> DV <span class="op">=</span> CENT<span class="op">/</span>VC <span class="op">+</span> EPS<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb87-4"><a href="model-specification.html#cb87-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-5"><a href="model-specification.html#cb87-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>self<span class="op">.</span>cmt<span class="op">==</span><span class="dv">3</span><span class="op">)</span> DV <span class="op">=</span> RESPOSE <span class="op">+</span> EPS<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span></code></pre></div>
 </div>
 <div id="self.amt" class="section level3" number="2.3.13">
 <h3><span class="header-section-number">2.3.13</span> <code>self.amt</code></h3>
 <p>The current <code>amt</code> value regardless of whether it was given as <code>amt</code> or <code>AMT</code>
 in the data set. There is no alias for <code>self.amt</code>.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb89-1"><a href="model-specification.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PREAMBLE <span class="op">]</span></span>
-<span id="cb89-2"><a href="model-specification.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> last_dose <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb89-3"><a href="model-specification.html#cb89-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-4"><a href="model-specification.html#cb89-4" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> MAIN <span class="op">]</span></span>
-<span id="cb89-5"><a href="model-specification.html#cb89-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-6"><a href="model-specification.html#cb89-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>EVID<span class="op">==</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb89-7"><a href="model-specification.html#cb89-7" aria-hidden="true" tabindex="-1"></a>  last_dose <span class="op">=</span> self<span class="op">.</span>amt<span class="op">;</span>  </span>
-<span id="cb89-8"><a href="model-specification.html#cb89-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb88-1"><a href="model-specification.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PREAMBLE <span class="op">]</span></span>
+<span id="cb88-2"><a href="model-specification.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> last_dose <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb88-3"><a href="model-specification.html#cb88-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-4"><a href="model-specification.html#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> MAIN <span class="op">]</span></span>
+<span id="cb88-5"><a href="model-specification.html#cb88-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-6"><a href="model-specification.html#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>EVID<span class="op">==</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb88-7"><a href="model-specification.html#cb88-7" aria-hidden="true" tabindex="-1"></a>  last_dose <span class="op">=</span> self<span class="op">.</span>amt<span class="op">;</span>  </span>
+<span id="cb88-8"><a href="model-specification.html#cb88-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 <div id="self.nid" class="section level3" number="2.3.14">
 <h3><span class="header-section-number">2.3.14</span> <code>self.nid</code></h3>
@@ -1650,11 +1639,11 @@ in the data set. There is no alias for <code>self.amt</code>.</p>
 <h3><span class="header-section-number">2.3.15</span> <code>self.idn</code></h3>
 <p>The current ID number. Numbers start at 0 and increase by one to <code>self.nid-1</code>.
 So if you want to test for the last ID in the output data set, you would write:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb90-1"><a href="model-specification.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> table <span class="op">]</span></span>
-<span id="cb90-2"><a href="model-specification.html#cb90-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb90-3"><a href="model-specification.html#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>self<span class="op">.</span>idn <span class="op">==</span> <span class="op">(</span>self<span class="op">.</span>nid<span class="op">-</span><span class="dv">1</span><span class="op">))</span> <span class="op">{</span></span>
-<span id="cb90-4"><a href="model-specification.html#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something ....</span></span>
-<span id="cb90-5"><a href="model-specification.html#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb89-1"><a href="model-specification.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> table <span class="op">]</span></span>
+<span id="cb89-2"><a href="model-specification.html#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-3"><a href="model-specification.html#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>self<span class="op">.</span>idn <span class="op">==</span> <span class="op">(</span>self<span class="op">.</span>nid<span class="op">-</span><span class="dv">1</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb89-4"><a href="model-specification.html#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something ....</span></span>
+<span id="cb89-5"><a href="model-specification.html#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 <div id="self.nrow" class="section level3" number="2.3.16">
 <h3><span class="header-section-number">2.3.16</span> <code>self.nrow</code></h3>
@@ -1664,21 +1653,21 @@ So if you want to test for the last ID in the output data set, you would write:<
 <h3><span class="header-section-number">2.3.17</span> <code>self.rown</code></h3>
 <p>The current row number. Numbers start at 0 and increase by one to <code>self.rown-1</code>.
 So if you want to test for the last row in the output data set, you would write:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb91-1"><a href="model-specification.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> table <span class="op">]</span></span>
-<span id="cb91-2"><a href="model-specification.html#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-3"><a href="model-specification.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>self<span class="op">.</span>rown <span class="op">==</span> <span class="op">(</span>self<span class="op">.</span>nrow<span class="op">-</span><span class="dv">1</span><span class="op">))</span> <span class="op">{</span></span>
-<span id="cb91-4"><a href="model-specification.html#cb91-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something ....</span></span>
-<span id="cb91-5"><a href="model-specification.html#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb90-1"><a href="model-specification.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> table <span class="op">]</span></span>
+<span id="cb90-2"><a href="model-specification.html#cb90-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-3"><a href="model-specification.html#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>self<span class="op">.</span>rown <span class="op">==</span> <span class="op">(</span>self<span class="op">.</span>nrow<span class="op">-</span><span class="dv">1</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb90-4"><a href="model-specification.html#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something ....</span></span>
+<span id="cb90-5"><a href="model-specification.html#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 <div id="self.envir" class="section level3" number="2.3.18">
 <h3><span class="header-section-number">2.3.18</span> <code>self.envir</code></h3>
 <p>This item is a null pointer that can be cast to an <code>Rcpp::Environment</code> only
 when the <code>Rcpp</code> plugin is invoked (see Section <a href="plugins.html#plugin-rcpp">8.3</a>).</p>
 <p>For example</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb92-1"><a href="model-specification.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> plugin <span class="op">]</span> Rcpp mrgx</span>
-<span id="cb92-2"><a href="model-specification.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb92-3"><a href="model-specification.html#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> preamble <span class="op">]</span> </span>
-<span id="cb92-4"><a href="model-specification.html#cb92-4" aria-hidden="true" tabindex="-1"></a>Rcpp<span class="op">::</span>Environment env <span class="op">=</span> mrgx<span class="op">::</span>get_envir<span class="op">(</span>self<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb91-1"><a href="model-specification.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> plugin <span class="op">]</span> Rcpp mrgx</span>
+<span id="cb91-2"><a href="model-specification.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb91-3"><a href="model-specification.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> preamble <span class="op">]</span> </span>
+<span id="cb91-4"><a href="model-specification.html#cb91-4" aria-hidden="true" tabindex="-1"></a>Rcpp<span class="op">::</span>Environment env <span class="op">=</span> mrgx<span class="op">::</span>get_envir<span class="op">(</span>self<span class="op">);</span></span></code></pre></div>
 </div>
 <div id="self-tad" class="section level3" number="2.3.19">
 <h3><span class="header-section-number">2.3.19</span> <code>self.tad()</code>  </h3>
@@ -1688,9 +1677,9 @@ return <code>-1</code> when it is called before the first dose record within an 
 (<code>NEWIND &lt;= 1</code>).</p>
 <p>This function should be called in <code>$MAIN</code> every time <code>$MAIN</code> is called.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb93-1"><a href="model-specification.html#cb93-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb93-2"><a href="model-specification.html#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-3"><a href="model-specification.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> TAD <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb92-1"><a href="model-specification.html#cb92-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb92-2"><a href="model-specification.html#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="model-specification.html#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> TAD <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
 <p>Do not make this calculation depend on any test or condition; it must be called
 every time <code>$MAIN</code> is called in order to see every dose.</p>
 </div>
@@ -1705,15 +1694,15 @@ advances to this record (this time), the differential equation solver will
 reset and restart, creating the discontinuity. The function returns the time of
 this event so the user can work with it in subsequent code.</p>
 <p>For example,</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb94-1"><a href="model-specification.html#cb94-1" aria-hidden="true" tabindex="-1"></a>$PARAM change_point <span class="op">=</span> <span class="fl">5.13</span><span class="op">;</span></span>
-<span id="cb94-2"><a href="model-specification.html#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-3"><a href="model-specification.html#cb94-3" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb94-4"><a href="model-specification.html#cb94-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-5"><a href="model-specification.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KA <span class="op">=</span> <span class="fl">1.1</span><span class="op">;</span></span>
-<span id="cb94-6"><a href="model-specification.html#cb94-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-7"><a href="model-specification.html#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mt1 <span class="op">=</span> self<span class="op">.</span>mtime<span class="op">(</span>change_point<span class="op">);</span></span>
-<span id="cb94-8"><a href="model-specification.html#cb94-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-9"><a href="model-specification.html#cb94-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>TIME <span class="op">&gt;=</span> mt1<span class="op">)</span> KA <span class="op">=</span> <span class="fl">2.1</span><span class="op">;</span>  </span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb93-1"><a href="model-specification.html#cb93-1" aria-hidden="true" tabindex="-1"></a>$PARAM change_point <span class="op">=</span> <span class="fl">5.13</span><span class="op">;</span></span>
+<span id="cb93-2"><a href="model-specification.html#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="model-specification.html#cb93-3" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb93-4"><a href="model-specification.html#cb93-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-5"><a href="model-specification.html#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KA <span class="op">=</span> <span class="fl">1.1</span><span class="op">;</span></span>
+<span id="cb93-6"><a href="model-specification.html#cb93-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-7"><a href="model-specification.html#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mt1 <span class="op">=</span> self<span class="op">.</span>mtime<span class="op">(</span>change_point<span class="op">);</span></span>
+<span id="cb93-8"><a href="model-specification.html#cb93-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-9"><a href="model-specification.html#cb93-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>TIME <span class="op">&gt;=</span> mt1<span class="op">)</span> KA <span class="op">=</span> <span class="fl">2.1</span><span class="op">;</span>  </span></code></pre></div>
 </div>
 <div id="self.meventtime-evid" class="section level3" number="2.3.21">
 <h3><span class="header-section-number">2.3.21</span> <code>self.mevent(&lt;time&gt;, &lt;evid&gt;)</code></h3>
@@ -1722,9 +1711,9 @@ specific <code>EVID</code> for this intervention and you track the change time v
 rather than the time. You’d use this if you want to anchor
 several events in the future and be sure you can distinguish between them.
 For example</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb95-1"><a href="model-specification.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
-<span id="cb95-2"><a href="model-specification.html#cb95-2" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span>mevent<span class="op">(</span>change_point1<span class="op">,</span> <span class="dv">33</span><span class="op">);</span></span>
-<span id="cb95-3"><a href="model-specification.html#cb95-3" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span>mevent<span class="op">(</span>change_point2<span class="op">,</span> <span class="dv">34</span><span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb94-1"><a href="model-specification.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
+<span id="cb94-2"><a href="model-specification.html#cb94-2" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span>mevent<span class="op">(</span>change_point1<span class="op">,</span> <span class="dv">33</span><span class="op">);</span></span>
+<span id="cb94-3"><a href="model-specification.html#cb94-3" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span>mevent<span class="op">(</span>change_point2<span class="op">,</span> <span class="dv">34</span><span class="op">);</span></span></code></pre></div>
 <p>Now, you can look for <code>EVID==33</code> to know you have hit <code>change_point1</code> or
 <code>EVID==34</code> to indicate that you have hit <code>change_point2</code>. Notice that
 <code>self.mevent()</code> doesn’t return any value. You will know that you’ve hit the
@@ -1767,13 +1756,13 @@ was a problem with this particular individual.</p>
 they may be used in a model even if appropriate <code>OMEGA</code> matrices have not been
 provided.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb96-1"><a href="model-specification.html#cb96-1" aria-hidden="true" tabindex="-1"></a>$OMEGA</span>
-<span id="cb96-2"><a href="model-specification.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></span>
-<span id="cb96-3"><a href="model-specification.html#cb96-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-4"><a href="model-specification.html#cb96-4" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb96-5"><a href="model-specification.html#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CL <span class="op">=</span> TVCL<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span>
-<span id="cb96-6"><a href="model-specification.html#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> VC <span class="op">=</span> TVVC<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">2</span><span class="op">));</span></span>
-<span id="cb96-7"><a href="model-specification.html#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KA <span class="op">=</span> TVKA<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">3</span><span class="op">));</span></span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb95-1"><a href="model-specification.html#cb95-1" aria-hidden="true" tabindex="-1"></a>$OMEGA</span>
+<span id="cb95-2"><a href="model-specification.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></span>
+<span id="cb95-3"><a href="model-specification.html#cb95-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-4"><a href="model-specification.html#cb95-4" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb95-5"><a href="model-specification.html#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CL <span class="op">=</span> TVCL<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span>
+<span id="cb95-6"><a href="model-specification.html#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> VC <span class="op">=</span> TVVC<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">2</span><span class="op">));</span></span>
+<span id="cb95-7"><a href="model-specification.html#cb95-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KA <span class="op">=</span> TVKA<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">3</span><span class="op">));</span></span></code></pre></div>
 <p>Here, we have a 3x3 <code>OMEGA</code> matrix. <code>ETA(1)</code>, <code>ETA(2)</code>, and <code>ETA(3)</code> will be
 populated with variates drawn from this matrix. <code>ETA(4)</code> through <code>ETA(25)</code>
 will be populated with zero.</p>
@@ -1783,41 +1772,41 @@ will be populated with zero.</p>
 <p><code>EPS(n)</code> holds the current value of the observation-level random variates drawn
 from <code>SIGMA</code>. The basic setup is the same as detailed in <code>ETA(n)</code>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb97-1"><a href="model-specification.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> CMT <span class="op">]</span> CENT</span>
-<span id="cb97-2"><a href="model-specification.html#cb97-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-3"><a href="model-specification.html#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PARAM <span class="op">]</span> CL<span class="op">=</span><span class="dv">1</span><span class="op">,</span> VC<span class="op">=</span><span class="dv">20</span></span>
-<span id="cb97-4"><a href="model-specification.html#cb97-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-5"><a href="model-specification.html#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> SIGMA <span class="op">]</span> @labels ADD PROP</span>
-<span id="cb97-6"><a href="model-specification.html#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span> <span class="fl">0.0025</span></span>
-<span id="cb97-7"><a href="model-specification.html#cb97-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-8"><a href="model-specification.html#cb97-8" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> TABLE <span class="op">]</span></span>
-<span id="cb97-9"><a href="model-specification.html#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> DV <span class="op">=</span> <span class="op">(</span>CENT<span class="op">/</span>VC<span class="op">)*(</span><span class="dv">1</span><span class="op">+</span>PROP<span class="op">)</span> <span class="op">+</span> ADD<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb96-1"><a href="model-specification.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> CMT <span class="op">]</span> CENT</span>
+<span id="cb96-2"><a href="model-specification.html#cb96-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-3"><a href="model-specification.html#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PARAM <span class="op">]</span> CL<span class="op">=</span><span class="dv">1</span><span class="op">,</span> VC<span class="op">=</span><span class="dv">20</span></span>
+<span id="cb96-4"><a href="model-specification.html#cb96-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-5"><a href="model-specification.html#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> SIGMA <span class="op">]</span> @labels ADD PROP</span>
+<span id="cb96-6"><a href="model-specification.html#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span> <span class="fl">0.0025</span></span>
+<span id="cb96-7"><a href="model-specification.html#cb96-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-8"><a href="model-specification.html#cb96-8" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> TABLE <span class="op">]</span></span>
+<span id="cb96-9"><a href="model-specification.html#cb96-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> DV <span class="op">=</span> <span class="op">(</span>CENT<span class="op">/</span>VC<span class="op">)*(</span><span class="dv">1</span><span class="op">+</span>PROP<span class="op">)</span> <span class="op">+</span> ADD<span class="op">;</span></span></code></pre></div>
 </div>
 <div id="tablename" class="section level3" number="2.3.27">
 <h3><span class="header-section-number">2.3.27</span> <code>table(&lt;name&gt;)</code></h3>
 <p>This macro has been deprecated. Users should <strong>not</strong> use code like this:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb98-1"><a href="model-specification.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> TABLE <span class="op">]</span></span>
-<span id="cb98-2"><a href="model-specification.html#cb98-2" aria-hidden="true" tabindex="-1"></a>table<span class="op">(</span>CP<span class="op">)</span> <span class="op">=</span> CENT<span class="op">/</span>VC<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb97-1"><a href="model-specification.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> TABLE <span class="op">]</span></span>
+<span id="cb97-2"><a href="model-specification.html#cb97-2" aria-hidden="true" tabindex="-1"></a>table<span class="op">(</span>CP<span class="op">)</span> <span class="op">=</span> CENT<span class="op">/</span>VC<span class="op">;</span></span></code></pre></div>
 <p>But rather this:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb99-1"><a href="model-specification.html#cb99-1" aria-hidden="true" tabindex="-1"></a>$TABLE </span>
-<span id="cb99-2"><a href="model-specification.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CP <span class="op">=</span> CENT<span class="op">/</span>VC<span class="op">;</span></span>
-<span id="cb99-3"><a href="model-specification.html#cb99-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-4"><a href="model-specification.html#cb99-4" aria-hidden="true" tabindex="-1"></a>$CAPTURE CP</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb98-1"><a href="model-specification.html#cb98-1" aria-hidden="true" tabindex="-1"></a>$TABLE </span>
+<span id="cb98-2"><a href="model-specification.html#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CP <span class="op">=</span> CENT<span class="op">/</span>VC<span class="op">;</span></span>
+<span id="cb98-3"><a href="model-specification.html#cb98-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-4"><a href="model-specification.html#cb98-4" aria-hidden="true" tabindex="-1"></a>$CAPTURE CP</span></code></pre></div>
 <p>See: section <a href="model-specification.html#block-table">2.2.11</a> and also <a href="model-specification.html#block-capture">2.2.15</a></p>
 </div>
 <div id="spec-f" class="section level3" number="2.3.28">
 <h3><span class="header-section-number">2.3.28</span> <code>F_CMT</code>  </h3>
 <p>For the <code>CMT</code> compartment, sets the bioavailability fraction for that compartment.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb100-1"><a href="model-specification.html#cb100-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb100-2"><a href="model-specification.html#cb100-2" aria-hidden="true" tabindex="-1"></a>F_CENT <span class="op">=</span> <span class="fl">0.7</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb99-1"><a href="model-specification.html#cb99-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb99-2"><a href="model-specification.html#cb99-2" aria-hidden="true" tabindex="-1"></a>F_CENT <span class="op">=</span> <span class="fl">0.7</span><span class="op">;</span></span></code></pre></div>
 </div>
 <div id="spec-alag" class="section level3" number="2.3.29">
 <h3><span class="header-section-number">2.3.29</span> <code>ALAG_CMT</code>  </h3>
 <p>For the <code>CMT</code> compartment, sets the lag time for doses into that compartment.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb101-1"><a href="model-specification.html#cb101-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb101-2"><a href="model-specification.html#cb101-2" aria-hidden="true" tabindex="-1"></a>ALAG_GUT <span class="op">=</span> <span class="fl">0.25</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb100-1"><a href="model-specification.html#cb100-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb100-2"><a href="model-specification.html#cb100-2" aria-hidden="true" tabindex="-1"></a>ALAG_GUT <span class="op">=</span> <span class="fl">0.25</span><span class="op">;</span></span></code></pre></div>
 </div>
 <div id="spec-r" class="section level3" number="2.3.30">
 <h3><span class="header-section-number">2.3.30</span> <code>R_CMT</code>  </h3>
@@ -1825,8 +1814,8 @@ from <code>SIGMA</code>. The basic setup is the same as detailed in <code>ETA(n)
 infusion rate is only set via <code>R_CMT</code> when <code>rate</code> in the data set or event
 object is set to <code>-1</code>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb102-1"><a href="model-specification.html#cb102-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb102-2"><a href="model-specification.html#cb102-2" aria-hidden="true" tabindex="-1"></a>R_CENT <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb101-1"><a href="model-specification.html#cb101-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb101-2"><a href="model-specification.html#cb101-2" aria-hidden="true" tabindex="-1"></a>R_CENT <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span></code></pre></div>
 </div>
 <div id="spec-d" class="section level3" number="2.3.31">
 <h3><span class="header-section-number">2.3.31</span> <code>D_CMT</code>  </h3>
@@ -1834,8 +1823,8 @@ object is set to <code>-1</code>.</p>
 The infusion duration is only set via <code>D_CMT</code> when <code>rate</code> in the data set or
 event object is set to <code>-2</code>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb103-1"><a href="model-specification.html#cb103-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb103-2"><a href="model-specification.html#cb103-2" aria-hidden="true" tabindex="-1"></a>D_CENT <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb102-1"><a href="model-specification.html#cb102-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb102-2"><a href="model-specification.html#cb102-2" aria-hidden="true" tabindex="-1"></a>D_CENT <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
 </div>
 </div>
 <div id="reserved-words" class="section level2" number="2.4">
@@ -1843,67 +1832,68 @@ event object is set to <code>-2</code>.</p>
 <p>Reserved words cannot be used as names for parameters, compartments or other
 derived variables in the model. <strong>Note</strong> that some of these words are “reserved”
 for you to use in your data set.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="model-specification.html#cb104-1" aria-hidden="true" tabindex="-1"></a>ID</span>
-<span id="cb104-2"><a href="model-specification.html#cb104-2" aria-hidden="true" tabindex="-1"></a>amt</span>
-<span id="cb104-3"><a href="model-specification.html#cb104-3" aria-hidden="true" tabindex="-1"></a>cmt</span>
-<span id="cb104-4"><a href="model-specification.html#cb104-4" aria-hidden="true" tabindex="-1"></a>ii</span>
-<span id="cb104-5"><a href="model-specification.html#cb104-5" aria-hidden="true" tabindex="-1"></a>ss</span>
-<span id="cb104-6"><a href="model-specification.html#cb104-6" aria-hidden="true" tabindex="-1"></a>evid</span>
-<span id="cb104-7"><a href="model-specification.html#cb104-7" aria-hidden="true" tabindex="-1"></a>addl</span>
-<span id="cb104-8"><a href="model-specification.html#cb104-8" aria-hidden="true" tabindex="-1"></a>rate</span>
-<span id="cb104-9"><a href="model-specification.html#cb104-9" aria-hidden="true" tabindex="-1"></a>time</span>
-<span id="cb104-10"><a href="model-specification.html#cb104-10" aria-hidden="true" tabindex="-1"></a>SOLVERTIME</span>
-<span id="cb104-11"><a href="model-specification.html#cb104-11" aria-hidden="true" tabindex="-1"></a>table</span>
-<span id="cb104-12"><a href="model-specification.html#cb104-12" aria-hidden="true" tabindex="-1"></a>ETA</span>
-<span id="cb104-13"><a href="model-specification.html#cb104-13" aria-hidden="true" tabindex="-1"></a>EPS</span>
-<span id="cb104-14"><a href="model-specification.html#cb104-14" aria-hidden="true" tabindex="-1"></a>AMT</span>
-<span id="cb104-15"><a href="model-specification.html#cb104-15" aria-hidden="true" tabindex="-1"></a>CMT</span>
-<span id="cb104-16"><a href="model-specification.html#cb104-16" aria-hidden="true" tabindex="-1"></a>ID</span>
-<span id="cb104-17"><a href="model-specification.html#cb104-17" aria-hidden="true" tabindex="-1"></a>TIME</span>
-<span id="cb104-18"><a href="model-specification.html#cb104-18" aria-hidden="true" tabindex="-1"></a>EVID</span>
-<span id="cb104-19"><a href="model-specification.html#cb104-19" aria-hidden="true" tabindex="-1"></a>simeps</span>
-<span id="cb104-20"><a href="model-specification.html#cb104-20" aria-hidden="true" tabindex="-1"></a>self</span>
-<span id="cb104-21"><a href="model-specification.html#cb104-21" aria-hidden="true" tabindex="-1"></a>simeta</span>
-<span id="cb104-22"><a href="model-specification.html#cb104-22" aria-hidden="true" tabindex="-1"></a>NEWIND</span>
-<span id="cb104-23"><a href="model-specification.html#cb104-23" aria-hidden="true" tabindex="-1"></a>DONE</span>
-<span id="cb104-24"><a href="model-specification.html#cb104-24" aria-hidden="true" tabindex="-1"></a>CFONSTOP</span>
-<span id="cb104-25"><a href="model-specification.html#cb104-25" aria-hidden="true" tabindex="-1"></a>DXDTZERO</span>
-<span id="cb104-26"><a href="model-specification.html#cb104-26" aria-hidden="true" tabindex="-1"></a>CFONSTOP</span>
-<span id="cb104-27"><a href="model-specification.html#cb104-27" aria-hidden="true" tabindex="-1"></a>INITSOLV</span>
-<span id="cb104-28"><a href="model-specification.html#cb104-28" aria-hidden="true" tabindex="-1"></a>_F</span>
-<span id="cb104-29"><a href="model-specification.html#cb104-29" aria-hidden="true" tabindex="-1"></a>_R</span>
-<span id="cb104-30"><a href="model-specification.html#cb104-30" aria-hidden="true" tabindex="-1"></a>_ALAG</span>
-<span id="cb104-31"><a href="model-specification.html#cb104-31" aria-hidden="true" tabindex="-1"></a>SETINIT</span>
-<span id="cb104-32"><a href="model-specification.html#cb104-32" aria-hidden="true" tabindex="-1"></a>report</span>
-<span id="cb104-33"><a href="model-specification.html#cb104-33" aria-hidden="true" tabindex="-1"></a>_VARS_</span>
-<span id="cb104-34"><a href="model-specification.html#cb104-34" aria-hidden="true" tabindex="-1"></a>VARS</span>
-<span id="cb104-35"><a href="model-specification.html#cb104-35" aria-hidden="true" tabindex="-1"></a>AMT</span>
-<span id="cb104-36"><a href="model-specification.html#cb104-36" aria-hidden="true" tabindex="-1"></a>CMT</span>
-<span id="cb104-37"><a href="model-specification.html#cb104-37" aria-hidden="true" tabindex="-1"></a>II</span>
-<span id="cb104-38"><a href="model-specification.html#cb104-38" aria-hidden="true" tabindex="-1"></a>SS</span>
-<span id="cb104-39"><a href="model-specification.html#cb104-39" aria-hidden="true" tabindex="-1"></a>ADDL</span>
-<span id="cb104-40"><a href="model-specification.html#cb104-40" aria-hidden="true" tabindex="-1"></a>RATE</span>
-<span id="cb104-41"><a href="model-specification.html#cb104-41" aria-hidden="true" tabindex="-1"></a>THETA</span>
-<span id="cb104-42"><a href="model-specification.html#cb104-42" aria-hidden="true" tabindex="-1"></a>pred_CL</span>
-<span id="cb104-43"><a href="model-specification.html#cb104-43" aria-hidden="true" tabindex="-1"></a>pred_VC</span>
-<span id="cb104-44"><a href="model-specification.html#cb104-44" aria-hidden="true" tabindex="-1"></a>pred_V</span>
-<span id="cb104-45"><a href="model-specification.html#cb104-45" aria-hidden="true" tabindex="-1"></a>pred_V2</span>
-<span id="cb104-46"><a href="model-specification.html#cb104-46" aria-hidden="true" tabindex="-1"></a>pred_KA</span>
-<span id="cb104-47"><a href="model-specification.html#cb104-47" aria-hidden="true" tabindex="-1"></a>pred_Q</span>
-<span id="cb104-48"><a href="model-specification.html#cb104-48" aria-hidden="true" tabindex="-1"></a>pred_VP</span>
-<span id="cb104-49"><a href="model-specification.html#cb104-49" aria-hidden="true" tabindex="-1"></a>pred_V3</span>
-<span id="cb104-50"><a href="model-specification.html#cb104-50" aria-hidden="true" tabindex="-1"></a>double</span>
-<span id="cb104-51"><a href="model-specification.html#cb104-51" aria-hidden="true" tabindex="-1"></a>int</span>
-<span id="cb104-52"><a href="model-specification.html#cb104-52" aria-hidden="true" tabindex="-1"></a>bool</span>
-<span id="cb104-53"><a href="model-specification.html#cb104-53" aria-hidden="true" tabindex="-1"></a>capture</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="model-specification.html#cb103-1" aria-hidden="true" tabindex="-1"></a>ID</span>
+<span id="cb103-2"><a href="model-specification.html#cb103-2" aria-hidden="true" tabindex="-1"></a>amt</span>
+<span id="cb103-3"><a href="model-specification.html#cb103-3" aria-hidden="true" tabindex="-1"></a>cmt</span>
+<span id="cb103-4"><a href="model-specification.html#cb103-4" aria-hidden="true" tabindex="-1"></a>ii</span>
+<span id="cb103-5"><a href="model-specification.html#cb103-5" aria-hidden="true" tabindex="-1"></a>ss</span>
+<span id="cb103-6"><a href="model-specification.html#cb103-6" aria-hidden="true" tabindex="-1"></a>evid</span>
+<span id="cb103-7"><a href="model-specification.html#cb103-7" aria-hidden="true" tabindex="-1"></a>addl</span>
+<span id="cb103-8"><a href="model-specification.html#cb103-8" aria-hidden="true" tabindex="-1"></a>rate</span>
+<span id="cb103-9"><a href="model-specification.html#cb103-9" aria-hidden="true" tabindex="-1"></a>time</span>
+<span id="cb103-10"><a href="model-specification.html#cb103-10" aria-hidden="true" tabindex="-1"></a>SOLVERTIME</span>
+<span id="cb103-11"><a href="model-specification.html#cb103-11" aria-hidden="true" tabindex="-1"></a>table</span>
+<span id="cb103-12"><a href="model-specification.html#cb103-12" aria-hidden="true" tabindex="-1"></a>ETA</span>
+<span id="cb103-13"><a href="model-specification.html#cb103-13" aria-hidden="true" tabindex="-1"></a>EPS</span>
+<span id="cb103-14"><a href="model-specification.html#cb103-14" aria-hidden="true" tabindex="-1"></a>AMT</span>
+<span id="cb103-15"><a href="model-specification.html#cb103-15" aria-hidden="true" tabindex="-1"></a>CMT</span>
+<span id="cb103-16"><a href="model-specification.html#cb103-16" aria-hidden="true" tabindex="-1"></a>ID</span>
+<span id="cb103-17"><a href="model-specification.html#cb103-17" aria-hidden="true" tabindex="-1"></a>TIME</span>
+<span id="cb103-18"><a href="model-specification.html#cb103-18" aria-hidden="true" tabindex="-1"></a>EVID</span>
+<span id="cb103-19"><a href="model-specification.html#cb103-19" aria-hidden="true" tabindex="-1"></a>simeps</span>
+<span id="cb103-20"><a href="model-specification.html#cb103-20" aria-hidden="true" tabindex="-1"></a>self</span>
+<span id="cb103-21"><a href="model-specification.html#cb103-21" aria-hidden="true" tabindex="-1"></a>simeta</span>
+<span id="cb103-22"><a href="model-specification.html#cb103-22" aria-hidden="true" tabindex="-1"></a>NEWIND</span>
+<span id="cb103-23"><a href="model-specification.html#cb103-23" aria-hidden="true" tabindex="-1"></a>DONE</span>
+<span id="cb103-24"><a href="model-specification.html#cb103-24" aria-hidden="true" tabindex="-1"></a>CFONSTOP</span>
+<span id="cb103-25"><a href="model-specification.html#cb103-25" aria-hidden="true" tabindex="-1"></a>DXDTZERO</span>
+<span id="cb103-26"><a href="model-specification.html#cb103-26" aria-hidden="true" tabindex="-1"></a>CFONSTOP</span>
+<span id="cb103-27"><a href="model-specification.html#cb103-27" aria-hidden="true" tabindex="-1"></a>INITSOLV</span>
+<span id="cb103-28"><a href="model-specification.html#cb103-28" aria-hidden="true" tabindex="-1"></a>_F</span>
+<span id="cb103-29"><a href="model-specification.html#cb103-29" aria-hidden="true" tabindex="-1"></a>_R</span>
+<span id="cb103-30"><a href="model-specification.html#cb103-30" aria-hidden="true" tabindex="-1"></a>_ALAG</span>
+<span id="cb103-31"><a href="model-specification.html#cb103-31" aria-hidden="true" tabindex="-1"></a>SETINIT</span>
+<span id="cb103-32"><a href="model-specification.html#cb103-32" aria-hidden="true" tabindex="-1"></a>report</span>
+<span id="cb103-33"><a href="model-specification.html#cb103-33" aria-hidden="true" tabindex="-1"></a>_VARS_</span>
+<span id="cb103-34"><a href="model-specification.html#cb103-34" aria-hidden="true" tabindex="-1"></a>VARS</span>
+<span id="cb103-35"><a href="model-specification.html#cb103-35" aria-hidden="true" tabindex="-1"></a>SS_ADVANCE</span>
+<span id="cb103-36"><a href="model-specification.html#cb103-36" aria-hidden="true" tabindex="-1"></a>AMT</span>
+<span id="cb103-37"><a href="model-specification.html#cb103-37" aria-hidden="true" tabindex="-1"></a>CMT</span>
+<span id="cb103-38"><a href="model-specification.html#cb103-38" aria-hidden="true" tabindex="-1"></a>II</span>
+<span id="cb103-39"><a href="model-specification.html#cb103-39" aria-hidden="true" tabindex="-1"></a>SS</span>
+<span id="cb103-40"><a href="model-specification.html#cb103-40" aria-hidden="true" tabindex="-1"></a>ADDL</span>
+<span id="cb103-41"><a href="model-specification.html#cb103-41" aria-hidden="true" tabindex="-1"></a>RATE</span>
+<span id="cb103-42"><a href="model-specification.html#cb103-42" aria-hidden="true" tabindex="-1"></a>THETA</span>
+<span id="cb103-43"><a href="model-specification.html#cb103-43" aria-hidden="true" tabindex="-1"></a>pred_CL</span>
+<span id="cb103-44"><a href="model-specification.html#cb103-44" aria-hidden="true" tabindex="-1"></a>pred_VC</span>
+<span id="cb103-45"><a href="model-specification.html#cb103-45" aria-hidden="true" tabindex="-1"></a>pred_V</span>
+<span id="cb103-46"><a href="model-specification.html#cb103-46" aria-hidden="true" tabindex="-1"></a>pred_V2</span>
+<span id="cb103-47"><a href="model-specification.html#cb103-47" aria-hidden="true" tabindex="-1"></a>pred_KA</span>
+<span id="cb103-48"><a href="model-specification.html#cb103-48" aria-hidden="true" tabindex="-1"></a>pred_Q</span>
+<span id="cb103-49"><a href="model-specification.html#cb103-49" aria-hidden="true" tabindex="-1"></a>pred_VP</span>
+<span id="cb103-50"><a href="model-specification.html#cb103-50" aria-hidden="true" tabindex="-1"></a>pred_V3</span>
+<span id="cb103-51"><a href="model-specification.html#cb103-51" aria-hidden="true" tabindex="-1"></a>double</span>
+<span id="cb103-52"><a href="model-specification.html#cb103-52" aria-hidden="true" tabindex="-1"></a>int</span>
+<span id="cb103-53"><a href="model-specification.html#cb103-53" aria-hidden="true" tabindex="-1"></a>bool</span>
+<span id="cb103-54"><a href="model-specification.html#cb103-54" aria-hidden="true" tabindex="-1"></a>capture</span></code></pre></div>
 <p>Other reserved words depend on the compartment names in your model. For
 example, if you have a compartment called <code>CENT</code> in the model, then the
 the following will be reserved</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="model-specification.html#cb105-1" aria-hidden="true" tabindex="-1"></a>F_CENT</span>
-<span id="cb105-2"><a href="model-specification.html#cb105-2" aria-hidden="true" tabindex="-1"></a>R_CENT</span>
-<span id="cb105-3"><a href="model-specification.html#cb105-3" aria-hidden="true" tabindex="-1"></a>D_CENT </span>
-<span id="cb105-4"><a href="model-specification.html#cb105-4" aria-hidden="true" tabindex="-1"></a>ALAG_CENT</span>
-<span id="cb105-5"><a href="model-specification.html#cb105-5" aria-hidden="true" tabindex="-1"></a>N_CENT</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="model-specification.html#cb104-1" aria-hidden="true" tabindex="-1"></a>F_CENT</span>
+<span id="cb104-2"><a href="model-specification.html#cb104-2" aria-hidden="true" tabindex="-1"></a>R_CENT</span>
+<span id="cb104-3"><a href="model-specification.html#cb104-3" aria-hidden="true" tabindex="-1"></a>D_CENT </span>
+<span id="cb104-4"><a href="model-specification.html#cb104-4" aria-hidden="true" tabindex="-1"></a>ALAG_CENT</span>
+<span id="cb104-5"><a href="model-specification.html#cb104-5" aria-hidden="true" tabindex="-1"></a>N_CENT</span></code></pre></div>
 </div>
 <div id="new-variables" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> Derive new variables</h2>
@@ -1911,13 +1901,13 @@ the following will be reserved</p>
 <code>$TABLE</code>. Because these are <code>C++</code> variables, the type of variable being used
 must be declared. For the vast majority of applications, the <code>double</code> type is
 used (double-precision numeric value).</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb106-1"><a href="model-specification.html#cb106-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb106-2"><a href="model-specification.html#cb106-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-3"><a href="model-specification.html#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi <span class="op">=</span> TVCL<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb105-1"><a href="model-specification.html#cb105-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb105-2"><a href="model-specification.html#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="model-specification.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi <span class="op">=</span> TVCL<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
 <p>We want <code>CLi</code> to be a numeric value, so we use <code>double</code>. To initialize a <code>boolean</code>
 variable (true / false), write</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb107-1"><a href="model-specification.html#cb107-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb107-2"><a href="model-specification.html#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> cure <span class="op">=</span> false<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb106-1"><a href="model-specification.html#cb106-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb106-2"><a href="model-specification.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> cure <span class="op">=</span> false<span class="op">;</span></span></code></pre></div>
 <div id="special-handling-for-double-int-bool" class="section level3" number="2.5.1">
 <h3><span class="header-section-number">2.5.1</span> Special handling for <code>double</code>, <code>int</code>, <code>bool</code></h3>
 <p>When variables of the type <code>double</code>, <code>int</code>, and <code>bool</code> are declared and
@@ -1927,32 +1917,32 @@ declared once in <code>$GLOBAL</code> not in <code>$MAIN</code>, <code>$ODE</cod
 that variables declared in one code block (e.g. <code>$MAIN</code>) can be read and
 modified in another code block (e.g. <code>$TABLE</code>).</p>
 <p>For example, in the following code:</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb108-1"><a href="model-specification.html#cb108-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb108-2"><a href="model-specification.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi <span class="op">=</span> TVCL<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb107-1"><a href="model-specification.html#cb107-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb107-2"><a href="model-specification.html#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi <span class="op">=</span> TVCL<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
 <p>a double-precision numeric variable is created (<code>CLi</code>) in the <code>$MAIN</code> block.
 When mrgsolve parses the model file, this code gets translated to</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb109-1"><a href="model-specification.html#cb109-1" aria-hidden="true" tabindex="-1"></a>$GLOBAL</span>
-<span id="cb109-2"><a href="model-specification.html#cb109-2" aria-hidden="true" tabindex="-1"></a>namespace <span class="op">{</span></span>
-<span id="cb109-3"><a href="model-specification.html#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> CLi<span class="op">;</span></span>
-<span id="cb109-4"><a href="model-specification.html#cb109-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb109-5"><a href="model-specification.html#cb109-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-6"><a href="model-specification.html#cb109-6" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb109-7"><a href="model-specification.html#cb109-7" aria-hidden="true" tabindex="-1"></a>CLi <span class="op">=</span> TVCL<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb108-1"><a href="model-specification.html#cb108-1" aria-hidden="true" tabindex="-1"></a>$GLOBAL</span>
+<span id="cb108-2"><a href="model-specification.html#cb108-2" aria-hidden="true" tabindex="-1"></a>namespace <span class="op">{</span></span>
+<span id="cb108-3"><a href="model-specification.html#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> CLi<span class="op">;</span></span>
+<span id="cb108-4"><a href="model-specification.html#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb108-5"><a href="model-specification.html#cb108-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-6"><a href="model-specification.html#cb108-6" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb108-7"><a href="model-specification.html#cb108-7" aria-hidden="true" tabindex="-1"></a>CLi <span class="op">=</span> TVCL<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
 <p>That is, <code>CLi</code> is declared in <code>$GLOBAL</code> in an unnamed namespace so that variables
 like this are global variables within the model file only.</p>
 <p>This way, we can still read the <code>CLi</code> variable in <code>$TABLE</code>:</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb110-1"><a href="model-specification.html#cb110-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb110-2"><a href="model-specification.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi <span class="op">=</span> TVCL<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span>
-<span id="cb110-3"><a href="model-specification.html#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> VCi <span class="op">=</span> TVVC<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">2</span><span class="op">));</span></span>
-<span id="cb110-4"><a href="model-specification.html#cb110-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-5"><a href="model-specification.html#cb110-5" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
-<span id="cb110-6"><a href="model-specification.html#cb110-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KEi <span class="op">=</span> CLi<span class="op">/</span>VCi<span class="op">;</span></span>
-<span id="cb110-7"><a href="model-specification.html#cb110-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-8"><a href="model-specification.html#cb110-8" aria-hidden="true" tabindex="-1"></a>$CAPTURE KEi</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb109-1"><a href="model-specification.html#cb109-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb109-2"><a href="model-specification.html#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi <span class="op">=</span> TVCL<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span>
+<span id="cb109-3"><a href="model-specification.html#cb109-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> VCi <span class="op">=</span> TVVC<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">2</span><span class="op">));</span></span>
+<span id="cb109-4"><a href="model-specification.html#cb109-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-5"><a href="model-specification.html#cb109-5" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
+<span id="cb109-6"><a href="model-specification.html#cb109-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KEi <span class="op">=</span> CLi<span class="op">/</span>VCi<span class="op">;</span></span>
+<span id="cb109-7"><a href="model-specification.html#cb109-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-8"><a href="model-specification.html#cb109-8" aria-hidden="true" tabindex="-1"></a>$CAPTURE KEi</span></code></pre></div>
 <p>To declare a variable that is local to a particular code block:</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb111-1"><a href="model-specification.html#cb111-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb111-2"><a href="model-specification.html#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-3"><a href="model-specification.html#cb111-3" aria-hidden="true" tabindex="-1"></a>localdouble CLi <span class="op">=</span> TVCL<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb110-1"><a href="model-specification.html#cb110-1" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb110-2"><a href="model-specification.html#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="model-specification.html#cb110-3" aria-hidden="true" tabindex="-1"></a>localdouble CLi <span class="op">=</span> TVCL<span class="op">*</span>exp<span class="op">(</span>ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
 <p>The <code>localdouble</code> type is still just a double-precision variable. The difference
 is that it is protected from this re-declaration process and the variable
 will be local to (in this case) the <code>$MAIN</code> block.</p>
@@ -1965,20 +1955,20 @@ we want to work with other variable types in a global manner. Whenever you
 want a data structure to be accessible across functions (e.g. <code>$MAIN</code>, <code>$TABLE</code>,
 etc.) they should be declared in <code>$GLOBAL</code>, optionally in an unnamed namespace.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb112-1"><a href="model-specification.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> GLOBAL <span class="op">]</span></span>
-<span id="cb112-2"><a href="model-specification.html#cb112-2" aria-hidden="true" tabindex="-1"></a>std<span class="op">::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> myvec<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb111-1"><a href="model-specification.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> GLOBAL <span class="op">]</span></span>
+<span id="cb111-2"><a href="model-specification.html#cb111-2" aria-hidden="true" tabindex="-1"></a>std<span class="op">::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> myvec<span class="op">;</span></span></code></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb113-1"><a href="model-specification.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> GLOBAL <span class="op">]</span></span>
-<span id="cb113-2"><a href="model-specification.html#cb113-2" aria-hidden="true" tabindex="-1"></a>namespace <span class="op">{</span></span>
-<span id="cb113-3"><a href="model-specification.html#cb113-3" aria-hidden="true" tabindex="-1"></a>  std<span class="op">::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> myvec<span class="op">;</span></span>
-<span id="cb113-4"><a href="model-specification.html#cb113-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb112-1"><a href="model-specification.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> GLOBAL <span class="op">]</span></span>
+<span id="cb112-2"><a href="model-specification.html#cb112-2" aria-hidden="true" tabindex="-1"></a>namespace <span class="op">{</span></span>
+<span id="cb112-3"><a href="model-specification.html#cb112-3" aria-hidden="true" tabindex="-1"></a>  std<span class="op">::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> myvec<span class="op">;</span></span>
+<span id="cb112-4"><a href="model-specification.html#cb112-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>In case that object needs some configuration prior to starting the problem,
 use <code>$PREAMBLE</code> to do that work</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb114-1"><a href="model-specification.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> GLOBAL <span class="op">]</span></span>
-<span id="cb114-2"><a href="model-specification.html#cb114-2" aria-hidden="true" tabindex="-1"></a>std<span class="op">::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> myvec<span class="op">;</span></span>
-<span id="cb114-3"><a href="model-specification.html#cb114-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-4"><a href="model-specification.html#cb114-4" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PREAMBLE <span class="op">]</span> </span>
-<span id="cb114-5"><a href="model-specification.html#cb114-5" aria-hidden="true" tabindex="-1"></a>myvec<span class="op">.</span>assign<span class="op">(</span><span class="dv">3</span><span class="op">,</span><span class="dv">1</span><span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb113-1"><a href="model-specification.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> GLOBAL <span class="op">]</span></span>
+<span id="cb113-2"><a href="model-specification.html#cb113-2" aria-hidden="true" tabindex="-1"></a>std<span class="op">::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> myvec<span class="op">;</span></span>
+<span id="cb113-3"><a href="model-specification.html#cb113-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-4"><a href="model-specification.html#cb113-4" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PREAMBLE <span class="op">]</span> </span>
+<span id="cb113-5"><a href="model-specification.html#cb113-5" aria-hidden="true" tabindex="-1"></a>myvec<span class="op">.</span>assign<span class="op">(</span><span class="dv">3</span><span class="op">,</span><span class="dv">1</span><span class="op">);</span></span></code></pre></div>
 </div>
 </div>
 <div id="examples" class="section level2" number="2.6">
@@ -2003,24 +1993,24 @@ compartment at any particular time (<code>GUT</code> and <code>CENT</code>)</li>
 <li>We derive a variable called <code>CP</code> in <code>$TABLE</code> that has type <code>capture</code>; mrgsolve
 will enter the <code>CP</code> name into the <code>$CAPTURE</code> block list</li>
 </ul>
-<div class="sourceCode" id="cb115"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb115-1"><a href="model-specification.html#cb115-1" aria-hidden="true" tabindex="-1"></a>$PARAM CL <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> VC <span class="op">=</span> <span class="dv">30</span><span class="op">,</span> KA <span class="op">=</span> <span class="fl">1.3</span></span>
-<span id="cb115-2"><a href="model-specification.html#cb115-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb115-3"><a href="model-specification.html#cb115-3" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT</span>
-<span id="cb115-4"><a href="model-specification.html#cb115-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb115-5"><a href="model-specification.html#cb115-5" aria-hidden="true" tabindex="-1"></a>$ODE</span>
-<span id="cb115-6"><a href="model-specification.html#cb115-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb115-7"><a href="model-specification.html#cb115-7" aria-hidden="true" tabindex="-1"></a>dxdt_GUT <span class="op">=</span> <span class="op">-</span>KA<span class="op">*</span>GUT<span class="op">;</span></span>
-<span id="cb115-8"><a href="model-specification.html#cb115-8" aria-hidden="true" tabindex="-1"></a>dxdt_CENT <span class="op">=</span> KA<span class="op">*</span>GUT <span class="op">-</span> <span class="op">(</span>CL<span class="op">/</span>VC<span class="op">)*</span>CENT<span class="op">;</span></span>
-<span id="cb115-9"><a href="model-specification.html#cb115-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb115-10"><a href="model-specification.html#cb115-10" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
-<span id="cb115-11"><a href="model-specification.html#cb115-11" aria-hidden="true" tabindex="-1"></a>capture CP <span class="op">=</span> CENT<span class="op">/</span>VC<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb114-1"><a href="model-specification.html#cb114-1" aria-hidden="true" tabindex="-1"></a>$PARAM CL <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> VC <span class="op">=</span> <span class="dv">30</span><span class="op">,</span> KA <span class="op">=</span> <span class="fl">1.3</span></span>
+<span id="cb114-2"><a href="model-specification.html#cb114-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-3"><a href="model-specification.html#cb114-3" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT</span>
+<span id="cb114-4"><a href="model-specification.html#cb114-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-5"><a href="model-specification.html#cb114-5" aria-hidden="true" tabindex="-1"></a>$ODE</span>
+<span id="cb114-6"><a href="model-specification.html#cb114-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-7"><a href="model-specification.html#cb114-7" aria-hidden="true" tabindex="-1"></a>dxdt_GUT <span class="op">=</span> <span class="op">-</span>KA<span class="op">*</span>GUT<span class="op">;</span></span>
+<span id="cb114-8"><a href="model-specification.html#cb114-8" aria-hidden="true" tabindex="-1"></a>dxdt_CENT <span class="op">=</span> KA<span class="op">*</span>GUT <span class="op">-</span> <span class="op">(</span>CL<span class="op">/</span>VC<span class="op">)*</span>CENT<span class="op">;</span></span>
+<span id="cb114-9"><a href="model-specification.html#cb114-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-10"><a href="model-specification.html#cb114-10" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
+<span id="cb114-11"><a href="model-specification.html#cb114-11" aria-hidden="true" tabindex="-1"></a>capture CP <span class="op">=</span> CENT<span class="op">/</span>VC<span class="op">;</span></span></code></pre></div>
 <p>This model can also be written without differential equations</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb116-1"><a href="model-specification.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PARAM <span class="op">]</span> CL <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> VC <span class="op">=</span> <span class="dv">30</span><span class="op">,</span> KA <span class="op">=</span> <span class="fl">1.3</span></span>
-<span id="cb116-2"><a href="model-specification.html#cb116-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-3"><a href="model-specification.html#cb116-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PKMODEL <span class="op">]</span> cmt <span class="op">=</span> <span class="st">&quot;CMT GUT CENT&quot;</span><span class="op">,</span> depot <span class="op">=</span> TRUE</span>
-<span id="cb116-4"><a href="model-specification.html#cb116-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-5"><a href="model-specification.html#cb116-5" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
-<span id="cb116-6"><a href="model-specification.html#cb116-6" aria-hidden="true" tabindex="-1"></a>capture CP <span class="op">=</span> CENT<span class="op">/</span>VC<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb115-1"><a href="model-specification.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PARAM <span class="op">]</span> CL <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> VC <span class="op">=</span> <span class="dv">30</span><span class="op">,</span> KA <span class="op">=</span> <span class="fl">1.3</span></span>
+<span id="cb115-2"><a href="model-specification.html#cb115-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-3"><a href="model-specification.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PKMODEL <span class="op">]</span> cmt <span class="op">=</span> <span class="st">&quot;CMT GUT CENT&quot;</span><span class="op">,</span> depot <span class="op">=</span> TRUE</span>
+<span id="cb115-4"><a href="model-specification.html#cb115-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-5"><a href="model-specification.html#cb115-5" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
+<span id="cb115-6"><a href="model-specification.html#cb115-6" aria-hidden="true" tabindex="-1"></a>capture CP <span class="op">=</span> CENT<span class="op">/</span>VC<span class="op">;</span></span></code></pre></div>
 </div>
 <div id="pkpd-model" class="section level3" number="2.6.2">
 <h3><span class="header-section-number">2.6.2</span> PK/PD model</h3>
@@ -2037,26 +2027,26 @@ function of two parameters <code>KIN/KOUT</code></li>
 <li>Both <code>$MAIN</code> and <code>$ODE</code> are <code>C++</code> code blocks; don’t forget to add the <code>;</code>
 at the end of each statement</li>
 </ul>
-<div class="sourceCode" id="cb117"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb117-1"><a href="model-specification.html#cb117-1" aria-hidden="true" tabindex="-1"></a>$PARAM CL <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> VC <span class="op">=</span> <span class="dv">30</span><span class="op">,</span> KA <span class="op">=</span> <span class="fl">1.3</span></span>
-<span id="cb117-2"><a href="model-specification.html#cb117-2" aria-hidden="true" tabindex="-1"></a>KIN <span class="op">=</span> <span class="dv">100</span><span class="op">,</span> KOUT <span class="op">=</span> <span class="dv">2</span><span class="op">,</span> IC50 <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb117-3"><a href="model-specification.html#cb117-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-4"><a href="model-specification.html#cb117-4" aria-hidden="true" tabindex="-1"></a>$GLOBAL</span>
-<span id="cb117-5"><a href="model-specification.html#cb117-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CP (CENT/VC)</span></span>
-<span id="cb117-6"><a href="model-specification.html#cb117-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-7"><a href="model-specification.html#cb117-7" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT RESP</span>
-<span id="cb117-8"><a href="model-specification.html#cb117-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-9"><a href="model-specification.html#cb117-9" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb117-10"><a href="model-specification.html#cb117-10" aria-hidden="true" tabindex="-1"></a>RESP_0 <span class="op">=</span> KIN<span class="op">/</span>KOUT<span class="op">;</span></span>
-<span id="cb117-11"><a href="model-specification.html#cb117-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-12"><a href="model-specification.html#cb117-12" aria-hidden="true" tabindex="-1"></a>$ODE</span>
-<span id="cb117-13"><a href="model-specification.html#cb117-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-14"><a href="model-specification.html#cb117-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> INH <span class="op">=</span> CP<span class="op">/(</span>IC50<span class="op">+</span>CP<span class="op">);</span></span>
-<span id="cb117-15"><a href="model-specification.html#cb117-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-16"><a href="model-specification.html#cb117-16" aria-hidden="true" tabindex="-1"></a>dxdt_GUT <span class="op">=</span> <span class="op">-</span>KA<span class="op">*</span>GUT<span class="op">;</span></span>
-<span id="cb117-17"><a href="model-specification.html#cb117-17" aria-hidden="true" tabindex="-1"></a>dxdt_CENT <span class="op">=</span> KA<span class="op">*</span>GUT <span class="op">-</span> <span class="op">(</span>CL<span class="op">/</span>VC<span class="op">)*</span>CENT<span class="op">;</span></span>
-<span id="cb117-18"><a href="model-specification.html#cb117-18" aria-hidden="true" tabindex="-1"></a>dxdt_RESP <span class="op">=</span> KIN<span class="op">*(</span><span class="dv">1</span><span class="op">-</span>INH<span class="op">)</span> <span class="op">-</span> KOUT<span class="op">*</span>RESP<span class="op">;</span></span>
-<span id="cb117-19"><a href="model-specification.html#cb117-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-20"><a href="model-specification.html#cb117-20" aria-hidden="true" tabindex="-1"></a>$CAPTURE CP</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb116-1"><a href="model-specification.html#cb116-1" aria-hidden="true" tabindex="-1"></a>$PARAM CL <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> VC <span class="op">=</span> <span class="dv">30</span><span class="op">,</span> KA <span class="op">=</span> <span class="fl">1.3</span></span>
+<span id="cb116-2"><a href="model-specification.html#cb116-2" aria-hidden="true" tabindex="-1"></a>KIN <span class="op">=</span> <span class="dv">100</span><span class="op">,</span> KOUT <span class="op">=</span> <span class="dv">2</span><span class="op">,</span> IC50 <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb116-3"><a href="model-specification.html#cb116-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-4"><a href="model-specification.html#cb116-4" aria-hidden="true" tabindex="-1"></a>$GLOBAL</span>
+<span id="cb116-5"><a href="model-specification.html#cb116-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CP (CENT/VC)</span></span>
+<span id="cb116-6"><a href="model-specification.html#cb116-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-7"><a href="model-specification.html#cb116-7" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT RESP</span>
+<span id="cb116-8"><a href="model-specification.html#cb116-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-9"><a href="model-specification.html#cb116-9" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb116-10"><a href="model-specification.html#cb116-10" aria-hidden="true" tabindex="-1"></a>RESP_0 <span class="op">=</span> KIN<span class="op">/</span>KOUT<span class="op">;</span></span>
+<span id="cb116-11"><a href="model-specification.html#cb116-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-12"><a href="model-specification.html#cb116-12" aria-hidden="true" tabindex="-1"></a>$ODE</span>
+<span id="cb116-13"><a href="model-specification.html#cb116-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-14"><a href="model-specification.html#cb116-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> INH <span class="op">=</span> CP<span class="op">/(</span>IC50<span class="op">+</span>CP<span class="op">);</span></span>
+<span id="cb116-15"><a href="model-specification.html#cb116-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-16"><a href="model-specification.html#cb116-16" aria-hidden="true" tabindex="-1"></a>dxdt_GUT <span class="op">=</span> <span class="op">-</span>KA<span class="op">*</span>GUT<span class="op">;</span></span>
+<span id="cb116-17"><a href="model-specification.html#cb116-17" aria-hidden="true" tabindex="-1"></a>dxdt_CENT <span class="op">=</span> KA<span class="op">*</span>GUT <span class="op">-</span> <span class="op">(</span>CL<span class="op">/</span>VC<span class="op">)*</span>CENT<span class="op">;</span></span>
+<span id="cb116-18"><a href="model-specification.html#cb116-18" aria-hidden="true" tabindex="-1"></a>dxdt_RESP <span class="op">=</span> KIN<span class="op">*(</span><span class="dv">1</span><span class="op">-</span>INH<span class="op">)</span> <span class="op">-</span> KOUT<span class="op">*</span>RESP<span class="op">;</span></span>
+<span id="cb116-19"><a href="model-specification.html#cb116-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-20"><a href="model-specification.html#cb116-20" aria-hidden="true" tabindex="-1"></a>$CAPTURE CP</span></code></pre></div>
 </div>
 <div id="population-pk-model-with-covariates-and-iov" class="section level3" number="2.6.3">
 <h3><span class="header-section-number">2.6.3</span> Population PK model with covariates and IOV</h3>
@@ -2072,36 +2062,36 @@ at the end of each statement</li>
 <li>We added zeros for both <code>$OMEGA</code> matrices; all the etas will be zero until we
 populate those matrices (section <a href="topics.html#topic-matrix-update">10.8</a>)</li>
 </ul>
-<div class="sourceCode" id="cb118"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb118-1"><a href="model-specification.html#cb118-1" aria-hidden="true" tabindex="-1"></a>$PARAM TVCL <span class="op">=</span> <span class="fl">1.3</span><span class="op">,</span> TVVC<span class="op">=</span><span class="dv">28</span><span class="op">,</span> TVKA<span class="op">=</span><span class="fl">0.6</span><span class="op">,</span> WT<span class="op">=</span><span class="dv">70</span><span class="op">,</span> OCC<span class="op">=</span><span class="dv">1</span></span>
-<span id="cb118-2"><a href="model-specification.html#cb118-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-3"><a href="model-specification.html#cb118-3" aria-hidden="true" tabindex="-1"></a>$SET delta<span class="op">=</span><span class="fl">0.1</span><span class="op">,</span> end<span class="op">=</span><span class="dv">240</span></span>
-<span id="cb118-4"><a href="model-specification.html#cb118-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-5"><a href="model-specification.html#cb118-5" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT</span>
-<span id="cb118-6"><a href="model-specification.html#cb118-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-7"><a href="model-specification.html#cb118-7" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
-<span id="cb118-8"><a href="model-specification.html#cb118-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-9"><a href="model-specification.html#cb118-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> IOV <span class="op">=</span> IOV1</span>
-<span id="cb118-10"><a href="model-specification.html#cb118-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>OCC<span class="op">==</span><span class="dv">2</span><span class="op">)</span> IOV <span class="op">=</span> IOV2<span class="op">;</span></span>
-<span id="cb118-11"><a href="model-specification.html#cb118-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-12"><a href="model-specification.html#cb118-12" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi <span class="op">=</span> exp<span class="op">(</span>log<span class="op">(</span>TVCL<span class="op">)</span> <span class="op">+</span> <span class="fl">0.75</span><span class="op">*</span>log<span class="op">(</span>WT<span class="op">/</span><span class="dv">70</span><span class="op">)</span> <span class="op">+</span> ECL <span class="op">+</span> IOV<span class="op">);</span></span>
-<span id="cb118-13"><a href="model-specification.html#cb118-13" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> VCi <span class="op">=</span> exp<span class="op">(</span>log<span class="op">(</span>TVVC<span class="op">)</span> <span class="op">+</span> EVC<span class="op">);</span></span>
-<span id="cb118-14"><a href="model-specification.html#cb118-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KAi <span class="op">=</span> exp<span class="op">(</span>log<span class="op">(</span>TVKA<span class="op">)</span> <span class="op">+</span> EKA<span class="op">);</span></span>
-<span id="cb118-15"><a href="model-specification.html#cb118-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-16"><a href="model-specification.html#cb118-16" aria-hidden="true" tabindex="-1"></a>$OMEGA @name IIV @labels ECL EVC EKA</span>
-<span id="cb118-17"><a href="model-specification.html#cb118-17" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb118-18"><a href="model-specification.html#cb118-18" aria-hidden="true" tabindex="-1"></a>$OMEGA @name IOV @labels IOV1 IOV2</span>
-<span id="cb118-19"><a href="model-specification.html#cb118-19" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb118-20"><a href="model-specification.html#cb118-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-21"><a href="model-specification.html#cb118-21" aria-hidden="true" tabindex="-1"></a>$SIGMA <span class="dv">0</span></span>
-<span id="cb118-22"><a href="model-specification.html#cb118-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-23"><a href="model-specification.html#cb118-23" aria-hidden="true" tabindex="-1"></a>$ODE</span>
-<span id="cb118-24"><a href="model-specification.html#cb118-24" aria-hidden="true" tabindex="-1"></a>dxdt_GUT <span class="op">=</span> <span class="op">-</span>KAi<span class="op">*</span>GUT<span class="op">;</span></span>
-<span id="cb118-25"><a href="model-specification.html#cb118-25" aria-hidden="true" tabindex="-1"></a>dxdt_CENT <span class="op">=</span> KAi<span class="op">*</span>GUT <span class="op">-</span> <span class="op">(</span>CLi<span class="op">/</span>VCi<span class="op">)*</span>CENT<span class="op">;</span></span>
-<span id="cb118-26"><a href="model-specification.html#cb118-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-27"><a href="model-specification.html#cb118-27" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
-<span id="cb118-28"><a href="model-specification.html#cb118-28" aria-hidden="true" tabindex="-1"></a>capture CP <span class="op">=</span> CENT<span class="op">/</span>VCi<span class="op">;</span></span>
-<span id="cb118-29"><a href="model-specification.html#cb118-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-30"><a href="model-specification.html#cb118-30" aria-hidden="true" tabindex="-1"></a>$CAPTURE IOV ECL EVC</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb117-1"><a href="model-specification.html#cb117-1" aria-hidden="true" tabindex="-1"></a>$PARAM TVCL <span class="op">=</span> <span class="fl">1.3</span><span class="op">,</span> TVVC<span class="op">=</span><span class="dv">28</span><span class="op">,</span> TVKA<span class="op">=</span><span class="fl">0.6</span><span class="op">,</span> WT<span class="op">=</span><span class="dv">70</span><span class="op">,</span> OCC<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb117-2"><a href="model-specification.html#cb117-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-3"><a href="model-specification.html#cb117-3" aria-hidden="true" tabindex="-1"></a>$SET delta<span class="op">=</span><span class="fl">0.1</span><span class="op">,</span> end<span class="op">=</span><span class="dv">240</span></span>
+<span id="cb117-4"><a href="model-specification.html#cb117-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-5"><a href="model-specification.html#cb117-5" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT</span>
+<span id="cb117-6"><a href="model-specification.html#cb117-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-7"><a href="model-specification.html#cb117-7" aria-hidden="true" tabindex="-1"></a>$MAIN</span>
+<span id="cb117-8"><a href="model-specification.html#cb117-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-9"><a href="model-specification.html#cb117-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> IOV <span class="op">=</span> IOV1</span>
+<span id="cb117-10"><a href="model-specification.html#cb117-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>OCC<span class="op">==</span><span class="dv">2</span><span class="op">)</span> IOV <span class="op">=</span> IOV2<span class="op">;</span></span>
+<span id="cb117-11"><a href="model-specification.html#cb117-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-12"><a href="model-specification.html#cb117-12" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CLi <span class="op">=</span> exp<span class="op">(</span>log<span class="op">(</span>TVCL<span class="op">)</span> <span class="op">+</span> <span class="fl">0.75</span><span class="op">*</span>log<span class="op">(</span>WT<span class="op">/</span><span class="dv">70</span><span class="op">)</span> <span class="op">+</span> ECL <span class="op">+</span> IOV<span class="op">);</span></span>
+<span id="cb117-13"><a href="model-specification.html#cb117-13" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> VCi <span class="op">=</span> exp<span class="op">(</span>log<span class="op">(</span>TVVC<span class="op">)</span> <span class="op">+</span> EVC<span class="op">);</span></span>
+<span id="cb117-14"><a href="model-specification.html#cb117-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> KAi <span class="op">=</span> exp<span class="op">(</span>log<span class="op">(</span>TVKA<span class="op">)</span> <span class="op">+</span> EKA<span class="op">);</span></span>
+<span id="cb117-15"><a href="model-specification.html#cb117-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-16"><a href="model-specification.html#cb117-16" aria-hidden="true" tabindex="-1"></a>$OMEGA @name IIV @labels ECL EVC EKA</span>
+<span id="cb117-17"><a href="model-specification.html#cb117-17" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb117-18"><a href="model-specification.html#cb117-18" aria-hidden="true" tabindex="-1"></a>$OMEGA @name IOV @labels IOV1 IOV2</span>
+<span id="cb117-19"><a href="model-specification.html#cb117-19" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb117-20"><a href="model-specification.html#cb117-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-21"><a href="model-specification.html#cb117-21" aria-hidden="true" tabindex="-1"></a>$SIGMA <span class="dv">0</span></span>
+<span id="cb117-22"><a href="model-specification.html#cb117-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-23"><a href="model-specification.html#cb117-23" aria-hidden="true" tabindex="-1"></a>$ODE</span>
+<span id="cb117-24"><a href="model-specification.html#cb117-24" aria-hidden="true" tabindex="-1"></a>dxdt_GUT <span class="op">=</span> <span class="op">-</span>KAi<span class="op">*</span>GUT<span class="op">;</span></span>
+<span id="cb117-25"><a href="model-specification.html#cb117-25" aria-hidden="true" tabindex="-1"></a>dxdt_CENT <span class="op">=</span> KAi<span class="op">*</span>GUT <span class="op">-</span> <span class="op">(</span>CLi<span class="op">/</span>VCi<span class="op">)*</span>CENT<span class="op">;</span></span>
+<span id="cb117-26"><a href="model-specification.html#cb117-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-27"><a href="model-specification.html#cb117-27" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
+<span id="cb117-28"><a href="model-specification.html#cb117-28" aria-hidden="true" tabindex="-1"></a>capture CP <span class="op">=</span> CENT<span class="op">/</span>VCi<span class="op">;</span></span>
+<span id="cb117-29"><a href="model-specification.html#cb117-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-30"><a href="model-specification.html#cb117-30" aria-hidden="true" tabindex="-1"></a>$CAPTURE IOV ECL EVC</span></code></pre></div>
 
 </div>
 </div>

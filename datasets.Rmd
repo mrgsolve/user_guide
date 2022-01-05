@@ -265,8 +265,8 @@ and drop them from the `data_set` or `idata_set` with a warning.
 ## Data set validation {#valid_data_set}
 
 A the time of simulation, mrgsolve will validate the input data set, removing
-character column, checking for missing values in parameter columns, checking
-compartment numbers etc.  
+non-numeric columns, checking for missing values in parameter columns, checking
+compartment numbers, etc.  
 
 Users can pre-validate the data set so that this does not need to happen at 
 run time. 
