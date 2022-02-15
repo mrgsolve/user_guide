@@ -124,6 +124,20 @@ $PLUGIN Rcpp
 Note that once your model is linked to `Rcpp`, you can start using that 
 functionality immediately (without including `Rcpp.h`).
 
+A very useful feature provided by `Rcpp` is that it exposes all of the `dpqr`
+functions that you normally use in R (e.g. `rnorm()` or `runif()`). So, if you
+want to simulate a number from Uniform (0,1) you can write
+
+```{c, eval = FALSE}
+$PLUGIN Rcpp
+
+$TABLE
+double uni = R::runif(0,1);
+```
+
+Note that the arguments are the same as the R version (`?runif`) **except** 
+there is no `n` argument; you always only get one draw.
+
 Information about `Rcpp` can be found here: https://github.com/RcppCore/Rcpp
 
 ## mrgx {#plugin-mrgx}

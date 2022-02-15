@@ -1903,6 +1903,52 @@ std::vector<double> myvec;
 myvec.assign(3,1);
 ```
 
+## Random number generation
+
+Users can simulate random numbers inside a model file using functions that 
+are similar to the functions you'd normally use in R (e.g. `rnorm()` and 
+`runif()`). This functionality is provided by `Rcpp` and therefore requires
+using the `Rcpp` plugin (see Chapter \@ref(plugins) and Section 
+\@ref(plugin-rcpp)). 
+
+`Rcpp` provides these functions inside the `R` namespace so you will have to 
+prefix the function call with `R::`. 
+
+As an example, to make a draw from Uniform (0,1)
+
+```{c, eval = FALSE}
+[ plugin ] Rcpp
+  
+[ error ] 
+double draw = R::runif(0,1);
+```
+
+Note that the `0` gets used as `min` and the `1` gets used as `max`;  
+we didn't pass `n` here and  `draw` is a single number (not a vector like you'd 
+get from (`runif(100, 0, 1)` on your R console). So in general, these functions 
+work like their `R` counterparts, but without the `n` argument.
+
+Another example showing how to draw from binomial distribution with probability
+0.5
+
+```{c, eval = FALSE}
+[ plugin ] Rcpp
+  
+[ error ] 
+double draw = R::rbinom(1, 0.5);
+```
+
+Here, the `1` is used as `size` (not `n`) and `0.5` is used as `prob`. 
+
+
+Other helpful functions could be `R::rnorm()` or `R::rlnorm()` but you can 
+call any of the `r` functions as well as the corresponding `dpq` functions
+through this `R` namespace. 
+
+Documentation, including functions to call and arguments can be found in the 
+Rcpp API docs
+
+http://dirk.eddelbuettel.com/code/rcpp/html/namespaceR.html
 
 
 ## Examples

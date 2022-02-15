@@ -24,7 +24,7 @@
 <meta name="author" content="Metrum Research Group" />
 
 
-<meta name="date" content="2022-01-05" />
+<meta name="date" content="2022-02-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -252,11 +252,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.1" data-path="model-specification.html"><a href="model-specification.html#special-handling-for-double-int-bool"><i class="fa fa-check"></i><b>2.5.1</b> Special handling for <code>double</code>, <code>int</code>, <code>bool</code></a></li>
 <li class="chapter" data-level="2.5.2" data-path="model-specification.html"><a href="model-specification.html#using-other-types-globally"><i class="fa fa-check"></i><b>2.5.2</b> Using other types globally</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="model-specification.html"><a href="model-specification.html#examples"><i class="fa fa-check"></i><b>2.6</b> Examples</a>
+<li class="chapter" data-level="2.6" data-path="model-specification.html"><a href="model-specification.html#random-number-generation"><i class="fa fa-check"></i><b>2.6</b> Random number generation</a></li>
+<li class="chapter" data-level="2.7" data-path="model-specification.html"><a href="model-specification.html#examples"><i class="fa fa-check"></i><b>2.7</b> Examples</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="model-specification.html"><a href="model-specification.html#simple-pk-model"><i class="fa fa-check"></i><b>2.6.1</b> Simple PK model</a></li>
-<li class="chapter" data-level="2.6.2" data-path="model-specification.html"><a href="model-specification.html#pkpd-model"><i class="fa fa-check"></i><b>2.6.2</b> PK/PD model</a></li>
-<li class="chapter" data-level="2.6.3" data-path="model-specification.html"><a href="model-specification.html#population-pk-model-with-covariates-and-iov"><i class="fa fa-check"></i><b>2.6.3</b> Population PK model with covariates and IOV</a></li>
+<li class="chapter" data-level="2.7.1" data-path="model-specification.html"><a href="model-specification.html#simple-pk-model"><i class="fa fa-check"></i><b>2.7.1</b> Simple PK model</a></li>
+<li class="chapter" data-level="2.7.2" data-path="model-specification.html"><a href="model-specification.html#pkpd-model"><i class="fa fa-check"></i><b>2.7.2</b> PK/PD model</a></li>
+<li class="chapter" data-level="2.7.3" data-path="model-specification.html"><a href="model-specification.html#population-pk-model-with-covariates-and-iov"><i class="fa fa-check"></i><b>2.7.3</b> Population PK model with covariates and IOV</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-set-chapter.html"><a href="data-set-chapter.html"><i class="fa fa-check"></i><b>3</b> Input data sets</a>
@@ -452,21 +453,21 @@ data set for simulation.</p>
 <h2><span class="header-section-number">4.1</span> Usage</h2>
 <p>Event objects are frequently used in a pipeline to simulate a dosing regimen.
 For example</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="event-chapter.html#cb140-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>(<span class="at">end =</span> <span class="dv">72</span>) </span>
-<span id="cb140-2"><a href="event-chapter.html#cb140-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb140-3"><a href="event-chapter.html#cb140-3" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">24</span>, <span class="at">addl =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
-<p><img src="user-guide_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="event-chapter.html#cb142-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>(<span class="at">end =</span> <span class="dv">72</span>) </span>
+<span id="cb142-2"><a href="event-chapter.html#cb142-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-3"><a href="event-chapter.html#cb142-3" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">24</span>, <span class="at">addl =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
+<p><img src="user-guide_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
 <p>This used the <code>ev()</code> constructor to make an event object for two 100 mg doses
 and this is passed into <code>mrgsim()</code> to implement this regimen.</p>
 <p>Alternatively, we can create a standalone object and feed that into the pipeline</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="event-chapter.html#cb141-1" aria-hidden="true" tabindex="-1"></a>regimen <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">24</span>, <span class="at">addl =</span> <span class="dv">1</span>)</span>
-<span id="cb141-2"><a href="event-chapter.html#cb141-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-3"><a href="event-chapter.html#cb141-3" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">ev</span>(regimen) <span class="sc">%&gt;%</span> <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="event-chapter.html#cb143-1" aria-hidden="true" tabindex="-1"></a>regimen <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">24</span>, <span class="at">addl =</span> <span class="dv">1</span>)</span>
+<span id="cb143-2"><a href="event-chapter.html#cb143-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb143-3"><a href="event-chapter.html#cb143-3" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">ev</span>(regimen) <span class="sc">%&gt;%</span> <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
 <p>If you are not using the pipe syntax, the following would be equivalent
 calls</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="event-chapter.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">events =</span> regimen) <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="event-chapter.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">events =</span> regimen) <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
 <p>And there are <code>mrgsim()</code> variants that explicitly accept an event object</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="event-chapter.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim_e</span>(mod, regimen) <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="event-chapter.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim_e</span>(mod, regimen) <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
 <p>More will be said about how to create and manipulate event objects in the
 following sections.</p>
 </div>
@@ -474,7 +475,7 @@ following sections.</p>
 <h2><span class="header-section-number">4.2</span> Construction</h2>
 <p>A new event object can be created with the <code>ev()</code> constructor. For a single,
 100 mg dose it would be</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="event-chapter.html#cb144-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="event-chapter.html#cb146-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>)</span></code></pre></div>
 <p>When you print the object to the R console we see the 100 mg dose along with
 the following defaults</p>
 <ul>
@@ -482,19 +483,19 @@ the following defaults</p>
 <li><code>cmt</code> set to 1 (the first compartment)</li>
 <li><code>evid</code> set to 1 (a bolus dose)</li>
 </ul>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="event-chapter.html#cb145-1" aria-hidden="true" tabindex="-1"></a>e</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="event-chapter.html#cb147-1" aria-hidden="true" tabindex="-1"></a>e</span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid
 . 1    0 100   1    1</code></pre>
 <p>Of course, we can override any of these defaults or add additional items as
 needed. For a single 100 mg dose infused over 2 hours in compartment 2 one
 hour after the simulation starts</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="event-chapter.html#cb147-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">rate =</span> <span class="dv">50</span>, <span class="at">cmt =</span> <span class="dv">2</span>, <span class="at">time =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="event-chapter.html#cb149-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">rate =</span> <span class="dv">50</span>, <span class="at">cmt =</span> <span class="dv">2</span>, <span class="at">time =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>To use this event object, we can pass it into <code>mrgsim()</code> under the <code>events</code>
 argument</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="event-chapter.html#cb148-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>(<span class="at">delta =</span> <span class="dv">1</span>, <span class="at">end =</span> <span class="dv">24</span>)</span>
-<span id="cb148-2"><a href="event-chapter.html#cb148-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb148-3"><a href="event-chapter.html#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">events =</span> e)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="event-chapter.html#cb150-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">house</span>(<span class="at">delta =</span> <span class="dv">1</span>, <span class="at">end =</span> <span class="dv">24</span>)</span>
+<span id="cb150-2"><a href="event-chapter.html#cb150-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-3"><a href="event-chapter.html#cb150-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">events =</span> e)</span></code></pre></div>
 <pre><code>. Model:  housemodel 
 . Dim:    26 x 7 
 . Time:   0 to 24 
@@ -509,7 +510,7 @@ argument</p>
 . 7:   1    5   0 86.11 34.75 4.305 4.305
 . 8:   1    6   0 81.91 35.22 4.095 4.095</code></pre>
 <p>Event object inputs can be functions of previously defined inputs. For example</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="event-chapter.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">rate =</span> amt <span class="sc">/</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="event-chapter.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">rate =</span> amt <span class="sc">/</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt rate cmt evid
 . 1    0 100   50   1    1</code></pre>
@@ -520,14 +521,14 @@ handful of options that can be helpful when constructing event objects.</p>
 <p>Above, we created some infusion event objects by adding an infusion rate to the
 input. We can also indicate an infusion by adding an infusion time through
 the <code>tinf</code> argument</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="event-chapter.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">tinf =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="event-chapter.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">tinf =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt rate cmt evid tinf
 . 1    0 100   50   1    1    2</code></pre>
 <p><strong>ID</strong></p>
 <p>While the primary use case for event objects are for <em>single individuals</em>,
 we can code a series of IDs into the object too</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="event-chapter.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="event-chapter.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>. Events:
 .   ID time amt cmt evid
 . 1  1    0 100   1    1
@@ -538,7 +539,7 @@ data set (see below), we’ll have a population data set from which to simulate.
 <p><strong>Additional data items</strong></p>
 <p>We can also pass through arbitrary data columns through the event object. For
 example, we can pass through <code>WT</code></p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="event-chapter.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">WT =</span> <span class="dv">80</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="event-chapter.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">WT =</span> <span class="dv">80</span>)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid WT
 . 1    0 100   1    1 80</code></pre>
@@ -549,20 +550,20 @@ example, we can pass through <code>WT</code></p>
 but data sets under the hood. We can take the event objects we created above
 and coerce them to other objects.</p>
 <p><strong>Using as_data_set</strong></p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="event-chapter.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_data_set</span>(e)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="event-chapter.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_data_set</span>(e)</span></code></pre></div>
 <pre><code>.   time amt rate cmt evid ID
 . 1    1 100   50   2    1  1</code></pre>
 <p>This will ensure that there is an <code>ID</code> column in the output and it will
 be suitable to use for simulation.</p>
 <p><strong>Using as.data.frame</strong></p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="event-chapter.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(e) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ID =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="event-chapter.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(e) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ID =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>.   time amt rate cmt evid ID
 . 1    1 100   50   2    1  5</code></pre>
 </div>
 <div id="extract-information" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Extract information</h2>
 <p>There is a <code>$</code> operator for event objects</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="event-chapter.html#cb162-1" aria-hidden="true" tabindex="-1"></a>e<span class="sc">$</span>amt</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="event-chapter.html#cb164-1" aria-hidden="true" tabindex="-1"></a>e<span class="sc">$</span>amt</span></code></pre></div>
 <pre><code>. [1] 100</code></pre>
 </div>
 <div id="combining-event-objects" class="section level2" number="4.5">
@@ -570,10 +571,10 @@ be suitable to use for simulation.</p>
 <div id="concatenate" class="section level3" number="4.5.1">
 <h3><span class="header-section-number">4.5.1</span> Concatenate</h3>
 <p>Two or more event objects can be concatenated using the <code>c</code> operator</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="event-chapter.html#cb164-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>)</span>
-<span id="cb164-2"><a href="event-chapter.html#cb164-2" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">200</span>, <span class="at">time =</span> <span class="dv">24</span>)</span>
-<span id="cb164-3"><a href="event-chapter.html#cb164-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb164-4"><a href="event-chapter.html#cb164-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(e1, e2)</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="event-chapter.html#cb166-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>)</span>
+<span id="cb166-2"><a href="event-chapter.html#cb166-2" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">200</span>, <span class="at">time =</span> <span class="dv">24</span>)</span>
+<span id="cb166-3"><a href="event-chapter.html#cb166-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-4"><a href="event-chapter.html#cb166-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(e1, e2)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid
 . 1    0 100   1    1
@@ -589,21 +590,21 @@ example, we wanted the 200 mg to happen at 24 hours and we had to code that
 fact into <code>time</code> accordingly.</p>
 <p>By specifying a dosing interval (<code>ii</code>) we can ask mrgsolve to do that
 automatically by calling the <code>seq()</code> method.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="event-chapter.html#cb166-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">24</span>)</span>
-<span id="cb166-2"><a href="event-chapter.html#cb166-2" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">200</span>, <span class="at">ii =</span> <span class="dv">24</span>)</span>
-<span id="cb166-3"><a href="event-chapter.html#cb166-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb166-4"><a href="event-chapter.html#cb166-4" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(e1, e2)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="event-chapter.html#cb168-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">24</span>)</span>
+<span id="cb168-2"><a href="event-chapter.html#cb168-2" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">200</span>, <span class="at">ii =</span> <span class="dv">24</span>)</span>
+<span id="cb168-3"><a href="event-chapter.html#cb168-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-4"><a href="event-chapter.html#cb168-4" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(e1, e2)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100 24    0   1    1
 . 2   24 200 24    0   1    1</code></pre>
 <p>This was a trivial example to get a simple result. We can try something more
 complicated to make the point</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="event-chapter.html#cb168-1" aria-hidden="true" tabindex="-1"></a>e3 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">6</span>,  <span class="at">addl =</span> <span class="dv">28</span>)</span>
-<span id="cb168-2"><a href="event-chapter.html#cb168-2" aria-hidden="true" tabindex="-1"></a>e4 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">200</span>, <span class="at">ii =</span> <span class="dv">12</span>, <span class="at">addl =</span> <span class="dv">124</span>)</span>
-<span id="cb168-3"><a href="event-chapter.html#cb168-3" aria-hidden="true" tabindex="-1"></a>e5 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">400</span>, <span class="at">ii =</span> <span class="dv">24</span>, <span class="at">addl =</span> <span class="dv">3</span>)</span>
-<span id="cb168-4"><a href="event-chapter.html#cb168-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-5"><a href="event-chapter.html#cb168-5" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(e3, e4, e5)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="event-chapter.html#cb170-1" aria-hidden="true" tabindex="-1"></a>e3 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">6</span>,  <span class="at">addl =</span> <span class="dv">28</span>)</span>
+<span id="cb170-2"><a href="event-chapter.html#cb170-2" aria-hidden="true" tabindex="-1"></a>e4 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">200</span>, <span class="at">ii =</span> <span class="dv">12</span>, <span class="at">addl =</span> <span class="dv">124</span>)</span>
+<span id="cb170-3"><a href="event-chapter.html#cb170-3" aria-hidden="true" tabindex="-1"></a>e5 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">400</span>, <span class="at">ii =</span> <span class="dv">24</span>, <span class="at">addl =</span> <span class="dv">3</span>)</span>
+<span id="cb170-4"><a href="event-chapter.html#cb170-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-5"><a href="event-chapter.html#cb170-5" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(e3, e4, e5)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100  6   28   1    1
@@ -612,7 +613,7 @@ complicated to make the point</p>
 <p><strong>NOTE</strong>: when mrgsolve puts event objects into a sequence, it starts the
 next segment of the regimen one dosing interval after the previous regimen
 finished. Going back to the simple example</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="event-chapter.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(e1, e2)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="event-chapter.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(e1, e2)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100 24    0   1    1
@@ -621,20 +622,20 @@ finished. Going back to the simple example</p>
 interval (24 hours) after the last (only) dose in <code>e1</code>. We can alter the amount
 of time between segments of the regimen by using the <code>wait</code> argument. For
 example, to push <code>e2</code> out by an additional 24 hours we’d use</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="event-chapter.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(e1, <span class="at">wait =</span> <span class="dv">24</span>, e2)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="event-chapter.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(e1, <span class="at">wait =</span> <span class="dv">24</span>, e2)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100 24    0   1    1
 . 2   48 200 24    0   1    1</code></pre>
 <p>We can also use a negative value for <code>wait</code> to make the next dose happen sooner</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="event-chapter.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(e1, <span class="at">wait =</span> <span class="sc">-</span><span class="dv">12</span>, e2)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="event-chapter.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(e1, <span class="at">wait =</span> <span class="sc">-</span><span class="dv">12</span>, e2)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100 24    0   1    1
 . 2   12 200 24    0   1    1</code></pre>
 <p>Finally, we should note that event objects can be used multiple times in a
 sequence</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="event-chapter.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(e1, e2, <span class="at">wait =</span> <span class="dv">7</span><span class="sc">*</span><span class="dv">24</span>, e2, e1)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="event-chapter.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(e1, e2, <span class="at">wait =</span> <span class="dv">7</span><span class="sc">*</span><span class="dv">24</span>, e2, e1)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100 24    0   1    1
@@ -646,21 +647,21 @@ sequence</p>
 <h3><span class="header-section-number">4.5.3</span> repeat</h3>
 <p>Like the <code>seq()</code> method for event objects, <code>ev_repeat</code> will put an event object
 into a sequence <code>n</code> times</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="event-chapter.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev_repeat</span>(e1, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="event-chapter.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev_repeat</span>(e1, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>.   ID time amt ii cmt evid addl
 . 1  1    0 100 24   1    1    0
 . 2  1   24 100 24   1    1    0
 . 3  1   48 100 24   1    1    0</code></pre>
 <p>By default, this function returns a regular data frame. To return an event
 object instead call</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="event-chapter.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev_repeat</span>(e1, <span class="at">n =</span> <span class="dv">3</span>, <span class="at">as.ev =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="event-chapter.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev_repeat</span>(e1, <span class="at">n =</span> <span class="dv">3</span>, <span class="at">as.ev =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>You can put a waiting period too. To illustrate this, let’s compose a more
 complicated regimen and repeat that</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="event-chapter.html#cb181-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">500</span>, <span class="at">ii =</span> <span class="dv">24</span>)</span>
-<span id="cb181-2"><a href="event-chapter.html#cb181-2" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">250</span>, <span class="at">ii =</span> <span class="dv">24</span>, <span class="at">addl =</span> <span class="dv">5</span>)</span>
-<span id="cb181-3"><a href="event-chapter.html#cb181-3" aria-hidden="true" tabindex="-1"></a>e3 <span class="ot">&lt;-</span> <span class="fu">ev_seq</span>(e1, e2)</span>
-<span id="cb181-4"><a href="event-chapter.html#cb181-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb181-5"><a href="event-chapter.html#cb181-5" aria-hidden="true" tabindex="-1"></a>e3 <span class="sc">%&gt;%</span> <span class="fu">realize_addl</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="event-chapter.html#cb183-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">500</span>, <span class="at">ii =</span> <span class="dv">24</span>)</span>
+<span id="cb183-2"><a href="event-chapter.html#cb183-2" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">250</span>, <span class="at">ii =</span> <span class="dv">24</span>, <span class="at">addl =</span> <span class="dv">5</span>)</span>
+<span id="cb183-3"><a href="event-chapter.html#cb183-3" aria-hidden="true" tabindex="-1"></a>e3 <span class="ot">&lt;-</span> <span class="fu">ev_seq</span>(e1, e2)</span>
+<span id="cb183-4"><a href="event-chapter.html#cb183-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-5"><a href="event-chapter.html#cb183-5" aria-hidden="true" tabindex="-1"></a>e3 <span class="sc">%&gt;%</span> <span class="fu">realize_addl</span>()</span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 500  0    0   1    1
@@ -673,7 +674,7 @@ complicated regimen and repeat that</p>
 <p>In this regimen, we have daily dosing for 7 doses. The last dose is given
 at 144 hours. When putting this into a sequence, we’ll wait one dosing interval
 and then the <code>wait</code> period and then start again</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="event-chapter.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev_repeat</span>(e3, <span class="at">n =</span> <span class="dv">3</span>, <span class="at">wait =</span> <span class="dv">7</span><span class="sc">*</span><span class="dv">24</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="event-chapter.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev_repeat</span>(e3, <span class="at">n =</span> <span class="dv">3</span>, <span class="at">wait =</span> <span class="dv">7</span><span class="sc">*</span><span class="dv">24</span>)</span></code></pre></div>
 <pre><code>.   ID time amt ii addl cmt evid
 . 1  1    0 500 24    0   1    1
 . 2  1   24 250 24    5   1    1
@@ -686,7 +687,7 @@ and then the <code>wait</code> period and then start again</p>
 <h3><span class="header-section-number">4.5.4</span> Create a “data_set”</h3>
 <p>Use the <code>as_data_set()</code> function to combine multiple event objects into a single
 data set.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="event-chapter.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_data_set</span>(e1, e2)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="event-chapter.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_data_set</span>(e1, e2)</span></code></pre></div>
 <pre><code>.   ID time cmt evid amt ii addl
 . 1  1    0   1    1 500 24    0
 . 2  2    0   1    1 250 24    5</code></pre>
@@ -698,11 +699,11 @@ you exit the event object world</li>
 </ol>
 <p>Recall that we can create event objects with multiple <code>IDs</code>; <code>as_data_set()</code>
 is handy to use with this feature</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="event-chapter.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_data_set</span>(</span>
-<span id="cb187-2"><a href="event-chapter.html#cb187-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), </span>
-<span id="cb187-3"><a href="event-chapter.html#cb187-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">200</span>, <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), </span>
-<span id="cb187-4"><a href="event-chapter.html#cb187-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">300</span>, <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
-<span id="cb187-5"><a href="event-chapter.html#cb187-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="event-chapter.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_data_set</span>(</span>
+<span id="cb189-2"><a href="event-chapter.html#cb189-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), </span>
+<span id="cb189-3"><a href="event-chapter.html#cb189-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">200</span>, <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), </span>
+<span id="cb189-4"><a href="event-chapter.html#cb189-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">300</span>, <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb189-5"><a href="event-chapter.html#cb189-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>.   ID time cmt evid amt
 . 1  1    0   1    1 100
 . 2  2    0   1    1 100
@@ -717,10 +718,10 @@ the 100 mg group, the 3 subjects in the 200 mg group, and the 2 subjects in
 the 300 mg group.</p>
 <p>We’ll cover a function called <code>ev_rep()</code> below to “expand” an event object to
 multiple individuals</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="event-chapter.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_data_set</span>(</span>
-<span id="cb189-2"><a href="event-chapter.html#cb189-2" aria-hidden="true" tabindex="-1"></a>  e1 <span class="sc">%&gt;%</span> <span class="fu">ev_rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">300</span>),</span>
-<span id="cb189-3"><a href="event-chapter.html#cb189-3" aria-hidden="true" tabindex="-1"></a>  e2 <span class="sc">%&gt;%</span> <span class="fu">ev_rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">300</span>)</span>
-<span id="cb189-4"><a href="event-chapter.html#cb189-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="event-chapter.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_data_set</span>(</span>
+<span id="cb191-2"><a href="event-chapter.html#cb191-2" aria-hidden="true" tabindex="-1"></a>  e1 <span class="sc">%&gt;%</span> <span class="fu">ev_rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">300</span>),</span>
+<span id="cb191-3"><a href="event-chapter.html#cb191-3" aria-hidden="true" tabindex="-1"></a>  e2 <span class="sc">%&gt;%</span> <span class="fu">ev_rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">300</span>)</span>
+<span id="cb191-4"><a href="event-chapter.html#cb191-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </div>
 <div id="modifying-an-event-object" class="section level2" number="4.6">
@@ -728,19 +729,19 @@ multiple individuals</p>
 <div id="tidy-like-manipulation" class="section level3" number="4.6.1">
 <h3><span class="header-section-number">4.6.1</span> Tidy-like manipulation</h3>
 <p>Event objects can be mutated</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="event-chapter.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(e, <span class="at">amt =</span> <span class="dv">200</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="event-chapter.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(e, <span class="at">amt =</span> <span class="dv">200</span>)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt rate cmt evid
 . 1    1 200   50   2    1</code></pre>
 <p>Columns can be removed from event objects</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="event-chapter.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">WT =</span> <span class="dv">50</span>, <span class="at">AGE =</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>WT)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="event-chapter.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">WT =</span> <span class="dv">50</span>, <span class="at">AGE =</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>WT)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid AGE
 . 1    0 100   1    1  12</code></pre>
 <p>Rows can be removed from event objects</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="event-chapter.html#cb194-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>), <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">200</span>, <span class="at">time =</span> <span class="dv">12</span>), <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">300</span>, <span class="at">time =</span> <span class="dv">24</span>))</span>
-<span id="cb194-2"><a href="event-chapter.html#cb194-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-3"><a href="event-chapter.html#cb194-3" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(e, time <span class="sc">&lt;=</span> <span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="event-chapter.html#cb196-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>), <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">200</span>, <span class="at">time =</span> <span class="dv">12</span>), <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">300</span>, <span class="at">time =</span> <span class="dv">24</span>))</span>
+<span id="cb196-2"><a href="event-chapter.html#cb196-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-3"><a href="event-chapter.html#cb196-3" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(e, time <span class="sc">&lt;=</span> <span class="dv">12</span>)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid
 . 1    0 100   1    1
@@ -749,7 +750,7 @@ multiple individuals</p>
 <div id="realize_addl" class="section level3" number="4.6.2">
 <h3><span class="header-section-number">4.6.2</span> realize_addl</h3>
 <p>“Additional” doses can be made explicit in an event object</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="event-chapter.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">6</span>, <span class="at">addl =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">realize_addl</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="event-chapter.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>, <span class="at">ii =</span> <span class="dv">6</span>, <span class="at">addl =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">realize_addl</span>()</span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100  0    0   1    1
@@ -761,7 +762,7 @@ multiple individuals</p>
 <h3><span class="header-section-number">4.6.3</span> ev_rep</h3>
 <p>Event objects can be “expanded” into multiple IDs to create a population;
 use the <code>ev_rep()</code> function for this.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="event-chapter.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">ev_rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="event-chapter.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">ev_rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
 <pre><code>.   ID time amt cmt evid
 . 1  1    0 100   1    1
 . 2  2    0 100   1    1
@@ -770,7 +771,7 @@ use the <code>ev_rep()</code> function for this.</p>
 . 5  5    0 100   1    1</code></pre>
 <p>By default, <code>ev_rep()</code> returns a regular data frame. You can request that
 an event object is returned</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="event-chapter.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">ev_rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">as.ev =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="event-chapter.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">ev_rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">as.ev =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><code>ev_rep()</code> can work on an event object with any complexity.</p>
 </div>
 </div>
@@ -781,27 +782,27 @@ an event object is returned</p>
 <h3><span class="header-section-number">4.7.1</span> ev_days</h3>
 <p><code>ev_days()</code> will create dosing sequences when dosing are on certain days (of the
 week). For example, to dose only on Monday, Wednesday, and Friday for on month</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="event-chapter.html#cb201-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">ev_days</span>(<span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>), <span class="at">ii =</span> <span class="dv">168</span>, <span class="at">addl =</span> <span class="dv">3</span>, <span class="at">days =</span> <span class="st">&#39;m,w,f&#39;</span>)</span>
-<span id="cb201-2"><a href="event-chapter.html#cb201-2" aria-hidden="true" tabindex="-1"></a>e</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="event-chapter.html#cb203-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">ev_days</span>(<span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>), <span class="at">ii =</span> <span class="dv">168</span>, <span class="at">addl =</span> <span class="dv">3</span>, <span class="at">days =</span> <span class="st">&#39;m,w,f&#39;</span>)</span>
+<span id="cb203-2"><a href="event-chapter.html#cb203-2" aria-hidden="true" tabindex="-1"></a>e</span></code></pre></div>
 <pre><code>.   time amt cmt evid  ii addl
 . 1    0 100   1    1 168    3
 . 2   48 100   1    1 168    3
 . 3   96 100   1    1 168    3</code></pre>
 <p>We can see how this works by simulating the regimen</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="event-chapter.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim_e</span>(mod, e, <span class="at">end =</span> <span class="dv">168</span><span class="sc">*</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
-<p><img src="user-guide_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="event-chapter.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim_e</span>(mod, e, <span class="at">end =</span> <span class="dv">168</span><span class="sc">*</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="st">&quot;CP&quot;</span>)</span></code></pre></div>
+<p><img src="user-guide_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
 </div>
 <div id="ev_rx" class="section level3" number="4.7.2">
 <h3><span class="header-section-number">4.7.2</span> ev_rx</h3>
 <p><code>ev_rx()</code> is a way to write a regimen out with notation similar to what you
 might see on a prescription. For example, 100 mg twice daily for 3 doses into
 compartment 2 would be</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="event-chapter.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev_rx</span>(<span class="st">&quot;100 mg q12h x3 in 2&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="event-chapter.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev_rx</span>(<span class="st">&quot;100 mg q12h x3 in 2&quot;</span>)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100 12    2   2    1</code></pre>
 <p>To code an infusion</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="event-chapter.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev_rx</span>(<span class="st">&quot;500 mg over 2 hours q 24 h x3 in 1&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="event-chapter.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ev_rx</span>(<span class="st">&quot;500 mg over 2 hours q 24 h x3 in 1&quot;</span>)</span></code></pre></div>
 <pre><code>. Events:
 .   time amt rate ii addl cmt evid
 . 1    0 500  250 24    2   1    1</code></pre>
