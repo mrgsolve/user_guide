@@ -1830,9 +1830,10 @@ D_CENT = 2;
 
 There is a NONMEM-like syntax that lets you write `F1` rather than `F_GUT`, 
 `D2` rather than `D_CENT` as well as other variables that are commonly used
-in a NONMEM control stream. 
+in a NONMEM control stream. To make this syntax available, the `nm-vars` 
+plugin must be invoked. 
 
-See Section \@ref(plugin-nm-vars) for details;
+See Section \@ref(plugin-nm-vars) on the `nm-vars` plugin for details. 
 
 ## Reserved words
 
