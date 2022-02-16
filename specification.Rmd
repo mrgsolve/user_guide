@@ -136,8 +136,40 @@ __Block options__
 Options may be specified on some code blocks that signal how the code is 
 to be parsed or used in the simulation.  
 
-We note two specific options (`@object` and `@as_object`) that have similar 
-function across multiple blocks.  
+Block options can be boolean in which case you indicate the option name 
+with nothing following.  For example, to indicate `block = TRUE` for an 
+OMEGA matrix, write
+
+```{c, eval = FALSE}
+$OMEGA @block 
+1 2 3
+```
+
+Here `@block` indicates `block = TRUE`. Starting with mrgsolve 1.0.0, block 
+options can be negated by writing `!` between `@` and the option name. To 
+request a non-block (diagonal) OMEGA matrix
+
+```{c, eval = FALSE}
+$OMEGA @!block 
+1 2 3
+```
+
+But note well that diagonal is the default configuration for OMEGA, so it is 
+never necessary to write this. 
+
+Other non-boolean block options state the name and then a value to be assigned
+to that name. For example, if we wanted to assign labels to the ETAs from 
+an OMEGA block, we'd write
+
+```{c, eval = FALSE}
+$OMEGA @labels ECL EVC
+1 2
+```
+
+This essentially sets labels equal to the vector `c("ECL", "EVC")`.
+
+We note two specific boolean options (`@object` and `@as_object`) that have 
+similar function across multiple blocks.  
 
 ### Programmatic or bulk initialization 
 
@@ -1362,6 +1394,13 @@ Gives the time in the current data set record.  This is usually only used in
 Gives the time of the current timestep taken by the solver.  *This is can only 
 be used in `$ODE`*.  Contrast with `TIME`.
 
+Starting with mrgsolve version 1.0.0, the variable `T` is provided as a synonym 
+to `SOLVERTIME` inside `$ODE`  when you invoke the `nm-vars` plugin  (Section
+\@ref(plugin-nm-vars)).
+
+### `T` 
+Only provided when the `nm-vars` plugin is invoked; see `SOLVERTIME`.
+
 ### `EVID`
 `EVID` is an event id indicator.  `mrgsolve` recognized the following event IDs:
 
@@ -1676,6 +1715,17 @@ was a problem with this particular individual.
 See also `self.stop_id_cf()` and `self.stop()`.
 
 
+### `THETA(n)`
+
+`THETA(n)` is ubiquitous in NONMEM control streams, representing estimated 
+fixed effect parameters. mrgsolve does not attach any special meaning to 
+`THETA(n)` but starting with version 1.0.0 it will translate `THETA(n)` to 
+`THETAn`.  This is useful when importing NONMEM estimates using `$NMXML`
+or `$NMEXT`, where `THETA`s are imported as parameters with names 
+`THETA1`, `THETA2`, `THETA3` and so on (see Sections \@ref(block-nmxml) and
+\@ref(block-nmext)). `THETA(n)` is simply a NONMEM-oriented style for referring
+to `THETAn`.
+
 ### `ETA(n)`
 `ETA(n)` is the value of the subject-level variate drawn from the model 
 `OMEGA` matrix.  `ETA(1)` through `ETA(25)` have default values of zero so 
@@ -1742,7 +1792,6 @@ $MAIN
 F_CENT = 0.7;
 ```
 
-
 ### `ALAG_CMT` \ {#spec-alag}
 For the `CMT` compartment, sets the lag time for doses into that compartment. 
 
@@ -1751,7 +1800,6 @@ Example:
 $MAIN
 ALAG_GUT = 0.25;
 ```
-
 
 ### `R_CMT` \ {#spec-r}
 For the `CMT` compartment, sets the infusion rate for that compartment.  The
@@ -1764,6 +1812,8 @@ $MAIN
 R_CENT = 100;
 ```
 
+### `Rn`
+Only available when the `nm-vars` plugin is invoked; see `R_CMT`.
 
 ### `D_CMT` \ {#spec-d}
 For the `CMT` compartment, sets the infusion duration for that compartment.  
@@ -1775,6 +1825,14 @@ Example:
 $MAIN
 D_CENT = 2;
 ```
+
+### NONMEM-like syntax
+
+There is a NONMEM-like syntax that lets you write `F1` rather than `F_GUT`, 
+`D2` rather than `D_CENT` as well as other variables that are commonly used
+in a NONMEM control stream. 
+
+See Section \@ref(plugin-nm-vars) for details;
 
 ## Reserved words
 
