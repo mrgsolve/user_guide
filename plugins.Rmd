@@ -46,7 +46,21 @@ in `$PARAM`; mrgsolve should already know about that won't try to declare it.
 
 When you are using the `autodec` plugin, you can still declare variables as 
 `double` or `int` or `bool`. mrgsolve already finds those variables and will 
-understand to leave those declarations alone. 
+understand to leave those declarations alone. Note that it may still very 
+convenient to declare using the `capture` type those variables that you 
+want captured into the output
+
+```{c, eval = FALSE}
+$PLUGIN autodec
+
+$ERROR
+capture Y = IPRED * exp(EPS(1));
+```
+
+The `capture` typedef makes `Y` a `double`; we didn't need to declare it with 
+`autodec` in play, but decided to declare with `capture` so that it is copied
+into the simulated output.
+
 
 The `autodec` plugin is intended for more straightforward models where most / 
 all variables are real valued. Because mrgsolve can handle any valid C++ code
@@ -69,6 +83,94 @@ This can be a vector of variable names to NOT declare when `autodec` is invoked.
 
 Available as of mrgsolve version 1.0.0.
 
+The `nm-vars` plugin provides a more NONMEM-like set of macros to use when 
+coding your compartmental model. Only a small subset of the NONMEM model syntax
+is replicated here. 
+
+
+__F, R, D, ALAG__
+
+- To set bioavailability for the nth compartment, use `Fn`
+- To set the infusion rate for the nth compartment, use `Rn`
+- To set the infusion duration for the nth compartment, use `Dn`
+- To set the lag time for the nth compartment, use `ALAGn`
+
+For example
+
+```{c, eval = FALSE}
+$CMT GUT CENT GUT2
+
+$PK
+F1 = 0.87;    // equivalent to F_GUT  = 0.87;
+R2 = 2.25;    // equivalent to R_CENT = 2.25;
+ALAG3 = 0.25; // equivalent to ALAG_GUT2 = 0.25; 
+```
+
+__A, A_0, DADT__
+
+- To refer to the amount in the nth compartment, use `A(n)`
+- To refer to the initial amount in the nth compartment, use `A_0(n)`
+- To refer to the differential equation for the nth compartment, use `DADT(n)`
+
+For example
+
+```{c, eval = FALSE}
+$CMT CMT1 CMT2
+
+$PK
+A_0(2) = 50;
+  
+$DES
+DADT(1) = -KA * A(1);
+DADT(2) =  KA * A(1) - KE * A(2); 
+```
+
+__Other syntax__
+
+- Using `THETA(n)` in model code will resolve to `THETAn`; this feature is 
+  always available, even when `nm-vars` hasn't been invoked; we mention it here
+  since it is a fundamental piece of the NONMEM syntax that mrgsolve has 
+  internalized 
+- Use `T` in `$DES` to refer to the current time in the odesolver rather
+  than `SOLVERTIME`
+  
+__Reserved words with nm-vars is invoked__
+
+There are some additional reserved words when the `nm-vars` plugin is invoked
+
+- `A`
+- `A_0`
+- `DADT`
+- `T`
+
+It is an error to use one of these symbols as the name of a parameter or 
+compartment or to try to declare them as variables. 
+
+__mrgsolve syntax that is still required__
+
+There are a lot of differences remaining between mrgsolve and NONMEM syntax. We
+mention a few here to make the point
+
+- mrgsolve continues to require `pow(base, exponent)` rather than `base**exponent`
+- mrgsolve continues to use `exp()` and `log()`, rather than `EXP()` and `LOG()`
+- mrgsolve continues to require a semi-colon at the end of each statement (this
+  is a C++ requirement)
+- mrgsolve continues to require that user-defined variables are declared with 
+  a type, except when the `autodec` plugin is invoked
+  
+__An example__
+
+There is an example of this syntax (along with `autodec` features) in the 
+internal model library
+
+```{r, eval = FALSE}
+mod <- modlib("nm-like")
+mod
+```
+
+```{r, echo = FALSE}
+modlib("nm-like", compile = FALSE)
+```
 
 
 ## tad {#plugin-tad}
