@@ -884,6 +884,13 @@ The following plugins make additional mrgsolve-specific functionality available
 - `tad`: track time after dose in your model 
 - `N_CMT`: get the number of a compartment
 
+The following plugins give you a different model specification experience
+
+- `autodec`: mrgsolve will find assignments in your model and automatically 
+  declare them as `double`s
+- `nm-vars`: a NONMEM look and feel for compartmental models; use `F1`, 
+  `A(1)` and `DADT(1)` rather than `F_GUT`, `GUT` and `dxdt_GUT`
+
 The following plugin lets you customize how your model is compiled
 
 - `CXX11`: compile your model with `C++11` standard; this adds

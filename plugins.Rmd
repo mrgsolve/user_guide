@@ -4,6 +4,73 @@ source("setup.R")
 
 # Plugins {#plugins}
 
+## autodec {#plugin-autodec}
+
+Available as of mrgsolve version 1.0.0.
+
+When this plugin is invoked, mrgsolve will search your model code for assignments
+and automatically declare them as `double` precision numbers. The following 
+blocks are searched
+
+- `$PREAMBLE`
+- `$MAIN` (or `$PK`)
+- `$ODE` (or `$DES`)
+- `$TABLE` (or `$ERROR`)
+- `$PRED`
+
+For example, the following code requires that `CL` gets assigned a type
+
+```{c, eval = FALSE}
+$PARAM WT = 70, TVCL = 1.2
+
+$PK
+double CL = TVCL * pow(WT/70, 0.75);
+```
+
+This is the default mrgsolve behavior and has been since the beginning.
+
+The `autodec` plugin lets you write the following
+
+```{c, eval = FALSE}
+$PLUGIN autodec 
+
+$PARAM WT = 70, TVCL = 1.2
+
+$PK
+CL = TVCL * pow(WT/70, 0.75);
+```
+
+mrgsolve will find `CL = ...` and understand that this is a user initiated 
+variable and will declare it as `double` for you. Don't worry about `WT = 70` 
+in `$PARAM`; mrgsolve should already know about that won't try to declare it. 
+
+When you are using the `autodec` plugin, you can still declare variables as 
+`double` or `int` or `bool`. mrgsolve already finds those variables and will 
+understand to leave those declarations alone. 
+
+The `autodec` plugin is intended for more straightforward models where most / 
+all variables are real valued. Because mrgsolve can handle any valid C++ code
+in these blocks, there is a possibility that the code could get much more 
+complicated, including custom classes and methods. In this case, we recommend
+to bypass this feature and take control of declaring variables as you would 
+in the default mode. 
+
+In case mrgsolve does try to declare (as `double`) a variable that shouldn't 
+be handled that way, you can note this name in an environment variable inside
+your model called `MRGSOLVE_AUTODEC_SKIP`
+
+```{c, eval = FALSE}
+$ENV MRGSOLVE_AUTODEC_SKIP = c("my_variable_1")
+```
+
+This can be a vector of variable names to NOT declare when `autodec` is invoked. 
+
+## nm-vars {#plugin-nm-vars}
+
+Available as of mrgsolve version 1.0.0.
+
+
+
 ## tad {#plugin-tad}
 
 __Purpose__

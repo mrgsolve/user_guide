@@ -347,19 +347,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="plugins.html"><a href="plugins.html"><i class="fa fa-check"></i><b>8</b> Plugins</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="plugins.html"><a href="plugins.html#plugin-tad"><i class="fa fa-check"></i><b>8.1</b> tad</a>
+<li class="chapter" data-level="8.1" data-path="plugins.html"><a href="plugins.html#plugin-autodec"><i class="fa fa-check"></i><b>8.1</b> autodec</a></li>
+<li class="chapter" data-level="8.2" data-path="plugins.html"><a href="plugins.html#plugin-nm-vars"><i class="fa fa-check"></i><b>8.2</b> nm-vars</a></li>
+<li class="chapter" data-level="8.3" data-path="plugins.html"><a href="plugins.html#plugin-tad"><i class="fa fa-check"></i><b>8.3</b> tad</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="plugins.html"><a href="plugins.html#note"><i class="fa fa-check"></i><b>8.1.1</b> Note</a></li>
+<li class="chapter" data-level="8.3.1" data-path="plugins.html"><a href="plugins.html#note"><i class="fa fa-check"></i><b>8.3.1</b> Note</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="plugins.html"><a href="plugins.html#plugin-cxx11"><i class="fa fa-check"></i><b>8.2</b> CXX11</a></li>
-<li class="chapter" data-level="8.3" data-path="plugins.html"><a href="plugins.html#plugin-rcpp"><i class="fa fa-check"></i><b>8.3</b> Rcpp</a></li>
-<li class="chapter" data-level="8.4" data-path="plugins.html"><a href="plugins.html#plugin-mrgx"><i class="fa fa-check"></i><b>8.4</b> mrgx</a>
+<li class="chapter" data-level="8.4" data-path="plugins.html"><a href="plugins.html#plugin-cxx11"><i class="fa fa-check"></i><b>8.4</b> CXX11</a></li>
+<li class="chapter" data-level="8.5" data-path="plugins.html"><a href="plugins.html#plugin-rcpp"><i class="fa fa-check"></i><b>8.5</b> Rcpp</a></li>
+<li class="chapter" data-level="8.6" data-path="plugins.html"><a href="plugins.html#plugin-mrgx"><i class="fa fa-check"></i><b>8.6</b> mrgx</a>
 <ul>
-<li class="chapter" data-level="8.4.1" data-path="plugins.html"><a href="plugins.html#get-the-model-environment"><i class="fa fa-check"></i><b>8.4.1</b> Get the model environment</a></li>
+<li class="chapter" data-level="8.6.1" data-path="plugins.html"><a href="plugins.html#get-the-model-environment"><i class="fa fa-check"></i><b>8.6.1</b> Get the model environment</a></li>
 </ul></li>
-<li class="chapter" data-level="8.5" data-path="plugins.html"><a href="plugins.html#extract-an-object-from-the-model-environment"><i class="fa fa-check"></i><b>8.5</b> Extract an object from the model environment</a></li>
-<li class="chapter" data-level="8.6" data-path="plugins.html"><a href="plugins.html#rcpparmadillo"><i class="fa fa-check"></i><b>8.6</b> RcppArmadillo</a></li>
-<li class="chapter" data-level="8.7" data-path="plugins.html"><a href="plugins.html#bh"><i class="fa fa-check"></i><b>8.7</b> BH</a></li>
+<li class="chapter" data-level="8.7" data-path="plugins.html"><a href="plugins.html#extract-an-object-from-the-model-environment"><i class="fa fa-check"></i><b>8.7</b> Extract an object from the model environment</a></li>
+<li class="chapter" data-level="8.8" data-path="plugins.html"><a href="plugins.html#rcpparmadillo"><i class="fa fa-check"></i><b>8.8</b> RcppArmadillo</a></li>
+<li class="chapter" data-level="8.9" data-path="plugins.html"><a href="plugins.html#bh"><i class="fa fa-check"></i><b>8.9</b> BH</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="mtime.html"><a href="mtime.html"><i class="fa fa-check"></i><b>9</b> Modeled events</a>
 <ul>
@@ -1078,6 +1080,13 @@ open up access to additional functionality provided by <code>mrgsolve</code> its
 <li><code>tad</code>: track time after dose in your model</li>
 <li><code>N_CMT</code>: get the number of a compartment</li>
 </ul>
+<p>The following plugins give you a different model specification experience</p>
+<ul>
+<li><code>autodec</code>: mrgsolve will find assignments in your model and automatically
+declare them as <code>double</code>s</li>
+<li><code>nm-vars</code>: a NONMEM look and feel for compartmental models; use <code>F1</code>,
+<code>A(1)</code> and <code>DADT(1)</code> rather than <code>F_GUT</code>, <code>GUT</code> and <code>dxdt_GUT</code></li>
+</ul>
 <p>The following plugin lets you customize how your model is compiled</p>
 <ul>
 <li><code>CXX11</code>: compile your model with <code>C++11</code> standard; this adds
@@ -1263,8 +1272,8 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 . 
 . ----------------  source: nmxml.cpp  ----------------
 . 
-.   project: /private/var/fol.../T/RtmpZWEAcC
-.   shared object: nmxml-so-9b3a650e6bef 
+.   project: /private/var/fol.../T/RtmpNJR9Jr
+.   shared object: nmxml-so-d77075eac26d 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
@@ -1663,7 +1672,7 @@ So if you want to test for the last row in the output data set, you would write:
 <div id="self.envir" class="section level3" number="2.3.18">
 <h3><span class="header-section-number">2.3.18</span> <code>self.envir</code></h3>
 <p>This item is a null pointer that can be cast to an <code>Rcpp::Environment</code> only
-when the <code>Rcpp</code> plugin is invoked (see Section <a href="plugins.html#plugin-rcpp">8.3</a>).</p>
+when the <code>Rcpp</code> plugin is invoked (see Section <a href="plugins.html#plugin-rcpp">8.5</a>).</p>
 <p>For example</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb91-1"><a href="model-specification.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> plugin <span class="op">]</span> Rcpp mrgx</span>
 <span id="cb91-2"><a href="model-specification.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -1976,7 +1985,7 @@ use <code>$PREAMBLE</code> to do that work</p>
 are similar to the functions you’d normally use in R (e.g. <code>rnorm()</code> and
 <code>runif()</code>). This functionality is provided by <code>Rcpp</code> and therefore requires
 using the <code>Rcpp</code> plugin (see Chapter <a href="plugins.html#plugins">8</a> and Section
-<a href="plugins.html#plugin-rcpp">8.3</a>).</p>
+<a href="plugins.html#plugin-rcpp">8.5</a>).</p>
 <p><code>Rcpp</code> provides these functions inside the <code>R</code> namespace so you will have to
 prefix the function call with <code>R::</code>.</p>
 <p>As an example, to make a draw from Uniform (0,1)</p>
