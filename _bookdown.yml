@@ -7,6 +7,7 @@ rmd_files: [
   "specification.Rmd",
   "datasets.Rmd", 
   "event.Rmd",
+  "matrix.Rmd",
   "output.Rmd", 
   "sequence.Rmd",
   "steady-state.Rmd",

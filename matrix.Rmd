@@ -1,0 +1,305 @@
+# Model Matrices {#matrix-chapter}
+
+```{r,echo=FALSE,message=FALSE}
+source("setup.R")
+```
+
+Model matrices include `$OMEGA` (for subject-level variability) and `$SIGMA`
+(for residual unexplained variability). These matrices are coded into the 
+model file (see Sections \@ref(block-omega) and \@ref(block-sigma)) and can 
+be manipulated in different ways via the model object. Because, `$OMEGA` and 
+`$SIGMA` matrices are handled using identical approach (only the names of the 
+functions change), we will focus on working with `$OMEGA` in the following 
+examples with references to the equivalent functions that can be used to 
+work on `$SIGMA`. Also note that, for simplicity, we will not compile the 
+examples presented in this chapter. 
+
+## Simple matrix lists
+
+We can look at the `popex` model in the internal library for a starting example
+to show how model matrices can be seen from the model object.
+
+Once the model is loaded
+```{r}
+mod <- modlib("popex", compile = FALSE)
+```
+
+We can print the model object to the console and see the matrix structure
+
+```{r}
+mod
+```
+
+In this output, we see that `omega` is a 3 by 3 matrix and `sigma` is 1 by 1.
+We can view both matrices by calling `revar()` on the model objec
+
+```{r}
+revar(mod)
+```
+
+This shows the 3x3 `$OMEGA` matrix with all off-diagonals set to zero and the 
+1x1 `$SIGMA` which is currently fixed to 0. 
+
+The `$OMEGA` matrix can be extracted with the `omat()` function
+
+```{r}
+omat(mod)
+```
+
+Use the `smat()` function to extract the `$SIGMA` matrix. The result of these 
+calls are `matlist` objects; for `$OMEGA` the class is `omegalist` (which 
+inherits from `matlist`)
+
+```{r}
+omat(mod) %>% class()
+```
+
+and for `$SIGMA` it is `sigmalist`. These are lists of matrices. In this 
+example, there is just one `$OMEGA` block in the code
+
+```{r}
+blocks(mod, OMEGA)
+```
+
+so the length of the `omegalist` object is also 1
+
+```{r}
+om <- omat(mod)
+length(om)
+```
+
+Functions are provided to check the names
+```{r}
+names(om)
+```
+
+and the labels
+```{r}
+labels(om)
+```
+
+The `omegalist` (`sigmalist`) object can be converted to a standard R list
+
+```{r}
+as.list(om) %>% str()
+```
+
+or it can be rendered as a matrix
+
+```{r}
+as.matrix(om)
+```
+
+
+## Updating `$OMEGA` and `$SIGMA` \  {#matrix-update}
+
+Like the values of parameters in the parameter list, we may want to update the 
+values in `$OMEGA` and `$SIGMA` matrices.  We can do so without re-compiling the 
+model.
+
+### Matrix helper functions
+
+`mrgsolve` keeps `$OMEGA` and `$SIGMA` in block matrices (regardless of whether
+the off-diagonal elements are zeros or not).  Recall that in the model
+specification file we can enter data for `$OMEGA` and `$SIGMA` as the lower
+triangle of the matrix (see section \@ref(block-omega)).  In `R`, we need to
+provide a matrix (as an `R` object).  `mrgsolve` provides some convenience
+functions to help ... allowing the user to enter lower diagonals instead of the
+full matrix.
+
+
+`dmat()` for diagonal matrix
+```{r}
+dmat(1,2,3)
+```
+
+`bmat()` for block matrix
+```{r}
+bmat(1,2,3)
+```
+
+`cmat()` for a block matrix where the diagonal elements are variances and the
+off-diagonals are taken to be correlations, not covariances
+```{r}
+cmat(0.1, 0.87,0.3)
+```
+
+`mrgsolve` will convert the correlations to covariances. 
+
+
+`mrgsolve` also provides `as_bmat()` and `as_dmat()` for converting other `R`
+objects to matrices or lists of matrices.
+
+Consider this list with named elements holding the data for a matrix:
+```{r}
+m <- list(OMEGA1.1 = 0.9, OMEGA2.1 = 0.3, OMEGA2.2 = 0.4)
+```
+
+These data could form either a 3x3 diagonal matrix or a 2x2 block matrix.  But
+the names suggest a 2x2 form.  `as_bmat()` can make the matrix like this
+
+```{r}
+as_bmat(m, "OMEGA")
+```
+
+The second argument is a regular expression that `mrgsolve` uses to find
+elements in the list to use for building the matrix.
+
+Frequently, we have estimates in a data frame like this
+```{r}
+data(exBoot)
+head(exBoot)
+```
+
+We can use `as_bmat()` with this data frame to extract the `$OMEGA` matrices
+```{r}
+omegas <- as_bmat(exBoot, "OMEGA")
+length(omegas)
+dim(exBoot)
+
+omegas[[6]]
+
+omegas[[16]]
+```
+
+The result of calling `as_bmat` or `as_dmat` is a list of matrices, one for 
+each row in the data frame.
+
+Note in this example, we could have called
+```{r,eval=FALSE}
+sigmas <- as_bmat(exBoot,"SIGMA") 
+```
+to grab the `$SIGMA` matrices.
+
+
+For help on these helper functions, see `?dmat`, `?bmat`, `?cmat`, `?as_bmat`, 
+`?as_dmat` in the `R` help system after loading `mrgsolve`.
+
+### Fill a matrix with zeros
+
+Sometimes we write a population model that includes random effects, but we would
+like to simulate from that same model without the random effects implemented.
+For example, we want to simulate some typical PK profiles from a population PK
+model that includes IIV on some parameters and / or RUV on the simulated
+outputs.
+
+To do this, pass the model through the `zero_re()` function.  By default, this
+will convert all `$OMEGA` and `$SIGMA` matrix elements to zeros. See the R help
+file (`?zero_re`) to see some options for selectively zeroing out only one or
+the other.
+
+For example we have this population PK model
+
+```{r}
+mod <- modlib("popex", compile = FALSE)
+
+omat(mod)
+```
+
+We can turn that matrix to all zeros with
+
+```{r}
+mod %>% zero_re() %>% omat()
+```
+
+And when we simulate right after that, all `ETA(n)` will be zero as well 
+and you'll get your fixed-effects simulation (the following is for example
+only and is not evaluated)
+
+```{r,eval = FALSE}
+mod %>% 
+  zero_re() %>% 
+  ev(amt = 100) %>% 
+  mrgsim() %>%
+  plot()
+```
+
+
+### Example: unnamed matrix
+
+Here is a model with only a 3x3 `$OMEGA` matrix
+```{r}
+code <- '
+$OMEGA
+1 2 3
+'
+
+mod <- mcode("matrix", code, compile=FALSE)
+```
+
+Let's check the values in the matrix using `omat()`
+```{r}
+mod %>% omat
+```
+
+We also use `omat()` to update the values in the matrix 
+
+```{r}
+mod %>% omat(dmat(4,5,6)) %>% omat
+```
+
+To update `$OMEGA`, we must provide a matrix of the same dimension, in this 
+case 3x3. An error is generated if we provide a matrix with the wrong dimension.
+
+```{r}
+ans <- try(mod %>% omat(dmat(11,23)))
+
+ans
+```
+
+### Example: named matrices
+
+When there are multiple `$OMEGA` matrices, it can be helpful to assign them 
+names.  Here, there are two matrices: one for interindividual variability 
+(`IIV`) and one for interoccasion variability (`IOV`). 
+
+```{r}
+code <- '
+$OMEGA @name IIV
+1 2 3
+$OMEGA @name IOV
+4 5
+'
+mod <- mcode("iov", code, compile=FALSE)
+
+revar(mod)
+```
+
+Now, we can update either `IIV` or `IOV` (or both) by name
+
+```{r}
+mod %>% 
+  omat(IOV = dmat(11,12), IIV = dmat(13, 14, 15)) %>% 
+  omat
+```
+
+Again, an error is generated if we try to assign a 3x3 matrix to the `IOV` 
+position
+
+```{r}
+ans <- try(mod %>% omat(IIV = dmat(1, 2)))
+ans
+```
+
+
+
+### Example: unnamed matrices
+If we do write the model with unnamed matrices, we can still update them
+```{r}
+code <- '
+$OMEGA
+1 2 3
+
+$OMEGA 
+4 5
+'
+mod <- mcode("multi", code, compile = FALSE)
+```
+
+In this case, the only way to update is to pass in a __list__ of matrices, where 
+(in this example) the first matrix is 3x3 and the second is 2x2
+
+```{r}
+mod %>% omat(list(dmat(5, 6, 7), dmat(8, 9))) %>% omat()
+```
+
