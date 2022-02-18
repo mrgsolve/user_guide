@@ -309,14 +309,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="matrix-chapter.html"><a href="matrix-chapter.html"><i class="fa fa-check"></i><b>5</b> Model Matrices</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#simple-matrix-lists"><i class="fa fa-check"></i><b>5.1</b> Simple matrix lists</a></li>
-<li class="chapter" data-level="5.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-update"><i class="fa fa-check"></i><b>5.2</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
+<li class="chapter" data-level="5.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#basics"><i class="fa fa-check"></i><b>5.1</b> Basics</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-helper-functions"><i class="fa fa-check"></i><b>5.2.1</b> Matrix helper functions</a></li>
-<li class="chapter" data-level="5.2.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>5.2.2</b> Fill a matrix with zeros</a></li>
-<li class="chapter" data-level="5.2.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>5.2.3</b> Example: unnamed matrix</a></li>
-<li class="chapter" data-level="5.2.4" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-named-matrices"><i class="fa fa-check"></i><b>5.2.4</b> Example: named matrices</a></li>
-<li class="chapter" data-level="5.2.5" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>5.2.5</b> Example: unnamed matrices</a></li>
+<li class="chapter" data-level="5.1.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#simple-matrix-lists"><i class="fa fa-check"></i><b>5.1.1</b> Simple matrix lists</a></li>
+<li class="chapter" data-level="5.1.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#multiple-matrix-lists"><i class="fa fa-check"></i><b>5.1.2</b> Multiple matrix lists</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#collapsing-matrices"><i class="fa fa-check"></i><b>5.2</b> Collapsing matrices</a></li>
+<li class="chapter" data-level="5.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-update"><i class="fa fa-check"></i><b>5.3</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-helper-functions"><i class="fa fa-check"></i><b>5.3.1</b> Matrix helper functions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>5.3.2</b> Fill a matrix with zeros</a></li>
+<li class="chapter" data-level="5.3.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>5.3.3</b> Example: unnamed matrix</a></li>
+<li class="chapter" data-level="5.3.4" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-named-matrices"><i class="fa fa-check"></i><b>5.3.4</b> Example: named matrices</a></li>
+<li class="chapter" data-level="5.3.5" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>5.3.5</b> Example: unnamed matrices</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>6</b> Simulated output</a>
@@ -458,8 +463,10 @@ functions change), we will focus on working with <code>$OMEGA</code> in the foll
 examples with references to the equivalent functions that can be used to
 work on <code>$SIGMA</code>. Also note that, for simplicity, we will not compile the
 examples presented in this chapter.</p>
-<div id="simple-matrix-lists" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Simple matrix lists</h2>
+<div id="basics" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Basics</h2>
+<div id="simple-matrix-lists" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Simple matrix lists</h3>
 <p>We can look at the <code>popex</code> model in the internal library for a starting example
 to show how model matrices can be seen from the model object.</p>
 <p>Once the model is loaded</p>
@@ -471,7 +478,7 @@ to show how model matrices can be seen from the model object.</p>
 . ----------------  source: popex.cpp  ----------------
 . 
 .   project: /Users/kyleb/Rli...gsolve/models
-.   shared object: popex-so-aad698a3f38 &lt;not loaded&gt;
+.   shared object: popex-so-db4447c5568 &lt;not loaded&gt;
 . 
 .   time:          start: 0 end: 240 delta: 0.5
 .                  add: &lt;none&gt;
@@ -485,7 +492,7 @@ to show how model matrices can be seen from the model object.</p>
 .   solver:        atol: 1e-08 rtol: 1e-08 maxsteps: 20k
 . ------------------------------------------------------</code></pre>
 <p>In this output, we see that <code>omega</code> is a 3 by 3 matrix and <code>sigma</code> is 1 by 1.
-We can view both matrices by calling <code>revar()</code> on the model objec</p>
+We can view both matrices by calling <code>revar()</code> on the model object</p>
 <div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="matrix-chapter.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">revar</span>(mod)</span></code></pre></div>
 <pre><code>. $omega
 . $...
@@ -535,27 +542,233 @@ example, there is just one <code>$OMEGA</code> block in the code</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="matrix-chapter.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labels</span>(om)</span></code></pre></div>
 <pre><code>. [[1]]
 . [1] &quot;ECL&quot; &quot;EV&quot;  &quot;EKA&quot;</code></pre>
+<p>as well as getting the dimensions or number of rows</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="matrix-chapter.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(om)</span></code></pre></div>
+<pre><code>. $...
+. [1] 3 3</code></pre>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="matrix-chapter.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(om)</span></code></pre></div>
+<pre><code>. ... 
+.   3</code></pre>
 <p>The <code>omegalist</code> (<code>sigmalist</code>) object can be converted to a standard R list</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="matrix-chapter.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(om) <span class="sc">%&gt;%</span> <span class="fu">str</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="matrix-chapter.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(om) <span class="sc">%&gt;%</span> <span class="fu">str</span>()</span></code></pre></div>
 <pre><code>. List of 1
 .  $ ...: num [1:3, 1:3] 0.3 0 0 0 0.1 0 0 0 0.5
 .   ..- attr(*, &quot;dimnames&quot;)=List of 2
 .   .. ..$ : chr [1:3] &quot;ECL&quot; &quot;EV&quot; &quot;EKA&quot;
 .   .. ..$ : chr [1:3] &quot;ECL&quot; &quot;EV&quot; &quot;EKA&quot;</code></pre>
 <p>or it can be rendered as a matrix</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="matrix-chapter.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(om)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="matrix-chapter.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(om)</span></code></pre></div>
 <pre><code>.      [,1] [,2] [,3]
 . [1,]  0.3  0.0  0.0
 . [2,]  0.0  0.1  0.0
 . [3,]  0.0  0.0  0.5</code></pre>
 </div>
-<div id="matrix-update" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </h2>
+<div id="multiple-matrix-lists" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Multiple matrix lists</h3>
+<p>Let’s look at an example where there is a more complicated <code>$OMEGA</code> structure.</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="matrix-chapter.html#cb238-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb238-2"><a href="matrix-chapter.html#cb238-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name first @labels a b c</span></span>
+<span id="cb238-3"><a href="matrix-chapter.html#cb238-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
+<span id="cb238-4"><a href="matrix-chapter.html#cb238-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb238-5"><a href="matrix-chapter.html#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name second @labels d e</span></span>
+<span id="cb238-6"><a href="matrix-chapter.html#cb238-6" aria-hidden="true" tabindex="-1"></a><span class="st">4 5</span></span>
+<span id="cb238-7"><a href="matrix-chapter.html#cb238-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb238-8"><a href="matrix-chapter.html#cb238-8" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name third @labels f g h i</span></span>
+<span id="cb238-9"><a href="matrix-chapter.html#cb238-9" aria-hidden="true" tabindex="-1"></a><span class="st">6 7 8 9</span></span>
+<span id="cb238-10"><a href="matrix-chapter.html#cb238-10" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb238-11"><a href="matrix-chapter.html#cb238-11" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;multiple-matrices&quot;</span>, code, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Each <code>$OMEGA</code> block codes a diagonal matrix; the interesting feature is that
+there are 3 different <code>$OMEGA</code> blocks.</p>
+<p>Now, when we look at the model</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="matrix-chapter.html#cb239-1" aria-hidden="true" tabindex="-1"></a>mod</span></code></pre></div>
+<pre><code>. 
+. 
+. ----------  source: multiple-matrices.cpp  ----------
+. 
+.   project: /private/var/fol.../T/RtmpyRrUiW
+.   shared object: multiple-matrices-so-db47ab265e &lt;not loaded&gt;
+. 
+.   time:          start: 0 end: 24 delta: 1
+.                  add: &lt;none&gt;
+. 
+.   compartments:  &lt;none&gt;
+.   parameters:    &lt;none&gt;
+.   captures:       &lt;none&gt;
+.   omega:         3x3,2x2,4x4 
+.   sigma:         0x0 
+. 
+.   solver:        atol: 1e-08 rtol: 1e-08 maxsteps: 20k
+. ------------------------------------------------------</code></pre>
+<p>We see that <code>$OMEGA</code> is one 3x3 matrix, one 2x2 matrix and on 4x4 matrix, in
+that order. Calling <code>revar()</code> on this model object</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="matrix-chapter.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">revar</span>(mod)</span></code></pre></div>
+<pre><code>. $omega
+. $first
+.     [,1] [,2] [,3]
+. a:     1    0    0
+. b:     0    2    0
+. c:     0    0    3
+. 
+. $second
+.     [,1] [,2]
+. d:     4    0
+. e:     0    5
+. 
+. $third
+.     [,1] [,2] [,3] [,4]
+. f:     6    0    0    0
+. g:     0    7    0    0
+. h:     0    0    8    0
+. i:     0    0    0    9
+. 
+. 
+. $sigma
+. No matrices found</code></pre>
+<p>we only see the <code>$OMEGA</code> matrices as the model was coded. Now the length
+of the <code>omegalist</code> object is 3</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="matrix-chapter.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">omat</span>(mod))</span></code></pre></div>
+<pre><code>. [1] 3</code></pre>
+<p>and the number of rows is 3 in the first matrix, 2 in the second, and 4 in the
+third</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="matrix-chapter.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">omat</span>(mod))</span></code></pre></div>
+<pre><code>.  first second  third 
+.      3      2      4</code></pre>
+<p>We can also check <code>dim()</code></p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="matrix-chapter.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">omat</span>(mod))</span></code></pre></div>
+<pre><code>. $first
+. [1] 3 3
+. 
+. $second
+. [1] 2 2
+. 
+. $third
+. [1] 4 4</code></pre>
+<p>The omega matrix can be converted from this segmented list into a single block
+matrix</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="matrix-chapter.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(<span class="fu">omat</span>(mod))</span></code></pre></div>
+<pre><code>.       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+.  [1,]    1    0    0    0    0    0    0    0    0
+.  [2,]    0    2    0    0    0    0    0    0    0
+.  [3,]    0    0    3    0    0    0    0    0    0
+.  [4,]    0    0    0    4    0    0    0    0    0
+.  [5,]    0    0    0    0    5    0    0    0    0
+.  [6,]    0    0    0    0    0    6    0    0    0
+.  [7,]    0    0    0    0    0    0    7    0    0
+.  [8,]    0    0    0    0    0    0    0    8    0
+.  [9,]    0    0    0    0    0    0    0    0    9</code></pre>
+<p>The result is 9x9 with all off diagonals between the different list positions
+set to zero.</p>
+<p>Otherwise, we might work with this object as a list</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="matrix-chapter.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(<span class="fu">omat</span>(mod))</span></code></pre></div>
+<pre><code>. $first
+.   a b c
+. a 1 0 0
+. b 0 2 0
+. c 0 0 3
+. 
+. $second
+.   d e
+. d 4 0
+. e 0 5
+. 
+. $third
+.   f g h i
+. f 6 0 0 0
+. g 0 7 0 0
+. h 0 0 8 0
+. i 0 0 0 9</code></pre>
+</div>
+</div>
+<div id="collapsing-matrices" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Collapsing matrices</h2>
+<p>The functionality described in this subsection is new with mrgsolve 1.0.0.</p>
+<p>The structure of the matrices and the order in which they appear in the list
+matter when updating each matrix (see below). We saw how to create one big
+matrix out of all the smaller matrices using the <code>as.matrix()</code>. This section
+describes how to combine matrices within the confines of the <code>matlist</code> object.</p>
+<p>mrgsolve provides functions to collapse (or combine) matrices in a <code>matlist</code>
+object. We can call <code>collapse_omega()</code>, passing in the model object</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="matrix-chapter.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">collapse_omega</span>(mod) <span class="sc">%&gt;%</span> <span class="fu">revar</span>()</span></code></pre></div>
+<pre><code>. $omega
+. $...
+.     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+. a:     1    0    0    0    0    0    0    0    0
+. b:     0    2    0    0    0    0    0    0    0
+. c:     0    0    3    0    0    0    0    0    0
+. d:     0    0    0    4    0    0    0    0    0
+. e:     0    0    0    0    5    0    0    0    0
+. f:     0    0    0    0    0    6    0    0    0
+. g:     0    0    0    0    0    0    7    0    0
+. h:     0    0    0    0    0    0    0    8    0
+. i:     0    0    0    0    0    0    0    0    9
+. 
+. 
+. $sigma
+. No matrices found</code></pre>
+<p>and now we have an <code>omegalist</code> object inside a model object and the matrix
+is a single 9x9 <code>$OMEGA</code> matrix. The row names have been retained, but there
+is now no name for the matrix; this can be provided when collapsing</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="matrix-chapter.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">collapse_omega</span>(mod, <span class="at">name =</span> <span class="st">&quot;only&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">omat</span>()</span></code></pre></div>
+<pre><code>. $only
+.     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+. a:     1    0    0    0    0    0    0    0    0
+. b:     0    2    0    0    0    0    0    0    0
+. c:     0    0    3    0    0    0    0    0    0
+. d:     0    0    0    4    0    0    0    0    0
+. e:     0    0    0    0    5    0    0    0    0
+. f:     0    0    0    0    0    6    0    0    0
+. g:     0    0    0    0    0    0    7    0    0
+. h:     0    0    0    0    0    0    0    8    0
+. i:     0    0    0    0    0    0    0    0    9</code></pre>
+<p>Suppose that we only want to combine the first two matrices, leaving the third
+matrix alone. In that case, call <code>collapse_omega()</code> with the range argument</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="matrix-chapter.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">collapse_omega</span>(mod, <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">name =</span> <span class="st">&quot;first_second&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">omat</span>()</span></code></pre></div>
+<pre><code>. $first_second
+.     [,1] [,2] [,3] [,4] [,5]
+. a:     1    0    0    0    0
+. b:     0    2    0    0    0
+. c:     0    0    3    0    0
+. d:     0    0    0    4    0
+. e:     0    0    0    0    5
+. 
+. $third
+.     f g h i
+. f:  6 0 0 0
+. g:  0 7 0 0
+. h:  0 0 8 0
+. i:  0 0 0 9</code></pre>
+<p>Now the matlist topology has changed; there are still 9 (total) rows and columns,
+but the matlist object is length 2 with 5x5 in the first position (newly
+named <code>first_second</code>) an the old 4x4 matrix in the second position. Collapsing
+matrices is an irreversible process; at this time there is no mechanism to
+cut matrices back into smaller chunks. But collapsing matrices can be very helpful
+when they need to be updated.</p>
+<p>Use <code>collapse_sigma()</code> to collapse <code>$SIGMA</code> matrices if needed.</p>
+<p>Also, the function <code>collapse_matrix()</code> can be called on a <code>omegalist</code> or
+<code>sigmalist</code> object to collapse</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="matrix-chapter.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">omat</span>(mod) <span class="sc">%&gt;%</span> <span class="fu">collapse_matrix</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="cn">NA</span>))</span></code></pre></div>
+<pre><code>. $first
+.     a b c
+. a:  1 0 0
+. b:  0 2 0
+. c:  0 0 3
+. 
+. $...
+.     [,1] [,2] [,3] [,4] [,5] [,6]
+. d:     4    0    0    0    0    0
+. e:     0    5    0    0    0    0
+. f:     0    0    6    0    0    0
+. g:     0    0    0    7    0    0
+. h:     0    0    0    0    8    0
+. i:     0    0    0    0    0    9</code></pre>
+</div>
+<div id="matrix-update" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </h2>
 <p>Like the values of parameters in the parameter list, we may want to update the
 values in <code>$OMEGA</code> and <code>$SIGMA</code> matrices. We can do so without re-compiling the
 model.</p>
-<div id="matrix-helper-functions" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Matrix helper functions</h3>
+<div id="matrix-helper-functions" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Matrix helper functions</h3>
 <p><code>mrgsolve</code> keeps <code>$OMEGA</code> and <code>$SIGMA</code> in block matrices (regardless of whether
 the off-diagonal elements are zeros or not). Recall that in the model
 specification file we can enter data for <code>$OMEGA</code> and <code>$SIGMA</code> as the lower
@@ -564,19 +777,19 @@ provide a matrix (as an <code>R</code> object). <code>mrgsolve</code> provides s
 functions to help … allowing the user to enter lower diagonals instead of the
 full matrix.</p>
 <p><code>dmat()</code> for diagonal matrix</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="matrix-chapter.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="matrix-chapter.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>.      [,1] [,2] [,3]
 . [1,]    1    0    0
 . [2,]    0    2    0
 . [3,]    0    0    3</code></pre>
 <p><code>bmat()</code> for block matrix</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="matrix-chapter.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="matrix-chapter.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>.      [,1] [,2]
 . [1,]    1    2
 . [2,]    2    3</code></pre>
 <p><code>cmat()</code> for a block matrix where the diagonal elements are variances and the
 off-diagonals are taken to be correlations, not covariances</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="matrix-chapter.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmat</span>(<span class="fl">0.1</span>, <span class="fl">0.87</span>,<span class="fl">0.3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="matrix-chapter.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmat</span>(<span class="fl">0.1</span>, <span class="fl">0.87</span>,<span class="fl">0.3</span>)</span></code></pre></div>
 <pre><code>.           [,1]      [,2]
 . [1,] 0.1000000 0.1506884
 . [2,] 0.1506884 0.3000000</code></pre>
@@ -584,18 +797,18 @@ off-diagonals are taken to be correlations, not covariances</p>
 <p><code>mrgsolve</code> also provides <code>as_bmat()</code> and <code>as_dmat()</code> for converting other <code>R</code>
 objects to matrices or lists of matrices.</p>
 <p>Consider this list with named elements holding the data for a matrix:</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="matrix-chapter.html#cb240-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">OMEGA1.1 =</span> <span class="fl">0.9</span>, <span class="at">OMEGA2.1 =</span> <span class="fl">0.3</span>, <span class="at">OMEGA2.2 =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="matrix-chapter.html#cb267-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">OMEGA1.1 =</span> <span class="fl">0.9</span>, <span class="at">OMEGA2.1 =</span> <span class="fl">0.3</span>, <span class="at">OMEGA2.2 =</span> <span class="fl">0.4</span>)</span></code></pre></div>
 <p>These data could form either a 3x3 diagonal matrix or a 2x2 block matrix. But
 the names suggest a 2x2 form. <code>as_bmat()</code> can make the matrix like this</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="matrix-chapter.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_bmat</span>(m, <span class="st">&quot;OMEGA&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="matrix-chapter.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_bmat</span>(m, <span class="st">&quot;OMEGA&quot;</span>)</span></code></pre></div>
 <pre><code>.      [,1] [,2]
 . [1,]  0.9  0.3
 . [2,]  0.3  0.4</code></pre>
 <p>The second argument is a regular expression that <code>mrgsolve</code> uses to find
 elements in the list to use for building the matrix.</p>
 <p>Frequently, we have estimates in a data frame like this</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="matrix-chapter.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(exBoot)</span>
-<span id="cb243-2"><a href="matrix-chapter.html#cb243-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(exBoot)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="matrix-chapter.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(exBoot)</span>
+<span id="cb270-2"><a href="matrix-chapter.html#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(exBoot)</span></code></pre></div>
 <pre><code>.   run  THETA1 THETA2  THETA3 OMEGA11   OMEGA21 OMEGA22 OMEGA31  OMEGA32 OMEGA33
 . 1   1 -0.7634  2.280  0.8472 0.12860  0.046130  0.2874 0.13820 -0.02164  0.3933
 . 2   2 -0.4816  2.076  0.5355 0.12000  0.051000  0.2409 0.06754 -0.07759  0.3342
@@ -611,17 +824,17 @@ elements in the list to use for building the matrix.</p>
 . 5 0.001606       0  0.8996
 . 6 0.002134       0  0.9744</code></pre>
 <p>We can use <code>as_bmat()</code> with this data frame to extract the <code>$OMEGA</code> matrices</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="matrix-chapter.html#cb245-1" aria-hidden="true" tabindex="-1"></a>omegas <span class="ot">&lt;-</span> <span class="fu">as_bmat</span>(exBoot, <span class="st">&quot;OMEGA&quot;</span>)</span>
-<span id="cb245-2"><a href="matrix-chapter.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(omegas)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="matrix-chapter.html#cb272-1" aria-hidden="true" tabindex="-1"></a>omegas <span class="ot">&lt;-</span> <span class="fu">as_bmat</span>(exBoot, <span class="st">&quot;OMEGA&quot;</span>)</span>
+<span id="cb272-2"><a href="matrix-chapter.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(omegas)</span></code></pre></div>
 <pre><code>. [1] 100</code></pre>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="matrix-chapter.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(exBoot)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="matrix-chapter.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(exBoot)</span></code></pre></div>
 <pre><code>. [1] 100  13</code></pre>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="matrix-chapter.html#cb249-1" aria-hidden="true" tabindex="-1"></a>omegas[[<span class="dv">6</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="matrix-chapter.html#cb276-1" aria-hidden="true" tabindex="-1"></a>omegas[[<span class="dv">6</span>]]</span></code></pre></div>
 <pre><code>.          [,1]     [,2]    [,3]
 . [1,]  0.13390 -0.01927  0.1074
 . [2,] -0.01927  0.16400 -0.0117
 . [3,]  0.10740 -0.01170  0.3412</code></pre>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="matrix-chapter.html#cb251-1" aria-hidden="true" tabindex="-1"></a>omegas[[<span class="dv">16</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="matrix-chapter.html#cb278-1" aria-hidden="true" tabindex="-1"></a>omegas[[<span class="dv">16</span>]]</span></code></pre></div>
 <pre><code>.         [,1]    [,2]   [,3]
 . [1,] 0.08126 0.01252 0.1050
 . [2,] 0.01252 0.16860 0.0149
@@ -629,13 +842,13 @@ elements in the list to use for building the matrix.</p>
 <p>The result of calling <code>as_bmat</code> or <code>as_dmat</code> is a list of matrices, one for
 each row in the data frame.</p>
 <p>Note in this example, we could have called</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="matrix-chapter.html#cb253-1" aria-hidden="true" tabindex="-1"></a>sigmas <span class="ot">&lt;-</span> <span class="fu">as_bmat</span>(exBoot,<span class="st">&quot;SIGMA&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="matrix-chapter.html#cb280-1" aria-hidden="true" tabindex="-1"></a>sigmas <span class="ot">&lt;-</span> <span class="fu">as_bmat</span>(exBoot,<span class="st">&quot;SIGMA&quot;</span>) </span></code></pre></div>
 <p>to grab the <code>$SIGMA</code> matrices.</p>
 <p>For help on these helper functions, see <code>?dmat</code>, <code>?bmat</code>, <code>?cmat</code>, <code>?as_bmat</code>,
 <code>?as_dmat</code> in the <code>R</code> help system after loading <code>mrgsolve</code>.</p>
 </div>
-<div id="fill-a-matrix-with-zeros" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> Fill a matrix with zeros</h3>
+<div id="fill-a-matrix-with-zeros" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Fill a matrix with zeros</h3>
 <p>Sometimes we write a population model that includes random effects, but we would
 like to simulate from that same model without the random effects implemented.
 For example, we want to simulate some typical PK profiles from a population PK
@@ -646,16 +859,16 @@ will convert all <code>$OMEGA</code> and <code>$SIGMA</code> matrix elements to 
 file (<code>?zero_re</code>) to see some options for selectively zeroing out only one or
 the other.</p>
 <p>For example we have this population PK model</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="matrix-chapter.html#cb254-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;popex&quot;</span>, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb254-2"><a href="matrix-chapter.html#cb254-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb254-3"><a href="matrix-chapter.html#cb254-3" aria-hidden="true" tabindex="-1"></a><span class="fu">omat</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="matrix-chapter.html#cb281-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;popex&quot;</span>, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb281-2"><a href="matrix-chapter.html#cb281-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb281-3"><a href="matrix-chapter.html#cb281-3" aria-hidden="true" tabindex="-1"></a><span class="fu">omat</span>(mod)</span></code></pre></div>
 <pre><code>. $...
 .       [,1] [,2] [,3]
 . ECL:   0.3  0.0  0.0
 . EV:    0.0  0.1  0.0
 . EKA:   0.0  0.0  0.5</code></pre>
 <p>We can turn that matrix to all zeros with</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="matrix-chapter.html#cb256-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">zero_re</span>() <span class="sc">%&gt;%</span> <span class="fu">omat</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="matrix-chapter.html#cb283-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">zero_re</span>() <span class="sc">%&gt;%</span> <span class="fu">omat</span>()</span></code></pre></div>
 <pre><code>. $...
 .       [,1] [,2] [,3]
 . ECL:     0    0    0
@@ -664,30 +877,30 @@ the other.</p>
 <p>And when we simulate right after that, all <code>ETA(n)</code> will be zero as well
 and you’ll get your fixed-effects simulation (the following is for example
 only and is not evaluated)</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="matrix-chapter.html#cb258-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb258-2"><a href="matrix-chapter.html#cb258-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">zero_re</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb258-3"><a href="matrix-chapter.html#cb258-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb258-4"><a href="matrix-chapter.html#cb258-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb258-5"><a href="matrix-chapter.html#cb258-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="matrix-chapter.html#cb285-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb285-2"><a href="matrix-chapter.html#cb285-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">zero_re</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb285-3"><a href="matrix-chapter.html#cb285-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb285-4"><a href="matrix-chapter.html#cb285-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb285-5"><a href="matrix-chapter.html#cb285-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
 </div>
-<div id="example-unnamed-matrix" class="section level3" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> Example: unnamed matrix</h3>
+<div id="example-unnamed-matrix" class="section level3" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> Example: unnamed matrix</h3>
 <p>Here is a model with only a 3x3 <code>$OMEGA</code> matrix</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="matrix-chapter.html#cb259-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb259-2"><a href="matrix-chapter.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA</span></span>
-<span id="cb259-3"><a href="matrix-chapter.html#cb259-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
-<span id="cb259-4"><a href="matrix-chapter.html#cb259-4" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb259-5"><a href="matrix-chapter.html#cb259-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb259-6"><a href="matrix-chapter.html#cb259-6" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;matrix&quot;</span>, code, <span class="at">compile=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="matrix-chapter.html#cb286-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb286-2"><a href="matrix-chapter.html#cb286-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA</span></span>
+<span id="cb286-3"><a href="matrix-chapter.html#cb286-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
+<span id="cb286-4"><a href="matrix-chapter.html#cb286-4" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb286-5"><a href="matrix-chapter.html#cb286-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb286-6"><a href="matrix-chapter.html#cb286-6" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;matrix&quot;</span>, code, <span class="at">compile=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Let’s check the values in the matrix using <code>omat()</code></p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="matrix-chapter.html#cb260-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> omat</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="matrix-chapter.html#cb287-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> omat</span></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     1    0    0
 . 2:     0    2    0
 . 3:     0    0    3</code></pre>
 <p>We also use <code>omat()</code> to update the values in the matrix</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="matrix-chapter.html#cb262-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">dmat</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)) <span class="sc">%&gt;%</span> omat</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="matrix-chapter.html#cb289-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">dmat</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)) <span class="sc">%&gt;%</span> omat</span></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     4    0    0
@@ -695,29 +908,29 @@ only and is not evaluated)</p>
 . 3:     0    0    6</code></pre>
 <p>To update <code>$OMEGA</code>, we must provide a matrix of the same dimension, in this
 case 3x3. An error is generated if we provide a matrix with the wrong dimension.</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="matrix-chapter.html#cb264-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">try</span>(mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">dmat</span>(<span class="dv">11</span>,<span class="dv">23</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="matrix-chapter.html#cb291-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">try</span>(mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">dmat</span>(<span class="dv">11</span>,<span class="dv">23</span>)))</span></code></pre></div>
 <pre><code>. Error : improper signature: omat</code></pre>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="matrix-chapter.html#cb266-1" aria-hidden="true" tabindex="-1"></a>ans</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="matrix-chapter.html#cb293-1" aria-hidden="true" tabindex="-1"></a>ans</span></code></pre></div>
 <pre><code>. [1] &quot;Error : improper signature: omat\n&quot;
 . attr(,&quot;class&quot;)
 . [1] &quot;try-error&quot;
 . attr(,&quot;condition&quot;)
 . &lt;simpleError: improper signature: omat&gt;</code></pre>
 </div>
-<div id="example-named-matrices" class="section level3" number="5.2.4">
-<h3><span class="header-section-number">5.2.4</span> Example: named matrices</h3>
+<div id="example-named-matrices" class="section level3" number="5.3.4">
+<h3><span class="header-section-number">5.3.4</span> Example: named matrices</h3>
 <p>When there are multiple <code>$OMEGA</code> matrices, it can be helpful to assign them
 names. Here, there are two matrices: one for interindividual variability
 (<code>IIV</code>) and one for interoccasion variability (<code>IOV</code>).</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="matrix-chapter.html#cb268-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb268-2"><a href="matrix-chapter.html#cb268-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name IIV</span></span>
-<span id="cb268-3"><a href="matrix-chapter.html#cb268-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
-<span id="cb268-4"><a href="matrix-chapter.html#cb268-4" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name IOV</span></span>
-<span id="cb268-5"><a href="matrix-chapter.html#cb268-5" aria-hidden="true" tabindex="-1"></a><span class="st">4 5</span></span>
-<span id="cb268-6"><a href="matrix-chapter.html#cb268-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb268-7"><a href="matrix-chapter.html#cb268-7" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;iov&quot;</span>, code, <span class="at">compile=</span><span class="cn">FALSE</span>)</span>
-<span id="cb268-8"><a href="matrix-chapter.html#cb268-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb268-9"><a href="matrix-chapter.html#cb268-9" aria-hidden="true" tabindex="-1"></a><span class="fu">revar</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="matrix-chapter.html#cb295-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb295-2"><a href="matrix-chapter.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name IIV</span></span>
+<span id="cb295-3"><a href="matrix-chapter.html#cb295-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
+<span id="cb295-4"><a href="matrix-chapter.html#cb295-4" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name IOV</span></span>
+<span id="cb295-5"><a href="matrix-chapter.html#cb295-5" aria-hidden="true" tabindex="-1"></a><span class="st">4 5</span></span>
+<span id="cb295-6"><a href="matrix-chapter.html#cb295-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb295-7"><a href="matrix-chapter.html#cb295-7" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;iov&quot;</span>, code, <span class="at">compile=</span><span class="cn">FALSE</span>)</span>
+<span id="cb295-8"><a href="matrix-chapter.html#cb295-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb295-9"><a href="matrix-chapter.html#cb295-9" aria-hidden="true" tabindex="-1"></a><span class="fu">revar</span>(mod)</span></code></pre></div>
 <pre><code>. $omega
 . $IIV
 .     [,1] [,2] [,3]
@@ -734,9 +947,9 @@ names. Here, there are two matrices: one for interindividual variability
 . $sigma
 . No matrices found</code></pre>
 <p>Now, we can update either <code>IIV</code> or <code>IOV</code> (or both) by name</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="matrix-chapter.html#cb270-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb270-2"><a href="matrix-chapter.html#cb270-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">omat</span>(<span class="at">IOV =</span> <span class="fu">dmat</span>(<span class="dv">11</span>,<span class="dv">12</span>), <span class="at">IIV =</span> <span class="fu">dmat</span>(<span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb270-3"><a href="matrix-chapter.html#cb270-3" aria-hidden="true" tabindex="-1"></a>  omat</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="matrix-chapter.html#cb297-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb297-2"><a href="matrix-chapter.html#cb297-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">omat</span>(<span class="at">IOV =</span> <span class="fu">dmat</span>(<span class="dv">11</span>,<span class="dv">12</span>), <span class="at">IIV =</span> <span class="fu">dmat</span>(<span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb297-3"><a href="matrix-chapter.html#cb297-3" aria-hidden="true" tabindex="-1"></a>  omat</span></code></pre></div>
 <pre><code>. $IIV
 .     [,1] [,2] [,3]
 . 1:    13    0    0
@@ -749,29 +962,29 @@ names. Here, there are two matrices: one for interindividual variability
 . 5:     0   12</code></pre>
 <p>Again, an error is generated if we try to assign a 3x3 matrix to the <code>IOV</code>
 position</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="matrix-chapter.html#cb272-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">try</span>(mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="at">IIV =</span> <span class="fu">dmat</span>(<span class="dv">1</span>, <span class="dv">2</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="matrix-chapter.html#cb299-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">try</span>(mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="at">IIV =</span> <span class="fu">dmat</span>(<span class="dv">1</span>, <span class="dv">2</span>)))</span></code></pre></div>
 <pre><code>. Error : improper dimension: omat</code></pre>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="matrix-chapter.html#cb274-1" aria-hidden="true" tabindex="-1"></a>ans</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="matrix-chapter.html#cb301-1" aria-hidden="true" tabindex="-1"></a>ans</span></code></pre></div>
 <pre><code>. [1] &quot;Error : improper dimension: omat\n&quot;
 . attr(,&quot;class&quot;)
 . [1] &quot;try-error&quot;
 . attr(,&quot;condition&quot;)
 . &lt;simpleError: improper dimension: omat&gt;</code></pre>
 </div>
-<div id="example-unnamed-matrices" class="section level3" number="5.2.5">
-<h3><span class="header-section-number">5.2.5</span> Example: unnamed matrices</h3>
+<div id="example-unnamed-matrices" class="section level3" number="5.3.5">
+<h3><span class="header-section-number">5.3.5</span> Example: unnamed matrices</h3>
 <p>If we do write the model with unnamed matrices, we can still update them</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="matrix-chapter.html#cb276-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb276-2"><a href="matrix-chapter.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA</span></span>
-<span id="cb276-3"><a href="matrix-chapter.html#cb276-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
-<span id="cb276-4"><a href="matrix-chapter.html#cb276-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb276-5"><a href="matrix-chapter.html#cb276-5" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA </span></span>
-<span id="cb276-6"><a href="matrix-chapter.html#cb276-6" aria-hidden="true" tabindex="-1"></a><span class="st">4 5</span></span>
-<span id="cb276-7"><a href="matrix-chapter.html#cb276-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb276-8"><a href="matrix-chapter.html#cb276-8" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;multi&quot;</span>, code, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="matrix-chapter.html#cb303-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb303-2"><a href="matrix-chapter.html#cb303-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA</span></span>
+<span id="cb303-3"><a href="matrix-chapter.html#cb303-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
+<span id="cb303-4"><a href="matrix-chapter.html#cb303-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-5"><a href="matrix-chapter.html#cb303-5" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA </span></span>
+<span id="cb303-6"><a href="matrix-chapter.html#cb303-6" aria-hidden="true" tabindex="-1"></a><span class="st">4 5</span></span>
+<span id="cb303-7"><a href="matrix-chapter.html#cb303-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb303-8"><a href="matrix-chapter.html#cb303-8" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;multi&quot;</span>, code, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>In this case, the only way to update is to pass in a <strong>list</strong> of matrices, where
 (in this example) the first matrix is 3x3 and the second is 2x2</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="matrix-chapter.html#cb277-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">list</span>(<span class="fu">dmat</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>), <span class="fu">dmat</span>(<span class="dv">8</span>, <span class="dv">9</span>))) <span class="sc">%&gt;%</span> <span class="fu">omat</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="matrix-chapter.html#cb304-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">list</span>(<span class="fu">dmat</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>), <span class="fu">dmat</span>(<span class="dv">8</span>, <span class="dv">9</span>))) <span class="sc">%&gt;%</span> <span class="fu">omat</span>()</span></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     5    0    0

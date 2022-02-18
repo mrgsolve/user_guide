@@ -309,14 +309,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="matrix-chapter.html"><a href="matrix-chapter.html"><i class="fa fa-check"></i><b>5</b> Model Matrices</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#simple-matrix-lists"><i class="fa fa-check"></i><b>5.1</b> Simple matrix lists</a></li>
-<li class="chapter" data-level="5.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-update"><i class="fa fa-check"></i><b>5.2</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
+<li class="chapter" data-level="5.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#basics"><i class="fa fa-check"></i><b>5.1</b> Basics</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-helper-functions"><i class="fa fa-check"></i><b>5.2.1</b> Matrix helper functions</a></li>
-<li class="chapter" data-level="5.2.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>5.2.2</b> Fill a matrix with zeros</a></li>
-<li class="chapter" data-level="5.2.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>5.2.3</b> Example: unnamed matrix</a></li>
-<li class="chapter" data-level="5.2.4" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-named-matrices"><i class="fa fa-check"></i><b>5.2.4</b> Example: named matrices</a></li>
-<li class="chapter" data-level="5.2.5" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>5.2.5</b> Example: unnamed matrices</a></li>
+<li class="chapter" data-level="5.1.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#simple-matrix-lists"><i class="fa fa-check"></i><b>5.1.1</b> Simple matrix lists</a></li>
+<li class="chapter" data-level="5.1.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#multiple-matrix-lists"><i class="fa fa-check"></i><b>5.1.2</b> Multiple matrix lists</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#collapsing-matrices"><i class="fa fa-check"></i><b>5.2</b> Collapsing matrices</a></li>
+<li class="chapter" data-level="5.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-update"><i class="fa fa-check"></i><b>5.3</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-helper-functions"><i class="fa fa-check"></i><b>5.3.1</b> Matrix helper functions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>5.3.2</b> Fill a matrix with zeros</a></li>
+<li class="chapter" data-level="5.3.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>5.3.3</b> Example: unnamed matrix</a></li>
+<li class="chapter" data-level="5.3.4" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-named-matrices"><i class="fa fa-check"></i><b>5.3.4</b> Example: named matrices</a></li>
+<li class="chapter" data-level="5.3.5" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>5.3.5</b> Example: unnamed matrices</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>6</b> Simulated output</a>
@@ -472,38 +477,38 @@ to simulating.</p>
 <p>To schedule a discontinuity, call the <code>mtime()</code> member (Section @ref(self.time))
 of the <code>self</code> object (Section <a href="model-specification.html#self-object">2.3.12</a>). This is typically done in
 the <code>$MAIN</code> block.</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb326-1"><a href="mtime.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span></span>
-<span id="cb326-2"><a href="mtime.html#cb326-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mt <span class="op">=</span> self<span class="op">.</span>mtime<span class="op">(</span><span class="fl">14.12</span><span class="op">);</span></span>
-<span id="cb326-3"><a href="mtime.html#cb326-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb326-4"><a href="mtime.html#cb326-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>TIME <span class="op">&gt;=</span> mt<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb326-5"><a href="mtime.html#cb326-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something  </span></span>
-<span id="cb326-6"><a href="mtime.html#cb326-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb353-1"><a href="mtime.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span></span>
+<span id="cb353-2"><a href="mtime.html#cb353-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mt <span class="op">=</span> self<span class="op">.</span>mtime<span class="op">(</span><span class="fl">14.12</span><span class="op">);</span></span>
+<span id="cb353-3"><a href="mtime.html#cb353-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb353-4"><a href="mtime.html#cb353-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>TIME <span class="op">&gt;=</span> mt<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb353-5"><a href="mtime.html#cb353-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something  </span></span>
+<span id="cb353-6"><a href="mtime.html#cb353-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Here, we have told <code>mrgsolve</code> to stop at <code>14.12</code> hours so we can do something.
 Notice that <code>self.mtime()</code> returns the value of the modeled even time so you
 can check it later.</p>
 <p>We can also schedule an event to happen some amount of time in the future</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb327-1"><a href="mtime.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span></span>
-<span id="cb327-2"><a href="mtime.html#cb327-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>NEWIND <span class="op">&lt;=</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb327-3"><a href="mtime.html#cb327-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mt <span class="op">=</span> <span class="fl">1e9</span><span class="op">;</span>  </span>
-<span id="cb327-4"><a href="mtime.html#cb327-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb327-5"><a href="mtime.html#cb327-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb327-6"><a href="mtime.html#cb327-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>EVID<span class="op">==</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb327-7"><a href="mtime.html#cb327-7" aria-hidden="true" tabindex="-1"></a>  mt <span class="op">=</span> self<span class="op">.</span>mtime<span class="op">(</span>TIME <span class="op">+</span> <span class="fl">8.2</span><span class="op">);</span></span>
-<span id="cb327-8"><a href="mtime.html#cb327-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb327-9"><a href="mtime.html#cb327-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb327-10"><a href="mtime.html#cb327-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>TIME <span class="op">&gt;=</span> mt<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb327-11"><a href="mtime.html#cb327-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something  </span></span>
-<span id="cb327-12"><a href="mtime.html#cb327-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb354-1"><a href="mtime.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span></span>
+<span id="cb354-2"><a href="mtime.html#cb354-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>NEWIND <span class="op">&lt;=</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb354-3"><a href="mtime.html#cb354-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mt <span class="op">=</span> <span class="fl">1e9</span><span class="op">;</span>  </span>
+<span id="cb354-4"><a href="mtime.html#cb354-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb354-5"><a href="mtime.html#cb354-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb354-6"><a href="mtime.html#cb354-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>EVID<span class="op">==</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb354-7"><a href="mtime.html#cb354-7" aria-hidden="true" tabindex="-1"></a>  mt <span class="op">=</span> self<span class="op">.</span>mtime<span class="op">(</span>TIME <span class="op">+</span> <span class="fl">8.2</span><span class="op">);</span></span>
+<span id="cb354-8"><a href="mtime.html#cb354-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb354-9"><a href="mtime.html#cb354-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb354-10"><a href="mtime.html#cb354-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>TIME <span class="op">&gt;=</span> mt<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb354-11"><a href="mtime.html#cb354-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something  </span></span>
+<span id="cb354-12"><a href="mtime.html#cb354-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 <div id="mtime-with-specific-evid" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> MTIME with specific EVID</h2>
 <p>You can call <code>self.mevent()</code> and pass both <code>time</code> and <code>evid</code> and then check
 for when that <code>EVID</code> comes around again. For example</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb328-1"><a href="mtime.html#cb328-1" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span>mevent<span class="op">(</span>TIME <span class="op">+</span> <span class="fl">8.2</span><span class="op">,</span> <span class="dv">33</span><span class="op">);</span></span>
-<span id="cb328-2"><a href="mtime.html#cb328-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb328-3"><a href="mtime.html#cb328-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>EVID<span class="op">==</span><span class="dv">33</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb328-4"><a href="mtime.html#cb328-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something  </span></span>
-<span id="cb328-5"><a href="mtime.html#cb328-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb355-1"><a href="mtime.html#cb355-1" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span>mevent<span class="op">(</span>TIME <span class="op">+</span> <span class="fl">8.2</span><span class="op">,</span> <span class="dv">33</span><span class="op">);</span></span>
+<span id="cb355-2"><a href="mtime.html#cb355-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb355-3"><a href="mtime.html#cb355-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>EVID<span class="op">==</span><span class="dv">33</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb355-4"><a href="mtime.html#cb355-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something  </span></span>
+<span id="cb355-5"><a href="mtime.html#cb355-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>This is similar in functionality to <code>self.mevent()</code>.</p>
 </div>
 <div id="modeled-doses" class="section level2" number="10.3">
@@ -515,7 +520,7 @@ to uncover how <code>self.mtime()</code> and <code>self.mevent()</code> work.</p
 <p>You can set up the following code in either <code>$MAIN</code> or <code>$TABLE</code>.</p>
 <p><strong><em>Create an evdata object</em></strong></p>
 <p>Once you know when you want the dose, create an <code>evdata</code> object.</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb329-1"><a href="mtime.html#cb329-1" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>evdata ev<span class="op">(</span><span class="fl">14.2</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb356-1"><a href="mtime.html#cb356-1" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>evdata ev<span class="op">(</span><span class="fl">14.2</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span></code></pre></div>
 <p>This will create (construct) an object called <code>ev</code> with class <code>evdata</code>. The
 constructor takes two arguments:</p>
 <ol style="list-style-type: decimal">
@@ -538,15 +543,15 @@ Once the object is created, you can modify the following public members</p>
 <p>If you are using this (lower-level) interface, chances are you will want to
 set at least <code>amt</code> and <code>cmt</code>. As an example, we will dose 100 mg into
 compartment 2 immediately (now)</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb330-1"><a href="mtime.html#cb330-1" aria-hidden="true" tabindex="-1"></a>ev<span class="op">.</span>amt <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
-<span id="cb330-2"><a href="mtime.html#cb330-2" aria-hidden="true" tabindex="-1"></a>ev<span class="op">.</span>cmt <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb330-3"><a href="mtime.html#cb330-3" aria-hidden="true" tabindex="-1"></a>ev<span class="op">.</span>now <span class="op">=</span> true<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb357-1"><a href="mtime.html#cb357-1" aria-hidden="true" tabindex="-1"></a>ev<span class="op">.</span>amt <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb357-2"><a href="mtime.html#cb357-2" aria-hidden="true" tabindex="-1"></a>ev<span class="op">.</span>cmt <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb357-3"><a href="mtime.html#cb357-3" aria-hidden="true" tabindex="-1"></a>ev<span class="op">.</span>now <span class="op">=</span> true<span class="op">;</span></span></code></pre></div>
 <p>The other members are set in a similar way.</p>
 <p><strong>Push the evdata object into the self object</strong></p>
 <p>After the object has been created and modified, you have to attach this object
 to the <code>self</code> object in order to make it available to mrgsolve. Do this by
 calling <code>push_back()</code> on <code>self.mevector</code></p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb331-1"><a href="mtime.html#cb331-1" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span>mevector<span class="op">.</span>push_back<span class="op">(</span>ev<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb358-1"><a href="mtime.html#cb358-1" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span>mevector<span class="op">.</span>push_back<span class="op">(</span>ev<span class="op">);</span></span></code></pre></div>
 <p>Again, this sequence should get called in either <code>$MAIN</code> or <code>$TABLE</code>. When that
 code block finishes running (for the current record), <code>mrgsolve</code> will find the
 event record and add that event to the simulation sequence.</p>

@@ -309,14 +309,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="matrix-chapter.html"><a href="matrix-chapter.html"><i class="fa fa-check"></i><b>5</b> Model Matrices</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#simple-matrix-lists"><i class="fa fa-check"></i><b>5.1</b> Simple matrix lists</a></li>
-<li class="chapter" data-level="5.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-update"><i class="fa fa-check"></i><b>5.2</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
+<li class="chapter" data-level="5.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#basics"><i class="fa fa-check"></i><b>5.1</b> Basics</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-helper-functions"><i class="fa fa-check"></i><b>5.2.1</b> Matrix helper functions</a></li>
-<li class="chapter" data-level="5.2.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>5.2.2</b> Fill a matrix with zeros</a></li>
-<li class="chapter" data-level="5.2.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>5.2.3</b> Example: unnamed matrix</a></li>
-<li class="chapter" data-level="5.2.4" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-named-matrices"><i class="fa fa-check"></i><b>5.2.4</b> Example: named matrices</a></li>
-<li class="chapter" data-level="5.2.5" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>5.2.5</b> Example: unnamed matrices</a></li>
+<li class="chapter" data-level="5.1.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#simple-matrix-lists"><i class="fa fa-check"></i><b>5.1.1</b> Simple matrix lists</a></li>
+<li class="chapter" data-level="5.1.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#multiple-matrix-lists"><i class="fa fa-check"></i><b>5.1.2</b> Multiple matrix lists</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#collapsing-matrices"><i class="fa fa-check"></i><b>5.2</b> Collapsing matrices</a></li>
+<li class="chapter" data-level="5.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-update"><i class="fa fa-check"></i><b>5.3</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-helper-functions"><i class="fa fa-check"></i><b>5.3.1</b> Matrix helper functions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>5.3.2</b> Fill a matrix with zeros</a></li>
+<li class="chapter" data-level="5.3.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>5.3.3</b> Example: unnamed matrix</a></li>
+<li class="chapter" data-level="5.3.4" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-named-matrices"><i class="fa fa-check"></i><b>5.3.4</b> Example: named matrices</a></li>
+<li class="chapter" data-level="5.3.5" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>5.3.5</b> Example: unnamed matrices</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>6</b> Simulated output</a>
@@ -467,8 +472,8 @@ step) or set to negative number to never check.</p>
 <h2><span class="header-section-number">12.2</span> Can I pass compiler flags to my model?</h2>
 <p>Compiler flags can be passed to your model by setting <code>PKG_CXXFLAGS</code> in
 <code>$ENV</code>. For example</p>
-<div class="sourceCode" id="cb453"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb453-1"><a href="q-and-a.html#cb453-1" aria-hidden="true" tabindex="-1"></a>$ENV</span>
-<span id="cb453-2"><a href="q-and-a.html#cb453-2" aria-hidden="true" tabindex="-1"></a>PKG_CXXFLAGS <span class="op">=</span> <span class="st">&quot;-std=c++11&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb480-1"><a href="q-and-a.html#cb480-1" aria-hidden="true" tabindex="-1"></a>$ENV</span>
+<span id="cb480-2"><a href="q-and-a.html#cb480-2" aria-hidden="true" tabindex="-1"></a>PKG_CXXFLAGS <span class="op">=</span> <span class="st">&quot;-std=c++11&quot;</span></span></code></pre></div>
 <p>will compile your model according to <code>C++11</code> standard (but note that there is a
 special plugin that will do this automatically for you; see Section
 <a href="plugins.html#plugin-cxx11">9.4</a>).</p>
@@ -482,13 +487,13 @@ special plugin that will do this automatically for you; see Section
 <p>There are three approaches</p>
 <p><strong>tad argument to mrgsim()</strong></p>
 <p>To get time after dose into your output you can call</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="q-and-a.html#cb454-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">tad =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="q-and-a.html#cb481-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mrgsim</span>(mod, <span class="at">tad =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>and the output will have a <code>tad</code> column. Note this does not let you interact
 with the <code>tad</code> value inside your model.</p>
 <p><strong>Simple calculation in the model</strong></p>
 <p>Most applications will call <code>self.tad()</code> (Section @ref(self.tad)). For example</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb455-1"><a href="q-and-a.html#cb455-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
-<span id="cb455-2"><a href="q-and-a.html#cb455-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb482-1"><a href="q-and-a.html#cb482-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
+<span id="cb482-2"><a href="q-and-a.html#cb482-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
 <p><strong>More complicated calculation in the model</strong></p>
 <p>You can get more control and track <code>tad</code> in a specific compartment by using
 the <code>tad</code> plugin. See Section <a href="plugins.html#plugin-tad">9.3</a> for details.</p>
@@ -500,7 +505,7 @@ in the <code>C++</code> code or inability of R to find the compiler and other pi
 the tool chain.</p>
 <p>If your model is not compiling, try the <code>recover</code> argument to <code>mread()</code> (or
 <code>mcode()</code>)</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="q-and-a.html#cb456-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mread</span>(..., <span class="at">recover =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="q-and-a.html#cb483-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mread</span>(..., <span class="at">recover =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>You will see a warning on the console and <code>mread()</code> will return a list of
 build information. You can look into that information or share it in the
 <a href="https://github.com/metrumresearchgroup/mrgsolve/issues">mrgsolve issue tracker</a>
@@ -509,9 +514,9 @@ on GitHub.</p>
 console. If you possibly have problems with the compiler or the rest of the
 toolchain, take a look at the <code>pkgbuild</code> package, which provides some helpful
 tools, especially if you are working on a Windows platform</p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="q-and-a.html#cb457-1" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">check_build_tools</span>()</span>
-<span id="cb457-2"><a href="q-and-a.html#cb457-2" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">has_build_tools</span>()</span>
-<span id="cb457-3"><a href="q-and-a.html#cb457-3" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">has_rtools</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="q-and-a.html#cb484-1" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">check_build_tools</span>()</span>
+<span id="cb484-2"><a href="q-and-a.html#cb484-2" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">has_build_tools</span>()</span>
+<span id="cb484-3"><a href="q-and-a.html#cb484-3" aria-hidden="true" tabindex="-1"></a>pkgbuild<span class="sc">::</span><span class="fu">has_rtools</span>()</span></code></pre></div>
 </div>
 <div id="can-i-run-mrgsolve-on-a-network-drive" class="section level2" number="12.6">
 <h2><span class="header-section-number">12.6</span> Can I run mrgsolve on a network drive?</h2>

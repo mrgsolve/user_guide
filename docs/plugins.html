@@ -309,14 +309,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="matrix-chapter.html"><a href="matrix-chapter.html"><i class="fa fa-check"></i><b>5</b> Model Matrices</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#simple-matrix-lists"><i class="fa fa-check"></i><b>5.1</b> Simple matrix lists</a></li>
-<li class="chapter" data-level="5.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-update"><i class="fa fa-check"></i><b>5.2</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
+<li class="chapter" data-level="5.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#basics"><i class="fa fa-check"></i><b>5.1</b> Basics</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-helper-functions"><i class="fa fa-check"></i><b>5.2.1</b> Matrix helper functions</a></li>
-<li class="chapter" data-level="5.2.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>5.2.2</b> Fill a matrix with zeros</a></li>
-<li class="chapter" data-level="5.2.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>5.2.3</b> Example: unnamed matrix</a></li>
-<li class="chapter" data-level="5.2.4" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-named-matrices"><i class="fa fa-check"></i><b>5.2.4</b> Example: named matrices</a></li>
-<li class="chapter" data-level="5.2.5" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>5.2.5</b> Example: unnamed matrices</a></li>
+<li class="chapter" data-level="5.1.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#simple-matrix-lists"><i class="fa fa-check"></i><b>5.1.1</b> Simple matrix lists</a></li>
+<li class="chapter" data-level="5.1.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#multiple-matrix-lists"><i class="fa fa-check"></i><b>5.1.2</b> Multiple matrix lists</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#collapsing-matrices"><i class="fa fa-check"></i><b>5.2</b> Collapsing matrices</a></li>
+<li class="chapter" data-level="5.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-update"><i class="fa fa-check"></i><b>5.3</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-helper-functions"><i class="fa fa-check"></i><b>5.3.1</b> Matrix helper functions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>5.3.2</b> Fill a matrix with zeros</a></li>
+<li class="chapter" data-level="5.3.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>5.3.3</b> Example: unnamed matrix</a></li>
+<li class="chapter" data-level="5.3.4" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-named-matrices"><i class="fa fa-check"></i><b>5.3.4</b> Example: named matrices</a></li>
+<li class="chapter" data-level="5.3.5" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>5.3.5</b> Example: unnamed matrices</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>6</b> Simulated output</a>
@@ -463,18 +468,18 @@ blocks are searched</p>
 <li><code>$PRED</code></li>
 </ul>
 <p>For example, the following code requires that <code>CL</code> gets assigned a type</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb303-1"><a href="plugins.html#cb303-1" aria-hidden="true" tabindex="-1"></a>$PARAM WT <span class="op">=</span> <span class="dv">70</span><span class="op">,</span> TVCL <span class="op">=</span> <span class="fl">1.2</span></span>
-<span id="cb303-2"><a href="plugins.html#cb303-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb303-3"><a href="plugins.html#cb303-3" aria-hidden="true" tabindex="-1"></a>$PK</span>
-<span id="cb303-4"><a href="plugins.html#cb303-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CL <span class="op">=</span> TVCL <span class="op">*</span> pow<span class="op">(</span>WT<span class="op">/</span><span class="dv">70</span><span class="op">,</span> <span class="fl">0.75</span><span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb330-1"><a href="plugins.html#cb330-1" aria-hidden="true" tabindex="-1"></a>$PARAM WT <span class="op">=</span> <span class="dv">70</span><span class="op">,</span> TVCL <span class="op">=</span> <span class="fl">1.2</span></span>
+<span id="cb330-2"><a href="plugins.html#cb330-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb330-3"><a href="plugins.html#cb330-3" aria-hidden="true" tabindex="-1"></a>$PK</span>
+<span id="cb330-4"><a href="plugins.html#cb330-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CL <span class="op">=</span> TVCL <span class="op">*</span> pow<span class="op">(</span>WT<span class="op">/</span><span class="dv">70</span><span class="op">,</span> <span class="fl">0.75</span><span class="op">);</span></span></code></pre></div>
 <p>This is the default mrgsolve behavior and has been since the beginning.</p>
 <p>The <code>autodec</code> plugin lets you write the following</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb304-1"><a href="plugins.html#cb304-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN autodec </span>
-<span id="cb304-2"><a href="plugins.html#cb304-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb304-3"><a href="plugins.html#cb304-3" aria-hidden="true" tabindex="-1"></a>$PARAM WT <span class="op">=</span> <span class="dv">70</span><span class="op">,</span> TVCL <span class="op">=</span> <span class="fl">1.2</span></span>
-<span id="cb304-4"><a href="plugins.html#cb304-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb304-5"><a href="plugins.html#cb304-5" aria-hidden="true" tabindex="-1"></a>$PK</span>
-<span id="cb304-6"><a href="plugins.html#cb304-6" aria-hidden="true" tabindex="-1"></a>CL <span class="op">=</span> TVCL <span class="op">*</span> pow<span class="op">(</span>WT<span class="op">/</span><span class="dv">70</span><span class="op">,</span> <span class="fl">0.75</span><span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb331-1"><a href="plugins.html#cb331-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN autodec </span>
+<span id="cb331-2"><a href="plugins.html#cb331-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-3"><a href="plugins.html#cb331-3" aria-hidden="true" tabindex="-1"></a>$PARAM WT <span class="op">=</span> <span class="dv">70</span><span class="op">,</span> TVCL <span class="op">=</span> <span class="fl">1.2</span></span>
+<span id="cb331-4"><a href="plugins.html#cb331-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-5"><a href="plugins.html#cb331-5" aria-hidden="true" tabindex="-1"></a>$PK</span>
+<span id="cb331-6"><a href="plugins.html#cb331-6" aria-hidden="true" tabindex="-1"></a>CL <span class="op">=</span> TVCL <span class="op">*</span> pow<span class="op">(</span>WT<span class="op">/</span><span class="dv">70</span><span class="op">,</span> <span class="fl">0.75</span><span class="op">);</span></span></code></pre></div>
 <p>mrgsolve will find <code>CL = ...</code> and understand that this is a user initiated
 variable and will declare it as <code>double</code> for you. Don’t worry about <code>WT = 70</code>
 in <code>$PARAM</code>; mrgsolve should already know about that won’t try to declare it.</p>
@@ -483,10 +488,10 @@ in <code>$PARAM</code>; mrgsolve should already know about that won’t try to d
 understand to leave those declarations alone. Note that it may still very
 convenient to declare using the <code>capture</code> type those variables that you
 want captured into the output</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb305-1"><a href="plugins.html#cb305-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN autodec</span>
-<span id="cb305-2"><a href="plugins.html#cb305-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb305-3"><a href="plugins.html#cb305-3" aria-hidden="true" tabindex="-1"></a>$ERROR</span>
-<span id="cb305-4"><a href="plugins.html#cb305-4" aria-hidden="true" tabindex="-1"></a>capture Y <span class="op">=</span> IPRED <span class="op">*</span> exp<span class="op">(</span>EPS<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb332-1"><a href="plugins.html#cb332-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN autodec</span>
+<span id="cb332-2"><a href="plugins.html#cb332-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb332-3"><a href="plugins.html#cb332-3" aria-hidden="true" tabindex="-1"></a>$ERROR</span>
+<span id="cb332-4"><a href="plugins.html#cb332-4" aria-hidden="true" tabindex="-1"></a>capture Y <span class="op">=</span> IPRED <span class="op">*</span> exp<span class="op">(</span>EPS<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
 <p>The <code>capture</code> typedef makes <code>Y</code> a <code>double</code>; we didn’t need to declare it with
 <code>autodec</code> in play, but decided to declare with <code>capture</code> so that it is copied
 into the simulated output.</p>
@@ -499,7 +504,7 @@ in the default mode.</p>
 <p>In case mrgsolve does try to declare (as <code>double</code>) a variable that shouldn’t
 be handled that way, you can note this name in an environment variable inside
 your model called <code>MRGSOLVE_AUTODEC_SKIP</code></p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb306-1"><a href="plugins.html#cb306-1" aria-hidden="true" tabindex="-1"></a>$ENV MRGSOLVE_AUTODEC_SKIP <span class="op">=</span> c<span class="op">(</span><span class="st">&quot;my_variable_1&quot;</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb333-1"><a href="plugins.html#cb333-1" aria-hidden="true" tabindex="-1"></a>$ENV MRGSOLVE_AUTODEC_SKIP <span class="op">=</span> c<span class="op">(</span><span class="st">&quot;my_variable_1&quot;</span><span class="op">)</span></span></code></pre></div>
 <p>This can be a vector of variable names to NOT declare when <code>autodec</code> is invoked.</p>
 </div>
 <div id="plugin-nm-vars" class="section level2" number="9.2">
@@ -516,12 +521,12 @@ is replicated here.</p>
 <li>To set the lag time for the nth compartment, use <code>ALAGn</code></li>
 </ul>
 <p>For example</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb307-1"><a href="plugins.html#cb307-1" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT GUT2</span>
-<span id="cb307-2"><a href="plugins.html#cb307-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb307-3"><a href="plugins.html#cb307-3" aria-hidden="true" tabindex="-1"></a>$PK</span>
-<span id="cb307-4"><a href="plugins.html#cb307-4" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> <span class="fl">0.87</span><span class="op">;</span>    <span class="co">// equivalent to F_GUT  = 0.87;</span></span>
-<span id="cb307-5"><a href="plugins.html#cb307-5" aria-hidden="true" tabindex="-1"></a>R2 <span class="op">=</span> <span class="fl">2.25</span><span class="op">;</span>    <span class="co">// equivalent to R_CENT = 2.25;</span></span>
-<span id="cb307-6"><a href="plugins.html#cb307-6" aria-hidden="true" tabindex="-1"></a>ALAG3 <span class="op">=</span> <span class="fl">0.25</span><span class="op">;</span> <span class="co">// equivalent to ALAG_GUT2 = 0.25; </span></span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb334-1"><a href="plugins.html#cb334-1" aria-hidden="true" tabindex="-1"></a>$CMT GUT CENT GUT2</span>
+<span id="cb334-2"><a href="plugins.html#cb334-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb334-3"><a href="plugins.html#cb334-3" aria-hidden="true" tabindex="-1"></a>$PK</span>
+<span id="cb334-4"><a href="plugins.html#cb334-4" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> <span class="fl">0.87</span><span class="op">;</span>    <span class="co">// equivalent to F_GUT  = 0.87;</span></span>
+<span id="cb334-5"><a href="plugins.html#cb334-5" aria-hidden="true" tabindex="-1"></a>R2 <span class="op">=</span> <span class="fl">2.25</span><span class="op">;</span>    <span class="co">// equivalent to R_CENT = 2.25;</span></span>
+<span id="cb334-6"><a href="plugins.html#cb334-6" aria-hidden="true" tabindex="-1"></a>ALAG3 <span class="op">=</span> <span class="fl">0.25</span><span class="op">;</span> <span class="co">// equivalent to ALAG_GUT2 = 0.25; </span></span></code></pre></div>
 <p><strong>A, A_0, DADT</strong></p>
 <ul>
 <li>To refer to the amount in the nth compartment, use <code>A(n)</code></li>
@@ -529,14 +534,14 @@ is replicated here.</p>
 <li>To refer to the differential equation for the nth compartment, use <code>DADT(n)</code></li>
 </ul>
 <p>For example</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb308-1"><a href="plugins.html#cb308-1" aria-hidden="true" tabindex="-1"></a>$CMT CMT1 CMT2</span>
-<span id="cb308-2"><a href="plugins.html#cb308-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb308-3"><a href="plugins.html#cb308-3" aria-hidden="true" tabindex="-1"></a>$PK</span>
-<span id="cb308-4"><a href="plugins.html#cb308-4" aria-hidden="true" tabindex="-1"></a>A_0<span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">=</span> <span class="dv">50</span><span class="op">;</span></span>
-<span id="cb308-5"><a href="plugins.html#cb308-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb308-6"><a href="plugins.html#cb308-6" aria-hidden="true" tabindex="-1"></a>$DES</span>
-<span id="cb308-7"><a href="plugins.html#cb308-7" aria-hidden="true" tabindex="-1"></a>DADT<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="op">-</span>KA <span class="op">*</span> A<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb308-8"><a href="plugins.html#cb308-8" aria-hidden="true" tabindex="-1"></a>DADT<span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">=</span>  KA <span class="op">*</span> A<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">-</span> KE <span class="op">*</span> A<span class="op">(</span><span class="dv">2</span><span class="op">);</span> </span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb335-1"><a href="plugins.html#cb335-1" aria-hidden="true" tabindex="-1"></a>$CMT CMT1 CMT2</span>
+<span id="cb335-2"><a href="plugins.html#cb335-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb335-3"><a href="plugins.html#cb335-3" aria-hidden="true" tabindex="-1"></a>$PK</span>
+<span id="cb335-4"><a href="plugins.html#cb335-4" aria-hidden="true" tabindex="-1"></a>A_0<span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">=</span> <span class="dv">50</span><span class="op">;</span></span>
+<span id="cb335-5"><a href="plugins.html#cb335-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb335-6"><a href="plugins.html#cb335-6" aria-hidden="true" tabindex="-1"></a>$DES</span>
+<span id="cb335-7"><a href="plugins.html#cb335-7" aria-hidden="true" tabindex="-1"></a>DADT<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="op">-</span>KA <span class="op">*</span> A<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb335-8"><a href="plugins.html#cb335-8" aria-hidden="true" tabindex="-1"></a>DADT<span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">=</span>  KA <span class="op">*</span> A<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">-</span> KE <span class="op">*</span> A<span class="op">(</span><span class="dv">2</span><span class="op">);</span> </span></code></pre></div>
 <p><strong>Other syntax</strong></p>
 <ul>
 <li>Using <code>THETA(n)</code> in model code will resolve to <code>THETAn</code>; this feature is
@@ -571,8 +576,8 @@ a type, except when the <code>autodec</code> plugin (Section <a href="plugins.ht
 <p><strong>An example</strong></p>
 <p>There is an example of this syntax (along with <code>autodec</code> features) in the
 internal model library</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="plugins.html#cb309-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;nm-like&quot;</span>)</span>
-<span id="cb309-2"><a href="plugins.html#cb309-2" aria-hidden="true" tabindex="-1"></a><span class="fu">see</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="plugins.html#cb336-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;nm-like&quot;</span>)</span>
+<span id="cb336-2"><a href="plugins.html#cb336-2" aria-hidden="true" tabindex="-1"></a><span class="fu">see</span>(mod)</span></code></pre></div>
 <pre><code>. 
 . Model file:  nm-like.cpp 
 . $PROB Model written with some nonmem-like syntax features
@@ -614,14 +619,14 @@ about a simpler way to calculate time after dose that should work fine if doses
 are only in a single compartment. This functionality is provided by mrgsolve.</p>
 <p><strong>Usage</strong></p>
 <p>First, tell <code>mrgsolve</code> that you want to use the <code>tad</code> plugin</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb311-1"><a href="plugins.html#cb311-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN tad</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb338-1"><a href="plugins.html#cb338-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN tad</span></code></pre></div>
 <p>The create <code>tadose</code> objects, one for each compartment where you want to track
 time after dose. One approach is to do this in <code>[ global ]</code></p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb312-1"><a href="plugins.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>plugin<span class="op">]</span> tad</span>
-<span id="cb312-2"><a href="plugins.html#cb312-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb312-3"><a href="plugins.html#cb312-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> global <span class="op">]</span> </span>
-<span id="cb312-4"><a href="plugins.html#cb312-4" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_1<span class="op">(</span><span class="dv">1</span><span class="op">);</span> </span>
-<span id="cb312-5"><a href="plugins.html#cb312-5" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_2<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb339-1"><a href="plugins.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>plugin<span class="op">]</span> tad</span>
+<span id="cb339-2"><a href="plugins.html#cb339-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-3"><a href="plugins.html#cb339-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> global <span class="op">]</span> </span>
+<span id="cb339-4"><a href="plugins.html#cb339-4" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_1<span class="op">(</span><span class="dv">1</span><span class="op">);</span> </span>
+<span id="cb339-5"><a href="plugins.html#cb339-5" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_2<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span></code></pre></div>
 <p>Notice that we pass the compartment number that we want to track in each
 case and also that we refer to the <code>mrg::</code> namespace for the <code>tadose</code> class.</p>
 <p>The <code>tadose</code> objects contain the following (public) members</p>
@@ -641,24 +646,24 @@ value of <code>-1.0</code> is returned</li>
 a new individual</li>
 </ul>
 <p>As an example, you can call the <code>reset()</code> method on one of the <code>tadose</code> objects</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb313-1"><a href="plugins.html#cb313-1" aria-hidden="true" tabindex="-1"></a>tad_cmt_1<span class="op">.</span>reset<span class="op">();</span></span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb340-1"><a href="plugins.html#cb340-1" aria-hidden="true" tabindex="-1"></a>tad_cmt_1<span class="op">.</span>reset<span class="op">();</span></span></code></pre></div>
 <p>You can find the source code for this object
 <a href="https://github.com/metrumresearchgroup/mrgsolve/blob/master/inst/base/mrgsolve-tad.h">here</a>.</p>
 <p>A working example model that tracks doses in compartments <code>1</code> and <code>2</code> is
 provided here</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb314-1"><a href="plugins.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>plugin<span class="op">]</span> tad</span>
-<span id="cb314-2"><a href="plugins.html#cb314-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb314-3"><a href="plugins.html#cb314-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> global <span class="op">]</span> </span>
-<span id="cb314-4"><a href="plugins.html#cb314-4" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_1<span class="op">(</span><span class="dv">1</span><span class="op">);</span> </span>
-<span id="cb314-5"><a href="plugins.html#cb314-5" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_2<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span>
-<span id="cb314-6"><a href="plugins.html#cb314-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb314-7"><a href="plugins.html#cb314-7" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> pkmodel <span class="op">]</span> cmt <span class="op">=</span> <span class="st">&quot;GUT,CENT&quot;</span><span class="op">,</span> depot <span class="op">=</span> TRUE</span>
-<span id="cb314-8"><a href="plugins.html#cb314-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb314-9"><a href="plugins.html#cb314-9" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> param <span class="op">]</span> CL <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> V <span class="op">=</span> <span class="dv">20</span><span class="op">,</span> KA <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb314-10"><a href="plugins.html#cb314-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb314-11"><a href="plugins.html#cb314-11" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
-<span id="cb314-12"><a href="plugins.html#cb314-12" aria-hidden="true" tabindex="-1"></a>capture tad1 <span class="op">=</span> tad_cmt_1<span class="op">.</span>tad<span class="op">(</span>self<span class="op">);</span> </span>
-<span id="cb314-13"><a href="plugins.html#cb314-13" aria-hidden="true" tabindex="-1"></a>capture tad2 <span class="op">=</span> tad_cmt_2<span class="op">.</span>tad<span class="op">(</span>self<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb341-1"><a href="plugins.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>plugin<span class="op">]</span> tad</span>
+<span id="cb341-2"><a href="plugins.html#cb341-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-3"><a href="plugins.html#cb341-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> global <span class="op">]</span> </span>
+<span id="cb341-4"><a href="plugins.html#cb341-4" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_1<span class="op">(</span><span class="dv">1</span><span class="op">);</span> </span>
+<span id="cb341-5"><a href="plugins.html#cb341-5" aria-hidden="true" tabindex="-1"></a>mrg<span class="op">::</span>tadose tad_cmt_2<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span>
+<span id="cb341-6"><a href="plugins.html#cb341-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-7"><a href="plugins.html#cb341-7" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> pkmodel <span class="op">]</span> cmt <span class="op">=</span> <span class="st">&quot;GUT,CENT&quot;</span><span class="op">,</span> depot <span class="op">=</span> TRUE</span>
+<span id="cb341-8"><a href="plugins.html#cb341-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-9"><a href="plugins.html#cb341-9" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> param <span class="op">]</span> CL <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> V <span class="op">=</span> <span class="dv">20</span><span class="op">,</span> KA <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb341-10"><a href="plugins.html#cb341-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-11"><a href="plugins.html#cb341-11" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
+<span id="cb341-12"><a href="plugins.html#cb341-12" aria-hidden="true" tabindex="-1"></a>capture tad1 <span class="op">=</span> tad_cmt_1<span class="op">.</span>tad<span class="op">(</span>self<span class="op">);</span> </span>
+<span id="cb341-13"><a href="plugins.html#cb341-13" aria-hidden="true" tabindex="-1"></a>capture tad2 <span class="op">=</span> tad_cmt_2<span class="op">.</span>tad<span class="op">(</span>self<span class="op">);</span></span></code></pre></div>
 <p><strong>Static approach</strong></p>
 <p>Another approach would be to make these static in <code>[ main ]</code> but this approach
 would only work if you only use these in <code>[ main ]</code>; the <code>[ global ]</code> approach
@@ -667,8 +672,8 @@ is preferable since then you can access the object in any block (function).</p>
 <h3><span class="header-section-number">9.3.1</span> Note</h3>
 <p>Note there is a simpler way to calculate time after dose when only dosing into
 a single compartment</p>
-<div class="sourceCode" id="cb315"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb315-1"><a href="plugins.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span></span>
-<span id="cb315-2"><a href="plugins.html#cb315-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb342-1"><a href="plugins.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span></span>
+<span id="cb342-2"><a href="plugins.html#cb342-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
 <p>The <code>self</code> object (Section <a href="model-specification.html#self-tad">2.3.20</a>) contains a <code>tad()</code> member which
 will track time after dose. Note that this needs to be called every record.</p>
 </div>
@@ -678,23 +683,23 @@ will track time after dose. Note that this needs to be called every record.</p>
 <p><strong>Purpose</strong></p>
 <p>Compile your model file with <code>C++11</code> standard.</p>
 <p><strong>Usage</strong></p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb316-1"><a href="plugins.html#cb316-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN CXX11</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb343-1"><a href="plugins.html#cb343-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN CXX11</span></code></pre></div>
 </div>
 <div id="plugin-rcpp" class="section level2" number="9.5">
 <h2><span class="header-section-number">9.5</span> Rcpp</h2>
 <p><strong>Purpose</strong></p>
 <p>Link to <code>Rcpp</code> headers into your model.</p>
 <p><strong>Usage</strong></p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb317-1"><a href="plugins.html#cb317-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN Rcpp</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb344-1"><a href="plugins.html#cb344-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN Rcpp</span></code></pre></div>
 <p>Note that once your model is linked to <code>Rcpp</code>, you can start using that
 functionality immediately (without including <code>Rcpp.h</code>).</p>
 <p>A very useful feature provided by <code>Rcpp</code> is that it exposes all of the <code>dpqr</code>
 functions that you normally use in R (e.g. <code>rnorm()</code> or <code>runif()</code>). So, if you
 want to simulate a number from Uniform (0,1) you can write</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb318-1"><a href="plugins.html#cb318-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN Rcpp</span>
-<span id="cb318-2"><a href="plugins.html#cb318-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb318-3"><a href="plugins.html#cb318-3" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
-<span id="cb318-4"><a href="plugins.html#cb318-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> uni <span class="op">=</span> R<span class="op">::</span>runif<span class="op">(</span><span class="dv">0</span><span class="op">,</span><span class="dv">1</span><span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb345-1"><a href="plugins.html#cb345-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN Rcpp</span>
+<span id="cb345-2"><a href="plugins.html#cb345-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb345-3"><a href="plugins.html#cb345-3" aria-hidden="true" tabindex="-1"></a>$TABLE</span>
+<span id="cb345-4"><a href="plugins.html#cb345-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> uni <span class="op">=</span> R<span class="op">::</span>runif<span class="op">(</span><span class="dv">0</span><span class="op">,</span><span class="dv">1</span><span class="op">);</span></span></code></pre></div>
 <p>Note that the arguments are the same as the R version (<code>?runif</code>) <strong>except</strong>
 there is no <code>n</code> argument; you always only get one draw.</p>
 <p>Information about <code>Rcpp</code> can be found here: <a href="https://github.com/RcppCore/Rcpp" class="uri">https://github.com/RcppCore/Rcpp</a></p>
@@ -710,29 +715,29 @@ so to invoke these functions, you always prepend <code>mrgx::</code>.</p>
 <h3><span class="header-section-number">9.6.1</span> Get the model environment</h3>
 <p>Note that your model object (<code>mod</code>) contains an R environment. For
 example</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="plugins.html#cb319-1" aria-hidden="true" tabindex="-1"></a>mrgsolve<span class="sc">::</span><span class="fu">house</span>()<span class="sc">@</span>envir</span></code></pre></div>
-<pre><code>. &lt;environment: 0x7febc6c80c40&gt;</code></pre>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="plugins.html#cb346-1" aria-hidden="true" tabindex="-1"></a>mrgsolve<span class="sc">::</span><span class="fu">house</span>()<span class="sc">@</span>envir</span></code></pre></div>
+<pre><code>. &lt;environment: 0x7fe6e1c002d8&gt;</code></pre>
 <p>The objects in this environment are created by a block called <code>$ENV</code>
 in your model code (see Section <a href="model-specification.html#block-env">2.2.26</a>);</p>
 <p>To access this environment in your model, call</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb321-1"><a href="plugins.html#cb321-1" aria-hidden="true" tabindex="-1"></a>Rcpp<span class="op">::</span>Environment env <span class="op">=</span> mrgx<span class="op">::</span>get_envir<span class="op">(</span>self<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb348-1"><a href="plugins.html#cb348-1" aria-hidden="true" tabindex="-1"></a>Rcpp<span class="op">::</span>Environment env <span class="op">=</span> mrgx<span class="op">::</span>get_envir<span class="op">(</span>self<span class="op">);</span></span></code></pre></div>
 </div>
 </div>
 <div id="extract-an-object-from-the-model-environment" class="section level2" number="9.7">
 <h2><span class="header-section-number">9.7</span> Extract an object from the model environment</h2>
 <p>When you have an object created in <code>$ENV</code></p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb322-1"><a href="plugins.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> env <span class="op">]</span> </span>
-<span id="cb322-2"><a href="plugins.html#cb322-2" aria-hidden="true" tabindex="-1"></a>rand <span class="op">&lt;-</span> rnorm<span class="op">(</span><span class="dv">100</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb349-1"><a href="plugins.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> env <span class="op">]</span> </span>
+<span id="cb349-2"><a href="plugins.html#cb349-2" aria-hidden="true" tabindex="-1"></a>rand <span class="op">&lt;-</span> rnorm<span class="op">(</span><span class="dv">100</span><span class="op">)</span></span></code></pre></div>
 <p>You can extract this object with</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb323-1"><a href="plugins.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> preamble <span class="op">]</span></span>
-<span id="cb323-2"><a href="plugins.html#cb323-2" aria-hidden="true" tabindex="-1"></a>Rcpp<span class="op">::</span>NumericVector draw <span class="op">=</span> mrgx<span class="op">::</span>get<span class="op">(</span><span class="st">&quot;rand&quot;</span><span class="op">,</span> self<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb350-1"><a href="plugins.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> preamble <span class="op">]</span></span>
+<span id="cb350-2"><a href="plugins.html#cb350-2" aria-hidden="true" tabindex="-1"></a>Rcpp<span class="op">::</span>NumericVector draw <span class="op">=</span> mrgx<span class="op">::</span>get<span class="op">(</span><span class="st">&quot;rand&quot;</span><span class="op">,</span> self<span class="op">);</span></span></code></pre></div>
 </div>
 <div id="rcpparmadillo" class="section level2" number="9.8">
 <h2><span class="header-section-number">9.8</span> RcppArmadillo</h2>
 <p><strong>Purpose</strong></p>
 <p>Link to <code>RcppArmadillo</code> headers into your model.</p>
 <p><strong>Usage</strong></p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb324-1"><a href="plugins.html#cb324-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN RcppArmadillo</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb351-1"><a href="plugins.html#cb351-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN RcppArmadillo</span></code></pre></div>
 <p>Information about <code>armadillo</code> can be found here: <a href="http://arma.sourceforge.net/" class="uri">http://arma.sourceforge.net/</a>
 Information about <code>RcppArmadillo</code> can be found here:
 <a href="https://github.com/RcppCore/RcppArmadillo" class="uri">https://github.com/RcppCore/RcppArmadillo</a></p>
@@ -742,7 +747,7 @@ Information about <code>RcppArmadillo</code> can be found here:
 <p><strong>Purpose</strong></p>
 <p>Link to <code>boost</code> headers into your model.</p>
 <p><strong>Usage</strong></p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb325-1"><a href="plugins.html#cb325-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN BH</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb352-1"><a href="plugins.html#cb352-1" aria-hidden="true" tabindex="-1"></a>$PLUGIN BH</span></code></pre></div>
 <p>Note that once your model is linked to <code>BH</code> (<code>boost</code>), you will be able to
 include the <code>boost</code> header file that you need. You have to include the header
 file that contains the <code>boost</code> function you want to use.</p>

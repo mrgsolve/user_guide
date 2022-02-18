@@ -14,7 +14,9 @@ examples with references to the equivalent functions that can be used to
 work on `$SIGMA`. Also note that, for simplicity, we will not compile the 
 examples presented in this chapter. 
 
-## Simple matrix lists
+## Basics
+
+### Simple matrix lists
 
 We can look at the `popex` model in the internal library for a starting example
 to show how model matrices can be seen from the model object.
@@ -31,7 +33,7 @@ mod
 ```
 
 In this output, we see that `omega` is a 3 by 3 matrix and `sigma` is 1 by 1.
-We can view both matrices by calling `revar()` on the model objec
+We can view both matrices by calling `revar()` on the model object
 
 ```{r}
 revar(mod)
@@ -78,6 +80,18 @@ and the labels
 labels(om)
 ```
 
+as well as getting the dimensions or number of rows
+
+```{r}
+dim(om)
+```
+
+
+```{r}
+nrow(om)
+```
+
+
 The `omegalist` (`sigmalist`) object can be converted to a standard R list
 
 ```{r}
@@ -88,6 +102,124 @@ or it can be rendered as a matrix
 
 ```{r}
 as.matrix(om)
+```
+
+### Multiple matrix lists
+
+Let's look at an example where there is a more complicated `$OMEGA` structure.
+
+```{r}
+code <- '
+$OMEGA @name first @labels a b c
+1 2 3
+
+$OMEGA @name second @labels d e
+4 5
+
+$OMEGA @name third @labels f g h i
+6 7 8 9
+'
+mod <- mcode("multiple-matrices", code, compile = FALSE)
+```
+
+Each `$OMEGA` block codes a diagonal matrix; the interesting feature is that
+there are 3 different `$OMEGA` blocks. 
+
+Now, when we look at the model
+
+```{r}
+mod
+```
+
+We see that `$OMEGA` is one 3x3 matrix, one 2x2 matrix and on 4x4 matrix, in 
+that order. Calling `revar()` on this model object 
+
+```{r}
+revar(mod)
+```
+
+we only see the `$OMEGA` matrices as the model was coded. Now the length 
+of the `omegalist` object is 3
+
+```{r}
+length(omat(mod))
+```
+
+and the number of rows is 3 in the first matrix, 2 in the second, and 4 in the
+third
+
+```{r}
+nrow(omat(mod))
+```
+
+We can also check `dim()`
+
+```{r}
+dim(omat(mod))
+```
+
+
+The omega matrix can be converted from this segmented list into a single block
+matrix
+```{r}
+as.matrix(omat(mod))
+```
+
+The result is 9x9 with all off diagonals between the different list positions
+set to zero.
+
+Otherwise, we might work with this object as a list
+
+```{r}
+as.list(omat(mod))
+```
+
+## Collapsing matrices
+
+The functionality described in this subsection is new with mrgsolve 1.0.0.
+
+The structure of the matrices and the order in which they appear in the list
+matter when updating each matrix (see below). We saw how to create one big
+matrix out of all the smaller matrices using the `as.matrix()`. This section
+describes how to combine matrices within the confines of the `matlist` object.
+
+
+mrgsolve provides functions to collapse (or combine) matrices in a `matlist`
+object. We can call `collapse_omega()`, passing in the model object
+
+```{r}
+collapse_omega(mod) %>% revar()
+```
+and now we have an `omegalist` object inside a model object and the matrix 
+is a single 9x9 `$OMEGA` matrix. The row names have been retained, but there 
+is now no name for the matrix; this can be provided when collapsing
+
+```{r}
+collapse_omega(mod, name = "only") %>% omat()
+```
+
+
+Suppose that we only want to combine the first two matrices, leaving the third
+matrix alone. In that case, call `collapse_omega()` with the range argument
+
+```{r}
+collapse_omega(mod, range = c(1,2), name = "first_second") %>% omat()
+```
+
+Now the matlist topology has changed; there are still 9 (total) rows and columns, 
+but the matlist object is length 2 with 5x5 in the first position (newly 
+named `first_second`) an the old 4x4 matrix in the second position. Collapsing 
+matrices is an irreversible process; at this time there is no mechanism to 
+cut matrices back into smaller chunks. But collapsing matrices can be very helpful
+when they need to be updated. 
+
+Use `collapse_sigma()` to collapse `$SIGMA` matrices if needed. 
+
+Also, the function `collapse_matrix()` can be called on a `omegalist` or 
+`sigmalist` object to collapse
+
+```{r}
+omat(mod) %>% collapse_matrix(range = c(2,NA))
 ```
 
 
