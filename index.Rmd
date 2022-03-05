@@ -73,6 +73,9 @@ pretty clear in the pdfbook).
 - Chapter \@ref(install) provides links to some Wiki pages that can help with 
   installation
 
+## PDF Version {-}
+This book is also available in pdf format [here](user-guide.pdf).
+
 ## Other Resources {-}
 
 
