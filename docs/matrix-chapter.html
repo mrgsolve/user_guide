@@ -1,459 +1,71 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Model Matrices | mrgsolve User Guide</title>
-  <meta name="description" content="A guide to using mrgsolve." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 5 Model Matrices | mrgsolve User Guide" />
-  <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://mrgsolve.github.io/user_guide/" />
-  
-  <meta property="og:description" content="A guide to using mrgsolve." />
-  <meta name="github-repo" content="mrgsolve/user_guide" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Model Matrices | mrgsolve User Guide" />
-  <meta name="twitter:site" content="@mrgsolve" />
-  <meta name="twitter:description" content="A guide to using mrgsolve." />
-  
-
-<meta name="author" content="Metrum Research Group" />
-
-
-<meta name="date" content="2022-02-17" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="event-chapter.html"/>
-<link rel="next" href="simulated-output.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-
-<link rel="stylesheet" href="bookstyle.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Model Matrices | mrgsolve User Guide</title>
+<meta name="author" content="Metrum Research Group">
+<meta name="description" content="Model matrices include $OMEGA (for subject-level variability) and $SIGMA (for residual unexplained variability). These matrices are coded into the model file (see Sections 2.2.16 and 2.2.17) and...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Model Matrices | mrgsolve User Guide">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://mrgsolve.github.io/user_guide/matrix-chapter.html">
+<meta property="og:description" content="Model matrices include $OMEGA (for subject-level variability) and $SIGMA (for residual unexplained variability). These matrices are coded into the model file (see Sections 2.2.16 and 2.2.17) and...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Model Matrices | mrgsolve User Guide">
+<meta name="twitter:site" content="@mrgsolve">
+<meta name="twitter:description" content="Model matrices include $OMEGA (for subject-level variability) and $SIGMA (for residual unexplained variability). These matrices are coded into the model file (see Sections 2.2.16 and 2.2.17) and...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bookstyle.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><strong><a href="./">User Guide: mrgsolve</a></strong></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i>Other Resources</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="model-components.html"><a href="model-components.html"><i class="fa fa-check"></i><b>1</b> Model components</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="model-components.html"><a href="model-components.html#component-param"><i class="fa fa-check"></i><b>1.1</b> Parameter list</a>
-<ul>
-<li class="chapter" data-level="1.1.1" data-path="model-components.html"><a href="model-components.html#central-role-of-parameters-in-planning-simulations"><i class="fa fa-check"></i><b>1.1.1</b> Central role of parameters in planning simulations</a></li>
-</ul></li>
-<li class="chapter" data-level="1.2" data-path="model-components.html"><a href="model-components.html#component-init"><i class="fa fa-check"></i><b>1.2</b> Compartment list</a></li>
-<li class="chapter" data-level="1.3" data-path="model-components.html"><a href="model-components.html#component-stime"><i class="fa fa-check"></i><b>1.3</b> Simulation time grid</a>
-<ul>
-<li class="chapter" data-level="1.3.1" data-path="model-components.html"><a href="model-components.html#component-tgrid"><i class="fa fa-check"></i><b>1.3.1</b> <code>tgrid</code> objects</a></li>
-</ul></li>
-<li class="chapter" data-level="1.4" data-path="model-components.html"><a href="model-components.html#solver-settings"><i class="fa fa-check"></i><b>1.4</b> Solver settings</a>
-<ul>
-<li class="chapter" data-level="1.4.1" data-path="model-components.html"><a href="model-components.html#atol"><i class="fa fa-check"></i><b>1.4.1</b> <code>atol</code></a></li>
-<li class="chapter" data-level="1.4.2" data-path="model-components.html"><a href="model-components.html#rtol"><i class="fa fa-check"></i><b>1.4.2</b> <code>rtol</code></a></li>
-<li class="chapter" data-level="1.4.3" data-path="model-components.html"><a href="model-components.html#maxsteps"><i class="fa fa-check"></i><b>1.4.3</b> <code>maxsteps</code></a></li>
-<li class="chapter" data-level="1.4.4" data-path="model-components.html"><a href="model-components.html#hmax"><i class="fa fa-check"></i><b>1.4.4</b> <code>hmax</code></a></li>
-<li class="chapter" data-level="1.4.5" data-path="model-components.html"><a href="model-components.html#hmin"><i class="fa fa-check"></i><b>1.4.5</b> <code>hmin</code></a></li>
-<li class="chapter" data-level="1.4.6" data-path="model-components.html"><a href="model-components.html#ixpr"><i class="fa fa-check"></i><b>1.4.6</b> <code>ixpr</code></a></li>
-<li class="chapter" data-level="1.4.7" data-path="model-components.html"><a href="model-components.html#mxhnil"><i class="fa fa-check"></i><b>1.4.7</b> <code>mxhnil</code></a></li>
-</ul></li>
-<li class="chapter" data-level="1.5" data-path="model-components.html"><a href="model-components.html#functions"><i class="fa fa-check"></i><b>1.5</b> Functions</a>
-<ul>
-<li class="chapter" data-level="1.5.1" data-path="model-components.html"><a href="model-components.html#the-preamble-function"><i class="fa fa-check"></i><b>1.5.1</b> The <code>$PREAMBLE</code> function</a></li>
-<li class="chapter" data-level="1.5.2" data-path="model-components.html"><a href="model-components.html#the-main-function"><i class="fa fa-check"></i><b>1.5.2</b> The <code>$MAIN</code> function</a></li>
-<li class="chapter" data-level="1.5.3" data-path="model-components.html"><a href="model-components.html#the-ode-function"><i class="fa fa-check"></i><b>1.5.3</b> The <code>$ODE</code> function</a></li>
-<li class="chapter" data-level="1.5.4" data-path="model-components.html"><a href="model-components.html#the-table-function"><i class="fa fa-check"></i><b>1.5.4</b> The <code>$TABLE</code> function</a></li>
-</ul></li>
-<li class="chapter" data-level="1.6" data-path="model-components.html"><a href="model-components.html#random-effect-variances"><i class="fa fa-check"></i><b>1.6</b> Random effect variances</a>
-<ul>
-<li class="chapter" data-level="1.6.1" data-path="model-components.html"><a href="model-components.html#omega"><i class="fa fa-check"></i><b>1.6.1</b> <code>OMEGA</code></a></li>
-<li class="chapter" data-level="1.6.2" data-path="model-components.html"><a href="model-components.html#sigma"><i class="fa fa-check"></i><b>1.6.2</b> <code>SIGMA</code></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="model-specification.html"><a href="model-specification.html"><i class="fa fa-check"></i><b>2</b> Model specification</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="model-specification.html"><a href="model-specification.html#how-where-to-write-a-model"><i class="fa fa-check"></i><b>2.1</b> How / where to write a model</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="model-specification.html"><a href="model-specification.html#spec-separate-file"><i class="fa fa-check"></i><b>2.1.1</b> Separate file</a></li>
-<li class="chapter" data-level="2.1.2" data-path="model-specification.html"><a href="model-specification.html#spec-inline"><i class="fa fa-check"></i><b>2.1.2</b> Inline / <code>code</code>  </a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="model-specification.html"><a href="model-specification.html#code-blocks"><i class="fa fa-check"></i><b>2.2</b> Code blocks</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="model-specification.html"><a href="model-specification.html#about-code-blocks"><i class="fa fa-check"></i><b>2.2.1</b> About code blocks</a></li>
-<li class="chapter" data-level="2.2.2" data-path="model-specification.html"><a href="model-specification.html#programmatic-or-bulk-initialization"><i class="fa fa-check"></i><b>2.2.2</b> Programmatic or bulk initialization</a></li>
-<li class="chapter" data-level="2.2.3" data-path="model-specification.html"><a href="model-specification.html#block-prob"><i class="fa fa-check"></i><b>2.2.3</b> <code>$PROB</code>  </a></li>
-<li class="chapter" data-level="2.2.4" data-path="model-specification.html"><a href="model-specification.html#block-param"><i class="fa fa-check"></i><b>2.2.4</b> <code>$PARAM</code>  </a></li>
-<li class="chapter" data-level="2.2.5" data-path="model-specification.html"><a href="model-specification.html#block-fixed"><i class="fa fa-check"></i><b>2.2.5</b> <code>$FIXED</code>  </a></li>
-<li class="chapter" data-level="2.2.6" data-path="model-specification.html"><a href="model-specification.html#cmt-and-init"><i class="fa fa-check"></i><b>2.2.6</b> <code>$CMT</code> and <code>$INIT</code></a></li>
-<li class="chapter" data-level="2.2.7" data-path="model-specification.html"><a href="model-specification.html#block-main"><i class="fa fa-check"></i><b>2.2.7</b> <code>$MAIN</code>  </a></li>
-<li class="chapter" data-level="2.2.8" data-path="model-specification.html"><a href="model-specification.html#block-pk"><i class="fa fa-check"></i><b>2.2.8</b> <code>$PK</code>  </a></li>
-<li class="chapter" data-level="2.2.9" data-path="model-specification.html"><a href="model-specification.html#block-ode"><i class="fa fa-check"></i><b>2.2.9</b> <code>$ODE</code>  </a></li>
-<li class="chapter" data-level="2.2.10" data-path="model-specification.html"><a href="model-specification.html#block-des"><i class="fa fa-check"></i><b>2.2.10</b> <code>$DES</code>  </a></li>
-<li class="chapter" data-level="2.2.11" data-path="model-specification.html"><a href="model-specification.html#block-table"><i class="fa fa-check"></i><b>2.2.11</b> <code>$TABLE</code>  </a></li>
-<li class="chapter" data-level="2.2.12" data-path="model-specification.html"><a href="model-specification.html#block-error"><i class="fa fa-check"></i><b>2.2.12</b> <code>$ERROR</code>  </a></li>
-<li class="chapter" data-level="2.2.13" data-path="model-specification.html"><a href="model-specification.html#block-preamble"><i class="fa fa-check"></i><b>2.2.13</b> <code>$PREAMBLE</code>  </a></li>
-<li class="chapter" data-level="2.2.14" data-path="model-specification.html"><a href="model-specification.html#block-pred"><i class="fa fa-check"></i><b>2.2.14</b> <code>$PRED</code>  </a></li>
-<li class="chapter" data-level="2.2.15" data-path="model-specification.html"><a href="model-specification.html#block-capture"><i class="fa fa-check"></i><b>2.2.15</b> <code>$CAPTURE</code>  </a></li>
-<li class="chapter" data-level="2.2.16" data-path="model-specification.html"><a href="model-specification.html#block-omega"><i class="fa fa-check"></i><b>2.2.16</b> <code>$OMEGA</code>  </a></li>
-<li class="chapter" data-level="2.2.17" data-path="model-specification.html"><a href="model-specification.html#block-sigma"><i class="fa fa-check"></i><b>2.2.17</b> <code>$SIGMA</code>  </a></li>
-<li class="chapter" data-level="2.2.18" data-path="model-specification.html"><a href="model-specification.html#set"><i class="fa fa-check"></i><b>2.2.18</b> <code>$SET</code></a></li>
-<li class="chapter" data-level="2.2.19" data-path="model-specification.html"><a href="model-specification.html#global"><i class="fa fa-check"></i><b>2.2.19</b> <code>$GLOBAL</code></a></li>
-<li class="chapter" data-level="2.2.20" data-path="model-specification.html"><a href="model-specification.html#pkmodel"><i class="fa fa-check"></i><b>2.2.20</b> <code>$PKMODEL</code></a></li>
-<li class="chapter" data-level="2.2.21" data-path="model-specification.html"><a href="model-specification.html#block-plugin"><i class="fa fa-check"></i><b>2.2.21</b> <code>$PLUGIN</code>  </a></li>
-<li class="chapter" data-level="2.2.22" data-path="model-specification.html"><a href="model-specification.html#block-theta"><i class="fa fa-check"></i><b>2.2.22</b> <code>$THETA</code>  </a></li>
-<li class="chapter" data-level="2.2.23" data-path="model-specification.html"><a href="model-specification.html#block-nmxml"><i class="fa fa-check"></i><b>2.2.23</b> <code>$NMXML</code>  </a></li>
-<li class="chapter" data-level="2.2.24" data-path="model-specification.html"><a href="model-specification.html#block-nmext"><i class="fa fa-check"></i><b>2.2.24</b> <code>$NMEXT</code>  </a></li>
-<li class="chapter" data-level="2.2.25" data-path="model-specification.html"><a href="model-specification.html#block-include"><i class="fa fa-check"></i><b>2.2.25</b> <code>$INCLUDE</code>  </a></li>
-<li class="chapter" data-level="2.2.26" data-path="model-specification.html"><a href="model-specification.html#block-env"><i class="fa fa-check"></i><b>2.2.26</b> <code>$ENV</code>  </a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="model-specification.html"><a href="model-specification.html#variables-macros"><i class="fa fa-check"></i><b>2.3</b> Variables and Macros</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="model-specification.html"><a href="model-specification.html#id"><i class="fa fa-check"></i><b>2.3.1</b> <code>ID</code></a></li>
-<li class="chapter" data-level="2.3.2" data-path="model-specification.html"><a href="model-specification.html#time"><i class="fa fa-check"></i><b>2.3.2</b> <code>TIME</code></a></li>
-<li class="chapter" data-level="2.3.3" data-path="model-specification.html"><a href="model-specification.html#solvertime"><i class="fa fa-check"></i><b>2.3.3</b> <code>SOLVERTIME</code></a></li>
-<li class="chapter" data-level="2.3.4" data-path="model-specification.html"><a href="model-specification.html#t"><i class="fa fa-check"></i><b>2.3.4</b> <code>T</code></a></li>
-<li class="chapter" data-level="2.3.5" data-path="model-specification.html"><a href="model-specification.html#evid"><i class="fa fa-check"></i><b>2.3.5</b> <code>EVID</code></a></li>
-<li class="chapter" data-level="2.3.6" data-path="model-specification.html"><a href="model-specification.html#cmt"><i class="fa fa-check"></i><b>2.3.6</b> <code>CMT</code></a></li>
-<li class="chapter" data-level="2.3.7" data-path="model-specification.html"><a href="model-specification.html#amt"><i class="fa fa-check"></i><b>2.3.7</b> <code>AMT</code></a></li>
-<li class="chapter" data-level="2.3.8" data-path="model-specification.html"><a href="model-specification.html#newind"><i class="fa fa-check"></i><b>2.3.8</b> <code>NEWIND</code></a></li>
-<li class="chapter" data-level="2.3.9" data-path="model-specification.html"><a href="model-specification.html#ss_advance"><i class="fa fa-check"></i><b>2.3.9</b> <code>SS_ADVANCE</code></a></li>
-<li class="chapter" data-level="2.3.10" data-path="model-specification.html"><a href="model-specification.html#simeta"><i class="fa fa-check"></i><b>2.3.10</b> <code>simeta()</code></a></li>
-<li class="chapter" data-level="2.3.11" data-path="model-specification.html"><a href="model-specification.html#simeps"><i class="fa fa-check"></i><b>2.3.11</b> <code>simeps()</code></a></li>
-<li class="chapter" data-level="2.3.12" data-path="model-specification.html"><a href="model-specification.html#self-object"><i class="fa fa-check"></i><b>2.3.12</b> <code>self</code>  </a></li>
-<li class="chapter" data-level="2.3.13" data-path="model-specification.html"><a href="model-specification.html#self.cmt"><i class="fa fa-check"></i><b>2.3.13</b> <code>self.cmt</code></a></li>
-<li class="chapter" data-level="2.3.14" data-path="model-specification.html"><a href="model-specification.html#self.amt"><i class="fa fa-check"></i><b>2.3.14</b> <code>self.amt</code></a></li>
-<li class="chapter" data-level="2.3.15" data-path="model-specification.html"><a href="model-specification.html#self.nid"><i class="fa fa-check"></i><b>2.3.15</b> <code>self.nid</code></a></li>
-<li class="chapter" data-level="2.3.16" data-path="model-specification.html"><a href="model-specification.html#self.idn"><i class="fa fa-check"></i><b>2.3.16</b> <code>self.idn</code></a></li>
-<li class="chapter" data-level="2.3.17" data-path="model-specification.html"><a href="model-specification.html#self.nrow"><i class="fa fa-check"></i><b>2.3.17</b> <code>self.nrow</code></a></li>
-<li class="chapter" data-level="2.3.18" data-path="model-specification.html"><a href="model-specification.html#self.rown"><i class="fa fa-check"></i><b>2.3.18</b> <code>self.rown</code></a></li>
-<li class="chapter" data-level="2.3.19" data-path="model-specification.html"><a href="model-specification.html#self.envir"><i class="fa fa-check"></i><b>2.3.19</b> <code>self.envir</code></a></li>
-<li class="chapter" data-level="2.3.20" data-path="model-specification.html"><a href="model-specification.html#self-tad"><i class="fa fa-check"></i><b>2.3.20</b> <code>self.tad()</code>  </a></li>
-<li class="chapter" data-level="2.3.21" data-path="model-specification.html"><a href="model-specification.html#self.mtime"><i class="fa fa-check"></i><b>2.3.21</b> <code>self.mtime(&lt;time&gt;)</code>  </a></li>
-<li class="chapter" data-level="2.3.22" data-path="model-specification.html"><a href="model-specification.html#self.meventtime-evid"><i class="fa fa-check"></i><b>2.3.22</b> <code>self.mevent(&lt;time&gt;, &lt;evid&gt;)</code></a></li>
-<li class="chapter" data-level="2.3.23" data-path="model-specification.html"><a href="model-specification.html#self.stop"><i class="fa fa-check"></i><b>2.3.23</b> <code>self.stop()</code></a></li>
-<li class="chapter" data-level="2.3.24" data-path="model-specification.html"><a href="model-specification.html#self.stop_id"><i class="fa fa-check"></i><b>2.3.24</b> <code>self.stop_id()</code></a></li>
-<li class="chapter" data-level="2.3.25" data-path="model-specification.html"><a href="model-specification.html#self.stop_id_cf"><i class="fa fa-check"></i><b>2.3.25</b> <code>self.stop_id_cf()</code></a></li>
-<li class="chapter" data-level="2.3.26" data-path="model-specification.html"><a href="model-specification.html#thetan"><i class="fa fa-check"></i><b>2.3.26</b> <code>THETA(n)</code></a></li>
-<li class="chapter" data-level="2.3.27" data-path="model-specification.html"><a href="model-specification.html#etan"><i class="fa fa-check"></i><b>2.3.27</b> <code>ETA(n)</code></a></li>
-<li class="chapter" data-level="2.3.28" data-path="model-specification.html"><a href="model-specification.html#epsn"><i class="fa fa-check"></i><b>2.3.28</b> <code>EPS(n)</code></a></li>
-<li class="chapter" data-level="2.3.29" data-path="model-specification.html"><a href="model-specification.html#tablename"><i class="fa fa-check"></i><b>2.3.29</b> <code>table(&lt;name&gt;)</code></a></li>
-<li class="chapter" data-level="2.3.30" data-path="model-specification.html"><a href="model-specification.html#spec-f"><i class="fa fa-check"></i><b>2.3.30</b> <code>F_CMT</code>  </a></li>
-<li class="chapter" data-level="2.3.31" data-path="model-specification.html"><a href="model-specification.html#spec-alag"><i class="fa fa-check"></i><b>2.3.31</b> <code>ALAG_CMT</code>  </a></li>
-<li class="chapter" data-level="2.3.32" data-path="model-specification.html"><a href="model-specification.html#spec-r"><i class="fa fa-check"></i><b>2.3.32</b> <code>R_CMT</code>  </a></li>
-<li class="chapter" data-level="2.3.33" data-path="model-specification.html"><a href="model-specification.html#rn"><i class="fa fa-check"></i><b>2.3.33</b> <code>Rn</code></a></li>
-<li class="chapter" data-level="2.3.34" data-path="model-specification.html"><a href="model-specification.html#spec-d"><i class="fa fa-check"></i><b>2.3.34</b> <code>D_CMT</code>  </a></li>
-<li class="chapter" data-level="2.3.35" data-path="model-specification.html"><a href="model-specification.html#nonmem-like-syntax"><i class="fa fa-check"></i><b>2.3.35</b> NONMEM-like syntax</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="model-specification.html"><a href="model-specification.html#reserved-words"><i class="fa fa-check"></i><b>2.4</b> Reserved words</a></li>
-<li class="chapter" data-level="2.5" data-path="model-specification.html"><a href="model-specification.html#new-variables"><i class="fa fa-check"></i><b>2.5</b> Derive new variables</a>
-<ul>
-<li class="chapter" data-level="2.5.1" data-path="model-specification.html"><a href="model-specification.html#special-handling-for-double-int-bool"><i class="fa fa-check"></i><b>2.5.1</b> Special handling for <code>double</code>, <code>int</code>, <code>bool</code></a></li>
-<li class="chapter" data-level="2.5.2" data-path="model-specification.html"><a href="model-specification.html#using-other-types-globally"><i class="fa fa-check"></i><b>2.5.2</b> Using other types globally</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="model-specification.html"><a href="model-specification.html#random-number-generation"><i class="fa fa-check"></i><b>2.6</b> Random number generation</a></li>
-<li class="chapter" data-level="2.7" data-path="model-specification.html"><a href="model-specification.html#examples"><i class="fa fa-check"></i><b>2.7</b> Examples</a>
-<ul>
-<li class="chapter" data-level="2.7.1" data-path="model-specification.html"><a href="model-specification.html#simple-pk-model"><i class="fa fa-check"></i><b>2.7.1</b> Simple PK model</a></li>
-<li class="chapter" data-level="2.7.2" data-path="model-specification.html"><a href="model-specification.html#pkpd-model"><i class="fa fa-check"></i><b>2.7.2</b> PK/PD model</a></li>
-<li class="chapter" data-level="2.7.3" data-path="model-specification.html"><a href="model-specification.html#population-pk-model-with-covariates-and-iov"><i class="fa fa-check"></i><b>2.7.3</b> Population PK model with covariates and IOV</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="data-set-chapter.html"><a href="data-set-chapter.html"><i class="fa fa-check"></i><b>3</b> Input data sets</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="data-set-chapter.html"><a href="data-set-chapter.html#datasets"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
-<li class="chapter" data-level="3.2" data-path="data-set-chapter.html"><a href="data-set-chapter.html#data-set"><i class="fa fa-check"></i><b>3.2</b> Event data sets (<code>data</code>)</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="data-set-chapter.html"><a href="data-set-chapter.html#two-types-of-data_set"><i class="fa fa-check"></i><b>3.2.1</b> Two types of <code>data_set</code></a></li>
-<li class="chapter" data-level="3.2.2" data-path="data-set-chapter.html"><a href="data-set-chapter.html#sorting-requirements"><i class="fa fa-check"></i><b>3.2.2</b> Sorting requirements</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data-set-chapter.html"><a href="data-set-chapter.html#creating-data-sets"><i class="fa fa-check"></i><b>3.2.3</b> Creating data sets</a></li>
-<li class="chapter" data-level="3.2.4" data-path="data-set-chapter.html"><a href="data-set-chapter.html#example"><i class="fa fa-check"></i><b>3.2.4</b> Example</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="data-set-chapter.html"><a href="data-set-chapter.html#idata-set"><i class="fa fa-check"></i><b>3.3</b> Individual data sets (<code>idata</code>)</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="data-set-chapter.html"><a href="data-set-chapter.html#use-case"><i class="fa fa-check"></i><b>3.3.1</b> Use case</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="data-set-chapter.html"><a href="data-set-chapter.html#numeric-only"><i class="fa fa-check"></i><b>3.4</b> Numeric data only</a></li>
-<li class="chapter" data-level="3.5" data-path="data-set-chapter.html"><a href="data-set-chapter.html#valid_data_set"><i class="fa fa-check"></i><b>3.5</b> Data set validation</a></li>
-<li class="chapter" data-level="3.6" data-path="data-set-chapter.html"><a href="data-set-chapter.html#pred-data"><i class="fa fa-check"></i><b>3.6</b> Data sets for use with <code>$PRED</code></a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="event-chapter.html"><a href="event-chapter.html"><i class="fa fa-check"></i><b>4</b> Event objects</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="event-chapter.html"><a href="event-chapter.html#usage"><i class="fa fa-check"></i><b>4.1</b> Usage</a></li>
-<li class="chapter" data-level="4.2" data-path="event-chapter.html"><a href="event-chapter.html#construction"><i class="fa fa-check"></i><b>4.2</b> Construction</a></li>
-<li class="chapter" data-level="4.3" data-path="event-chapter.html"><a href="event-chapter.html#coerce-to-data-set"><i class="fa fa-check"></i><b>4.3</b> Coerce to data set</a></li>
-<li class="chapter" data-level="4.4" data-path="event-chapter.html"><a href="event-chapter.html#extract-information"><i class="fa fa-check"></i><b>4.4</b> Extract information</a></li>
-<li class="chapter" data-level="4.5" data-path="event-chapter.html"><a href="event-chapter.html#combining-event-objects"><i class="fa fa-check"></i><b>4.5</b> Combining event objects</a>
-<ul>
-<li class="chapter" data-level="4.5.1" data-path="event-chapter.html"><a href="event-chapter.html#concatenate"><i class="fa fa-check"></i><b>4.5.1</b> Concatenate</a></li>
-<li class="chapter" data-level="4.5.2" data-path="event-chapter.html"><a href="event-chapter.html#sequence"><i class="fa fa-check"></i><b>4.5.2</b> Sequence</a></li>
-<li class="chapter" data-level="4.5.3" data-path="event-chapter.html"><a href="event-chapter.html#repeat"><i class="fa fa-check"></i><b>4.5.3</b> repeat</a></li>
-<li class="chapter" data-level="4.5.4" data-path="event-chapter.html"><a href="event-chapter.html#create-a-data_set"><i class="fa fa-check"></i><b>4.5.4</b> Create a “data_set”</a></li>
-</ul></li>
-<li class="chapter" data-level="4.6" data-path="event-chapter.html"><a href="event-chapter.html#modifying-an-event-object"><i class="fa fa-check"></i><b>4.6</b> Modifying an event object</a>
-<ul>
-<li class="chapter" data-level="4.6.1" data-path="event-chapter.html"><a href="event-chapter.html#tidy-like-manipulation"><i class="fa fa-check"></i><b>4.6.1</b> Tidy-like manipulation</a></li>
-<li class="chapter" data-level="4.6.2" data-path="event-chapter.html"><a href="event-chapter.html#realize_addl"><i class="fa fa-check"></i><b>4.6.2</b> realize_addl</a></li>
-<li class="chapter" data-level="4.6.3" data-path="event-chapter.html"><a href="event-chapter.html#ev_rep"><i class="fa fa-check"></i><b>4.6.3</b> ev_rep</a></li>
-</ul></li>
-<li class="chapter" data-level="4.7" data-path="event-chapter.html"><a href="event-chapter.html#creative-composition"><i class="fa fa-check"></i><b>4.7</b> Creative composition</a>
-<ul>
-<li class="chapter" data-level="4.7.1" data-path="event-chapter.html"><a href="event-chapter.html#ev_days"><i class="fa fa-check"></i><b>4.7.1</b> ev_days</a></li>
-<li class="chapter" data-level="4.7.2" data-path="event-chapter.html"><a href="event-chapter.html#ev_rx"><i class="fa fa-check"></i><b>4.7.2</b> ev_rx</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="matrix-chapter.html"><a href="matrix-chapter.html"><i class="fa fa-check"></i><b>5</b> Model Matrices</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#basics"><i class="fa fa-check"></i><b>5.1</b> Basics</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#simple-matrix-lists"><i class="fa fa-check"></i><b>5.1.1</b> Simple matrix lists</a></li>
-<li class="chapter" data-level="5.1.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#multiple-matrix-lists"><i class="fa fa-check"></i><b>5.1.2</b> Multiple matrix lists</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#collapsing-matrices"><i class="fa fa-check"></i><b>5.2</b> Collapsing matrices</a></li>
-<li class="chapter" data-level="5.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-update"><i class="fa fa-check"></i><b>5.3</b> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="matrix-chapter.html"><a href="matrix-chapter.html#matrix-helper-functions"><i class="fa fa-check"></i><b>5.3.1</b> Matrix helper functions</a></li>
-<li class="chapter" data-level="5.3.2" data-path="matrix-chapter.html"><a href="matrix-chapter.html#fill-a-matrix-with-zeros"><i class="fa fa-check"></i><b>5.3.2</b> Fill a matrix with zeros</a></li>
-<li class="chapter" data-level="5.3.3" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrix"><i class="fa fa-check"></i><b>5.3.3</b> Example: unnamed matrix</a></li>
-<li class="chapter" data-level="5.3.4" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-named-matrices"><i class="fa fa-check"></i><b>5.3.4</b> Example: named matrices</a></li>
-<li class="chapter" data-level="5.3.5" data-path="matrix-chapter.html"><a href="matrix-chapter.html#example-unnamed-matrices"><i class="fa fa-check"></i><b>5.3.5</b> Example: unnamed matrices</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="simulated-output.html"><a href="simulated-output.html"><i class="fa fa-check"></i><b>6</b> Simulated output</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="simulated-output.html"><a href="simulated-output.html#output-types"><i class="fa fa-check"></i><b>6.1</b> Output types</a></li>
-<li class="chapter" data-level="6.2" data-path="simulated-output.html"><a href="simulated-output.html#methods-for-mrgsim-output"><i class="fa fa-check"></i><b>6.2</b> Methods for mrgsim output</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="simulated-output.html"><a href="simulated-output.html#coercion-methods"><i class="fa fa-check"></i><b>6.2.1</b> Coercion methods</a></li>
-<li class="chapter" data-level="6.2.2" data-path="simulated-output.html"><a href="simulated-output.html#query-methods"><i class="fa fa-check"></i><b>6.2.2</b> Query methods</a></li>
-<li class="chapter" data-level="6.2.3" data-path="simulated-output.html"><a href="simulated-output.html#graphical-methods"><i class="fa fa-check"></i><b>6.2.3</b> Graphical methods</a></li>
-<li class="chapter" data-level="6.2.4" data-path="simulated-output.html"><a href="simulated-output.html#methods-for-dplyr-verbs"><i class="fa fa-check"></i><b>6.2.4</b> Methods for <code>dplyr</code> verbs</a></li>
-<li class="chapter" data-level="6.2.5" data-path="simulated-output.html"><a href="simulated-output.html#modify-methods"><i class="fa fa-check"></i><b>6.2.5</b> Modify methods</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="simulated-output.html"><a href="simulated-output.html#controlling-output-scope"><i class="fa fa-check"></i><b>6.3</b> Controlling output scope</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="simulated-output.html"><a href="simulated-output.html#background"><i class="fa fa-check"></i><b>6.3.1</b> Background</a></li>
-<li class="chapter" data-level="6.3.2" data-path="simulated-output.html"><a href="simulated-output.html#implementation"><i class="fa fa-check"></i><b>6.3.2</b> Implementation</a></li>
-<li class="chapter" data-level="6.3.3" data-path="simulated-output.html"><a href="simulated-output.html#copy-items-from-data-to-simulated-output"><i class="fa fa-check"></i><b>6.3.3</b> Copy items from data to simulated output</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="section-sequence.html"><a href="section-sequence.html"><i class="fa fa-check"></i><b>7</b> Simulation sequence</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="section-sequence.html"><a href="section-sequence.html#functions-to-call"><i class="fa fa-check"></i><b>7.1</b> Functions to call</a></li>
-<li class="chapter" data-level="7.2" data-path="section-sequence.html"><a href="section-sequence.html#problem-initiation"><i class="fa fa-check"></i><b>7.2</b> Problem initiation</a></li>
-<li class="chapter" data-level="7.3" data-path="section-sequence.html"><a href="section-sequence.html#subject-initiation"><i class="fa fa-check"></i><b>7.3</b> Subject initiation</a></li>
-<li class="chapter" data-level="7.4" data-path="section-sequence.html"><a href="section-sequence.html#sequence-for-a-single-record"><i class="fa fa-check"></i><b>7.4</b> Sequence for a single record</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="steady-state.html"><a href="steady-state.html"><i class="fa fa-check"></i><b>8</b> Steady state</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="steady-state.html"><a href="steady-state.html#key-information"><i class="fa fa-check"></i><b>8.1</b> Key information</a></li>
-<li class="chapter" data-level="8.2" data-path="steady-state.html"><a href="steady-state.html#introduction-1"><i class="fa fa-check"></i><b>8.2</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="8.2.1" data-path="steady-state.html"><a href="steady-state.html#intermittent-doses"><i class="fa fa-check"></i><b>8.2.1</b> Intermittent doses</a></li>
-<li class="chapter" data-level="8.2.2" data-path="steady-state.html"><a href="steady-state.html#continuous-infusion"><i class="fa fa-check"></i><b>8.2.2</b> Continuous infusion</a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="steady-state.html"><a href="steady-state.html#advance-to-ss"><i class="fa fa-check"></i><b>8.3</b> Advance to SS</a></li>
-<li class="chapter" data-level="8.4" data-path="steady-state.html"><a href="steady-state.html#control-advance-to-ss"><i class="fa fa-check"></i><b>8.4</b> Control advance to SS</a>
-<ul>
-<li class="chapter" data-level="8.4.1" data-path="steady-state.html"><a href="steady-state.html#tolerances-for-ss"><i class="fa fa-check"></i><b>8.4.1</b> Tolerances for SS</a></li>
-<li class="chapter" data-level="8.4.2" data-path="steady-state.html"><a href="steady-state.html#max-dose-number"><i class="fa fa-check"></i><b>8.4.2</b> Max dose number</a></li>
-<li class="chapter" data-level="8.4.3" data-path="steady-state.html"><a href="steady-state.html#include-exclude-compartments-for-ss"><i class="fa fa-check"></i><b>8.4.3</b> Include / exclude compartments for SS</a></li>
-<li class="chapter" data-level="8.4.4" data-path="steady-state.html"><a href="steady-state.html#ss_advance-flag"><i class="fa fa-check"></i><b>8.4.4</b> SS_ADVANCE flag</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="plugins.html"><a href="plugins.html"><i class="fa fa-check"></i><b>9</b> Plugins</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="plugins.html"><a href="plugins.html#plugin-autodec"><i class="fa fa-check"></i><b>9.1</b> autodec</a></li>
-<li class="chapter" data-level="9.2" data-path="plugins.html"><a href="plugins.html#plugin-nm-vars"><i class="fa fa-check"></i><b>9.2</b> nm-vars</a></li>
-<li class="chapter" data-level="9.3" data-path="plugins.html"><a href="plugins.html#plugin-tad"><i class="fa fa-check"></i><b>9.3</b> tad</a>
-<ul>
-<li class="chapter" data-level="9.3.1" data-path="plugins.html"><a href="plugins.html#note"><i class="fa fa-check"></i><b>9.3.1</b> Note</a></li>
-</ul></li>
-<li class="chapter" data-level="9.4" data-path="plugins.html"><a href="plugins.html#plugin-cxx11"><i class="fa fa-check"></i><b>9.4</b> CXX11</a></li>
-<li class="chapter" data-level="9.5" data-path="plugins.html"><a href="plugins.html#plugin-rcpp"><i class="fa fa-check"></i><b>9.5</b> Rcpp</a></li>
-<li class="chapter" data-level="9.6" data-path="plugins.html"><a href="plugins.html#plugin-mrgx"><i class="fa fa-check"></i><b>9.6</b> mrgx</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="plugins.html"><a href="plugins.html#get-the-model-environment"><i class="fa fa-check"></i><b>9.6.1</b> Get the model environment</a></li>
-</ul></li>
-<li class="chapter" data-level="9.7" data-path="plugins.html"><a href="plugins.html#extract-an-object-from-the-model-environment"><i class="fa fa-check"></i><b>9.7</b> Extract an object from the model environment</a></li>
-<li class="chapter" data-level="9.8" data-path="plugins.html"><a href="plugins.html#rcpparmadillo"><i class="fa fa-check"></i><b>9.8</b> RcppArmadillo</a></li>
-<li class="chapter" data-level="9.9" data-path="plugins.html"><a href="plugins.html#bh"><i class="fa fa-check"></i><b>9.9</b> BH</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="mtime.html"><a href="mtime.html"><i class="fa fa-check"></i><b>10</b> Modeled events</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="mtime.html"><a href="mtime.html#simple-mtime"><i class="fa fa-check"></i><b>10.1</b> Simple MTIME</a></li>
-<li class="chapter" data-level="10.2" data-path="mtime.html"><a href="mtime.html#mtime-with-specific-evid"><i class="fa fa-check"></i><b>10.2</b> MTIME with specific EVID</a></li>
-<li class="chapter" data-level="10.3" data-path="mtime.html"><a href="mtime.html#modeled-doses"><i class="fa fa-check"></i><b>10.3</b> Modeled doses</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="topics.html"><a href="topics.html"><i class="fa fa-check"></i><b>11</b> Topics</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="topics.html"><a href="topics.html#topic-annotated"><i class="fa fa-check"></i><b>11.1</b> Annotated model specification</a></li>
-<li class="chapter" data-level="11.2" data-path="topics.html"><a href="topics.html#topic-init"><i class="fa fa-check"></i><b>11.2</b> Set initial conditions</a>
-<ul>
-<li class="chapter" data-level="11.2.1" data-path="topics.html"><a href="topics.html#summary"><i class="fa fa-check"></i><b>11.2.1</b> Summary</a></li>
-<li class="chapter" data-level="11.2.2" data-path="topics.html"><a href="topics.html#make-a-model-only-to-examine-init-behavior"><i class="fa fa-check"></i><b>11.2.2</b> Make a model only to examine <code>init</code> behavior</a></li>
-<li class="chapter" data-level="11.2.3" data-path="topics.html"><a href="topics.html#example-pkpd-model-with-initial-condition"><i class="fa fa-check"></i><b>11.2.3</b> Example PK/PD model with initial condition</a></li>
-<li class="chapter" data-level="11.2.4" data-path="topics.html"><a href="topics.html#remember-calling-init-will-let-you-check-to-see-what-is-going-on"><i class="fa fa-check"></i><b>11.2.4</b> Remember: calling <code>init</code> will let you check to see what is going on</a></li>
-<li class="chapter" data-level="11.2.5" data-path="topics.html"><a href="topics.html#set-initial-conditions-via-idata"><i class="fa fa-check"></i><b>11.2.5</b> Set initial conditions via <code>idata</code></a></li>
-</ul></li>
-<li class="chapter" data-level="11.3" data-path="topics.html"><a href="topics.html#topic-parameter-update"><i class="fa fa-check"></i><b>11.3</b> Updating parameters</a>
-<ul>
-<li class="chapter" data-level="11.3.1" data-path="topics.html"><a href="topics.html#parameter-update-hierarchy"><i class="fa fa-check"></i><b>11.3.1</b> Parameter update hierarchy</a></li>
-<li class="chapter" data-level="11.3.2" data-path="topics.html"><a href="topics.html#topic-parameter-update-base"><i class="fa fa-check"></i><b>11.3.2</b> Updating the base parameter list</a></li>
-</ul></li>
-<li class="chapter" data-level="11.4" data-path="topics.html"><a href="topics.html#topic-tgrid"><i class="fa fa-check"></i><b>11.4</b> Time grid objects</a></li>
-<li class="chapter" data-level="11.5" data-path="topics.html"><a href="topics.html#topic-designs"><i class="fa fa-check"></i><b>11.5</b> Individualized sampling designs</a></li>
-<li class="chapter" data-level="11.6" data-path="topics.html"><a href="topics.html#some-helpful-c"><i class="fa fa-check"></i><b>11.6</b> Some helpful <code>C++</code></a>
-<ul>
-<li class="chapter" data-level="11.6.1" data-path="topics.html"><a href="topics.html#semi-colons"><i class="fa fa-check"></i><b>11.6.1</b> Semi-colons</a></li>
-<li class="chapter" data-level="11.6.2" data-path="topics.html"><a href="topics.html#if-else"><i class="fa fa-check"></i><b>11.6.2</b> if-else</a></li>
-<li class="chapter" data-level="11.6.3" data-path="topics.html"><a href="topics.html#functions-1"><i class="fa fa-check"></i><b>11.6.3</b> Functions</a></li>
-<li class="chapter" data-level="11.6.4" data-path="topics.html"><a href="topics.html#integer-division"><i class="fa fa-check"></i><b>11.6.4</b> Integer division</a></li>
-<li class="chapter" data-level="11.6.5" data-path="topics.html"><a href="topics.html#pre-processor-directives"><i class="fa fa-check"></i><b>11.6.5</b> Pre-processor directives</a></li>
-</ul></li>
-<li class="chapter" data-level="11.7" data-path="topics.html"><a href="topics.html#resimulate-eta-and-eps"><i class="fa fa-check"></i><b>11.7</b> Resimulate <code>ETA</code> and <code>EPS</code></a></li>
-<li class="chapter" data-level="11.8" data-path="topics.html"><a href="topics.html#topics-time-varying"><i class="fa fa-check"></i><b>11.8</b> Time varying covariates</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="q-and-a.html"><a href="q-and-a.html"><i class="fa fa-check"></i><b>12</b> Questions and Answers</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="q-and-a.html"><a href="q-and-a.html#can-i-interrupt-a-simulation"><i class="fa fa-check"></i><b>12.1</b> Can I interrupt a simulation?</a></li>
-<li class="chapter" data-level="12.2" data-path="q-and-a.html"><a href="q-and-a.html#can-i-pass-compiler-flags-to-my-model"><i class="fa fa-check"></i><b>12.2</b> Can I pass compiler flags to my model?</a></li>
-<li class="chapter" data-level="12.3" data-path="q-and-a.html"><a href="q-and-a.html#can-i-compile-my-model-with-c11"><i class="fa fa-check"></i><b>12.3</b> Can I compile my model with <code>C++11</code>?</a></li>
-<li class="chapter" data-level="12.4" data-path="q-and-a.html"><a href="q-and-a.html#how-can-i-calculate-time-after-dose"><i class="fa fa-check"></i><b>12.4</b> How can I calculate time after dose?</a></li>
-<li class="chapter" data-level="12.5" data-path="q-and-a.html"><a href="q-and-a.html#my-model-failed-to-compile-what-now"><i class="fa fa-check"></i><b>12.5</b> My model failed to compile; what now?</a></li>
-<li class="chapter" data-level="12.6" data-path="q-and-a.html"><a href="q-and-a.html#can-i-run-mrgsolve-on-a-network-drive"><i class="fa fa-check"></i><b>12.6</b> Can I run mrgsolve on a network drive?</a></li>
-<li class="chapter" data-level="12.7" data-path="q-and-a.html"><a href="q-and-a.html#can-i-run-mrgsolve-on-a-cloud-synced-folder"><i class="fa fa-check"></i><b>12.7</b> Can I run mrgsolve on a cloud-synced folder?</a></li>
-<li class="chapter" data-level="12.8" data-path="q-and-a.html"><a href="q-and-a.html#can-i-run-mrgsolve-in-a-path-that-includes-spaces"><i class="fa fa-check"></i><b>12.8</b> Can I run mrgsolve in a path that includes spaces?</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>13</b> Installation</a></li>
-<li class="divider"></li>
-<li><a href="https://mrgsolve.github.io" target="blank">https://mrgsolve.github.io</a></li>
-<li><a href="https:/metrumrg.com" target="blank">https://metrumrg.com</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">mrgsolve User Guide</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">mrgsolve User Guide</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li><a class="" href="model-components.html"><span class="header-section-number">1</span> Model components</a></li>
+<li><a class="" href="model-specification.html"><span class="header-section-number">2</span> Model specification</a></li>
+<li><a class="" href="data-set-chapter.html"><span class="header-section-number">3</span> Input data sets</a></li>
+<li><a class="" href="event-chapter.html"><span class="header-section-number">4</span> Event objects</a></li>
+<li><a class="active" href="matrix-chapter.html"><span class="header-section-number">5</span> Model Matrices</a></li>
+<li><a class="" href="simulated-output.html"><span class="header-section-number">6</span> Simulated output</a></li>
+<li><a class="" href="section-sequence.html"><span class="header-section-number">7</span> Simulation sequence</a></li>
+<li><a class="" href="steady-state.html"><span class="header-section-number">8</span> Steady state</a></li>
+<li><a class="" href="plugins.html"><span class="header-section-number">9</span> Plugins</a></li>
+<li><a class="" href="mtime.html"><span class="header-section-number">10</span> Modeled events</a></li>
+<li><a class="" href="topics.html"><span class="header-section-number">11</span> Topics</a></li>
+<li><a class="" href="q-and-a.html"><span class="header-section-number">12</span> Questions and Answers</a></li>
+<li><a class="" href="install.html"><span class="header-section-number">13</span> Installation</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="matrix-chapter" class="section level1" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Model Matrices</h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="matrix-chapter" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Model Matrices<a class="anchor" aria-label="anchor" href="#matrix-chapter"><i class="fas fa-link"></i></a>
+</h1>
 <p>Model matrices include <code>$OMEGA</code> (for subject-level variability) and <code>$SIGMA</code>
 (for residual unexplained variability). These matrices are coded into the
 model file (see Sections <a href="model-specification.html#block-omega">2.2.16</a> and <a href="model-specification.html#block-sigma">2.2.17</a>) and can
@@ -464,21 +76,27 @@ examples with references to the equivalent functions that can be used to
 work on <code>$SIGMA</code>. Also note that, for simplicity, we will not compile the
 examples presented in this chapter.</p>
 <div id="basics" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Basics</h2>
+<h2>
+<span class="header-section-number">5.1</span> Basics<a class="anchor" aria-label="anchor" href="#basics"><i class="fas fa-link"></i></a>
+</h2>
 <div id="simple-matrix-lists" class="section level3" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> Simple matrix lists</h3>
+<h3>
+<span class="header-section-number">5.1.1</span> Simple matrix lists<a class="anchor" aria-label="anchor" href="#simple-matrix-lists"><i class="fas fa-link"></i></a>
+</h3>
 <p>We can look at the <code>popex</code> model in the internal library for a starting example
 to show how model matrices can be seen from the model object.</p>
 <p>Once the model is loaded</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="matrix-chapter.html#cb213-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;popex&quot;</span>, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"popex"</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>We can print the model object to the console and see the matrix structure</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="matrix-chapter.html#cb214-1" aria-hidden="true" tabindex="-1"></a>mod</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mod</span></code></pre></div>
 <pre><code>. 
 . 
 . ----------------  source: popex.cpp  ----------------
 . 
 .   project: /Users/kyleb/Rli...gsolve/models
-.   shared object: popex-so-db4447c5568 &lt;not loaded&gt;
+.   shared object: popex-so-1024e3e987137 &lt;not loaded&gt;
 . 
 .   time:          start: 0 end: 240 delta: 0.5
 .                  add: &lt;none&gt;
@@ -493,7 +111,8 @@ to show how model matrices can be seen from the model object.</p>
 . ------------------------------------------------------</code></pre>
 <p>In this output, we see that <code>omega</code> is a 3 by 3 matrix and <code>sigma</code> is 1 by 1.
 We can view both matrices by calling <code>revar()</code> on the model object</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="matrix-chapter.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">revar</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">revar</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
 <pre><code>. $omega
 . $...
 .       [,1] [,2] [,3]
@@ -509,7 +128,8 @@ We can view both matrices by calling <code>revar()</code> on the model object</p
 <p>This shows the 3x3 <code>$OMEGA</code> matrix with all off-diagonals set to zero and the
 1x1 <code>$SIGMA</code> which is currently fixed to 0.</p>
 <p>The <code>$OMEGA</code> matrix can be extracted with the <code>omat()</code> function</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="matrix-chapter.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">omat</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
 <pre><code>. $...
 .       [,1] [,2] [,3]
 . ECL:   0.3  0.0  0.0
@@ -518,13 +138,15 @@ We can view both matrices by calling <code>revar()</code> on the model object</p
 <p>Use the <code>smat()</code> function to extract the <code>$SIGMA</code> matrix. The result of these
 calls are <code>matlist</code> objects; for <code>$OMEGA</code> the class is <code>omegalist</code> (which
 inherits from <code>matlist</code>)</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="matrix-chapter.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">omat</span>(mod) <span class="sc">%&gt;%</span> <span class="fu">class</span>()</span></code></pre></div>
-<pre><code>. [1] &quot;omegalist&quot;
-. attr(,&quot;package&quot;)
-. [1] &quot;mrgsolve&quot;</code></pre>
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>. [1] "omegalist"
+. attr(,"package")
+. [1] "mrgsolve"</code></pre>
 <p>and for <code>$SIGMA</code> it is <code>sigmalist</code>. These are lists of matrices. In this
 example, there is just one <code>$OMEGA</code> block in the code</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="matrix-chapter.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">blocks</span>(mod, OMEGA)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">blocks</span><span class="op">(</span><span class="va">mod</span>, <span class="va">OMEGA</span><span class="op">)</span></code></pre></div>
 <pre><code>. 
 . Model file: popex.cpp 
 . 
@@ -532,61 +154,72 @@ example, there is just one <code>$OMEGA</code> block in the code</p>
 . @labels ECL EV EKA
 . 0.3 0.1 0.5</code></pre>
 <p>so the length of the <code>omegalist</code> object is also 1</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="matrix-chapter.html#cb224-1" aria-hidden="true" tabindex="-1"></a>om <span class="ot">&lt;-</span> <span class="fu">omat</span>(mod)</span>
-<span id="cb224-2"><a href="matrix-chapter.html#cb224-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(om)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">om</span> <span class="op">&lt;-</span> <span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></code></pre></div>
 <pre><code>. [1] 1</code></pre>
 <p>Functions are provided to check the names</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="matrix-chapter.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(om)</span></code></pre></div>
-<pre><code>. [1] &quot;...&quot;</code></pre>
+<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></code></pre></div>
+<pre><code>. [1] "..."</code></pre>
 <p>and the labels</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="matrix-chapter.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labels</span>(om)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/labels.html">labels</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></code></pre></div>
 <pre><code>. [[1]]
-. [1] &quot;ECL&quot; &quot;EV&quot;  &quot;EKA&quot;</code></pre>
+. [1] "ECL" "EV"  "EKA"</code></pre>
 <p>as well as getting the dimensions or number of rows</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="matrix-chapter.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(om)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></code></pre></div>
 <pre><code>. $...
 . [1] 3 3</code></pre>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="matrix-chapter.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(om)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></code></pre></div>
 <pre><code>. ... 
 .   3</code></pre>
 <p>The <code>omegalist</code> (<code>sigmalist</code>) object can be converted to a standard R list</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="matrix-chapter.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(om) <span class="sc">%&gt;%</span> <span class="fu">str</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>. List of 1
 .  $ ...: num [1:3, 1:3] 0.3 0 0 0 0.1 0 0 0 0.5
-.   ..- attr(*, &quot;dimnames&quot;)=List of 2
-.   .. ..$ : chr [1:3] &quot;ECL&quot; &quot;EV&quot; &quot;EKA&quot;
-.   .. ..$ : chr [1:3] &quot;ECL&quot; &quot;EV&quot; &quot;EKA&quot;</code></pre>
+.   ..- attr(*, "dimnames")=List of 2
+.   .. ..$ : chr [1:3] "ECL" "EV" "EKA"
+.   .. ..$ : chr [1:3] "ECL" "EV" "EKA"</code></pre>
 <p>or it can be rendered as a matrix</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="matrix-chapter.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(om)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></code></pre></div>
 <pre><code>.      [,1] [,2] [,3]
 . [1,]  0.3  0.0  0.0
 . [2,]  0.0  0.1  0.0
 . [3,]  0.0  0.0  0.5</code></pre>
 </div>
 <div id="multiple-matrix-lists" class="section level3" number="5.1.2">
-<h3><span class="header-section-number">5.1.2</span> Multiple matrix lists</h3>
+<h3>
+<span class="header-section-number">5.1.2</span> Multiple matrix lists<a class="anchor" aria-label="anchor" href="#multiple-matrix-lists"><i class="fas fa-link"></i></a>
+</h3>
 <p>Let’s look at an example where there is a more complicated <code>$OMEGA</code> structure.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="matrix-chapter.html#cb238-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb238-2"><a href="matrix-chapter.html#cb238-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name first @labels a b c</span></span>
-<span id="cb238-3"><a href="matrix-chapter.html#cb238-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
-<span id="cb238-4"><a href="matrix-chapter.html#cb238-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb238-5"><a href="matrix-chapter.html#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name second @labels d e</span></span>
-<span id="cb238-6"><a href="matrix-chapter.html#cb238-6" aria-hidden="true" tabindex="-1"></a><span class="st">4 5</span></span>
-<span id="cb238-7"><a href="matrix-chapter.html#cb238-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb238-8"><a href="matrix-chapter.html#cb238-8" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name third @labels f g h i</span></span>
-<span id="cb238-9"><a href="matrix-chapter.html#cb238-9" aria-hidden="true" tabindex="-1"></a><span class="st">6 7 8 9</span></span>
-<span id="cb238-10"><a href="matrix-chapter.html#cb238-10" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb238-11"><a href="matrix-chapter.html#cb238-11" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;multiple-matrices&quot;</span>, code, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
+$OMEGA @name first @labels a b c
+1 2 3
+
+$OMEGA @name second @labels d e
+4 5
+
+$OMEGA @name third @labels f g h i
+6 7 8 9
+'</span>
+<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"multiple-matrices"</span>, <span class="va">code</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Each <code>$OMEGA</code> block codes a diagonal matrix; the interesting feature is that
 there are 3 different <code>$OMEGA</code> blocks.</p>
 <p>Now, when we look at the model</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="matrix-chapter.html#cb239-1" aria-hidden="true" tabindex="-1"></a>mod</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mod</span></code></pre></div>
 <pre><code>. 
 . 
 . ----------  source: multiple-matrices.cpp  ----------
 . 
-.   project: /private/var/fol.../T/RtmpyRrUiW
-.   shared object: multiple-matrices-so-db47ab265e &lt;not loaded&gt;
+.   project: /private/var/fol.../T/RtmpUtHCpb
+.   shared object: multiple-matrices-so-1024e64e266d5 &lt;not loaded&gt;
 . 
 .   time:          start: 0 end: 24 delta: 1
 .                  add: &lt;none&gt;
@@ -601,7 +234,8 @@ there are 3 different <code>$OMEGA</code> blocks.</p>
 . ------------------------------------------------------</code></pre>
 <p>We see that <code>$OMEGA</code> is one 3x3 matrix, one 2x2 matrix and on 4x4 matrix, in
 that order. Calling <code>revar()</code> on this model object</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="matrix-chapter.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">revar</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">revar</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
 <pre><code>. $omega
 . $first
 .     [,1] [,2] [,3]
@@ -626,15 +260,18 @@ that order. Calling <code>revar()</code> on this model object</p>
 . No matrices found</code></pre>
 <p>we only see the <code>$OMEGA</code> matrices as the model was coded. Now the length
 of the <code>omegalist</code> object is 3</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="matrix-chapter.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">omat</span>(mod))</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>. [1] 3</code></pre>
 <p>and the number of rows is 3 in the first matrix, 2 in the second, and 4 in the
 third</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="matrix-chapter.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">omat</span>(mod))</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>.  first second  third 
 .      3      2      4</code></pre>
-<p>We can also check <code>dim()</code></p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="matrix-chapter.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">omat</span>(mod))</span></code></pre></div>
+<p>We can also check <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code></p>
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>. $first
 . [1] 3 3
 . 
@@ -645,7 +282,8 @@ third</p>
 . [1] 4 4</code></pre>
 <p>The omega matrix can be converted from this segmented list into a single block
 matrix</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="matrix-chapter.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(<span class="fu">omat</span>(mod))</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>.       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
 .  [1,]    1    0    0    0    0    0    0    0    0
 .  [2,]    0    2    0    0    0    0    0    0    0
@@ -659,7 +297,8 @@ matrix</p>
 <p>The result is 9x9 with all off diagonals between the different list positions
 set to zero.</p>
 <p>Otherwise, we might work with this object as a list</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="matrix-chapter.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(<span class="fu">omat</span>(mod))</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>. $first
 .   a b c
 . a 1 0 0
@@ -680,15 +319,18 @@ set to zero.</p>
 </div>
 </div>
 <div id="collapsing-matrices" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Collapsing matrices</h2>
+<h2>
+<span class="header-section-number">5.2</span> Collapsing matrices<a class="anchor" aria-label="anchor" href="#collapsing-matrices"><i class="fas fa-link"></i></a>
+</h2>
 <p>The functionality described in this subsection is new with mrgsolve 1.0.0.</p>
 <p>The structure of the matrices and the order in which they appear in the list
 matter when updating each matrix (see below). We saw how to create one big
-matrix out of all the smaller matrices using the <code>as.matrix()</code>. This section
+matrix out of all the smaller matrices using the <code><a href="https://rdrr.io/r/base/matrix.html">as.matrix()</a></code>. This section
 describes how to combine matrices within the confines of the <code>matlist</code> object.</p>
 <p>mrgsolve provides functions to collapse (or combine) matrices in a <code>matlist</code>
 object. We can call <code>collapse_omega()</code>, passing in the model object</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="matrix-chapter.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">collapse_omega</span>(mod) <span class="sc">%&gt;%</span> <span class="fu">revar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">collapse_omega</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">revar</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>. $omega
 . $...
 .     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
@@ -708,7 +350,8 @@ object. We can call <code>collapse_omega()</code>, passing in the model object</
 <p>and now we have an <code>omegalist</code> object inside a model object and the matrix
 is a single 9x9 <code>$OMEGA</code> matrix. The row names have been retained, but there
 is now no name for the matrix; this can be provided when collapsing</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="matrix-chapter.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">collapse_omega</span>(mod, <span class="at">name =</span> <span class="st">&quot;only&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">omat</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">collapse_omega</span><span class="op">(</span><span class="va">mod</span>, name <span class="op">=</span> <span class="st">"only"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>. $only
 .     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
 . a:     1    0    0    0    0    0    0    0    0
@@ -722,7 +365,8 @@ is now no name for the matrix; this can be provided when collapsing</p>
 . i:     0    0    0    0    0    0    0    0    9</code></pre>
 <p>Suppose that we only want to combine the first two matrices, leaving the third
 matrix alone. In that case, call <code>collapse_omega()</code> with the range argument</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="matrix-chapter.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">collapse_omega</span>(mod, <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">name =</span> <span class="st">&quot;first_second&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">omat</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">collapse_omega</span><span class="op">(</span><span class="va">mod</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"first_second"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>. $first_second
 .     [,1] [,2] [,3] [,4] [,5]
 . a:     1    0    0    0    0
@@ -746,7 +390,8 @@ when they need to be updated.</p>
 <p>Use <code>collapse_sigma()</code> to collapse <code>$SIGMA</code> matrices if needed.</p>
 <p>Also, the function <code>collapse_matrix()</code> can be called on a <code>omegalist</code> or
 <code>sigmalist</code> object to collapse</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="matrix-chapter.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">omat</span>(mod) <span class="sc">%&gt;%</span> <span class="fu">collapse_matrix</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="cn">NA</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">collapse_matrix</span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="cn">NA</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>. $first
 .     a b c
 . a:  1 0 0
@@ -763,12 +408,16 @@ when they need to be updated.</p>
 . i:     0    0    0    0    0    9</code></pre>
 </div>
 <div id="matrix-update" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  </h2>
+<h2>
+<span class="header-section-number">5.3</span> Updating <code>$OMEGA</code> and <code>$SIGMA</code>  <a class="anchor" aria-label="anchor" href="#matrix-update"><i class="fas fa-link"></i></a>
+</h2>
 <p>Like the values of parameters in the parameter list, we may want to update the
 values in <code>$OMEGA</code> and <code>$SIGMA</code> matrices. We can do so without re-compiling the
 model.</p>
 <div id="matrix-helper-functions" class="section level3" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> Matrix helper functions</h3>
+<h3>
+<span class="header-section-number">5.3.1</span> Matrix helper functions<a class="anchor" aria-label="anchor" href="#matrix-helper-functions"><i class="fas fa-link"></i></a>
+</h3>
 <p><code>mrgsolve</code> keeps <code>$OMEGA</code> and <code>$SIGMA</code> in block matrices (regardless of whether
 the off-diagonal elements are zeros or not). Recall that in the model
 specification file we can enter data for <code>$OMEGA</code> and <code>$SIGMA</code> as the lower
@@ -777,19 +426,22 @@ provide a matrix (as an <code>R</code> object). <code>mrgsolve</code> provides s
 functions to help … allowing the user to enter lower diagonals instead of the
 full matrix.</p>
 <p><code>dmat()</code> for diagonal matrix</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="matrix-chapter.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">dmat</span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>.      [,1] [,2] [,3]
 . [1,]    1    0    0
 . [2,]    0    2    0
 . [3,]    0    0    3</code></pre>
 <p><code>bmat()</code> for block matrix</p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="matrix-chapter.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bmat</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">bmat</span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>.      [,1] [,2]
 . [1,]    1    2
 . [2,]    2    3</code></pre>
 <p><code>cmat()</code> for a block matrix where the diagonal elements are variances and the
 off-diagonals are taken to be correlations, not covariances</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="matrix-chapter.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmat</span>(<span class="fl">0.1</span>, <span class="fl">0.87</span>,<span class="fl">0.3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">cmat</span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.87</span>,<span class="fl">0.3</span><span class="op">)</span></code></pre></div>
 <pre><code>.           [,1]      [,2]
 . [1,] 0.1000000 0.1506884
 . [2,] 0.1506884 0.3000000</code></pre>
@@ -797,18 +449,21 @@ off-diagonals are taken to be correlations, not covariances</p>
 <p><code>mrgsolve</code> also provides <code>as_bmat()</code> and <code>as_dmat()</code> for converting other <code>R</code>
 objects to matrices or lists of matrices.</p>
 <p>Consider this list with named elements holding the data for a matrix:</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="matrix-chapter.html#cb267-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">OMEGA1.1 =</span> <span class="fl">0.9</span>, <span class="at">OMEGA2.1 =</span> <span class="fl">0.3</span>, <span class="at">OMEGA2.2 =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>OMEGA1.1 <span class="op">=</span> <span class="fl">0.9</span>, OMEGA2.1 <span class="op">=</span> <span class="fl">0.3</span>, OMEGA2.2 <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></code></pre></div>
 <p>These data could form either a 3x3 diagonal matrix or a 2x2 block matrix. But
 the names suggest a 2x2 form. <code>as_bmat()</code> can make the matrix like this</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="matrix-chapter.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_bmat</span>(m, <span class="st">&quot;OMEGA&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">as_bmat</span><span class="op">(</span><span class="va">m</span>, <span class="st">"OMEGA"</span><span class="op">)</span></code></pre></div>
 <pre><code>.      [,1] [,2]
 . [1,]  0.9  0.3
 . [2,]  0.3  0.4</code></pre>
 <p>The second argument is a regular expression that <code>mrgsolve</code> uses to find
 elements in the list to use for building the matrix.</p>
 <p>Frequently, we have estimates in a data frame like this</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="matrix-chapter.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(exBoot)</span>
-<span id="cb270-2"><a href="matrix-chapter.html#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(exBoot)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exBoot</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">exBoot</span><span class="op">)</span></code></pre></div>
 <pre><code>.   run  THETA1 THETA2  THETA3 OMEGA11   OMEGA21 OMEGA22 OMEGA31  OMEGA32 OMEGA33
 . 1   1 -0.7634  2.280  0.8472 0.12860  0.046130  0.2874 0.13820 -0.02164  0.3933
 . 2   2 -0.4816  2.076  0.5355 0.12000  0.051000  0.2409 0.06754 -0.07759  0.3342
@@ -824,17 +479,21 @@ elements in the list to use for building the matrix.</p>
 . 5 0.001606       0  0.8996
 . 6 0.002134       0  0.9744</code></pre>
 <p>We can use <code>as_bmat()</code> with this data frame to extract the <code>$OMEGA</code> matrices</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="matrix-chapter.html#cb272-1" aria-hidden="true" tabindex="-1"></a>omegas <span class="ot">&lt;-</span> <span class="fu">as_bmat</span>(exBoot, <span class="st">&quot;OMEGA&quot;</span>)</span>
-<span id="cb272-2"><a href="matrix-chapter.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(omegas)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">omegas</span> <span class="op">&lt;-</span> <span class="fu">as_bmat</span><span class="op">(</span><span class="va">exBoot</span>, <span class="st">"OMEGA"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">omegas</span><span class="op">)</span></code></pre></div>
 <pre><code>. [1] 100</code></pre>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="matrix-chapter.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(exBoot)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">exBoot</span><span class="op">)</span></code></pre></div>
 <pre><code>. [1] 100  13</code></pre>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="matrix-chapter.html#cb276-1" aria-hidden="true" tabindex="-1"></a>omegas[[<span class="dv">6</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">omegas</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <pre><code>.          [,1]     [,2]    [,3]
 . [1,]  0.13390 -0.01927  0.1074
 . [2,] -0.01927  0.16400 -0.0117
 . [3,]  0.10740 -0.01170  0.3412</code></pre>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="matrix-chapter.html#cb278-1" aria-hidden="true" tabindex="-1"></a>omegas[[<span class="dv">16</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">omegas</span><span class="op">[[</span><span class="fl">16</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <pre><code>.         [,1]    [,2]   [,3]
 . [1,] 0.08126 0.01252 0.1050
 . [2,] 0.01252 0.16860 0.0149
@@ -842,13 +501,16 @@ elements in the list to use for building the matrix.</p>
 <p>The result of calling <code>as_bmat</code> or <code>as_dmat</code> is a list of matrices, one for
 each row in the data frame.</p>
 <p>Note in this example, we could have called</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="matrix-chapter.html#cb280-1" aria-hidden="true" tabindex="-1"></a>sigmas <span class="ot">&lt;-</span> <span class="fu">as_bmat</span>(exBoot,<span class="st">&quot;SIGMA&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sigmas</span> <span class="op">&lt;-</span> <span class="fu">as_bmat</span><span class="op">(</span><span class="va">exBoot</span>,<span class="st">"SIGMA"</span><span class="op">)</span> </code></pre></div>
 <p>to grab the <code>$SIGMA</code> matrices.</p>
 <p>For help on these helper functions, see <code>?dmat</code>, <code>?bmat</code>, <code>?cmat</code>, <code>?as_bmat</code>,
 <code>?as_dmat</code> in the <code>R</code> help system after loading <code>mrgsolve</code>.</p>
 </div>
 <div id="fill-a-matrix-with-zeros" class="section level3" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> Fill a matrix with zeros</h3>
+<h3>
+<span class="header-section-number">5.3.2</span> Fill a matrix with zeros<a class="anchor" aria-label="anchor" href="#fill-a-matrix-with-zeros"><i class="fas fa-link"></i></a>
+</h3>
 <p>Sometimes we write a population model that includes random effects, but we would
 like to simulate from that same model without the random effects implemented.
 For example, we want to simulate some typical PK profiles from a population PK
@@ -859,16 +521,18 @@ will convert all <code>$OMEGA</code> and <code>$SIGMA</code> matrix elements to 
 file (<code>?zero_re</code>) to see some options for selectively zeroing out only one or
 the other.</p>
 <p>For example we have this population PK model</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="matrix-chapter.html#cb281-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modlib</span>(<span class="st">&quot;popex&quot;</span>, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb281-2"><a href="matrix-chapter.html#cb281-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb281-3"><a href="matrix-chapter.html#cb281-3" aria-hidden="true" tabindex="-1"></a><span class="fu">omat</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"popex"</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+
+<span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
 <pre><code>. $...
 .       [,1] [,2] [,3]
 . ECL:   0.3  0.0  0.0
 . EV:    0.0  0.1  0.0
 . EKA:   0.0  0.0  0.5</code></pre>
 <p>We can turn that matrix to all zeros with</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="matrix-chapter.html#cb283-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">zero_re</span>() <span class="sc">%&gt;%</span> <span class="fu">omat</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">zero_re</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>. $...
 .       [,1] [,2] [,3]
 . ECL:     0    0    0
@@ -877,30 +541,36 @@ the other.</p>
 <p>And when we simulate right after that, all <code>ETA(n)</code> will be zero as well
 and you’ll get your fixed-effects simulation (the following is for example
 only and is not evaluated)</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="matrix-chapter.html#cb285-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb285-2"><a href="matrix-chapter.html#cb285-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">zero_re</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb285-3"><a href="matrix-chapter.html#cb285-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ev</span>(<span class="at">amt =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb285-4"><a href="matrix-chapter.html#cb285-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrgsim</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb285-5"><a href="matrix-chapter.html#cb285-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mod</span> <span class="op">%&gt;%</span> 
+  <span class="fu">zero_re</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mrgsim</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="example-unnamed-matrix" class="section level3" number="5.3.3">
-<h3><span class="header-section-number">5.3.3</span> Example: unnamed matrix</h3>
+<h3>
+<span class="header-section-number">5.3.3</span> Example: unnamed matrix<a class="anchor" aria-label="anchor" href="#example-unnamed-matrix"><i class="fas fa-link"></i></a>
+</h3>
 <p>Here is a model with only a 3x3 <code>$OMEGA</code> matrix</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="matrix-chapter.html#cb286-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb286-2"><a href="matrix-chapter.html#cb286-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA</span></span>
-<span id="cb286-3"><a href="matrix-chapter.html#cb286-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
-<span id="cb286-4"><a href="matrix-chapter.html#cb286-4" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb286-5"><a href="matrix-chapter.html#cb286-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb286-6"><a href="matrix-chapter.html#cb286-6" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;matrix&quot;</span>, code, <span class="at">compile=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
+$OMEGA
+1 2 3
+'</span>
+
+<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"matrix"</span>, <span class="va">code</span>, compile<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Let’s check the values in the matrix using <code>omat()</code></p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="matrix-chapter.html#cb287-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> omat</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="va">omat</span></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     1    0    0
 . 2:     0    2    0
 . 3:     0    0    3</code></pre>
 <p>We also use <code>omat()</code> to update the values in the matrix</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="matrix-chapter.html#cb289-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">dmat</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)) <span class="sc">%&gt;%</span> omat</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="fu">dmat</span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">omat</span></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     4    0    0
@@ -908,29 +578,34 @@ only and is not evaluated)</p>
 . 3:     0    0    6</code></pre>
 <p>To update <code>$OMEGA</code>, we must provide a matrix of the same dimension, in this
 case 3x3. An error is generated if we provide a matrix with the wrong dimension.</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="matrix-chapter.html#cb291-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">try</span>(mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">dmat</span>(<span class="dv">11</span>,<span class="dv">23</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ans</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="fu">dmat</span><span class="op">(</span><span class="fl">11</span>,<span class="fl">23</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>. Error : improper signature: omat</code></pre>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="matrix-chapter.html#cb293-1" aria-hidden="true" tabindex="-1"></a>ans</span></code></pre></div>
-<pre><code>. [1] &quot;Error : improper signature: omat\n&quot;
-. attr(,&quot;class&quot;)
-. [1] &quot;try-error&quot;
-. attr(,&quot;condition&quot;)
+<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ans</span></code></pre></div>
+<pre><code>. [1] "Error : improper signature: omat\n"
+. attr(,"class")
+. [1] "try-error"
+. attr(,"condition")
 . &lt;simpleError: improper signature: omat&gt;</code></pre>
 </div>
 <div id="example-named-matrices" class="section level3" number="5.3.4">
-<h3><span class="header-section-number">5.3.4</span> Example: named matrices</h3>
+<h3>
+<span class="header-section-number">5.3.4</span> Example: named matrices<a class="anchor" aria-label="anchor" href="#example-named-matrices"><i class="fas fa-link"></i></a>
+</h3>
 <p>When there are multiple <code>$OMEGA</code> matrices, it can be helpful to assign them
 names. Here, there are two matrices: one for interindividual variability
 (<code>IIV</code>) and one for interoccasion variability (<code>IOV</code>).</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="matrix-chapter.html#cb295-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb295-2"><a href="matrix-chapter.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name IIV</span></span>
-<span id="cb295-3"><a href="matrix-chapter.html#cb295-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
-<span id="cb295-4"><a href="matrix-chapter.html#cb295-4" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA @name IOV</span></span>
-<span id="cb295-5"><a href="matrix-chapter.html#cb295-5" aria-hidden="true" tabindex="-1"></a><span class="st">4 5</span></span>
-<span id="cb295-6"><a href="matrix-chapter.html#cb295-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb295-7"><a href="matrix-chapter.html#cb295-7" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;iov&quot;</span>, code, <span class="at">compile=</span><span class="cn">FALSE</span>)</span>
-<span id="cb295-8"><a href="matrix-chapter.html#cb295-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb295-9"><a href="matrix-chapter.html#cb295-9" aria-hidden="true" tabindex="-1"></a><span class="fu">revar</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
+$OMEGA @name IIV
+1 2 3
+$OMEGA @name IOV
+4 5
+'</span>
+<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"iov"</span>, <span class="va">code</span>, compile<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+
+<span class="fu">revar</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
 <pre><code>. $omega
 . $IIV
 .     [,1] [,2] [,3]
@@ -947,9 +622,10 @@ names. Here, there are two matrices: one for interindividual variability
 . $sigma
 . No matrices found</code></pre>
 <p>Now, we can update either <code>IIV</code> or <code>IOV</code> (or both) by name</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="matrix-chapter.html#cb297-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb297-2"><a href="matrix-chapter.html#cb297-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">omat</span>(<span class="at">IOV =</span> <span class="fu">dmat</span>(<span class="dv">11</span>,<span class="dv">12</span>), <span class="at">IIV =</span> <span class="fu">dmat</span>(<span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb297-3"><a href="matrix-chapter.html#cb297-3" aria-hidden="true" tabindex="-1"></a>  omat</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mod</span> <span class="op">%&gt;%</span> 
+  <span class="fu">omat</span><span class="op">(</span>IOV <span class="op">=</span> <span class="fu">dmat</span><span class="op">(</span><span class="fl">11</span>,<span class="fl">12</span><span class="op">)</span>, IIV <span class="op">=</span> <span class="fu">dmat</span><span class="op">(</span><span class="fl">13</span>, <span class="fl">14</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="va">omat</span></code></pre></div>
 <pre><code>. $IIV
 .     [,1] [,2] [,3]
 . 1:    13    0    0
@@ -962,29 +638,35 @@ names. Here, there are two matrices: one for interindividual variability
 . 5:     0   12</code></pre>
 <p>Again, an error is generated if we try to assign a 3x3 matrix to the <code>IOV</code>
 position</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="matrix-chapter.html#cb299-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">try</span>(mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="at">IIV =</span> <span class="fu">dmat</span>(<span class="dv">1</span>, <span class="dv">2</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ans</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span>IIV <span class="op">=</span> <span class="fu">dmat</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>. Error : improper dimension: omat</code></pre>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="matrix-chapter.html#cb301-1" aria-hidden="true" tabindex="-1"></a>ans</span></code></pre></div>
-<pre><code>. [1] &quot;Error : improper dimension: omat\n&quot;
-. attr(,&quot;class&quot;)
-. [1] &quot;try-error&quot;
-. attr(,&quot;condition&quot;)
+<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ans</span></code></pre></div>
+<pre><code>. [1] "Error : improper dimension: omat\n"
+. attr(,"class")
+. [1] "try-error"
+. attr(,"condition")
 . &lt;simpleError: improper dimension: omat&gt;</code></pre>
 </div>
 <div id="example-unnamed-matrices" class="section level3" number="5.3.5">
-<h3><span class="header-section-number">5.3.5</span> Example: unnamed matrices</h3>
+<h3>
+<span class="header-section-number">5.3.5</span> Example: unnamed matrices<a class="anchor" aria-label="anchor" href="#example-unnamed-matrices"><i class="fas fa-link"></i></a>
+</h3>
 <p>If we do write the model with unnamed matrices, we can still update them</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="matrix-chapter.html#cb303-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb303-2"><a href="matrix-chapter.html#cb303-2" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA</span></span>
-<span id="cb303-3"><a href="matrix-chapter.html#cb303-3" aria-hidden="true" tabindex="-1"></a><span class="st">1 2 3</span></span>
-<span id="cb303-4"><a href="matrix-chapter.html#cb303-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb303-5"><a href="matrix-chapter.html#cb303-5" aria-hidden="true" tabindex="-1"></a><span class="st">$OMEGA </span></span>
-<span id="cb303-6"><a href="matrix-chapter.html#cb303-6" aria-hidden="true" tabindex="-1"></a><span class="st">4 5</span></span>
-<span id="cb303-7"><a href="matrix-chapter.html#cb303-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb303-8"><a href="matrix-chapter.html#cb303-8" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">mcode</span>(<span class="st">&quot;multi&quot;</span>, code, <span class="at">compile =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
+$OMEGA
+1 2 3
+
+$OMEGA 
+4 5
+'</span>
+<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"multi"</span>, <span class="va">code</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>In this case, the only way to update is to pass in a <strong>list</strong> of matrices, where
 (in this example) the first matrix is 3x3 and the second is 2x2</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="matrix-chapter.html#cb304-1" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> <span class="fu">omat</span>(<span class="fu">list</span>(<span class="fu">dmat</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>), <span class="fu">dmat</span>(<span class="dv">8</span>, <span class="dv">9</span>))) <span class="sc">%&gt;%</span> <span class="fu">omat</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">dmat</span><span class="op">(</span><span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span>, <span class="fu">dmat</span><span class="op">(</span><span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     5    0    0
@@ -999,69 +681,54 @@ position</p>
 </div>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="event-chapter.html"><span class="header-section-number">4</span> Event objects</a></div>
+<div class="next"><a href="simulated-output.html"><span class="header-section-number">6</span> Simulated output</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#matrix-chapter"><span class="header-section-number">5</span> Model Matrices</a></li>
+<li>
+<a class="nav-link" href="#basics"><span class="header-section-number">5.1</span> Basics</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#simple-matrix-lists"><span class="header-section-number">5.1.1</span> Simple matrix lists</a></li>
+<li><a class="nav-link" href="#multiple-matrix-lists"><span class="header-section-number">5.1.2</span> Multiple matrix lists</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#collapsing-matrices"><span class="header-section-number">5.2</span> Collapsing matrices</a></li>
+<li>
+<a class="nav-link" href="#matrix-update"><span class="header-section-number">5.3</span> Updating $OMEGA and $SIGMA  </a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#matrix-helper-functions"><span class="header-section-number">5.3.1</span> Matrix helper functions</a></li>
+<li><a class="nav-link" href="#fill-a-matrix-with-zeros"><span class="header-section-number">5.3.2</span> Fill a matrix with zeros</a></li>
+<li><a class="nav-link" href="#example-unnamed-matrix"><span class="header-section-number">5.3.3</span> Example: unnamed matrix</a></li>
+<li><a class="nav-link" href="#example-named-matrices"><span class="header-section-number">5.3.4</span> Example: named matrices</a></li>
+<li><a class="nav-link" href="#example-unnamed-matrices"><span class="header-section-number">5.3.5</span> Example: unnamed matrices</a></li>
+</ul>
+</li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="event-chapter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="simulated-output.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>mrgsolve User Guide</strong>" was written by <font color="DarkGreen">Metrum Research Group</font>. It was last built on 2022-03-04.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["user-guide.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "none",
-"sharing": false
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -1073,7 +740,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>
