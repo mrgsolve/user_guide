@@ -1,6 +1,8 @@
 bookdown::bs4_book:
   #highlight: pygments
   css: [bookstyle.css]
+  theme: 
+    primary: green
   config:
     toc:
       collapse: none
