@@ -127,7 +127,7 @@ DADT(2) =  KA * A(1) - KE * A(2);
 
 __Math__
 
-Macros are provided for several math functions
+Starting with version 1.0.1, macros are provided for several math functions
 
 - `EXP(a)`  gets mapped to `exp(a)`
 - `LOG(a)`  gets mapped to `log(a)`
@@ -164,8 +164,6 @@ There are a lot of differences remaining between mrgsolve and NONMEM syntax. We
 mention a few here to make the point
 
 - mrgsolve continues to require `pow(base, exponent)` rather than `base**exponent`
-- mrgsolve continues to use `exp()`, `log()` and `sqrt()`, rather than 
-  `EXP()`, `LOG()`, and `SQRT()`
 - mrgsolve continues to require a semi-colon at the end of each statement (this
   is a C++ requirement)
 - mrgsolve continues to require that user-defined variables are declared with 

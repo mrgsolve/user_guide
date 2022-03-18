@@ -169,7 +169,7 @@ is replicated here.</p>
 <span id="cb333-7"><a href="plugins.html#cb333-7" aria-hidden="true" tabindex="-1"></a>DADT<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="op">-</span>KA <span class="op">*</span> A<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
 <span id="cb333-8"><a href="plugins.html#cb333-8" aria-hidden="true" tabindex="-1"></a>DADT<span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">=</span>  KA <span class="op">*</span> A<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">-</span> KE <span class="op">*</span> A<span class="op">(</span><span class="dv">2</span><span class="op">);</span> </span></code></pre></div>
 <p><strong>Math</strong></p>
-<p>Macros are provided for several math functions</p>
+<p>Starting with version 1.0.1, macros are provided for several math functions</p>
 <ul>
 <li>
 <code>EXP(a)</code> gets mapped to <code>exp(a)</code>
@@ -209,9 +209,6 @@ compartment or to try to declare them as variables.</p>
 mention a few here to make the point</p>
 <ul>
 <li>mrgsolve continues to require <code>pow(base, exponent)</code> rather than <code>base**exponent</code>
-</li>
-<li>mrgsolve continues to use <code><a href="https://rdrr.io/r/base/Log.html">exp()</a></code>, <code><a href="https://rdrr.io/r/base/Log.html">log()</a></code> and <code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code>, rather than
-<code>EXP()</code>, <code>LOG()</code>, and <code>SQRT()</code>
 </li>
 <li>mrgsolve continues to require a semi-colon at the end of each statement (this
 is a C++ requirement)</li>
@@ -382,7 +379,7 @@ so to invoke these functions, you always prepend <code>mrgx::</code>.</p>
 example</p>
 <div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">mrgsolve</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span><span class="op">@</span><span class="va">envir</span></code></pre></div>
-<pre><code>. &lt;environment: 0x7fbe4f3a42c8&gt;</code></pre>
+<pre><code>. &lt;environment: 0x7ff4e4520960&gt;</code></pre>
 <p>The objects in this environment are created by a block called <code>$ENV</code>
 in your model code (see Section <a href="model-specification.html#block-env">2.2.26</a>);</p>
 <p>To access this environment in your model, call</p>
