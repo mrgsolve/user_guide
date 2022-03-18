@@ -176,7 +176,7 @@ the problem is started. Settings include: <code>atol</code>, <code>rtol</code>, 
 example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"viral1"</span>, end <span class="op">=</span> <span class="fl">144</span><span class="op">)</span> </code></pre></div>
-<pre><code>. Loading model from cache.</code></pre>
+<pre><code>. Building viral1 ... done.</code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">mrgsim_e</span><span class="op">(</span><span class="va">mod</span>, <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">V</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span>
 
@@ -442,7 +442,7 @@ random effects (one draw per observation).</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by <font color="DarkGreen">Metrum Research Group</font>. It was last built on 2022-03-05.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by <font color="DarkGreen">Metrum Research Group</font>. It was last built on 2022-03-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

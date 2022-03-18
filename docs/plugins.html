@@ -168,6 +168,22 @@ is replicated here.</p>
 <span id="cb333-6"><a href="plugins.html#cb333-6" aria-hidden="true" tabindex="-1"></a>$DES</span>
 <span id="cb333-7"><a href="plugins.html#cb333-7" aria-hidden="true" tabindex="-1"></a>DADT<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="op">-</span>KA <span class="op">*</span> A<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
 <span id="cb333-8"><a href="plugins.html#cb333-8" aria-hidden="true" tabindex="-1"></a>DADT<span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">=</span>  KA <span class="op">*</span> A<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">-</span> KE <span class="op">*</span> A<span class="op">(</span><span class="dv">2</span><span class="op">);</span> </span></code></pre></div>
+<p><strong>Math</strong></p>
+<p>Macros are provided for several math functions</p>
+<ul>
+<li>
+<code>EXP(a)</code> gets mapped to <code>exp(a)</code>
+</li>
+<li>
+<code>LOG(a)</code> gets mapped to <code>log(a)</code>
+</li>
+<li>
+<code>SQRT(a)</code> gets mapped to <code>sqrt(a)</code>
+</li>
+</ul>
+<p>These are purely for convenience, so that upper-case versions from NMTRAN don’t
+require conversion to lower-case; this happens automatically via the C++
+preprocessor.</p>
 <p><strong>Other syntax</strong></p>
 <ul>
 <li>Using <code>THETA(n)</code> in model code will resolve to <code>THETAn</code>; this feature is
@@ -366,7 +382,7 @@ so to invoke these functions, you always prepend <code>mrgx::</code>.</p>
 example</p>
 <div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">mrgsolve</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span><span class="op">@</span><span class="va">envir</span></code></pre></div>
-<pre><code>. &lt;environment: 0x7ff6f7dcd8f8&gt;</code></pre>
+<pre><code>. &lt;environment: 0x7fbe4f3a42c8&gt;</code></pre>
 <p>The objects in this environment are created by a block called <code>$ENV</code>
 in your model code (see Section <a href="model-specification.html#block-env">2.2.26</a>);</p>
 <p>To access this environment in your model, call</p>
@@ -448,7 +464,7 @@ about <code>BH</code> can be found here: <a href="https://github.com/eddelbuette
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by <font color="DarkGreen">Metrum Research Group</font>. It was last built on 2022-03-05.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by <font color="DarkGreen">Metrum Research Group</font>. It was last built on 2022-03-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

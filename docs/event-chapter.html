@@ -317,10 +317,10 @@ sequence</p>
 into a sequence <code>n</code> times</p>
 <div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ev_repeat</span><span class="op">(</span><span class="va">e1</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
-<pre><code>.   ID time amt ii cmt evid addl
-. 1  1    0 100 24   1    1    0
-. 2  1   24 100 24   1    1    0
-. 3  1   48 100 24   1    1    0</code></pre>
+<pre><code>.   time amt ii cmt evid addl
+. 1    0 100 24   1    1    0
+. 2   24 100 24   1    1    0
+. 3   48 100 24   1    1    0</code></pre>
 <p>By default, this function returns a regular data frame. To return an event
 object instead call</p>
 <div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
@@ -347,13 +347,13 @@ at 144 hours. When putting this into a sequence, we’ll wait one dosing interva
 and then the <code>wait</code> period and then start again</p>
 <div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ev_repeat</span><span class="op">(</span><span class="va">e3</span>, n <span class="op">=</span> <span class="fl">3</span>, wait <span class="op">=</span> <span class="fl">7</span><span class="op">*</span><span class="fl">24</span><span class="op">)</span></code></pre></div>
-<pre><code>.   ID time amt ii addl cmt evid
-. 1  1    0 500 24    0   1    1
-. 2  1   24 250 24    5   1    1
-. 3  1  336 500 24    0   1    1
-. 4  1  360 250 24    5   1    1
-. 5  1  672 500 24    0   1    1
-. 6  1  696 250 24    5   1    1</code></pre>
+<pre><code>.   time amt ii addl cmt evid
+. 1    0 500 24    0   1    1
+. 2   24 250 24    5   1    1
+. 3  336 500 24    0   1    1
+. 4  360 250 24    5   1    1
+. 5  672 500 24    0   1    1
+. 6  696 250 24    5   1    1</code></pre>
 </div>
 <div id="create-a-data_set" class="section level3" number="4.5.4">
 <h3>
@@ -561,7 +561,7 @@ compartment 2 would be</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by <font color="DarkGreen">Metrum Research Group</font>. It was last built on 2022-03-05.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by <font color="DarkGreen">Metrum Research Group</font>. It was last built on 2022-03-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

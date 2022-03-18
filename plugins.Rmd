@@ -125,6 +125,18 @@ DADT(1) = -KA * A(1);
 DADT(2) =  KA * A(1) - KE * A(2); 
 ```
 
+__Math__
+
+Macros are provided for several math functions
+
+- `EXP(a)`  gets mapped to `exp(a)`
+- `LOG(a)`  gets mapped to `log(a)`
+- `SQRT(a)` gets mapped to `sqrt(a)`
+
+These are purely for convenience, so that upper-case versions from NMTRAN don't
+require conversion to lower-case; this happens automatically via the C++ 
+preprocessor. 
+
 __Other syntax__
 
 - Using `THETA(n)` in model code will resolve to `THETAn`; this feature is 
