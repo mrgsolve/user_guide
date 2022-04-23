@@ -7,7 +7,7 @@
 <title>Chapter 2 Model specification | mrgsolve User Guide</title>
 <meta name="author" content="Metrum Research Group">
 <meta name="description" content="This chapter details the mrgsolve model specification format.  2.1 How / where to write a model There are two ways to write your model: Code in a separate file and source into your R script Code...">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta name="generator" content="bookdown 0.25 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Model specification | mrgsolve User Guide">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://mrgsolve.github.io/user_guide/model-specification.html">
@@ -16,10 +16,14 @@
 <meta name="twitter:title" content="Chapter 2 Model specification | mrgsolve User Guide">
 <meta name="twitter:site" content="@mrgsolve">
 <meta name="twitter:description" content="This chapter details the mrgsolve model specification format.  2.1 How / where to write a model There are two ways to write your model: Code in a separate file and source into your R script Code...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bookstyle.css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bookstyle.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -251,7 +255,7 @@ for every parameter name. Names (and numbers) of parameters must be set at the
 time the model is compiled, but parameter values may be updated without
 re-compiling the model.</p>
 <p>The <code>@covariates</code> option allows you to tag a collection of parameters as
-“covariates.” It does not change the functionality of the model or simulation
+“covariates”. It does not change the functionality of the model or simulation
 workflow in any way, but allows you to get that list of covariate names out
 of the model object.</p>
 <p>Example:</p>
@@ -986,8 +990,8 @@ $SET delta=4, end=96
 . 
 . ----------------  source: nmxml.cpp  ----------------
 . 
-.   project: /private/var/fol.../T/RtmpBIURBn
-.   shared object: nmxml-so-25e718f31690 
+.   project: /private/var/fol.../T/RtmpsHaCRw
+.   shared object: nmxml-so-12c334434cb88 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
@@ -1111,7 +1115,7 @@ assumes that the the <code>ext</code> file can be found relative to the “worki
 directory. The only other value that <code>root</code> can take is <code>"cppfile"</code>. When
 <code>root = "cppfile"</code>, then mrgsolve will look for the <code>ext</code> file in a directory
 that is relative to <strong>where the model source code file is located</strong>.</p>
-<p>We recommend that users start using the <code>root</code> argument and set it to “cppfile.”
+<p>We recommend that users start using the <code>root</code> argument and set it to “cppfile”.
 This will eventually become the default. For example:</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb78-1"><a href="model-specification.html#cb78-1" aria-hidden="true" tabindex="-1"></a>$NMEXT</span>
 <span id="cb78-2"><a href="model-specification.html#cb78-2" aria-hidden="true" tabindex="-1"></a>run <span class="op">=</span> <span class="dv">1005</span></span>
@@ -2108,7 +2112,7 @@ populate those matrices (section <a href="#topic-matrix-update"><strong>??</stro
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by <font color="DarkGreen">Metrum Research Group</font>. It was last built on 2022-03-24.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by <font color="DarkGreen">Metrum Research Group</font>. It was last built on 2022-04-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

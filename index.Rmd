@@ -20,7 +20,7 @@ source("setup.R")
 
 
 # Introduction {-}
-<img src="images/mrgsolve_hex.png" align="right" width="150px"></img> Welcome to
+<img src="images/MRG-Solve-Hex.png" align="right" width="150px"></img> Welcome to
 the mrgsolve user guide. The user guide is the main documentation source for how
 mrgsolve works and how to best use mrgsolve in your modeling and simulation
 project.  As with most of the mrgsolve documentation, this is a work in

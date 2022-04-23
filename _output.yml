@@ -2,7 +2,7 @@ bookdown::bs4_book:
   #highlight: pygments
   css: [bookstyle.css]
   theme: 
-    primary: green
+    primary: "#097f5f"
   config:
     toc:
       collapse: none
