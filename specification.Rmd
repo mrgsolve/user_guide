@@ -1756,11 +1756,11 @@ Example:
 
 [ PARAM ] CL=1, VC=20
 
-[ SIGMA ] @labels ADD PROP
+[ SIGMA ] 
 25 0.0025
 
 [ TABLE ]
-double DV = (CENT/VC)*(1+PROP) + ADD;
+double DV = (CENT/VC)*(1+EPS(2)) + EPS(1);
 
 ```
 
