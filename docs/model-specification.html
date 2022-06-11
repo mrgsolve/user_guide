@@ -7,7 +7,7 @@
 <title>Chapter 2 Model specification | mrgsolve User Guide</title>
 <meta name="author" content="Metrum Research Group">
 <meta name="description" content="This chapter details the mrgsolve model specification format.  2.1 How / where to write a model There are two ways to write your model: Code in a separate file and source into your R script Code...">
-<meta name="generator" content="bookdown 0.25 with bs4_book()">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Model specification | mrgsolve User Guide">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://mrgsolve.github.io/user_guide/model-specification.html">
@@ -990,8 +990,8 @@ $SET delta=4, end=96
 . 
 . ----------------  source: nmxml.cpp  ----------------
 . 
-.   project: /private/var/fol.../T/RtmpU2gz3x
-.   shared object: nmxml-so-15df063f9bf72 
+.   project: /private/var/fol.../T/RtmpOsDmrt
+.   shared object: nmxml-so-ef067b0c4ecf 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
@@ -1594,11 +1594,11 @@ from <code>SIGMA</code>. The basic setup is the same as detailed in <code>ETA(n)
 <span id="cb97-2"><a href="model-specification.html#cb97-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-3"><a href="model-specification.html#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PARAM <span class="op">]</span> CL<span class="op">=</span><span class="dv">1</span><span class="op">,</span> VC<span class="op">=</span><span class="dv">20</span></span>
 <span id="cb97-4"><a href="model-specification.html#cb97-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-5"><a href="model-specification.html#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> SIGMA <span class="op">]</span> @labels ADD PROP</span>
+<span id="cb97-5"><a href="model-specification.html#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> SIGMA <span class="op">]</span> </span>
 <span id="cb97-6"><a href="model-specification.html#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span> <span class="fl">0.0025</span></span>
 <span id="cb97-7"><a href="model-specification.html#cb97-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-8"><a href="model-specification.html#cb97-8" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> TABLE <span class="op">]</span></span>
-<span id="cb97-9"><a href="model-specification.html#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> DV <span class="op">=</span> <span class="op">(</span>CENT<span class="op">/</span>VC<span class="op">)*(</span><span class="dv">1</span><span class="op">+</span>PROP<span class="op">)</span> <span class="op">+</span> ADD<span class="op">;</span></span></code></pre></div>
+<span id="cb97-9"><a href="model-specification.html#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> DV <span class="op">=</span> <span class="op">(</span>CENT<span class="op">/</span>VC<span class="op">)*(</span><span class="dv">1</span><span class="op">+</span>EPS<span class="op">(</span><span class="dv">2</span><span class="op">))</span> <span class="op">+</span> EPS<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span></code></pre></div>
 </div>
 <div id="tablename" class="section level3" number="2.3.29">
 <h3>
@@ -2112,7 +2112,7 @@ populate those matrices (section <a href="#topic-matrix-update"><strong>??</stro
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-05-17.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

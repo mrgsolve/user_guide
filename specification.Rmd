@@ -1751,6 +1751,7 @@ will be populated with zero.
 from `SIGMA`.  The basic setup is the same as detailed in `ETA(n)`.
 
 Example:
+
 ```{c,eval=FALSE}
 [ CMT ] CENT
 

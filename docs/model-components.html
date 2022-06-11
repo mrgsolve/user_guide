@@ -7,7 +7,7 @@
 <title>Chapter 1 Model components | mrgsolve User Guide</title>
 <meta name="author" content="Metrum Research Group">
 <meta name="description" content="This chapter details the different components of a model in mrgsolve. Each component listed here is maintained within a “model object”. This is an updatable S4 object in R that contains all of the...">
-<meta name="generator" content="bookdown 0.25 with bs4_book()">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 1 Model components | mrgsolve User Guide">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://mrgsolve.github.io/user_guide/model-components.html">
@@ -180,7 +180,7 @@ the problem is started. Settings include: <code>atol</code>, <code>rtol</code>, 
 example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"viral1"</span>, end <span class="op">=</span> <span class="fl">144</span><span class="op">)</span> </code></pre></div>
-<pre><code>. Building viral1 ... done.</code></pre>
+<pre><code>. Loading model from cache.</code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">mrgsim_e</span><span class="op">(</span><span class="va">mod</span>, <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">V</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span>
 
@@ -446,7 +446,7 @@ random effects (one draw per observation).</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-05-17.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
