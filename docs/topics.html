@@ -105,21 +105,21 @@ should include all relevant blocks in a single file (or R string).</p>
 <span id="cb359-2"><a href="topics.html#cb359-2" aria-hidden="true" tabindex="-1"></a>double CL <span class="ot">=</span> TVCL<span class="sc">*</span><span class="fu">pow</span>(WT<span class="sc">/</span><span class="dv">70</span>,WTCL)<span class="sc">*</span><span class="fu">exp</span>(ECL);</span>
 <span id="cb359-3"><a href="topics.html#cb359-3" aria-hidden="true" tabindex="-1"></a>double V  <span class="ot">=</span> TVV <span class="sc">*</span><span class="fu">pow</span>(SEXVC,SEX)<span class="sc">*</span><span class="fu">exp</span>(EV);</span>
 <span id="cb359-4"><a href="topics.html#cb359-4" aria-hidden="true" tabindex="-1"></a>double KA <span class="ot">=</span> TVKA<span class="sc">*</span><span class="fu">exp</span>(EKA);</span></code></pre></div>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="topics.html#cb360-1" aria-hidden="true" tabindex="-1"></a>[OMEGA] <span class="sc">@</span>name OMGA <span class="sc">@</span>correlation <span class="sc">@</span>block</span>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="topics.html#cb360-1" aria-hidden="true" tabindex="-1"></a>[OMEGA] <span class="sc">@</span>name OMGA <span class="sc">@</span>correlation <span class="sc">@</span>block <span class="sc">@</span>annotated</span>
 <span id="cb360-2"><a href="topics.html#cb360-2" aria-hidden="true" tabindex="-1"></a>ECL <span class="sc">:</span> <span class="fl">1.23</span> <span class="sc">:</span> Random effect on CL</span>
 <span id="cb360-3"><a href="topics.html#cb360-3" aria-hidden="true" tabindex="-1"></a>EV  <span class="sc">:</span> <span class="fl">0.67</span> <span class="fl">0.4</span> <span class="sc">:</span> Random effect on V</span>
 <span id="cb360-4"><a href="topics.html#cb360-4" aria-hidden="true" tabindex="-1"></a>EKA <span class="sc">:</span> <span class="fl">0.25</span> <span class="fl">0.87</span> <span class="fl">0.2</span> <span class="sc">:</span> Random effect on KA</span></code></pre></div>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="topics.html#cb361-1" aria-hidden="true" tabindex="-1"></a>[SIGMA] <span class="sc">@</span>name SGMA </span>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="topics.html#cb361-1" aria-hidden="true" tabindex="-1"></a>[SIGMA] <span class="sc">@</span>name SGMA <span class="sc">@</span>annotated</span>
 <span id="cb361-2"><a href="topics.html#cb361-2" aria-hidden="true" tabindex="-1"></a>PROP<span class="sc">:</span> <span class="fl">0.25</span> <span class="sc">:</span> Proportional residual error</span>
 <span id="cb361-3"><a href="topics.html#cb361-3" aria-hidden="true" tabindex="-1"></a>ADD <span class="sc">:</span> <span class="dv">25</span>   <span class="sc">:</span> Additive residual error</span></code></pre></div>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="topics.html#cb362-1" aria-hidden="true" tabindex="-1"></a>[CMT]</span>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="topics.html#cb362-1" aria-hidden="true" tabindex="-1"></a>[CMT] <span class="sc">@</span>annotated</span>
 <span id="cb362-2"><a href="topics.html#cb362-2" aria-hidden="true" tabindex="-1"></a>GUT  <span class="sc">:</span> Dosing <span class="fu">compartment</span>  (mg)</span>
 <span id="cb362-3"><a href="topics.html#cb362-3" aria-hidden="true" tabindex="-1"></a>CENT <span class="sc">:</span> Central <span class="fu">compartment</span> (mg)</span></code></pre></div>
 <div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="topics.html#cb363-1" aria-hidden="true" tabindex="-1"></a>[PKMODEL] ncmt <span class="ot">=</span> <span class="dv">1</span>, depot<span class="ot">=</span><span class="cn">TRUE</span></span></code></pre></div>
 <div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="topics.html#cb364-1" aria-hidden="true" tabindex="-1"></a>[TABLE]</span>
 <span id="cb364-2"><a href="topics.html#cb364-2" aria-hidden="true" tabindex="-1"></a>capture IPRED <span class="ot">=</span> CENT<span class="sc">/</span>V;</span>
 <span id="cb364-3"><a href="topics.html#cb364-3" aria-hidden="true" tabindex="-1"></a>double DV <span class="ot">=</span> IPRED<span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span>PROP) <span class="sc">+</span> ADD;</span></code></pre></div>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="topics.html#cb365-1" aria-hidden="true" tabindex="-1"></a>[CAPTURE]</span>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="topics.html#cb365-1" aria-hidden="true" tabindex="-1"></a>[CAPTURE] <span class="sc">@</span>annotated</span>
 <span id="cb365-2"><a href="topics.html#cb365-2" aria-hidden="true" tabindex="-1"></a>DV  <span class="sc">:</span> <span class="fu">Concentration</span> (mg<span class="sc">/</span>L)</span>
 <span id="cb365-3"><a href="topics.html#cb365-3" aria-hidden="true" tabindex="-1"></a>ECL <span class="sc">:</span> Random effect on CL</span>
 <span id="cb365-4"><a href="topics.html#cb365-4" aria-hidden="true" tabindex="-1"></a>CL  <span class="sc">:</span> Individual <span class="fu">clearance</span> (L<span class="sc">/</span>hr)</span></code></pre></div>
@@ -1135,7 +1135,7 @@ during system advance in section <a href="section-sequence.html#section-sequence
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-11.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

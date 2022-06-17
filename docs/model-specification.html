@@ -333,6 +333,8 @@ in efficiency of the simulation.</p>
 <li>For <code>$CMT</code> give the names of compartments; initial values are assumed to be 0</li>
 <li>For <code>$INIT</code> give the name and initial value for all compartments</li>
 </ul>
+<p>Note that both <code>$CMT</code> and <code>$INIT</code> declare compartments, so any compartment name
+should get declared in either <code>$CMT</code> or <code>$INIT</code>, but never both.</p>
 <p>Examples:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb30-1"><a href="model-specification.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> CMT <span class="op">]</span> GUT CENT RESPONSE</span></code></pre></div>
 <div class="sourceCode" id="cb31"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb31-1"><a href="model-specification.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> INIT <span class="op">]</span> GUT  <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> CENT <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> RESPONSE <span class="op">=</span> <span class="dv">25</span></span></code></pre></div>
@@ -990,8 +992,8 @@ $SET delta=4, end=96
 . 
 . ----------------  source: nmxml.cpp  ----------------
 . 
-.   project: /private/var/fol.../T/RtmpOsDmrt
-.   shared object: nmxml-so-ef067b0c4ecf 
+.   project: /private/var/fol.../T/RtmpxbKKp1
+.   shared object: nmxml-so-e4165784247 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
@@ -2112,7 +2114,7 @@ populate those matrices (section <a href="#topic-matrix-update"><strong>??</stro
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-11.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

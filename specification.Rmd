@@ -351,6 +351,9 @@ Declare the names of all compartments in the model.
 * For `$CMT` give the names of compartments; initial values are assumed to be 0
 * For `$INIT` give the name and initial value for all compartments
 
+Note that both `$CMT` and `$INIT` declare compartments, so any compartment name
+should get declared in either `$CMT` or `$INIT`, but never both.
+
 Examples:
 ```{c,eval=FALSE}
 [ CMT ] GUT CENT RESPONSE
