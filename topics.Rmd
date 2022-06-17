@@ -49,20 +49,20 @@ double KA = TVKA*exp(EKA);
 ```
 
 ```{r,eval=FALSE}
-[OMEGA] @name OMGA @correlation @block
+[OMEGA] @name OMGA @correlation @block @annotated
 ECL : 1.23 : Random effect on CL
 EV  : 0.67 0.4 : Random effect on V
 EKA : 0.25 0.87 0.2 : Random effect on KA
 ```
 
 ```{r,eval=FALSE}
-[SIGMA] @name SGMA 
+[SIGMA] @name SGMA @annotated
 PROP: 0.25 : Proportional residual error
 ADD : 25   : Additive residual error
 ```
 
 ```{r,eval=FALSE}
-[CMT]
+[CMT] @annotated
 GUT  : Dosing compartment  (mg)
 CENT : Central compartment (mg)
 ```
@@ -78,7 +78,7 @@ capture IPRED = CENT/V;
 double DV = IPRED*(1+PROP) + ADD;
 
 ```{r,eval=FALSE}
-[CAPTURE]
+[CAPTURE] @annotated
 DV  : Concentration (mg/L)
 ECL : Random effect on CL
 CL  : Individual clearance (L/hr)
