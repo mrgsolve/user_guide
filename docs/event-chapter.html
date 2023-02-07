@@ -213,6 +213,9 @@ be suitable to use for simulation.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>ID <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.   time amt rate cmt evid ID
 . 1    1 100   50   2    1  5</code></pre>
+<p><strong>Upper case names</strong></p>
+<p>See section @(ref-evd) for a constructor for an event object that renders with
+upper case names.</p>
 </div>
 <div id="extract-information" class="section level2" number="4.4">
 <h2>
@@ -515,9 +518,9 @@ compartment 2 would be</p>
 <p>See the <code>ev_rx()</code> documentation for more details and limitations.</p>
 </div>
 </div>
-<div id="upper-case-names" class="section level2" number="4.8">
+<div id="ref-evd" class="section level2" number="4.8">
 <h2>
-<span class="header-section-number">4.8</span> Upper case names<a class="anchor" aria-label="anchor" href="#upper-case-names"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.8</span> Upper case names<a class="anchor" aria-label="anchor" href="#ref-evd"><i class="fas fa-link"></i></a>
 </h2>
 <p>You’ll notice in the previous sections that most of the column names were
 rendered with lower case letters when we convert the event object to a
@@ -626,7 +629,7 @@ data like or event object. To convert to upper case use <code>uctran()</code></p
 <li><a class="nav-link" href="#ev_rx"><span class="header-section-number">4.7.2</span> ev_rx</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#upper-case-names"><span class="header-section-number">4.8</span> Upper case names</a></li>
+<li><a class="nav-link" href="#ref-evd"><span class="header-section-number">4.8</span> Upper case names</a></li>
 </ul>
 
       <div class="book-extra">

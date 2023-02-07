@@ -164,7 +164,10 @@ as.data.frame(e) %>% mutate(ID = 5)
 ```
 
 
+__Upper case names__
 
+See section \@(ref-evd) for a constructor for an event object that renders with 
+upper case names. 
 
 
 ## Extract information
@@ -425,7 +428,7 @@ ev_rx("500 mg over 2 hours q 24 h x3 in 1")
 
 See the `ev_rx()` documentation for more details and limitations.
 
-## Upper case names
+## Upper case names {#ref-evd}
 
 You'll notice in the previous sections that most of the column names were 
 rendered with lower case letters when we convert the event object to a 
