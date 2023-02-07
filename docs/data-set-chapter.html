@@ -7,7 +7,7 @@
 <title>Chapter 3 Input data sets | mrgsolve User Guide</title>
 <meta name="author" content="Metrum Research Group">
 <meta name="description" content="Input data sets are used in mrgsolve to allow the user to specify interventions and input data items. Please see the mrgsolve help topic ?exdatasets for examples of all of the data sets discussed...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Input data sets | mrgsolve User Guide">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://mrgsolve.github.io/user_guide/data-set-chapter.html">
@@ -18,7 +18,7 @@
 <meta name="twitter:description" content="Input data sets are used in mrgsolve to allow the user to specify interventions and input data items. Please see the mrgsolve help topic ?exdatasets for examples of all of the data sets discussed...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -182,8 +182,8 @@ subjects in the data set.</li>
 </ul>
 <p><strong>Example of condensed data set</strong></p>
 <div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">extran1</span>, package <span class="op">=</span> <span class="st">"mrgsolve"</span><span class="op">)</span>
-<span class="va">extran1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">extran1</span>, package <span class="op">=</span> <span class="st">"mrgsolve"</span><span class="op">)</span></span>
+<span><span class="va">extran1</span></span></code></pre></div>
 <pre><code>.   ID  amt cmt time addl ii rate evid
 . 1  1 1000   1    0    3 24    0    1
 . 2  2 1000   2    0    0  0   20    1
@@ -197,9 +197,9 @@ subjects in the data set.</li>
 <p>See <code>?exdatasets</code> in the <code>R</code> help system after loading mrgsolve.</p>
 <p><strong>Example of full data set</strong></p>
 <div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exTheoph</span>, package <span class="op">=</span> <span class="st">"mrgsolve"</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">exTheoph</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exTheoph</span>, package <span class="op">=</span> <span class="st">"mrgsolve"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">exTheoph</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.   ID   WT Dose time  conc cmt  amt evid
 . 1  1 79.6 4.02 0.00  0.00   1 4.02    1
 . 2  1 79.6 4.02 0.25  2.84   0 0.00    0
@@ -216,16 +216,16 @@ make a smooth profile on a plot). In that case, you can set <code>obsaug  = TRUE
 when calling <code>mrgsim</code>.</p>
 <p>For example:</p>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">out</span> <span class="op">&lt;-</span> 
-  <span class="va">mod</span> <span class="op">%&gt;%</span>
-    <span class="fu">data_set</span><span class="op">(</span><span class="va">exTheoph</span>, <span class="va">ID</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu">carry.out</span><span class="op">(</span><span class="va">a.u.g</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="va">obsaug</span> <span class="op">%&gt;%</span>
-    <span class="fu">mrgsim</span><span class="op">(</span>end<span class="op">=</span><span class="fl">24</span>, delta<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
-
-<span class="va">out</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">mod</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">data_set</span><span class="op">(</span><span class="va">exTheoph</span>, <span class="va">ID</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">carry.out</span><span class="op">(</span><span class="va">a.u.g</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="va">obsaug</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mrgsim</span><span class="op">(</span>end<span class="op">=</span><span class="fl">24</span>, delta<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">out</span></span></code></pre></div>
 <pre><code>. Model:  housemodel 
 . Dim:    36 x 8 
 . Time:   0 to 24.37 
@@ -240,7 +240,7 @@ when calling <code>mrgsim</code>.</p>
 . 7:   1 2.00     1 0.3647 3.422 49.34 0.15048 0.15048
 . 8:   1 2.02     0 0.3560 3.428 49.33 0.15072 0.15072</code></pre>
 <div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">unlist</span> <span class="op">%&gt;%</span> <span class="va">unname</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">unlist</span> <span class="op">%&gt;%</span> <span class="va">unname</span></span></code></pre></div>
 <pre><code>.  [1]  0.00  0.00  0.25  0.57  1.00  1.12  2.00  2.02  3.00  3.82  4.00  5.00
 . [13]  5.10  6.00  7.00  7.03  8.00  9.00  9.05 10.00 11.00 12.00 12.12 13.00
 . [25] 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 24.37</code></pre>
@@ -271,9 +271,9 @@ use.</p>
 </h3>
 <p>To create a data set of 3 people each receiving <strong>250 mg every 8 hours for 12 total doses</strong>:</p>
 <div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">expand.ev</span><span class="op">(</span>ID<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, amt<span class="op">=</span><span class="fl">250</span>, ii<span class="op">=</span><span class="fl">8</span>, addl<span class="op">=</span><span class="fl">11</span><span class="op">)</span>
-
-<span class="va">data</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">expand.ev</span><span class="op">(</span>ID<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, amt<span class="op">=</span><span class="fl">250</span>, ii<span class="op">=</span><span class="fl">8</span>, addl<span class="op">=</span><span class="fl">11</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">data</span></span></code></pre></div>
 <pre><code>.   ID time amt ii addl cmt evid
 . 1  1    0 250  8   11   1    1
 . 2  2    0 250  8   11   1    1
@@ -281,9 +281,9 @@ use.</p>
 <p>Notice that <code>expand.ev</code> assumes that <code>time</code> is 0 and <code>cmt</code> is 1. To dose as a
 2-hour infusion into the second compartment use:</p>
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">expand.ev</span><span class="op">(</span>ID<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, amt<span class="op">=</span><span class="fl">250</span>, rate<span class="op">=</span><span class="fl">125</span>, ii<span class="op">=</span><span class="fl">8</span>, addl<span class="op">=</span><span class="fl">11</span>, cmt<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-
-<span class="va">data</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">expand.ev</span><span class="op">(</span>ID<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, amt<span class="op">=</span><span class="fl">250</span>, rate<span class="op">=</span><span class="fl">125</span>, ii<span class="op">=</span><span class="fl">8</span>, addl<span class="op">=</span><span class="fl">11</span>, cmt<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">data</span></span></code></pre></div>
 <pre><code>.   ID time amt rate ii addl cmt evid
 . 1  1    0 250  125  8   11   2    1
 . 2  2    0 250  125  8   11   2    1
@@ -291,12 +291,12 @@ use.</p>
 <p>Use <code>data_set</code> to pass the data into the problem.</p>
 <p>For example:</p>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">mod</span> <span class="op">%&gt;%</span>
-  <span class="fu">data_set</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">mrgsim</span><span class="op">(</span>end<span class="op">=</span><span class="fl">240</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">CP</span><span class="op">~</span><span class="va">time</span><span class="op">|</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">ID</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">data_set</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mrgsim</span><span class="op">(</span>end<span class="op">=</span><span class="fl">240</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">CP</span><span class="op">~</span><span class="va">time</span><span class="op">|</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">ID</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/data_set-1-1.png" width="672"></div>
 </div>
 </div>
@@ -332,9 +332,9 @@ mrgsolve documentation, we refer to individual data sets <code>idata</code> or
 <a href="data-set-chapter.html#data-set">3.2</a>).</p>
 <p>An <code>idata_set</code> looks like this:</p>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exidata</span><span class="op">)</span>
-
-<span class="va">exidata</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exidata</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">exidata</span></span></code></pre></div>
 <pre><code>.    ID    CL    VC     KA  KOUT  IC50 FOO
 . 1   1 1.050 47.80 0.8390 2.450 1.280   4
 . 2   2 0.730 30.10 0.0684 2.510 1.840   6
@@ -362,12 +362,12 @@ is not required.</p>
 <p>Use the <code>idata_set</code> function to pass the data set into the problem.</p>
 <p>For example:</p>
 <div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">mod</span> <span class="op">%&gt;%</span>
-  <span class="fu">idata_set</span><span class="op">(</span><span class="va">exidata</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">ev</span><span class="op">(</span>amt<span class="op">=</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="va">mrgsim</span> <span class="op">%&gt;%</span> <span class="va">plot</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">idata_set</span><span class="op">(</span><span class="va">exidata</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ev</span><span class="op">(</span>amt<span class="op">=</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="va">mrgsim</span> <span class="op">%&gt;%</span> <span class="va">plot</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/idata_set-1-1.png" width="672"></div>
 <p>Because there were 10 subjects in the <code>idata_set</code>, we get 10 profiles in the
 output. Each “individual” or “unit” received the same 100 mg dose. We would
@@ -393,9 +393,9 @@ compartment numbers, etc.</p>
 <p>Users can pre-validate the data set so that this does not need to happen at
 run time.</p>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exTheoph</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">exTheoph</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exTheoph</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">exTheoph</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.   ID   WT Dose time  conc cmt  amt evid
 . 1  1 79.6 4.02 0.00  0.00   1 4.02    1
 . 2  1 79.6 4.02 0.25  2.84   0 0.00    0
@@ -404,12 +404,12 @@ run time.</p>
 . 5  1 79.6 4.02 2.02  9.66   0 0.00    0
 . 6  1 79.6 4.02 3.82  8.58   0 0.00    0</code></pre>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"pk1"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"pk1"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Loading model from cache.</code></pre>
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">valid</span> <span class="op">&lt;-</span> <span class="fu">valid_data_set</span><span class="op">(</span><span class="va">exTheoph</span>,<span class="va">mod</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">valid</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">valid</span> <span class="op">&lt;-</span> <span class="fu">valid_data_set</span><span class="op">(</span><span class="va">exTheoph</span>,<span class="va">mod</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">valid</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.  'valid_data_set' num [1:132, 1:9] 1 1 1 1 1 1 1 1 1 1 ...
 .  - attr(*, "dimnames")=List of 2
 .   ..$ : NULL
@@ -475,7 +475,7 @@ be sorted by <code>time</code> or <code>TIME</code>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-17.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2023-02-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -488,7 +488,7 @@ be sorted by <code>time</code> or <code>TIME</code>
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

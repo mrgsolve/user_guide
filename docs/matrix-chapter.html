@@ -7,7 +7,7 @@
 <title>Chapter 5 Model Matrices | mrgsolve User Guide</title>
 <meta name="author" content="Metrum Research Group">
 <meta name="description" content="Model matrices include $OMEGA (for subject-level variability) and $SIGMA (for residual unexplained variability). These matrices are coded into the model file (see Sections 2.2.16 and 2.2.17) and...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="Chapter 5 Model Matrices | mrgsolve User Guide">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://mrgsolve.github.io/user_guide/matrix-chapter.html">
@@ -18,7 +18,7 @@
 <meta name="twitter:description" content="Model matrices include $OMEGA (for subject-level variability) and $SIGMA (for residual unexplained variability). These matrices are coded into the model file (see Sections 2.2.16 and 2.2.17) and...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -90,17 +90,17 @@ examples presented in this chapter.</p>
 <p>We can look at the <code>popex</code> model in the internal library for a starting example
 to show how model matrices can be seen from the model object.</p>
 <p>Once the model is loaded</p>
-<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"popex"</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"popex"</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>We can print the model object to the console and see the matrix structure</p>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span></span></code></pre></div>
 <pre><code>. 
 . 
 . ----------------  source: popex.cpp  ----------------
 . 
 .   project: /Users/kyleb/Rli...gsolve/models
-.   shared object: popex-so-e41611940d1e &lt;not loaded&gt;
+.   shared object: popex-so-49a56986b6d4 &lt;not loaded&gt;
 . 
 .   time:          start: 0 end: 240 delta: 0.5
 .                  add: &lt;none&gt;
@@ -115,8 +115,8 @@ to show how model matrices can be seen from the model object.</p>
 . ------------------------------------------------------</code></pre>
 <p>In this output, we see that <code>omega</code> is a 3 by 3 matrix and <code>sigma</code> is 1 by 1.
 We can view both matrices by calling <code>revar()</code> on the model object</p>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">revar</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">revar</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $omega
 . $...
 .       [,1] [,2] [,3]
@@ -132,8 +132,8 @@ We can view both matrices by calling <code>revar()</code> on the model object</p
 <p>This shows the 3x3 <code>$OMEGA</code> matrix with all off-diagonals set to zero and the
 1x1 <code>$SIGMA</code> which is currently fixed to 0.</p>
 <p>The <code>$OMEGA</code> matrix can be extracted with the <code>omat()</code> function</p>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $...
 .       [,1] [,2] [,3]
 . ECL:   0.3  0.0  0.0
@@ -142,15 +142,15 @@ We can view both matrices by calling <code>revar()</code> on the model object</p
 <p>Use the <code>smat()</code> function to extract the <code>$SIGMA</code> matrix. The result of these
 calls are <code>matlist</code> objects; for <code>$OMEGA</code> the class is <code>omegalist</code> (which
 inherits from <code>matlist</code>)</p>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. [1] "omegalist"
 . attr(,"package")
 . [1] "mrgsolve"</code></pre>
 <p>and for <code>$SIGMA</code> it is <code>sigmalist</code>. These are lists of matrices. In this
 example, there is just one <code>$OMEGA</code> block in the code</p>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">blocks</span><span class="op">(</span><span class="va">mod</span>, <span class="va">OMEGA</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">blocks</span><span class="op">(</span><span class="va">mod</span>, <span class="va">OMEGA</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. 
 . Model file: popex.cpp 
 . 
@@ -158,39 +158,39 @@ example, there is just one <code>$OMEGA</code> block in the code</p>
 . @labels ECL EV EKA
 . 0.3 0.1 0.5</code></pre>
 <p>so the length of the <code>omegalist</code> object is also 1</p>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">om</span> <span class="op">&lt;-</span> <span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">om</span> <span class="op">&lt;-</span> <span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. [1] 1</code></pre>
 <p>Functions are provided to check the names</p>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. [1] "..."</code></pre>
 <p>and the labels</p>
-<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/labels.html">labels</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/labels.html">labels</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. [[1]]
 . [1] "ECL" "EV"  "EKA"</code></pre>
 <p>as well as getting the dimensions or number of rows</p>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $...
 . [1] 3 3</code></pre>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. ... 
 .   3</code></pre>
 <p>The <code>omegalist</code> (<code>sigmalist</code>) object can be converted to a standard R list</p>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. List of 1
 .  $ ...: num [1:3, 1:3] 0.3 0 0 0 0.1 0 0 0 0.5
 .   ..- attr(*, "dimnames")=List of 2
 .   .. ..$ : chr [1:3] "ECL" "EV" "EKA"
 .   .. ..$ : chr [1:3] "ECL" "EV" "EKA"</code></pre>
 <p>or it can be rendered as a matrix</p>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">om</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.      [,1] [,2] [,3]
 . [1,]  0.3  0.0  0.0
 . [2,]  0.0  0.1  0.0
@@ -201,29 +201,29 @@ example, there is just one <code>$OMEGA</code> block in the code</p>
 <span class="header-section-number">5.1.2</span> Multiple matrix lists<a class="anchor" aria-label="anchor" href="#multiple-matrix-lists"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s look at an example where there is a more complicated <code>$OMEGA</code> structure.</p>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-$OMEGA @name first @labels a b c
-1 2 3
-
-$OMEGA @name second @labels d e
-4 5
-
-$OMEGA @name third @labels f g h i
-6 7 8 9
-'</span>
-<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"multiple-matrices"</span>, <span class="va">code</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">$OMEGA @name first @labels a b c</span></span>
+<span><span class="st">1 2 3</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$OMEGA @name second @labels d e</span></span>
+<span><span class="st">4 5</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$OMEGA @name third @labels f g h i</span></span>
+<span><span class="st">6 7 8 9</span></span>
+<span><span class="st">'</span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"multiple-matrices"</span>, <span class="va">code</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Each <code>$OMEGA</code> block codes a diagonal matrix; the interesting feature is that
 there are 3 different <code>$OMEGA</code> blocks.</p>
 <p>Now, when we look at the model</p>
-<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span></span></code></pre></div>
 <pre><code>. 
 . 
 . ----------  source: multiple-matrices.cpp  ----------
 . 
-.   project: /private/var/fol.../T/RtmpxbKKp1
-.   shared object: multiple-matrices-so-e4161e84987b &lt;not loaded&gt;
+.   project: /private/var/fol.../T/RtmpoQlvXl
+.   shared object: multiple-matrices-so-49a56249a66f &lt;not loaded&gt;
 . 
 .   time:          start: 0 end: 24 delta: 1
 .                  add: &lt;none&gt;
@@ -238,8 +238,8 @@ there are 3 different <code>$OMEGA</code> blocks.</p>
 . ------------------------------------------------------</code></pre>
 <p>We see that <code>$OMEGA</code> is one 3x3 matrix, one 2x2 matrix and on 4x4 matrix, in
 that order. Calling <code>revar()</code> on this model object</p>
-<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">revar</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">revar</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $omega
 . $first
 .     [,1] [,2] [,3]
@@ -264,18 +264,18 @@ that order. Calling <code>revar()</code> on this model object</p>
 . No matrices found</code></pre>
 <p>we only see the <code>$OMEGA</code> matrices as the model was coded. Now the length
 of the <code>omegalist</code> object is 3</p>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. [1] 3</code></pre>
 <p>and the number of rows is 3 in the first matrix, 2 in the second, and 4 in the
 third</p>
-<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.  first second  third 
 .      3      2      4</code></pre>
 <p>We can also check <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code></p>
-<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $first
 . [1] 3 3
 . 
@@ -286,8 +286,8 @@ third</p>
 . [1] 4 4</code></pre>
 <p>The omega matrix can be converted from this segmented list into a single block
 matrix</p>
-<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
 .  [1,]    1    0    0    0    0    0    0    0    0
 .  [2,]    0    2    0    0    0    0    0    0    0
@@ -301,8 +301,8 @@ matrix</p>
 <p>The result is 9x9 with all off diagonals between the different list positions
 set to zero.</p>
 <p>Otherwise, we might work with this object as a list</p>
-<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $first
 .   a b c
 . a 1 0 0
@@ -333,8 +333,8 @@ matrix out of all the smaller matrices using the <code><a href="https://rdrr.io/
 describes how to combine matrices within the confines of the <code>matlist</code> object.</p>
 <p>mrgsolve provides functions to collapse (or combine) matrices in a <code>matlist</code>
 object. We can call <code>collapse_omega()</code>, passing in the model object</p>
-<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">collapse_omega</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">revar</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">collapse_omega</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">revar</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $omega
 . $...
 .     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
@@ -354,8 +354,8 @@ object. We can call <code>collapse_omega()</code>, passing in the model object</
 <p>and now we have an <code>omegalist</code> object inside a model object and the matrix
 is a single 9x9 <code>$OMEGA</code> matrix. The row names have been retained, but there
 is now no name for the matrix; this can be provided when collapsing</p>
-<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">collapse_omega</span><span class="op">(</span><span class="va">mod</span>, name <span class="op">=</span> <span class="st">"only"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">collapse_omega</span><span class="op">(</span><span class="va">mod</span>, name <span class="op">=</span> <span class="st">"only"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $only
 .     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
 . a:     1    0    0    0    0    0    0    0    0
@@ -369,8 +369,8 @@ is now no name for the matrix; this can be provided when collapsing</p>
 . i:     0    0    0    0    0    0    0    0    9</code></pre>
 <p>Suppose that we only want to combine the first two matrices, leaving the third
 matrix alone. In that case, call <code>collapse_omega()</code> with the range argument</p>
-<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">collapse_omega</span><span class="op">(</span><span class="va">mod</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"first_second"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">collapse_omega</span><span class="op">(</span><span class="va">mod</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"first_second"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $first_second
 .     [,1] [,2] [,3] [,4] [,5]
 . a:     1    0    0    0    0
@@ -394,8 +394,8 @@ when they need to be updated.</p>
 <p>Use <code>collapse_sigma()</code> to collapse <code>$SIGMA</code> matrices if needed.</p>
 <p>Also, the function <code>collapse_matrix()</code> can be called on a <code>omegalist</code> or
 <code>sigmalist</code> object to collapse</p>
-<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">collapse_matrix</span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="cn">NA</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">collapse_matrix</span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $first
 .     a b c
 . a:  1 0 0
@@ -430,22 +430,22 @@ provide a matrix (as an <code>R</code> object). <code>mrgsolve</code> provides s
 functions to help … allowing the user to enter lower diagonals instead of the
 full matrix.</p>
 <p><code>dmat()</code> for diagonal matrix</p>
-<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">dmat</span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">dmat</span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.      [,1] [,2] [,3]
 . [1,]    1    0    0
 . [2,]    0    2    0
 . [3,]    0    0    3</code></pre>
 <p><code>bmat()</code> for block matrix</p>
-<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">bmat</span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">bmat</span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.      [,1] [,2]
 . [1,]    1    2
 . [2,]    2    3</code></pre>
 <p><code>cmat()</code> for a block matrix where the diagonal elements are variances and the
 off-diagonals are taken to be correlations, not covariances</p>
-<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">cmat</span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.87</span>,<span class="fl">0.3</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">cmat</span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.87</span>,<span class="fl">0.3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.           [,1]      [,2]
 . [1,] 0.1000000 0.1506884
 . [2,] 0.1506884 0.3000000</code></pre>
@@ -453,21 +453,21 @@ off-diagonals are taken to be correlations, not covariances</p>
 <p><code>mrgsolve</code> also provides <code>as_bmat()</code> and <code>as_dmat()</code> for converting other <code>R</code>
 objects to matrices or lists of matrices.</p>
 <p>Consider this list with named elements holding the data for a matrix:</p>
-<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>OMEGA1.1 <span class="op">=</span> <span class="fl">0.9</span>, OMEGA2.1 <span class="op">=</span> <span class="fl">0.3</span>, OMEGA2.2 <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>OMEGA1.1 <span class="op">=</span> <span class="fl">0.9</span>, OMEGA2.1 <span class="op">=</span> <span class="fl">0.3</span>, OMEGA2.2 <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span></code></pre></div>
 <p>These data could form either a 3x3 diagonal matrix or a 2x2 block matrix. But
 the names suggest a 2x2 form. <code>as_bmat()</code> can make the matrix like this</p>
-<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">as_bmat</span><span class="op">(</span><span class="va">m</span>, <span class="st">"OMEGA"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">as_bmat</span><span class="op">(</span><span class="va">m</span>, <span class="st">"OMEGA"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.      [,1] [,2]
 . [1,]  0.9  0.3
 . [2,]  0.3  0.4</code></pre>
 <p>The second argument is a regular expression that <code>mrgsolve</code> uses to find
 elements in the list to use for building the matrix.</p>
 <p>Frequently, we have estimates in a data frame like this</p>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exBoot</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">exBoot</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exBoot</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">exBoot</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.   run  THETA1 THETA2  THETA3 OMEGA11   OMEGA21 OMEGA22 OMEGA31  OMEGA32 OMEGA33
 . 1   1 -0.7634  2.280  0.8472 0.12860  0.046130  0.2874 0.13820 -0.02164  0.3933
 . 2   2 -0.4816  2.076  0.5355 0.12000  0.051000  0.2409 0.06754 -0.07759  0.3342
@@ -483,21 +483,21 @@ elements in the list to use for building the matrix.</p>
 . 5 0.001606       0  0.8996
 . 6 0.002134       0  0.9744</code></pre>
 <p>We can use <code>as_bmat()</code> with this data frame to extract the <code>$OMEGA</code> matrices</p>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">omegas</span> <span class="op">&lt;-</span> <span class="fu">as_bmat</span><span class="op">(</span><span class="va">exBoot</span>, <span class="st">"OMEGA"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">omegas</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">omegas</span> <span class="op">&lt;-</span> <span class="fu">as_bmat</span><span class="op">(</span><span class="va">exBoot</span>, <span class="st">"OMEGA"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">omegas</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. [1] 100</code></pre>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">exBoot</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">exBoot</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. [1] 100  13</code></pre>
-<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">omegas</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">omegas</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <pre><code>.          [,1]     [,2]    [,3]
 . [1,]  0.13390 -0.01927  0.1074
 . [2,] -0.01927  0.16400 -0.0117
 . [3,]  0.10740 -0.01170  0.3412</code></pre>
-<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">omegas</span><span class="op">[[</span><span class="fl">16</span><span class="op">]</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">omegas</span><span class="op">[[</span><span class="fl">16</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <pre><code>.         [,1]    [,2]   [,3]
 . [1,] 0.08126 0.01252 0.1050
 . [2,] 0.01252 0.16860 0.0149
@@ -505,8 +505,8 @@ elements in the list to use for building the matrix.</p>
 <p>The result of calling <code>as_bmat</code> or <code>as_dmat</code> is a list of matrices, one for
 each row in the data frame.</p>
 <p>Note in this example, we could have called</p>
-<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sigmas</span> <span class="op">&lt;-</span> <span class="fu">as_bmat</span><span class="op">(</span><span class="va">exBoot</span>,<span class="st">"SIGMA"</span><span class="op">)</span> </code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sigmas</span> <span class="op">&lt;-</span> <span class="fu">as_bmat</span><span class="op">(</span><span class="va">exBoot</span>,<span class="st">"SIGMA"</span><span class="op">)</span> </span></code></pre></div>
 <p>to grab the <code>$SIGMA</code> matrices.</p>
 <p>For help on these helper functions, see <code>?dmat</code>, <code>?bmat</code>, <code>?cmat</code>, <code>?as_bmat</code>,
 <code>?as_dmat</code> in the <code>R</code> help system after loading <code>mrgsolve</code>.</p>
@@ -525,18 +525,18 @@ will convert all <code>$OMEGA</code> and <code>$SIGMA</code> matrix elements to 
 file (<code>?zero_re</code>) to see some options for selectively zeroing out only one or
 the other.</p>
 <p>For example we have this population PK model</p>
-<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"popex"</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"popex"</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">omat</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $...
 .       [,1] [,2] [,3]
 . ECL:   0.3  0.0  0.0
 . EV:    0.0  0.1  0.0
 . EKA:   0.0  0.0  0.5</code></pre>
 <p>We can turn that matrix to all zeros with</p>
-<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">zero_re</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">zero_re</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $...
 .       [,1] [,2] [,3]
 . ECL:     0    0    0
@@ -545,36 +545,36 @@ the other.</p>
 <p>And when we simulate right after that, all <code>ETA(n)</code> will be zero as well
 and you’ll get your fixed-effects simulation (the following is for example
 only and is not evaluated)</p>
-<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">%&gt;%</span> 
-  <span class="fu">zero_re</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">mrgsim</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">zero_re</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mrgsim</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="example-unnamed-matrix" class="section level3" number="5.3.3">
 <h3>
 <span class="header-section-number">5.3.3</span> Example: unnamed matrix<a class="anchor" aria-label="anchor" href="#example-unnamed-matrix"><i class="fas fa-link"></i></a>
 </h3>
 <p>Here is a model with only a 3x3 <code>$OMEGA</code> matrix</p>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-$OMEGA
-1 2 3
-'</span>
-
-<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"matrix"</span>, <span class="va">code</span>, compile<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">$OMEGA</span></span>
+<span><span class="st">1 2 3</span></span>
+<span><span class="st">'</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"matrix"</span>, <span class="va">code</span>, compile<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s check the values in the matrix using <code>omat()</code></p>
-<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="va">omat</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="va">omat</span></span></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     1    0    0
 . 2:     0    2    0
 . 3:     0    0    3</code></pre>
 <p>We also use <code>omat()</code> to update the values in the matrix</p>
-<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="fu">dmat</span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">omat</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="fu">dmat</span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">omat</span></span></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     4    0    0
@@ -582,11 +582,11 @@ $OMEGA
 . 3:     0    0    6</code></pre>
 <p>To update <code>$OMEGA</code>, we must provide a matrix of the same dimension, in this
 case 3x3. An error is generated if we provide a matrix with the wrong dimension.</p>
-<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ans</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="fu">dmat</span><span class="op">(</span><span class="fl">11</span>,<span class="fl">23</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="fu">dmat</span><span class="op">(</span><span class="fl">11</span>,<span class="fl">23</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Error : improper signature: omat</code></pre>
-<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ans</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ans</span></span></code></pre></div>
 <pre><code>. [1] "Error : improper signature: omat\n"
 . attr(,"class")
 . [1] "try-error"
@@ -600,16 +600,16 @@ case 3x3. An error is generated if we provide a matrix with the wrong dimension.
 <p>When there are multiple <code>$OMEGA</code> matrices, it can be helpful to assign them
 names. Here, there are two matrices: one for interindividual variability
 (<code>IIV</code>) and one for interoccasion variability (<code>IOV</code>).</p>
-<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-$OMEGA @name IIV
-1 2 3
-$OMEGA @name IOV
-4 5
-'</span>
-<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"iov"</span>, <span class="va">code</span>, compile<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">revar</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">$OMEGA @name IIV</span></span>
+<span><span class="st">1 2 3</span></span>
+<span><span class="st">$OMEGA @name IOV</span></span>
+<span><span class="st">4 5</span></span>
+<span><span class="st">'</span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"iov"</span>, <span class="va">code</span>, compile<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">revar</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $omega
 . $IIV
 .     [,1] [,2] [,3]
@@ -626,10 +626,10 @@ $OMEGA @name IOV
 . $sigma
 . No matrices found</code></pre>
 <p>Now, we can update either <code>IIV</code> or <code>IOV</code> (or both) by name</p>
-<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">%&gt;%</span> 
-  <span class="fu">omat</span><span class="op">(</span>IOV <span class="op">=</span> <span class="fu">dmat</span><span class="op">(</span><span class="fl">11</span>,<span class="fl">12</span><span class="op">)</span>, IIV <span class="op">=</span> <span class="fu">dmat</span><span class="op">(</span><span class="fl">13</span>, <span class="fl">14</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="va">omat</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">omat</span><span class="op">(</span>IOV <span class="op">=</span> <span class="fu">dmat</span><span class="op">(</span><span class="fl">11</span>,<span class="fl">12</span><span class="op">)</span>, IIV <span class="op">=</span> <span class="fu">dmat</span><span class="op">(</span><span class="fl">13</span>, <span class="fl">14</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="va">omat</span></span></code></pre></div>
 <pre><code>. $IIV
 .     [,1] [,2] [,3]
 . 1:    13    0    0
@@ -642,11 +642,11 @@ $OMEGA @name IOV
 . 5:     0   12</code></pre>
 <p>Again, an error is generated if we try to assign a 3x3 matrix to the <code>IOV</code>
 position</p>
-<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ans</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span>IIV <span class="op">=</span> <span class="fu">dmat</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span>IIV <span class="op">=</span> <span class="fu">dmat</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Error : improper dimension: omat</code></pre>
-<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ans</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ans</span></span></code></pre></div>
 <pre><code>. [1] "Error : improper dimension: omat\n"
 . attr(,"class")
 . [1] "try-error"
@@ -658,19 +658,19 @@ position</p>
 <span class="header-section-number">5.3.5</span> Example: unnamed matrices<a class="anchor" aria-label="anchor" href="#example-unnamed-matrices"><i class="fas fa-link"></i></a>
 </h3>
 <p>If we do write the model with unnamed matrices, we can still update them</p>
-<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-$OMEGA
-1 2 3
-
-$OMEGA 
-4 5
-'</span>
-<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"multi"</span>, <span class="va">code</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">$OMEGA</span></span>
+<span><span class="st">1 2 3</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$OMEGA </span></span>
+<span><span class="st">4 5</span></span>
+<span><span class="st">'</span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"multi"</span>, <span class="va">code</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>In this case, the only way to update is to pass in a <strong>list</strong> of matrices, where
 (in this example) the first matrix is 3x3 and the second is 2x2</p>
-<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">dmat</span><span class="op">(</span><span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span>, <span class="fu">dmat</span><span class="op">(</span><span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">dmat</span><span class="op">(</span><span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span>, <span class="fu">dmat</span><span class="op">(</span><span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">omat</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $...
 .     [,1] [,2] [,3]
 . 1:     5    0    0
@@ -724,7 +724,7 @@ $OMEGA
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-17.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2023-02-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -737,7 +737,7 @@ $OMEGA
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

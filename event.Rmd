@@ -140,6 +140,7 @@ example, we can pass through `WT`
 ev(amt = 100, WT = 80)
 ```
 
+
 ## Coerce to data set
 
 As we noted, event objects are very similar to data sets and they are nothing 
@@ -161,6 +162,10 @@ __Using as.data.frame__
 ```{r}
 as.data.frame(e) %>% mutate(ID = 5)
 ```
+
+
+
+
 
 ## Extract information
 
@@ -420,3 +425,84 @@ ev_rx("500 mg over 2 hours q 24 h x3 in 1")
 
 See the `ev_rx()` documentation for more details and limitations.
 
+## Upper case names
+
+You'll notice in the previous sections that most of the column names were 
+rendered with lower case letters when we convert the event object to a 
+data set like object:
+
+```{r}
+as.data.frame(ev(amt = 100))
+```
+
+And when this event object is use to simulate, you'll see these lower case names 
+in the simulated output. The reasons for this are historical and this behavior 
+is unlikely to change because it goes so far back into the history of mrgsolve. 
+
+Nevertheless, recent versions of mrgsolve have included similar constructor 
+functions that will render column names in upper case which are commonly seen 
+in analysis data sets. 
+
+The `evd()` constructor behaves just like `ev()`, but it will render upper
+case names when coerced to a data set or used for simulation.
+
+```{r}
+e <- evd(amt = 100)
+
+e
+```
+
+The `d` in `evd()` indicates that the event object will render with names like 
+a Data set and you will see a reminder of the data set like nature of this 
+object when it is printed. 
+
+When this object is rendered to a data frame, you will see the names rendered in 
+upper case
+
+```{r}
+as.data.frame(e)
+```
+
+You can also coerce an event object created with `ev()` to one that behaves 
+as if it were created via `evd()`
+
+```{r}
+as.evd(ev(amt = 100))
+```
+
+It is important to note that the case of the column names aren't made upper 
+case until the data frame is rendered. So, in the previous example, `time` and 
+`amt` are in lower case because we have not rendered yet. If you want to work 
+on this object before it is rendered, be sure to lower case names before rendering
+and upper case after rendering. For example we use `rate` in the the following 
+example, not `RATE`:
+
+```{r}
+evd(amt = 100) %>% mutate(rate = amt / 5)
+```
+
+You can coerce a traditional event object to a data like event object with
+
+```{r}
+as.evd(ev(amt = 100))
+```
+
+And finally, there are two utility functions for changing the names of a 
+data like or event object. To convert to upper case use `uctran()`
+
+```{r}
+ev(amt = 100) %>% as_data_set() %>% uctran()
+```
+
+To convert to lower case, use `lctran()`
+
+```{r}
+evd(amt = 100) %>% as_data_set() %>% lctran()
+```
+
+
+The utility functions also work on event objects. For example, 
+
+```{r}
+ev(amt = 100) %>% uctran()
+```

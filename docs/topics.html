@@ -7,7 +7,7 @@
 <title>Chapter 11 Topics | mrgsolve User Guide</title>
 <meta name="author" content="Metrum Research Group">
 <meta name="description" content="11.1 Annotated model specification Here is a complete annotated mrgsolve model. The goal was to get in several of the most common blocks that you might want to annotate. The different code blocks...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="Chapter 11 Topics | mrgsolve User Guide">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://mrgsolve.github.io/user_guide/topics.html">
@@ -18,7 +18,7 @@
 <meta name="twitter:description" content="11.1 Annotated model specification Here is a complete annotated mrgsolve model. The goal was to get in several of the most common blocks that you might want to annotate. The different code blocks...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -78,59 +78,59 @@
 of the most common blocks that you might want to annotate. The different code
 blocks are rendered here separately for clarity in presentation; but users
 should include all relevant blocks in a single file (or R string).</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="topics.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span>PROB</span>
-<span id="cb357-2"><a href="topics.html#cb357-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb357-3"><a href="topics.html#cb357-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Final PK model</span></span>
-<span id="cb357-4"><a href="topics.html#cb357-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb357-5"><a href="topics.html#cb357-5" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Author<span class="sc">:</span> Pmetrics Scientist</span>
-<span id="cb357-6"><a href="topics.html#cb357-6" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Client<span class="sc">:</span> Pharmaco, Inc.</span>
-<span id="cb357-7"><a href="topics.html#cb357-7" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Date<span class="sc">:</span> <span class="st">`</span><span class="at">r Sys.Date()</span><span class="st">`</span></span>
-<span id="cb357-8"><a href="topics.html#cb357-8" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> NONMEM Run<span class="sc">:</span> <span class="dv">12345</span></span>
-<span id="cb357-9"><a href="topics.html#cb357-9" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Structure<span class="sc">:</span> one compartment, first order absorption</span>
-<span id="cb357-10"><a href="topics.html#cb357-10" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Implementation<span class="sc">:</span> closed form solutions</span>
-<span id="cb357-11"><a href="topics.html#cb357-11" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Error model<span class="sc">:</span> Additive <span class="sc">+</span> proportional</span>
-<span id="cb357-12"><a href="topics.html#cb357-12" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Covariates<span class="sc">:</span></span>
-<span id="cb357-13"><a href="topics.html#cb357-13" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> WT on clearance</span>
-<span id="cb357-14"><a href="topics.html#cb357-14" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> SEX on volume</span>
-<span id="cb357-15"><a href="topics.html#cb357-15" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Random effects on<span class="sc">:</span> <span class="st">`</span><span class="at">CL</span><span class="st">`</span>, <span class="st">`</span><span class="at">V</span><span class="st">`</span>, <span class="st">`</span><span class="at">KA</span><span class="st">`</span></span></code></pre></div>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="topics.html#cb358-1" aria-hidden="true" tabindex="-1"></a>[PARAM] <span class="sc">@</span>annotated</span>
-<span id="cb358-2"><a href="topics.html#cb358-2" aria-hidden="true" tabindex="-1"></a>TVCL <span class="sc">:</span> <span class="fl">1.1</span>   <span class="sc">:</span> <span class="fu">Clearance</span> (L<span class="sc">/</span>hr)</span>
-<span id="cb358-3"><a href="topics.html#cb358-3" aria-hidden="true" tabindex="-1"></a>TVV  <span class="sc">:</span> <span class="fl">35.6</span>  <span class="sc">:</span> Volume of <span class="fu">distribution</span> (L)</span>
-<span id="cb358-4"><a href="topics.html#cb358-4" aria-hidden="true" tabindex="-1"></a>TVKA <span class="sc">:</span> <span class="fl">1.35</span>  <span class="sc">:</span> Absorption rate <span class="fu">constant</span> (<span class="dv">1</span><span class="sc">/</span>hr)</span>
-<span id="cb358-5"><a href="topics.html#cb358-5" aria-hidden="true" tabindex="-1"></a>WT   <span class="sc">:</span> <span class="dv">70</span>    <span class="sc">:</span> <span class="fu">Weight</span> (kg)</span>
-<span id="cb358-6"><a href="topics.html#cb358-6" aria-hidden="true" tabindex="-1"></a>SEX  <span class="sc">:</span> <span class="dv">1</span>     <span class="sc">:</span> Male <span class="ot">=</span> <span class="dv">0</span>, Female <span class="dv">1</span></span>
-<span id="cb358-7"><a href="topics.html#cb358-7" aria-hidden="true" tabindex="-1"></a>WTCL <span class="sc">:</span> <span class="fl">0.75</span>  <span class="sc">:</span> Exponent weight on CL</span>
-<span id="cb358-8"><a href="topics.html#cb358-8" aria-hidden="true" tabindex="-1"></a>SEXV <span class="sc">:</span> <span class="fl">0.878</span> <span class="sc">:</span> Volume female<span class="sc">/</span>Volume male</span></code></pre></div>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="topics.html#cb359-1" aria-hidden="true" tabindex="-1"></a>[MAIN]</span>
-<span id="cb359-2"><a href="topics.html#cb359-2" aria-hidden="true" tabindex="-1"></a>double CL <span class="ot">=</span> TVCL<span class="sc">*</span><span class="fu">pow</span>(WT<span class="sc">/</span><span class="dv">70</span>,WTCL)<span class="sc">*</span><span class="fu">exp</span>(ECL);</span>
-<span id="cb359-3"><a href="topics.html#cb359-3" aria-hidden="true" tabindex="-1"></a>double V  <span class="ot">=</span> TVV <span class="sc">*</span><span class="fu">pow</span>(SEXVC,SEX)<span class="sc">*</span><span class="fu">exp</span>(EV);</span>
-<span id="cb359-4"><a href="topics.html#cb359-4" aria-hidden="true" tabindex="-1"></a>double KA <span class="ot">=</span> TVKA<span class="sc">*</span><span class="fu">exp</span>(EKA);</span></code></pre></div>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="topics.html#cb360-1" aria-hidden="true" tabindex="-1"></a>[OMEGA] <span class="sc">@</span>name OMGA <span class="sc">@</span>correlation <span class="sc">@</span>block <span class="sc">@</span>annotated</span>
-<span id="cb360-2"><a href="topics.html#cb360-2" aria-hidden="true" tabindex="-1"></a>ECL <span class="sc">:</span> <span class="fl">1.23</span> <span class="sc">:</span> Random effect on CL</span>
-<span id="cb360-3"><a href="topics.html#cb360-3" aria-hidden="true" tabindex="-1"></a>EV  <span class="sc">:</span> <span class="fl">0.67</span> <span class="fl">0.4</span> <span class="sc">:</span> Random effect on V</span>
-<span id="cb360-4"><a href="topics.html#cb360-4" aria-hidden="true" tabindex="-1"></a>EKA <span class="sc">:</span> <span class="fl">0.25</span> <span class="fl">0.87</span> <span class="fl">0.2</span> <span class="sc">:</span> Random effect on KA</span></code></pre></div>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="topics.html#cb361-1" aria-hidden="true" tabindex="-1"></a>[SIGMA] <span class="sc">@</span>name SGMA <span class="sc">@</span>annotated</span>
-<span id="cb361-2"><a href="topics.html#cb361-2" aria-hidden="true" tabindex="-1"></a>PROP<span class="sc">:</span> <span class="fl">0.25</span> <span class="sc">:</span> Proportional residual error</span>
-<span id="cb361-3"><a href="topics.html#cb361-3" aria-hidden="true" tabindex="-1"></a>ADD <span class="sc">:</span> <span class="dv">25</span>   <span class="sc">:</span> Additive residual error</span></code></pre></div>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="topics.html#cb362-1" aria-hidden="true" tabindex="-1"></a>[CMT] <span class="sc">@</span>annotated</span>
-<span id="cb362-2"><a href="topics.html#cb362-2" aria-hidden="true" tabindex="-1"></a>GUT  <span class="sc">:</span> Dosing <span class="fu">compartment</span>  (mg)</span>
-<span id="cb362-3"><a href="topics.html#cb362-3" aria-hidden="true" tabindex="-1"></a>CENT <span class="sc">:</span> Central <span class="fu">compartment</span> (mg)</span></code></pre></div>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="topics.html#cb363-1" aria-hidden="true" tabindex="-1"></a>[PKMODEL] ncmt <span class="ot">=</span> <span class="dv">1</span>, depot<span class="ot">=</span><span class="cn">TRUE</span></span></code></pre></div>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="topics.html#cb364-1" aria-hidden="true" tabindex="-1"></a>[TABLE]</span>
-<span id="cb364-2"><a href="topics.html#cb364-2" aria-hidden="true" tabindex="-1"></a>capture IPRED <span class="ot">=</span> CENT<span class="sc">/</span>V;</span>
-<span id="cb364-3"><a href="topics.html#cb364-3" aria-hidden="true" tabindex="-1"></a>double DV <span class="ot">=</span> IPRED<span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span>PROP) <span class="sc">+</span> ADD;</span></code></pre></div>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="topics.html#cb365-1" aria-hidden="true" tabindex="-1"></a>[CAPTURE] <span class="sc">@</span>annotated</span>
-<span id="cb365-2"><a href="topics.html#cb365-2" aria-hidden="true" tabindex="-1"></a>DV  <span class="sc">:</span> <span class="fu">Concentration</span> (mg<span class="sc">/</span>L)</span>
-<span id="cb365-3"><a href="topics.html#cb365-3" aria-hidden="true" tabindex="-1"></a>ECL <span class="sc">:</span> Random effect on CL</span>
-<span id="cb365-4"><a href="topics.html#cb365-4" aria-hidden="true" tabindex="-1"></a>CL  <span class="sc">:</span> Individual <span class="fu">clearance</span> (L<span class="sc">/</span>hr)</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="topics.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span>PROB</span>
+<span id="cb375-2"><a href="topics.html#cb375-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb375-3"><a href="topics.html#cb375-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Final PK model</span></span>
+<span id="cb375-4"><a href="topics.html#cb375-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb375-5"><a href="topics.html#cb375-5" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Author<span class="sc">:</span> Pmetrics Scientist</span>
+<span id="cb375-6"><a href="topics.html#cb375-6" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Client<span class="sc">:</span> Pharmaco, Inc.</span>
+<span id="cb375-7"><a href="topics.html#cb375-7" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Date<span class="sc">:</span> <span class="st">`</span><span class="at">r Sys.Date()</span><span class="st">`</span></span>
+<span id="cb375-8"><a href="topics.html#cb375-8" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> NONMEM Run<span class="sc">:</span> <span class="dv">12345</span></span>
+<span id="cb375-9"><a href="topics.html#cb375-9" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Structure<span class="sc">:</span> one compartment, first order absorption</span>
+<span id="cb375-10"><a href="topics.html#cb375-10" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Implementation<span class="sc">:</span> closed form solutions</span>
+<span id="cb375-11"><a href="topics.html#cb375-11" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Error model<span class="sc">:</span> Additive <span class="sc">+</span> proportional</span>
+<span id="cb375-12"><a href="topics.html#cb375-12" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Covariates<span class="sc">:</span></span>
+<span id="cb375-13"><a href="topics.html#cb375-13" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> WT on clearance</span>
+<span id="cb375-14"><a href="topics.html#cb375-14" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> SEX on volume</span>
+<span id="cb375-15"><a href="topics.html#cb375-15" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Random effects on<span class="sc">:</span> <span class="st">`</span><span class="at">CL</span><span class="st">`</span>, <span class="st">`</span><span class="at">V</span><span class="st">`</span>, <span class="st">`</span><span class="at">KA</span><span class="st">`</span></span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="topics.html#cb376-1" aria-hidden="true" tabindex="-1"></a>[PARAM] <span class="sc">@</span>annotated</span>
+<span id="cb376-2"><a href="topics.html#cb376-2" aria-hidden="true" tabindex="-1"></a>TVCL <span class="sc">:</span> <span class="fl">1.1</span>   <span class="sc">:</span> <span class="fu">Clearance</span> (L<span class="sc">/</span>hr)</span>
+<span id="cb376-3"><a href="topics.html#cb376-3" aria-hidden="true" tabindex="-1"></a>TVV  <span class="sc">:</span> <span class="fl">35.6</span>  <span class="sc">:</span> Volume of <span class="fu">distribution</span> (L)</span>
+<span id="cb376-4"><a href="topics.html#cb376-4" aria-hidden="true" tabindex="-1"></a>TVKA <span class="sc">:</span> <span class="fl">1.35</span>  <span class="sc">:</span> Absorption rate <span class="fu">constant</span> (<span class="dv">1</span><span class="sc">/</span>hr)</span>
+<span id="cb376-5"><a href="topics.html#cb376-5" aria-hidden="true" tabindex="-1"></a>WT   <span class="sc">:</span> <span class="dv">70</span>    <span class="sc">:</span> <span class="fu">Weight</span> (kg)</span>
+<span id="cb376-6"><a href="topics.html#cb376-6" aria-hidden="true" tabindex="-1"></a>SEX  <span class="sc">:</span> <span class="dv">1</span>     <span class="sc">:</span> Male <span class="ot">=</span> <span class="dv">0</span>, Female <span class="dv">1</span></span>
+<span id="cb376-7"><a href="topics.html#cb376-7" aria-hidden="true" tabindex="-1"></a>WTCL <span class="sc">:</span> <span class="fl">0.75</span>  <span class="sc">:</span> Exponent weight on CL</span>
+<span id="cb376-8"><a href="topics.html#cb376-8" aria-hidden="true" tabindex="-1"></a>SEXV <span class="sc">:</span> <span class="fl">0.878</span> <span class="sc">:</span> Volume female<span class="sc">/</span>Volume male</span></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="topics.html#cb377-1" aria-hidden="true" tabindex="-1"></a>[MAIN]</span>
+<span id="cb377-2"><a href="topics.html#cb377-2" aria-hidden="true" tabindex="-1"></a>double CL <span class="ot">=</span> TVCL<span class="sc">*</span><span class="fu">pow</span>(WT<span class="sc">/</span><span class="dv">70</span>,WTCL)<span class="sc">*</span><span class="fu">exp</span>(ECL);</span>
+<span id="cb377-3"><a href="topics.html#cb377-3" aria-hidden="true" tabindex="-1"></a>double V  <span class="ot">=</span> TVV <span class="sc">*</span><span class="fu">pow</span>(SEXVC,SEX)<span class="sc">*</span><span class="fu">exp</span>(EV);</span>
+<span id="cb377-4"><a href="topics.html#cb377-4" aria-hidden="true" tabindex="-1"></a>double KA <span class="ot">=</span> TVKA<span class="sc">*</span><span class="fu">exp</span>(EKA);</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="topics.html#cb378-1" aria-hidden="true" tabindex="-1"></a>[OMEGA] <span class="sc">@</span>name OMGA <span class="sc">@</span>correlation <span class="sc">@</span>block <span class="sc">@</span>annotated</span>
+<span id="cb378-2"><a href="topics.html#cb378-2" aria-hidden="true" tabindex="-1"></a>ECL <span class="sc">:</span> <span class="fl">1.23</span> <span class="sc">:</span> Random effect on CL</span>
+<span id="cb378-3"><a href="topics.html#cb378-3" aria-hidden="true" tabindex="-1"></a>EV  <span class="sc">:</span> <span class="fl">0.67</span> <span class="fl">0.4</span> <span class="sc">:</span> Random effect on V</span>
+<span id="cb378-4"><a href="topics.html#cb378-4" aria-hidden="true" tabindex="-1"></a>EKA <span class="sc">:</span> <span class="fl">0.25</span> <span class="fl">0.87</span> <span class="fl">0.2</span> <span class="sc">:</span> Random effect on KA</span></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="topics.html#cb379-1" aria-hidden="true" tabindex="-1"></a>[SIGMA] <span class="sc">@</span>name SGMA <span class="sc">@</span>annotated</span>
+<span id="cb379-2"><a href="topics.html#cb379-2" aria-hidden="true" tabindex="-1"></a>PROP<span class="sc">:</span> <span class="fl">0.25</span> <span class="sc">:</span> Proportional residual error</span>
+<span id="cb379-3"><a href="topics.html#cb379-3" aria-hidden="true" tabindex="-1"></a>ADD <span class="sc">:</span> <span class="dv">25</span>   <span class="sc">:</span> Additive residual error</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="topics.html#cb380-1" aria-hidden="true" tabindex="-1"></a>[CMT] <span class="sc">@</span>annotated</span>
+<span id="cb380-2"><a href="topics.html#cb380-2" aria-hidden="true" tabindex="-1"></a>GUT  <span class="sc">:</span> Dosing <span class="fu">compartment</span>  (mg)</span>
+<span id="cb380-3"><a href="topics.html#cb380-3" aria-hidden="true" tabindex="-1"></a>CENT <span class="sc">:</span> Central <span class="fu">compartment</span> (mg)</span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="topics.html#cb381-1" aria-hidden="true" tabindex="-1"></a>[PKMODEL] ncmt <span class="ot">=</span> <span class="dv">1</span>, depot<span class="ot">=</span><span class="cn">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="topics.html#cb382-1" aria-hidden="true" tabindex="-1"></a>[TABLE]</span>
+<span id="cb382-2"><a href="topics.html#cb382-2" aria-hidden="true" tabindex="-1"></a>capture IPRED <span class="ot">=</span> CENT<span class="sc">/</span>V;</span>
+<span id="cb382-3"><a href="topics.html#cb382-3" aria-hidden="true" tabindex="-1"></a>double DV <span class="ot">=</span> IPRED<span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span>PROP) <span class="sc">+</span> ADD;</span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="topics.html#cb383-1" aria-hidden="true" tabindex="-1"></a>[CAPTURE] <span class="sc">@</span>annotated</span>
+<span id="cb383-2"><a href="topics.html#cb383-2" aria-hidden="true" tabindex="-1"></a>DV  <span class="sc">:</span> <span class="fu">Concentration</span> (mg<span class="sc">/</span>L)</span>
+<span id="cb383-3"><a href="topics.html#cb383-3" aria-hidden="true" tabindex="-1"></a>ECL <span class="sc">:</span> Random effect on CL</span>
+<span id="cb383-4"><a href="topics.html#cb383-4" aria-hidden="true" tabindex="-1"></a>CL  <span class="sc">:</span> Individual <span class="fu">clearance</span> (L<span class="sc">/</span>hr)</span></code></pre></div>
 </div>
 <div id="topic-init" class="section level2" number="11.2">
 <h2>
 <span class="header-section-number">11.2</span> Set initial conditions<a class="anchor" aria-label="anchor" href="#topic-init"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/metrumresearchgroup/mrgsolve">mrgsolve</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/metrumresearchgroup/mrgsolve">mrgsolve</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <div id="summary" class="section level3" number="11.2.1">
 <h3>
 <span class="header-section-number">11.2.1</span> Summary<a class="anchor" aria-label="anchor" href="#summary"><i class="fas fa-link"></i></a>
@@ -174,23 +174,23 @@ for setting and interpreting the value (it is not reserved in any way and
 </li>
 <li>Compartment <code>A</code> always stays at the initial condition</li>
 </ul>
-<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-$PARAM BASE=100, IFLAG = 0
-
-$CMT A
-
-$MAIN
-
-if(IFLAG &gt; 0) A_0 = BASE;
-
-$ODE dxdt_A = 0;
-'</span></code></pre></div>
-<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode</a></span><span class="op">(</span><span class="st">"init"</span>,<span class="va">code</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">$PARAM BASE=100, IFLAG = 0</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$CMT A</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$MAIN</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">if(IFLAG &gt; 0) A_0 = BASE;</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$ODE dxdt_A = 0;</span></span>
+<span><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode</a></span><span class="op">(</span><span class="st">"init"</span>,<span class="va">code</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Check the initial condition</strong></p>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/init.html">init</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/init.html">init</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. 
 .  Model initial conditions (N=1):
 .  name    value . name    value
@@ -203,16 +203,16 @@ condition for <code>A</code> is set to 0</li>
 <li>So, if we don’t update something in <code>$MAIN</code> the initial condition is as we
 set it in the base list</li>
 </ul>
-<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">mrgsim</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">plot</span></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">mrgsim</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">plot</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/topic-init-2-1.png" width="672"></div>
 <p><strong>Next, we update the base initial condition for <code>A</code> to 50</strong></p>
 <p>Note:</p>
 <ul>
 <li>The code in <code>$MAIN</code> still doesn’t get run because <code>IFLAG</code> is 0</li>
 </ul>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/init.html">init</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">mrgsim</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">plot</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/init.html">init</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">mrgsim</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">plot</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/topic-init-3-1.png" width="672"></div>
 <p><strong>Now, turn on <code>IFLAG</code></strong></p>
 <p>Note:</p>
@@ -222,11 +222,11 @@ set it in the base list</li>
 <code>A_0</code> is set to the value of <code>BASE</code>
 </li>
 </ul>
-<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span>IFLAG<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">mrgsim</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">plot</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span>IFLAG<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">mrgsim</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">plot</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/topic-init-4-1.png" width="672"></div>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span>IFLAG<span class="op">=</span><span class="fl">1</span>, BASE<span class="op">=</span><span class="fl">300</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">mrgsim</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">plot</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span>IFLAG<span class="op">=</span><span class="fl">1</span>, BASE<span class="op">=</span><span class="fl">300</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">mrgsim</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">plot</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/topic-init-5-1.png" width="672"></div>
 </div>
 <div id="example-pkpd-model-with-initial-condition" class="section level3" number="11.2.3">
@@ -235,29 +235,29 @@ set it in the base list</li>
 </h3>
 <p>Just to be clear, there is no need to set any sort of flag to set the initial
 condition as seen here:</p>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-$PARAM AUC=0, AUC50 = 75, KIN=200, KOUT=5
-
-$CMT RESP
-
-$MAIN 
-RESP_0 = KIN/KOUT;
-
-$ODE
-
-dxdt_RESP = KIN*(1-AUC/(AUC50+AUC)) - KOUT*RESP;
-
-'</span></code></pre></div>
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode</a></span><span class="op">(</span><span class="st">"init2"</span>, <span class="va">code</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">$PARAM AUC=0, AUC50 = 75, KIN=200, KOUT=5</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$CMT RESP</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$MAIN </span></span>
+<span><span class="st">RESP_0 = KIN/KOUT;</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$ODE</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">dxdt_RESP = KIN*(1-AUC/(AUC50+AUC)) - KOUT*RESP;</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode</a></span><span class="op">(</span><span class="st">"init2"</span>, <span class="va">code</span><span class="op">)</span></span></code></pre></div>
 <p>The initial condition is set to 40 per the values of <code>KIN</code> and <code>KOUT</code></p>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">mrgsim</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">plot</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">mrgsim</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">plot</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/topic-init-7-1.png" width="672"></div>
 <p>Even when we change <code>RESP_0</code> in <code>R</code>, the calculation in <code>$MAIN</code> gets the final say</p>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/init.html">init</a></span><span class="op">(</span>RESP<span class="op">=</span><span class="fl">1E9</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">mrgsim</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/init.html">init</a></span><span class="op">(</span>RESP<span class="op">=</span><span class="fl">1E9</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">mrgsim</span></span></code></pre></div>
 <pre><code>. Model:  init2 
 . Dim:    25 x 3 
 . Time:   0 to 24 
@@ -282,14 +282,14 @@ dxdt_RESP = KIN*(1-AUC/(AUC50+AUC)) - KOUT*RESP;
 <code>init</code> first takes the base initial condition list, then calls <code>$MAIN</code> and
 does any calculation you have in there; so the result is the calculated initials</li>
 </ul>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/init.html">init</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/init.html">init</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. 
 .  Model initial conditions (N=1):
 .  name       value . name    value
 .  RESP (1)   0     | . ...   .</code></pre>
-<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span>KIN<span class="op">=</span><span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">init</span></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span>KIN<span class="op">=</span><span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">init</span></span></code></pre></div>
 <pre><code>. 
 .  Model initial conditions (N=1):
 .  name       value . name    value
@@ -300,10 +300,10 @@ does any calculation you have in there; so the result is the calculated initials
 <span class="header-section-number">11.2.5</span> Set initial conditions via <code>idata</code><a class="anchor" aria-label="anchor" href="#set-initial-conditions-via-idata"><i class="fas fa-link"></i></a>
 </h3>
 <p>Go back to house model</p>
-<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/init.html">init</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/init.html">init</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. 
 .  Model initial conditions (N=3):
 .  name       value . name       value
@@ -317,10 +317,10 @@ list for that subject.</li>
 <li>But note that if <code>CMT_0</code> is set in <code>$MAIN</code>, that will override the <code>idata</code>
 update.</li>
 </ul>
-<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">idata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/expand.idata.html">expand.idata</a></span><span class="op">(</span>CENT_0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">25</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">idata</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">head</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">idata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/expand.idata.html">expand.idata</a></span><span class="op">(</span>CENT_0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">25</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">idata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">head</span></span></code></pre></div>
 <pre><code>.   ID CENT_0
 . 1  1      0
 . 2  2      1
@@ -328,13 +328,13 @@ update.</li>
 . 4  4      3
 . 5  5      4
 . 6  6      5</code></pre>
-<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> 
-  <span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/idata_set.html">idata_set</a></span><span class="op">(</span><span class="va">idata</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="fl">40</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span>, <span class="va">CENT</span><span class="op">~</span><span class="va">.</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/idata_set.html">idata_set</a></span><span class="op">(</span><span class="va">idata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="fl">40</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span>, <span class="va">CENT</span><span class="op">~</span><span class="va">.</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/topic-init-11-1.png" width="672"></div>
 </div>
 </div>
@@ -386,15 +386,15 @@ both the <code>idata_set</code> and the <code>data_set</code>). In other words, 
 <li>No changing the names or numbers of parameters once the model is compiled</li>
 <li>But, several ways to change the values</li>
 </ul>
-<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-$VCMT KYLE
-$PARAM CL = 1.1, VC=23.1, KA=1.7, KM=10
-$CAPTURE CL VC KA KM
-'</span>
-<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode</a></span><span class="op">(</span><span class="st">"tmp"</span>, <span class="va">code</span>, warn<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">$VCMT KYLE</span></span>
+<span><span class="st">$PARAM CL = 1.1, VC=23.1, KA=1.7, KM=10</span></span>
+<span><span class="st">$CAPTURE CL VC KA KM</span></span>
+<span><span class="st">'</span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode</a></span><span class="op">(</span><span class="st">"tmp"</span>, <span class="va">code</span>, warn<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=4):
 .  name value . name value
@@ -405,10 +405,10 @@ $CAPTURE CL VC KA KM
 data; there are some default values in place.</p>
 <p><strong>The parameters in the base list can be changed or updated in <code>R</code></strong></p>
 <p>Use the <code><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param()</a></code> function to both set and get:</p>
-<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">mod</span>, CL<span class="op">=</span><span class="fl">2.1</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">mod</span>, CL<span class="op">=</span><span class="fl">2.1</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=4):
 .  name value . name value
@@ -422,9 +422,9 @@ of using <code><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param()</a>
 have the same name as one of the parameters in the parameter list. But there
 is no changing values in the base parameter set once the simulation starts.<br>
 That is, the following model specification will not compile:</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb398-1"><a href="topics.html#cb398-1" aria-hidden="true" tabindex="-1"></a>$PARAM CL <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb398-2"><a href="topics.html#cb398-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb398-3"><a href="topics.html#cb398-3" aria-hidden="true" tabindex="-1"></a>$MAIN CL <span class="op">=</span> <span class="dv">3</span><span class="op">;</span> <span class="co">// ERROR</span></span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb416-1"><a href="topics.html#cb416-1" aria-hidden="true" tabindex="-1"></a>$PARAM CL <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb416-2"><a href="topics.html#cb416-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb416-3"><a href="topics.html#cb416-3" aria-hidden="true" tabindex="-1"></a>$MAIN CL <span class="op">=</span> <span class="dv">3</span><span class="op">;</span> <span class="co">// ERROR</span></span></code></pre></div>
 <p>You cannot over-write the value of a parameter in the model specification.<br>
 Let <code>mrgsolve</code> do the updating.</p>
 <p><code>mrgsolve</code> always reverts to the base parameter set when starting work on a
@@ -432,9 +432,9 @@ new individual.</p>
 <p><strong>Parameters updated from <code>idata_set</code></strong></p>
 <p>When <code>mrgsolve</code> finds parameters in <code>idata</code>, it will update the base parameter
 list with those parameters prior to starting that individual.</p>
-<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exidata</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">exidata</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exidata</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">exidata</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.   ID    CL    VC     KA KOUT  IC50 FOO
 . 1  1 1.050 47.80 0.8390 2.45 1.280   4
 . 2  2 0.730 30.10 0.0684 2.51 1.840   6
@@ -444,21 +444,21 @@ list with those parameters prior to starting that individual.</p>
 . 6  6 3.620 39.80 0.1260 1.89 4.240   1</code></pre>
 <p>Notice that there are several columns in <code>exidata</code> that match up with the names
 in the parameter list</p>
-<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">exidata</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">exidata</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. [1] "ID"   "CL"   "VC"   "KA"   "KOUT" "IC50" "FOO"</code></pre>
-<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. [1] "CL" "VC" "KA" "KM"</code></pre>
 <p>The matching names tell <code>mrgsolve</code> to update, assigning each individual
 their individual parameter.</p>
-<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> 
-  <span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/idata_set.html">idata_set</a></span><span class="op">(</span><span class="va">exidata</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="op">-</span><span class="fl">1</span> , add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/idata_set.html">idata_set</a></span><span class="op">(</span><span class="va">exidata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="op">-</span><span class="fl">1</span> , add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span></span></code></pre></div>
 <pre><code>. Model:  tmp 
 . Dim:    20 x 7 
 . Time:   0 to 2 
@@ -474,16 +474,16 @@ their individual parameter.</p>
 . 8:   4    2    0 0.552 26.3 0.4950 10</code></pre>
 <p><strong>Parameters updated from <code>data_set</code></strong></p>
 <p>Like an <code>idata</code> set, we can put parameters on a <code>data</code> set</p>
-<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/expand.idata.html">expand.ev</a></span><span class="op">(</span>amt<span class="op">=</span><span class="fl">0</span>, CL<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, VC<span class="op">=</span><span class="fl">30</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> 
-  <span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> 
-  <span class="va">obsonly</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/expand.idata.html">expand.ev</a></span><span class="op">(</span>amt<span class="op">=</span><span class="fl">0</span>, CL<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, VC<span class="op">=</span><span class="fl">30</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">obsonly</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span></span></code></pre></div>
 <pre><code>. Model:  tmp 
 . Dim:    6 x 7 
 . Time:   0 to 2 
@@ -496,18 +496,16 @@ their individual parameter.</p>
 . 5:   3    0    0  3 30 1.7 10
 . 6:   3    2    0  3 30 1.7 10</code></pre>
 <p>This is how we do time-varying parameters:</p>
-<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">data_frame</a></span><span class="op">(</span>CL<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>evid<span class="op">=</span><span class="fl">0</span>,ID<span class="op">=</span><span class="fl">1</span>,cmt<span class="op">=</span><span class="fl">1</span>,time<span class="op">=</span><span class="va">CL</span><span class="op">-</span><span class="fl">1</span>,amt<span class="op">=</span><span class="fl">0</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">data_frame</a></span><span class="op">(</span>CL<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>evid<span class="op">=</span><span class="fl">0</span>,ID<span class="op">=</span><span class="fl">1</span>,cmt<span class="op">=</span><span class="fl">1</span>,time<span class="op">=</span><span class="va">CL</span><span class="op">-</span><span class="fl">1</span>,amt<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Warning: `data_frame()` was deprecated in tibble 1.1.0.
-. Please use `tibble()` instead.
-. This warning is displayed once every 8 hours.
-. Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
-<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+. ℹ Please use `tibble()` instead.</code></pre>
+<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Model:  tmp 
 . Dim:    5 x 7 
 . Time:   0 to 4 
@@ -522,16 +520,16 @@ their individual parameter.</p>
 (parameters), see sections <a href="topics.html#topics-time-varying">11.8</a> and <a href="section-sequence.html#section-sequence">7</a>.</p>
 <p><strong>Parameters are carried back when first record isn’t at <code>time == 0</code></strong></p>
 <p>What about this?</p>
-<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/expand.idata.html">expand.ev</a></span><span class="op">(</span>amt<span class="op">=</span><span class="fl">100</span>,time<span class="op">=</span><span class="fl">24</span>,CL<span class="op">=</span><span class="fl">5</span>,VC<span class="op">=</span><span class="fl">32</span><span class="op">)</span>
-<span class="va">data</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/expand.idata.html">expand.ev</a></span><span class="op">(</span>amt<span class="op">=</span><span class="fl">100</span>,time<span class="op">=</span><span class="fl">24</span>,CL<span class="op">=</span><span class="fl">5</span>,VC<span class="op">=</span><span class="fl">32</span><span class="op">)</span></span>
+<span><span class="va">data</span></span></code></pre></div>
 <pre><code>.   ID time amt cmt evid CL VC
 . 1  1   24 100   1    1  5 32</code></pre>
 <p>The first <code>data</code> record happens at <code>time==24</code></p>
-<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Model:  tmp 
 . Dim:    3 x 7 
 . Time:   0 to 24 
@@ -546,10 +544,10 @@ doesn’t change from the base parameter set until then.</p>
 the simulation. This is by design … by far the more useful configuration.</p>
 <p>If you wanted the base parameter set in play until that first data set record,
 do this:</p>
-<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="op">-</span><span class="fl">1</span>,add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span>, filbak<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="op">-</span><span class="fl">1</span>,add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span>, filbak<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Model:  tmp 
 . Dim:    3 x 7 
 . Time:   0 to 24 
@@ -559,19 +557,19 @@ do this:</p>
 . 2:   1    2    0  5 32 1.7 10
 . 3:   1   24  100  5 32 1.7 10</code></pre>
 <p>Will this work?</p>
-<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">idata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">"expand.idata"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">idata</span></code></pre></div>
+<div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">idata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">"expand.idata"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">idata</span></span></code></pre></div>
 <pre><code>.   ID  CL   VC  KA KM
 . 1  1 2.1 23.1 1.7 10</code></pre>
 <p>Here, we’ll pass in <strong>both</strong> <code>data_set</code> and <code>idata_set</code> and they have
 conflicting values for the parameters.</p>
-<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/idata_set.html">idata_set</a></span><span class="op">(</span><span class="va">idata</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="op">-</span><span class="fl">1</span>,add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/idata_set.html">idata_set</a></span><span class="op">(</span><span class="va">idata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="op">-</span><span class="fl">1</span>,add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Model:  tmp 
 . Dim:    3 x 7 
 . Time:   0 to 24 
@@ -587,8 +585,8 @@ conflicting values for the parameters.</p>
 <span class="header-section-number">11.3.2</span> Updating the base parameter list<a class="anchor" aria-label="anchor" href="#topic-parameter-update-base"><i class="fas fa-link"></i></a>
 </h3>
 <p>From the previous section</p>
-<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=4):
 .  name value . name value
@@ -597,18 +595,18 @@ conflicting values for the parameters.</p>
 <p><strong>Update with <code>name-value</code> pairs</strong></p>
 <p>We can call <code><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param()</a></code> to update the model object, directly naming the parameter
 to update and the new value to take</p>
-<div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span>CL <span class="op">=</span> <span class="fl">777</span>, KM <span class="op">=</span> <span class="fl">999</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">param</span></code></pre></div>
+<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span>CL <span class="op">=</span> <span class="fl">777</span>, KM <span class="op">=</span> <span class="fl">999</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">param</span></span></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=4):
 .  name value . name value
 .  CL   777   | KM   999  
 .  KA   1.7   | VC   23.1</code></pre>
 <p>The parameter list can also be updated by scanning the names in a list</p>
-<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">what</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>CL <span class="op">=</span> <span class="fl">555</span>, VC <span class="op">=</span> <span class="fl">888</span>, KYLE <span class="op">=</span> <span class="fl">123</span>, MN <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
-
-<span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">what</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">param</span></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">what</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>CL <span class="op">=</span> <span class="fl">555</span>, VC <span class="op">=</span> <span class="fl">888</span>, KYLE <span class="op">=</span> <span class="fl">123</span>, MN <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">what</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">param</span></span></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=4):
 .  name value . name value
@@ -618,10 +616,10 @@ to update and the new value to take</p>
 and <code>MN</code> (not in the model anywhere) are ignored.</p>
 <p>Alternatively, we can pick a row from a data frame to provide the input for the
 update</p>
-<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">data_frame</a></span><span class="op">(</span>CL<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">9</span>,<span class="fl">10</span><span class="op">)</span>, VC<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span>,<span class="fl">12</span><span class="op">)</span>, KTB<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">13</span>,<span class="fl">14</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">param</span></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">data_frame</a></span><span class="op">(</span>CL<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">9</span>,<span class="fl">10</span><span class="op">)</span>, VC<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span>,<span class="fl">12</span><span class="op">)</span>, KTB<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">13</span>,<span class="fl">14</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">param</span></span></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=4):
 .  name value . name value
@@ -629,8 +627,8 @@ update</p>
 .  KA   1.7   | VC   12</code></pre>
 <p>Here the second row in the data frame drives the update. Other names are ignored.</p>
 <p>A warning will be issued if an update is attempted, but no matching names are found</p>
-<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span>ZIP <span class="op">=</span> <span class="fl">1</span>, CODE <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="va">param</span></code></pre></div>
+<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/param.html">param</a></span><span class="op">(</span>ZIP <span class="op">=</span> <span class="fl">1</span>, CODE <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">param</span></span></code></pre></div>
 <pre><code>Warning message:
 Found nothing to update: param </code></pre>
 </div>
@@ -640,15 +638,15 @@ Found nothing to update: param </code></pre>
 <span class="header-section-number">11.4</span> Time grid objects<a class="anchor" aria-label="anchor" href="#topic-tgrid"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>Simulation times in <code>mrgsolve</code></strong></p>
-<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/Req.html">Req</a></span><span class="op">(</span><span class="va">CP</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/ev.html">ev</a></span><span class="op">(</span>amt<span class="op">=</span><span class="fl">1000</span>,ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">1000</span><span class="op">)</span> </code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/Req.html">Req</a></span><span class="op">(</span><span class="va">CP</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/ev.html">ev</a></span><span class="op">(</span>amt<span class="op">=</span><span class="fl">1000</span>,ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">1000</span><span class="op">)</span> </span></code></pre></div>
 <p><code>mrgsolve</code> keeps track of a simulation <code>start</code> and <code>end</code> time and a fixed size
 step between <code>start</code> and <code>end</code> (called <code>delta</code>). <code>mrgsolve</code> also keeps an
 arbitrary vector of simulation times called <code>add</code>.</p>
-<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="fl">4</span>,delta<span class="op">=</span><span class="fl">2</span>,add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>,<span class="fl">9</span>,<span class="fl">50</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="va">as.data.frame</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="fl">4</span>,delta<span class="op">=</span><span class="fl">2</span>,add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>,<span class="fl">9</span>,<span class="fl">50</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">as.data.frame</span></span></code></pre></div>
 <pre><code>.   ID time       CP
 . 1  1    0  0.00000
 . 2  1    0  0.00000
@@ -661,41 +659,41 @@ arbitrary vector of simulation times called <code>add</code>.</p>
 <p>The <code>tgrid</code> object abstracts this setup and allows us to make complicated
 sampling designs from elementary building blocks.</p>
 <p><strong>Make a day 1 sampling with intensive sampling around the peak and sparser otherwise</strong></p>
-<div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">peak1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/tgrid.html">tgrid</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">0.1</span><span class="op">)</span>
-<span class="va">sparse1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/tgrid.html">tgrid</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,<span class="fl">4</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">peak1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/tgrid.html">tgrid</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">0.1</span><span class="op">)</span></span>
+<span><span class="va">sparse1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/tgrid.html">tgrid</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,<span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Use the <code>c</code> operator to combine simpler designs into more complicated designs</strong></p>
-<div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">day1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">peak1</span>,<span class="va">sparse1</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">day1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">peak1</span>,<span class="va">sparse1</span><span class="op">)</span></span></code></pre></div>
 <p>Check this by calling <code>stime</code></p>
-<div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/stime.html">stime</a></span><span class="op">(</span><span class="va">day1</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/stime.html">stime</a></span><span class="op">(</span><span class="va">day1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.  [1]  0.0  1.0  1.1  1.2  1.3  1.4  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3
 . [16]  2.4  2.5  2.6  2.7  2.8  2.9  3.0  3.1  3.2  3.3  3.4  3.5  3.6  3.7  3.8
 . [31]  3.9  4.0  8.0 12.0 16.0 20.0 24.0</code></pre>
 <p>Pass this object in to <code>mrgsim</code> as <code>tgrid</code>. It will override the default
 <code>start/end/delta/add</code> sequence.</p>
-<div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>tgrid<span class="op">=</span><span class="va">day1</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">'b'</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>tgrid<span class="op">=</span><span class="va">day1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">'b'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/topic-tgrid-1-1.png" width="672"></div>
 <p><strong>Now, look at both day 1 and day 10</strong>:</p>
 <p>Adding a number to a <code>tgrid</code> object will offset those times by that amount.</p>
-<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">des</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">day1</span>, <span class="va">day1</span><span class="op">+</span><span class="fl">10</span><span class="op">*</span><span class="fl">24</span><span class="op">)</span>
-
-<span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>tgrid<span class="op">=</span><span class="va">des</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">'b'</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">des</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">day1</span>, <span class="va">day1</span><span class="op">+</span><span class="fl">10</span><span class="op">*</span><span class="fl">24</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>tgrid<span class="op">=</span><span class="va">des</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">'b'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/topic-tgrid-2-1.png" width="672"></div>
 <p>Pick up day 5 as well</p>
-<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">des</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">des</span>, <span class="va">day1</span><span class="op">+</span><span class="fl">5</span><span class="op">*</span><span class="fl">24</span><span class="op">)</span>
-
-<span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>tgrid<span class="op">=</span><span class="va">des</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">'b'</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">des</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">des</span>, <span class="va">day1</span><span class="op">+</span><span class="fl">5</span><span class="op">*</span><span class="fl">24</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>tgrid<span class="op">=</span><span class="va">des</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">'b'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/topic-tgrid-3-1.png" width="672"></div>
 </div>
 <div id="topic-designs" class="section level2" number="11.5">
@@ -703,14 +701,14 @@ sampling designs from elementary building blocks.</p>
 <span class="header-section-number">11.5</span> Individualized sampling designs<a class="anchor" aria-label="anchor" href="#topic-designs"><i class="fas fa-link"></i></a>
 </h2>
 <p>Here is a PopPK model and a full <code>data_set</code>.</p>
-<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exTheoph</span><span class="op">)</span>
-
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">exTheoph</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">exTheoph</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">exTheoph</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.   ID   WT Dose time  conc cmt  amt evid
 . 1  1 79.6 4.02 0.00  0.00   1 4.02    1
 . 2  1 79.6 4.02 0.25  2.84   0 0.00    0
@@ -718,13 +716,13 @@ sampling designs from elementary building blocks.</p>
 . 4  1 79.6 4.02 1.12 10.50   0 0.00    0
 . 5  1 79.6 4.02 2.02  9.66   0 0.00    0
 . 6  1 79.6 4.02 3.82  8.58   0 0.00    0</code></pre>
-<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/Req.html">Req</a></span><span class="op">(</span><span class="va">CP</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/carry_out.html">carry.out</a></span><span class="op">(</span><span class="va">a.u.g</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="va">obsaug</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="va">mrgsim</span> </code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/Req.html">Req</a></span><span class="op">(</span><span class="va">CP</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/carry_out.html">carry.out</a></span><span class="op">(</span><span class="va">a.u.g</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">obsaug</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">mrgsim</span> </span></code></pre></div>
 <pre><code>. Model:  housemodel 
 . Dim:    5904 x 4 
 . Time:   0 to 120 
@@ -740,23 +738,23 @@ sampling designs from elementary building blocks.</p>
 . 8:   1 1.00     1 0.12001</code></pre>
 <p>Now, define two time grid objects: <code>des1</code> runs from 0 to 24 and <code>des2</code> runs from
 0 to 96, both every hour.</p>
-<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">des1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/tgrid.html">tgrid</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,<span class="fl">1</span><span class="op">)</span>
-<span class="va">des2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/tgrid.html">tgrid</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">96</span>,<span class="fl">1</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/stime.html">stime</a></span><span class="op">(</span><span class="va">des1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">des1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/tgrid.html">tgrid</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,<span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">des2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/tgrid.html">tgrid</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">96</span>,<span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/stime.html">stime</a></span><span class="op">(</span><span class="va">des1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. [1]  0 24</code></pre>
-<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/stime.html">stime</a></span><span class="op">(</span><span class="va">des2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/stime.html">stime</a></span><span class="op">(</span><span class="va">des2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. [1]  0 96</code></pre>
 <p>Now, derive an <code>idata_set</code> after adding a grouping column (<code>GRP</code>) that splits
 the data set into two groups</p>
-<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">df</span>, GRP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">ID</span> <span class="op">&gt;</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">id</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">ID</span>,<span class="va">GRP</span><span class="op">)</span> 
-
-<span class="va">id</span></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">df</span>, GRP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">ID</span> <span class="op">&gt;</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">id</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">ID</span>,<span class="va">GRP</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">id</span></span></code></pre></div>
 <pre><code>.    ID GRP
 . 1   1   0
 . 2   2   0
@@ -782,18 +780,18 @@ the data set into two groups</p>
 </li>
 </ul>
 <p>When we simulate, the individuals in <code>GRP 1</code> will get <code>des1</code> and those in <code>GRP 2</code> will get <code>des2</code></p>
-<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> 
-  <span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/Req.html">Req</a></span><span class="op">(</span><span class="va">CP</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/carry_out.html">carry.out</a></span><span class="op">(</span><span class="va">a.u.g</span>,<span class="va">GRP</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/idata_set.html">idata_set</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/design.html">design</a></span><span class="op">(</span>descol<span class="op">=</span><span class="st">"GRP"</span>, deslist<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">des1</span>,<span class="va">des2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="va">obsaug</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span>
-  <span class="va">mrgsim</span> 
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span>, <span class="va">CP</span><span class="op">~</span><span class="va">time</span><span class="op">|</span><span class="va">GRP</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/Req.html">Req</a></span><span class="op">(</span><span class="va">CP</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/carry_out.html">carry.out</a></span><span class="op">(</span><span class="va">a.u.g</span>,<span class="va">GRP</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/idata_set.html">idata_set</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/data_set.html">data_set</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/design.html">design</a></span><span class="op">(</span>descol<span class="op">=</span><span class="st">"GRP"</span>, deslist<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">des1</span>,<span class="va">des2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">obsaug</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">mrgsim</span> </span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span>, <span class="va">CP</span><span class="op">~</span><span class="va">time</span><span class="op">|</span><span class="va">GRP</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/topic-design-1-1.png" width="672"></div>
 </div>
 <div id="some-helpful-c" class="section level2" number="11.6">
@@ -825,56 +823,56 @@ out there that can suit your needs.</p>
 <span class="header-section-number">11.6.1</span> Semi-colons<a class="anchor" aria-label="anchor" href="#semi-colons"><i class="fas fa-link"></i></a>
 </h3>
 <p>Every statement in <code>C++</code> must end with a semi-colon. For example;</p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb457-1"><a href="topics.html#cb457-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> MAIN <span class="op">]</span> </span>
-<span id="cb457-2"><a href="topics.html#cb457-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CL <span class="op">=</span> exp<span class="op">(</span>log_TVCL <span class="op">+</span> ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb475-1"><a href="topics.html#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> MAIN <span class="op">]</span> </span>
+<span id="cb475-2"><a href="topics.html#cb475-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CL <span class="op">=</span> exp<span class="op">(</span>log_TVCL <span class="op">+</span> ETA<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb458-1"><a href="topics.html#cb458-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> ODE <span class="op">]</span> </span>
-<span id="cb458-2"><a href="topics.html#cb458-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb458-3"><a href="topics.html#cb458-3" aria-hidden="true" tabindex="-1"></a>dxdt_DEPOT <span class="op">=</span> <span class="op">-</span>KA <span class="op">*</span> DEPOT<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb476-1"><a href="topics.html#cb476-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> ODE <span class="op">]</span> </span>
+<span id="cb476-2"><a href="topics.html#cb476-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb476-3"><a href="topics.html#cb476-3" aria-hidden="true" tabindex="-1"></a>dxdt_DEPOT <span class="op">=</span> <span class="op">-</span>KA <span class="op">*</span> DEPOT<span class="op">;</span></span></code></pre></div>
 </div>
 <div id="if-else" class="section level3" number="11.6.2">
 <h3>
 <span class="header-section-number">11.6.2</span> if-else<a class="anchor" aria-label="anchor" href="#if-else"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb459"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb459-1"><a href="topics.html#cb459-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>a <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb460"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb460-1"><a href="topics.html#cb460-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>a<span class="op">==</span><span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb460-2"><a href="topics.html#cb460-2" aria-hidden="true" tabindex="-1"></a>  b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>  </span>
-<span id="cb460-3"><a href="topics.html#cb460-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb461"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb461-1"><a href="topics.html#cb461-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>a <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb461-2"><a href="topics.html#cb461-2" aria-hidden="true" tabindex="-1"></a>  b<span class="op">=</span><span class="dv">2</span><span class="op">;</span></span>
-<span id="cb461-3"><a href="topics.html#cb461-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb461-4"><a href="topics.html#cb461-4" aria-hidden="true" tabindex="-1"></a>  b<span class="op">=</span><span class="dv">3</span><span class="op">;</span></span>
-<span id="cb461-5"><a href="topics.html#cb461-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb477-1"><a href="topics.html#cb477-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>a <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb478-1"><a href="topics.html#cb478-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>a<span class="op">==</span><span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb478-2"><a href="topics.html#cb478-2" aria-hidden="true" tabindex="-1"></a>  b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>  </span>
+<span id="cb478-3"><a href="topics.html#cb478-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb479-1"><a href="topics.html#cb479-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>a <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb479-2"><a href="topics.html#cb479-2" aria-hidden="true" tabindex="-1"></a>  b<span class="op">=</span><span class="dv">2</span><span class="op">;</span></span>
+<span id="cb479-3"><a href="topics.html#cb479-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb479-4"><a href="topics.html#cb479-4" aria-hidden="true" tabindex="-1"></a>  b<span class="op">=</span><span class="dv">3</span><span class="op">;</span></span>
+<span id="cb479-5"><a href="topics.html#cb479-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>This is the equivalent of <code>x &lt;- ifelse(c == 4, 8, 10)</code> in R</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb462-1"><a href="topics.html#cb462-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> c <span class="op">==</span> <span class="dv">4</span> <span class="op">?</span> <span class="dv">8</span> <span class="op">:</span> <span class="dv">10</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb480-1"><a href="topics.html#cb480-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> c <span class="op">==</span> <span class="dv">4</span> <span class="op">?</span> <span class="dv">8</span> <span class="op">:</span> <span class="dv">10</span><span class="op">;</span></span></code></pre></div>
 </div>
-<div id="functions-1" class="section level3" number="11.6.3">
+<div id="functions" class="section level3" number="11.6.3">
 <h3>
-<span class="header-section-number">11.6.3</span> Functions<a class="anchor" aria-label="anchor" href="#functions-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.6.3</span> Functions<a class="anchor" aria-label="anchor" href="#functions"><i class="fas fa-link"></i></a>
 </h3>
 <p>The following functions are hopefully understandable based on the function
 name. Consult <a href="https://cppreference.com" class="uri">https://cppreference.com</a> for further details.</p>
-<div class="sourceCode" id="cb463"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb463-1"><a href="topics.html#cb463-1" aria-hidden="true" tabindex="-1"></a><span class="er"># base^exponent</span></span>
-<span id="cb463-2"><a href="topics.html#cb463-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> d <span class="op">=</span> pow<span class="op">(</span>base<span class="op">,</span>exponent<span class="op">);</span></span>
-<span id="cb463-3"><a href="topics.html#cb463-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb463-4"><a href="topics.html#cb463-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> e <span class="op">=</span> exp<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
-<span id="cb463-5"><a href="topics.html#cb463-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb463-6"><a href="topics.html#cb463-6" aria-hidden="true" tabindex="-1"></a><span class="er"># absolute value</span></span>
-<span id="cb463-7"><a href="topics.html#cb463-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> f <span class="op">=</span> fabs<span class="op">(-</span><span class="dv">4</span><span class="op">);</span></span>
-<span id="cb463-8"><a href="topics.html#cb463-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb463-9"><a href="topics.html#cb463-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> g <span class="op">=</span> sqrt<span class="op">(</span><span class="dv">5</span><span class="op">);</span></span>
-<span id="cb463-10"><a href="topics.html#cb463-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb463-11"><a href="topics.html#cb463-11" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> h <span class="op">=</span> log<span class="op">(</span><span class="dv">6</span><span class="op">);</span></span>
-<span id="cb463-12"><a href="topics.html#cb463-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb463-13"><a href="topics.html#cb463-13" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> i <span class="op">=</span> log10<span class="op">(</span><span class="dv">7</span><span class="op">);</span></span>
-<span id="cb463-14"><a href="topics.html#cb463-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb463-15"><a href="topics.html#cb463-15" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> j <span class="op">=</span> floor<span class="op">(</span><span class="fl">4.2</span><span class="op">);</span></span>
-<span id="cb463-16"><a href="topics.html#cb463-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb463-17"><a href="topics.html#cb463-17" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> k <span class="op">=</span> ceil<span class="op">(</span><span class="fl">4.2</span><span class="op">);</span></span>
-<span id="cb463-18"><a href="topics.html#cb463-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb463-19"><a href="topics.html#cb463-19" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> l <span class="op">=</span> std<span class="op">::</span>max<span class="op">(</span><span class="fl">0.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">3.0</span><span class="op">);</span></span>
-<span id="cb463-20"><a href="topics.html#cb463-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb463-21"><a href="topics.html#cb463-21" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> m <span class="op">=</span> std<span class="op">::</span>min<span class="op">(</span><span class="fl">0.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">3.0</span><span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb481-1"><a href="topics.html#cb481-1" aria-hidden="true" tabindex="-1"></a><span class="er"># base^exponent</span></span>
+<span id="cb481-2"><a href="topics.html#cb481-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> d <span class="op">=</span> pow<span class="op">(</span>base<span class="op">,</span>exponent<span class="op">);</span></span>
+<span id="cb481-3"><a href="topics.html#cb481-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb481-4"><a href="topics.html#cb481-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> e <span class="op">=</span> exp<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
+<span id="cb481-5"><a href="topics.html#cb481-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb481-6"><a href="topics.html#cb481-6" aria-hidden="true" tabindex="-1"></a><span class="er"># absolute value</span></span>
+<span id="cb481-7"><a href="topics.html#cb481-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> f <span class="op">=</span> fabs<span class="op">(-</span><span class="dv">4</span><span class="op">);</span></span>
+<span id="cb481-8"><a href="topics.html#cb481-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb481-9"><a href="topics.html#cb481-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> g <span class="op">=</span> sqrt<span class="op">(</span><span class="dv">5</span><span class="op">);</span></span>
+<span id="cb481-10"><a href="topics.html#cb481-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb481-11"><a href="topics.html#cb481-11" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> h <span class="op">=</span> log<span class="op">(</span><span class="dv">6</span><span class="op">);</span></span>
+<span id="cb481-12"><a href="topics.html#cb481-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb481-13"><a href="topics.html#cb481-13" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> i <span class="op">=</span> log10<span class="op">(</span><span class="dv">7</span><span class="op">);</span></span>
+<span id="cb481-14"><a href="topics.html#cb481-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb481-15"><a href="topics.html#cb481-15" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> j <span class="op">=</span> floor<span class="op">(</span><span class="fl">4.2</span><span class="op">);</span></span>
+<span id="cb481-16"><a href="topics.html#cb481-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb481-17"><a href="topics.html#cb481-17" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> k <span class="op">=</span> ceil<span class="op">(</span><span class="fl">4.2</span><span class="op">);</span></span>
+<span id="cb481-18"><a href="topics.html#cb481-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb481-19"><a href="topics.html#cb481-19" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> l <span class="op">=</span> std<span class="op">::</span>max<span class="op">(</span><span class="fl">0.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">3.0</span><span class="op">);</span></span>
+<span id="cb481-20"><a href="topics.html#cb481-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb481-21"><a href="topics.html#cb481-21" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> m <span class="op">=</span> std<span class="op">::</span>min<span class="op">(</span><span class="fl">0.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">3.0</span><span class="op">);</span></span></code></pre></div>
 </div>
 <div id="integer-division" class="section level3" number="11.6.4">
 <h3>
@@ -882,46 +880,46 @@ name. Consult <a href="https://cppreference.com" class="uri">https://cppreferenc
 </h3>
 <p>The user is warned about division with two integers. In <code>R</code>, the following
 statement evaluates to <code>0.75</code>:</p>
-<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fl">3</span><span class="op">/</span><span class="fl">4</span></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">3</span><span class="op">/</span><span class="fl">4</span></span></code></pre></div>
 <pre><code>. [1] 0.75</code></pre>
 <p>But in <code>C++</code> it evaluates to 0:</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb466-1"><a href="topics.html#cb466-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> <span class="dv">3</span><span class="op">/</span><span class="dv">4</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb484-1"><a href="topics.html#cb484-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> <span class="dv">3</span><span class="op">/</span><span class="dv">4</span><span class="op">;</span></span></code></pre></div>
 <p>This is because both the <code>3</code> and the <code>4</code> are taken as integer literals. This
 produces the same result as</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb467-1"><a href="topics.html#cb467-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
-<span id="cb467-2"><a href="topics.html#cb467-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
-<span id="cb467-3"><a href="topics.html#cb467-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> a<span class="op">/</span>b<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb485-1"><a href="topics.html#cb485-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb485-2"><a href="topics.html#cb485-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb485-3"><a href="topics.html#cb485-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> a<span class="op">/</span>b<span class="op">;</span></span></code></pre></div>
 <p>When one integer is divided by another integer, the remainder is discarded (the
 result is rounded down). This is the way <code>C++</code> works. The user is warned.</p>
 <p>Note that parameters in mrgsolve are <code>doubles</code> so this will evaluate to <code>0.75</code></p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb468-1"><a href="topics.html#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PARAM <span class="op">]</span> a <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb468-2"><a href="topics.html#cb468-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb468-3"><a href="topics.html#cb468-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> MAIN <span class="op">]</span> </span>
-<span id="cb468-4"><a href="topics.html#cb468-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> a<span class="op">/</span><span class="dv">4</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb486-1"><a href="topics.html#cb486-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> PARAM <span class="op">]</span> a <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb486-2"><a href="topics.html#cb486-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb486-3"><a href="topics.html#cb486-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> MAIN <span class="op">]</span> </span>
+<span id="cb486-4"><a href="topics.html#cb486-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> a<span class="op">/</span><span class="dv">4</span><span class="op">;</span></span></code></pre></div>
 <p>Since <code>a</code> is a parameter the operation of <code>a/4</code> is not integer division and
 the result is <code>0.75</code>.</p>
 <p>Unless you are already very comfortable with this concept, users are encouraged
 to add <code>.0</code> suffix to any literal number <strong>written as C++ code</strong>. For example:</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb469-1"><a href="topics.html#cb469-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> <span class="fl">3.0</span> <span class="op">/</span> <span class="fl">4.0</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb487-1"><a href="topics.html#cb487-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x <span class="op">=</span> <span class="fl">3.0</span> <span class="op">/</span> <span class="fl">4.0</span><span class="op">;</span></span></code></pre></div>
 <p>I think it’s fair to say that the vast majority of time you want this to
 evaluate to <code>0.75</code> and writing <code>3.0/4.0</code> rather than <code>3/4</code> will ensure you
 will not discard any remainder here.</p>
 <p>If you would like to experiment with these concepts, try running this code</p>
-<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/metrumresearchgroup/mrgsolve">mrgsolve</a></span><span class="op">)</span>
-
-<span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-[ param ] a = 3
-
-[ main ] 
-capture x = 3/4;
-capture y = 3.0/4.0;
-capture z = a/4;
-'</span>
-<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode</a></span><span class="op">(</span><span class="st">"foo"</span>, <span class="va">code</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/metrumresearchgroup/mrgsolve">mrgsolve</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">[ param ] a = 3</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">[ main ] </span></span>
+<span><span class="st">capture x = 3/4;</span></span>
+<span><span class="st">capture y = 3.0/4.0;</span></span>
+<span><span class="st">capture z = a/4;</span></span>
+<span><span class="st">'</span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode</a></span><span class="op">(</span><span class="st">"foo"</span>, <span class="va">code</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Model:  foo 
 . Dim:    25 x 5 
 . Time:   0 to 24 
@@ -942,9 +940,9 @@ capture z = a/4;
 </h3>
 <p>Pre-processor directives are global substitutions that are made in your
 model code at the time the model is compiled. For example</p>
-<div class="sourceCode" id="cb472"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb472-1"><a href="topics.html#cb472-1" aria-hidden="true" tabindex="-1"></a>$GLOBAL </span>
-<span id="cb472-2"><a href="topics.html#cb472-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb472-3"><a href="topics.html#cb472-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CP (CENT/VC)</span></span></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb490-1"><a href="topics.html#cb490-1" aria-hidden="true" tabindex="-1"></a>$GLOBAL </span>
+<span id="cb490-2"><a href="topics.html#cb490-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb490-3"><a href="topics.html#cb490-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CP (CENT/VC)</span></span></code></pre></div>
 <p>When you write this into your model, the pre-processor will find every
 instance of <code>CP</code> and <strong>replace</strong> it with <code>(CENT/VC)</code>. This substitution
 happens right as the model is compiled; you won’t see this substitution happen
@@ -974,34 +972,34 @@ just choose another name for your directive.</li>
 </ul>
 <p>For example, we can simulate individual-level covariates
 within a certain range:</p>
-<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-$PARAM TVCL = 1, TVWT = 70
-
-$MAIN 
-capture WT = TVWT*exp(EWT);
-
-int i = 0;
-
-while((WT &lt; 60) || (WT &gt; 80)) {
-  if(++i &gt; 100) break;
-  simeta(1);
-  WT = TVWT*exp(EWT);
-}
-
-$OMEGA @labels EWT
-4
-
-$CAPTURE EWT WT
-'</span>
-
-<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode</a></span><span class="op">(</span><span class="st">"simeta"</span>, <span class="va">code</span><span class="op">)</span>
-
-<span class="va">out</span> <span class="op">&lt;-</span> <span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>nid<span class="op">=</span><span class="fl">100</span>, end<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>
-
-<span class="va">sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span>
-
-<span class="va">sum</span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">$PARAM TVCL = 1, TVWT = 70</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$MAIN </span></span>
+<span><span class="st">capture WT = TVWT*exp(EWT);</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">int i = 0;</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">while((WT &lt; 60) || (WT &gt; 80)) {</span></span>
+<span><span class="st">  if(++i &gt; 100) break;</span></span>
+<span><span class="st">  simeta(1);</span></span>
+<span><span class="st">  WT = TVWT*exp(EWT);</span></span>
+<span><span class="st">}</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$OMEGA @labels EWT</span></span>
+<span><span class="st">4</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$CAPTURE EWT WT</span></span>
+<span><span class="st">'</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode</a></span><span class="op">(</span><span class="st">"simeta"</span>, <span class="va">code</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>nid<span class="op">=</span><span class="fl">100</span>, end<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sum</span></span></code></pre></div>
 <pre><code>.        ID              time        EWT                  WT       
 .  Min.   :  1.00   Min.   :0   Min.   :-0.152612   Min.   :60.09  
 .  1st Qu.: 25.75   1st Qu.:0   1st Qu.:-0.087695   1st Qu.:64.12  
@@ -1017,35 +1015,35 @@ $CAPTURE EWT WT
 </ul>
 <p>For example, we can resimulate until all
 concentrations are greater than zero:</p>
-<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-$PARAM CL = 1, V = 20,
-
-$CMT CENT
-
-$SIGMA 50
-
-$PKMODEL ncmt=1
-
-$TABLE
-capture CP = CENT/V + EPS(1);
-
-int i = 0;
-
-while(CP &lt; 0 &amp;&amp; i &lt; 100) {
-  simeps(1);
-  CP = CENT/V + EPS(1);
-  ++i;
-}
-
-'</span>
-
-<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode</a></span><span class="op">(</span><span class="st">"simeps"</span>, <span class="va">code</span><span class="op">)</span>
-
-<span class="va">out</span> <span class="op">&lt;-</span> <span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/ev.html">ev</a></span><span class="op">(</span>amt<span class="op">=</span><span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="fl">48</span><span class="op">)</span>
-<span class="va">sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span>
-
-<span class="va">sum</span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">$PARAM CL = 1, V = 20,</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$CMT CENT</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$SIGMA 50</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$PKMODEL ncmt=1</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$TABLE</span></span>
+<span><span class="st">capture CP = CENT/V + EPS(1);</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">int i = 0;</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">while(CP &lt; 0 &amp;&amp; i &lt; 100) {</span></span>
+<span><span class="st">  simeps(1);</span></span>
+<span><span class="st">  CP = CENT/V + EPS(1);</span></span>
+<span><span class="st">  ++i;</span></span>
+<span><span class="st">}</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">'</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode</a></span><span class="op">(</span><span class="st">"simeps"</span>, <span class="va">code</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/ev.html">ev</a></span><span class="op">(</span>amt<span class="op">=</span><span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>end<span class="op">=</span><span class="fl">48</span><span class="op">)</span></span>
+<span><span class="va">sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sum</span></span></code></pre></div>
 <pre><code>.        ID         time            CENT              CP          
 .  Min.   :1   Min.   : 0.00   Min.   :  0.00   Min.   : 0.08813  
 .  1st Qu.:1   1st Qu.:11.25   1st Qu.: 15.93   1st Qu.: 2.19641  
@@ -1076,8 +1074,8 @@ covariate <code>COV1</code>.</p>
 so that the system uses the value of <code>COV1</code> to advance from <code>TIME1</code> to <code>TIME2</code>.
 To use <code>locf</code> advance, set <code>nocb</code> to <code>FALSE</code> when calling <code>mrgsim</code>. For
 example,</p>
-<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op"><a href="https://rdrr.io/pkg/mrgsolve/man/zchain.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>nocb <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span>nocb <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>There is additional information about the sequence of events that takes place
 during system advance in section <a href="section-sequence.html#section-sequence">7</a>.</p>
 
@@ -1112,7 +1110,7 @@ during system advance in section <a href="section-sequence.html#section-sequence
 <a class="nav-link" href="#some-helpful-c"><span class="header-section-number">11.6</span> Some helpful C++</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#semi-colons"><span class="header-section-number">11.6.1</span> Semi-colons</a></li>
 <li><a class="nav-link" href="#if-else"><span class="header-section-number">11.6.2</span> if-else</a></li>
-<li><a class="nav-link" href="#functions-1"><span class="header-section-number">11.6.3</span> Functions</a></li>
+<li><a class="nav-link" href="#functions"><span class="header-section-number">11.6.3</span> Functions</a></li>
 <li><a class="nav-link" href="#integer-division"><span class="header-section-number">11.6.4</span> Integer division</a></li>
 <li><a class="nav-link" href="#pre-processor-directives"><span class="header-section-number">11.6.5</span> Pre-processor directives</a></li>
 </ul>
@@ -1135,7 +1133,7 @@ during system advance in section <a href="section-sequence.html#section-sequence
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-17.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2023-02-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -1148,7 +1146,7 @@ during system advance in section <a href="section-sequence.html#section-sequence
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -7,7 +7,7 @@
 <title>Chapter 6 Simulated output | mrgsolve User Guide</title>
 <meta name="author" content="Metrum Research Group">
 <meta name="description" content="6.1 Output types When mrgsim() is used to simulate from a model, it by default returns an object with class mrgsims. This is an S4 object containing a data.frame of simulated output and a handful...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="Chapter 6 Simulated output | mrgsolve User Guide">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://mrgsolve.github.io/user_guide/simulated-output.html">
@@ -18,7 +18,7 @@
 <meta name="twitter:description" content="6.1 Output types When mrgsim() is used to simulate from a model, it by default returns an object with class mrgsims. This is an S4 object containing a data.frame of simulated output and a handful...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -82,11 +82,11 @@ types (like <code>data.frame</code> or <code>tibble</code>).</p>
 important, users can request the output be returned as a data frame. This is most efficient
 when the features provided by the <code>mrgsims</code> object are not needed. To do this, pass
 the <code>output</code> argument to <code><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim()</a></code></p>
-<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">mrgsim</span><span class="op">(</span><span class="va">mod</span>, <span class="va">...</span>, output <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">mrgsim</span><span class="op">(</span><span class="va">mod</span>, <span class="va">...</span>, output <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span></span></code></pre></div>
 <p>or use <code><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim_df()</a></code></p>
-<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">mrgsim_df</span><span class="op">(</span><span class="va">mod</span>, <span class="va">....</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">mrgsim_df</span><span class="op">(</span><span class="va">mod</span>, <span class="va">....</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="methods-for-mrgsim-output" class="section level2" number="6.2">
 <h2>
@@ -136,16 +136,16 @@ following subsections all refer to working with <code>mrgsims</code> objects, no
 </h3>
 <p>There is a <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> methods for simulated output that is aware of independent and dependent
 variables from the simulation. If <code>out</code> is the simulated output (an <code>mrgsims</code> object)</p>
-<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span></span></code></pre></div>
 <p>Plot with a formula; the following example selects only the <code>CP</code> and <code>RESPONSE</code> outputs
 and plots them versus <code>time</code></p>
-<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span>, <span class="va">CP</span> <span class="op">+</span> <span class="va">RESPONSE</span> <span class="op">~</span> <span class="va">time</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span>, <span class="va">CP</span> <span class="op">+</span> <span class="va">RESPONSE</span> <span class="op">~</span> <span class="va">time</span><span class="op">)</span></span></code></pre></div>
 <p>To select a large number of responses to plot, pass a character vector or comma-separated
 character data containing output columns to plot</p>
-<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span>, <span class="st">"CP, RESPONSE, WT, DOSE"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span>, <span class="st">"CP, RESPONSE, WT, DOSE"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="methods-for-dplyr-verbs" class="section level3" number="6.2.4">
 <h3>
@@ -154,16 +154,16 @@ character data containing output columns to plot</p>
 <p><code>mrgsolve</code> provides several S3 methods to make it possible to include <code>dplyr</code> verbs in
 your simulation pipeline.</p>
 <p>For example</p>
-<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/metrumresearchgroup/mrgsolve">mrgsolve</a></span><span class="op">)</span>
-
-<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/ev.html">ev</a></span><span class="op">(</span>amt<span class="op">=</span><span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">time</span> <span class="op">&gt;=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/metrumresearchgroup/mrgsolve">mrgsolve</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mrgsolve</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/ev.html">ev</a></span><span class="op">(</span>amt<span class="op">=</span><span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">time</span> <span class="op">&gt;=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <p>Here, <code><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim()</a></code> returns an <code>mrgsims</code> object. When <code>dplyr</code> is also loaded, this object
 can be piped directly to <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> etc.</p>
 <p>It is important to note that when <code>mrgsims</code> output is piped to <code>dplyr</code> functionality,
@@ -236,10 +236,10 @@ consumption and increase efficiency.</p>
 </h3>
 <p>The mrgsolve model object tracks compartments and captures that are currently
 being requested. This can be queried using <code><a href="https://rdrr.io/pkg/mrgsolve/man/outvars.html">outvars()</a></code></p>
-<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/outvars.html">outvars</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/house.html">house</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/outvars.html">outvars</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $cmt
 . [1] "GUT"  "CENT" "RESP"
 . 
@@ -247,10 +247,10 @@ being requested. This can be queried using <code><a href="https://rdrr.io/pkg/mr
 . [1] "DV" "CP"</code></pre>
 <p>Items are listed under <code>cmt</code> and <code>capture</code>. The user can update the model object
 with the names of columns that are being requested by passing <code>outvars</code> to <code><a href="https://rdrr.io/pkg/mrgsolve/man/update.html">update()</a></code></p>
-<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/update.html">update</a></span><span class="op">(</span><span class="va">mod</span>, outvars <span class="op">=</span> <span class="st">"CP, RESP"</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/outvars.html">outvars</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/update.html">update</a></span><span class="op">(</span><span class="va">mod</span>, outvars <span class="op">=</span> <span class="st">"CP, RESP"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/outvars.html">outvars</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $cmt
 . [1] "RESP"
 . 
@@ -258,12 +258,12 @@ with the names of columns that are being requested by passing <code>outvars</cod
 . [1] "CP"</code></pre>
 <p>This will exclude anything that isn’t named in the update. The <code>outvars</code> list can
 be reset by passing <code>(all)</code></p>
-<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/update.html">update</a></span><span class="op">(</span><span class="va">mod</span>, outvars <span class="op">=</span> <span class="st">"(all)"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/update.html">update</a></span><span class="op">(</span><span class="va">mod</span>, outvars <span class="op">=</span> <span class="st">"(all)"</span><span class="op">)</span></span></code></pre></div>
 <p>Remember that <code>...</code> passed to <code><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim()</a></code> are also passed to <code><a href="https://rdrr.io/pkg/mrgsolve/man/update.html">update()</a></code> so it is possible
 to select outputs right in your <code><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim()</a></code> call</p>
-<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span><span class="va">mod</span>, outvars <span class="op">=</span> <span class="st">"CP, RESP"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span><span class="va">mod</span>, outvars <span class="op">=</span> <span class="st">"CP, RESP"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="copy-items-from-data-to-simulated-output" class="section level3" number="6.3.3">
 <h3>
@@ -315,7 +315,7 @@ output. This is covered in a different chapter.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-17.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2023-02-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -328,7 +328,7 @@ output. This is covered in a different chapter.</p>
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

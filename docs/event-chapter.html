@@ -7,7 +7,7 @@
 <title>Chapter 4 Event objects | mrgsolve User Guide</title>
 <meta name="author" content="Metrum Research Group">
 <meta name="description" content="Event objects are similar to the data sets described in 3, but are simpler and easier to create. This is the fastest way to implement a basic intervention (like dosing) for a single “individual”...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Event objects | mrgsolve User Guide">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://mrgsolve.github.io/user_guide/event-chapter.html">
@@ -18,7 +18,7 @@
 <meta name="twitter:description" content="Event objects are similar to the data sets described in 3, but are simpler and easier to create. This is the fastest way to implement a basic intervention (like dosing) for a single “individual”...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -87,24 +87,24 @@ data set for simulation.</p>
 <p>Event objects are frequently used in a pipeline to simulate a dosing regimen.
 For example</p>
 <div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">house</span><span class="op">(</span>end <span class="op">=</span> <span class="fl">72</span><span class="op">)</span> 
-
-<span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ii <span class="op">=</span> <span class="fl">24</span>, addl <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">mrgsim</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="st">"CP"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">house</span><span class="op">(</span>end <span class="op">=</span> <span class="fl">72</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ii <span class="op">=</span> <span class="fl">24</span>, addl <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">mrgsim</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="st">"CP"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/unnamed-chunk-120-1.png" width="672"></div>
 <p>This used the <code>ev()</code> constructor to make an event object for two 100 mg doses
 and this is passed into <code>mrgsim()</code> to implement this regimen.</p>
 <p>Alternatively, we can create a standalone object and feed that into the pipeline</p>
 <div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">regimen</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ii <span class="op">=</span> <span class="fl">24</span>, addl <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">ev</span><span class="op">(</span><span class="va">regimen</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">mrgsim</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="st">"CP"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">regimen</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ii <span class="op">=</span> <span class="fl">24</span>, addl <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op">%&gt;%</span> <span class="fu">ev</span><span class="op">(</span><span class="va">regimen</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">mrgsim</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="st">"CP"</span><span class="op">)</span></span></code></pre></div>
 <p>If you are not using the pipe syntax, the following would be equivalent
 calls</p>
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">mrgsim</span><span class="op">(</span><span class="va">mod</span>, events <span class="op">=</span> <span class="va">regimen</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="st">"CP"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">mrgsim</span><span class="op">(</span><span class="va">mod</span>, events <span class="op">=</span> <span class="va">regimen</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="st">"CP"</span><span class="op">)</span></span></code></pre></div>
 <p>And there are <code>mrgsim()</code> variants that explicitly accept an event object</p>
 <div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">mrgsim_e</span><span class="op">(</span><span class="va">mod</span>, <span class="va">regimen</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="st">"CP"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">mrgsim_e</span><span class="op">(</span><span class="va">mod</span>, <span class="va">regimen</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="st">"CP"</span><span class="op">)</span></span></code></pre></div>
 <p>More will be said about how to create and manipulate event objects in the
 following sections.</p>
 </div>
@@ -115,7 +115,7 @@ following sections.</p>
 <p>A new event object can be created with the <code>ev()</code> constructor. For a single,
 100 mg dose it would be</p>
 <div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <p>When you print the object to the R console we see the 100 mg dose along with
 the following defaults</p>
 <ul>
@@ -127,7 +127,7 @@ the following defaults</p>
 <code>evid</code> set to 1 (a bolus dose)</li>
 </ul>
 <div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">e</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">e</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid
 . 1    0 100   1    1</code></pre>
@@ -135,13 +135,13 @@ the following defaults</p>
 needed. For a single 100 mg dose infused over 2 hours in compartment 2 one
 hour after the simulation starts</p>
 <div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, rate <span class="op">=</span> <span class="fl">50</span>, cmt <span class="op">=</span> <span class="fl">2</span>, time <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, rate <span class="op">=</span> <span class="fl">50</span>, cmt <span class="op">=</span> <span class="fl">2</span>, time <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p>To use this event object, we can pass it into <code>mrgsim()</code> under the <code>events</code>
 argument</p>
 <div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">house</span><span class="op">(</span>delta <span class="op">=</span> <span class="fl">1</span>, end <span class="op">=</span> <span class="fl">24</span><span class="op">)</span>
-
-<span class="fu">mrgsim</span><span class="op">(</span><span class="va">mod</span>, events <span class="op">=</span> <span class="va">e</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">house</span><span class="op">(</span>delta <span class="op">=</span> <span class="fl">1</span>, end <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">mrgsim</span><span class="op">(</span><span class="va">mod</span>, events <span class="op">=</span> <span class="va">e</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Model:  housemodel 
 . Dim:    26 x 7 
 . Time:   0 to 24 
@@ -157,7 +157,7 @@ argument</p>
 . 8:   1    6   0 81.91 35.22 4.095 4.095</code></pre>
 <p>Event object inputs can be functions of previously defined inputs. For example</p>
 <div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, rate <span class="op">=</span> <span class="va">amt</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, rate <span class="op">=</span> <span class="va">amt</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt rate cmt evid
 . 1    0 100   50   1    1</code></pre>
@@ -169,7 +169,7 @@ handful of options that can be helpful when constructing event objects.</p>
 input. We can also indicate an infusion by adding an infusion time through
 the <code>tinf</code> argument</p>
 <div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, tinf <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, tinf <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt rate cmt evid tinf
 . 1    0 100   50   1    1    2</code></pre>
@@ -177,7 +177,7 @@ the <code>tinf</code> argument</p>
 <p>While the primary use case for event objects are for <em>single individuals</em>,
 we can code a series of IDs into the object too</p>
 <div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   ID time amt cmt evid
 . 1  1    0 100   1    1
@@ -189,7 +189,7 @@ data set (see below), we’ll have a population data set from which to simulate.
 <p>We can also pass through arbitrary data columns through the event object. For
 example, we can pass through <code>WT</code></p>
 <div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, WT <span class="op">=</span> <span class="fl">80</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, WT <span class="op">=</span> <span class="fl">80</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid WT
 . 1    0 100   1    1 80</code></pre>
@@ -203,14 +203,14 @@ but data sets under the hood. We can take the event objects we created above
 and coerce them to other objects.</p>
 <p><strong>Using as_data_set</strong></p>
 <div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">as_data_set</span><span class="op">(</span><span class="va">e</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">as_data_set</span><span class="op">(</span><span class="va">e</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.   time amt rate cmt evid ID
 . 1    1 100   50   2    1  1</code></pre>
 <p>This will ensure that there is an <code>ID</code> column in the output and it will
 be suitable to use for simulation.</p>
 <p><strong>Using as.data.frame</strong></p>
 <div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>ID <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>ID <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.   time amt rate cmt evid ID
 . 1    1 100   50   2    1  5</code></pre>
 </div>
@@ -220,7 +220,7 @@ be suitable to use for simulation.</p>
 </h2>
 <p>There is a <code>$</code> operator for event objects</p>
 <div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">e</span><span class="op">$</span><span class="va">amt</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">e</span><span class="op">$</span><span class="va">amt</span></span></code></pre></div>
 <pre><code>. [1] 100</code></pre>
 </div>
 <div id="combining-event-objects" class="section level2" number="4.5">
@@ -233,10 +233,10 @@ be suitable to use for simulation.</p>
 </h3>
 <p>Two or more event objects can be concatenated using the <code>c</code> operator</p>
 <div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">e1</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
-<span class="va">e2</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">200</span>, time <span class="op">=</span> <span class="fl">24</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">e1</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">e2</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">200</span>, time <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid
 . 1    0 100   1    1
@@ -255,10 +255,10 @@ fact into <code>time</code> accordingly.</p>
 <p>By specifying a dosing interval (<code>ii</code>) we can ask mrgsolve to do that
 automatically by calling the <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> method.</p>
 <div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">e1</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ii <span class="op">=</span> <span class="fl">24</span><span class="op">)</span>
-<span class="va">e2</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">200</span>, ii <span class="op">=</span> <span class="fl">24</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">e1</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ii <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span>
+<span><span class="va">e2</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">200</span>, ii <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100 24    0   1    1
@@ -266,11 +266,11 @@ automatically by calling the <code><a href="https://rdrr.io/r/base/seq.html">seq
 <p>This was a trivial example to get a simple result. We can try something more
 complicated to make the point</p>
 <div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">e3</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ii <span class="op">=</span> <span class="fl">6</span>,  addl <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>
-<span class="va">e4</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">200</span>, ii <span class="op">=</span> <span class="fl">12</span>, addl <span class="op">=</span> <span class="fl">124</span><span class="op">)</span>
-<span class="va">e5</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">400</span>, ii <span class="op">=</span> <span class="fl">24</span>, addl <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">e3</span>, <span class="va">e4</span>, <span class="va">e5</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">e3</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ii <span class="op">=</span> <span class="fl">6</span>,  addl <span class="op">=</span> <span class="fl">28</span><span class="op">)</span></span>
+<span><span class="va">e4</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">200</span>, ii <span class="op">=</span> <span class="fl">12</span>, addl <span class="op">=</span> <span class="fl">124</span><span class="op">)</span></span>
+<span><span class="va">e5</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">400</span>, ii <span class="op">=</span> <span class="fl">24</span>, addl <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">e3</span>, <span class="va">e4</span>, <span class="va">e5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100  6   28   1    1
@@ -280,7 +280,7 @@ complicated to make the point</p>
 next segment of the regimen one dosing interval after the previous regimen
 finished. Going back to the simple example</p>
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100 24    0   1    1
@@ -290,14 +290,14 @@ interval (24 hours) after the last (only) dose in <code>e1</code>. We can alter 
 of time between segments of the regimen by using the <code>wait</code> argument. For
 example, to push <code>e2</code> out by an additional 24 hours we’d use</p>
 <div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">e1</span>, wait <span class="op">=</span> <span class="fl">24</span>, <span class="va">e2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">e1</span>, wait <span class="op">=</span> <span class="fl">24</span>, <span class="va">e2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100 24    0   1    1
 . 2   48 200 24    0   1    1</code></pre>
 <p>We can also use a negative value for <code>wait</code> to make the next dose happen sooner</p>
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">e1</span>, wait <span class="op">=</span> <span class="op">-</span><span class="fl">12</span>, <span class="va">e2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">e1</span>, wait <span class="op">=</span> <span class="op">-</span><span class="fl">12</span>, <span class="va">e2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100 24    0   1    1
@@ -305,7 +305,7 @@ example, to push <code>e2</code> out by an additional 24 hours we’d use</p>
 <p>Finally, we should note that event objects can be used multiple times in a
 sequence</p>
 <div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span>, wait <span class="op">=</span> <span class="fl">7</span><span class="op">*</span><span class="fl">24</span>, <span class="va">e2</span>, <span class="va">e1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span>, wait <span class="op">=</span> <span class="fl">7</span><span class="op">*</span><span class="fl">24</span>, <span class="va">e2</span>, <span class="va">e1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100 24    0   1    1
@@ -320,7 +320,7 @@ sequence</p>
 <p>Like the <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> method for event objects, <code>ev_repeat</code> will put an event object
 into a sequence <code>n</code> times</p>
 <div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev_repeat</span><span class="op">(</span><span class="va">e1</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev_repeat</span><span class="op">(</span><span class="va">e1</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.   time amt ii cmt evid addl
 . 1    0 100 24   1    1    0
 . 2   24 100 24   1    1    0
@@ -328,15 +328,15 @@ into a sequence <code>n</code> times</p>
 <p>By default, this function returns a regular data frame. To return an event
 object instead call</p>
 <div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev_repeat</span><span class="op">(</span><span class="va">e1</span>, n <span class="op">=</span> <span class="fl">3</span>, as.ev <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev_repeat</span><span class="op">(</span><span class="va">e1</span>, n <span class="op">=</span> <span class="fl">3</span>, as.ev <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>You can put a waiting period too. To illustrate this, let’s compose a more
 complicated regimen and repeat that</p>
 <div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">e1</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">500</span>, ii <span class="op">=</span> <span class="fl">24</span><span class="op">)</span>
-<span class="va">e2</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">250</span>, ii <span class="op">=</span> <span class="fl">24</span>, addl <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
-<span class="va">e3</span> <span class="op">&lt;-</span> <span class="fu">ev_seq</span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span>
-
-<span class="va">e3</span> <span class="op">%&gt;%</span> <span class="fu">realize_addl</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">e1</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">500</span>, ii <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span>
+<span><span class="va">e2</span> <span class="op">&lt;-</span> <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">250</span>, ii <span class="op">=</span> <span class="fl">24</span>, addl <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">e3</span> <span class="op">&lt;-</span> <span class="fu">ev_seq</span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">e3</span> <span class="op">%&gt;%</span> <span class="fu">realize_addl</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 500  0    0   1    1
@@ -350,7 +350,7 @@ complicated regimen and repeat that</p>
 at 144 hours. When putting this into a sequence, we’ll wait one dosing interval
 and then the <code>wait</code> period and then start again</p>
 <div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev_repeat</span><span class="op">(</span><span class="va">e3</span>, n <span class="op">=</span> <span class="fl">3</span>, wait <span class="op">=</span> <span class="fl">7</span><span class="op">*</span><span class="fl">24</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev_repeat</span><span class="op">(</span><span class="va">e3</span>, n <span class="op">=</span> <span class="fl">3</span>, wait <span class="op">=</span> <span class="fl">7</span><span class="op">*</span><span class="fl">24</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.   time amt ii addl cmt evid
 . 1    0 500 24    0   1    1
 . 2   24 250 24    5   1    1
@@ -366,7 +366,7 @@ and then the <code>wait</code> period and then start again</p>
 <p>Use the <code>as_data_set()</code> function to combine multiple event objects into a single
 data set.</p>
 <div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">as_data_set</span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">as_data_set</span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.   ID time cmt evid amt ii addl
 . 1  1    0   1    1 500 24    0
 . 2  2    0   1    1 250 24    5</code></pre>
@@ -380,11 +380,11 @@ you exit the event object world</li>
 <p>Recall that we can create event objects with multiple <code>IDs</code>; <code>as_data_set()</code>
 is handy to use with this feature</p>
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">as_data_set</span><span class="op">(</span>
-  <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, 
-  <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">200</span>, ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, 
-  <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">300</span>, ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">as_data_set</span><span class="op">(</span></span>
+<span>  <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, </span>
+<span>  <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">200</span>, ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, </span>
+<span>  <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">300</span>, ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <pre><code>.   ID time cmt evid amt
 . 1  1    0   1    1 100
 . 2  2    0   1    1 100
@@ -400,10 +400,10 @@ the 300 mg group.</p>
 <p>We’ll cover a function called <code>ev_rep()</code> below to “expand” an event object to
 multiple individuals</p>
 <div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">as_data_set</span><span class="op">(</span>
-  <span class="va">e1</span> <span class="op">%&gt;%</span> <span class="fu">ev_rep</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">300</span><span class="op">)</span>,
-  <span class="va">e2</span> <span class="op">%&gt;%</span> <span class="fu">ev_rep</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">300</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">as_data_set</span><span class="op">(</span></span>
+<span>  <span class="va">e1</span> <span class="op">%&gt;%</span> <span class="fu">ev_rep</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">300</span><span class="op">)</span>,</span>
+<span>  <span class="va">e2</span> <span class="op">%&gt;%</span> <span class="fu">ev_rep</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">300</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div id="modifying-an-event-object" class="section level2" number="4.6">
@@ -416,21 +416,21 @@ multiple individuals</p>
 </h3>
 <p>Event objects can be mutated</p>
 <div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">mutate</span><span class="op">(</span><span class="va">e</span>, amt <span class="op">=</span> <span class="fl">200</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">mutate</span><span class="op">(</span><span class="va">e</span>, amt <span class="op">=</span> <span class="fl">200</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt rate cmt evid
 . 1    1 200   50   2    1</code></pre>
 <p>Columns can be removed from event objects</p>
 <div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, WT <span class="op">=</span> <span class="fl">50</span>, AGE <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">WT</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, WT <span class="op">=</span> <span class="fl">50</span>, AGE <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">WT</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid AGE
 . 1    0 100   1    1  12</code></pre>
 <p>Rows can be removed from event objects</p>
 <div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>, <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">200</span>, time <span class="op">=</span> <span class="fl">12</span><span class="op">)</span>, <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">300</span>, time <span class="op">=</span> <span class="fl">24</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">e</span>, <span class="va">time</span> <span class="op">&lt;=</span> <span class="fl">12</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>, <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">200</span>, time <span class="op">=</span> <span class="fl">12</span><span class="op">)</span>, <span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">300</span>, time <span class="op">=</span> <span class="fl">24</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">e</span>, <span class="va">time</span> <span class="op">&lt;=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt cmt evid
 . 1    0 100   1    1
@@ -442,7 +442,7 @@ multiple individuals</p>
 </h3>
 <p>“Additional” doses can be made explicit in an event object</p>
 <div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ii <span class="op">=</span> <span class="fl">6</span>, addl <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">realize_addl</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span>, ii <span class="op">=</span> <span class="fl">6</span>, addl <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">realize_addl</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100  0    0   1    1
@@ -457,7 +457,7 @@ multiple individuals</p>
 <p>Event objects can be “expanded” into multiple IDs to create a population;
 use the <code>ev_rep()</code> function for this.</p>
 <div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">ev_rep</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">ev_rep</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.     ID time amt cmt evid
 . 1    1    0 100   1    1
 . 1.1  2    0 100   1    1
@@ -467,7 +467,7 @@ use the <code>ev_rep()</code> function for this.</p>
 <p>By default, <code>ev_rep()</code> returns a regular data frame. You can request that
 an event object is returned</p>
 <div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">ev_rep</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, as.ev <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">ev_rep</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, as.ev <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><code>ev_rep()</code> can work on an event object with any complexity.</p>
 </div>
 </div>
@@ -483,15 +483,15 @@ an event object is returned</p>
 <p><code>ev_days()</code> will create dosing sequences when dosing are on certain days (of the
 week). For example, to dose only on Monday, Wednesday, and Friday for on month</p>
 <div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu">ev_days</span><span class="op">(</span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>, ii <span class="op">=</span> <span class="fl">168</span>, addl <span class="op">=</span> <span class="fl">3</span>, days <span class="op">=</span> <span class="st">'m,w,f'</span><span class="op">)</span>
-<span class="va">e</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu">ev_days</span><span class="op">(</span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>, ii <span class="op">=</span> <span class="fl">168</span>, addl <span class="op">=</span> <span class="fl">3</span>, days <span class="op">=</span> <span class="st">'m,w,f'</span><span class="op">)</span></span>
+<span><span class="va">e</span></span></code></pre></div>
 <pre><code>.   time amt cmt evid  ii addl
 . 1    0 100   1    1 168    3
 . 2   48 100   1    1 168    3
 . 3   96 100   1    1 168    3</code></pre>
 <p>We can see how this works by simulating the regimen</p>
 <div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">mrgsim_e</span><span class="op">(</span><span class="va">mod</span>, <span class="va">e</span>, end <span class="op">=</span> <span class="fl">168</span><span class="op">*</span><span class="fl">4</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="st">"CP"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">mrgsim_e</span><span class="op">(</span><span class="va">mod</span>, <span class="va">e</span>, end <span class="op">=</span> <span class="fl">168</span><span class="op">*</span><span class="fl">4</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="st">"CP"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="user-guide_files/figure-html/unnamed-chunk-156-1.png" width="672"></div>
 </div>
 <div id="ev_rx" class="section level3" number="4.7.2">
@@ -502,19 +502,96 @@ week). For example, to dose only on Monday, Wednesday, and Friday for on month</
 might see on a prescription. For example, 100 mg twice daily for 3 doses into
 compartment 2 would be</p>
 <div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev_rx</span><span class="op">(</span><span class="st">"100 mg q12h x3 in 2"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev_rx</span><span class="op">(</span><span class="st">"100 mg q12h x3 in 2"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt ii addl cmt evid
 . 1    0 100 12    2   2    1</code></pre>
 <p>To code an infusion</p>
 <div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ev_rx</span><span class="op">(</span><span class="st">"500 mg over 2 hours q 24 h x3 in 1"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ev_rx</span><span class="op">(</span><span class="st">"500 mg over 2 hours q 24 h x3 in 1"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. Events:
 .   time amt rate ii addl cmt evid
 . 1    0 500  250 24    2   1    1</code></pre>
 <p>See the <code>ev_rx()</code> documentation for more details and limitations.</p>
-
 </div>
+</div>
+<div id="upper-case-names" class="section level2" number="4.8">
+<h2>
+<span class="header-section-number">4.8</span> Upper case names<a class="anchor" aria-label="anchor" href="#upper-case-names"><i class="fas fa-link"></i></a>
+</h2>
+<p>You’ll notice in the previous sections that most of the column names were
+rendered with lower case letters when we convert the event object to a
+data set like object:</p>
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>.   time amt cmt evid
+. 1    0 100   1    1</code></pre>
+<p>And when this event object is use to simulate, you’ll see these lower case names
+in the simulated output. The reasons for this are historical and this behavior
+is unlikely to change because it goes so far back into the history of mrgsolve.</p>
+<p>Nevertheless, recent versions of mrgsolve have included similar constructor
+functions that will render column names in upper case which are commonly seen
+in analysis data sets.</p>
+<p>The <code>evd()</code> constructor behaves just like <code>ev()</code>, but it will render upper
+case names when coerced to a data set or used for simulation.</p>
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu">evd</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">e</span></span></code></pre></div>
+<pre><code>. Events Data:
+.   time amt cmt evid
+. 1    0 100   1    1</code></pre>
+<p>The <code>d</code> in <code>evd()</code> indicates that the event object will render with names like
+a Data set and you will see a reminder of the data set like nature of this
+object when it is printed.</p>
+<p>When this object is rendered to a data frame, you will see the names rendered in
+upper case</p>
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">e</span><span class="op">)</span></span></code></pre></div>
+<pre><code>.   TIME AMT CMT EVID
+. 1    0 100   1    1</code></pre>
+<p>You can also coerce an event object created with <code>ev()</code> to one that behaves
+as if it were created via <code>evd()</code></p>
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">as.evd</span><span class="op">(</span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>. Events Data:
+.   time amt cmt evid
+. 1    0 100   1    1</code></pre>
+<p>It is important to note that the case of the column names aren’t made upper
+case until the data frame is rendered. So, in the previous example, <code>time</code> and
+<code>amt</code> are in lower case because we have not rendered yet. If you want to work
+on this object before it is rendered, be sure to lower case names before rendering
+and upper case after rendering. For example we use <code>rate</code> in the the following
+example, not <code>RATE</code>:</p>
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">evd</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>rate <span class="op">=</span> <span class="va">amt</span> <span class="op">/</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>. Events Data:
+.   time amt rate cmt evid
+. 1    0 100   20   1    1</code></pre>
+<p>You can coerce a traditional event object to a data like event object with</p>
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">as.evd</span><span class="op">(</span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>. Events Data:
+.   time amt cmt evid
+. 1    0 100   1    1</code></pre>
+<p>And finally, there are two utility functions for changing the names of a
+data like or event object. To convert to upper case use <code>uctran()</code></p>
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">as_data_set</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">uctran</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>.   TIME AMT CMT EVID ID
+. 1    0 100   1    1  1</code></pre>
+<p>To convert to lower case, use <code>lctran()</code></p>
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">evd</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">as_data_set</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">lctran</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>.   time amt cmt evid ID
+. 1    0 100   1    1  1</code></pre>
+<p>The utility functions also work on event objects. For example,</p>
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ev</span><span class="op">(</span>amt <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">uctran</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>. Events Data:
+.   time amt cmt evid
+. 1    0 100   1    1</code></pre>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -549,6 +626,7 @@ compartment 2 would be</p>
 <li><a class="nav-link" href="#ev_rx"><span class="header-section-number">4.7.2</span> ev_rx</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#upper-case-names"><span class="header-section-number">4.8</span> Upper case names</a></li>
 </ul>
 
       <div class="book-extra">
@@ -565,7 +643,7 @@ compartment 2 would be</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-17.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2023-02-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -578,7 +656,7 @@ compartment 2 would be</p>
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

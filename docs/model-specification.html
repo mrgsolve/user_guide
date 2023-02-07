@@ -7,7 +7,7 @@
 <title>Chapter 2 Model specification | mrgsolve User Guide</title>
 <meta name="author" content="Metrum Research Group">
 <meta name="description" content="This chapter details the mrgsolve model specification format.  2.1 How / where to write a model There are two ways to write your model: Code in a separate file and source into your R script Code...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Model specification | mrgsolve User Guide">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://mrgsolve.github.io/user_guide/model-specification.html">
@@ -18,7 +18,7 @@
 <meta name="twitter:description" content="This chapter details the mrgsolve model specification format.  2.1 How / where to write a model There are two ways to write your model: Code in a separate file and source into your R script Code...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -97,7 +97,7 @@ specification elements.</p>
 called <code>mymodel</code> saved in <code>mymodel.cpp</code> (in the current working directory),
 issue the command:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mread</span><span class="op">(</span><span class="st">"mymodel"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mread</span><span class="op">(</span><span class="st">"mymodel"</span><span class="op">)</span></span></code></pre></div>
 <p><code>mread()</code> returns a model object from which you can simulate.</p>
 </div>
 <div id="spec-inline" class="section level3" number="2.1.2">
@@ -107,10 +107,10 @@ issue the command:</p>
 <p>Often it is more convenient to write a model right in your <code>R</code> script. The
 model might look something like this:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-$PARAM CL = 1, VC = 20
-$PKMODEL ncmt=1
-'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">$PARAM CL = 1, VC = 20</span></span>
+<span><span class="st">$PKMODEL ncmt=1</span></span>
+<span><span class="st">'</span></span></code></pre></div>
 <p>Here, we created a character vector of length 1 and saved it to the <code>R</code> object
 called <code>code</code>. The name of this object is irrelevant. But <code>code</code> will be
 passed into <code>mrgsolve</code> as the model definition. When <code>mrgsolve</code> gets a model
@@ -119,12 +119,12 @@ file called <code>&lt;model-name&gt;.cpp</code> and read it right back in as if 
 the code into this file (section <a href="model-specification.html#spec-separate-file">2.1.1</a>).</p>
 <p>To parse and load this model, use the <code>mcode()</code> command:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"mymodel"</span>, <span class="va">code</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"mymodel"</span>, <span class="va">code</span><span class="op">)</span></span></code></pre></div>
 <p><code>mcode()</code> is a convenience wrapper for <code>mread()</code>. <code>mcode</code> writes the code to
 <code>mymodel.cpp</code> in <code><a href="https://rdrr.io/r/base/tempfile.html">tempdir()</a></code>, reads it back in, compiles and loads.</p>
 <p>The <code>mcode</code> call is equivalent to:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mread</span><span class="op">(</span><span class="st">"mymodel"</span>, <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">code</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mread</span><span class="op">(</span><span class="st">"mymodel"</span>, <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">code</span><span class="op">)</span></span></code></pre></div>
 <p>For help, see <code>?mread</code> , <code>?mcode</code> in the <code>R</code> help system after loading
 <code>mrgsolve</code>.</p>
 </div>
@@ -279,9 +279,9 @@ of the model object.</p>
 . WT = 70</code></pre>
 <p>then</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"popex"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"popex"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">$</span><span class="va">covariates</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">$</span><span class="va">covariates</span></span></code></pre></div>
 <pre><code>. [1] "WT"</code></pre>
 <p>Notes:</p>
 <ul>
@@ -938,16 +938,16 @@ working directory.</p>
 the source for imported parameters can be retrieved by coercing the
 model object to list and looking for <code>nm_import</code>:</p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"1005"</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">$</span><span class="va">nm_import</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">modlib</span><span class="op">(</span><span class="st">"1005"</span>, compile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">$</span><span class="va">nm_import</span></span></code></pre></div>
 <p>For help on the arguments / options for <code>$NMXML</code>, please see the <code>?nmxml</code>
 help topic in your <code>R</code> session after loading the <code>mrgsolve</code> package.</p>
 <p><strong>An example</strong></p>
 <p>There is a NONMEM run embedded in the <code>mrgsolve</code> package</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/find.package.html">path.package</a></span><span class="op">(</span><span class="st">"mrgsolve"</span><span class="op">)</span>,<span class="st">"nonmem"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">path</span>, recursive<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/find.package.html">path.package</a></span><span class="op">(</span><span class="st">"mrgsolve"</span><span class="op">)</span>,<span class="st">"nonmem"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">path</span>, recursive<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>.  [1] "1005/1005.cat"    "1005/1005.coi"    "1005/1005.cor"    "1005/1005.cov"   
 .  [5] "1005/1005.cpu"    "1005/1005.ctl"    "1005/1005.ext"    "1005/1005.grd"   
 .  [9] "1005/1005.lst"    "1005/1005.phi"    "1005/1005.shk"    "1005/1005.shm"   
@@ -956,44 +956,44 @@ help topic in your <code>R</code> session after loading the <code>mrgsolve</code
 <p>We can create a <code>mrgsolve</code> control stream that will import <code>THETA</code>, <code>OMEGA</code> and
 <code>SIGMA</code> from that run using the <code>$NMXML</code> code block.</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-$NMXML
-run = 1005
-project = path
-root = "cppfile"
-
-olabels = c("ECL", "EVC", "EKA")
-slabels = c("PROP", "ADD")
-
-$MAIN
-double CL = THETA1*exp(ECL);
-double V2 = THETA2*exp(EVC);
-double KA = THETA3*exp(EKA);
-double Q = THETA4;
-double V3 = THETA5;
-
-$PKMODEL ncmt=2, depot=TRUE
-
-$CMT GUT CENT PERIPH
-
-$TABLE
-double CP = (CENT/V2)*(1+PROP) + ADD/5;
-
-$CAPTURE CP
-
-$SET delta=4, end=96
-'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">$NMXML</span></span>
+<span><span class="st">run = 1005</span></span>
+<span><span class="st">project = path</span></span>
+<span><span class="st">root = "cppfile"</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">olabels = c("ECL", "EVC", "EKA")</span></span>
+<span><span class="st">slabels = c("PROP", "ADD")</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$MAIN</span></span>
+<span><span class="st">double CL = THETA1*exp(ECL);</span></span>
+<span><span class="st">double V2 = THETA2*exp(EVC);</span></span>
+<span><span class="st">double KA = THETA3*exp(EKA);</span></span>
+<span><span class="st">double Q = THETA4;</span></span>
+<span><span class="st">double V3 = THETA5;</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$PKMODEL ncmt=2, depot=TRUE</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$CMT GUT CENT PERIPH</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$TABLE</span></span>
+<span><span class="st">double CP = (CENT/V2)*(1+PROP) + ADD/5;</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$CAPTURE CP</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$SET delta=4, end=96</span></span>
+<span><span class="st">'</span></span></code></pre></div>
 <p><strong>NOTE</strong>: in order to use this code, we need to install the <code>xml2</code> package.</p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"nmxml"</span>, <span class="va">code</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="va">mod</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"nmxml"</span>, <span class="va">code</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mod</span></span></code></pre></div>
 <pre><code>. 
 . 
 . ----------------  source: nmxml.cpp  ----------------
 . 
-.   project: /private/var/fol.../T/RtmpxbKKp1
-.   shared object: nmxml-so-e4165784247 
+.   project: /private/var/fol.../T/RtmpoQlvXl
+.   shared object: nmxml-so-49a55b02c5b6 
 . 
 .   time:          start: 0 end: 96 delta: 4
 .                  add: &lt;none&gt;
@@ -1008,7 +1008,7 @@ $SET delta=4, end=96
 .   solver:        atol: 1e-08 rtol: 1e-08 maxsteps: 20k
 . ------------------------------------------------------</code></pre>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">param</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">param</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=7):
 .  name   value  . name   value
@@ -1017,7 +1017,7 @@ $SET delta=4, end=96
 .  THETA3 0.0714 | THETA7 1.19 
 .  THETA4 3.47   | .      .</code></pre>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">revar</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">revar</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. $omega
 . $...
 .              [,1]        [,2]        [,3]
@@ -1057,39 +1057,39 @@ faster than <code>$NMXML</code> when loading from sampling based methods (mainly
 <p>We can load the same mode as the <code>$NMXML</code> example above with the following
 code:</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/find.package.html">path.package</a></span><span class="op">(</span><span class="st">"mrgsolve"</span><span class="op">)</span>,<span class="st">"nonmem"</span><span class="op">)</span>
-
-<span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'
-$NMEXT
-run = 1005
-project = path
-root = "cppfile"
-
-olabels = c("ECL", "EVC", "EKA")
-slabels = c("PROP", "ADD")
-
-$MAIN
-double CL = THETA1*exp(ECL);
-double V2 = THETA2*exp(EVC);
-double KA = THETA3*exp(EKA);
-double Q = THETA4;
-double V3 = THETA5;
-
-$PKMODEL ncmt=2, depot=TRUE
-
-$CMT GUT CENT PERIPH
-
-$TABLE
-double CP = (CENT/V2)*(1+PROP) + ADD/5;
-
-$CAPTURE CP
-
-$SET delta = 4, end = 96
-'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/find.package.html">path.package</a></span><span class="op">(</span><span class="st">"mrgsolve"</span><span class="op">)</span>,<span class="st">"nonmem"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">$NMEXT</span></span>
+<span><span class="st">run = 1005</span></span>
+<span><span class="st">project = path</span></span>
+<span><span class="st">root = "cppfile"</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">olabels = c("ECL", "EVC", "EKA")</span></span>
+<span><span class="st">slabels = c("PROP", "ADD")</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$MAIN</span></span>
+<span><span class="st">double CL = THETA1*exp(ECL);</span></span>
+<span><span class="st">double V2 = THETA2*exp(EVC);</span></span>
+<span><span class="st">double KA = THETA3*exp(EKA);</span></span>
+<span><span class="st">double Q = THETA4;</span></span>
+<span><span class="st">double V3 = THETA5;</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$PKMODEL ncmt=2, depot=TRUE</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$CMT GUT CENT PERIPH</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$TABLE</span></span>
+<span><span class="st">double CP = (CENT/V2)*(1+PROP) + ADD/5;</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$CAPTURE CP</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">$SET delta = 4, end = 96</span></span>
+<span><span class="st">'</span></span></code></pre></div>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"nmext"</span>, <span class="va">code</span>, quiet<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">param</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">mcode</span><span class="op">(</span><span class="st">"nmext"</span>, <span class="va">code</span>, quiet<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">param</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>. 
 .  Model parameters (N=7):
 .  name   value  . name   value
@@ -1738,11 +1738,11 @@ for you to use in your data set.</p>
 example, if you have a compartment called <code>CENT</code> in the model, then the
 the following will be reserved</p>
 <div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">F_CENT</span>
-<span class="va">R_CENT</span>
-<span class="va">D_CENT</span> 
-<span class="va">ALAG_CENT</span>
-<span class="va">N_CENT</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">F_CENT</span></span>
+<span><span class="va">R_CENT</span></span>
+<span><span class="va">D_CENT</span> </span>
+<span><span class="va">ALAG_CENT</span></span>
+<span><span class="va">N_CENT</span></span></code></pre></div>
 </div>
 <div id="new-variables" class="section level2" number="2.5">
 <h2>
@@ -2114,7 +2114,7 @@ populate those matrices (section <a href="#topic-matrix-update"><strong>??</stro
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-17.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2023-02-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -2127,7 +2127,7 @@ populate those matrices (section <a href="#topic-matrix-update"><strong>??</stro
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

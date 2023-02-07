@@ -7,7 +7,7 @@
 <title>Chapter 12 Questions and Answers | mrgsolve User Guide</title>
 <meta name="author" content="Metrum Research Group">
 <meta name="description" content="I’m using this chapter as a place to provide miscellaneous information that might not have an obvious place to live. I’d call this a FAQ, but not all of the questions are asked frequently or at...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="Chapter 12 Questions and Answers | mrgsolve User Guide">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://mrgsolve.github.io/user_guide/q-and-a.html">
@@ -18,7 +18,7 @@
 <meta name="twitter:description" content="I’m using this chapter as a place to provide miscellaneous information that might not have an obvious place to live. I’d call this a FAQ, but not all of the questions are asked frequently or at...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -92,8 +92,8 @@ step) or set to negative number to never check.</p>
 </h2>
 <p>Compiler flags can be passed to your model by setting <code>PKG_CXXFLAGS</code> in
 <code>$ENV</code>. For example</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb478-1"><a href="q-and-a.html#cb478-1" aria-hidden="true" tabindex="-1"></a>$ENV</span>
-<span id="cb478-2"><a href="q-and-a.html#cb478-2" aria-hidden="true" tabindex="-1"></a>PKG_CXXFLAGS <span class="op">=</span> <span class="st">"-std=c++11"</span></span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb496-1"><a href="q-and-a.html#cb496-1" aria-hidden="true" tabindex="-1"></a>$ENV</span>
+<span id="cb496-2"><a href="q-and-a.html#cb496-2" aria-hidden="true" tabindex="-1"></a>PKG_CXXFLAGS <span class="op">=</span> <span class="st">"-std=c++11"</span></span></code></pre></div>
 <p>will compile your model according to <code>C++11</code> standard (but note that there is a
 special plugin that will do this automatically for you; see Section
 <a href="plugins.html#plugin-cxx11">9.4</a>).</p>
@@ -111,14 +111,14 @@ special plugin that will do this automatically for you; see Section
 <p>There are three approaches</p>
 <p><strong>tad argument to mrgsim()</strong></p>
 <p>To get time after dose into your output you can call</p>
-<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span><span class="va">mod</span>, tad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mrgsim.html">mrgsim</a></span><span class="op">(</span><span class="va">mod</span>, tad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>and the output will have a <code>tad</code> column. Note this does not let you interact
 with the <code>tad</code> value inside your model.</p>
 <p><strong>Simple calculation in the model</strong></p>
 <p>Most applications will call <code>self.tad()</code> (Section @ref(self.tad)). For example</p>
-<div class="sourceCode" id="cb480"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb480-1"><a href="q-and-a.html#cb480-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
-<span id="cb480-2"><a href="q-and-a.html#cb480-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb498-1"><a href="q-and-a.html#cb498-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span> main <span class="op">]</span> </span>
+<span id="cb498-2"><a href="q-and-a.html#cb498-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> tad <span class="op">=</span> self<span class="op">.</span>tad<span class="op">();</span></span></code></pre></div>
 <p><strong>More complicated calculation in the model</strong></p>
 <p>You can get more control and track <code>tad</code> in a specific compartment by using
 the <code>tad</code> plugin. See Section <a href="plugins.html#plugin-tad">9.3</a> for details.</p>
@@ -132,8 +132,8 @@ in the <code>C++</code> code or inability of R to find the compiler and other pi
 the tool chain.</p>
 <p>If your model is not compiling, try the <code>recover</code> argument to <code><a href="https://rdrr.io/pkg/mrgsolve/man/mread.html">mread()</a></code> (or
 <code><a href="https://rdrr.io/pkg/mrgsolve/man/mcode.html">mcode()</a></code>)</p>
-<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mread.html">mread</a></span><span class="op">(</span><span class="va">...</span>, recover <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mrgsolve/man/mread.html">mread</a></span><span class="op">(</span><span class="va">...</span>, recover <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>You will see a warning on the console and <code><a href="https://rdrr.io/pkg/mrgsolve/man/mread.html">mread()</a></code> will return a list of
 build information. You can look into that information or share it in the
 <a href="https://github.com/metrumresearchgroup/mrgsolve/issues">mrgsolve issue tracker</a>
@@ -142,10 +142,10 @@ on GitHub.</p>
 console. If you possibly have problems with the compiler or the rest of the
 toolchain, take a look at the <code>pkgbuild</code> package, which provides some helpful
 tools, especially if you are working on a Windows platform</p>
-<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">pkgbuild</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pkgbuild/man/has_build_tools.html">check_build_tools</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu">pkgbuild</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pkgbuild/man/has_build_tools.html">has_build_tools</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu">pkgbuild</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pkgbuild/man/has_rtools.html">has_rtools</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">pkgbuild</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/pkgbuild/reference/has_build_tools.html">check_build_tools</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">pkgbuild</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/pkgbuild/reference/has_build_tools.html">has_build_tools</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">pkgbuild</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/pkgbuild/reference/has_rtools.html">has_rtools</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="can-i-run-mrgsolve-on-a-network-drive" class="section level2" number="12.6">
 <h2>
@@ -203,7 +203,7 @@ whose paths do not include spaces.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2022-06-17.</p>
+    <p>"<strong>mrgsolve User Guide</strong>" was written by Metrum Research Group. It was last built on 2023-02-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -216,7 +216,7 @@ whose paths do not include spaces.</p>
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

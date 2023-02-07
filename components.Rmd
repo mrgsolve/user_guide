@@ -190,7 +190,7 @@ switches between non-stiff and stiff solving modes.  Rarely used.
 The maximum number of messages printed when the model is solving.  If you 
 have a lot of messages, keep working on your model code. 
 
-## Functions
+## Functions \ {#model-functions}
 
 There are four `C++` functions that `mrgsolve` creates and manages: `PREAMBLE`,
 `MAIN`, `ODE`, `TABLE`. Each function is created from an entire code block in
@@ -243,6 +243,17 @@ parameters (e.g. `CL` or `VC`).
 In addition to getting called once per record, the `MAIN` function may be 
 called several times prior to starting the simulation run.  The `MAIN` 
 function is also called whenever the user queries the compartment list. 
+
+mrgsolve allows you access compartment amounts in the `MAIN` function. But 
+it is important to remember the calling order of these model functions
+(section \@ref(model-functions)): because `MAIN` is called _before_ the system 
+advances, the compartment amounts inside this function will reflect the 
+pre-advance values. This is in contrast to accessing compartment amounts 
+inside the `TABLE` function, which will reflect the values _after_ the
+system advances. While there are some use cases where it is useful 
+to check the pre-advance compartment amounts in `MAIN`, most applications
+should interact with compartment amounts after the system advances in 
+`TABLE`.
 
 See \@ref(block-main) for details.
 
